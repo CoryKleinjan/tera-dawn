@@ -40,7 +40,7 @@ Defaults; every key can be changed under **Settings > Controls**, with two keys 
 
 | Action | Keyboard | Gamepad |
 | --- | --- | --- |
-| Move / climb | Arrow keys | Left stick or d-pad |
+| Move | Arrow keys | Left stick or d-pad |
 | Jump | Space or Alt | A |
 | Drop through a platform | Down + Jump | Down + A |
 | Sit on the ground (doubles regen) | C | |

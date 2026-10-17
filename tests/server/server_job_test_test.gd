@@ -49,7 +49,7 @@ func _boss(m: MapInstance) -> SimMob:
 func _reach_the_end() -> void:
 	var def := p.map.def
 	h.place(p, def.tears[0].x, def.surface_y(def.tear_platform))
-	h.server.on_move(2, p.position, 1, &"stand", false)
+	h.server.on_move(2, p.position, 1, &"stand")
 	h.step()
 
 func test_advancing_needs_the_job_test() -> void:

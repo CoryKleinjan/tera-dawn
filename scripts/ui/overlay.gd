@@ -120,8 +120,6 @@ func _draw_minimap(mm: Rect2) -> void:
 	var ground := Rect2(inner.position.x - 1.0, floor_y, inner.size.x + 2.0, inner.end.y + 1.0 - floor_y)
 	DrawUtil.round_rect(self, ground, minf(MINIMAP_ROUND, ground.size.y / 2.0), Color(0.32, 0.22, 0.14, 0.9))
 	draw_line(Vector2(inner.position.x, floor_y), Vector2(inner.end.x, floor_y), MINIMAP_LAND, 1.5)
-	for c in world.map.climbables:
-		draw_line(inner.position + Vector2(c.x * sx, c.top * sy), inner.position + Vector2(c.x * sx, c.bottom * sy), Color(0.85, 0.7, 0.45, 0.8), 1.0)
 	for i in range(1, world.platforms.size()):
 		if i <= world.map.platforms.size() and world.map.platforms[i - 1].secret:
 			continue # secret ledges stay off the map (a platform added at runtime has no def)

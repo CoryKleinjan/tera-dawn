@@ -2,9 +2,6 @@
 
 [ext_resource type="Resource" path="res://data/biomes/harbor.tres" id="1_njh0v"]
 [ext_resource type="Script" path="res://scripts/data/building_placement.gd" id="2_x273b"]
-[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="3_h2qlq"]
-[ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="4_2ndue"]
-[ext_resource type="Resource" path="res://data/climb_styles/rope_ladder.tres" id="5_u4a6e"]
 [ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="6_l2s11"]
 [ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="7_5a77d"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="8_v0hwf"]
@@ -20,90 +17,6 @@
 [ext_resource type="Resource" path="res://data/monsters/barnacle_boar.tres" id="18_v8ctv"]
 [ext_resource type="Script" path="res://scripts/data/decor_def.gd" id="20_2qgkd"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="21_muwax"]
-
-[sub_resource type="Resource" id="Resource_jr4j6"]
-script = ExtResource("3_h2qlq")
-x = 2840.0
-top = 500.0
-bottom = 620.0
-style = ExtResource("4_2ndue")
-
-[sub_resource type="Resource" id="Resource_5appu"]
-script = ExtResource("3_h2qlq")
-x = 2600.0
-top = 390.0
-bottom = 500.0
-style = ExtResource("4_2ndue")
-
-[sub_resource type="Resource" id="Resource_afxr1"]
-script = ExtResource("3_h2qlq")
-x = 2520.0
-top = 270.0
-bottom = 390.0
-style = ExtResource("4_2ndue")
-
-[sub_resource type="Resource" id="Resource_0jqkm"]
-script = ExtResource("3_h2qlq")
-x = 2230.0
-top = 490.0
-bottom = 620.0
-style = ExtResource("5_u4a6e")
-
-[sub_resource type="Resource" id="Resource_6adkm"]
-script = ExtResource("3_h2qlq")
-x = 2080.0
-top = 370.0
-bottom = 490.0
-style = ExtResource("4_2ndue")
-
-[sub_resource type="Resource" id="Resource_ttioq"]
-script = ExtResource("3_h2qlq")
-x = 1730.0
-top = 500.0
-bottom = 620.0
-style = ExtResource("5_u4a6e")
-
-[sub_resource type="Resource" id="Resource_6sgq8"]
-script = ExtResource("3_h2qlq")
-x = 1250.0
-top = 500.0
-bottom = 620.0
-style = ExtResource("5_u4a6e")
-
-[sub_resource type="Resource" id="Resource_p8cqh"]
-script = ExtResource("3_h2qlq")
-x = 1120.0
-top = 370.0
-bottom = 500.0
-style = ExtResource("4_2ndue")
-
-[sub_resource type="Resource" id="Resource_uidym"]
-script = ExtResource("3_h2qlq")
-x = 1060.0
-top = 260.0
-bottom = 370.0
-style = ExtResource("4_2ndue")
-
-[sub_resource type="Resource" id="Resource_qrvo4"]
-script = ExtResource("3_h2qlq")
-x = 640.0
-top = 480.0
-bottom = 620.0
-style = ExtResource("4_2ndue")
-
-[sub_resource type="Resource" id="Resource_1l7ox"]
-script = ExtResource("3_h2qlq")
-x = 480.0
-top = 350.0
-bottom = 480.0
-style = ExtResource("4_2ndue")
-
-[sub_resource type="Resource" id="Resource_vtos5"]
-script = ExtResource("3_h2qlq")
-x = 1840.0
-top = 170.0
-bottom = 370.0
-style = ExtResource("4_2ndue")
 
 [sub_resource type="Resource" id="Resource_uit6t"]
 script = ExtResource("7_5a77d")
@@ -382,6 +295,84 @@ platform = 0
 target_map = &"tuskers_den"
 target_x = 140.0
 
+[sub_resource type="Resource" id="Step_1"]
+script = ExtResource("7_5a77d")
+x = 2813.0
+y = 560.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_2"]
+script = ExtResource("7_5a77d")
+x = 2203.0
+y = 555.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_3"]
+script = ExtResource("7_5a77d")
+x = 1703.0
+y = 560.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_4"]
+script = ExtResource("7_5a77d")
+x = 1223.0
+y = 560.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_5"]
+script = ExtResource("7_5a77d")
+x = 613.0
+y = 550.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_6"]
+script = ExtResource("7_5a77d")
+x = 2573.0
+y = 445.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_7"]
+script = ExtResource("7_5a77d")
+x = 1093.0
+y = 435.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_8"]
+script = ExtResource("7_5a77d")
+x = 2053.0
+y = 430.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_9"]
+script = ExtResource("7_5a77d")
+x = 453.0
+y = 415.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_10"]
+script = ExtResource("7_5a77d")
+x = 2493.0
+y = 330.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_11"]
+script = ExtResource("7_5a77d")
+x = 1033.0
+y = 315.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_12"]
+script = ExtResource("7_5a77d")
+x = 1813.0
+y = 303.3
+width = 110.0
+
+[sub_resource type="Resource" id="Step_13"]
+script = ExtResource("7_5a77d")
+x = 1757.0
+y = 236.7
+width = 110.0
+
 [resource]
 script = ExtResource("15_q6phd")
 id = &"smugglers_grotto"
@@ -399,8 +390,7 @@ world_pos = Vector2(530, 395)
 town = false
 return_map = &"dawnharbor"
 interior = false
-platforms = Array[ExtResource("7_5a77d")]([SubResource("Resource_uit6t"), SubResource("Resource_87m7u"), SubResource("Resource_sm1p6"), SubResource("Resource_qupgw"), SubResource("Resource_1xdqn"), SubResource("Resource_gd0cp"), SubResource("Resource_8jkyd"), SubResource("Resource_xj5fg"), SubResource("Resource_nv6yq"), SubResource("Resource_e35bm"), SubResource("Resource_8mtvj"), SubResource("Resource_r4dkn")])
-climbables = Array[ExtResource("3_h2qlq")]([SubResource("Resource_jr4j6"), SubResource("Resource_5appu"), SubResource("Resource_afxr1"), SubResource("Resource_0jqkm"), SubResource("Resource_6adkm"), SubResource("Resource_ttioq"), SubResource("Resource_6sgq8"), SubResource("Resource_p8cqh"), SubResource("Resource_uidym"), SubResource("Resource_qrvo4"), SubResource("Resource_1l7ox"), SubResource("Resource_vtos5")])
+platforms = Array[ExtResource("7_5a77d")]([SubResource("Resource_uit6t"), SubResource("Resource_87m7u"), SubResource("Resource_sm1p6"), SubResource("Resource_qupgw"), SubResource("Resource_1xdqn"), SubResource("Resource_gd0cp"), SubResource("Resource_8jkyd"), SubResource("Resource_xj5fg"), SubResource("Resource_nv6yq"), SubResource("Resource_e35bm"), SubResource("Resource_8mtvj"), SubResource("Resource_r4dkn"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3"), SubResource("Step_4"), SubResource("Step_5"), SubResource("Step_6"), SubResource("Step_7"), SubResource("Step_8"), SubResource("Step_9"), SubResource("Step_10"), SubResource("Step_11"), SubResource("Step_12"), SubResource("Step_13")])
 portals = Array[ExtResource("8_v0hwf")]([SubResource("Resource_6c3ii"), SubResource("Portal_arena")])
 spawns = Array[ExtResource("16_vhlnm")]([SubResource("Resource_loyx4"), SubResource("Resource_uqekj"), SubResource("Resource_g4coa"), SubResource("Resource_o0myh"), SubResource("Resource_j5jm3"), SubResource("Resource_yh6yx"), SubResource("Resource_lxbmf"), SubResource("Resource_66eil"), SubResource("Resource_gadrn"), SubResource("Resource_b78er"), SubResource("Resource_wuuv8"), SubResource("Resource_pobws"), SubResource("Resource_ixevy")])
 npcs = Array[ExtResource("6_l2s11")]([])

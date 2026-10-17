@@ -33,12 +33,12 @@
       "pistol2"
     ],
     [
-      "rope1",
-      "rope2",
-      "rope_hold",
-      "ladder1",
       "",
-      "ladder_hold",
+      "",
+      "",
+      "",
+      "",
+      "",
       "back",
       ""
     ]
@@ -90,11 +90,6 @@
         "throw2": "hero_hair:throw2",
         "pistol1": "hero_hair:pistol1",
         "pistol2": "hero_hair:pistol2",
-        "rope1": "hero_hair:rope1",
-        "rope2": "hero_hair:rope2",
-        "rope_hold": "hero_hair:rope_hold",
-        "ladder1": "hero_hair:ladder1",
-        "ladder_hold": "hero_hair:ladder_hold",
         "back": "hero_hair:back",
         "swing2": "hero_hair:idle1",
         "swing3": "hero_hair:idle1",
@@ -210,36 +205,6 @@
         "pistol2": {
           "frames": [
             "pistol2"
-          ],
-          "fps": 1
-        },
-        "rope1": {
-          "frames": [
-            "rope1"
-          ],
-          "fps": 1
-        },
-        "rope2": {
-          "frames": [
-            "rope2"
-          ],
-          "fps": 1
-        },
-        "rope_hold": {
-          "frames": [
-            "rope_hold"
-          ],
-          "fps": 1
-        },
-        "ladder1": {
-          "frames": [
-            "ladder1"
-          ],
-          "fps": 1
-        },
-        "ladder_hold": {
-          "frames": [
-            "ladder_hold"
           ],
           "fps": 1
         },

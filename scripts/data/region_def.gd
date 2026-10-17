@@ -19,7 +19,7 @@ extends Resource
 ## of the region sits inside it; the zone map widens it to the painting's shape.
 @export var zone_rect := Rect2()
 ## Its zone map draws each of its maps to shape, the Hollow Knight way, instead of as a dot on
-## the painting: a room of the map's own size at MapDef.zone_pos with its ledges and ropes,
+## the painting: a room of the map's own size at MapDef.zone_pos with its ledges,
 ## shown once you've been there (secret ledges and ways once you've found them).
 @export var shaped_zone := false
 

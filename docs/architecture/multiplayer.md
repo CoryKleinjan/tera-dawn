@@ -26,7 +26,7 @@ TDWorld  ───────────────────────�
   `scripts/server/social/`. `ServerMoves` (`scripts/server/server_moves.gd`) runs the server's
   side of the job movement skills.
 - **Client** (`scripts/world/`, `scripts/actors/`): `TDWorld` shows the map you're on. Your own
-  hero (`TDPlayer`) moves and climbs on your machine so it feels instant, like MapleStory, and
+  hero (`TDPlayer`) moves on your machine so it feels instant, like MapleStory, and
   reports where it is 20 times a second; the server checks the report is possible and puts you
   back if not. Monsters (`TDMob`), other players (`TDAvatar`) and drops (`TDDrop`) are views
   that glide to where the server's snapshots say they are (`SnapshotSync` keeps them in step;
@@ -94,7 +94,7 @@ computer, and they bring one along to whatever game they play.
   host ended the game."), and the connection stays open a moment (`Net.GOODBYE_TICKS`) so
   it gets there.
 
-Shared pieces both sides use: `MapLayout` (a map's platforms, ropes, portals), `DropFlight`
+Shared pieces both sides use: `MapLayout` (a map's platforms, portals), `DropFlight`
 (how a drop flies and lands, run identically everywhere), `Combat` and `CharacterStats`.
 Monster index `i` is the same monster on both sides because both build them from
 `MapDef.roster()`: the map's spawns in order, each monster that splits followed by the

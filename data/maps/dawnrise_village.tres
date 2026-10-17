@@ -3,8 +3,6 @@
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/meadow.tres" id="2_meadow"]
 [ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
-[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="climbable_def"]
-[ext_resource type="Resource" path="res://data/climb_styles/ladder.tres" id="ladder"]
 [ext_resource type="Script" path="res://scripts/data/building_placement.gd" id="bp_script"]
 [ext_resource type="Resource" path="res://data/buildings/dawnrise_cottage.tres" id="b_cottage"]
 [ext_resource type="Resource" path="res://data/buildings/dawnrise_elder_house.tres" id="b_elder"]
@@ -43,13 +41,6 @@ x = 1790.0
 y = 530.0
 width = 330.0
 solid = true
-
-[sub_resource type="Resource" id="Ladder_rise"]
-script = ExtResource("climbable_def")
-x = 1820.0
-top = 530.0
-bottom = 620.0
-style = ExtResource("ladder")
 
 [sub_resource type="Resource" id="House_cottage"]
 script = ExtResource("bp_script")
@@ -272,7 +263,6 @@ region = &"dawnrise_isle"
 world_pos = Vector2(150.0, 270.0)
 town = true
 platforms = Array[ExtResource("3_platform_def")]([SubResource("Plat_rise")])
-climbables = Array[ExtResource("climbable_def")]([SubResource("Ladder_rise")])
 portals = Array[ExtResource("4_portal_def")]([SubResource("Portal_west"), SubResource("Portal_east"), SubResource("Door_elder"), SubResource("Door_store")])
 npcs = Array[ExtResource("5_npc_placement")]([SubResource("Npc_elder"), SubResource("Npc_sorrel"), SubResource("Npc_hobb"), SubResource("Npc_marlo"), SubResource("Npc_granddaughter"), SubResource("Npc_baker"), SubResource("Npc_farmer")])
 props = Array[ExtResource("prop_placement")]([SubResource("Lamp_west"), SubResource("Lamp_east"), SubResource("Prop_signpost"), SubResource("Prop_fence"), SubResource("Prop_veg_bed"), SubResource("Prop_flower_bed"), SubResource("Prop_bench"), SubResource("Prop_well"), SubResource("Prop_bread_basket"), SubResource("Prop_hay"), SubResource("Prop_scarecrow"), SubResource("Prop_beehives"), SubResource("Prop_wheelbarrow")])

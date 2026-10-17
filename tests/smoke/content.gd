@@ -50,9 +50,6 @@ func check() -> void:
 			for route in (n.npc.travel if n.npc else []):
 				if not Content.maps.has(route.target_map):
 					problems.append("%s: %s travels to unknown map %s" % [id, n.npc.id, route.target_map])
-		for c in map.climbables:
-			if c.style == null or c.style.middle == null:
-				problems.append("%s: climbable at %d has no style" % [id, c.x])
 	for id in Content.monsters:
 		var m: MonsterDef = Content.monsters[id]
 		if m.sprite_frames == null and m.texture == null:

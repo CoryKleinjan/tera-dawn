@@ -82,11 +82,6 @@ animations = {
 "frames": [&"cast1", &"cast2"],
 "loop": false
 },
-&"climb_idle": {
-"fps": 1.0,
-"frames": [&"rope_hold"],
-"loop": true
-},
 &"crouch": {
 "fps": 1.0,
 "frames": [&"crouch"],
@@ -122,11 +117,6 @@ animations = {
 "frames": [&"jump"],
 "loop": true
 },
-&"ladder": {
-"fps": 4.0,
-"frames": [&"ladder1", &"ladder_hold"],
-"loop": true
-},
 &"leap": {
 "fps": 1.0,
 "frames": [&"leap"],
@@ -145,11 +135,6 @@ animations = {
 &"roll": {
 "fps": 8.0,
 "frames": [&"roll1", &"roll2"],
-"loop": true
-},
-&"rope": {
-"fps": 4.0,
-"frames": [&"rope1", &"rope2"],
 "loop": true
 },
 &"shadow_ambush": {

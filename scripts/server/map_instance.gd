@@ -79,7 +79,6 @@ func step() -> void:
 func add_player(p: SimPlayer, x: float, platform := 0) -> void:
 	p.map = self
 	p.position = Vector2(x, layout.platforms[platform].y)
-	p.climbing = false
 	p.since_move = 0
 	p.hurt_here = false
 	p.character.map_id = def.id
@@ -422,7 +421,6 @@ func hurt_player(p: SimPlayer, def: MonsterDef, from_x: float, power := 1.0) -> 
 	Net.send(p.peer, &"ev_hurt", [from_x])
 	if p.character.health.is_dead():
 		p.faint_t = SimPlayer.FAINT_TICKS
-		p.climbing = false
 		var lost := Combat.faint_penalty(p.character.essence)
 		p.character.essence -= lost
 		Net.send(p.peer, &"ev_fainted", [])
@@ -524,7 +522,7 @@ func _pet_step(p: SimPlayer) -> void:
 			tell(p, "%s is getting hungry. Feed it some pet food." % pet.display_name, BAD)
 	if tick % 2400 == 0 and not pet.chatter.is_empty() and randf() < 0.5:
 		broadcast(&"ev_chat", ["pet", pet.display_name, pet.chatter.pick_random(), p.peer])
-	if tick % pet.loot_every != 0 or p.climbing:
+	if tick % pet.loot_every != 0:
 		return
 	var best: SimDrop = null
 	for d in drops.values():
