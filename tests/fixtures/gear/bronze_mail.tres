@@ -25,4 +25,3 @@ jobs = Array[StringName]([&"warrior"])
 required_level = 15
 stats = SubResource("Resource_1")
 variance = 2
-required_strength = 40

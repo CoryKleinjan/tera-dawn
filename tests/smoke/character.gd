@@ -1,5 +1,5 @@
 extends SmokeArea
-## A character without the world: inventory, equipment, buying stats, saving, jobs and skills.
+## A character without the world: inventory, equipment, levels and power, saving, jobs and skills.
 
 ## Inventory, equipment, stats and saving, without the world.
 func check() -> void:
@@ -8,7 +8,7 @@ func check() -> void:
 	_check(c.equipment.at(&"weapon") != null and c.equipment.at(&"weapon").item == sword, "a new character wears the starting sword")
 	_check(c.inventory.count_of(Content.item(&"red_potion")) == 5, "a new character carries 5 Red Potions")
 	var dmg := c.damage_range()
-	_check(dmg.x > 0 and dmg.y >= dmg.x, "the damage range comes from stats and the weapon (%d ~ %d)" % [dmg.x, dmg.y])
+	_check(dmg.x > 0 and dmg.y >= dmg.x, "the damage range comes from power and the weapon (%d ~ %d)" % [dmg.x, dmg.y])
 
 	# stacking and a full tab
 	var red: ItemDef = Content.item(&"red_potion")
@@ -28,17 +28,12 @@ func check() -> void:
 	c.gear.equip(_first_filled(c, ItemDef.Tab.EQUIP))
 	_check(c.stats.defense > defense, "wearing a hat raises Weapon Defense")
 	c.inventory.add(Content.item(&"dawn_blade"))
-	_check(c.gear.equip(_first_filled(c, ItemDef.Tab.EQUIP)) != "", "a new Beginner can't wear the Dawn Blade (35 STR)")
+	_check(c.gear.equip(_first_filled(c, ItemDef.Tab.EQUIP)) == "", "a new Beginner can wear the Dawn Blade: gear asks for no stats")
 
-	# Dawn Essence buys stats, each point dearer than the last, and STR raises damage
-	_check(c.essence == 0 and c.ap.buy(&"strength") == 0, "no Dawn Essence, no stat points")
-	var cost := 0
-	for n in 5:
-		cost += CharacterStats.stat_price(n)
-	c.gain_essence(cost)
+	# a level raises power, and with it damage
 	var top := c.damage_range().y
-	_check(c.ap.buy(&"strength", 5) == 5 and c.essence == 0 and c.ap.spent() == 5, "Dawn Essence buys stat points at their prices")
-	_check(c.damage_range().y > top and c.ap.price(&"strength") > CharacterStats.stat_price(0), "STR raises damage, and the next point costs more")
+	var power := c.power()
+	_check(c.gain_xp(c.xp_need()) == 1 and c.power() == power + CharacterStats.POWER_PER_LEVEL and c.damage_range().y > top, "a level raises power and damage")
 
 	# saving and loading keeps the bag and the gear
 	c.inventory.add(tusk, 3)
@@ -47,7 +42,7 @@ func check() -> void:
 	var back := store.load_character("Tester")
 	_check(back != null and JSON.stringify(back.inventory.to_dict()) == JSON.stringify(c.inventory.to_dict())
 		and JSON.stringify(back.equipment.to_dict()) == JSON.stringify(c.equipment.to_dict())
-		and back.base.strength == c.base.strength and back.ap.spent() == 5 and back.essence == c.essence, "saving and loading keeps inventory, equipment and stats")
+		and back.level == c.level and back.power() == c.power() and back.essence == c.essence, "saving and loading keeps inventory, equipment and level")
 	_check(CharacterStore.clean_name("  Dawn<ling>!  ") == "Dawnling", "character names are cleaned up")
 	_check_jobs()
 	_check_skill_rules()
@@ -102,8 +97,6 @@ func _check_jobs() -> void:
 		_check(Content.jobs.has(id) and Content.job(id).advances_from == &"beginner", "%s is a first job" % id)
 	_check(c.advance(warrior) == "Pass the %s first." % warrior.advance_quest.title, "advancing to Warrior needs the Job Test, and no stats")
 	c.quests.done[warrior.advance_quest.id] = true
-	c.base.strength = 35  # what the gifted Bronze Sword needs to be worn
-	c.recalc()
 	var hp := c.max_hp()
 	_check(c.advance(warrior) == "" and c.job == warrior and c.has_passed(warrior), "a Beginner who passed the Job Test becomes a Warrior")
 	_check(c.gear.weapon() == Content.item(&"bronze_sword") and c.max_hp() >= hp, "the Warrior gets a Bronze Sword and wears it")

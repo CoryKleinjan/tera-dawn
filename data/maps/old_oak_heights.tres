@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=159 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=155 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -11,9 +11,7 @@
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="14_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="15_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="16_elixir"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_dex_60.tres" id="17_scroll_top_dex_60"]
 [ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="18_mana_tea"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_armor_def_60.tres" id="19_scroll_armor_def_60"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="20_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/stump.png" id="21_stump"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="22_bush_large"]
@@ -806,12 +804,6 @@ item = ExtResource("16_elixir")
 min_amount = 2
 max_amount = 2
 
-[sub_resource type="Resource" id="Loot_0_2"]
-script = ExtResource("14_drop_entry")
-item = ExtResource("17_scroll_top_dex_60")
-min_amount = 1
-max_amount = 1
-
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("12_breakable_def")
 id = &"old_oak_heights_far_chest"
@@ -821,7 +813,7 @@ hits = 1
 whole = ExtResource("24_chest")
 broken = ExtResource("25_chest_open")
 height = 48.0
-loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1"), SubResource("Loot_0_2")])
+loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1")])
 card = ExtResource("10_barkcap")
 
 [sub_resource type="Resource" id="Loot_1_0"]
@@ -836,12 +828,6 @@ item = ExtResource("18_mana_tea")
 min_amount = 4
 max_amount = 4
 
-[sub_resource type="Resource" id="Loot_1_2"]
-script = ExtResource("14_drop_entry")
-item = ExtResource("19_scroll_armor_def_60")
-min_amount = 1
-max_amount = 1
-
 [sub_resource type="Resource" id="Breakable_1"]
 script = ExtResource("12_breakable_def")
 id = &"old_oak_heights_high_chest"
@@ -851,7 +837,7 @@ hits = 1
 whole = ExtResource("24_chest")
 broken = ExtResource("25_chest_open")
 height = 48.0
-loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
+loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1")])
 card = ExtResource("11_grove_wisp")
 
 [resource]

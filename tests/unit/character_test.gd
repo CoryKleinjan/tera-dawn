@@ -1,5 +1,5 @@
 extends TestCase
-## Character rules: Dawn Essence and growth, HP and MP, recalc, buying stats, skills bought
+## Character rules: Dawn Essence and growth, HP and MP, recalc, power and avoid, skills bought
 ## with essence, buffs and their expiry, quickslots, storage, job advancement and switching, tallies,
 ## visited maps, pets, and a fresh character from real content.
 
@@ -25,14 +25,6 @@ func test_gain_essence_adds_up_and_never_takes_away() -> void:
 	c.gain_essence(27)
 	check_eq(c.essence, 42, "adds up")
 
-func test_stat_prices_climb_with_each_point_in_a_stat() -> void:
-	# 17 × (1 + n / 5) ^ 2.1, rounded
-	var want := {0: 17, 1: 25, 2: 34, 3: 46, 4: 58, 5: 73, 10: 171, 19: 458}
-	for n in want:
-		check_eq(CharacterStats.stat_price(n), want[n], "point %d" % (n + 1))
-	for n in range(0, 200):
-		check(CharacterStats.stat_price(n + 1) > CharacterStats.stat_price(n), "point %d costs more than %d" % [n + 2, n + 1])
-
 func test_skill_prices_climb_with_each_level_bought() -> void:
 	# 17 × (1 + k / 3) ^ 2.1, rounded
 	var want := {0: 17, 1: 31, 2: 50, 3: 73, 9: 312}
@@ -40,14 +32,6 @@ func test_skill_prices_climb_with_each_level_bought() -> void:
 		check_eq(CharacterStats.skill_price(k), want[k], "level %d" % (k + 1))
 	for k in range(0, 200):
 		check(CharacterStats.skill_price(k + 1) > CharacterStats.skill_price(k), "level %d costs more than %d" % [k + 2, k + 1])
-
-func test_buying_a_stat_leaves_max_hp_to_levels() -> void:
-	var c := fx.character()
-	c.health.damage(30)
-	c.essence = 1000
-	check_eq(c.ap.buy(&"dexterity", 5), 5, "five points")
-	check_eq(c.health.max_hp, 60, "max HP comes from levels")
-	check_eq(c.health.hp, 30, "still hurt")
 
 # ---------- EXP and levels ----------
 
@@ -155,90 +139,34 @@ func test_recalc_without_job_does_nothing() -> void:
 	c.recalc()
 	check(c.job == null, "no crash without a job")
 
-func test_damage_range_uses_total_stats() -> void:
-	var c := fx.character(null, {"strength": 20, "dexterity": 10})
+func test_damage_range_uses_power_and_total_stats() -> void:
+	var c := fx.character(null, 3)
 	c.equipment.put(&"weapon", ItemStack.exact(fx.equip(&"t_a", EquipDef.Slot.WEAPON, {"attack": 10})))
-	check_eq(c.damage_range(), Vector2i(7, 14), "range: 20 STR × 3.6 × 10 / 100 × 2")
+	c.recalc()
+	check_eq(c.damage_range(), Vector2i(7, 14), "range: 20 power × 3.6 × 10 / 100 × 2")
 
-# ---------- Ability Points ----------
+# ---------- power and avoid ----------
 
-func test_buy_stat_spends_essence_at_its_price() -> void:
-	var c := fx.character(null, {"strength": 4})
-	check_eq(c.ap.bought(&"strength"), 4, "4 points above a start of 0")
-	check_eq(c.ap.price(&"strength"), 58, "the 5th point")
-	c.essence = 58 + 5
-	check_eq(c.ap.buy(&"strength"), 1, "bought")
-	check_eq(c.base.strength, 5, "base")
-	check_eq(c.stats.strength, 5, "total recalculated")
-	check_eq(c.essence, 5, "paid 58")
-	check_eq(c.ap.price(&"strength"), 73, "the next point costs more")
-	check_eq(c.ap.price(&"luck"), 17, "a stat with nothing bought is still cheap")
-	for s in StatBlock.BASE:
-		c.essence = c.ap.price(s)
-		check_eq(c.ap.buy(s), 1, "%s allowed" % s)
-		check_eq(c.essence, 0, "%s paid exactly" % s)
-
-func test_buy_stat_refuses_without_essence_or_bad_stat() -> void:
+func test_power_grows_with_level() -> void:
 	var c := fx.character()
-	c.essence = 16
-	check_eq(c.ap.buy(&"strength"), 0, "1 short of 17")
-	check_eq(c.essence, 16, "nothing spent")
-	c.essence = 1000
-	check_eq(c.ap.buy(&"attack"), 0, "attack isn't a base stat")
-	check_eq(c.ap.buy(&"max_hp"), 0, "max HP isn't either")
-	check_eq(c.ap.buy(&"nonsense"), 0, "unknown stat")
-	check_eq(c.essence, 1000, "essence kept")
-	check_eq(c.base.attack, 0, "nothing raised")
-	check_eq(c.base.strength, 0, "nothing raised")
+	check_eq(c.power(), 10, "the job's base power at level 1")
+	c.level = 11
+	check_eq(c.power(), 10 + 10 * CharacterStats.POWER_PER_LEVEL, "five a level")
+	check_eq(c.magic_attack(), c.power(), "magic attack is power without gear")
+	c.equipment.put(&"weapon", ItemStack.exact(fx.equip(&"t_wand", EquipDef.Slot.WEAPON, {"magic_attack": 7})))
+	c.recalc()
+	check_eq(c.magic_attack(), c.power() + 7, "plus the gear's")
 
-func test_buy_stat_buys_several_but_only_what_essence_pays_for() -> void:
-	var c := fx.character(null, {"luck": 4})
-	c.essence = 58 + 73 + 10
-	check_eq(c.ap.buy(&"luck", 3), 2, "the 5th and 6th points, not the 7th")
-	check_eq(c.base.luck, 6, "LUK")
-	check_eq(c.essence, 10, "what's left")
-	c.essence = 1000
-	check_eq(c.ap.buy(&"luck", 0), 0, "zero points")
-	check_eq(c.ap.buy(&"luck", -2), 0, "negative points")
-	check_eq(c.essence, 1000, "essence kept")
-
-func test_auto_buys_the_damage_stat_while_it_can() -> void:
-	var c := fx.character(null, {"strength": 10, "dexterity": 5})
-	c.essence = 171 + 196 + 222 + 1
-	check_eq(c.ap.auto(), 3, "three points")
-	check_eq(c.base.strength, 13, "all in STR")
-	check_eq(c.base.dexterity, 5, "DEX untouched")
-	check_eq(c.essence, 1, "left over: less than the next point")
-	check_eq(c.ap.auto(), 0, "nothing more to buy")
-
-func test_auto_for_a_blend_buys_the_cheaper_damage_stat_first() -> void:
+func test_avoid_grows_with_the_jobs_avoid_growth() -> void:
 	var j := fx.job()
-	j.secondary_stat = &"dexterity"
-	var c := fx.character(j, {"strength": 10, "dexterity": 5})
-	c.essence = 73 + 89
-	check_eq(c.ap.auto(), 2, "two points")
-	check_eq([c.base.strength, c.base.dexterity], [10, 7], "both in the cheaper DEX")
-	check_eq(c.essence, 0, "all spent")
-
-func test_spent_counts_points_above_the_start_and_what_they_cost() -> void:
-	var j := fx.job()
-	j.starting_stats = UnitHelpers.stats({"strength": 4, "luck": 4})
-	var c := fx.character(j, {"strength": 6, "dexterity": 1, "luck": 3})
-	check_eq(c.ap.bought(&"strength"), 2, "STR above its start")
-	check_eq(c.ap.bought(&"luck"), 0, "below the start counts as none")
-	check_eq(c.ap.spent(), 3, "2 STR and 1 DEX")
-	check_eq(c.ap.essence_spent(), 17 + 25 + 17, "each stat's points priced from its own first")
-
-func test_refund_all_hands_back_the_essence_of_every_point_above_the_start() -> void:
-	var j := fx.job()
-	j.starting_stats = UnitHelpers.stats({"strength": 4, "luck": 4})
-	var c := fx.character(j, {"strength": 14, "dexterity": 3, "luck": 6})
-	c.essence = 2
-	c.ap.refund_all()
-	# 10 STR points: 723, 3 DEX: 76, 2 LUK: 42
-	check_eq(c.essence, 2 + 723 + 76 + 42, "essence back")
-	check_eq([c.base.strength, c.base.dexterity, c.base.luck], [4, 0, 4], "back to the start")
-	check_eq(c.ap.spent(), 0, "nothing bought")
+	var c := fx.character(j)
+	check_eq(c.avoid(), CharacterStats.BASE_AVOID, "everyone's base")
+	j.avoid_growth = 2.0
+	c.level = 6
+	check_eq(c.avoid(), CharacterStats.BASE_AVOID + 10, "two a level past the first")
+	c.equipment.put(&"shoes", ItemStack.exact(fx.equip(&"t_shoes", EquipDef.Slot.SHOES, {"avoid": 4})))
+	c.recalc()
+	check_eq(c.avoid(), CharacterStats.BASE_AVOID + 10 + 4, "plus gear")
 
 # ---------- skills ----------
 
@@ -363,10 +291,10 @@ func test_learn_with_full_quickslots_still_learns() -> void:
 	check_eq(c.skills.learned[&"t_skill"], 1, "known")
 
 func test_passive_adds_stats_and_regen() -> void:
-	var c := fx.character(null, {"strength": 10})
+	var c := fx.character()
 	var p := fx.skill(&"t_passive", SkillDef.Kind.PASSIVE)
-	p.stats = UnitHelpers.stats({"strength": 2})
-	p.stats_per_level = UnitHelpers.stats({"strength": 1})
+	p.stats = UnitHelpers.stats({"accuracy": 2})
+	p.stats_per_level = UnitHelpers.stats({"accuracy": 1})
 	p.regen_hp = 5
 	p.regen_hp_per_level = 2
 	p.regen_mp = 1
@@ -374,7 +302,7 @@ func test_passive_adds_stats_and_regen() -> void:
 	c.skills.learn(p)
 	c.skills.learn(p)
 	c.skills.learn(p)
-	check_eq(c.stats.strength, 10 + 2 + 2, "passive level 3: +4 STR")
+	check_eq(c.stats.accuracy, 2 + 2, "passive level 3: +4 accuracy")
 	check_eq(c.skills.regen_bonus(), Vector2i(9, 1), "regen at level 3")
 
 func test_use_problem_rules() -> void:
@@ -607,15 +535,8 @@ func _advance_setup() -> Array:
 	var first := fx.job(&"t_job")
 	var next := fx.job(&"t_next", &"t_warrior", &"t_job")
 	next.hp_growth = 20
-	var c := fx.character(first, {"strength": 35})
+	var c := fx.character(first)
 	return [c, next]
-
-func test_advance_needs_no_stats() -> void:
-	var setup := _advance_setup()
-	var c: Character = setup[0]
-	var next: JobDef = setup[1]
-	c.base.strength = 0
-	check_eq(c.advance_problem(next), "", "no stats asked")
 
 func test_advance_refuses_the_job_you_are() -> void:
 	var setup := _advance_setup()
@@ -655,8 +576,7 @@ func test_advance_changes_job_gives_gifts_and_refills() -> void:
 	c.level = 8
 	check_eq(c.advance(next), "", "advanced")
 	check_eq(c.job.id, &"t_next", "new job")
-	# level 8 and 35 STR points bought
-	check_eq(c.max_hp(), 50 + 8 * 20 + 35, "new job's HP growth, plus STR")
+	check_eq(c.max_hp(), 50 + 8 * 20, "new job's HP growth at level 8")
 	check_eq(c.essence, 40, "advancing costs and gives no essence")
 	check_eq(c.health.hp, c.max_hp(), "refilled")
 	check_eq(c.gear.weapon(), sword, "the gift weapon is worn")
@@ -720,10 +640,10 @@ func test_advance_leaves_a_gift_weapon_it_cant_wear_in_the_bag() -> void:
 	var c: Character = setup[0]
 	var next: JobDef = setup[1]
 	var heavy := fx.equip(&"t_heavy")
-	heavy.required_strength = 50
+	heavy.jobs = [&"t_mage"]
 	next.advance_gifts = [UnitHelpers.drop(heavy)]
 	check_eq(c.advance(next), "", "advanced")
-	check_eq(c.gear.weapon(), null, "too heavy to wear")
+	check_eq(c.gear.weapon(), null, "another line's weapon")
 	check_eq(c.inventory.count_of(heavy), 1, "in the bag")
 
 func test_line_runs_back_through_every_parent() -> void:
@@ -753,7 +673,7 @@ func _switch_setup() -> Dictionary:
 	var jab := fx.skill(&"t_jab")
 	var cut := fx.skill(&"t_cut", SkillDef.Kind.ATTACK, &"t_next")
 	var spark := fx.skill(&"t_spark", SkillDef.Kind.ATTACK, &"t_other")
-	var c := fx.character(first, {"strength": 20, "intelligence": 7})
+	var c := fx.character(first, 12)
 	c.quests.done[next.advance_quest.id] = true
 	check_eq(c.advance(next), "", "became the first job")
 	c.essence = CharacterStats.skill_price(0) + CharacterStats.skill_price(1) + CharacterStats.skill_price(2)
@@ -790,8 +710,8 @@ func test_switching_drops_the_old_jobs_skills_and_refunds_what_was_paid() -> voi
 	var paid := int(c.skills.paid[cut.id])
 	check_eq(paid, CharacterStats.skill_price(1) + CharacterStats.skill_price(2), "what the two levels cost")
 	check(c.quickslot_of(&"skill", cut.id) >= 0, "on a quickslot")
-	var base := c.base.to_dict()
-	var str_total := c.stats.strength
+	var level := c.level
+	var power := c.power()
 	check_eq(c.skills_lost_by(s["other"]), [cut] as Array[SkillDef], "only the Warrior skill would go")
 	c.quests.done[s["other"].advance_quest.id] = true
 	check_eq(c.advance(s["other"]), "", "switched")
@@ -802,8 +722,8 @@ func test_switching_drops_the_old_jobs_skills_and_refunds_what_was_paid() -> voi
 	check_eq(c.quickslot_of(&"skill", cut.id), -1, "its quickslot empties")
 	check(not c.skills.buffs.has(cut.id), "its buff ends")
 	check_eq(c.skills.level(s["jab"]), 1, "the Beginner skill stays")
-	check_eq(c.base.to_dict(), base, "stats stay")
-	check_eq(c.stats.strength, str_total, "and their totals")
+	check_eq(c.level, level, "the level stays")
+	check_eq(c.power(), power, "so does power (same base power)")
 	check_eq(c.skills.price(), CharacterStats.skill_price(1), "the next level costs as if the old skill was never bought")
 	check_eq(c.inventory.count_of(s["potion"]), 40, "gifts the first time")
 	check(c.has_passed(s["other"]), "now passed too")
@@ -886,7 +806,8 @@ func test_create_beginner_from_content() -> void:
 	check_eq(c.name, "Hero", "name")
 	check_eq(c.essence, 0, "no essence yet")
 	check(c.job == j, "beginner")
-	check_eq(c.base.to_dict(), j.starting_stats.to_dict(), "starting stats")
+	check_eq(c.level, 1, "level 1")
+	check_eq(c.power(), j.base_power, "the job's base power")
 	check_eq(c.equipment.worn.size(), NewCharacter.new().starting_gear(j).size(), "starting gear and the creator's default outfit worn")
 	for e in j.starting_gear:
 		var worn: ItemStack = null

@@ -1,6 +1,6 @@
 extends TestCase
 ## Combat: player hits (never miss, crits, damage range and skill multiplier, magic, no
-## penalty against stronger monsters), monster touches (dodge from avoid, defense, floor of 1)
+## penalty against stronger monsters), monster touches (dodge from avoid and the job's growth, defense, floor of 1)
 ## and the faint penalty. Randomness is pinned with seed() or stats that force the outcome.
 
 var fx: UnitHelpers
@@ -11,14 +11,19 @@ func before_each() -> void:
 func after_each() -> void:
 	fx.cleanup()
 
-## A character whose physical range is exactly 9..18 and who never crits.
+## A character whose physical range is exactly 9..18 (power 25 at level 4) and who never
+## crits.
 func _fighter(extra := {}) -> Character:
-	var values := {"strength": 25, "dexterity": 10, "attack": 10, "crit": -12}
+	var values := {"attack": 10, "crit": -12}
 	values.merge(extra, true)
-	var c := fx.character(null, {})
-	c.base = UnitHelpers.stats(values)
-	c.recalc()
+	var c := fx.character(null, 4)
+	_wear(c, values)
 	return c
+
+## Puts gear with `values` on `c`, in place of the last.
+func _wear(c: Character, values: Dictionary) -> void:
+	c.equipment.put(&"weapon", ItemStack.exact(fx.equip(&"t_gear", EquipDef.Slot.WEAPON, values)))
+	c.recalc()
 
 func _attack(multiplier := 1.0) -> SkillDef:
 	var s := fx.skill(&"t_hit")
@@ -65,8 +70,6 @@ func test_certain_crit_multiplies_damage() -> void:
 
 func test_stronger_monster_neither_dodges_nor_shrugs_off_damage() -> void:
 	var c := _fighter()
-	c.base.dexterity = 0
-	c.recalc()
 	var m := fx.monster(&"t_mob", 60)
 	var s := _attack()
 	for i in 300:
@@ -76,8 +79,7 @@ func test_stronger_monster_neither_dodges_nor_shrugs_off_damage() -> void:
 
 func test_magic_skill_uses_magic_range() -> void:
 	var c := _fighter()
-	c.base = UnitHelpers.stats({"intelligence": 40, "magic_attack": 20, "crit": -12})
-	c.recalc()
+	_wear(c, {"magic_attack": 35, "crit": -12})  # M = 25 power + 35
 	var s := _attack()
 	s.magic = true
 	var m := fx.monster(&"t_mob", 10)
@@ -100,8 +102,7 @@ func test_player_hit_is_repeatable_with_same_seed() -> void:
 
 func test_monster_hit_range_without_dodge() -> void:
 	var c := _fighter()
-	c.base = UnitHelpers.stats({"defense": 10})
-	c.recalc()
+	_wear(c, {"defense": 10, "avoid": -CharacterStats.BASE_AVOID})
 	var m := fx.monster(&"t_mob", 10)
 	m.attack = 100
 	# 100 × 0.85..1.15 - 10 × 0.3 = 82..112
@@ -110,8 +111,7 @@ func test_monster_hit_range_without_dodge() -> void:
 
 func test_monster_hit_never_below_one() -> void:
 	var c := _fighter()
-	c.base = UnitHelpers.stats({"defense": 1000})
-	c.recalc()
+	_wear(c, {"defense": 1000, "avoid": -CharacterStats.BASE_AVOID})
 	var m := fx.monster(&"t_mob", 10)
 	m.attack = 5
 	for i in 50:
@@ -127,13 +127,24 @@ func test_monster_hit_dodge_capped_at_thirty_percent() -> void:
 	check_between(dodged, 500, 700, "about 30% dodged")
 
 func test_dodge_comes_from_avoid_alone() -> void:
-	var c := _fighter({"avoid": 50})  # 50 × 0.004 = 20%
+	var c := _fighter({"avoid": 50 - CharacterStats.BASE_AVOID})  # 50 × 0.004 = 20%
 	var m := fx.monster(&"t_mob", 60)
 	var dodged := 0
 	for i in 2000:
 		if Combat.monster_hit(m, c) == 0:
 			dodged += 1
 	check_between(dodged, 300, 500, "about 20% dodged, however strong the monster")
+
+func test_dodge_grows_with_the_jobs_avoid_growth() -> void:
+	var c := _fighter({"avoid": -CharacterStats.BASE_AVOID})
+	c.job.avoid_growth = 2.5
+	c.level = 21  # 2.5 × 20 = 50: 20%
+	var m := fx.monster(&"t_mob", 10)
+	var dodged := 0
+	for i in 2000:
+		if Combat.monster_hit(m, c) == 0:
+			dodged += 1
+	check_between(dodged, 300, 500, "about 20% dodged")
 
 func test_faint_penalty_is_ten_percent_rounded_down() -> void:
 	check_eq(Combat.faint_penalty(0), 0, "zero")

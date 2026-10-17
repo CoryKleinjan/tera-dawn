@@ -1,8 +1,7 @@
 extends SmokeArea
-## The field maps' monsters (splitters, hoppers, shooters) and upgrade scrolls.
+## The field maps' monsters (splitters, hoppers, shooters).
 
-## The new field maps: walking west out of the village, monsters that split, hop and shoot,
-## and upgrade scrolls.
+## The new field maps: walking west out of the village, and monsters that split, hop and shoot.
 func check() -> void:
 	var ch := _me().character
 	# a monster bumping you off the portal would make this flaky
@@ -72,35 +71,5 @@ func check() -> void:
 	_check(sentry.position.x == x0, "the sentry never moves")
 	_release_mobs(others)
 	_me().inv = 100000
-	# upgrade scrolls: always spend a slot, add their stats when they work
-	var sword: EquipDef = Content.item(&"bronze_sword")
-	var good: ScrollDef = Content.item(&"scroll_weapon_att_60")
-	ch.inventory.add(sword, 1)
-	ch.inventory.add(good, 2)
-	ch.inventory.add(Content.item(&"scroll_helmet_hp_60"), 1)
-	var e := ch.inventory.find(sword)
-	var stack := ch.inventory.at(ItemDef.Tab.EQUIP, e)
-	var att := stack.stats.attack
-	_check(ch.gear.scroll_problem(ch.inventory.find(Content.item(&"scroll_helmet_hp_60")), e) != "", "a helmet scroll doesn't work on a sword")
-	var r := ch.gear.use_scroll(ch.inventory.find(good), e, 0.0)
-	_check(r["worked"] and stack.stats.attack == att + 2 and stack.slots_used == 1 and stack.upgrades == 1 and stack.display_name().ends_with("+1"),
-		"a scroll that works adds its stats and spends a slot")
-	r = ch.gear.use_scroll(ch.inventory.find(good), e, 0.99)
-	_check(not r["worked"] and stack.stats.attack == att + 2 and stack.slots_used == 2 and stack.slots_left() == sword.upgrade_slots - 2,
-		"a scroll that fails still spends a slot")
-	var saved := ItemStack.from_dict(stack.to_dict())
-	_check(saved.slots_used == 2 and saved.upgrades == 1 and saved.stats.attack == att + 2, "upgrades are saved with the gear")
-	# and through the bag window
-	ch.inventory.add(good, 1)
-	_me().dirty_character = true
-	await _ticks(2)
-	var bag: TDInventoryWindow = world.hud.windows["inventory"]
-	bag.tab = ItemDef.Tab.USE
-	bag.use_slot(Game.me.inventory.find(good))
-	_check(bag.scrolling >= 0 and bag.tab == ItemDef.Tab.EQUIP, "double-clicking a scroll picks it up and shows the gear")
-	bag.use_scroll_on(Game.me.inventory.find(sword))
-	await _ticks(3)
-	_check(Game.me.inventory.count_of(good) == 0 and Game.me.inventory.at(ItemDef.Tab.EQUIP, Game.me.inventory.find(sword)).slots_used == 3,
-		"clicking the gear uses the scroll on it")
 	Net.server.enter_map(_me(), &"meadow", 300)
 	await _ticks(3)

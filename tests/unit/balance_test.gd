@@ -35,18 +35,17 @@ func test_typical_is_beginner_before_ten() -> void:
 	check_eq(c.job.id, &"beginner", "beginner at 9")
 	check_eq(Balance.typical(&"mage", 10).job.id, &"mage", "mage at 10")
 
-func test_typical_buys_its_tiers_points() -> void:
+func test_typical_is_at_its_tier_level() -> void:
 	for j in Balance.lines():
 		var c := Balance.typical(j, 20)
-		var start: StatBlock = Content.job(&"beginner").starting_stats
-		var spent := 0
-		for s in StatBlock.BASE:
-			spent += c.base.value(s) - start.value(s)
-		check_eq(spent, 19 * CharacterStats.GROWTH_POINTS, "%s buys a tier's points for every tier past 1" % j)
-		check_eq(c.ap.spent(), spent, "%s: the points count as bought" % j)
 		check_eq([c.level, Balance.tier(c)], [20, 20], "%s is level 20, tier 20" % j)
-		var main := StringName(c.job.primary_stat)
-		check(c.base.value(main) - start.value(main) >= spent / 2, "%s puts most into the main stat" % j)
+		check_eq(c.power(), CharacterStats.power(c.job, 20), "%s: power from its level alone" % j)
+		check_eq(c.essence, 0, "%s has nothing to spend" % j)
+
+func test_casts_spells_follows_the_job_line() -> void:
+	check(Balance.casts_spells(Balance.typical(&"mage", 20)), "a Magician casts")
+	check(not Balance.casts_spells(Balance.typical(&"warrior", 20)), "a Warrior swings")
+	check(not Balance.casts_spells(Balance.typical(&"mage", 9)), "a Beginner swings")
 
 func test_typical_wears_a_weapon_it_can_use() -> void:
 	for j in Balance.lines():

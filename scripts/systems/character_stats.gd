@@ -1,37 +1,25 @@
 class_name CharacterStats
 extends RefCounted
-## MapleStory-style formulas that turn a character's stats into what they do in combat.
+## MapleStory-style formulas that turn a character's level, job and stats into what they do in
+## combat.
 ## Balance lives here (and in Combat), so tuning never means hunting through actors.
 
 ## MapleStory's damage formula times this, so numbers fit the game's monsters.
 const DAMAGE_SCALE := 2.0
 const BASE_CRIT := 0.12
 
-## What the job's damage stat (JobDef.damage_stat_value: one stat, or a blend's two added
-## together) is worth in the damage formula.
+## What a point of power (`power`) is worth in the damage formula.
 const MAIN_STAT_WEIGHT := 3.6
-## What the other stats give as they grow: Max HP per STR, Max MP per INT, Accuracy per
-## DEX, Avoidability per LUK, and for CHA a shop discount and more Dawnshards per point.
-const HP_PER_STR := 1.0
-const MP_PER_INT := 1.0
-const ACCURACY_PER_DEX := 0.8
-const AVOID_PER_LUK := 0.75
-const DISCOUNT_PER_CHA := 0.001
-const MAX_DISCOUNT := 0.15
-const SHARDS_PER_CHA := 0.002
+## Power gained every level, on top of the job's `JobDef.base_power`.
+const POWER_PER_LEVEL := 5
+## Avoidability everyone has before gear, and the job's `JobDef.avoid_growth` a level on top.
+const BASE_AVOID := 3
 
-## Dawn Essence prices. Each point in a stat costs more than the last point bought in that
-## stat: STAT_PRICE × (1 + bought / STAT_STEP) ^ PRICE_GROWTH. Skill levels work the same way,
-## counted across every skill level bought (SKILL_STEP). Set so the first hours take about as
-## long as the old EXP curve did; the pace bot should retune them.
-const STAT_PRICE := 17.0
-const STAT_STEP := 5.0
+## Dawn Essence prices for skill levels: SKILL_PRICE × (1 + bought / SKILL_STEP) ^ PRICE_GROWTH,
+## counted across every skill level bought. The pace bot should retune them.
 const SKILL_PRICE := 17.0
 const SKILL_STEP := 3.0
 const PRICE_GROWTH := 2.1
-## Stat points a typical player buys for each level (Balance and the test characters), and
-## what an old save's stat points count for when it gets its level (CharacterCodec).
-const GROWTH_POINTS := 5
 ## The EXP curve (xp_need): up to JOB_LEVEL a level takes XP_SCALE × level^XP_GROWTH EXP; after
 ## it, the Lv JOB_LEVEL amount times (level / JOB_LEVEL)^XP_JOB_GROWTH. Tuned with the pace bot
 ## (playtest/pace-run-3.md in the project files) at scale 55: about 1.5-2 hours to Lv 10, then
@@ -41,43 +29,35 @@ const XP_GROWTH := 3.0
 const JOB_LEVEL := 10
 const XP_JOB_GROWTH := 1.8
 
+## What a `job` character's damage grows from at `level`: the job's base power plus
+## POWER_PER_LEVEL a level (Character.power adds the Monster Book's).
+static func power(job: JobDef, level: int) -> int:
+	return job.base_power + POWER_PER_LEVEL * (maxi(1, level) - 1)
+
 ## Lowest and highest hit before skills, crits and monster level: the stats window's
-## "Damage" line. max = main stat × MAIN_STAT_WEIGHT × weapon attack / 100, with the stat
-## (or a blend's two stats added together) `JobDef.damage_stat_value` gives.
-static func damage_range(job: JobDef, total: StatBlock) -> Vector2i:
-	var main := job.damage_stat_value(total)
-	var top := maxi(1, roundi(main * MAIN_STAT_WEIGHT * total.attack / 100.0 * DAMAGE_SCALE))
+## "Damage" line. max = power × MAIN_STAT_WEIGHT × weapon attack / 100.
+static func damage_range(job: JobDef, power: int, total: StatBlock) -> Vector2i:
+	var top := maxi(1, roundi(power * MAIN_STAT_WEIGHT * total.attack / 100.0 * DAMAGE_SCALE))
 	return Vector2i(maxi(1, roundi(top * job.mastery)), top)
 
 ## Lowest and highest spell hit before the spell's own multiplier, from Magic Attack (which
-## includes INT, or for a blend with INT both its stats): (M² / 120) + M. The square keeps
-## spells growing as fast as weapon damage, which grows with both the main stat and Weapon
-## Attack.
-static func magic_range(job: JobDef, total: StatBlock) -> Vector2i:
-	var m := magic_attack(total, job)
+## includes power): (M² / 120) + M. The square keeps spells growing as fast as weapon damage,
+## which grows with both power and Weapon Attack.
+static func magic_range(job: JobDef, power: int, total: StatBlock) -> Vector2i:
+	var m := magic_attack(total, power)
 	var top := maxi(1, roundi(m * m / 120.0 + m))
 	return Vector2i(maxi(1, roundi(top * job.mastery)), top)
 
-## Magic Attack plus INT. A blend whose stats include INT (a Spellblade's STR and INT) adds
-## both its stats instead, so its spells grow with either.
-static func magic_attack(total: StatBlock, job: JobDef = null) -> int:
-	if job and job.secondary_stat != &"" and &"intelligence" in job.damage_stats():
-		return total.magic_attack + job.damage_stat_value(total)
-	return total.magic_attack + total.intelligence
+## Magic Attack plus power.
+static func magic_attack(total: StatBlock, power: int) -> int:
+	return total.magic_attack + power
 
 static func accuracy(total: StatBlock) -> int:
-	return total.accuracy + roundi(total.dexterity * ACCURACY_PER_DEX)
+	return total.accuracy
 
-static func avoid(total: StatBlock) -> int:
-	return total.avoid + roundi(total.luck * AVOID_PER_LUK)
-
-## The share taken off shop prices for this much CHA (at most MAX_DISCOUNT).
-static func shop_discount(total: StatBlock) -> float:
-	return minf(MAX_DISCOUNT, maxi(0, total.charisma) * DISCOUNT_PER_CHA)
-
-## Dawnshards picked up are multiplied by this for this much CHA.
-static func shard_bonus(total: StatBlock) -> float:
-	return 1.0 + maxi(0, total.charisma) * SHARDS_PER_CHA
+## Avoidability: gear's, BASE_AVOID, and the job's avoid_growth for every level past the first.
+static func avoid(job: JobDef, level: int, total: StatBlock) -> int:
+	return total.avoid + BASE_AVOID + roundi(job.avoid_growth * (maxi(1, level) - 1))
 
 static func crit_rate(total: StatBlock) -> float:
 	return BASE_CRIT + total.crit / 100.0
@@ -106,14 +86,10 @@ static func xp_need(level: int) -> int:
 	return int(floor(XP_SCALE * pow(JOB_LEVEL, XP_GROWTH) * pow(float(lvl) / JOB_LEVEL, XP_JOB_GROWTH)))
 
 static func max_hp(job: JobDef, level: int, total: StatBlock) -> int:
-	return job.base_hp + maxi(1, level) * job.hp_growth + total.max_hp + roundi(total.strength * HP_PER_STR)
+	return job.base_hp + maxi(1, level) * job.hp_growth + total.max_hp
 
 static func max_mp(job: JobDef, level: int, total: StatBlock) -> int:
-	return job.base_mp + maxi(1, level) * job.mp_growth + total.max_mp + roundi(total.intelligence * MP_PER_INT)
-
-## Dawn Essence for the next point of a stat that has had `bought` points bought already.
-static func stat_price(bought: int) -> int:
-	return roundi(STAT_PRICE * pow(1.0 + maxi(0, bought) / STAT_STEP, PRICE_GROWTH))
+	return job.base_mp + maxi(1, level) * job.mp_growth + total.max_mp
 
 ## Dawn Essence for the next skill level, with `bought` skill levels bought already.
 static func skill_price(bought: int) -> int:

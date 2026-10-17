@@ -17,8 +17,7 @@ func before_each() -> void:
 	map.mobs[0].position.x = 300.0
 	p = h.join(2, "Ann", ServerHarness.FIELD, 300.0)
 	c = p.character
-	c.base.luck = 0 # no avoid: the blow can't be dodged
-	c.recalc()
+	ServerHarness.no_dodge(c) # the blow can't be dodged
 	c.essence = 15
 	c.xp = 15
 

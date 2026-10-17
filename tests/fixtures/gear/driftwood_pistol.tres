@@ -22,7 +22,6 @@ sell_price = 60
 slot = 10
 jobs = Array[StringName]([&"pirate"])
 required_level = 10
-required_charisma = 20
 stats = SubResource("Resource_1")
 variance = 1
 offhand_kind = &"pistol"

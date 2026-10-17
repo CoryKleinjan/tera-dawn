@@ -1,7 +1,7 @@
 class_name Balance
 extends RefCounted
-## Numbers for tuning: a typical character of a job at a tier of progress (their level, stats
-## bought in the job's main stat, the best gear made for that tier from the game's items), and
+## Numbers for tuning: a typical character of a job at a tier of progress (their level and
+## the best gear made for that tier from the game's items), and
 ## how many hits of their main attack a monster takes. A player's tier is their level, and a
 ## monster's tier is its MonsterDef.level. tests/balance_report.tscn prints the whole table; the smoke test keeps
 ## every job inside BAND against monsters of its tier.
@@ -17,18 +17,15 @@ static func lines() -> Array[StringName]:
 		out.append(j.id)
 	return out
 
-## A character of `job_id` at `tier`, as a player who spent their essence sensibly would have.
+## A character of `job_id` at level `tier`, in the best gear made for that tier.
 static func typical(job_id: StringName, tier: int) -> Character:
 	# everyone starts as a Beginner and takes their job at 10
 	var c := Character.create("Balance")
 	if tier >= 10:
 		c.job = Content.job(job_id)
-	var j := c.job
 	c.level = clampi(tier, 1, Character.MAX_LEVEL)
-	var points := (tier - 1) * CharacterStats.GROWTH_POINTS
-	c.base.set(StringName(j.primary_stat), c.base.value(StringName(j.primary_stat)) + points)
 	c.recalc()
-	# the best of each kind of gear made for their tier (by the stat their attack uses)
+	# the best of each kind of gear made for their tier (by what their attack uses)
 	var best := {}
 	for item in Content.items.values():
 		var e := item as EquipDef
@@ -47,8 +44,14 @@ static func typical(job_id: StringName, tier: int) -> Character:
 
 static func _score(c: Character, e: EquipDef) -> int:
 	var s := e.stats
-	return (s.magic_attack + s.intelligence if c.job.primary_stat == "intelligence" else s.attack * 3) \
-		+ s.value(StringName(c.job.primary_stat)) + s.defense / 4
+	return (s.magic_attack if casts_spells(c) else s.attack * 3) + s.defense / 4
+
+## Whether `c`'s job line attacks with spells (Magic Attack) rather than weapons.
+static func casts_spells(c: Character) -> bool:
+	for s: SkillDef in Content.skills.values():
+		if s.magic and s.kind == SkillDef.Kind.ATTACK and c.job_line().has(s.job):
+			return true
+	return false
 
 ## How far along `c` is (see the top): their level.
 static func tier(c: Character) -> int:

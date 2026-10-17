@@ -1,7 +1,7 @@
 class_name ServerJobs
 extends ServerPart
 ## How a character grows: becoming or switching jobs at a job instructor (NpcDef.instructs),
-## and buying stats and skills with Dawn Essence. The rules are Character's.
+## and buying skill levels with Dawn Essence. The rules are Character's.
 
 ## The jingle (a Sound.jingle id, sent as ev_jingle) for a job advance.
 const ADVANCE_JINGLE := &"jingle_jobadvance"
@@ -50,20 +50,6 @@ func _instructed(p: SimPlayer, npc_id: StringName, job_id: StringName) -> JobDef
 	if npc == null or next == null or not job_id in npc.instructs:
 		return null
 	return next
-
-## Buys one point of a base stat with Dawn Essence (the "+" buttons). AbilityPoints.buy
-## refuses other stats and never spends more essence than there is.
-func on_buy_stat(peer: int, stat: StringName) -> void:
-	change(peer, func(c: Character) -> String:
-		if c.ap.buy(stat) == 0 and stat in StatBlock.BASE:
-			return "You need %d Dawn Essence for that." % c.ap.price(stat)
-		return "")
-
-## The Auto button: buys the job's damage stats while the essence lasts.
-func on_auto_stats(peer: int) -> void:
-	change(peer, func(c: Character) -> String:
-		c.ap.auto()
-		return "")
 
 ## Buys a level of `skill_id` with Dawn Essence.
 func on_learn_skill(peer: int, skill_id: StringName) -> void:

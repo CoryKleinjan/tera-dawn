@@ -351,7 +351,6 @@ func test_there_is_enough_content() -> void:
 	var bosses := Content.monsters.values().filter(func(m: MonsterDef) -> bool: return m.boss)
 	var shooters := Content.monsters.values().filter(func(m: MonsterDef) -> bool: return not m.projectiles().is_empty())
 	var splitters := Content.monsters.values().filter(func(m: MonsterDef) -> bool: return m.splits_into != null)
-	var scrolls := Content.items.values().filter(func(i: ItemDef) -> bool: return i is ScrollDef)
 	check(Content.maps.has(&"meadow") and Content.maps.has(&"hollow"), "the starting maps meadow and hollow exist")
 	check(towns.size() >= 7, "hub towns: %d, want at least 7" % towns.size())
 	check(Content.maps.size() >= 40, "maps: %d, want at least 40" % Content.maps.size())
@@ -362,7 +361,6 @@ func test_there_is_enough_content() -> void:
 	# about 150 since the old gear was removed (it had about 200 items with it)
 	var items := Content.items.size() - Content.extra_items.size()
 	check(items >= 150, "items: %d, want at least 150" % items)
-	check(scrolls.size() >= 12, "upgrade scrolls: %d, want at least 12" % scrolls.size())
 	check(Content.quests.size() >= 6, "quests: %d, want at least 6" % Content.quests.size())
 	check(not Content.shops.is_empty(), "there are shops")
 

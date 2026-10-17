@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=32 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=20 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/arcane_sentinel.tres" id="anim"]
@@ -8,12 +8,6 @@
 [ext_resource type="Resource" path="res://data/items/use/sunrise_cake.tres" id="7_sunrise_cake"]
 [ext_resource type="Resource" path="res://data/items/use/starlight_draught.tres" id="8_starlight_draught"]
 [ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="9_elixir"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_gloves_att_60.tres" id="10_scroll_gloves_att_60"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_dex_60.tres" id="11_scroll_top_dex_60"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_att_60.tres" id="12_scroll_weapon_att_60"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_shoes_speed_60.tres" id="13_scroll_shoes_speed_60"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_luk_60.tres" id="14_scroll_top_luk_60"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_int_60.tres" id="15_scroll_top_int_60"]
 [ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="22_power_elixir"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_shot_bolt.tres" id="mv_boss_shot_bolt"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_slam.tres" id="mv_boss_slam"]
@@ -26,48 +20,6 @@ item = ExtResource("22_power_elixir")
 chance = 0.5
 min_amount = 1
 max_amount = 3
-
-[sub_resource type="Resource" id="Resource_11"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("15_scroll_top_int_60")
-chance = 0.25
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_10"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("14_scroll_top_luk_60")
-chance = 0.25
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_9"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("13_scroll_shoes_speed_60")
-chance = 0.25
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_8"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("12_scroll_weapon_att_60")
-chance = 0.25
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_7"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("11_scroll_top_dex_60")
-chance = 0.25
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_6"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("10_scroll_gloves_att_60")
-chance = 0.25
-min_amount = 1
-max_amount = 1
 
 [sub_resource type="Resource" id="Resource_5"]
 script = ExtResource("4_drop_entry")
@@ -124,5 +76,5 @@ rage_ticks = 100
 sprite_frames = ExtResource("anim")
 sprite_scale = 1.5
 light_color = Color(0.690196, 0.564706, 1.0, 1.0)
-drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_18")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_18")])
 respawn_ticks = Vector2i(1800, 2400)

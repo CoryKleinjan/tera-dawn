@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=23 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/kelp_lurker.tres" id="2_kelp_lurker"]
@@ -8,33 +8,9 @@
 [ext_resource type="Resource" path="res://data/items/use/honey_bun.tres" id="6_honey_bun"]
 [ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="7_mana_tea"]
 [ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="8_elixir"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_matt_10.tres" id="9_scroll_weapon_matt_10"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_matt_60.tres" id="10_scroll_weapon_matt_60"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_armor_def_60.tres" id="11_scroll_armor_def_60"]
 [ext_resource type="Resource" path="res://data/monster_moves/pounce.tres" id="mv_pounce"]
 [ext_resource type="Resource" path="res://data/monster_moves/slam.tres" id="mv_slam"]
 [ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
-
-[sub_resource type="Resource" id="Resource_8"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("11_scroll_armor_def_60")
-chance = 0.012
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_7"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("10_scroll_weapon_matt_60")
-chance = 0.012
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_6"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("9_scroll_weapon_matt_10")
-chance = 0.0036
-min_amount = 1
-max_amount = 1
 
 [sub_resource type="Resource" id="Resource_5"]
 script = ExtResource("3_drop_entry")
@@ -87,4 +63,4 @@ jumps = true
 moves = Array[ExtResource("mv_script")]([ExtResource("mv_pounce"), ExtResource("mv_slam")])
 sprite_frames = ExtResource("2_kelp_lurker")
 sprite_scale = 1.0
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5")])

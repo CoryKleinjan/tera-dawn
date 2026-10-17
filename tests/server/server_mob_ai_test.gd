@@ -12,12 +12,11 @@ func before_each() -> void:
 func after_each() -> void:
 	h.close()
 
-## Puts `char_name` on the test field at `x` with no luck, so no avoid: nothing they're hit
-## by can be dodged.
+## Puts `char_name` on the test field at `x` with no avoid: nothing they're hit by can be
+## dodged.
 func _join(peer: int, char_name: String, x: float) -> SimPlayer:
 	var p := h.join(peer, char_name, ServerHarness.FIELD, x)
-	p.character.base.luck = 0
-	p.character.recalc()
+	ServerHarness.no_dodge(p.character)
 	p.character.refill()
 	return p
 

@@ -1,7 +1,7 @@
 extends TestCase
 ## Second-tier jobs: blends of two first jobs. Either parent can advance into one; both
-## parents' skills open to it, both their stats add up for damage, and it wears both their
-## gear. Uses the real blends in data/jobs.
+## parents' skills open to it, its base power is both of theirs added up, and it wears both
+## their gear. Uses the real blends in data/jobs.
 
 var fx: UnitHelpers
 
@@ -18,7 +18,7 @@ func _first_job(first: StringName) -> Character:
 	c.recalc()
 	return c
 
-func test_every_blend_joins_two_first_jobs_and_their_stats() -> void:
+func test_every_blend_joins_two_first_jobs() -> void:
 	var blends := 0
 	for j: JobDef in Content.jobs.values():
 		if j.partner == &"":
@@ -27,7 +27,6 @@ func test_every_blend_joins_two_first_jobs_and_their_stats() -> void:
 		var a := Content.job(j.advances_from)
 		var b := Content.job(j.partner)
 		check(a.advances_from == Character.START_JOB and b.advances_from == Character.START_JOB, "%s joins two first jobs" % j.id)
-		check_eq(j.damage_stats(), [StringName(a.primary_stat), StringName(b.primary_stat)] as Array[StringName], "%s: its stats are its parents'" % j.id)
 		check_eq(j.tier(), 2, "%s is a second-tier job" % j.id)
 	check_eq(blends, 5, "five blends")
 
@@ -72,28 +71,21 @@ func test_both_parents_skills_share_one_price() -> void:
 	check_eq(c.essence, 0, "for its price")
 	check_eq(c.skills.price(), CharacterStats.skill_price(1), "the next skill, from either parent, costs the second level's price")
 
-func test_both_stats_add_up_for_damage() -> void:
-	var blade := Content.job(&"spellblade")
-	var s := UnitHelpers.stats({"strength": 100, "intelligence": 50})
-	check_eq(blade.damage_stat_value(s), 150, "STR and INT added")
-	var more_str := UnitHelpers.stats({"strength": 110, "intelligence": 50, "attack": 20})
-	var more_int := UnitHelpers.stats({"strength": 100, "intelligence": 60, "attack": 20})
-	check_eq(CharacterStats.damage_range(blade, more_str), CharacterStats.damage_range(blade, more_int), "a point in either is worth the same")
-	check_eq(CharacterStats.magic_attack(more_int, blade), 160, "spells add both too")
-	check_eq(CharacterStats.magic_attack(more_int, Content.job(&"mage")), 60, "a Magician's spells only INT")
+func test_a_blends_base_power_is_both_parents_added() -> void:
+	for j: JobDef in Content.jobs.values():
+		if j.partner == &"":
+			continue
+		var want := Content.job(j.advances_from).base_power + Content.job(j.partner).base_power
+		check_eq(j.base_power, want, "%s: its parents' power added" % j.id)
 
-func test_auto_buys_both_stats_in_turn() -> void:
-	var c := Character.create("Hexer")
-	c.job = Content.job(&"hexcaster")
-	c.recalc()
-	var int_before := c.base.intelligence
-	var luk_before := c.base.luck
-	# the cheaper first, a tie to the first stat: INT, LUK, INT, LUK, INT
-	c.essence = 2 * CharacterStats.stat_price(0) + 2 * CharacterStats.stat_price(1) + CharacterStats.stat_price(2)
-	check_eq(c.ap.auto(), 5, "five points bought")
-	check_eq(c.base.intelligence - int_before, 3, "three in INT")
-	check_eq(c.base.luck - luk_before, 2, "two in LUK")
-	check_eq(c.essence, 0, "every bit of essence spent")
+func test_a_blend_hits_harder_than_either_parent_at_the_same_level() -> void:
+	var blade := Content.job(&"spellblade")
+	var s := UnitHelpers.stats({"attack": 20})
+	var hit := CharacterStats.damage_range(blade, CharacterStats.power(blade, 30), s).y
+	for parent in [&"warrior", &"mage"]:
+		var p := Content.job(parent)
+		check(hit > CharacterStats.damage_range(p, CharacterStats.power(p, 30), s).y, "more than a %s" % parent)
+	check_eq(CharacterStats.magic_attack(s, CharacterStats.power(blade, 30)), CharacterStats.power(blade, 30), "spells grow from the same power")
 
 func test_a_blend_wears_both_parents_gear() -> void:
 	var c := fx.character(Content.job(&"spellblade"))

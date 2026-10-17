@@ -4,9 +4,8 @@ extends TestCase
 ## skills, jobs and items have usable values.
 
 const Scan := preload("res://tests/content/content_scan.gd")
-## The tier a Beginner takes a first job at (see Balance.typical): one tier for every
-## CharacterStats.GROWTH_POINTS stat points bought, and the gear tier (EquipDef.required_level)
-## of a first job's weapons.
+## The tier a Beginner takes a first job at (see Balance.typical): their level, and the gear
+## tier (EquipDef.required_level) of a first job's weapons.
 const FIRST_JOB_TIER := 10
 
 func _check_drop(d: DropEntry, what: String) -> void:
@@ -208,6 +207,8 @@ func test_jobs_have_usable_growth() -> void:
 		var w := Scan.where(j)
 		check_between(j.mastery, 0.1, 0.95, "%s: mastery" % w)
 		check(j.base_hp > 0 and j.base_mp >= 0 and j.hp_growth > 0 and j.mp_growth >= 0, "%s: HP / MP growth must be positive" % w)
+		check(j.base_power > 0, "%s: base_power %d must be positive" % [w, j.base_power])
+		check(j.avoid_growth >= 0.0, "%s: avoid_growth %s is negative" % [w, j.avoid_growth])
 		if j.advances_from != &"":
 			var from: JobDef = Content.jobs.get(j.advances_from)
 			if from:
@@ -222,7 +223,7 @@ func test_every_first_job_has_a_job_test_anyone_may_take() -> void:
 			continue
 		check(j.advance_quest.jobs.is_empty(), "%s: its Job Test %s is limited to %s, but any job may take it" % [Scan.where(j), j.advance_quest.id, j.advance_quest.jobs])
 
-func test_gear_has_sane_requirements_and_stats() -> void:
+func test_gear_has_a_sane_tier_and_stats() -> void:
 	for i: ItemDef in Content.items.values():
 		if i.id in Content.extra_items:
 			continue
@@ -231,9 +232,7 @@ func test_gear_has_sane_requirements_and_stats() -> void:
 			continue
 		var w := Scan.where(e)
 		check(e.required_level >= 0 and e.required_level <= 200, "%s: required_level is %d" % [w, e.required_level])
-		for f in ["required_strength", "required_dexterity", "required_intelligence", "required_luck"]:
-			check(int(e.get(f)) >= 0, "%s: %s is negative" % [w, f])
-		check(e.variance >= 0 and e.upgrade_slots >= 0, "%s: variance %d / upgrade_slots %d is negative" % [w, e.variance, e.upgrade_slots])
+		check(e.variance >= 0, "%s: variance %d is negative" % [w, e.variance])
 		if e.stats:
 			for f in StatBlock.FIELDS:
 				check(e.stats.value(f) >= 0, "%s: stats.%s is negative" % [w, f])
@@ -251,9 +250,6 @@ func test_use_items_have_sane_numbers() -> void:
 			check(u.heal_hp >= 0 and u.heal_mp >= 0 and u.pet_food >= 0 and u.cooldown >= 0, "%s: a heal, pet_food or cooldown is negative" % w)
 			check_between(u.heal_hp_percent, 0, 100, "%s: heal_hp_percent" % w)
 			check_between(u.heal_mp_percent, 0, 100, "%s: heal_mp_percent" % w)
-		var s := i as ScrollDef
-		if s:
-			check(s.chance > 0.0 and s.chance <= 1.0, "%s: chance is %s" % [Scan.where(s), s.chance])
 
 func test_towns_are_safe() -> void:
 	# towns are where you wake up: nothing hostile spawns there (the starting meadow excepted)
