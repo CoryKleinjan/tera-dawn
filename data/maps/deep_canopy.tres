@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=152 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=151 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -33,7 +33,6 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/greenbough_fields_side.png" id="32_ground_side"]
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="33_backdrop_layer_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/greenbough_fields/deep_canopy.png" id="34_deep_canopy"]
-[ext_resource type="Resource" path="res://data/climb_styles/ladder.tres" id="34_ladder"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/root_wall.png" id="35_root_wall"]
 
 [sub_resource type="Resource" id="Prop_0"]
@@ -109,28 +108,24 @@ script = ExtResource("3_platform_def")
 x = 160.0
 y = 2635.0
 width = 640.0
-solid = true
 
 [sub_resource type="Resource" id="Platform_2"]
 script = ExtResource("3_platform_def")
 x = 300.0
 y = 2550.0
 width = 360.0
-solid = true
 
 [sub_resource type="Resource" id="Platform_3"]
 script = ExtResource("3_platform_def")
 x = 1720.0
 y = 2550.0
 width = 460.0
-solid = true
 
 [sub_resource type="Resource" id="Platform_4"]
 script = ExtResource("3_platform_def")
 x = 2180.0
 y = 2635.0
 width = 400.0
-solid = true
 
 [sub_resource type="Resource" id="Platform_5"]
 script = ExtResource("3_platform_def")
@@ -331,7 +326,7 @@ script = ExtResource("4_climbable_def")
 x = 1780.0
 top = 2550.0
 bottom = 2720.0
-style = ExtResource("34_ladder")
+style = ExtResource("5_rope_ladder")
 
 [sub_resource type="Resource" id="Climbable_1"]
 script = ExtResource("4_climbable_def")
