@@ -54,7 +54,6 @@ extends Resource
 @export_group("Layout")
 ## One-way platforms, numbered from 1 in this order (0 is the floor).
 @export var platforms: Array[PlatformDef] = []
-@export var climbables: Array[ClimbableDef] = []
 @export var portals: Array[PortalDef] = []
 ## Chests and walls that break open when the player hits them, once per character.
 @export var breakables: Array[BreakableDef] = []

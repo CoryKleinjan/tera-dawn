@@ -5,7 +5,7 @@ extends Node3D
 ## post effects, and asks the builders to turn the map into 3D:
 ##   TerrainBuilder  the painted front skins of the floor and the platforms
 ##   BackdropBuilder the parallax mountains, trees, clouds and sun
-##   SceneryBuilder  props, climbables, portals, lanterns and signs
+##   SceneryBuilder  props, portals, lanterns and signs
 ## One 3D unit is PX game pixels. Static helpers here make sprites and lights for everyone.
 
 const PX := 32.0
@@ -40,9 +40,6 @@ const ART_DENSITY := {
 	# the scenery pieces of props/ (dawnshards there are drop items, drawn at their own size)
 	"res://assets/sprites/props/portal_": 2.0,
 	"res://assets/sprites/props/lantern_": 2.0,
-	"res://assets/sprites/props/ladder_": 2.0,
-	"res://assets/sprites/props/rope": 2.0,
-	"res://assets/sprites/props/vine_": 2.0,
 }
 
 ## Land is flat, like a 2D game: the floor and the floating platforms are painted front skins
@@ -54,15 +51,14 @@ const SCENERY_DEEP := 9.0
 const SCENERY_LAYER := 0.9
 
 ## Draw order. Depth is 3D z: bigger is nearer the camera. Everything the player can touch
-## (climbables, NPCs, monsters, drops, the player) stands in front of all the land, so the
+## (NPCs, monsters, drops, the player) stands in front of all the land, so the
 ## ground, platforms and their decoration never hide it. New content should use these.
 ## Land: platform front skins sit at LAND_FRONT; decoration and props are clamped behind it.
 ## (The grass on the floor's front edge is nearer, but it shows below everyone's feet.)
 const LAND_FRONT := 0.14
 ## Portals stand in front of all the land and scenery (so nothing hides the way out) but behind
-## everything you can touch: ropes, NPCs, monsters, drops and the player.
+## everything you can touch: NPCs, monsters, drops and the player.
 const Z_PORTAL := 0.17
-const Z_CLIMBABLE := 0.2
 const Z_NPC := 0.3
 ## Monsters spread over [Z_MONSTER, Z_MONSTER + Z_MONSTER_SPREAD) so overlapping ones don't flicker.
 const Z_MONSTER := 0.38

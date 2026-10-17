@@ -31,7 +31,6 @@ var position := Vector2.ZERO
 var face := 1
 ## The animation the client says it is playing, passed on to everyone else on the map.
 var animation := &"idle"
-var climbing := false
 ## Sitting on the ground (see TDServer.on_sit). Moving or getting hit gets them up.
 var sitting := false
 var hurtbox := Hitbox.new(HURTBOX_SIZE)
@@ -83,17 +82,16 @@ func stands_on(plat: Platform) -> bool:
 
 ## Applies a movement report. False (and the position stays) when it isn't possible.
 ## Moving gets you up.
-func report_move(at: Vector2, facing: int, anim: StringName, on_rope: bool) -> bool:
+func report_move(at: Vector2, facing: int, anim: StringName) -> bool:
 	var ticks := maxi(1, since_move)
 	since_move = 0
 	if fainted() or at.distance_to(position) > MAX_STEP * ticks + 40.0:
 		return false
-	if sitting and (at.distance_to(position) > 2.0 or on_rope):
+	if sitting and at.distance_to(position) > 2.0:
 		sitting = false
 	position = Vector2(clampf(at.x, 0.0, float(map.def.width)), clampf(at.y, -200.0, float(map.def.height)))
 	face = 1 if facing >= 0 else -1
 	animation = anim
-	climbing = on_rope
 	return true
 
 ## Runs the player's timers and HP / MP regeneration. True when they've lain fainted long
@@ -134,8 +132,6 @@ func motion() -> Array:
 		flags |= SnapshotFlags.PLAYER_FAINTED
 	if inv > 0:
 		flags |= SnapshotFlags.PLAYER_BLINK
-	if climbing:
-		flags |= SnapshotFlags.PLAYER_CLIMBING
 	if hidden():
 		flags |= SnapshotFlags.PLAYER_HIDDEN
 	return [peer, position.x, position.y, face, animation, flags]

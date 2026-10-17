@@ -6,20 +6,20 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 
 1. Create `data/maps/<id>.tres` as a **MapDef**. Give it an `id`, a display name, a size and
    a `biome` (`data/biomes/meadow.tres` or `harbor.tres`, or a new BiomeDef).
-2. Lay it out: `platforms` (one-way, numbered from 1; the floor is 0), `climbables` (x, top,
-   bottom and a climb style: rope, vine, ladder or rope ladder) and `portals`.
+2. Lay it out: `platforms` (one-way, numbered from 1; the floor is 0) and `portals`. There
+   are no ropes or ladders: every place is reached by jumping.
 3. Fill it: `spawns`, `npcs` (an **NpcPlacement** with an NpcDef and an x) and hand-placed
    `props` on top of the biome's random decoration. Anything that looks like ground (a
    tall ledge) is a platform with that picture as its `look`, never a prop, so everything
-   that looks walkable is. A deck, ledge or ladder already painted into a building or a
-   `look` (a treehouse deck, a crow's nest, a terrace's railed wing) gets a platform or
-   climbable with `in_scenery` set, which draws nothing, so it can be stood on or climbed
-   too. Land art stands on the floor: no floating rock islands or
-   arches; a floating platform uses the biome's plain platform front. Every platform, rope,
+   that looks walkable is. A deck or ledge already painted into a building or a
+   `look` (a treehouse deck, a crow's nest, a terrace's railed wing) gets a platform with
+   `in_scenery` set, which draws nothing, so it can be stood on; a painted ladder gets narrow
+   `in_scenery` steps up its rungs. Land art stands on the floor: no floating rock islands or
+   arches; a floating platform uses the biome's plain platform front. Every platform,
    portal, NPC and spawn must be reachable with the hero's own jump from where players arrive
    (secret ledges aside, below), and no two portals on a map may lead to the same map
-   (`tests/content/content_reach_test.gd`). A platform more than about 90 px above the one
-   below needs a rope or ladder. A map can be taller than 700 (more floors, more exits); keep
+   (`tests/content/content_reach_test.gd`). A plain jump rises about 90 px, so a platform
+   higher than that above the one below needs steps up to it (keep each rise about 70). A map can be taller than 700 (more floors, more exits); keep
    `ground_y` 80 above `height`. On a tall map the backdrop strips sit lower
    (`BackdropBuilder.strip_center`), so climbing up shows more sky.
 4. Connect it: add a **PortalDef** on an existing map whose `target_map` is the new id, and a
@@ -49,7 +49,7 @@ drawn in code (`TDStage._build_tears`); nothing in the game mentions them.
 ### Secrets and shortcuts
 
 A **secret ledge** (`PlatformDef.secret`) is reached only with a job's movement skill at level
-1 (Flash Jump, Blink, Charge, Rolling Dash, Backstep Leap), never a plain jump, a rope or a fall,
+1 (Flash Jump, Blink, Charge, Rolling Dash, Backstep Leap), never a plain jump or a fall,
 and the minimap leaves it out. Nothing a player needs stands on one (a chest may);
 `content_reach_test` checks both ways with `map_reach.gd`'s skill moves. A field has two: a
 high one about 130 px over the ledge you jump from, with nothing over it (Flash Jump, Blink),
@@ -181,8 +181,8 @@ A bigger town can have **levels**, like a classic MapleStory city: raised stone 
 and a cliff top above the street, each a platform with `solid = true`. A solid platform's
 front runs all the way down to the land it stands on (`MapDef.land_under`: the highest
 platform under its middle, or the floor), so it reads as raised ground rather than a thin
-ledge; you still walk in front of it along the street below. Ladders and ropes join the
-levels (more than about 90 px needs one). Buildings, NPCs and portals stand on a level by
+ledge; you still walk in front of it along the street below. Steps join the
+levels (more than about 90 px needs them). Buildings, NPCs and portals stand on a level by
 their `platform`; each level is its own row for the spacing checks, and nothing should
 stand on the floor straight behind a terrace's wall (lanterns, scattered decor and
 background houses keep clear of it by themselves). Lanterns stand only on open street by themselves; a level gets its own with `MapDef.level_lanterns` (x and platform), drawn in front of the land so the wall of the level above doesn't hide them; ivy and flower boxes hung on a level's wall are props with `on_wall` set. Doors stay on the floor for now (a portal's

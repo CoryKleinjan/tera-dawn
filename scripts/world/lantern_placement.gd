@@ -2,7 +2,7 @@ class_name LanternPlacement
 extends RefCounted
 ## Where a map's lanterns stand along the floor: a few, spread evenly, each in open ground
 ## clear of everything else standing on or hanging over the floor (buildings, portals,
-## ropes and ladders, props, NPCs and low platforms), so a lantern never shows in front of
+## props, NPCs and low platforms), so a lantern never shows in front of
 ## or behind another piece of the scene. Worked out from the MapDef alone, so it needs no
 ## scene, and tests can check every map.
 ## SceneryBuilder stands the posts here and keeps the floor's scattered trees, bushes and
@@ -15,9 +15,8 @@ const FIELD_SPACING := 1400.0
 const CLEAR := 24.0
 ## How far in from the map's ends lanterns stand.
 const EDGE := 120.0
-## Half the width a portal and a rope or ladder take up, in game pixels.
+## Half the width a portal takes up, in game pixels.
 const PORTAL_HALF := 34.0
-const CLIMB_HALF := 16.0
 ## How tall a portal stands, for one on a platform just above the floor.
 const PORTAL_HEIGHT := 110.0
 
@@ -86,9 +85,6 @@ static func blocked(map: MapDef) -> Array[Vector2]:
 		var r := npc_rect(n)
 		if hits.call(y + r.position.y, y + r.end.y):
 			out.append(Vector2(n.x + r.position.x, n.x + r.end.x))
-	for c in map.climbables:
-		if hits.call(c.top, c.bottom):
-			out.append(Vector2(c.x - CLIMB_HALF, c.x + CLIMB_HALF))
 	for p in map.props:
 		if p.texture == null:
 			continue

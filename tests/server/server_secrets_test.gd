@@ -82,7 +82,7 @@ func _portal_from(who: SimPlayer, x: float, y := ServerHarness.GROUND) -> void:
 
 ## `who` reports walking to `x` (on the floor, or at `y`).
 func _walk(who: SimPlayer, x: float, y := ServerHarness.GROUND) -> void:
-	h.ask(who.peer, &"req_move", [Vector2(x, y), 1, &"walk", false])
+	h.ask(who.peer, &"req_move", [Vector2(x, y), 1, &"walk"])
 
 # ---------- arriving up high ----------
 

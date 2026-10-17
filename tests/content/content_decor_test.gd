@@ -1,7 +1,7 @@
 extends TestCase
 ## The floor and platforms aren't cluttered: the biome's scattered trees, bushes, rocks and
-## flowers stand wholly on their own land, clear of buildings, portals, NPCs, ropes and
-## ladders, props and lanterns, never on top of each other, and only as often as the shared
+## flowers stand wholly on their own land, clear of buildings, portals, NPCs, props and
+## lanterns, never on top of each other, and only as often as the shared
 ## density allows (see DecorPlacement); in towns even the tree line keeps clear of all of
 ## that and no two pieces overlap; nothing grows on a hanging bridge.
 

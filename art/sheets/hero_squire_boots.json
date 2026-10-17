@@ -23,12 +23,12 @@
       "faint"
     ],
     [
-      "rope1",
-      "rope2",
-      "rope_hold",
-      "ladder1",
       "",
-      "ladder_hold",
+      "",
+      "",
+      "",
+      "",
+      "",
       "back",
       ""
     ],
@@ -103,11 +103,6 @@
         "walk3": "hero_squire_boots:walk3",
         "crouch": "hero_squire_boots:crouch",
         "faint": "hero_squire_boots:faint",
-        "rope1": "hero_squire_boots:rope1",
-        "rope2": "hero_squire_boots:rope2",
-        "rope_hold": "hero_squire_boots:rope_hold",
-        "ladder1": "hero_squire_boots:ladder1",
-        "ladder_hold": "hero_squire_boots:ladder_hold",
         "back": "hero_squire_boots:back",
         "swing2": "hero_squire_boots:swing2",
         "swing3": "hero_squire_boots:swing3",
@@ -183,36 +178,6 @@
         "faint": {
           "frames": [
             "faint"
-          ],
-          "fps": 1
-        },
-        "rope1": {
-          "frames": [
-            "rope1"
-          ],
-          "fps": 1
-        },
-        "rope2": {
-          "frames": [
-            "rope2"
-          ],
-          "fps": 1
-        },
-        "rope_hold": {
-          "frames": [
-            "rope_hold"
-          ],
-          "fps": 1
-        },
-        "ladder1": {
-          "frames": [
-            "ladder1"
-          ],
-          "fps": 1
-        },
-        "ladder_hold": {
-          "frames": [
-            "ladder_hold"
           ],
           "fps": 1
         },

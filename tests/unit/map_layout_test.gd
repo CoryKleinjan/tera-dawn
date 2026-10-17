@@ -1,11 +1,11 @@
 extends TestCase
 ## MapLayout: the floor and one-way platforms, what's under the feet, where drops land,
-## ropes and ladders in reach, and portals.
+## and portals.
 
 var layout: MapLayout
 
 ## A 1000-wide map with the floor at 600, a platform at y 400 from x 100 to 300, one above
-## it at y 250 from x 150 to 250, a rope at x 500 from 300 to 600 and a portal on platform 1.
+## it at y 250 from x 150 to 250 and a portal on platform 1.
 func before_each() -> void:
 	var m := MapDef.new()
 	m.id = &"t_map"
@@ -17,11 +17,6 @@ func before_each() -> void:
 		d.y = p[1]
 		d.width = p[2]
 		m.platforms.append(d)
-	var rope := ClimbableDef.new()
-	rope.x = 500
-	rope.top = 300
-	rope.bottom = 600
-	m.climbables.append(rope)
 	var portal := PortalDef.new()
 	portal.x = 200
 	portal.platform = 1
@@ -66,15 +61,6 @@ func test_platform_under_feet() -> void:
 func test_dropping_from_the_top_lands_on_the_highest_ground() -> void:
 	check_eq(layout.ground_below(Vector2(200, 0)), 250.0, "drop above both")
 	check_eq(layout.ground_below(Vector2(900, 0)), 600.0, "drop over floor")
-
-func test_climbable_near() -> void:
-	check(layout.climbable_near(Vector2(500, 450)) != null, "on the rope")
-	check(layout.climbable_near(Vector2(515, 450)) != null, "within 16 px")
-	check(layout.climbable_near(Vector2(516, 450)) == null, "too far sideways")
-	check(layout.climbable_near(Vector2(500, 299)) != null, "just above the top")
-	check(layout.climbable_near(Vector2(500, 297)) == null, "above the top")
-	check(layout.climbable_near(Vector2(500, 602)) != null, "at the bottom")
-	check(layout.climbable_near(Vector2(500, 603)) == null, "below the bottom")
 
 func test_portal_at() -> void:
 	check(layout.portal_at(Vector2(200, 400)) != null, "standing in it")

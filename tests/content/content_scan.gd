@@ -25,7 +25,6 @@ const EXPECTED := {
 	"regions": ["RegionDef"],
 	"biomes": ["BiomeDef"],
 	"buildings": ["BuildingDef"],
-	"climb_styles": ["ClimbStyleDef"],
 	"projectiles": ["ProjectileDef"],
 	"achievements": ["AchievementDef"],
 	"cutscenes": ["CutsceneDef"],

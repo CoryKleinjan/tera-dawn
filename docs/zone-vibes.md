@@ -69,7 +69,7 @@ cello, slow and tender. Field: ocarina, flute, guitar, strings, light percussion
 wandering melody.
 
 **Town: Dawnrise Village.** Small and cosy, humbler than Dawnharbor: a village green with a low
-grassy rise (ladder up) where the windmill stands. Round honey-stone and timber cottages under fat
+grassy rise (steps up) where the windmill stands. Round honey-stone and timber cottages under fat
 golden thatch, rose and peach heart shutters, flower boxes, climbing roses; no blue tiles or cream
 plaster. Buildings: Elder Rowan's house, Mira's shop (striped awning), a family cottage, the
 windmill. Rose-wound lamp posts. One 4K sunrise meadow panorama (hills, village, windmill, sea).
@@ -151,7 +151,7 @@ thatch and antler trim.
 | Wayside Cave | Secret | – | Bough Trail's warm light, under the trail through a fake wall | Thornling, Bramble Boar |
 | Whisper Pool | Secret | – | Whispering Grove's mint mist, under the grove through a fake wall | Seedwing, Thornling |
 | Rootway | Secret | – | Elder's Root's gold glow: a long tunnel from the roots back to Wayside Cave | Acorn Sentry, Barkcap |
-| Oak Crown | Secret | – | Old Oak Heights' look: the top of the old oak, up a hidden climb | Grove Wisp, Barkcap |
+| Oak Crown | Secret | – | Old Oak Heights' look: the top of the old oak, up a hidden run of ledges | Grove Wisp, Barkcap |
 
 ## Lumewood
 

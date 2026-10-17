@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="map_def"]
 [ext_resource type="Resource" path="res://data/biomes/coast.tres" id="coast"]
 [ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="platform_def"]
-[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="climbable_def"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="portal_def"]
 [ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="npc_placement"]
 [ext_resource type="Script" path="res://scripts/data/building_placement.gd" id="building_placement"]
@@ -38,8 +37,6 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/prop_ship_wheel.png" id="t_prop_ship_wheel"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/hull_deck.png" id="t_hull"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/driftcove/jetty.png" id="t_jetty"]
-[ext_resource type="Resource" path="res://data/climb_styles/rope_ladder.tres" id="rope_ladder"]
-
 [sub_resource type="Resource" id="Hull_deck"]
 script = ExtResource("platform_def")
 x = 2850.0
@@ -57,27 +54,6 @@ width = 420.0
 look = ExtResource("t_jetty")
 look_span = 0.9
 look_top = 78.0
-
-[sub_resource type="Resource" id="Ladder_hull_west"]
-script = ExtResource("climbable_def")
-x = 2880.0
-top = 441.5
-bottom = 620.0
-style = ExtResource("rope_ladder")
-
-[sub_resource type="Resource" id="Ladder_hull_east"]
-script = ExtResource("climbable_def")
-x = 3580.0
-top = 441.5
-bottom = 620.0
-style = ExtResource("rope_ladder")
-
-[sub_resource type="Resource" id="Ladder_jetty"]
-script = ExtResource("climbable_def")
-x = 4090.0
-top = 550.25
-bottom = 620.0
-style = ExtResource("rope_ladder")
 
 [sub_resource type="Resource" id="Mast_barrel_west"]
 script = ExtResource("platform_def")
@@ -112,14 +88,6 @@ script = ExtResource("platform_def")
 x = 2276.0
 y = 193.75
 width = 108.0
-in_scenery = true
-
-[sub_resource type="Resource" id="Ladder_mast"]
-script = ExtResource("climbable_def")
-x = 2330.6
-top = 266.25
-bottom = 499.0
-style = ExtResource("rope_ladder")
 in_scenery = true
 
 [sub_resource type="Resource" id="Portal_west"]
@@ -340,6 +308,39 @@ light_color = Color(1.0, 0.78, 0.48, 1.0)
 light_energy = 1.5
 light_height = 120.0
 
+[sub_resource type="Resource" id="Step_1"]
+script = ExtResource("platform_def")
+x = 2853.0
+y = 560.5
+width = 110.0
+
+[sub_resource type="Resource" id="Step_2"]
+script = ExtResource("platform_def")
+x = 2797.0
+y = 501.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_3"]
+script = ExtResource("platform_def")
+x = 2308.6
+y = 440.8
+width = 44.0
+in_scenery = true
+
+[sub_resource type="Resource" id="Step_4"]
+script = ExtResource("platform_def")
+x = 2308.6
+y = 382.6
+width = 44.0
+in_scenery = true
+
+[sub_resource type="Resource" id="Step_5"]
+script = ExtResource("platform_def")
+x = 2308.6
+y = 324.4
+width = 44.0
+in_scenery = true
+
 [resource]
 script = ExtResource("map_def")
 id = &"driftcove"
@@ -351,8 +352,7 @@ height = 700
 ground_y = 620
 lantern_spacing = 0.0
 start_x = 300.0
-platforms = Array[ExtResource("platform_def")]([SubResource("Hull_deck"), SubResource("Jetty"), SubResource("Mast_barrel_west"), SubResource("Mast_barrel_east"), SubResource("Mast_crate"), SubResource("Mast_yard"), SubResource("Mast_nest")])
-climbables = Array[ExtResource("climbable_def")]([SubResource("Ladder_hull_west"), SubResource("Ladder_hull_east"), SubResource("Ladder_jetty"), SubResource("Ladder_mast")])
+platforms = Array[ExtResource("platform_def")]([SubResource("Hull_deck"), SubResource("Jetty"), SubResource("Mast_barrel_west"), SubResource("Mast_barrel_east"), SubResource("Mast_crate"), SubResource("Mast_yard"), SubResource("Mast_nest"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3"), SubResource("Step_4"), SubResource("Step_5")])
 npcs = Array[ExtResource("npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_shop"), SubResource("Npc_keeper"), SubResource("Npc_deckhand"), SubResource("Npc_fisher"), SubResource("Npc_parrot_girl")])
 props = Array[ExtResource("prop_placement")]([SubResource("Prop_0_prop_rowboat"), SubResource("Prop_1_lamp_post"), SubResource("Prop_2_prop_crates"), SubResource("Prop_3_prop_barrels"), SubResource("Prop_4_prop_chest"), SubResource("Prop_5_lamp_post"), SubResource("Prop_6_prop_oar_rack"), SubResource("Prop_7_prop_cannon"), SubResource("Prop_8_prop_ship_wheel"), SubResource("Prop_9_prop_flag"), SubResource("Prop_10_prop_rope_coil"), SubResource("Prop_11_prop_lobster_pot"), SubResource("Prop_12_prop_anchor"), SubResource("Prop_13_prop_figurehead"), SubResource("Prop_14_lamp_post")])
 buildings = Array[ExtResource("building_placement")]([SubResource("Building_boat_store"), SubResource("Building_small"), SubResource("Building_large"), SubResource("Building_mast_lookout"), SubResource("Building_captains_cabin"), SubResource("Building_net_loft")])
