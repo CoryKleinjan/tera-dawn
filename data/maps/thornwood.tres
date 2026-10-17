@@ -97,14 +97,12 @@ script = ExtResource("3_platform_def")
 x = 4560.0
 y = 1340.0
 width = 560.0
-solid = true
 
 [sub_resource type="Resource" id="Platform_2"]
 script = ExtResource("3_platform_def")
 x = 4180.0
 y = 1260.0
 width = 460.0
-solid = true
 
 [sub_resource type="Resource" id="Platform_3"]
 script = ExtResource("3_platform_def")
@@ -141,21 +139,18 @@ script = ExtResource("3_platform_def")
 x = 2600.0
 y = 1180.0
 width = 1000.0
-solid = true
 
 [sub_resource type="Resource" id="Platform_9"]
 script = ExtResource("3_platform_def")
 x = 2340.0
 y = 1260.0
 width = 300.0
-solid = true
 
 [sub_resource type="Resource" id="Platform_10"]
 script = ExtResource("3_platform_def")
 x = 2080.0
 y = 1340.0
 width = 340.0
-solid = true
 
 [sub_resource type="Resource" id="Platform_11"]
 script = ExtResource("3_platform_def")
@@ -240,7 +235,6 @@ script = ExtResource("3_platform_def")
 x = 240.0
 y = 1200.0
 width = 560.0
-solid = true
 
 [sub_resource type="Resource" id="Platform_25"]
 script = ExtResource("3_platform_def")

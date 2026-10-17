@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=90 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=89 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -31,7 +31,6 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/greenbough_fields_side.png" id="33_ground_side"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest.png" id="34_chest"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest_open.png" id="35_chest_open"]
-[ext_resource type="Resource" path="res://data/climb_styles/ladder.tres" id="35_ladder"]
 [ext_resource type="Resource" path="res://data/climb_styles/vine.tres" id="36_vine"]
 
 [sub_resource type="Resource" id="Prop_0"]
@@ -100,28 +99,24 @@ script = ExtResource("3_platform_def")
 x = 0.0
 y = 1300.0
 width = 340.0
-solid = true
 
 [sub_resource type="Resource" id="Platform_2"]
 script = ExtResource("3_platform_def")
 x = 400.0
 y = 1340.0
 width = 420.0
-solid = true
 
 [sub_resource type="Resource" id="Platform_3"]
 script = ExtResource("3_platform_def")
 x = 900.0
 y = 1300.0
 width = 440.0
-solid = true
 
 [sub_resource type="Resource" id="Platform_4"]
 script = ExtResource("3_platform_def")
 x = 1400.0
 y = 1240.0
 width = 400.0
-solid = true
 
 [sub_resource type="Resource" id="Platform_5"]
 script = ExtResource("3_platform_def")
@@ -213,21 +208,21 @@ script = ExtResource("4_climbable_def")
 x = 1120.0
 top = 960.0
 bottom = 1300.0
-style = ExtResource("35_ladder")
+style = ExtResource("5_rope_ladder")
 
 [sub_resource type="Resource" id="Climbable_1"]
 script = ExtResource("4_climbable_def")
 x = 1180.0
 top = 700.0
 bottom = 960.0
-style = ExtResource("35_ladder")
+style = ExtResource("5_rope_ladder")
 
 [sub_resource type="Resource" id="Climbable_2"]
 script = ExtResource("4_climbable_def")
 x = 1060.0
 top = 460.0
 bottom = 700.0
-style = ExtResource("35_ladder")
+style = ExtResource("5_rope_ladder")
 
 [sub_resource type="Resource" id="Climbable_3"]
 script = ExtResource("4_climbable_def")

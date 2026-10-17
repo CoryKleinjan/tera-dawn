@@ -162,6 +162,8 @@ update this page when one changes. Each zone's own look and music are in
   a high one (Flash Jump, Blink) and a far one across a gap (every movement skill).
   Each holds a chest a character opens once (shards, potions, a 60% scroll, a local Monster Book
   card). Secret ledges and shortcuts stay off the minimap; the zone map shows them once found.
+- Greenbough's fields have no raised land: every ledge is a plain platform with nothing under it
+  (no terrace walls).
 - Characters, NPCs, ropes and ladders draw in front of land; characters cast no shadows. Portals draw in front of land and
   scenery, behind ropes, NPCs, monsters and players; no NPC stands on a portal.
 - Portals are a blue-white light pillar on the ground, at exits and doorways, 70% opaque.
