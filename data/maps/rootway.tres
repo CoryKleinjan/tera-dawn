@@ -323,7 +323,7 @@ x = 1160.0
 platform = 6
 target_map = &"elder_root"
 target_x = 1290.0
-shortcut = &"elder_root_rootway"
+gate = &"elder_root_rootway"
 
 [sub_resource type="Resource" id="Portal_1"]
 script = ExtResource("6_portal_def")

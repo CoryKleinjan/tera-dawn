@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=111 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=115 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -345,6 +345,7 @@ target_map = &"whisper_pool"
 target_x = 1210.0
 target_platform = 1
 shortcut = &"whispering_grove_fake_wall"
+gate = &"whisper_pool_gate"
 
 [sub_resource type="Resource" id="Spawn_0"]
 script = ExtResource("8_spawn_def")
@@ -524,6 +525,24 @@ monster = ExtResource("10_seedwing")
 platform = 22
 count = 1
 
+[sub_resource type="Resource" id="Lever_step_1"]
+script = ExtResource("3_platform_def")
+x = 1700.0
+y = 590.0
+width = 150.0
+
+[sub_resource type="Resource" id="Lever_step_2"]
+script = ExtResource("3_platform_def")
+x = 1890.0
+y = 515.0
+width = 150.0
+
+[sub_resource type="Resource" id="Lever_step_3"]
+script = ExtResource("3_platform_def")
+x = 2080.0
+y = 440.0
+width = 240.0
+
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("18_breakable_def")
 id = &"whispering_grove_fake_wall"
@@ -594,6 +613,14 @@ height = 48.0
 loot = Array[ExtResource("22_drop_entry")]([SubResource("Loot_2_0"), SubResource("Loot_2_1"), SubResource("Loot_2_2")])
 card = ExtResource("10_seedwing")
 
+[sub_resource type="Resource" id="Lever_whisper_pool_gate"]
+script = ExtResource("18_breakable_def")
+id = &"whisper_pool_gate"
+x = 2220.0
+platform = 42
+hits = 1
+height = 80.0
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"whispering_grove"
@@ -604,9 +631,9 @@ width = 4000
 height = 1400
 ground_y = 1320
 start_x = 120.0
-platforms = Array[ExtResource("3_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9"), SubResource("Platform_10"), SubResource("Platform_11"), SubResource("Platform_12"), SubResource("Platform_13"), SubResource("Platform_14"), SubResource("Platform_15"), SubResource("Platform_16"), SubResource("Platform_17"), SubResource("Platform_18"), SubResource("Platform_19"), SubResource("Platform_20"), SubResource("Platform_21"), SubResource("Platform_22"), SubResource("Platform_23"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3"), SubResource("Step_4"), SubResource("Step_5"), SubResource("Step_6"), SubResource("Step_7"), SubResource("Step_8"), SubResource("Step_9"), SubResource("Step_10"), SubResource("Step_11"), SubResource("Step_12"), SubResource("Step_13"), SubResource("Step_14"), SubResource("Step_15"), SubResource("Step_16")])
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9"), SubResource("Platform_10"), SubResource("Platform_11"), SubResource("Platform_12"), SubResource("Platform_13"), SubResource("Platform_14"), SubResource("Platform_15"), SubResource("Platform_16"), SubResource("Platform_17"), SubResource("Platform_18"), SubResource("Platform_19"), SubResource("Platform_20"), SubResource("Platform_21"), SubResource("Platform_22"), SubResource("Platform_23"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3"), SubResource("Step_4"), SubResource("Step_5"), SubResource("Step_6"), SubResource("Step_7"), SubResource("Step_8"), SubResource("Step_9"), SubResource("Step_10"), SubResource("Step_11"), SubResource("Step_12"), SubResource("Step_13"), SubResource("Step_14"), SubResource("Step_15"), SubResource("Step_16"), SubResource("Lever_step_1"), SubResource("Lever_step_2"), SubResource("Lever_step_3")])
 portals = Array[ExtResource("7_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1"), SubResource("Portal_2")])
-breakables = Array[ExtResource("18_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1"), SubResource("Breakable_2")])
+breakables = Array[ExtResource("18_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1"), SubResource("Breakable_2"), SubResource("Lever_whisper_pool_gate")])
 spawns = Array[ExtResource("8_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13"), SubResource("Spawn_14"), SubResource("Spawn_15"), SubResource("Spawn_16"), SubResource("Spawn_17"), SubResource("Spawn_18"), SubResource("Spawn_19"), SubResource("Spawn_20"), SubResource("Spawn_21"), SubResource("Spawn_22"), SubResource("Spawn_23"), SubResource("Spawn_24"), SubResource("Spawn_25"), SubResource("Spawn_26"), SubResource("Spawn_27")])
 props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_35"), SubResource("Resource_37"), SubResource("Resource_38"), SubResource("Resource_39"), SubResource("Resource_40"), SubResource("Resource_41")])
 region = &"greenbough"

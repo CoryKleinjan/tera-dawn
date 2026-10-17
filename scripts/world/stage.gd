@@ -59,6 +59,9 @@ const LAND_FRONT := 0.14
 ## Portals stand in front of all the land and scenery (so nothing hides the way out) but behind
 ## everything you can touch: NPCs, monsters, drops and the player.
 const Z_PORTAL := 0.17
+## A gated door's shut gate stands just in front of its portal, so the light shows through
+## its gaps.
+const Z_GATE := 0.2
 const Z_NPC := 0.3
 ## Monsters spread over [Z_MONSTER, Z_MONSTER + Z_MONSTER_SPREAD) so overlapping ones don't flicker.
 const Z_MONSTER := 0.38
@@ -86,6 +89,8 @@ var sun: DirectionalLight3D
 var map_root: Node3D
 ## The scenery of portals that open and shut with a quest (PortalDef.locked) -> their PortalDef.
 var locked_portals := {}
+## The shut gate in front of each gated door (PortalDef.gate) -> that door's PortalDef.
+var gates := {}
 ## Index in MapDef.breakables -> the picture of that chest or wall (SceneryBuilder._breakable).
 var breakables := {}
 var motes: CPUParticles3D
@@ -403,6 +408,7 @@ func build() -> void:
 	add_child(map_root)
 	_rebuild_at = 0
 	locked_portals.clear()
+	gates.clear()
 	breakables.clear()
 	var map := world.map
 	var biome := map.look()
@@ -427,10 +433,13 @@ func build() -> void:
 	show_open_portals(Game.me)
 	show_breakables(Game.me)
 
-## Shows the locked portals `c` has opened and hides the rest.
+## Shows the locked portals `c` has opened, or sees shut behind a gate, and hides the rest;
+## a gate stands only while it is shut for `c`.
 func show_open_portals(c: Character) -> void:
 	for node: Node3D in locked_portals:
-		node.visible = (locked_portals[node] as PortalDef).open_to(c)
+		node.visible = (locked_portals[node] as PortalDef).shows_to(c)
+	for gate: Node3D in gates:
+		gate.visible = (gates[gate] as PortalDef).gated_for(c)
 
 ## Shows each chest and wall broken open if `c` has broken theirs (gone, if it has no broken
 ## picture), else whole. A fake wall already fading away is left to fade.

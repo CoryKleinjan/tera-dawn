@@ -362,8 +362,9 @@ func _strike_breakables(p: SimPlayer, skill: SkillDef, aim: Hitbox.Aim) -> void:
 			else:
 				Net.send(p.peer, &"ev_struck", [b.index, false])
 
-## `b` breaks open for `p`, for good: its loot spills out for them, and a wall opens its
-## shortcut (the portal behind it, and its far end on the other map, show from now on).
+## `b` breaks open for `p`, for good: its loot spills out for them, a wall opens its
+## shortcut (the portal behind it, and its far end on the other map, show from now on), and
+## a lever swings over and lifts the gate on the doors with its id (PortalDef.gate).
 func _break_open(p: SimPlayer, b: SimBreakable) -> void:
 	p.character.find_secret(b.def.id)
 	p.dirty_character = true
@@ -381,6 +382,8 @@ func _break_open(p: SimPlayer, b: SimBreakable) -> void:
 		spawn_drop(loot[i][0], loot[i][1], null, DropFlight.create(b.foot + Vector2(0, -20), plat.y, x), p.peer)
 	if def.portals.any(func(o: PortalDef) -> bool: return o.shortcut == b.def.id):
 		tell(p, "You found a hidden way." if b.def.walk_through else "You found a shortcut.", Palette.SUN)
+	elif def.portals.any(func(o: PortalDef) -> bool: return o.gate == b.def.id):
+		tell(p, "The gate opened.", Palette.SUN)
 
 ## What `p` finds by walking: a fake wall they step into fades for them and opens the way
 ## behind it, like a broken wall, and a secret ledge they stand on is theirs to see on the

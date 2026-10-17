@@ -162,6 +162,11 @@ update this page when one changes. Each zone's own look and music are in
   loop through, each with 2 to 4 exits, and more rooms hide behind secrets: fake walls you walk
   through, breakable walls and shortcuts. Shortcuts open one way until you find them, then work
   both ways.
+- Locked doors are puzzles (Cory picked levers and keys): a gated door shows behind its shut gate
+  from the start; a lever somewhere opens it for good (often from the far side, Hollow Knight
+  style), or a key from a chest elsewhere in the zone unlocks it and is used up. Keys can't be
+  sold or dropped. Each character opens their own. Gates guard side rooms and shortcuts, never
+  the main way.
 - Every field has two secret ledges only a job's movement skill reaches (a small room has one):
   a high one (Flash Jump, Blink) and a far one across a gap (every movement skill).
   Each holds a chest a character opens once (shards, potions, a 60% scroll, a local Monster Book

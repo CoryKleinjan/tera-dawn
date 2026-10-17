@@ -598,7 +598,7 @@ x = 150.0
 platform = 3
 target_map = &"deep_canopy"
 target_x = 2880.0
-shortcut = &"greenbough_trunk"
+gate = &"greenbough_trunk"
 
 [sub_resource type="Resource" id="Portal_2"]
 script = ExtResource("7_portal_def")
