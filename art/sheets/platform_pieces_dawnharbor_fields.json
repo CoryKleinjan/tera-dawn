@@ -26,6 +26,9 @@
     ]
   ],
   "platform": {
-    "loop_middles": 40
+    "loop_middles": 40,
+    "shift": {
+      "cap_left": -3
+    }
   }
 }
