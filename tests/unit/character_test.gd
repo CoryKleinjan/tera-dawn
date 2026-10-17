@@ -94,16 +94,16 @@ func test_level_up_raises_max_and_refills() -> void:
 	c.health.damage(2)
 	c.spend_mp(10)
 	c.gain_xp(c.xp_need())
-	check_eq(c.max_hearts(), 4, "a heart more at level 20")
-	check_eq(c.health.max_hp, 4, "health max follows")
-	check_eq(c.health.hp, 4, "refilled")
+	check_eq(c.max_hearts(), 6, "a segment more at level 20")
+	check_eq(c.health.max_hp, 6, "health max follows")
+	check_eq(c.health.hp, 6, "refilled")
 	check_eq(c.mp, c.max_mp(), "MP refilled")
 
 func test_no_level_means_no_refill() -> void:
 	var c := fx.character()
 	c.health.damage(1)
 	c.gain_xp(5)
-	check_eq(c.health.hp, 2, "still hurt")
+	check_eq(c.health.hp, 4, "still hurt")
 
 # ---------- HP, MP and recalc ----------
 
@@ -123,10 +123,10 @@ func test_recalc_clamps_hearts_and_mp_when_gear_comes_off() -> void:
 	var c := fx.character()
 	c.equipment.put(&"hat", ItemStack.exact(fx.equip(&"t_hat", EquipDef.Slot.HAT, {"heart_pieces": 8, "max_mp": 50})))
 	c.refill()
-	check_eq(c.health.hp, 5, "full with gear")
+	check_eq(c.health.hp, 7, "full with gear")
 	check_eq(c.mp, 75, "full MP with gear")
 	c.equipment.take(&"hat")
-	check_eq(c.health.hp, 3, "hearts clamped")
+	check_eq(c.health.hp, 5, "health clamped")
 	check_eq(c.mp, 25, "MP clamped")
 
 func test_recalc_emits_stats_changed() -> void:
@@ -578,7 +578,7 @@ func test_advance_changes_job_gives_gifts_and_refills() -> void:
 	c.level = 8
 	check_eq(c.advance(next), "", "advanced")
 	check_eq(c.job.id, &"t_next", "new job")
-	check_eq(c.max_hearts(), 4, "the new job's bonus heart")
+	check_eq(c.max_hearts(), 6, "the new job's bonus segment")
 	check_eq(c.essence, 40, "advancing costs and gives no essence")
 	check_eq(c.health.hp, c.max_hearts(), "refilled")
 	check_eq(c.gear.weapon(), sword, "the gift weapon is worn")

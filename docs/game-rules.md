@@ -84,15 +84,15 @@ update this page when one changes. Each zone's own look and music are in
 - The hero has a level (1 to 100, Cory Oct 17). Monsters give EXP equal to the Dawn Essence they
   drop, and quests give EXP equal to their essence reward, on the old MapleStory-style EXP curve.
   Each level raises power and MP by the job's growth and refills them, with a burst, a
-  "LEVEL UP!" ribbon and a jingle. The HUD shows a level badge, the hearts, an MP bar and the EXP
+  "LEVEL UP!" ribbon and a jingle. The HUD shows a level badge, the health bar, an MP bar and the EXP
   bar. Fainting loses 10% of the EXP toward the next level (never a level); essence is safe.
-- Health is hearts, Hollow Knight style (Cory Oct 17): the hero starts with 3, gains one every
-  20 levels (8 at level 100), Warrior and Pirate lines one more, and 4 heart pieces from runes
-  make another. A monster's hit costs 1 heart, or 2 from the hardest hitters and bosses' big
+- Health is a segmented bar (Cory Oct 17): the hero starts with 5 segments, gains one every 20
+  levels (10 at level 100), Warrior and Pirate lines one more, and 4 heart pieces from runes
+  make another. A monster's hit costs 1 segment, or 2 from the hardest hitters and bosses' big
   moves (attack x power 100 or more); monster HP and the hero's damage are unchanged. Defense
-  gives a chance to block a hit; Magic Guard may pay MP instead of a heart. Potions and First
-  Aid heal whole hearts; a heart comes back on its own every 15 seconds (7.5 sitting). Fainting
-  at 0 hearts; waking with half. Party frames show hearts too.
+  gives a chance to block a hit; Magic Guard may pay MP instead of health. Potions and First
+  Aid heal whole segments; one comes back on its own every 10 seconds (5 sitting). Fainting
+  at 0; waking with half. Party frames show the segmented bar too. No heart icons.
 - No numbers for health or mana: MP is a number only behind the scenes, and the HUD shows a
   plain bar. No damage numbers on screen, on monsters or the hero; a hit reads by its flash,
   effect and sound, and a dodge or miss still says "Miss".

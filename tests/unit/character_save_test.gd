@@ -209,7 +209,7 @@ func test_missing_hp_and_mp_load_full() -> void:
 	c.load_dict({"job": "t_job", "essence": 0, "level": 2})
 	check_eq(c.health.hp, c.max_hearts(), "full HP")
 	check_eq(c.mp, c.max_mp(), "full MP")
-	check_eq(c.max_hearts(), 3, "level 2: three hearts")
+	check_eq(c.max_hearts(), 5, "level 2: five segments")
 
 func test_save_with_an_old_appearance_loads_without_it() -> void:
 	var c := fx.character()

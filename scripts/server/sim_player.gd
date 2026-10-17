@@ -21,9 +21,9 @@ const CHEST := 34.0
 const REGEN_EVERY := 120
 const REGEN_BASE := 2
 const REGEN_MP_LEVELS := 4
-## Ticks between getting a heart back on its own (plus the regen bonus's hearts); sitting
+## Ticks between getting a health segment back on its own (plus the regen bonus's); sitting
 ## halves it.
-const HEART_REGEN_EVERY := 900
+const HEART_REGEN_EVERY := 600
 
 var peer := 0
 var character: Character
