@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skillfx_star_scatter_star.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 674, 675, 1349],
+    "cols": [1, 599, 600, 1198, 1200, 1798, 1800, 2398]
+  },
+  "cells": [
+    ["star_scatter_star_1", "", "star_scatter_star_2", "", "star_scatter_star_3", "", "star_scatter_star_4"],
+    ["", "", "", "", "", "", ""],
+    ["star_scatter_star_5", "", "star_scatter_star_6", "", "star_scatter_star_7", "", "star_scatter_star_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.0757,
+  "overrides": {
+    "star_scatter_star_1": {
+      "crop": [0, 136, 578, 518]
+    },
+    "star_scatter_star_2": {
+      "crop": [0, 136, 578, 518]
+    },
+    "star_scatter_star_3": {
+      "crop": [0, 136, 578, 518]
+    },
+    "star_scatter_star_4": {
+      "crop": [0, 136, 578, 518]
+    },
+    "star_scatter_star_5": {
+      "crop": [0, 136, 578, 518]
+    },
+    "star_scatter_star_6": {
+      "crop": [0, 136, 578, 518]
+    },
+    "star_scatter_star_7": {
+      "crop": [0, 136, 578, 518]
+    },
+    "star_scatter_star_8": {
+      "crop": [0, 136, 578, 518]
+    }
+  }
+}

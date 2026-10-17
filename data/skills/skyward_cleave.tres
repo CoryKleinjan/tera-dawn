@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
-[ext_resource type="Resource" path="res://data/effects/swish.tres" id="e_swish"]
-[ext_resource type="Resource" path="res://data/effects/power_strike_hit.tres" id="h_power_strike_hit"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/skyward_cleave.png" id="i_icon"]
+[ext_resource type="Resource" path="res://data/effects/skyward_cleave_swing.tres" id="fx_effect"]
+[ext_resource type="Resource" path="res://data/effects/skyward_cleave_hit.tres" id="fx_hit_effect"]
 
 [resource]
 script = ExtResource("1_skill_def")
@@ -29,6 +29,6 @@ recharge_per_level = -0.2
 reach = 110.0
 height = 110.0
 animation = &"skyward_cleave"
-effect = ExtResource("e_swish")
-hit_effect = ExtResource("h_power_strike_hit")
+effect = ExtResource("fx_effect")
+hit_effect = ExtResource("fx_hit_effect")
 icon = ExtResource("i_icon")

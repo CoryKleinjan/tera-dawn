@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="SkillDef" load_steps=4 format=3]
+[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
-[ext_resource type="Resource" path="res://data/effects/critical.tres" id="h_critical"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/gravity_well.png" id="i_icon"]
+[ext_resource type="Resource" path="res://data/effects/gravity_well_pull.tres" id="fx_effect"]
+[ext_resource type="Resource" path="res://data/effects/gravity_well_hit.tres" id="fx_hit_effect"]
 
 [resource]
 script = ExtResource("1_skill_def")
@@ -30,5 +31,6 @@ reach = 200.0
 height = 260.0
 animation = &"gravity_well"
 flash = Color(0.7, 0.55, 1.0, 1)
-hit_effect = ExtResource("h_critical")
+hit_effect = ExtResource("fx_hit_effect")
+effect = ExtResource("fx_effect")
 icon = ExtResource("i_icon")

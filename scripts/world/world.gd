@@ -449,3 +449,7 @@ func sound_at(id: StringName, pos: Vector2) -> void:
 ## Plays an effect. Effects that follow someone (heal, level up) follow `follow`, or you.
 func add_effect(def: EffectDef, pos: Vector2, face: int, follow: Node2D = null, aim := Hitbox.Aim.AHEAD) -> void:
 	fx.add_effect(def, pos, face, follow, aim)
+
+## Shows buff `skill`'s aura round `who` for `ticks` (TDWorldFx.add_aura).
+func add_aura(who: Node2D, skill: SkillDef, ticks: int) -> void:
+	fx.add_aura(who, skill, ticks)
