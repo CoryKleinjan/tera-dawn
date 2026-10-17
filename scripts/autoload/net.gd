@@ -265,6 +265,12 @@ func req_move(at: Vector2, face: int, anim: StringName) -> void:
 	if server:
 		server.on_move(_sender(), at, face, anim)
 
+## A Slam (RelicDef.Move.SLAM) landed with the feet `at`.
+@rpc("any_peer", "call_local", "reliable")
+func req_slam(at: Vector2) -> void:
+	if server:
+		server.on_slam(_sender(), at)
+
 ## Sit down on the ground (`down`) or get up.
 @rpc("any_peer", "call_local", "reliable")
 func req_sit(down: bool) -> void:

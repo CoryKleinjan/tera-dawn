@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="RelicDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/relic_def.gd" id="1_relic_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/molten_crown.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1_relic_def")
+move = 2
+move_name = "Slam"
+trail = Color(1.8, 0.9, 0.4, 1)
+id = &"magma_heart"
+display_name = "Magma Heart"
+description = "Dropped by the Molten King. It teaches Slam: a straight drop from the air that breaks cracked floors."
+icon = ExtResource("2_icon")
+sprite_scale = 0.4
+glow_color = Color(1, 0.55, 0.3, 1)
+max_stack = 1
+sell_price = 0
+quest_item = true

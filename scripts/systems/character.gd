@@ -83,6 +83,8 @@ var counters := {}
 var scenes_seen: Array[String] = []
 ## Secrets found, for good: shortcuts opened, walls broken and chests opened (their ids).
 var secrets: Array[String] = []
+## Boss relics picked up (RelicDef ids): each one's move is unlocked for good.
+var relics: Array[String] = []
 
 func _init() -> void:
 	equipment.changed.connect(recalc)
@@ -217,6 +219,27 @@ func find_secret(id: StringName) -> bool:
 	if found_secret(id):
 		return false
 	secrets.append(String(id))
+	return true
+
+## The relic that unlocked move `m` (RelicDef.Move), or null while it's still locked.
+func relic_for(m: RelicDef.Move) -> RelicDef:
+	for id in relics:
+		var r := Content.items.get(StringName(id)) as RelicDef
+		if r and r.move == m:
+			return r
+	return null
+
+func has_move(m: RelicDef.Move) -> bool:
+	return relic_for(m) != null
+
+func has_relic(r: RelicDef) -> bool:
+	return relics.has(String(r.id))
+
+## Picks up relic `r`, unlocking its move. True the first time.
+func learn_relic(r: RelicDef) -> bool:
+	if has_relic(r):
+		return false
+	relics.append(String(r.id))
 	return true
 
 ## The pet that's out, or null.

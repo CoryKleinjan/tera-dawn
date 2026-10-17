@@ -16,7 +16,9 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 4. Optional: `flying` with `hover_height`, `boss`, a `light_color` or `aura_color` for
    glowing monsters, a `tint` (one sprite can stand in for several monsters), and
    `respawn_ticks` (how long a defeated one takes to come back). A map nobody is on any
-   more is dropped (`TDServer._off_map`) and loads fresh when someone next enters.
+   more is dropped (`TDServer._off_map`) and loads fresh when someone next enters. A zone
+   boss can have a `relic` (a **RelicDef** in `data/items/relics/`), which drops for each
+   player at the fight who hasn't got it yet.
 5. Give it one or two `moves` (three, all different, for a boss) from `data/monster_moves/`
    (see below), and a `sight` (how far away it notices players; starters 120, shooters 340,
    bosses 700).

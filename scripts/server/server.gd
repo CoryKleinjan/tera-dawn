@@ -243,6 +243,14 @@ func on_move(peer: int, at: Vector2, face: int, anim: StringName) -> void:
 		p.map.check_tear(p)
 		p.map.check_secrets(p)
 
+## The player's Slam landed at `at`: what it lands on breaks (MapInstance.slam), if they
+## have the move and are where they say.
+func on_slam(peer: int, at: Vector2) -> void:
+	var p := player_of(peer)
+	if p and not p.fainted() and p.character.has_move(RelicDef.Move.SLAM) \
+			and at.distance_to(p.position) <= SimPlayer.MAX_STEP * TDPlayer.REPORT_EVERY + 40.0:
+		p.map.slam(p, at)
+
 ## Sits the player down on the ground (`down`) or gets them up. Sitting regenerates faster
 ## (SimPlayer.step); moving or getting hit gets them up.
 func on_sit(peer: int, down: bool) -> void:
