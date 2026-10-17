@@ -62,6 +62,8 @@ extends Resource
 
 @export_group("Loot")
 @export var drops: Array[DropEntry] = []
+## A boss's relic (RelicDef): it drops for everyone at the fight who hasn't got its move yet.
+@export var relic: RelicDef
 ## Ticks before a slain monster returns, picked between x and y.
 @export var respawn_ticks := Vector2i(360, 540)
 

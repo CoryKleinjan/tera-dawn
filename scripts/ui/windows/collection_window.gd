@@ -83,7 +83,7 @@ func _draw_book() -> void:
 	var book := Game.me.book
 	draw_label(Vector2(PAD, 84), "Book rank %d  ·  %d/%d pages  ·  %d cards" % [book.rank(), book.completed(), _monsters.size(), book.total_cards()], Palette.SUN, 12)
 	if book.rank() > 1:
-		draw_label(Vector2(size.x - PAD, 84), "+%d to every stat" % (book.rank() - 1), Palette.GOOD, 11, -1)
+		draw_label(Vector2(size.x - PAD, 84), "+%d Power" % (book.rank() - 1), Palette.GOOD, 11, -1)
 	UiSkin.draw_book(self, _book_rect(), LEFT_PAGE_W, BOOK_SCALE)
 	for i in COLS * ROWS:
 		var k := page * COLS * ROWS + i

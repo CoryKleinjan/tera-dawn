@@ -35,13 +35,14 @@ func step() -> void:
 	t += 1
 	flight.step()
 
+## A boss's relic stays until its owner takes it.
 func expired() -> bool:
-	return t > LIFETIME
+	return t > LIFETIME and not item is RelicDef
 
 ## Whether `p` may pick this up now, standing within `reach` of it (their pet reaches further).
 func can_loot(p: SimPlayer, reach := LOOT_REACH) -> bool:
 	return not taken and t > SETTLE_TICKS and not p.fainted() \
-		and (owner == 0 or owner == p.peer or t > OWNER_TICKS) \
+		and (owner == 0 or owner == p.peer or t > OWNER_TICKS and not item is RelicDef) \
 		and absf(flight.position.x - p.position.x) < reach \
 		and absf(flight.position.y - p.position.y) < LOOT_REACH_Y + maxf(0.0, reach - LOOT_REACH) * 0.5
 

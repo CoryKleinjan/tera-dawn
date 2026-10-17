@@ -59,12 +59,21 @@ update this page when one changes. Each zone's own look and music are in
   air, hops short when jump is let go early and falls faster than he rises. A full jump keeps its
   height, so every map stays reachable.
 - He walks, never runs, and walks 15% faster after about 0.4 s of moving. No jump sound.
-- No dash for the hero: each job has its own movement skill instead. Warrior Charge (a lunge
+- Each job has its own movement skill. Warrior Charge (a lunge
   that only shoves monsters aside, no damage; once per jump in the air too), Thief Flash Jump (a
   second jump in mid-air), Magician Blink (a teleport the held way, up and down too), Archer
   Backstep Leap (springs back still facing ahead), Pirate Rolling Dash (a low roll on the ground
   nothing can hit). Beginners have none. Their effects are code-drawn stand-ins until painted
   ones are made with Gemini in the same look as every other skill effect.
+- Bosses unlock more moves, Hollow Knight style (Cory Oct 17): each zone boss drops a relic the
+  first time a character beats it, for everyone at the fight, and only they can take theirs.
+  The move is theirs for good on every job, with no level, essence or MP, on top of the job's
+  own skill: Grotto Tusker Dash (a flat burst ahead, once per jump in the air), Arcane Sentinel
+  Double Jump, Molten King Slam (Down + Jump in the air drops straight down and breaks cracked
+  floors), Reef Titan Surge (hold Down + Dash on the ground, let go to fly straight ahead). Elder
+  Treant Wall Jump and Lantern Wraith Glide wait for their poses. The main way never needs a
+  move; secret rooms in other zones can. Their effects and the relic icons are stand-ins until
+  painted.
 - Attacks and most attack skills aim: up hits overhead, down (in the air only) hits below. Buffs
   don't aim. A downward melee blow that meets a monster bounces him off it (pogo).
 - He can move while swinging and keeps facing the swing until it ends. Buffs and spells make no
@@ -142,8 +151,8 @@ update this page when one changes. Each zone's own look and music are in
   (Lanternfall), Archer Hunter's set (Greenbough), Pirate Deckhand set (Driftcove). Tests still
   bring their own plain gear (`tests/fixtures/gear`) for what the game doesn't have yet.
 - No upgrade scrolls (Cory Oct 17): gear gets better through enchantments, which are planned
-  (three per piece; boss ones drop only). Specialised boss drops unlock movement skills, the
-  way Hollow Knight unlocks its moves.
+  (three per piece; boss ones drop only). Boss relics unlock moves (see "Movement and combat
+  feel").
 
 ## Weapons
 

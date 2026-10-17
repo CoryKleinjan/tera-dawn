@@ -69,7 +69,9 @@ so breaking it opens the way on both maps. With no `broken` picture it is gone o
 A **fake wall** (`walk_through`) takes no blows: it fades the first time a player steps into it
 (`MapInstance.check_secrets` after each move report) and opens the `shortcut` portal behind it
 the same way, so put it where the main way never crosses, at the end of a side ledge or a nook,
-looking like the room's wall. Standing on a secret ledge finds it too (`MapDef.ledge_secret`),
+looking like the room's wall. A **cracked floor** (`slam_only`) is a wall lying on a platform:
+blows only shake it, and a Slam landing on it (`MapInstance.slam`) breaks it and opens its
+`shortcut` portal, a way down. Standing on a secret ledge finds it too (`MapDef.ledge_secret`),
 so the zone map can show it.
 
 A **gated door** (`PortalDef.gate`, an id) shows from the start behind its shut gate

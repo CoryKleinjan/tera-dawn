@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="RelicDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/relic_def.gd" id="1_relic_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/clawbeard_pearl.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1_relic_def")
+move = 3
+move_name = "Surge"
+trail = Color(0.8, 1.5, 1.7, 1)
+id = &"titans_pearl"
+display_name = "Titan's Pearl"
+description = "Dropped by the Reef Titan. It teaches Surge: a charged flight straight across a long gap."
+icon = ExtResource("2_icon")
+sprite_scale = 0.4
+glow_color = Color(0.55, 0.9, 1, 1)
+max_stack = 1
+sell_price = 0
+quest_item = true

@@ -9,6 +9,10 @@ extends RefCounted
 const DROP_SPACING := 26.0
 ## How high above a player's feet a fake wall must reach for them to have stepped into it.
 const WALK_IN_HEIGHT := 20.0
+## How wide and how high above the feet a Slam's landing reaches, and how far below them
+## (a cracked floor lies on the platform it lands on).
+const SLAM_AREA := Vector2(90.0, 40.0)
+const SLAM_DEPTH := 10.0
 const BAD := Color("ff8a99")
 
 var server: TDServer
@@ -332,6 +336,11 @@ func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 			if not p in credited:
 				p.character.book.record_kill(m.def)
 			p.dirty_character = true
+	# a boss's relic, for each one at the fight who hasn't unlocked its move yet
+	if m.def.relic:
+		for p: SimPlayer in players.values():
+			if not p.character.has_relic(m.def.relic):
+				spawn_drop(m.def.relic, 1, null, DropFlight.create(m.position + Vector2(0, -20), m.plat.y, m.position.x), p.peer)
 	var loot := []
 	for entry in m.def.drops:
 		var amount := entry.roll()
@@ -360,10 +369,20 @@ func _strike_breakables(p: SimPlayer, skill: SkillDef, aim: Hitbox.Aim) -> void:
 	var area := _skill_area(p, skill, aim)
 	for b in breakables:
 		if not b.def.walk_through and b.whole_for(p) and area.intersects(b.def.rect(b.foot)):
-			if b.strike(p):
+			# a cracked floor only shakes: it takes a Slam
+			if not b.def.slam_only and b.strike(p):
 				_break_open(p, b)
 			else:
 				Net.send(p.peer, &"ev_struck", [b.index, false])
+
+## `p` landed a Slam (RelicDef.Move.SLAM) with their feet at `at`: every chest, wall or
+## cracked floor (BreakableDef.slam_only) the landing meets breaks open for them at once.
+func slam(p: SimPlayer, at: Vector2) -> void:
+	var area := Rect2(at.x - SLAM_AREA.x / 2.0, at.y - SLAM_AREA.y, SLAM_AREA.x, SLAM_AREA.y + SLAM_DEPTH)
+	for b in breakables:
+		if not b.def.walk_through and b.whole_for(p) and area.intersects(b.def.rect(b.foot)):
+			b.forget(p.peer)
+			_break_open(p, b)
 
 ## `b` breaks open for `p`, for good: its loot spills out for them, a wall opens its
 ## shortcut (the portal behind it, and its far end on the other map, show from now on), and
@@ -461,6 +480,10 @@ func pick_up(p: SimPlayer, d: SimDrop) -> bool:
 		_remove_drop(d, p.peer)
 		_add_card(p, (d.item as CardDef).monster)
 		return true
+	if d.item is RelicDef:
+		_remove_drop(d, p.peer)
+		_learn_relic(p, d.item as RelicDef)
+		return true
 	var found := d.amount
 	if d.item.is_currency:
 		ch.shards += found
@@ -487,11 +510,19 @@ func pick_up(p: SimPlayer, d: SimDrop) -> bool:
 
 ## Whether the player has room for a drop (a pet only picks up what fits).
 func has_room(p: SimPlayer, d: SimDrop) -> bool:
-	if d.item.is_currency or d.item is CardDef:
+	if d.item.is_currency or d.item is CardDef or d.item is RelicDef:
 		return true
 	if d.stack:
 		return p.character.inventory.room_for([d.stack])
 	return p.character.inventory.has_room(d.item, d.amount)
+
+## `p` picked up relic `r`: its move is theirs for good, on every job.
+func _learn_relic(p: SimPlayer, r: RelicDef) -> void:
+	if not p.character.learn_relic(r):
+		return
+	p.dirty_character = true
+	tell(p, "New move: %s." % r.move_name, Palette.SUN)
+	broadcast(&"ev_effect", [EffectDef.CELEBRATE, p.position.x, p.position.y, 1, p.peer])
 
 func _add_card(p: SimPlayer, m: MonsterDef) -> void:
 	var book := p.character.book
@@ -505,7 +536,7 @@ func _add_card(p: SimPlayer, m: MonsterDef) -> void:
 		tell(p, "You completed the %s page!" % m.display_name, Palette.SUN)
 	if book.rank() > rank:
 		p.character.recalc()
-		tell(p, "Your Monster Book reached rank %d: +%d to every stat." % [book.rank(), book.rank() - 1], Palette.SUN)
+		tell(p, "Your Monster Book reached rank %d: +%d Power." % [book.rank(), book.rank() - 1], Palette.SUN)
 		broadcast(&"ev_effect", [EffectDef.CELEBRATE, p.position.x, p.position.y, 1, p.peer])
 
 ## The pet that's out gets hungrier, and picks up what it can reach.
