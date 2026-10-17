@@ -27,8 +27,8 @@ const SOUND_FAR := 900.0
 const SOUND_FADE_DB := -18.0
 
 var map: MapDef
-## The map's zone has turned (TearState): the stage shows its darker light and fog.
-var dark := false
+## How far the world has declined on this map (TearState): the stage shows its light and fog.
+var decline := 0
 var layout: MapLayout
 var platforms: Array[Platform] = []
 var started := false
@@ -141,7 +141,7 @@ func enter_map(id: StringName, x: float, state: Dictionary, platform := 0) -> vo
 	# a cutscene belongs to the map it started on (the server stops it too)
 	scenes.stop()
 	hud.windows["player"].visible = false
-	load_map(id, state.get("dark", false))
+	load_map(id, state.get("decline", 0))
 	player.place(x, platforms[platform].y)
 	var mob_states: Array = state.get("mobs", [])
 	var views := mobs()
@@ -159,10 +159,10 @@ func enter_map(id: StringName, x: float, state: Dictionary, platform := 0) -> vo
 		Sound.music(map.music_id())
 
 ## Builds a map: its layout, the NPCs, a view for each of its monsters (shown once the
-## server says where they are) and the stage. `is_dark`: its zone has turned (TearState).
-func load_map(id: StringName, is_dark := false) -> void:
+## server says where they are) and the stage. `step`: how far the world has declined (TearState).
+func load_map(id: StringName, step := 0) -> void:
 	map = Content.map(id)
-	dark = is_dark
+	decline = step
 	layout = MapLayout.new(map)
 	platforms = layout.platforms
 	for layer in [mob_layer, npc_layer, drop_layer, avatar_layer, fx_layer]:
@@ -172,7 +172,7 @@ func load_map(id: StringName, is_dark := false) -> void:
 	sync.clear()
 	# same order as the server's MapInstance, so index i is the same monster on both sides
 	for r in map.roster():
-		mob_layer.add_child(TDMob.create(self, mob_layer.get_child_count(), TearState.kind(r[0], map, dark),
+		mob_layer.add_child(TDMob.create(self, mob_layer.get_child_count(), TearState.kind(r[0], decline),
 			platforms[r[1]]))
 	for p in map.npcs:
 		npc_layer.add_child(TDNpc.create(self, p, platforms[p.platform]))

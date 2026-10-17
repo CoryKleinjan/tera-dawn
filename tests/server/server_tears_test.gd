@@ -1,43 +1,62 @@
 extends TestCase
-## The tears (TearState): a tear stays sealed until its story quest is done, and once the
-## host has finished one its zone's fields turn: the more dangerous kinds spawn in place of
-## the ones they replace, every monster there is TearState.STRENGTH stronger, and the map
-## says it's dark. Towns and other zones never change.
+## The tears (TearState): a tear stays sealed until its story quest is done, and each tear
+## the host has finished takes the whole world a step further into its decline (DeclineDef):
+## each step's dangerous kinds spawn in place of the ones they replace, every monster is
+## STRENGTH_PER_STEP stronger per step, and the map says how far it has declined. A tear's
+## own maps never decline.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
-
-const ZONE := &"test_zone"
 
 var h: ServerHarness
 var boar: MonsterDef
 var wisp: MonsterDef
 var fierce_boar: MonsterDef
-var tear: TearDef
+var dread_boar: MonsterDef
+var first: TearDef
+var second: TearDef
+var step1: DeclineDef
+var step2: DeclineDef
 
 func before_each() -> void:
 	h = ServerHarness.new()
 	boar = ServerHarness.monster(&"test_boar", 10, 10)
 	wisp = ServerHarness.monster(&"test_wisp", 10, 10)
 	fierce_boar = ServerHarness.monster(&"test_fierce_boar", 10, 10)
-	var field := ServerHarness.field_def()
-	field.region = ZONE
+	dread_boar = ServerHarness.monster(&"test_dread_boar", 10, 10)
+	var field := Content.map(ServerHarness.FIELD)
+	field.region = &"test_zone"
 	field.spawns.append(ServerHarness.spawn(boar))
 	field.spawns.append(ServerHarness.spawn(wisp))
-	h.add_map(field)
-	Content.map(ServerHarness.TOWN).region = ZONE
-	tear = TearDef.new()
-	tear.id = &"test_tear"
-	tear.region = ZONE
-	tear.seal_quest = &"test_seal"
-	tear.finish_quest = &"test_finish"
-	tear.dangerous = {&"test_boar": fierce_boar}
-	tear.dark_look = BiomeVariantDef.new()
-	tear.dark_look.light_energy = 0.4
-	h._register("tears", tear.id, tear)
+	first = _tear(&"test_tear_a", &"test_finish_a")
+	second = _tear(&"test_tear_b", &"test_finish_b")
+	step1 = _step(&"test_decline_1", 1, {&"test_boar": fierce_boar}, 0.4)
+	step2 = _step(&"test_decline_2", 2, {&"test_fierce_boar": dread_boar}, -1.0)
 
 func after_each() -> void:
-	Content.map(ServerHarness.TOWN).region = &""
+	Content.map(ServerHarness.FIELD).region = &""
+	Content.map(ServerHarness.FIELD).spawns.clear()
+	Content.map(ServerHarness.FIELD).biome = null
 	h.close()
+
+func _tear(id: StringName, finish: StringName) -> TearDef:
+	var t := TearDef.new()
+	t.id = id
+	t.region = &"test_zone"
+	t.inside = StringName("%s_inside" % id)
+	t.seal_quest = &"test_seal"
+	t.finish_quest = finish
+	h._register("tears", t.id, t)
+	return t
+
+func _step(id: StringName, n: int, dangerous: Dictionary[StringName, MonsterDef], light: float) -> DeclineDef:
+	var d := DeclineDef.new()
+	d.id = id
+	d.step = n
+	d.dangerous = dangerous
+	d.look = BiomeVariantDef.new()
+	d.look.light_energy = light
+	h._register("declines", d.id, d)
+	return d
 
 ## Ann in town, with quests `done` handed in, then walking out to the field.
 func _ann_on_field(done: Array) -> MapInstance:
@@ -50,48 +69,52 @@ func _ann_on_field(done: Array) -> MapInstance:
 
 func test_a_tear_is_sealed_until_its_story_quest_is_done() -> void:
 	var c := Character.new()
-	check(not TearState.open(tear, c), "sealed at first")
+	check(not TearState.open(first, c), "sealed at first")
 	c.quests.done[&"test_seal"] = 1
-	check(TearState.open(tear, c), "open once the story quest is done")
-	check(not TearState.finished(tear, c), "open isn't finished")
+	check(TearState.open(first, c), "open once the story quest is done")
+	check(not TearState.finished(first, c), "open isn't finished")
 
-func test_a_zone_stays_as_it_is_until_the_tear_is_finished() -> void:
+func test_the_world_stays_as_it_is_until_a_tear_is_finished() -> void:
 	var map := _ann_on_field([&"test_seal"])
-	check(not map.dark, "not dark")
+	check_eq(map.decline, 0, "no decline")
 	check_eq(map.mobs[0].def, boar, "the usual boar")
 	check_eq(map.mobs[0].max_hp(), 10, "its usual HP")
-	check_eq(map.full_state()["dark"], false, "the client is told it isn't dark")
+	check_eq(map.full_state()["decline"], 0, "the client is told")
 
-func test_a_finished_tear_turns_its_zone() -> void:
-	var map := _ann_on_field([&"test_seal", &"test_finish"])
-	check(map.dark, "dark")
+func test_the_first_finished_tear_turns_the_world() -> void:
+	var map := _ann_on_field([&"test_seal", &"test_finish_a"])
+	check_eq(map.decline, 1, "one step")
 	check_eq(map.mobs[0].def, fierce_boar, "the boar's dangerous version spawns in its place")
 	check_eq(map.mobs[0].max_hp(), 15, "and is stronger")
 	check_eq(map.mobs[1].def, wisp, "a kind with no dangerous version stays")
 	check_eq(map.mobs[1].max_hp(), 15, "but is stronger too")
 	check_eq(map.mobs[1].essence(), 15, "and gives more essence to match")
-	check_eq(map.full_state()["dark"], true, "the client is told it's dark")
+	check_eq(map.full_state()["decline"], 1, "the client is told")
 
-func test_towns_and_other_zones_never_turn() -> void:
+func test_each_tear_after_takes_it_further() -> void:
+	var map := _ann_on_field([&"test_seal", &"test_finish_a", &"test_finish_b"])
+	check_eq(map.decline, 2, "two steps")
+	check_eq(map.mobs[0].def, dread_boar, "the second step replaces the first step's boar")
+	check_eq(map.mobs[0].max_hp(), 20, "stronger again")
+
+func test_a_tears_own_maps_never_decline() -> void:
 	var c := Character.new()
-	c.quests.done[&"test_finish"] = 1
-	check(not TearState.dark(Content.map(ServerHarness.TOWN), c), "the town stays")
-	var other := ServerHarness.field_def(&"test_other")
-	other.region = &"test_elsewhere"
-	check(not TearState.dark(other, c), "another zone stays")
-	check(TearState.dark(Content.map(ServerHarness.FIELD), c), "the tear's own field turns")
+	c.quests.done[&"test_finish_a"] = 1
+	var inside := ServerHarness.field_def(&"test_inside")
+	inside.region = first.inside
+	check_eq(TearState.decline_of(inside, c), 0, "inside the tear")
+	check_eq(TearState.decline_of(Content.map(ServerHarness.TOWN), c), 1, "towns are part of the world")
 
 func test_a_tear_with_no_finish_quest_never_finishes() -> void:
 	var c := Character.new()
-	tear.finish_quest = &""
+	first.finish_quest = &""
 	c.quests.done[&""] = 1
-	check(not TearState.finished(tear, c), "nothing to finish yet")
+	check(not TearState.finished(first, c), "nothing to finish yet")
 
-func test_a_turned_map_shows_its_zones_darker_light_and_fog() -> void:
+func test_a_declined_map_shows_each_steps_light_and_fog() -> void:
 	var field := Content.map(ServerHarness.FIELD)
 	field.biome = load("res://data/biomes/greenwood.tres")
-	var dark := TearState.look(field, true)
-	check_eq(dark.light_energy, 0.4, "darker light")
+	check_eq(TearState.look(field, 1).light_energy, 0.4, "step 1's light")
+	check_eq(TearState.look(field, 2).light_energy, 0.4, "step 2 keeps what it doesn't set")
 	check(field.look().light_energy != 0.4, "the map's own look is unchanged")
-	check_eq(TearState.look(field, false), field.look(), "unturned, it's the map's own look")
-	field.biome = null
+	check_eq(TearState.look(field, 0), field.look(), "no decline: the map's own look")

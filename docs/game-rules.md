@@ -359,10 +359,15 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   that only a boss move from another zone reaches. Dawnrise Isle and Daybreak Shore have none.
 - Every tear stays sealed until the story first takes the hero through a tear. Gates are progress,
   never level.
-- Finishing a tear turns its zone for that character: its fields get darker light and fog (never a
-  recolour of the art) and its monsters become more dangerous, painted versions of themselves,
-  1.5x as strong with more EXP and essence to match. Towns never change. In co-op a map follows
-  the host's character.
+- Finishing a tear makes the world decline: the first one turns the whole world (every map but
+  the tears' own) and each one after takes it further. The game goes from bright and happy to
+  dreary and sullen: darker light and fog (never a recolour of the art), new painted scenery and
+  more dangerous, less cute painted versions of the monsters, +50% stronger a step with more EXP
+  and essence to match. In co-op a map follows the host's character.
+- Some maps have areas no one can reach until the world declines: a cracked wall or floor gives
+  way and leads into an extended zone with the next part of the story, harder to cross and with
+  more dangerous monsters. Two are shared (Greenbough with Lumewood, Lanternfall with
+  Driftcove), Emberreach has its own that opens last, and none joins Dawnharbor.
 - Each zone also has 2-3 secret areas that need its own boss's move, so a new move has a use right
   after the fight.
 - The second-job tutors are not in these tears.

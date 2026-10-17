@@ -1,24 +1,19 @@
 class_name TearState
 extends RefCounted
-## The rules for the tears (TearDef): when one is open to a character, when it's finished,
-## and what a finished one does to its zone. The server's MapInstance asks which monsters
-## spawn and how strong; the stage asks for the light. In co-op a map follows the host's
-## character, so everyone on it sees and fights the same thing.
+## The rules for the tears (TearDef) and the world's decline (DeclineDef): when a tear is open
+## to a character, how many they have finished, and what that does to the world. The first
+## finished tear turns the whole world (every map but the tears' own) and each one after
+## takes it a step further. The server's MapInstance asks which monsters spawn and how strong;
+## the stage asks for the light. In co-op a map follows the host's character, so everyone on
+## it sees and fights the same thing.
 
-## How much stronger (HP, attack and Dawn Essence) a finished tear's zone's monsters are.
-const STRENGTH := 1.5
-## The only parts of a look a tear's dark_look may set: light and fog, never colours of the art.
+## How much stronger (HP, attack and Dawn Essence) monsters get with each step of the decline.
+const STRENGTH_PER_STEP := 0.5
+## The only parts of a look a decline step may set: light and fog, never colours of the art.
 const LIGHT_AND_FOG := ["light_color", "light_energy", "ambient_color", "ambient_energy", "fog_color",
 	"fog_begin", "fog_end", "fog_density", "mote_color", "light_shafts"]
 ## The peer whose character a shared map follows: the one running the game (solo or host).
 const HOST_PEER := 1
-
-## The tear that opens from region `region`, or null.
-static func of_region(region: StringName) -> TearDef:
-	for t: TearDef in Content.tears.values():
-		if t.region == region:
-			return t
-	return null
 
 ## `c` can go through tear `t`: the story has taken them through one.
 static func open(t: TearDef, c: Character) -> bool:
@@ -28,9 +23,22 @@ static func open(t: TearDef, c: Character) -> bool:
 static func finished(t: TearDef, c: Character) -> bool:
 	return t != null and c != null and t.finish_quest != &"" and c.quests.done.has(t.finish_quest)
 
-## Map `map` has turned for `c`: a field (not a town) in a zone whose tear `c` has finished.
-static func dark(map: MapDef, c: Character) -> bool:
-	return map != null and not map.town and finished(of_region(map.region), c)
+## How far the world has declined for `c`: the tears they have finished.
+static func decline(c: Character) -> int:
+	var n := 0
+	for t: TearDef in Content.tears.values():
+		if finished(t, c):
+			n += 1
+	return n
+
+## How far map `map` has declined for `c`: the world's step, except inside a tear.
+static func decline_of(map: MapDef, c: Character) -> int:
+	if map == null:
+		return 0
+	for t: TearDef in Content.tears.values():
+		if t.inside != &"" and t.inside == map.region:
+			return 0
+	return decline(c)
 
 ## The character a shared map on `server` follows: the host's, or anyone's when the host
 ## isn't playing (tests, a host at the character select).
@@ -40,20 +48,33 @@ static func host(server: TDServer) -> Character:
 		p = server.sessions.values()[0]
 	return p.character if p else null
 
-## The kind that spawns in place of `m` on `map`: its dangerous version once turned.
-static func kind(m: MonsterDef, map: MapDef, is_dark: bool) -> MonsterDef:
-	if not is_dark or m == null:
+## The decline steps that apply at step `step`, in order.
+static func steps(step: int) -> Array[DeclineDef]:
+	var out: Array[DeclineDef] = []
+	for d: DeclineDef in Content.declines.values():
+		if d.step <= step:
+			out.append(d)
+	out.sort_custom(func(a: DeclineDef, b: DeclineDef) -> bool: return a.step < b.step)
+	return out
+
+## The kind that spawns in place of `m` at step `step`.
+static func kind(m: MonsterDef, step: int) -> MonsterDef:
+	if m == null:
 		return m
-	var t := of_region(map.region)
-	return t.dangerous.get(m.id, m) if t else m
+	for d in steps(step):
+		m = d.dangerous.get(m.id, m)
+	return m
 
-## How much stronger monsters are on a map that has (or hasn't) turned.
-static func strength(is_dark: bool) -> float:
-	return STRENGTH if is_dark else 1.0
+## How much stronger monsters are at step `step`.
+static func strength(step: int) -> float:
+	return 1.0 + STRENGTH_PER_STEP * maxi(0, step)
 
-## How `map` looks: its own look, with its zone's darker light and fog once turned.
-static func look(map: MapDef, is_dark: bool) -> BiomeDef:
-	var t := of_region(map.region) if is_dark else null
-	if t == null or t.dark_look == null or map.look() == null:
-		return map.look()
-	return t.dark_look.apply(map.look())
+## How `map` looks at step `step`: its own look, with each step's light and fog on top.
+static func look(map: MapDef, step: int) -> BiomeDef:
+	var b := map.look()
+	if b == null:
+		return b
+	for d in steps(step):
+		if d.look:
+			b = d.look.apply(b)
+	return b

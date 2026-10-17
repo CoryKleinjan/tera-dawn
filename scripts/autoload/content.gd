@@ -20,6 +20,7 @@ const FOLDERS := {
 	"achievements": "res://data/achievements",
 	"cutscenes": "res://data/cutscenes",
 	"tears": "res://data/tears",
+	"declines": "res://data/declines",
 }
 
 var monsters := {}
@@ -39,6 +40,8 @@ var achievements := {}
 var cutscenes := {}
 ## TearDefs: the hidden tears and what finishing one does to its zone (TearState).
 var tears := {}
+## DeclineDefs: each step of the world's decline as tears are finished (TearState).
+var declines := {}
 
 func _ready() -> void:
 	for kind in FOLDERS:
