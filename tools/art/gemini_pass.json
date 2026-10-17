@@ -4092,28 +4092,6 @@
    }
   },
   {
-   "id": "paint_climb_tops_fine",
-   "prompts": null,
-   "batch": "painted look: climb_tops_fine (edit)",
-   "with": null,
-   "refs": [],
-   "save": "climb_tops_fine_painted.png",
-   "replaces": null,
-   "kind": "still",
-   "stands": false,
-   "cells": [
-    1,
-    1
-   ],
-   "anchor": null,
-   "size": "4K",
-   "note": "2026-10-11 painted-look thread: the pixel-art sheet repainted as soft painted art, same layout (Cory's preferred look).",
-   "edit": {
-    "base": "art/source/climb_tops_fine.png",
-    "text": "Repaint this whole image as a soft hand-painted illustration, like a painted storybook or the painted art of a modern hand-painted game: smooth painted shading, gentle colour gradients, soft brush texture, clean thin dark plum-brown outlines and warm light from the upper left. There must be NO visible pixels anywhere: no square pixel blocks, no stair-stepped pixel edges, no dithering, no pixel-art look. Keep everything else exactly the same: the same objects, shapes, silhouettes, sizes, positions, colours, details and layout. Every flat magenta #FF00FF area stays flat magenta #FF00FF, and nothing new is added. Keep the white label text, cell borders and divider lines as they are."
-   }
-  },
-  {
    "id": "paint_ground_textures",
    "prompts": null,
    "batch": "painted look: ground_textures (edit)",
