@@ -45,6 +45,8 @@ extends Resource
 @export var interior := false
 ## Its own track (a boss lair). Empty: its region's town or field music (music_id).
 @export var music: StringName
+## No music at all here (the hero's silent home world), not even its region's.
+@export var silent := false
 ## A cutscene each character sees the first time they arrive (see CutsceneDef).
 @export var intro_scene: CutsceneDef
 ## Each player gets a copy of their own (a job test fought alone, even in co-op). The copy
@@ -79,6 +81,9 @@ extends Resource
 ## `SpawnDef.from_tear` step out of the first tear.
 @export var tear_platform := -1
 @export var tear_scene: CutsceneDef
+## Spots that play a cutscene for a player standing on them, and may send them on to another
+## map (the home-world tear's light and way back, the hero's thoughts there). See SceneSpot.
+@export var scene_spots: Array[SceneSpot] = []
 
 var _look: BiomeDef
 
@@ -137,9 +142,11 @@ func return_town() -> StringName:
 func outside() -> StringName:
 	return return_town() if interior or solo else id
 
-## The track that plays here: its own, else its region's town music for towns and
-## rooms, and its region's field music for everywhere else.
+## The track that plays here: none on a silent map, else its own, else its region's town
+## music for towns and rooms, and its region's field music for everywhere else.
 func music_id() -> StringName:
+	if silent:
+		return &""
 	if music != &"":
 		return music
 	var r: RegionDef = Content.regions.get(region)
@@ -147,12 +154,15 @@ func music_id() -> StringName:
 		return &""
 	return r.town_music if town or interior else r.field_music
 
-## The maps its portals lead to.
+## The maps its portals and scene spots lead to.
 func neighbours() -> Array[StringName]:
 	var out: Array[StringName] = []
 	for p in portals:
 		if not p.target_map in out:
 			out.append(p.target_map)
+	for s in scene_spots:
+		if s.then_map != &"" and not s.then_map in out:
+			out.append(s.then_map)
 	return out
 
 ## Every monster on the map, in the order the server and every client number them:
