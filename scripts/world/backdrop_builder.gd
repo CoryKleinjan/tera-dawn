@@ -4,6 +4,10 @@ extends RefCounted
 ## mountains and trees standing far behind the play area (real 3D depth does the parallax),
 ## loose pieces such as clouds and the sun scattered across the sky, and single pictures.
 
+## How far above the top of the view (a fraction of the screen) a tall map's picture keeps
+## its top edge when the camera is at the top of the map.
+const PICTURE_CLEAR := 0.02
+
 var stage: TDStage
 var root: Node3D
 var drifting: Array[Sprite3D] = []
@@ -35,7 +39,17 @@ static func strip_edges(map: MapDef, layer: BackdropLayerDef) -> Vector2:
 static func _edges_for(map: MapDef, layer: BackdropLayerDef, center: float) -> Vector2:
 	var tex: Texture2D = layer.textures[0]
 	var top := TDStage.screen_height_at(layer.screen_top.x, -layer.depth, center)
+	if layer.mode == BackdropLayerDef.Mode.PICTURE:
+		top = _picture_top(map, layer)
 	return Vector2(top, top - tex.get_height() * layer_pixel_size(map, layer))
+
+## The 3D height of a picture's top edge: where its `screen_top` puts it with the camera
+## mid-map, or on a map too tall for that, just high enough that it never shows below the top
+## of the view (PICTURE_CLEAR above it), even with the camera at the top of the map.
+static func _picture_top(map: MapDef, layer: BackdropLayerDef) -> float:
+	var z := -layer.depth
+	var r := TDStage.view_center_range(map.height)
+	return maxf(TDStage.screen_height_at(layer.screen_top.x, z, TDStage.backdrop_center(map)), TDStage.screen_height_at(-PICTURE_CLEAR, z, r.x))
 
 ## The view centre (game y) the strips are placed for: the backdrop's own, or on a map taller
 ## than the nearest strip covers, lower, just enough that its painted ground stays behind the
@@ -74,7 +88,8 @@ static func _floor_hides(map: MapDef, z: float) -> float:
 	return TDStage.screen_height_at(minf(TDStage.screen_frac_at(floor_top, TDStage.LAND_FRONT, c), 1.0), z, c)
 
 ## Texel size in 3D units of a strip or picture layer's art on `map`: a picture is stretched
-## to cover the whole span the view sweeps over, a strip shows at its `texel`.
+## to cover the whole span the view sweeps over, across and (on a tall map) from its top edge
+## down to where the floor hides it; a strip shows at its `texel`.
 static func layer_pixel_size(map: MapDef, layer: BackdropLayerDef) -> float:
 	var z := -layer.depth
 	var tex: Texture2D = layer.textures[0]
@@ -82,6 +97,7 @@ static func layer_pixel_size(map: MapDef, layer: BackdropLayerDef) -> float:
 	if layer.mode == BackdropLayerDef.Mode.PICTURE:
 		var span := span_at(map, z)
 		size = maxf(size, (span.y - span.x) / tex.get_width())
+		size = maxf(size, (_picture_top(map, layer) - _floor_hides(map, z) + 1.0 / TDStage.PX) / tex.get_height())
 	return size
 
 ## Moves drifting pieces (clouds) and wraps them around.

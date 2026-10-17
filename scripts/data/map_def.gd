@@ -31,6 +31,10 @@ extends Resource
 ## Where it sits on the world map, in world-map units (pixels of the world map painting,
 ## TDWorldMapWindow.WORLD).
 @export var world_pos := Vector2.ZERO
+## Where its top-left corner sits on its region's zone map, in game pixels (y down), when the
+## region draws its maps to shape (RegionDef.shaped_zone): neighbouring maps touch along the
+## edge their portals join, the Hollow Knight way.
+@export var zone_pos := Vector2.ZERO
 ## Towns are safe places to respawn and where return scrolls take you.
 @export var town := false
 ## The town you wake up in after fainting here, and where a return scroll goes. Empty means
@@ -113,6 +117,15 @@ func solid_spans_on(platform: int) -> Array[Vector2]:
 		if d.solid and land_under(i + 1) == platform:
 			out.append(Vector2(d.x, d.x + d.width))
 	return out
+
+## The area it covers on its region's zone map (see `zone_pos`).
+func zone_rect() -> Rect2:
+	return Rect2(zone_pos, Vector2(width, height))
+
+## The secret (Character.secrets) a player finds by standing on secret ledge `platform` (its
+## index, from 1): the zone map shows the ledge from then on.
+func ledge_secret(platform: int) -> StringName:
+	return StringName("%s/ledge%d" % [id, platform])
 
 ## The town this map sends you back to (see `return_map`).
 func return_town() -> StringName:

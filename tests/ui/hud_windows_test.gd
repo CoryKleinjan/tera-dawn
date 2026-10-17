@@ -504,10 +504,11 @@ func test_world_map_click_opens_a_zone_and_the_arrow_goes_back() -> void:
 		check_eq(wm.zone, r.id, "clicking %s's city opens its zone" % r.id)
 		await _redrawn(wm, "zone %s" % r.id)
 		for m in TDWorldMapWindow.placed_in(r.id):
-			var at := wm.to_screen(m.world_pos)
-			check(wm._area().grow(-6).has_point(at), "%s: %s's dot at %s lies inside the zone view" % [r.id, m.id, at])
-			wm._hovered(at)
-			check_eq(wm.hovered, m.id, "%s: hovering %s's dot finds it" % [r.id, m.id])
+			var at := wm.spot(m)
+			check(wm._area().grow(-6).has_point(at), "%s: %s's dot or room at %s lies inside the zone view" % [r.id, m.id, at])
+			if wm.shows(m):
+				wm._hovered(at)
+				check_eq(wm.hovered, m.id, "%s: hovering %s's dot or room finds it" % [r.id, m.id])
 		check(wm.zone_exits().size() > 0, "%s: the zone shows its ways out" % r.id)
 		for exit in wm.zone_exits():
 			check(wm._area().has_point(exit.label_at), "%s: the label %s lies inside the view" % [r.id, exit.label])
@@ -524,6 +525,33 @@ func test_world_map_zone_exits_open_the_next_zone() -> void:
 	check_eq(wm.zone, exit.region, "clicking %s opens that zone" % exit.label)
 	wm.open_zone(&"")
 
+func test_world_map_draws_shaped_zones_room_by_room() -> void:
+	var wm: TDWorldMapWindow = _open("worldmap")
+	var shaped := Content.regions.values().filter(func(r: RegionDef) -> bool: return r.shaped_zone)
+	check(not shaped.is_empty(), "some zone is drawn to shape")
+	for r: RegionDef in shaped:
+		wm.open_zone(r.id)
+		var rooms := TDWorldMapWindow.placed_in(r.id)
+		for m in rooms:
+			check(wm._area().encloses(wm.room_rect(m)), "%s: %s's room lies inside the zone view" % [r.id, m.id])
+		# only the rooms you've been to show, with the doors you've found
+		Game.me.visited.clear()
+		Game.me.visited.append(String(r.capital))
+		await _redrawn(wm, "%s with only its city found" % r.id)
+		for m in rooms:
+			check_eq(wm.shows(m), m.town, "%s: %s shows only once visited" % [r.id, m.id])
+		for door in wm.room_doors():
+			check(door[0].town, "%s: only the city's doors show" % r.id)
+		for m in rooms:
+			Game.me.visited.append(String(m.id))
+		await _redrawn(wm, "%s with every room found" % r.id)
+		for m in rooms:
+			wm._hovered(wm.spot(m))
+			check_eq(wm.hovered, m.id, "%s: hovering %s's room finds it" % [r.id, m.id])
+		for door in wm.room_doors():
+			check(wm._area().has_point(door[1]), "%s: a door of %s lies inside the view" % [r.id, door[0].id])
+	wm.open_zone(&"")
+
 func test_world_map_painting_keeps_its_shape() -> void:
 	# world_pos values are pixels of this painting: a repaint must place every dot again
 	var art := UiSkin.size_of("world_map")
@@ -537,8 +565,11 @@ func test_world_map_painting_keeps_its_shape() -> void:
 		check(TDWorldMapWindow.INNER.grow(0.5).encloses(v), "%s: the zone view %s stays inside the painting's scroll" % [r.id, v])
 
 func test_world_map_zone_dots_dont_overlap() -> void:
+	# a zone drawn to shape has rooms, not dots: content_routes_test keeps them from overlapping
 	var wm: TDWorldMapWindow = _open("worldmap")
 	for r: RegionDef in Content.regions.values():
+		if r.shaped_zone:
+			continue
 		wm.open_zone(r.id)
 		var placed := TDWorldMapWindow.placed_in(r.id)
 		for i in placed.size():

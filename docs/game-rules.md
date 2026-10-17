@@ -152,13 +152,16 @@ update this page when one changes. Each zone's own look and music are in
 - Every piece of land is walkable: no arches or floating rock islands, nothing that looks like
   ground but isn't. A deck, ledge or ladder painted into a building or a terrace (a treehouse
   deck, a lookout, a crow's nest, a railed wing) can be stood on or climbed too. No two exits of a map lead to the same map. Maps can be wide and multi-level.
-- A zone's fields are a web you can loop through, stacked like Hollow Knight's (canopy above,
-  roots below), each with 2 to 4 exits; Greenbough is the pilot. Shortcuts open one way until
-  you find them, then work both ways; a breakable wall opens one.
-- Every field has two secret ledges only a job's movement skill reaches: a high one (Flash Jump,
-  Blink) and a far one across a gap (every movement skill). Each holds a chest a character opens
-  once (shards, potions, a 60% scroll, a local Monster Book card). Secret ledges and shortcuts
-  stay off the minimap and world map.
+- A zone's maps fit together like Hollow Knight's rooms on one zone map (Greenbough first): each
+  room its own size, canopy above and roots below, neighbours touching where their doors join
+  them, with MapleStory portals at the room edges they lead through. Fields are a web you can
+  loop through, each with 2 to 4 exits, and more rooms hide behind secrets: fake walls you walk
+  through, breakable walls and shortcuts. Shortcuts open one way until you find them, then work
+  both ways.
+- Every field has two secret ledges only a job's movement skill reaches (a small room has one):
+  a high one (Flash Jump, Blink) and a far one across a gap (every movement skill).
+  Each holds a chest a character opens once (shards, potions, a 60% scroll, a local Monster Book
+  card). Secret ledges and shortcuts stay off the minimap; the zone map shows them once found.
 - Characters, NPCs, ropes and ladders draw in front of land; characters cast no shadows. Portals draw in front of land and
   scenery, behind ropes, NPCs, monsters and players; no NPC stands on a portal.
 - Portals are a blue-white light pillar on the ground, at exits and doorways, 70% opaque.
@@ -182,7 +185,8 @@ update this page when one changes. Each zone's own look and music are in
   panorama is the template. Clouds drift in front of it.
 - Fields look clean, like Hollow Knight's (Greenbough is the pilot): land with one clean grassy edge
   over plain earth, no tufts or plants strewn along it, few floor plants, and dark leaves framing
-  the screen's top corners. A breakable wall is gone once smashed.
+  the screen's top corners. A breakable wall is gone once smashed; a fake wall fades as you walk
+  into it.
 - Sparse ground scenery, each piece wholly on its platform; few lanterns, never overlapping buildings,
   NPCs or scenery.
 - No on-screen controls or how-to-play text anywhere: the tutorial teaches new characters the keys.
@@ -275,7 +279,9 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 - The equipment window lays its slots out like a person (hat on top, shoes at the bottom), with
   what the gear adds beside them.
 - No clouds on the title screen.
-- The world map shows towns always and a field only once visited (as "???" before).
+- The world map shows towns always and a field only once visited (as "???" before). A zone drawn
+  to shape (Greenbough) shows a room only once visited, like Hollow Knight: its ledges, ropes and
+  doors, secret ledges and ways once found, and where you stand.
 - Playing solo, the chat box shows only the last few lines, briefly; achievements are solo goals.
 - No controls box on screen, in towns or fields: the tutorial teaches the keys (its step hints
   show at the bottom), and the full list is in Settings > Controls.

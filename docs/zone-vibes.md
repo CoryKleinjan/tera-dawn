@@ -124,7 +124,9 @@ Giant oak trunks, broad leaf canopies, planks, rope bridges and ladders, moss an
 are plant and woodland creatures. Fields: one painted backdrop picture each, in its own colours
 below; earth ledges with one grassy edge over plain dark earth; dark oak leaves framing the top
 corners; a hollow trunk at the trunk shortcut, a painted chest on each secret ledge and a wall of
-roots over Elder's Root's shortcut.
+roots over each hidden way (breakable or fake). The zone fits together like Hollow Knight's rooms:
+the village and its two trails across the middle, the canopy rooms above, caves and the Rootway
+below, Elder's Root down the far west side to the boss.
 
 **Keep (music):** adventurous and verdant. Town: wooden flutes, harp, plucked strings,
 birdsong-like woodwinds, airy and calm. Field: wooden flutes, strings, hand drums, a quiet
@@ -143,6 +145,13 @@ thatch and antler trim.
 | Deep Canopy | Training | 16-18 | Dark green under a closed canopy, warm shafts piercing through | Acorn Sentry, Barkcap |
 | Old Oak Heights | Training | 18-23 | High in the old oaks: warm afternoon light through the leaves, golden shafts, soft green haze | Barkcap, Grove Wisp |
 | Elder's Root | Boss | 23-28 | Golden late-afternoon glow around an ancient tree, gold motes; reverent | Grove Wisp; boss Elder Treant |
+| Dappled Nook | Secret | – | Mossy Glade's look: a small sunlit glade behind a root wall | Bramble Boar, Seedwing |
+| Canopy Walk | Secret | – | Deep Canopy's look: a long hidden path along the treetops | Seedwing, Barkcap |
+| Thorn Thicket | Secret | – | Thornwood's look: a tangled pocket behind a bramble wall | Bramble Boar, Acorn Sentry |
+| Wayside Cave | Secret | – | Bough Trail's warm light, under the trail through a fake wall | Thornling, Bramble Boar |
+| Whisper Pool | Secret | – | Whispering Grove's mint mist, under the grove through a fake wall | Seedwing, Thornling |
+| Rootway | Secret | – | Elder's Root's gold glow: a long tunnel from the roots back to Wayside Cave | Acorn Sentry, Barkcap |
+| Oak Crown | Secret | – | Old Oak Heights' look: the top of the old oak, up a hidden climb | Grove Wisp, Barkcap |
 
 ## Lumewood
 

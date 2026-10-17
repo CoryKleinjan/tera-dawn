@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=95 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=132 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
 [ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="5_rope"]
 [ext_resource type="Resource" path="res://data/climb_styles/rope_ladder.tres" id="6_rope_ladder"]
-[ext_resource type="Resource" path="res://data/climb_styles/ladder.tres" id="7_ladder"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="8_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="9_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/barkcap.tres" id="10_barkcap"]
@@ -33,378 +32,12 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/greenbough_fields_side.png" id="32_ground_side"]
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="33_backdrop_layer_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/greenbough_fields/old_oak_heights.png" id="34_old_oak_heights"]
-
-[sub_resource type="Resource" id="Platform_1"]
-script = ExtResource("3_platform_def")
-x = 0.0
-y = 480.0
-width = 900.0
-
-[sub_resource type="Resource" id="Platform_2"]
-script = ExtResource("3_platform_def")
-x = 1000.0
-y = 430.0
-width = 720.0
-
-[sub_resource type="Resource" id="Platform_3"]
-script = ExtResource("3_platform_def")
-x = 1820.0
-y = 480.0
-width = 680.0
-
-[sub_resource type="Resource" id="Platform_4"]
-script = ExtResource("3_platform_def")
-x = 2600.0
-y = 460.0
-width = 600.0
-
-[sub_resource type="Resource" id="Platform_5"]
-script = ExtResource("3_platform_def")
-x = 1300.0
-y = 240.0
-width = 300.0
-
-[sub_resource type="Resource" id="Platform_6"]
-script = ExtResource("3_platform_def")
-x = 1820.0
-y = 290.0
-width = 180.0
-secret = true
-
-[sub_resource type="Resource" id="Platform_7"]
-script = ExtResource("3_platform_def")
-x = 2840.0
-y = 330.0
-width = 140.0
-secret = true
-
-[sub_resource type="Resource" id="Platform_8"]
-script = ExtResource("3_platform_def")
-x = 240.0
-y = 840.0
-width = 560.0
-
-[sub_resource type="Resource" id="Platform_9"]
-script = ExtResource("3_platform_def")
-x = 1100.0
-y = 820.0
-width = 520.0
-
-[sub_resource type="Resource" id="Platform_10"]
-script = ExtResource("3_platform_def")
-x = 1900.0
-y = 840.0
-width = 520.0
-
-[sub_resource type="Resource" id="Platform_11"]
-script = ExtResource("3_platform_def")
-x = 500.0
-y = 1180.0
-width = 520.0
-
-[sub_resource type="Resource" id="Platform_12"]
-script = ExtResource("3_platform_def")
-x = 1400.0
-y = 1160.0
-width = 520.0
-
-[sub_resource type="Resource" id="Platform_13"]
-script = ExtResource("3_platform_def")
-x = 2140.0
-y = 1180.0
-width = 380.0
-
-[sub_resource type="Resource" id="Platform_14"]
-script = ExtResource("3_platform_def")
-x = 2720.0
-y = 760.0
-width = 400.0
-
-[sub_resource type="Resource" id="Platform_15"]
-script = ExtResource("3_platform_def")
-x = 2720.0
-y = 1060.0
-width = 400.0
-
-[sub_resource type="Resource" id="Platform_16"]
-script = ExtResource("3_platform_def")
-x = 2720.0
-y = 1300.0
-width = 400.0
-
-[sub_resource type="Resource" id="Climbable_0"]
-script = ExtResource("4_climbable_def")
-x = 1360.0
-top = 240.0
-bottom = 430.0
-style = ExtResource("5_rope")
-
-[sub_resource type="Resource" id="Climbable_1"]
-script = ExtResource("4_climbable_def")
-x = 740.0
-top = 480.0
-bottom = 840.0
-style = ExtResource("5_rope")
-
-[sub_resource type="Resource" id="Climbable_2"]
-script = ExtResource("4_climbable_def")
-x = 1160.0
-top = 430.0
-bottom = 820.0
-style = ExtResource("5_rope")
-
-[sub_resource type="Resource" id="Climbable_3"]
-script = ExtResource("4_climbable_def")
-x = 2360.0
-top = 480.0
-bottom = 840.0
-style = ExtResource("5_rope")
-
-[sub_resource type="Resource" id="Climbable_4"]
-script = ExtResource("4_climbable_def")
-x = 560.0
-top = 840.0
-bottom = 1180.0
-style = ExtResource("5_rope")
-
-[sub_resource type="Resource" id="Climbable_5"]
-script = ExtResource("4_climbable_def")
-x = 1460.0
-top = 820.0
-bottom = 1160.0
-style = ExtResource("5_rope")
-
-[sub_resource type="Resource" id="Climbable_6"]
-script = ExtResource("4_climbable_def")
-x = 2200.0
-top = 840.0
-bottom = 1180.0
-style = ExtResource("5_rope")
-
-[sub_resource type="Resource" id="Climbable_7"]
-script = ExtResource("4_climbable_def")
-x = 960.0
-top = 1180.0
-bottom = 1520.0
-style = ExtResource("6_rope_ladder")
-
-[sub_resource type="Resource" id="Climbable_8"]
-script = ExtResource("4_climbable_def")
-x = 1860.0
-top = 1160.0
-bottom = 1520.0
-style = ExtResource("6_rope_ladder")
-
-[sub_resource type="Resource" id="Climbable_9"]
-script = ExtResource("4_climbable_def")
-x = 2460.0
-top = 1180.0
-bottom = 1520.0
-style = ExtResource("6_rope_ladder")
-
-[sub_resource type="Resource" id="Climbable_10"]
-script = ExtResource("4_climbable_def")
-x = 3060.0
-top = 460.0
-bottom = 760.0
-style = ExtResource("7_ladder")
-
-[sub_resource type="Resource" id="Climbable_11"]
-script = ExtResource("4_climbable_def")
-x = 2780.0
-top = 760.0
-bottom = 1060.0
-style = ExtResource("7_ladder")
-
-[sub_resource type="Resource" id="Climbable_12"]
-script = ExtResource("4_climbable_def")
-x = 3060.0
-top = 1060.0
-bottom = 1300.0
-style = ExtResource("7_ladder")
-
-[sub_resource type="Resource" id="Climbable_13"]
-script = ExtResource("4_climbable_def")
-x = 2780.0
-top = 1300.0
-bottom = 1520.0
-style = ExtResource("7_ladder")
-
-[sub_resource type="Resource" id="Portal_0"]
-script = ExtResource("8_portal_def")
-x = 60.0
-platform = 1
-target_map = &"deep_canopy"
-target_x = 2160.0
-target_platform = 14
-
-[sub_resource type="Resource" id="Portal_1"]
-script = ExtResource("8_portal_def")
-x = 3120.0
-platform = 0
-target_map = &"elder_root"
-target_x = 300.0
-target_platform = 1
-
-[sub_resource type="Resource" id="Spawn_0"]
-script = ExtResource("9_spawn_def")
-monster = ExtResource("10_barkcap")
-platform = 0
-count = 4
-patrol_from = 200.0
-patrol_to = 2600.0
-
-[sub_resource type="Resource" id="Spawn_1"]
-script = ExtResource("9_spawn_def")
-monster = ExtResource("11_grove_wisp")
-platform = 0
-count = 2
-patrol_from = 600.0
-patrol_to = 2400.0
-
-[sub_resource type="Resource" id="Spawn_2"]
-script = ExtResource("9_spawn_def")
-monster = ExtResource("10_barkcap")
-platform = 1
-count = 2
-patrol_from = 300.0
-
-[sub_resource type="Resource" id="Spawn_3"]
-script = ExtResource("9_spawn_def")
-monster = ExtResource("11_grove_wisp")
-platform = 2
-count = 2
-
-[sub_resource type="Resource" id="Spawn_4"]
-script = ExtResource("9_spawn_def")
-monster = ExtResource("10_barkcap")
-platform = 3
-count = 2
-
-[sub_resource type="Resource" id="Spawn_5"]
-script = ExtResource("9_spawn_def")
-monster = ExtResource("11_grove_wisp")
-platform = 4
-count = 1
-
-[sub_resource type="Resource" id="Spawn_6"]
-script = ExtResource("9_spawn_def")
-monster = ExtResource("11_grove_wisp")
-platform = 5
-count = 1
-
-[sub_resource type="Resource" id="Spawn_7"]
-script = ExtResource("9_spawn_def")
-monster = ExtResource("10_barkcap")
-platform = 8
-count = 2
-
-[sub_resource type="Resource" id="Spawn_8"]
-script = ExtResource("9_spawn_def")
-monster = ExtResource("11_grove_wisp")
-platform = 9
-count = 2
-
-[sub_resource type="Resource" id="Spawn_9"]
-script = ExtResource("9_spawn_def")
-monster = ExtResource("10_barkcap")
-platform = 10
-count = 2
-
-[sub_resource type="Resource" id="Spawn_10"]
-script = ExtResource("9_spawn_def")
-monster = ExtResource("11_grove_wisp")
-platform = 11
-count = 2
-
-[sub_resource type="Resource" id="Spawn_11"]
-script = ExtResource("9_spawn_def")
-monster = ExtResource("10_barkcap")
-platform = 12
-count = 2
-
-[sub_resource type="Resource" id="Spawn_12"]
-script = ExtResource("9_spawn_def")
-monster = ExtResource("11_grove_wisp")
-platform = 13
-count = 1
-
-[sub_resource type="Resource" id="Spawn_13"]
-script = ExtResource("9_spawn_def")
-monster = ExtResource("10_barkcap")
-platform = 14
-count = 1
-
-[sub_resource type="Resource" id="Spawn_14"]
-script = ExtResource("9_spawn_def")
-monster = ExtResource("11_grove_wisp")
-platform = 15
-count = 1
-
-[sub_resource type="Resource" id="Loot_0_0"]
-script = ExtResource("14_drop_entry")
-item = ExtResource("15_dawnshard")
-min_amount = 220
-max_amount = 320
-
-[sub_resource type="Resource" id="Loot_0_1"]
-script = ExtResource("14_drop_entry")
-item = ExtResource("16_elixir")
-min_amount = 2
-max_amount = 2
-
-[sub_resource type="Resource" id="Loot_0_2"]
-script = ExtResource("14_drop_entry")
-item = ExtResource("17_scroll_top_dex_60")
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Breakable_0"]
-script = ExtResource("12_breakable_def")
-id = &"old_oak_heights_far_chest"
-x = 1910.0
-platform = 6
-hits = 1
-whole = ExtResource("24_chest")
-broken = ExtResource("25_chest_open")
-height = 48.0
-loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1"), SubResource("Loot_0_2")])
-card = ExtResource("10_barkcap")
-
-[sub_resource type="Resource" id="Loot_1_0"]
-script = ExtResource("14_drop_entry")
-item = ExtResource("15_dawnshard")
-min_amount = 220
-max_amount = 320
-
-[sub_resource type="Resource" id="Loot_1_1"]
-script = ExtResource("14_drop_entry")
-item = ExtResource("18_mana_tea")
-min_amount = 4
-max_amount = 4
-
-[sub_resource type="Resource" id="Loot_1_2"]
-script = ExtResource("14_drop_entry")
-item = ExtResource("19_scroll_armor_def_60")
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Breakable_1"]
-script = ExtResource("12_breakable_def")
-id = &"old_oak_heights_high_chest"
-x = 2910.0
-platform = 7
-hits = 1
-whole = ExtResource("24_chest")
-broken = ExtResource("25_chest_open")
-height = 48.0
-loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
-card = ExtResource("11_grove_wisp")
+[ext_resource type="Resource" path="res://data/climb_styles/vine.tres" id="34_vine"]
 
 [sub_resource type="Resource" id="Prop_0"]
 script = ExtResource("20_prop_placement")
 texture = ExtResource("21_stump")
-x = 1698.0
+x = 2122.0
 y = -1.0
 depth = -2.3
 scale = 1.17
@@ -413,7 +46,7 @@ flip = false
 [sub_resource type="Resource" id="Prop_1"]
 script = ExtResource("20_prop_placement")
 texture = ExtResource("22_bush_large")
-x = 1894.0
+x = 2368.0
 y = -1.0
 depth = -3.0
 scale = 1.3
@@ -422,7 +55,7 @@ flip = true
 [sub_resource type="Resource" id="Prop_2"]
 script = ExtResource("20_prop_placement")
 texture = ExtResource("22_bush_large")
-x = 1291.0
+x = 1614.0
 y = -1.0
 depth = -4.4
 scale = 1.25
@@ -431,7 +64,7 @@ flip = false
 [sub_resource type="Resource" id="Prop_3"]
 script = ExtResource("20_prop_placement")
 texture = ExtResource("22_bush_large")
-x = 502.0
+x = 628.0
 y = -1.0
 depth = -3.9
 scale = 0.94
@@ -468,22 +101,622 @@ ground_side = ExtResource("32_ground_side")
 hide_layers = PackedInt32Array(0, 1, 2, 3, 4, 5, 6)
 more_backdrop = Array[ExtResource("33_backdrop_layer_def")]([SubResource("Backdrop_picture")])
 
+[sub_resource type="Resource" id="Platform_1"]
+script = ExtResource("3_platform_def")
+x = 3560.0
+y = 900.0
+width = 440.0
+
+[sub_resource type="Resource" id="Platform_2"]
+script = ExtResource("3_platform_def")
+x = 3600.0
+y = 1130.0
+width = 360.0
+
+[sub_resource type="Resource" id="Platform_3"]
+script = ExtResource("3_platform_def")
+x = 3420.0
+y = 1360.0
+width = 380.0
+
+[sub_resource type="Resource" id="Platform_4"]
+script = ExtResource("3_platform_def")
+x = 3600.0
+y = 1600.0
+width = 360.0
+
+[sub_resource type="Resource" id="Platform_5"]
+script = ExtResource("3_platform_def")
+x = 2680.0
+y = 980.0
+width = 820.0
+
+[sub_resource type="Resource" id="Platform_6"]
+script = ExtResource("3_platform_def")
+x = 2120.0
+y = 1065.0
+width = 500.0
+
+[sub_resource type="Resource" id="Platform_7"]
+script = ExtResource("3_platform_def")
+x = 1640.0
+y = 1150.0
+width = 420.0
+
+[sub_resource type="Resource" id="Platform_8"]
+script = ExtResource("3_platform_def")
+x = 760.0
+y = 1150.0
+width = 440.0
+
+[sub_resource type="Resource" id="Platform_9"]
+script = ExtResource("3_platform_def")
+x = 160.0
+y = 1150.0
+width = 520.0
+
+[sub_resource type="Resource" id="Platform_10"]
+script = ExtResource("3_platform_def")
+x = 540.0
+y = 1510.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_11"]
+script = ExtResource("3_platform_def")
+x = 300.0
+y = 1850.0
+width = 400.0
+solid = true
+
+[sub_resource type="Resource" id="Platform_12"]
+script = ExtResource("3_platform_def")
+x = 1060.0
+y = 1400.0
+width = 820.0
+
+[sub_resource type="Resource" id="Platform_13"]
+script = ExtResource("3_platform_def")
+x = 1200.0
+y = 1840.0
+width = 600.0
+solid = true
+
+[sub_resource type="Resource" id="Platform_14"]
+script = ExtResource("3_platform_def")
+x = 1340.0
+y = 1755.0
+width = 320.0
+solid = true
+
+[sub_resource type="Resource" id="Platform_15"]
+script = ExtResource("3_platform_def")
+x = 2480.0
+y = 1840.0
+width = 840.0
+solid = true
+
+[sub_resource type="Resource" id="Platform_16"]
+script = ExtResource("3_platform_def")
+x = 2680.0
+y = 1755.0
+width = 400.0
+solid = true
+
+[sub_resource type="Resource" id="Platform_17"]
+script = ExtResource("3_platform_def")
+x = 2160.0
+y = 1480.0
+width = 480.0
+
+[sub_resource type="Resource" id="Platform_18"]
+script = ExtResource("3_platform_def")
+x = 2980.0
+y = 1410.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_19"]
+script = ExtResource("3_platform_def")
+x = 1880.0
+y = 1850.0
+width = 220.0
+solid = true
+
+[sub_resource type="Resource" id="Platform_20"]
+script = ExtResource("3_platform_def")
+x = 60.0
+y = 900.0
+width = 420.0
+
+[sub_resource type="Resource" id="Platform_21"]
+script = ExtResource("3_platform_def")
+x = 420.0
+y = 815.0
+width = 300.0
+
+[sub_resource type="Resource" id="Platform_22"]
+script = ExtResource("3_platform_def")
+x = 120.0
+y = 600.0
+width = 440.0
+
+[sub_resource type="Resource" id="Platform_23"]
+script = ExtResource("3_platform_def")
+x = 640.0
+y = 520.0
+width = 520.0
+
+[sub_resource type="Resource" id="Platform_24"]
+script = ExtResource("3_platform_def")
+x = 1220.0
+y = 435.0
+width = 540.0
+
+[sub_resource type="Resource" id="Platform_25"]
+script = ExtResource("3_platform_def")
+x = 1660.0
+y = 300.0
+width = 560.0
+
+[sub_resource type="Resource" id="Platform_26"]
+script = ExtResource("3_platform_def")
+x = 2240.0
+y = 380.0
+width = 420.0
+
+[sub_resource type="Resource" id="Platform_27"]
+script = ExtResource("3_platform_def")
+x = 2720.0
+y = 465.0
+width = 380.0
+
+[sub_resource type="Resource" id="Platform_28"]
+script = ExtResource("3_platform_def")
+x = 3160.0
+y = 550.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_29"]
+script = ExtResource("3_platform_def")
+x = 3760.0
+y = 580.0
+width = 150.0
+secret = true
+
+[sub_resource type="Resource" id="Platform_30"]
+script = ExtResource("3_platform_def")
+x = 2060.0
+y = 165.0
+width = 150.0
+secret = true
+
+[sub_resource type="Resource" id="Climbable_0"]
+script = ExtResource("4_climbable_def")
+x = 3880.0
+top = 900.0
+bottom = 1130.0
+style = ExtResource("6_rope_ladder")
+
+[sub_resource type="Resource" id="Climbable_1"]
+script = ExtResource("4_climbable_def")
+x = 3660.0
+top = 1130.0
+bottom = 1360.0
+style = ExtResource("6_rope_ladder")
+
+[sub_resource type="Resource" id="Climbable_2"]
+script = ExtResource("4_climbable_def")
+x = 3740.0
+top = 1360.0
+bottom = 1600.0
+style = ExtResource("6_rope_ladder")
+
+[sub_resource type="Resource" id="Climbable_3"]
+script = ExtResource("4_climbable_def")
+x = 3880.0
+top = 1600.0
+bottom = 1920.0
+style = ExtResource("6_rope_ladder")
+
+[sub_resource type="Resource" id="Climbable_4"]
+script = ExtResource("4_climbable_def")
+x = 880.0
+top = 1150.0
+bottom = 1510.0
+style = ExtResource("6_rope_ladder")
+
+[sub_resource type="Resource" id="Climbable_5"]
+script = ExtResource("4_climbable_def")
+x = 600.0
+top = 1510.0
+bottom = 1850.0
+style = ExtResource("5_rope")
+
+[sub_resource type="Resource" id="Climbable_6"]
+script = ExtResource("4_climbable_def")
+x = 1700.0
+top = 1150.0
+bottom = 1400.0
+style = ExtResource("5_rope")
+
+[sub_resource type="Resource" id="Climbable_7"]
+script = ExtResource("4_climbable_def")
+x = 1140.0
+top = 1150.0
+bottom = 1400.0
+style = ExtResource("5_rope")
+
+[sub_resource type="Resource" id="Climbable_8"]
+script = ExtResource("4_climbable_def")
+x = 1400.0
+top = 1400.0
+bottom = 1755.0
+style = ExtResource("5_rope")
+
+[sub_resource type="Resource" id="Climbable_9"]
+script = ExtResource("4_climbable_def")
+x = 2580.0
+top = 1065.0
+bottom = 1480.0
+style = ExtResource("5_rope")
+
+[sub_resource type="Resource" id="Climbable_10"]
+script = ExtResource("4_climbable_def")
+x = 2220.0
+top = 1480.0
+bottom = 1920.0
+style = ExtResource("6_rope_ladder")
+
+[sub_resource type="Resource" id="Climbable_11"]
+script = ExtResource("4_climbable_def")
+x = 3040.0
+top = 1410.0
+bottom = 1755.0
+style = ExtResource("5_rope")
+
+[sub_resource type="Resource" id="Climbable_12"]
+script = ExtResource("4_climbable_def")
+x = 220.0
+top = 900.0
+bottom = 1150.0
+style = ExtResource("34_vine")
+
+[sub_resource type="Resource" id="Climbable_13"]
+script = ExtResource("4_climbable_def")
+x = 500.0
+top = 600.0
+bottom = 815.0
+style = ExtResource("34_vine")
+
+[sub_resource type="Resource" id="Climbable_14"]
+script = ExtResource("4_climbable_def")
+x = 1720.0
+top = 300.0
+bottom = 435.0
+style = ExtResource("34_vine")
+
+[sub_resource type="Resource" id="Portal_0"]
+script = ExtResource("8_portal_def")
+x = 3900.0
+platform = 1
+target_map = &"deep_canopy"
+target_x = 170.0
+target_platform = 11
+
+[sub_resource type="Resource" id="Portal_1"]
+script = ExtResource("8_portal_def")
+x = 80.0
+target_map = &"elder_root"
+target_x = 2150.0
+target_platform = 1
+
+[sub_resource type="Resource" id="Portal_2"]
+script = ExtResource("8_portal_def")
+x = 1900.0
+platform = 25
+target_map = &"oak_crown"
+target_x = 1390.0
+
+[sub_resource type="Resource" id="Spawn_0"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 0
+count = 4
+patrol_from = 330.0
+patrol_to = 1200.0
+
+[sub_resource type="Resource" id="Spawn_1"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 0
+count = 3
+patrol_from = 1800.0
+patrol_to = 2480.0
+
+[sub_resource type="Resource" id="Spawn_2"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 0
+count = 2
+patrol_from = 3320.0
+patrol_to = 3900.0
+
+[sub_resource type="Resource" id="Spawn_3"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("11_grove_wisp")
+platform = 0
+count = 3
+patrol_from = 700.0
+patrol_to = 2480.0
+
+[sub_resource type="Resource" id="Spawn_4"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 2
+count = 1
+
+[sub_resource type="Resource" id="Spawn_5"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 3
+count = 2
+
+[sub_resource type="Resource" id="Spawn_6"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("11_grove_wisp")
+platform = 4
+count = 1
+
+[sub_resource type="Resource" id="Spawn_7"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 5
+count = 4
+
+[sub_resource type="Resource" id="Spawn_8"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("11_grove_wisp")
+platform = 5
+count = 1
+
+[sub_resource type="Resource" id="Spawn_9"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 6
+count = 2
+
+[sub_resource type="Resource" id="Spawn_10"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("11_grove_wisp")
+platform = 6
+count = 1
+
+[sub_resource type="Resource" id="Spawn_11"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 7
+count = 2
+
+[sub_resource type="Resource" id="Spawn_12"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 8
+count = 2
+
+[sub_resource type="Resource" id="Spawn_13"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("11_grove_wisp")
+platform = 9
+count = 3
+
+[sub_resource type="Resource" id="Spawn_14"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 10
+count = 2
+
+[sub_resource type="Resource" id="Spawn_15"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 11
+count = 2
+
+[sub_resource type="Resource" id="Spawn_16"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 12
+count = 4
+
+[sub_resource type="Resource" id="Spawn_17"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("11_grove_wisp")
+platform = 12
+count = 1
+
+[sub_resource type="Resource" id="Spawn_18"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 13
+count = 2
+
+[sub_resource type="Resource" id="Spawn_19"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("11_grove_wisp")
+platform = 14
+count = 1
+
+[sub_resource type="Resource" id="Spawn_20"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 15
+count = 4
+
+[sub_resource type="Resource" id="Spawn_21"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("11_grove_wisp")
+platform = 16
+count = 1
+
+[sub_resource type="Resource" id="Spawn_22"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 16
+count = 1
+
+[sub_resource type="Resource" id="Spawn_23"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 17
+count = 3
+
+[sub_resource type="Resource" id="Spawn_24"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("11_grove_wisp")
+platform = 18
+count = 2
+
+[sub_resource type="Resource" id="Spawn_25"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 19
+count = 1
+
+[sub_resource type="Resource" id="Spawn_26"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("11_grove_wisp")
+platform = 20
+count = 2
+
+[sub_resource type="Resource" id="Spawn_27"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 21
+count = 1
+
+[sub_resource type="Resource" id="Spawn_28"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 22
+count = 2
+
+[sub_resource type="Resource" id="Spawn_29"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("11_grove_wisp")
+platform = 23
+count = 2
+
+[sub_resource type="Resource" id="Spawn_30"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 23
+count = 2
+
+[sub_resource type="Resource" id="Spawn_31"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 24
+count = 2
+
+[sub_resource type="Resource" id="Spawn_32"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 26
+count = 2
+
+[sub_resource type="Resource" id="Spawn_33"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("11_grove_wisp")
+platform = 27
+count = 1
+
+[sub_resource type="Resource" id="Spawn_34"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 27
+count = 1
+
+[sub_resource type="Resource" id="Spawn_35"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barkcap")
+platform = 28
+count = 2
+
+[sub_resource type="Resource" id="Loot_0_0"]
+script = ExtResource("14_drop_entry")
+item = ExtResource("15_dawnshard")
+min_amount = 220
+max_amount = 320
+
+[sub_resource type="Resource" id="Loot_0_1"]
+script = ExtResource("14_drop_entry")
+item = ExtResource("16_elixir")
+min_amount = 2
+max_amount = 2
+
+[sub_resource type="Resource" id="Loot_0_2"]
+script = ExtResource("14_drop_entry")
+item = ExtResource("17_scroll_top_dex_60")
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Breakable_0"]
+script = ExtResource("12_breakable_def")
+id = &"old_oak_heights_far_chest"
+x = 3835.0
+platform = 29
+hits = 1
+whole = ExtResource("24_chest")
+broken = ExtResource("25_chest_open")
+height = 48.0
+loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1"), SubResource("Loot_0_2")])
+card = ExtResource("10_barkcap")
+
+[sub_resource type="Resource" id="Loot_1_0"]
+script = ExtResource("14_drop_entry")
+item = ExtResource("15_dawnshard")
+min_amount = 220
+max_amount = 320
+
+[sub_resource type="Resource" id="Loot_1_1"]
+script = ExtResource("14_drop_entry")
+item = ExtResource("18_mana_tea")
+min_amount = 4
+max_amount = 4
+
+[sub_resource type="Resource" id="Loot_1_2"]
+script = ExtResource("14_drop_entry")
+item = ExtResource("19_scroll_armor_def_60")
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Breakable_1"]
+script = ExtResource("12_breakable_def")
+id = &"old_oak_heights_high_chest"
+x = 2135.0
+platform = 30
+hits = 1
+whole = ExtResource("24_chest")
+broken = ExtResource("25_chest_open")
+height = 48.0
+loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
+card = ExtResource("11_grove_wisp")
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"old_oak_heights"
 display_name = "Old Oak Heights"
 biome = ExtResource("2_greenwood")
 variant = SubResource("Variant")
-width = 3200
-height = 1600
-ground_y = 1520
-start_x = 120.0
-platforms = Array[ExtResource("3_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9"), SubResource("Platform_10"), SubResource("Platform_11"), SubResource("Platform_12"), SubResource("Platform_13"), SubResource("Platform_14"), SubResource("Platform_15"), SubResource("Platform_16")])
-climbables = Array[ExtResource("4_climbable_def")]([SubResource("Climbable_0"), SubResource("Climbable_1"), SubResource("Climbable_2"), SubResource("Climbable_3"), SubResource("Climbable_4"), SubResource("Climbable_5"), SubResource("Climbable_6"), SubResource("Climbable_7"), SubResource("Climbable_8"), SubResource("Climbable_9"), SubResource("Climbable_10"), SubResource("Climbable_11"), SubResource("Climbable_12"), SubResource("Climbable_13")])
-portals = Array[ExtResource("8_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1")])
+width = 4000
+height = 2000
+ground_y = 1920
+start_x = 170.0
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9"), SubResource("Platform_10"), SubResource("Platform_11"), SubResource("Platform_12"), SubResource("Platform_13"), SubResource("Platform_14"), SubResource("Platform_15"), SubResource("Platform_16"), SubResource("Platform_17"), SubResource("Platform_18"), SubResource("Platform_19"), SubResource("Platform_20"), SubResource("Platform_21"), SubResource("Platform_22"), SubResource("Platform_23"), SubResource("Platform_24"), SubResource("Platform_25"), SubResource("Platform_26"), SubResource("Platform_27"), SubResource("Platform_28"), SubResource("Platform_29"), SubResource("Platform_30")])
+climbables = Array[ExtResource("4_climbable_def")]([SubResource("Climbable_0"), SubResource("Climbable_1"), SubResource("Climbable_2"), SubResource("Climbable_3"), SubResource("Climbable_4"), SubResource("Climbable_5"), SubResource("Climbable_6"), SubResource("Climbable_7"), SubResource("Climbable_8"), SubResource("Climbable_9"), SubResource("Climbable_10"), SubResource("Climbable_11"), SubResource("Climbable_12"), SubResource("Climbable_13"), SubResource("Climbable_14")])
+portals = Array[ExtResource("8_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1"), SubResource("Portal_2")])
 breakables = Array[ExtResource("12_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1")])
-spawns = Array[ExtResource("9_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13"), SubResource("Spawn_14")])
+spawns = Array[ExtResource("9_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13"), SubResource("Spawn_14"), SubResource("Spawn_15"), SubResource("Spawn_16"), SubResource("Spawn_17"), SubResource("Spawn_18"), SubResource("Spawn_19"), SubResource("Spawn_20"), SubResource("Spawn_21"), SubResource("Spawn_22"), SubResource("Spawn_23"), SubResource("Spawn_24"), SubResource("Spawn_25"), SubResource("Spawn_26"), SubResource("Spawn_27"), SubResource("Spawn_28"), SubResource("Spawn_29"), SubResource("Spawn_30"), SubResource("Spawn_31"), SubResource("Spawn_32"), SubResource("Spawn_33"), SubResource("Spawn_34"), SubResource("Spawn_35")])
 props = Array[ExtResource("20_prop_placement")]([SubResource("Prop_0"), SubResource("Prop_1"), SubResource("Prop_2"), SubResource("Prop_3")])
 region = &"greenbough"
-world_pos = Vector2(275.0, 132.0)
+world_pos = Vector2(311.0, 107.0)
+zone_pos = Vector2(-5800.0, -4200.0)
 return_map = &"greenbough"
