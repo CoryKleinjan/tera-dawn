@@ -78,7 +78,6 @@ width = 1400
 start_x = 200.0
 lantern_spacing = 0.0
 region = &"dawnharbor"
-world_pos = Vector2(385.0, 262.0)
 town = true
 return_map = &"dawnharbor"
 portals = Array[ExtResource("3_portal_def")]([SubResource("Portal_town")])
