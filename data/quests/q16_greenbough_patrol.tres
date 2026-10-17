@@ -24,7 +24,6 @@ script = ExtResource("1_quest_def")
 id = &"q16_greenbough_patrol"
 title = "Greenbough Patrol"
 giver = &"greenbough_store"
-min_level = 10
 requires = Array[StringName]([])
 offer_text = "The Thornlings in Mossy Glade are getting bold. Would you thin them out? 15 ought to do it. The portal by Brin leads out there."
 progress_text = "15 Thornlings in Mossy Glade. The portal by the storage keeper leads there."

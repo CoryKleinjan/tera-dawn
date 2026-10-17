@@ -15,9 +15,6 @@ extends Resource
 ## Where its name sits on the world map, in world-map units (pixels of the world map painting,
 ## TDWorldMapWindow.WORLD).
 @export var label_pos := Vector2.ZERO
-## "Lv. 1-10": the tuning tier its maps are made for. Never shown to players (there are no
-## levels in the game); content tests use it to keep the zones in order.
-@export var level_text := ""
 ## The part of the world map painting (world-map units) its zone map zooms into. Every map
 ## of the region sits inside it; the zone map widens it to the painting's shape.
 @export var zone_rect := Rect2()

@@ -22,7 +22,6 @@ script = ExtResource("1_quest_def")
 id = &"q05_into_the_hollow"
 title = "Into the Hollow"
 giver = &"village_elder"
-min_level = 7
 requires = Array[StringName]([&"q03_sprouting_menace"])
 repeatable = false
 offer_text = "You've grown strong, Dawnling. East through the portal lies Fern Hollow, where the Fern Boars run wild. Go there, defeat five of them, and come back to me."

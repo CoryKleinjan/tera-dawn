@@ -79,6 +79,49 @@ top = 550.25
 bottom = 620.0
 style = ExtResource("rope_ladder")
 
+[sub_resource type="Resource" id="Mast_barrel_west"]
+script = ExtResource("platform_def")
+x = 2257.0
+y = 570.0
+width = 44.0
+in_scenery = true
+
+[sub_resource type="Resource" id="Mast_barrel_east"]
+script = ExtResource("platform_def")
+x = 2347.0
+y = 568.75
+width = 78.0
+in_scenery = true
+
+[sub_resource type="Resource" id="Mast_crate"]
+script = ExtResource("platform_def")
+x = 2240.0
+y = 499.0
+width = 177.0
+in_scenery = true
+
+[sub_resource type="Resource" id="Mast_yard"]
+script = ExtResource("platform_def")
+x = 2206.0
+y = 266.25
+width = 248.0
+in_scenery = true
+
+[sub_resource type="Resource" id="Mast_nest"]
+script = ExtResource("platform_def")
+x = 2276.0
+y = 193.75
+width = 108.0
+in_scenery = true
+
+[sub_resource type="Resource" id="Ladder_mast"]
+script = ExtResource("climbable_def")
+x = 2330.6
+top = 266.25
+bottom = 499.0
+style = ExtResource("rope_ladder")
+in_scenery = true
+
 [sub_resource type="Resource" id="Portal_west"]
 script = ExtResource("portal_def")
 x = 60.0
@@ -204,7 +247,7 @@ face = 1
 [sub_resource type="Resource" id="Npc_parrot_girl"]
 script = ExtResource("npc_placement")
 npc = ExtResource("n_parrot_girl")
-x = 4800.0
+x = 4840.0
 platform = 0
 face = -1
 
@@ -292,7 +335,7 @@ x = 4730.0
 [sub_resource type="Resource" id="Prop_14_lamp_post"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_lamp_post")
-x = 4870.0
+x = 5350.0
 light_color = Color(1.0, 0.78, 0.48, 1.0)
 light_energy = 1.5
 light_height = 120.0
@@ -308,13 +351,12 @@ height = 700
 ground_y = 620
 lantern_spacing = 0.0
 start_x = 300.0
-platforms = Array[ExtResource("platform_def")]([SubResource("Hull_deck"), SubResource("Jetty")])
-climbables = Array[ExtResource("climbable_def")]([SubResource("Ladder_hull_west"), SubResource("Ladder_hull_east"), SubResource("Ladder_jetty")])
+platforms = Array[ExtResource("platform_def")]([SubResource("Hull_deck"), SubResource("Jetty"), SubResource("Mast_barrel_west"), SubResource("Mast_barrel_east"), SubResource("Mast_crate"), SubResource("Mast_yard"), SubResource("Mast_nest")])
+climbables = Array[ExtResource("climbable_def")]([SubResource("Ladder_hull_west"), SubResource("Ladder_hull_east"), SubResource("Ladder_jetty"), SubResource("Ladder_mast")])
 npcs = Array[ExtResource("npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_shop"), SubResource("Npc_keeper"), SubResource("Npc_deckhand"), SubResource("Npc_fisher"), SubResource("Npc_parrot_girl")])
 props = Array[ExtResource("prop_placement")]([SubResource("Prop_0_prop_rowboat"), SubResource("Prop_1_lamp_post"), SubResource("Prop_2_prop_crates"), SubResource("Prop_3_prop_barrels"), SubResource("Prop_4_prop_chest"), SubResource("Prop_5_lamp_post"), SubResource("Prop_6_prop_oar_rack"), SubResource("Prop_7_prop_cannon"), SubResource("Prop_8_prop_ship_wheel"), SubResource("Prop_9_prop_flag"), SubResource("Prop_10_prop_rope_coil"), SubResource("Prop_11_prop_lobster_pot"), SubResource("Prop_12_prop_anchor"), SubResource("Prop_13_prop_figurehead"), SubResource("Prop_14_lamp_post")])
 buildings = Array[ExtResource("building_placement")]([SubResource("Building_boat_store"), SubResource("Building_small"), SubResource("Building_large"), SubResource("Building_mast_lookout"), SubResource("Building_captains_cabin"), SubResource("Building_net_loft")])
 region = &"driftcove"
 world_pos = Vector2(365.0, 495.0)
 town = true
-level_text = "Town"
 portals = Array[ExtResource("portal_def")]([SubResource("Portal_west"), SubResource("Door_store"), SubResource("Door_hall"), SubResource("Portal_mid"), SubResource("Portal_east")])

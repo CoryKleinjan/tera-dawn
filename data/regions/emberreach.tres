@@ -10,7 +10,6 @@ description = "Cinder hills and forges, home of the Warriors."
 color = Color(1.0, 0.478431, 0.239216, 1.0)
 capital = &"emberforge"
 label_pos = Vector2(872.0, 392.0)
-level_text = "Lv. 7-31"
 zone_rect = Rect2(650.0, 170.0, 280.0, 184.0)
 town_music = &"town_emberreach"
 field_music = &"field_emberreach"

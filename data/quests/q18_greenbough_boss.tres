@@ -24,7 +24,6 @@ script = ExtResource("1_quest_def")
 id = &"q18_greenbough_boss"
 title = "The Elder Treant"
 giver = &"greenbough_instructor"
-min_level = 22
 requires = Array[StringName]([&"q17_greenbough_supplies"])
 offer_text = "At the end of our hunting grounds lives the Elder Treant. Only the strongest of us have faced it. Bring me the Heartwood and I'll know you're ready."
 progress_text = "Defeat the Elder Treant at the far end of the hunting grounds and bring back the Heartwood."

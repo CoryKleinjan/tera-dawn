@@ -157,6 +157,8 @@ func test_climbables_fit_on_their_platforms() -> void:
 				if not check(layout.platforms.any(func(pl: Platform) -> bool: return pl.contains_x(c.x) and absf(pl.y - end[0]) < 1.0),
 						"%s: climbables[%d] at x %s has no platform at y %s" % [w, i, c.x, end[0]]):
 					continue
+				if c.in_scenery:
+					continue  # painted into the scenery: no art of its own to hang over an end
 				var room := ClimbStyleDef.ledge_room(c.x, end[0], layout.platforms)
 				var reach := ClimbStyleDef.solid_reach(end[1], st.texel)
 				if end[1] == st.top and st.top_flipped(room):

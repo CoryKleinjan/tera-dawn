@@ -24,7 +24,6 @@ script = ExtResource("1_quest_def")
 id = &"q01_dewling_trouble"
 title = "Dewling Trouble"
 giver = &"village_elder"
-min_level = 1
 requires = Array[StringName]([])
 repeatable = false
 offer_text = "The Dewlings have been splashing through the village gardens all week. Be a dear and calm eight of them down. Gently, if you can."

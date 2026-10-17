@@ -126,4 +126,3 @@ sprite_frames = ExtResource("3_lantern_wraith")
 sprite_scale = 1.1
 light_color = Color(0.501961, 0.376471, 1.0, 1.0)
 drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_18")])
-respawn_ticks = Vector2i(1800, 2400)

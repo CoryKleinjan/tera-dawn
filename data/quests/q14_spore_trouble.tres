@@ -24,7 +24,6 @@ script = ExtResource("1_quest_def")
 id = &"q14_spore_trouble"
 title = "Spore Trouble"
 giver = &"shopkeeper"
-min_level = 4
 requires = Array[StringName]([])
 offer_text = "Sporecaps have taken over the dell west of the meadow, and when you pop one, out come more! Thin them out for me? Twelve should do."
 progress_text = "Twelve Sporecaps in Mushroom Dell, west of the meadow, past Sunny Slope."

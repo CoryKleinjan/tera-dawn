@@ -24,7 +24,6 @@ script = ExtResource("1_quest_def")
 id = &"q15_clawbeard"
 title = "Old Clawbeard"
 giver = &"village_elder"
-min_level = 9
 requires = Array[StringName]([&"q01_dewling_trouble"])
 offer_text = "Out on the Tidal Flats lives a crab older than this village. Old Clawbeard, the fishermen call him. He's been snapping nets again. Bring me his pearl and the shore is yours."
 progress_text = "Old Clawbeard lives in a cove off the Tidal Flats, at the far west of the isle. Bring back Clawbeard's Pearl."

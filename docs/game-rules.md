@@ -36,6 +36,8 @@ update this page when one changes. Each zone's own look and music are in
   turns). The weapon is one painting held in his near fist; the shield or tome is in his far
   hand and only shows while the weapon does. Where each sits, its turn and its layer on every
   frame are set by hand in the pose editor.
+- Head gear (helmet, hat, hood, bandana) covers only his head: nothing attached to it reaches his
+  shoulders, so no cape, collar or shoulder flap.
 - Draw order, back to front: off-hand (shield), cape, body, trousers, shoes, tome, top, gloves,
   face, hair (hidden under helmets), hat, weapon, then his fists over its grip. In the pose editor
   any piece (his body, face, hair, fists, each piece of gear) can be moved, turned, resized and
@@ -148,7 +150,8 @@ update this page when one changes. Each zone's own look and music are in
 
 - Map names show only at the top of the screen; nothing labels a map in the world.
 - Every piece of land is walkable: no arches or floating rock islands, nothing that looks like
-  ground but isn't. No two exits of a map lead to the same map. Maps can be wide and multi-level.
+  ground but isn't. A deck, ledge or ladder painted into a building or a terrace (a treehouse
+  deck, a lookout, a crow's nest, a railed wing) can be stood on or climbed too. No two exits of a map lead to the same map. Maps can be wide and multi-level.
 - A zone's maps fit together like Hollow Knight's rooms on one zone map (Greenbough first): each
   room its own size, canopy above and roots below, neighbours touching where their doors join
   them, with MapleStory portals at the room edges they lead through. Fields are a web you can
@@ -240,9 +243,11 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 
 - Two or three monster kinds per map (a boss counts as one). Each kind belongs to one zone unless
   Cory says otherwise. A monster taken out of a zone stays in the files.
+- Defeated monsters (bosses too) stay down until the map loads fresh: leaving and coming back,
+  or fainting and returning. In co-op a map resets once every player has left it.
 - No levels are shown anywhere: no "Lv." on monsters, bosses, maps, regions, the Monster Book,
-  quests, gear or trips. Monsters, maps and quests keep a hidden tuning tier (MonsterDef.level,
-  the "Lv. a-b" level_text) only so content tests keep the zones in order.
+  quests, gear or trips. Monsters and gear keep a hidden tuning tier (MonsterDef.level,
+  EquipDef.required_level) only so the balance and content checks can measure them.
 - Monster strength: each kind's own HP, attack and Dawn Essence are what it is on the map nearest
   a town that it lives on; on each map farther from the nearest town than that it is 15% stronger
   (HP, attack and essence). Shortcuts and one-way ways home (a boss arena's) don't count

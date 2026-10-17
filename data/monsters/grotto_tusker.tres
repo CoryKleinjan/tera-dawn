@@ -121,5 +121,4 @@ moves = Array[ExtResource("mv_script")]([ExtResource("mv_boss_charge"), ExtResou
 sprite_frames = ExtResource("2_barnacle_boar")
 sprite_scale = 1.3
 drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12")])
-respawn_ticks = Vector2i(1800, 2400)
 tint = Color(0.82, 0.86, 1.0, 1)

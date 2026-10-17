@@ -366,7 +366,6 @@ region = &"dawnharbor"
 world_pos = Vector2(560, 285)
 town = false
 return_map = &"dawnharbor"
-level_text = "Lv. 10-17"
 interior = false
 music = &""
 platforms = Array[ExtResource("7_mqnj7")]([SubResource("Resource_f270g"), SubResource("Resource_d6kew"), SubResource("Resource_yl8wq"), SubResource("Resource_d4xmr"), SubResource("Resource_yqwcl"), SubResource("Resource_qghot"), SubResource("Resource_43505"), SubResource("Resource_ropnd"), SubResource("Resource_68842")])

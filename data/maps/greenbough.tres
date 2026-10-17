@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=73 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=77 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="greenwood"]
@@ -79,6 +79,36 @@ x = 5270.0
 top = 472.7
 bottom = 620.0
 style = ExtResource("ladder")
+
+[sub_resource type="Resource" id="Treehouse_deck"]
+script = ExtResource("platform_def")
+x = 2253.0
+y = 432.2
+width = 202.0
+in_scenery = true
+
+[sub_resource type="Resource" id="Lookout_deck"]
+script = ExtResource("platform_def")
+x = 3034.0
+y = 303.1
+width = 241.0
+in_scenery = true
+
+[sub_resource type="Resource" id="Ladder_treehouse"]
+script = ExtResource("climbable_def")
+x = 2352.0
+top = 432.2
+bottom = 620.0
+style = ExtResource("ladder")
+in_scenery = true
+
+[sub_resource type="Resource" id="Ladder_lookout"]
+script = ExtResource("climbable_def")
+x = 3154.7
+top = 303.1
+bottom = 620.0
+style = ExtResource("ladder")
+in_scenery = true
 
 [sub_resource type="Resource" id="Portal_west"]
 script = ExtResource("portal_def")
@@ -266,7 +296,8 @@ y = 472.7
 [sub_resource type="Resource" id="Prop_hay"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_hay")
-x = 4250.0
+x = 3555.0
+y = 472.7
 
 [sub_resource type="Resource" id="Prop_barrel"]
 script = ExtResource("prop_placement")
@@ -290,13 +321,12 @@ height = 700
 ground_y = 620
 lantern_spacing = 0.0
 start_x = 300.0
-platforms = Array[ExtResource("platform_def")]([SubResource("Deck_west"), SubResource("Bridge"), SubResource("Deck_east")])
-climbables = Array[ExtResource("climbable_def")]([SubResource("Ladder_west"), SubResource("Ladder_east")])
+platforms = Array[ExtResource("platform_def")]([SubResource("Deck_west"), SubResource("Bridge"), SubResource("Deck_east"), SubResource("Treehouse_deck"), SubResource("Lookout_deck")])
+climbables = Array[ExtResource("climbable_def")]([SubResource("Ladder_west"), SubResource("Ladder_east"), SubResource("Ladder_treehouse"), SubResource("Ladder_lookout")])
 npcs = Array[ExtResource("npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_forager"), SubResource("Npc_shop"), SubResource("Npc_keeper"), SubResource("Npc_kid"), SubResource("Npc_hunter")])
 props = Array[ExtResource("prop_placement")]([SubResource("Prop_signpost"), SubResource("Prop_lamp_west"), SubResource("Prop_arrow_rack"), SubResource("Prop_lamp_east"), SubResource("Prop_target"), SubResource("Prop_hide_rack"), SubResource("Prop_logs"), SubResource("Prop_hay"), SubResource("Prop_barrel"), SubResource("Prop_bench")])
 buildings = Array[ExtResource("building_placement")]([SubResource("Building_hut"), SubResource("Building_store"), SubResource("Building_lodge"), SubResource("Building_treehouse"), SubResource("Building_lookout"), SubResource("Building_cabin")])
 region = &"greenbough"
 world_pos = Vector2(390.0, 150.0)
 town = true
-level_text = "Town"
 portals = Array[ExtResource("portal_def")]([SubResource("Portal_west"), SubResource("Door_store"), SubResource("Door_hall"), SubResource("Portal_mid"), SubResource("Portal_east")])

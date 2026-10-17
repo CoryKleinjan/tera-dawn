@@ -81,7 +81,6 @@ start_x = 180.0
 solo = true
 region = &"lumewood"
 return_map = &"lumewood"
-level_text = "Lv. 10-11"
 platforms = Array[ExtResource("3_platform")]([SubResource("P1"), SubResource("P2"), SubResource("P3"), SubResource("P4"), SubResource("P5"), SubResource("P6")])
 portals = Array[ExtResource("4_portal")]([SubResource("Back")])
 spawns = Array[ExtResource("7_spawn")]([SubResource("Boss")])

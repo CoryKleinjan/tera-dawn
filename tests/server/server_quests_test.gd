@@ -100,11 +100,6 @@ func test_quests_are_only_taken_standing_by_the_giver() -> void:
 	h.ask(2, &"req_quest_accept", [&"test_taker", q_kill.id])
 	check(not c.quests.active.has(q_kill.id), "the wrong NPC")
 
-func test_quests_have_no_level_to_take_them() -> void:
-	q_kill.min_level = 5
-	h.ask(2, &"req_quest_accept", [&"test_giver", q_kill.id])
-	check(c.quests.active.has(q_kill.id), "taken: levels are gone")
-
 func test_kills_count_toward_the_quest() -> void:
 	h.ask(2, &"req_quest_accept", [&"test_giver", q_kill.id])
 	h.move_to(p, ServerHarness.FIELD, 300.0)
@@ -148,7 +143,8 @@ func test_quest_items_drop_only_while_the_quest_wants_them() -> void:
 	h.move_to(p, ServerHarness.TOWN, GIVER_X)
 	h.ask(2, &"req_quest_accept", [&"test_giver", q_collect.id])
 	h.move_to(p, ServerHarness.FIELD, 300.0)
-	h.step(200) # the first quarry comes back
+	field = h.server.maps[ServerHarness.FIELD] # loaded fresh, the first quarry back
+	h.step(30) # past the swing's cooldown
 	for m in field.mobs:
 		m.position.x = 340.0
 	h.ask(2, &"req_skill", [&"basic_attack", p.position, 1])

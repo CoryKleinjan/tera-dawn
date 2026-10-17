@@ -23,12 +23,16 @@ nudges = {
 &"hands": {
 &"ambush1": Vector4(-0.5, 1.800003, 0, 0),
 &"backstep": Vector4(-12.5, 6.9000015, 0, 0),
-&"cast1": Vector4(1.800003, 2.800003, 0, 0)
+&"cast1": Vector4(1.800003, 2.800003, 0, 0),
+&"sit": Vector4(1.6, 38.3, 28, 0)
 }
 }
 frame_art = {
 &"body": {
 &"roll2": &"roll1"
+},
+&"hands": {
+&"sit": &"walk3"
 }
 }
 animations = {

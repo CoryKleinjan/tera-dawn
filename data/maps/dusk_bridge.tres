@@ -240,4 +240,3 @@ props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_23"), Sub
 region = &"lanternfall"
 world_pos = Vector2(700.0, 375.0)
 return_map = &"lanternfall"
-level_text = "Lv. 9-10"

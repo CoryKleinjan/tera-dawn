@@ -300,4 +300,3 @@ props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_32"), Sub
 region = &"dawnrise_isle"
 world_pos = Vector2(90.0, 350.0)
 return_map = &"dawnrise_village"
-level_text = "Lv. 4-8"

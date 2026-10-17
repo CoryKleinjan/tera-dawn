@@ -15,7 +15,6 @@ script = ExtResource("1_quest_def")
 id = &"jtest_archer"
 title = "Job Test"
 giver = &"greenbough_instructor"
-min_level = 10
 offer_text = "Still on your feet out there, I see. Before I call you an Archer, show me. Run my trial course to the far end. Eyes open, feet quick."
 progress_text = "The trial ground is through the light by the wall."
 complete_text = "Forty years in this forest and I've never seen anything like that. You held your ground. You're an Archer now. But that light... Go to Lumewood and tell Archmage Celest what you saw."

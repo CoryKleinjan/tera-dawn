@@ -24,7 +24,6 @@ script = ExtResource("1_quest_def")
 id = &"q20_lumewood_supplies"
 title = "Lumewood Supplies"
 giver = &"lumewood_shop"
-min_level = 13
 requires = Array[StringName]([&"q19_lumewood_patrol"])
 offer_text = "I need 20 Prism Jellys for my work. You'll find them in Crystal Caves, past Glowcap Hollow."
 progress_text = "20 Prism Jellys from Crystal Caves."
