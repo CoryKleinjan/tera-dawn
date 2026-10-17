@@ -124,7 +124,7 @@ script = ExtResource("7_portal_def")
 x = 2540.0
 platform = 0
 target_map = &"lumewood"
-target_x = 120.0
+target_x = 225.0
 
 [sub_resource type="Resource" id="Resource_11"]
 script = ExtResource("7_portal_def")
