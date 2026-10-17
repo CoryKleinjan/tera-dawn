@@ -51,7 +51,7 @@ func test_you_wake_up_in_the_maps_town_after_lying_still() -> void:
 
 func test_waking_up_gives_half_hp_and_mp_and_invincibility() -> void:
 	h.step(SimPlayer.FAINT_TICKS + 1)
-	check_eq(c.health.hp, ceili(c.max_hp() / 2.0), "half HP, rounded up")
+	check_eq(c.health.hp, ceili(c.max_hearts() / 2.0), "half HP, rounded up")
 	check_eq(c.mp, ceili(c.max_mp() / 2.0), "half MP, rounded up")
 	check_eq(p.inv, 120, "a moment of invincibility")
 
@@ -79,7 +79,7 @@ func test_leaving_while_fainted_wakes_you_in_town() -> void:
 	h.ask(2, &"req_leave_character")
 	var saved := h.saved("Ann")
 	check_eq(saved.map_id, ServerHarness.TOWN, "saved in the field's town")
-	check_eq(saved.health.hp, ceili(saved.max_hp() / 2.0), "with half HP")
+	check_eq(saved.health.hp, ceili(saved.max_hearts() / 2.0), "with half HP")
 	h.play(2, "Ann")
 	check_eq(h.server.player_of(2).map.def.id, ServerHarness.TOWN, "and comes back there")
 	check(not h.server.player_of(2).fainted(), "awake")

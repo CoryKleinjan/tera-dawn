@@ -86,15 +86,17 @@ static func swing_point(feet: Vector2, face: int, aim: Hitbox.Aim) -> Vector2:
 			return chest + Vector2(0, TDPlayer.CHEST)
 	return chest
 
-## Damage numbers and hit effects for `hits` on monster `m` (numbers stack, see
-## _number_slot). Your own hits also get hit-stop, and crits a little screen shake.
+## Hit effects for `hits` on monster `m`, and "Miss" for the ones that missed (they stack,
+## see _number_slot). Your own hits also get hit-stop, and crits a little screen shake.
 func _show_hits(skill: SkillDef, m: TDMob, hits: Array, face: int, mine: bool) -> void:
 	var mid := m.body_position() + Vector2(0, -m.def.size.y / 2.0)
 	var crit := false
 	var landed := false
 	for i in hits.size():
 		var kind: String = hits[i][1]
-		add_number(m.body_position() + Vector2(0, -m.def.size.y - 10 - _number_slot(m.index) * NUMBER_STEP), hits[i][0], kind)
+		# no damage numbers: a hit reads by its flash, effect and sound; only a miss says so
+		if kind == "miss":
+			add_number(m.body_position() + Vector2(0, -m.def.size.y - 10 - _number_slot(m.index) * NUMBER_STEP), hits[i][0], kind)
 		crit = crit or kind == "crit"
 		landed = landed or kind != "miss"
 		if kind == "crit":

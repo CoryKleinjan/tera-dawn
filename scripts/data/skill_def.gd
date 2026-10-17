@@ -116,7 +116,7 @@ const AMBUSH_GROUP := 110.0
 @export_group("Buffs and passives")
 ## A buff that also reaches every party member on the map within PARTY_REACH.
 @export var party := false
-## Heals this share of Max HP as it goes off (a buff with no duration is just the heal).
+## Hearts it heals as it goes off, rounded down (a buff with no duration is just the heal).
 @export var heal := 0.0
 @export var heal_per_level := 0.0
 ## While the buff lasts, this share of the damage taken comes out of MP instead of HP.
@@ -132,7 +132,7 @@ const AMBUSH_GROUP := 110.0
 ## How long a buff lasts, in seconds.
 @export var duration := 0.0
 @export var duration_per_level := 0.0
-## Extra HP and MP restored every few seconds (passives).
+## Extra hearts and MP restored each time they regenerate (passives).
 @export var regen_hp := 0
 @export var regen_hp_per_level := 0
 @export var regen_mp := 0
@@ -165,11 +165,16 @@ func recharge_ticks(level: int) -> int:
 func slow_ticks(level: int) -> int:
 	return roundi(maxf(0.0, slow + slow_per_level * maxi(0, level - 1)) * 60.0)
 
-func heal_at(level: int) -> float:
-	return heal + heal_per_level * maxi(0, level - 1) if level > 0 else 0.0
+## Hearts it heals at `level`.
+func heal_at(level: int) -> int:
+	return floori(heal + heal_per_level * maxi(0, level - 1)) if level > 0 else 0
 
 func mp_guard_at(level: int) -> float:
 	return clampf(mp_guard + mp_guard_per_level * maxi(0, level - 1), 0.0, 1.0) if level > 0 else 0.0
+
+## "1 heart", "2 hearts".
+static func hearts_text(n: int) -> String:
+	return "%d heart%s" % [n, "" if n == 1 else "s"]
 
 ## `base` grown by `per` for every level above 1 (0 when the skill isn't learned).
 static func grown(base: float, per: float, level: int) -> float:
@@ -266,17 +271,17 @@ func describe_level(level: int) -> PackedStringArray:
 			out.append("Slows them for %s seconds" % _seconds(slow_ticks(level)))
 		if root_ticks(level) > 0:
 			out.append("Roots them for %s seconds" % _seconds(root_ticks(level)))
-	if heal_at(level) > 0.0:
-		out.append("Heals %d%% of Max HP" % roundi(heal_at(level) * 100))
+	if heal_at(level) > 0:
+		out.append("Heals %s" % hearts_text(heal_at(level)))
 	var s := stats_at(level)
 	for f in s.nonzero():
 		out.append("%s %s" % [StatBlock.LABELS[f], StatBlock.format(f, s.value(f))])
 	if regen_hp_at(level) > 0:
-		out.append("HP recovery +%d" % regen_hp_at(level))
+		out.append("Heart recovery +%d" % regen_hp_at(level))
 	if regen_mp_at(level) > 0:
 		out.append("MP recovery +%d" % regen_mp_at(level))
 	if mp_guard_at(level) > 0.0:
-		out.append("%d%% of damage taken comes out of MP" % roundi(mp_guard_at(level) * 100))
+		out.append("%d%% chance a hit costs MP instead of a heart" % roundi(mp_guard_at(level) * 100))
 	if steady:
 		out.append("No knockback")
 	if hide:

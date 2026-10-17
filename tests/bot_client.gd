@@ -47,8 +47,9 @@ func _run() -> void:
 		for a in world.avatars.values():
 			result["saw_host"] = result["saw_host"] or a.char_name == "Host"
 		result["saw_mobs"] = result["saw_mobs"] or world.mobs().any(func(m: TDMob) -> bool: return m.known)
-		for f in world.fx_layer.get_children():
-			result["saw_hits"] = result["saw_hits"] or (f is TDFloatText and f.kind != "taken")
+		# there are no damage numbers: a monster flashing white is a hit landing
+		for m in world.mobs():
+			result["saw_hits"] = result["saw_hits"] or m._flash_until > Engine.get_physics_frames()
 		# keep swinging long enough for the host to see a monster defeated
 		if i >= 20 and result.keys().all(func(k: String) -> bool: return k == "saved" or result[k]):
 			break

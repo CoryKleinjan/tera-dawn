@@ -31,7 +31,7 @@ func test_every_job_gets_a_grown_character_in_gear_it_can_wear() -> void:
 		for place: StringName in c.equipment.worn:
 			var e := c.equipment.at(place).equip_def()
 			check_eq(c.gear.equip_problem(e), "", "%s can wear the %s" % [job.id, e.id])
-		check_eq(c.health.hp, c.max_hp(), "%s: full HP" % job.id)
+		check_eq(c.health.hp, c.max_hearts(), "%s: full HP" % job.id)
 
 func test_the_gear_is_the_best_the_job_can_wear() -> void:
 	for job in TestCharacters.jobs():

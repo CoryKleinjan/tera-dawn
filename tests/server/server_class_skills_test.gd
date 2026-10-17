@@ -73,10 +73,10 @@ func test_a_self_buff_stays_with_the_caster() -> void:
 func test_first_aid_heals_then_waits_for_its_recharge() -> void:
 	_setup()
 	var c := ann.character
-	c.health.damage(c.max_hp() - 1)
+	c.health.damage(c.max_hearts() - 1)
 	_use(ann, &"first_aid")
 	var aid := Content.skill(&"first_aid")
-	check_eq(c.health.hp, 1 + roundi(c.max_hp() * aid.heal_at(1)), "healed")
+	check_eq(c.health.hp, 2, "healed a heart")
 	check(c.skills.buffs.is_empty(), "nothing lingers after the heal")
 	h.step(aid.cooldown + 1)
 	c.health.damage(c.health.hp - 1)
@@ -85,7 +85,7 @@ func test_first_aid_heals_then_waits_for_its_recharge() -> void:
 	h.step(aid.recharge_ticks(1))
 	c.health.damage(c.health.hp - 1)
 	_use(ann, &"first_aid")
-	check_eq(c.health.hp, 1 + roundi(c.max_hp() * aid.heal_at(1)), "ready again")
+	check_eq(c.health.hp, 2, "ready again")
 
 # ---------- Dark Sight ----------
 
