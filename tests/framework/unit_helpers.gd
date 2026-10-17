@@ -32,14 +32,14 @@ static func stats(values := {}) -> StatBlock:
 		s.set(StringName(k), values[k])
 	return s
 
-## A job with round numbers: HP 50 + 10 and MP 20 + 5 per CharacterStats.GROWTH_POINTS stat
-## points bought, STR main and DEX second, mastery 0.5.
+## A job with round numbers: power 10, HP 50 + 10 and MP 20 + 5 a level, no avoid growth,
+## mastery 0.5.
 func job(id := &"t_job", family := &"t_family", advances_from := &"") -> JobDef:
 	var j := JobDef.new()
 	j.id = id
 	j.display_name = String(id).capitalize()
 	j.family = family
-	j.primary_stat = "strength"
+	j.base_power = 10
 	j.mastery = 0.5
 	j.base_hp = 50
 	j.hp_growth = 10
@@ -49,12 +49,12 @@ func job(id := &"t_job", family := &"t_family", advances_from := &"") -> JobDef:
 	register("jobs", j)
 	return j
 
-## A character of `j` (a fresh test job if null) with `base_values` as base stats, full HP and MP.
-func character(j: JobDef = null, base_values := {}) -> Character:
+## A character of `j` (a fresh test job if null) at `level`, full HP and MP.
+func character(j: JobDef = null, level := 1) -> Character:
 	var c := Character.new()
 	c.name = "Tester"
 	c.job = j if j else job()
-	c.base = stats(base_values)
+	c.level = level
 	c.recalc()
 	c.refill()
 	return c
@@ -83,20 +83,8 @@ func equip(id := &"t_sword", slot := EquipDef.Slot.WEAPON, values := {}, varianc
 	e.slot = slot
 	e.stats = stats(values)
 	e.variance = variance
-	e.upgrade_slots = 7
 	register("items", e)
 	return e
-
-func scroll(id := &"t_scroll", slots: Array[int] = [EquipDef.Slot.WEAPON], chance := 0.6, values := {"attack": 2}) -> ScrollDef:
-	var s := ScrollDef.new()
-	s.id = id
-	s.display_name = String(id).capitalize()
-	s.slots = slots
-	s.chance = chance
-	s.stats = stats(values)
-	s.max_stack = 100
-	register("items", s)
-	return s
 
 func skill(id := &"t_skill", kind := SkillDef.Kind.ATTACK, job_id := &"t_job") -> SkillDef:
 	var s := SkillDef.new()

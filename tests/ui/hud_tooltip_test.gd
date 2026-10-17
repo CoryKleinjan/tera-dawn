@@ -1,7 +1,7 @@
 extends TestCase
 ## The item tooltip for every item in the game: it starts with the item's name, says what
-## kind of item it is, shows what that kind needs (requirements in red when not met, what a
-## potion restores, a scroll's success rate, a card's count...), compares gear with what's
+## kind of item it is, shows what that kind needs (the jobs that can wear it, red when yours
+## can't, what a potion restores, a card's count...), compares gear with what's
 ## worn, ends with the hint, and draws over its window.
 
 const RED := Color("ff6b7d")
@@ -46,8 +46,6 @@ func _kind_line(item: ItemDef) -> String:
 		return "Setup · Pet"
 	if item is CardDef:
 		return "Monster Book card · "
-	if item is ScrollDef:
-		return "Upgrade scroll · "
 	return "Etc"
 
 func test_every_item_has_a_tooltip_naming_its_kind() -> void:
@@ -62,14 +60,14 @@ func test_every_item_has_a_tooltip_naming_its_kind() -> void:
 			var text := " ".join(_texts(lines))
 			check(text.contains(item.description.split(" ")[0]), "%s: the description is shown" % item.id)
 		kinds[_kind_line(item)] = true
-	check_eq(kinds.size(), 6, "item kinds seen (gear, use, pet, card, scroll, etc)")
+	check_eq(kinds.size(), 5, "item kinds seen (gear, use, pet, card, etc)")
 
 func test_every_item_tooltip_draws() -> void:
 	for item: ItemDef in Content.items.values():
 		tip.show_item(inv, ItemStack.create(item), Vector2(TDWorld.VIEW.x - 10, TDWorld.VIEW.y - 10), "hint", item is EquipDef)
 		check(await ui.redraw(tip), "%s: the tooltip draws" % item.id)
 
-func test_gear_tooltips_show_requirements_stats_and_upgrades() -> void:
+func test_gear_tooltips_show_jobs_and_stats_and_ask_for_nothing() -> void:
 	for item: ItemDef in Content.items.values():
 		var e := item as EquipDef
 		if e == null:
@@ -80,15 +78,8 @@ func test_gear_tooltips_show_requirements_stats_and_upgrades() -> void:
 		check(texts[1].contains(e.slot_name()), "%s: names its slot %s" % [e.id, e.slot_name()])
 		for f in stack.stats.nonzero():
 			check(texts.has("%s: %s" % [StatBlock.LABELS[f], StatBlock.format(f, stack.stats.value(f))]), "%s: lists %s" % [e.id, f])
-		check(texts.has("Upgrades available: %d" % e.upgrade_slots), "%s: lists its upgrade slots" % e.id)
-		var reqs := e.requirements()
-		check(not texts.any(func(t: String) -> bool: return t.begins_with("Requires Level")), "%s: no level requirement" % e.id)
-		for key in reqs:
-			var label: String = StatBlock.LABELS[key]
-			var i := texts.find("Requires %s %d" % [label, reqs[key]])
-			if check(i >= 0, "%s: lists Requires %s %d" % [e.id, label, reqs[key]]):
-				var have := Game.me.stats.value(key)
-				check_eq(lines[i][1] == RED, have < reqs[key], "%s: Requires %s is red exactly when not met" % [e.id, label])
+		check(not texts.any(func(t: String) -> bool: return t.begins_with("Requires")), "%s: no level or stat requirement" % e.id)
+		check(not texts.any(func(t: String) -> bool: return t.begins_with("Upgrades")), "%s: no upgrade slots" % e.id)
 		if not e.jobs.is_empty():
 			var line := "%s only" % EquipDef.families_text(e.jobs)
 			var i := texts.find(line)
@@ -109,14 +100,6 @@ func test_rolled_gear_colours_stats_against_the_base() -> void:
 	i = _texts(lines).find("%s: %s" % [StatBlock.LABELS[&"attack"], StatBlock.format(&"attack", stack.stats.attack)])
 	if check(i >= 0, "the lower attack is listed"):
 		check_eq(lines[i][1], Color("ffb38a"), "a worse-than-base stat is orange")
-
-func test_upgraded_gear_shows_its_plus() -> void:
-	var stack := ItemStack.exact(Content.item(&"dawn_blade"))
-	stack.slots_used = 3
-	stack.upgrades = 2
-	var lines := _lines_for(stack)
-	check_eq(lines[0][0], "Dawn Blade +2", "the name carries the upgrades")
-	check(_texts(lines).has("Upgrades available: %d" % (stack.equip_def().upgrade_slots - 3)), "upgrade slots left")
 
 func test_gear_compares_with_what_is_worn() -> void:
 	var sword := Game.me.equipment.at(&"weapon")
@@ -146,14 +129,10 @@ func test_use_tooltips_say_what_they_restore() -> void:
 		if u.pet_food > 0:
 			check(texts.has("Pet food: +%d fullness" % u.pet_food), "%s: says it's pet food" % u.id)
 
-func test_scroll_and_pet_tooltips() -> void:
+func test_pet_tooltips() -> void:
 	for item: ItemDef in Content.items.values():
 		var texts := _texts(_lines_for(ItemStack.create(item)))
-		if item is ScrollDef:
-			var sc := item as ScrollDef
-			check(texts[1].contains(sc.slot_text()), "%s: names the gear it fits" % item.id)
-			check(texts.has("Success rate: %d%%" % roundi(sc.chance * 100.0)), "%s: gives its success rate" % item.id)
-		elif item is PetDef:
+		if item is PetDef:
 			check(texts.has("Picks up items within %d px of you" % roundi((item as PetDef).loot_reach)), "%s: gives its reach" % item.id)
 
 func test_pet_tooltip_shows_fullness_when_out() -> void:

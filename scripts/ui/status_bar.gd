@@ -186,15 +186,10 @@ func _gui_input(event: InputEvent) -> void:
 			world.hud.toggle_window(TDHud.WINDOW_ACTIONS[i])
 			accept_event()
 
-## Whether a window's button should glow because there's essence to spend in it: the
-## Character window while it pays for a stat point, Skills while it pays for a skill level.
+## Whether a window's button should glow because there's essence to spend in it: Skills
+## while it pays for a skill level.
 static func has_points_waiting(action: String) -> bool:
-	match action:
-		"stats":
-			return TDStatsWindow.can_buy_any(Game.me)
-		"skills":
-			return Game.me.skills.can_learn_any()
-	return false
+	return action == "skills" and Game.me.skills.can_learn_any()
 
 static func _key_name(action: String) -> String:
 	if TDPad.using_pad and Keybinds.pad_text(action) != "":

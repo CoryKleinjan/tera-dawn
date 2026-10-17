@@ -9,7 +9,6 @@
 script = ExtResource("stat_block")
 defense = 3
 avoid = 3
-dexterity = 1
 
 [resource]
 script = ExtResource("script")

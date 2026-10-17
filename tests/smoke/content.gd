@@ -65,8 +65,10 @@ func check() -> void:
 			problems.append("equip %s has no stats" % id)
 	for id in Content.jobs:
 		var job: JobDef = Content.jobs[id]
-		if job.advances_from == &"" and (job.starting_stats == null or job.starting_gear.has(null)):
-			problems.append("job %s is missing starting stats or gear" % id)
+		if job.advances_from == &"" and job.starting_gear.has(null):
+			problems.append("job %s is missing starting gear" % id)
+		if job.base_power <= 0:
+			problems.append("job %s has no base power" % id)
 		if job.advances_from != &"" and not Content.jobs.has(job.advances_from):
 			problems.append("job %s advances from unknown job %s" % [id, job.advances_from])
 		for g in job.advance_gifts:
@@ -153,6 +155,4 @@ func _check_world_graph() -> void:
 	var splitters := Content.monsters.values().filter(func(m: MonsterDef) -> bool: return m.splits_into != null)
 	_check(Content.monsters.size() >= 50 and bosses.size() >= 6 and shooters.size() >= 10 and splitters.size() >= 4,
 		"%d monsters, with bosses, shooters and splitters" % Content.monsters.size())
-	var scrolls := Content.items.values().filter(func(i: ItemDef) -> bool: return i is ScrollDef)
-	_check(Content.items.size() >= 200 and scrolls.size() >= 12 and scrolls.all(func(s: ScrollDef) -> bool: return not s.slots.is_empty() and s.stats != null),
-		"%d items, with upgrade scrolls for each kind of gear" % Content.items.size())
+	_check(Content.items.size() >= 200, "%d items" % Content.items.size())

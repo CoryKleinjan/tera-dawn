@@ -80,22 +80,20 @@ update this page when one changes. Each zone's own look and music are in
 - An aimed attack turns its swing effect up or down.
 - Job skills will be flashy and grand, like MapleStory.
 
-## Jobs, stats and skills
+## Jobs, levels and skills
 
 - The hero has a level (1 to 100, Cory Oct 17). Monsters give EXP equal to the Dawn Essence they
   drop, and quests give EXP equal to their essence reward, on the old MapleStory-style EXP curve.
-  Each level raises Max HP and MP by the job's growth and refills them, with a burst, a "LEVEL UP!"
-  ribbon and a jingle. The HUD shows a level badge and HP, MP and EXP bars. Fainting loses 10% of
+  Each level raises power, Max HP and MP by the job's growth and refills them, with a burst, a
+  "LEVEL UP!" ribbon and a jingle. The HUD shows a level badge and HP, MP and EXP bars. Fainting loses 10% of
   the EXP toward the next level (never a level); essence is safe.
+- No base stats (no STR, DEX, INT, LUK or CHA, Cory Oct 17): the job and the level set them.
+  Damage grows from power (the job's own at level 1, plus the same every level, plus the Monster
+  Book's rank); Max HP, MP and Avoidability grow by the job. Nothing is bought with points and
+  nothing asks for a stat.
 - Monsters also drop Dawn Essence when they die and it flies to the hero (quests pay it too). It
-  is spent anywhere, in the stats window on stat points and in the skill window on skill levels;
-  each point in a stat costs more than the last one in that stat, and each skill level more than
-  the last skill level bought. Menus call it "Dawn Essence".
-- Each first job has one stat that drives its damage, and no other stat adds to it: Warrior STR,
-  Magician INT, Thief LUK, Archer DEX, Pirate CHA (Charisma). Gear asks only for the job's own
-  stat; Auto spends essence on that stat.
-- What each stat also gives as it grows: STR Max HP, INT Max MP, DEX Accuracy, LUK Avoidability,
-  CHA slightly lower shop prices (capped) and more Dawnshards found.
+  buys skill levels only, anywhere, in the skill window; each skill level costs more than the
+  last one bought. Menus call it "Dawn Essence".
 - A first job has seven skills: a movement skill, a quick single-target attack, a crowd attack, a
   self buff, a party buff (reaches party members nearby), a passive and a monster-control skill.
   Skill levels get dear quickly, so players choose what to leave unmaxed.
@@ -105,16 +103,16 @@ update this page when one changes. Each zone's own look and music are in
   Archer Pinning Shot pins one monster in place, even in mid-air; Pirate Anchor Haul drags
   monsters in a line back to the hero. Thrown or stunned monsters can't move, attack or hurt by
   touch. Every one deals damage. Bosses take the damage but are never thrown, dragged or stunned.
-- First-job tutors open when the hero reaches their town, with no stat requirement and no stat
-  reset; each job is taken by passing its Job Test once, and switching back to a job already
+- First-job tutors open when the hero reaches their town, with no requirement; each job is taken
+  by passing its Job Test once, and switching back to a job already
   passed is free (its gifts come only the first time). Switching jobs at any tutor
-  that offers one drops the old job's skills and refunds the essence spent on them; stats stay.
+  that offers one drops the old job's skills and refunds the essence spent on them.
 - Second tier: every first job picks one of two blends of itself and another first job:
   Spellblade (Warrior + Magician), Hexcaster (Magician + Thief), Swashbuckler (Thief + Pirate),
   Sharpshooter (Pirate + Archer), Wildhunter (Archer + Warrior). A blend is the same job from
   either side. It keeps its own first-job skills and opens all of the other job's first-job
-  skills; it has no skills of its own (its draw is combining the two jobs). Both stats add
-  together for damage (no averaging); Auto buys both, the cheaper first. It wields every weapon and off-hand of both jobs.
+  skills; it has no skills of its own (its draw is combining the two jobs). It wields every
+  weapon and off-hand of both jobs.
   Second- and third-tier jobs open when the hero beats a set boss, found through the tears,
   while one of the parent jobs. Which tutor teaches them and which boss opens each wait on
   the story.
@@ -127,7 +125,7 @@ update this page when one changes. Each zone's own look and music are in
   Warlock (Magician) or Nightweaver (Thief), Swashbuckler into Cutthroat (Thief) or Dread
   Pirate (Pirate), Sharpshooter into Gunslinger (Pirate) or Hawkeye (Archer), Wildhunter into
   Stalker (Archer) or Berserker (Warrior). It joins no new job: it keeps both parents' skills
-  and weapons (no two-handed weapons), both stats still add evenly, and it adds four skills of
+  and weapons (no two-handed weapons), and it adds four skills of
   its own that differ by lean: three skills and one ultimate that hits a very large area.
 - There is no Harbinger job: the harbinger is only a story reveal.
 - Off-hand slot (once the Shield slot): Warriors and Beginners wear a shield, a Thief throwing
@@ -143,6 +141,9 @@ update this page when one changes. Each zone's own look and music are in
   town's shop: Warrior Squire set (Emberforge), Magician Novice set (Lumewood), Thief Footpad set
   (Lanternfall), Archer Hunter's set (Greenbough), Pirate Deckhand set (Driftcove). Tests still
   bring their own plain gear (`tests/fixtures/gear`) for what the game doesn't have yet.
+- No upgrade scrolls (Cory Oct 17): gear gets better through enchantments, which are planned
+  (three per piece; boss ones drop only). Specialised boss drops unlock movement skills, the
+  way Hollow Knight unlocks its moves.
 
 ## Weapons
 
@@ -172,8 +173,7 @@ update this page when one changes. Each zone's own look and music are in
   the main way.
 - Every field has two secret ledges only a job's movement skill reaches (a small room has one):
   a high one (Flash Jump, Blink) and a far one across a gap (every movement skill).
-  Each holds a chest a character opens once (shards, potions, a 60% scroll, a local Monster Book
-  card). Secret ledges and shortcuts stay off the minimap; the zone map shows them once found.
+  Each holds a chest a character opens once (shards, potions, a local Monster Book card). Secret ledges and shortcuts stay off the minimap; the zone map shows them once found.
 - Greenbough's and Dawnharbor Coast's fields have no raised land: every ledge is a plain platform with nothing under it
   (no terrace walls).
 - Characters and NPCs draw in front of land; characters cast no shadows. Portals draw in front of land and

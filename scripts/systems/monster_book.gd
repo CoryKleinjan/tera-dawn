@@ -58,15 +58,9 @@ func completed() -> int:
 func rank() -> int:
 	return 1 + completed() / PAGES_PER_RANK
 
-## What the book adds to the character's stats.
-func bonus() -> StatBlock:
-	var out := StatBlock.new()
-	var n := rank() - 1
-	out.strength = n
-	out.dexterity = n
-	out.intelligence = n
-	out.luck = n
-	return out
+## What the book adds to the character's power (Character.power): one a rank past the first.
+func power_bonus() -> int:
+	return rank() - 1
 
 func to_dict() -> Dictionary:
 	var out := {}

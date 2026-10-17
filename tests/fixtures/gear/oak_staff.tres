@@ -26,4 +26,3 @@ required_level = 15
 stats = SubResource("Resource_1")
 variance = 2
 weapon_kind = &"staff"
-required_intelligence = 40

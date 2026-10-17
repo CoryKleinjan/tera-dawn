@@ -8,7 +8,7 @@ data/                 Content, one .tres per thing
   monster_moves/      Monster attacks, shared by monster families (MonsterMove)
   achievements/       Milestones, unlocked on Steam too (AchievementDef)
   quests/ shops/ regions/ cutscenes/ projectiles/    Also looked up by id
-  items/use/ items/etc/ items/scrolls/ items/setup/ items/equips/  Subfolders are scanned too
+  items/use/ items/etc/ items/setup/ items/equips/  Subfolders are scanned too
   hero/               HeroLookDef (look.tres: his layers and animations); held/ has each held
                       weapon or off-hand's pins per frame (HeldDef), set in the pose editor
   maps/ biomes/ buildings/    Maps and how they look (maps/rooms/ and
@@ -28,7 +28,7 @@ scripts/
   data/               Resource classes for everything in data/
   systems/            Character (and CharacterCodec, its save format; CharacterStore keeps them
                       on this computer) and its parts SkillBook,
-                      AbilityPoints and Gear (CharacterPart), NewCharacter,
+                      and Gear (CharacterPart), NewCharacter,
                       Inventory, Equipment,
                       ItemStack, CharacterStats, MonsterBook, Achievements, Counters, Balance
   components/         Health, Hitbox, JumpGrace, SpriteRig, HeroBody (how a hero shows: his painted

@@ -94,7 +94,7 @@ keep the default, so an old or hand-edited file never breaks the game.
 - **DevSettings** holds developer-only switches, on a Developer tab that only debug builds
   (the editor, a debug export) show; a release build ignores them. `test_characters` makes
   character select (solo, host or join) list the test characters, saved in their own folder
-  (`TestCharacters.FOLDER`): a character of every job at `Character.MAX_LEVEL` with `TestCharacters.STAT_POINTS` stats bought, in the best gear
+  (`TestCharacters.FOLDER`): a character of every job at `Character.MAX_LEVEL`, in the best gear
   it can wear, every skill at its highest level and `TestCharacters.SHARDS` Dawnshards.
   They're made the first time (`TestCharacters.prepare`, from `Net.open_saves`), kept as
   played after that (but put back in their job's town), and made again after "Rebuild test

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=89 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=85 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="12_breakable_def"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="14_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="15_dawnshard"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_top_dex_60.tres" id="17_scroll_top_dex_60"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="20_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/stump.png" id="21_stump"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="22_bush_large"]
@@ -27,8 +26,6 @@
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="33_backdrop_layer_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/greenbough_fields/old_oak_heights.png" id="34_old_oak_heights"]
 [ext_resource type="Resource" path="res://data/items/use/honey_bun.tres" id="34_honey_bun"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_helmet_hp_60.tres" id="35_scroll_helmet_hp_60"]
-
 [sub_resource type="Resource" id="Prop_0"]
 script = ExtResource("20_prop_placement")
 texture = ExtResource("21_stump")
@@ -393,12 +390,6 @@ item = ExtResource("34_honey_bun")
 min_amount = 4
 max_amount = 4
 
-[sub_resource type="Resource" id="Loot_0_2"]
-script = ExtResource("14_drop_entry")
-item = ExtResource("35_scroll_helmet_hp_60")
-min_amount = 1
-max_amount = 1
-
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("12_breakable_def")
 id = &"oak_crown_lookout_chest"
@@ -408,7 +399,7 @@ hits = 1
 whole = ExtResource("24_chest")
 broken = ExtResource("25_chest_open")
 height = 48.0
-loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1"), SubResource("Loot_0_2")])
+loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1")])
 card = ExtResource("10_barkcap")
 
 [sub_resource type="Resource" id="Loot_1_0"]
@@ -423,12 +414,6 @@ item = ExtResource("34_honey_bun")
 min_amount = 4
 max_amount = 4
 
-[sub_resource type="Resource" id="Loot_1_2"]
-script = ExtResource("14_drop_entry")
-item = ExtResource("17_scroll_top_dex_60")
-min_amount = 1
-max_amount = 1
-
 [sub_resource type="Resource" id="Breakable_1"]
 script = ExtResource("12_breakable_def")
 id = &"oak_crown_far_chest"
@@ -438,7 +423,7 @@ hits = 1
 whole = ExtResource("24_chest")
 broken = ExtResource("25_chest_open")
 height = 48.0
-loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
+loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1")])
 card = ExtResource("10_barkcap")
 
 [resource]
