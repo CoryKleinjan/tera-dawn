@@ -25034,6 +25034,55 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds flat bright green (#00FF00) shapes on a flat magenta background: the parts of a boy that show outside his long wizard's robe (the robe is not shown), in the same pose as the boy in the first attached picture: facing right, one arm reaching straight out to the right and his other arm raised with its fist at his cheek. Cells 2 to 8 are empty and must stay empty. The green shapes are his head, his two fists on their own (where they come out of his long sleeves: one at the end of his outstretched arm on the right, one at his cheek), and his lower legs and feet. Paint ONLY his two closed rounded MITTEN fists, each with no separate fingers or thumb, exactly the same size, shape, angle, skin colour and place as those fists in the first attached picture, so each lies exactly on its green shape and fills it. Paint nothing outside the green fist shapes: no forearm, arm, sleeve, body, head, face, weapon or object, and nothing on the magenta. Leave his head, legs and feet flat pure #00FF00 green, exactly as they are, and the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the skin, warm colours, light from the upper left, smooth soft painted shading and thin dark plum-brown outline of the boy in the first attached picture. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "mshero_sleeve_arm_b20",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_sleeve_arm_b20.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory: 16:30Z 'Repaint', to make his raised arm on bow2 match the other jobs): his raised forearm and fist on bow2 under the robe as their own layer: the forearm level like every other job's, in the robe's long sleeve with a gold cuff, fist at his cheek (b18 left the sleeve at his elbow and his forearm rising at an angle). Released by Cory 16:34Z (\"Yes\") to the priced line 16:34Z (\"Should I paint these 2 sheets for about $0.14?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b20_sleeve_arm_b20_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/b18_bow2_body_ref.png",
+    "/mnt/project-files/art-sheets/maple-hero/bases/b20_bow2_robe_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds two flat guide shapes on a flat magenta background: a long flat BLUE shape, lying level from left to right, and a small flat SKIN-coloured shape at its right end. Together they are a boy's forearm and fist held level in front of him, his fist up at his cheek (the boy himself is not shown), in the same place as the raised forearm and fist of the boy in the first attached picture. Paint the blue shape as the long sleeve of his wizard's robe around his forearm: deep blue cloth with soft folds and shading, exactly the cloth, colours and trim of the robe in the second attached picture, ending at its right end in a wide gold cuff just before the fist. Paint the skin shape as his closed rounded MITTEN fist with no separate fingers or thumb, coming out of the cuff, exactly the skin, size and look of his fists in the first attached picture. Cover each guide shape exactly and completely, staying inside its outline, so no flat blue or flat skin is left, with a thin dark plum-brown outline around the whole sleeve and fist. Style: smooth soft painted shading, warm colours, light from the upper left, like the attached pictures. Keep the background flat pure magenta #FF00FF and keep the grid lines. Do not add any figure, head, body, face or object. Cells 2 to 8 are empty and must stay empty magenta: do not copy the attached pictures into them. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mage_robe_b20",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mage_robe_b20.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory: 16:30Z 'Repaint', to make his raised arm on bow2 match the other jobs): the Magician robe on bow2 with the gold cuff under his raised elbow painted as plain sleeve cloth, so it doesn't show under the new sleeve layer. Released by Cory 16:34Z (\"Yes\") to the priced line 16:34Z (\"Should I paint these 2 sheets for about $0.14?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b20_mage_robe_b20_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds the flat bright green (#00FF00) shape of a small boy facing right, wearing a painted wizard's robe: deep blue cloth trimmed with gold, a gold star clasp at the collar and a purple sash. Flat plain blue patches with no shading lie on the robe: one on the sleeve at the left, where a gold cuff was, and one just under his raised arm next to the collar. Paint each patch as the robe's plain deep blue cloth, with the same folds and shading as the cloth around it, so no gold cuff shows on that sleeve and no flat blue is left. Keep everything else about the robe exactly as it is: its outline, size, position, collar, star clasp, front band, the gold cuff on the sleeve at the right, sash, hem, colours, trim, folds, shading and thin dark plum-brown outline. Leave every green pixel flat pure #00FF00 exactly as it is, and the background around him flat pure magenta #FF00FF. Do not paint any face, skin, hands, head or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the robe already in the base picture. Keep the grid lines. No text, no labels."
+  }
  }
 ]
 }
