@@ -1,11 +1,8 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=89 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=82 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
 [ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
-[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
-[ext_resource type="Resource" path="res://data/climb_styles/rope_ladder.tres" id="5_rope_ladder"]
-[ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="6_rope"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/bramble_boar.tres" id="9_bramble_boar"]
@@ -31,7 +28,6 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/greenbough_fields_side.png" id="33_ground_side"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest.png" id="34_chest"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest_open.png" id="35_chest_open"]
-[ext_resource type="Resource" path="res://data/climb_styles/vine.tres" id="36_vine"]
 
 [sub_resource type="Resource" id="Prop_0"]
 script = ExtResource("19_prop_placement")
@@ -203,61 +199,35 @@ y = 590.0
 width = 140.0
 secret = true
 
-[sub_resource type="Resource" id="Climbable_0"]
-script = ExtResource("4_climbable_def")
-x = 1120.0
-top = 960.0
-bottom = 1300.0
-style = ExtResource("5_rope_ladder")
+[sub_resource type="Resource" id="Step_1"]
+script = ExtResource("3_platform_def")
+x = 1570.0
+y = 1160.0
+width = 150.0
 
-[sub_resource type="Resource" id="Climbable_1"]
-script = ExtResource("4_climbable_def")
-x = 1180.0
-top = 700.0
-bottom = 960.0
-style = ExtResource("5_rope_ladder")
+[sub_resource type="Resource" id="Step_2"]
+script = ExtResource("3_platform_def")
+x = 1640.0
+y = 1080.0
+width = 150.0
 
-[sub_resource type="Resource" id="Climbable_2"]
-script = ExtResource("4_climbable_def")
-x = 1060.0
-top = 460.0
-bottom = 700.0
-style = ExtResource("5_rope_ladder")
+[sub_resource type="Resource" id="Step_3"]
+script = ExtResource("3_platform_def")
+x = 240.0
+y = 1227.0
+width = 150.0
 
-[sub_resource type="Resource" id="Climbable_3"]
-script = ExtResource("4_climbable_def")
-x = 1700.0
-top = 1000.0
-bottom = 1240.0
-style = ExtResource("5_rope_ladder")
+[sub_resource type="Resource" id="Step_4"]
+script = ExtResource("3_platform_def")
+x = 130.0
+y = 1153.0
+width = 150.0
 
-[sub_resource type="Resource" id="Climbable_4"]
-script = ExtResource("4_climbable_def")
-x = 1440.0
-top = 620.0
-bottom = 920.0
-style = ExtResource("6_rope")
-
-[sub_resource type="Resource" id="Climbable_5"]
-script = ExtResource("4_climbable_def")
-x = 260.0
-top = 1080.0
-bottom = 1300.0
-style = ExtResource("36_vine")
-
-[sub_resource type="Resource" id="Climbable_6"]
-script = ExtResource("4_climbable_def")
-x = 560.0
-top = 840.0
-bottom = 1000.0
-style = ExtResource("6_rope")
-
-[sub_resource type="Resource" id="Climbable_7"]
-script = ExtResource("4_climbable_def")
-x = 460.0
-top = 600.0
-bottom = 840.0
-style = ExtResource("36_vine")
+[sub_resource type="Resource" id="Step_5"]
+script = ExtResource("3_platform_def")
+x = 540.0
+y = 920.0
+width = 150.0
 
 [sub_resource type="Resource" id="Portal_0"]
 script = ExtResource("7_portal_def")
@@ -427,8 +397,7 @@ height = 1500
 ground_y = 1420
 start_x = 150.0
 lantern_spacing = 0.0
-platforms = Array[ExtResource("3_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9"), SubResource("Platform_10"), SubResource("Platform_11"), SubResource("Platform_12"), SubResource("Platform_13"), SubResource("Platform_14"), SubResource("Platform_15"), SubResource("Platform_16"), SubResource("Platform_17"), SubResource("Platform_18")])
-climbables = Array[ExtResource("4_climbable_def")]([SubResource("Climbable_0"), SubResource("Climbable_1"), SubResource("Climbable_2"), SubResource("Climbable_3"), SubResource("Climbable_4"), SubResource("Climbable_5"), SubResource("Climbable_6"), SubResource("Climbable_7")])
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9"), SubResource("Platform_10"), SubResource("Platform_11"), SubResource("Platform_12"), SubResource("Platform_13"), SubResource("Platform_14"), SubResource("Platform_15"), SubResource("Platform_16"), SubResource("Platform_17"), SubResource("Platform_18"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3"), SubResource("Step_4"), SubResource("Step_5")])
 portals = Array[ExtResource("7_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1")])
 breakables = Array[ExtResource("11_breakable_def")]([SubResource("Breakable_0")])
 spawns = Array[ExtResource("8_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13"), SubResource("Spawn_14"), SubResource("Spawn_15"), SubResource("Spawn_16"), SubResource("Spawn_17")])
