@@ -43,8 +43,8 @@ func test_npcs_have_art() -> void:
 func test_items_have_icons() -> void:
 	for i: ItemDef in Content.items.values():
 		var w := Scan.where(i)
-		# gear and runes show their names until their icons are painted
-		if i.icon or not (i is EquipDef or i is RuneDef):
+		# gear shows its name until its icons are painted
+		if i.icon or not i is EquipDef:
 			_texture(i.icon, w + ": icon")
 		for k in i.world_frames.size():
 			_texture(i.world_frames[k], "%s: world_frames[%d]" % [w, k])
