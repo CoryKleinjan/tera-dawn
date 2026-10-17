@@ -174,7 +174,7 @@ update this page when one changes. Each zone's own look and music are in
 - No ropes, ladders, vines or climbing anywhere: every place is reached by platforming (jumps,
   and a boss relic's move for secrets). A climb that used to be there is a run of plain
   platforms, each at most a comfortable jump above the last (Cory, Oct 17). No two exits of a map lead to the same map. Maps can be wide and multi-level.
-- A zone's maps fit together like Hollow Knight's rooms on one zone map (Greenbough first): each
+- A zone's maps fit together like Hollow Knight's rooms on one zone map (Greenbough first, then Dawnharbor Coast): each
   room its own size, canopy above and roots below, neighbours touching where their doors join
   them, with MapleStory portals at the room edges they lead through. Fields are a web you can
   loop through, each with 2 to 4 exits, and more rooms hide behind secrets: fake walls you walk
@@ -188,7 +188,7 @@ update this page when one changes. Each zone's own look and music are in
 - Every field has two secret ledges only a boss relic's move reaches (a small room has one):
   a high one (Double Jump) and a far one across a gap (Dash or Surge).
   Each holds a chest a character opens once (shards, potions, a local Monster Book card). Secret ledges and shortcuts stay off the minimap; the zone map shows them once found.
-- Greenbough's fields have no raised land: every ledge is a plain platform with nothing under it
+- Greenbough's and Dawnharbor Coast's fields have no raised land: every ledge is a plain platform with nothing under it
   (no terrace walls).
 - Characters and NPCs draw in front of land; characters cast no shadows. Portals draw in front of land and
   scenery, behind NPCs, monsters and players; no NPC stands on a portal.
@@ -306,7 +306,7 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   what the gear adds beside them.
 - No clouds on the title screen.
 - The world map shows towns always and a field only once visited (as "???" before). A zone drawn
-  to shape (Greenbough) shows a room only once visited, like Hollow Knight: its ledges and
+  to shape (Greenbough, Dawnharbor Coast) shows a room only once visited, like Hollow Knight: its ledges and
   doors, secret ledges and ways once found, and where you stand.
 - Playing solo, the chat box shows only the last few lines, briefly; achievements are solo goals.
 - No controls box on screen, in towns or fields: the tutorial teaches the keys (its step hints

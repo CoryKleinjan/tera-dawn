@@ -1,0 +1,29 @@
+{
+  "source": "art/source/dawnharbor_fields_locks.png",
+  "region": [
+    1400,
+    900,
+    2400,
+    1560
+  ],
+  "out_dir": "assets/sprites/items",
+  "scale": 0.08,
+  "label_band": 0,
+  "inset": 0,
+  "keep": "largest",
+  "grid": {
+    "rows": [
+      0,
+      660
+    ],
+    "cols": [
+      0,
+      1000
+    ]
+  },
+  "cells": [
+    [
+      "smugglers_key"
+    ]
+  ]
+}
