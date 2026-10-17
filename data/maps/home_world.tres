@@ -17,6 +17,11 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/home_world/lookout.png" id="t_lookout"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/home_world/wall.png" id="t_wall"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/home_world/boat.png" id="t_boat"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/home_world/cap_left.png" id="t_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/home_world/middle_a.png" id="t_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/home_world/middle_b.png" id="t_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/home_world/cap_right.png" id="t_cap_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/home_world_side.png" id="t_ground_side"]
 
 [sub_resource type="Resource" id="Backdrop_town"]
 script = ExtResource("backdrop_def")
@@ -47,6 +52,11 @@ hide_town_decor = true
 hide_edge_grass = true
 hide_platform_decor = true
 hide_flyers = true
+platform_left = ExtResource("t_cap_left")
+platform_middle = ExtResource("t_middle_a")
+platform_middle_alt = ExtResource("t_middle_b")
+platform_right = ExtResource("t_cap_right")
+ground_side = ExtResource("t_ground_side")
 hide_layers = PackedInt32Array(0, 1, 2, 3, 4, 5, 6)
 more_backdrop = Array[ExtResource("backdrop_def")]([SubResource("Backdrop_town")])
 

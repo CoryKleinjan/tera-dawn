@@ -26,6 +26,8 @@
     ]
   ],
   "platform": {
-    "loop_middles": 40
+    "loop_middles": 40,
+    "max_depth": 100,
+    "top_share": 0.65
   }
 }
