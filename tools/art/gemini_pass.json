@@ -26378,6 +26378,54 @@
    ],
    "text": "The first image is a guide for a sheet of ground pieces for my 2D side-scrolling game, on a flat magenta #FF00FF background. Flat colours show where each piece goes: the pale strip is the top surface, the mid grey is the ground body, the darker grey below is a wall, and the dark line is the outline. Paint over the guide as finished ground for a small, ordinary seaside town that was abandoned and fell to ruin long ago, keeping every shape's position, size and outline EXACTLY, so the pieces still line up and join seamlessly when the sheet is cut apart. The second image shows ruined objects from the same place: match their style, ash-grey palette, outline and level of detail exactly. TOP: one long floating ledge of an old broken seawall (it will be cut into a left end, two middle pieces and a right end that join side by side). Its top is ONE row of worn, flat coping stones seen exactly side-on, so only their thin front faces show, as one band along the top edge, with a little pale ash-grey sand and dust drifted along the top line, a few loose pebbles and a broken shell or two. The pale strip in the guide is the front face of those coping stones: do NOT paint a cobbled street or any ground surface seen from above, and never a second row of kerb stones. Under it is a body of grey packed earth and old cracked paving stones, kept simple with little detail inside so it reads at a glance as solid ground. A crisp dark outline runs all round it, a few broken stones hang under its bottom edge, and its two ends are rounded. BOTTOM: a raised block of the same ground: the very same side-on row of coping stones along its top, with SQUARE ends, then below the band's lower edge a wall of slightly darker old grey stone blocks, running straight down off the bottom of the image between straight vertical outlined sides. Keep the wall's texture even across its whole area, with no big features, bright spots or shading toward its edges, so a square of it can repeat as a tile. The whole place is drained of colour: ash greys, pale blue-greys and faded sand under a flat, sunless, overcast light; quiet and sad, never scary, no blood, no bones, no fire, no plants growing, nobody there. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own painted style: soft cel-painted shading with clear light and shadow shapes, soft pale highlights on the lit edges from the upper left, a bold dark outline, and hand-painted texture at a fairly chunky brush scale. Seen exactly from the side, like a stone wall face: the top is only the coping stones' front faces, never ground seen from above, and nothing runs back into the picture. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the pieces the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
   }
+ },
+ {
+  "id": "rune_icons_test",
+  "prompts": null,
+  "batch": "Rune and relic icons",
+  "with": null,
+  "refs": [],
+  "save": "rune_icons_test.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   2,
+   2
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 Job system thread (enchantments #301, relics #298/#305): small test of the rune and relic icons: one zone rune each from Dawnharbor and Greenbough, one boss rune, one relic.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png",
+    "/mnt/project-files/art-sheets/rune-icons/item_style_ref.png"
+   ],
+   "text": "The first image is an empty magenta canvas. On it, paint FOUR separate item icons for my 2D side-scrolling game, laid out in 2 rows of 2, each centred in its own quarter of the canvas and fully inside it (no icon touches or runs off any canvas edge), all about the same size, filling about two thirds of their quarter, with a wide band of plain magenta around and between them, not touching. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is four finished item icons from the same game: match their painting style, outline thickness, shading, light from the upper left and level of detail exactly. Each icon is ONE loose object with no frame, badge, card or background behind it, lit brightly enough to read clearly even when the icon is shown very small. A RUNE is a small, smooth, palm-sized river stone, rounded and slightly flattened, worn soft at the edges, in the zone's colour, with ONE bold simple sigil carved deep into its face and glowing softly from inside the carving, a faint glow around the sigil only. A BOSS RUNE is the same kind of carved rune stone but bigger, darker and richer, set in a thick worn gold rim with four small claw prongs holding it, its carved sigil blazing bright, with a few tiny sparkles around it. Top left, Tide Rune: a sea-blue and sand-cream stone with a curling wave sigil glowing pale aqua. Top right, Thorn Rune: a mossy deep green stone with a sharp thorny bramble sigil glowing fresh leaf green. Bottom left, Tusker Rune (boss rune): a dark slate stone in the gold rim with a curved boar tusk sigil blazing warm gold. Bottom right, Tusk Charm (a relic, not a rune): a single polished ivory boar tusk with a carved speed swoosh along it, hung on a short braided brown leather cord with two small wooden beads, a soft pale golden glow around the tusk. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each object, the same thickness on all. 3) No letters, words or numbers anywhere, and no people, faces, hands or creatures. 4) Flat pure magenta #FF00FF background everywhere outside the objects, with no shadow under them; no magenta or pink inside the art."
+  }
+ },
+ {
+  "id": "skillfx_slam_impact",
+  "prompts": null,
+  "batch": "Rune and relic icons",
+  "with": null,
+  "refs": [],
+  "save": "skillfx_slam_impact.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 Job system thread (enchantments #301, relics #298/#305): Slam (Magma Heart relic) landing effect, same look as the approved skill effects (#303) and the other relic moves.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/skill-anims/bases/blank_2x4_169.png",
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint ONE frame of a single skill effect animation in each cell, so that cells 1 to 8 played in order make one smooth, exciting animation. This is a flashy movement skill in a hand-painted 2D fantasy side-scroller, grand and spectacular like the skill effects of MapleStory, but painted: luminous hand-painted light with visible, fairly chunky brush strokes and painted texture, rich saturated colour, a white-hot core fading through bright colour to soft glowing edges, strong contrast between the bright core and the deeper colour around it. Never pixel art, never a photo, never a 3D render, never flat vector shapes. The skill is SLAM, a straight drop from the air that smashes down onto the floor, in molten light: white-hot yellow, blazing orange and deep ember red. This sheet is its IMPACT where he lands: the effect sits on an invisible floor line across the lower third of each cell, centred, spreading sideways along it, about three quarters of the cell's width at its biggest. Cell 1: a short bright downward streak of light hitting the floor line. Cell 2: a white-hot flash bursting at the point of impact. Cell 3: a low dome of blazing orange light pushing up and out, with sharp molten rays. Cell 4: the peak, a wide flat shockwave racing out left and right along the floor line, a fountain of glowing ember sparks flying up and out. Cell 5: the shockwave widening and thinning, sparks arcing down. Cell 6: two thin fading glowing arcs at the far left and right, embers falling. Cell 7: scattered dim embers. Cell 8: a few last tiny embers. Every frame is the SAME effect at the same scale and in the same colours, anchored at the same place in its cell; only its animation stage changes, so the frames flow smoothly from one to the next. It is light and magic, so it has NO outline at all: no dark line or border around any arc, flame, spark or glow; its edges are light fading softly into the background. Draw ONLY the effect: no character, hero, foot, hand, weapon, monster, creature, face, ground, floor, rocks, rubble, grass, scenery, shadow on the ground, text, title, letters or numbers anywhere. No smoke clouds. Each frame fits fully inside its own cell with a wide clear magenta margin on every side, never touching or crossing a cell border; never merge, split or add cells. Keep only the base picture's grid lines: never add extra grid lines, guide lines, boxes, squares or subdivisions inside any cell, and never fill a cell with grey or any colour. REPAINT: the background stays exactly the base picture's bright pure flat magenta #FF00FF (RGB 255, 0, 255) in every cell, never a darker plum or wine colour, never white, grey, black, pink or mauve, with no gradient or glow haze spreading into it beyond the effect's own soft edge. The effect itself uses NO pink, magenta, purple or violet anywhere."
+  }
  }
 ]
 }
