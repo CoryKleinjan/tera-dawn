@@ -132,10 +132,10 @@ func test_gear_has_three_empty_rune_slots() -> void:
 
 func test_runes_add_to_the_gears_total() -> void:
 	var s := ItemStack.exact(fx.equip(&"t_sword", EquipDef.Slot.WEAPON, {"attack": 20}))
-	s.runes[0] = fx.rune(&"t_rune", {"attack": 2, "max_hp": 15})
+	s.runes[0] = fx.rune(&"t_rune", {"attack": 2, "heart_pieces": 1})
 	s.runes[2] = fx.rune(&"t_rune_2", {"attack": 1})
 	check_eq(s.total().attack, 23, "attack")
-	check_eq(s.total().max_hp, 15, "Max HP")
+	check_eq(s.total().heart_pieces, 1, "heart pieces")
 	check_eq(s.stats.attack, 20, "its own stats untouched")
 	check_eq(s.runes_set(), 2, "two set")
 

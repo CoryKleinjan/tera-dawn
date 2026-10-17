@@ -9,12 +9,12 @@
 script = ExtResource("script")
 id = &"orange_potion"
 display_name = "Orange Potion"
-description = "Brewed from sunfruit. Restores a fair amount of HP."
+description = "Brewed from sunfruit. Heals 2 hearts."
 icon = ExtResource("icon")
 sprite_scale = 0.36
 glow_color = Color(1.000, 0.690, 0.361, 1.0)
 pickup_effect = ExtResource("pickup")
 sell_price = 15
 max_stack = 100
-heal_hp = 150
+heal_hearts = 2
 use_effect = ExtResource("heal")

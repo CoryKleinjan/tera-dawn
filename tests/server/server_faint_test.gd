@@ -1,6 +1,6 @@
 extends TestCase
-## Fainting: a monster's blow that takes the last HP, the EXP it costs, lying still, and
-## waking up in town with half HP and MP and a moment of invincibility.
+## Fainting: a monster's blow that takes the last heart, the EXP it costs, lying still, and
+## waking up in town with half the hearts and MP and a moment of invincibility.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
@@ -18,6 +18,7 @@ func before_each() -> void:
 	p = h.join(2, "Ann", ServerHarness.FIELD, 300.0)
 	c = p.character
 	ServerHarness.no_dodge(c) # the blow can't be dodged
+	c.health.set_hp(2) # and costs two hearts: the last ones
 	c.essence = 15
 	c.xp = 15
 
@@ -51,7 +52,7 @@ func test_you_wake_up_in_the_maps_town_after_lying_still() -> void:
 
 func test_waking_up_gives_half_hp_and_mp_and_invincibility() -> void:
 	h.step(SimPlayer.FAINT_TICKS + 1)
-	check_eq(c.health.hp, ceili(c.max_hp() / 2.0), "half HP, rounded up")
+	check_eq(c.health.hp, ceili(c.max_hearts() / 2.0), "half HP, rounded up")
 	check_eq(c.mp, ceili(c.max_mp() / 2.0), "half MP, rounded up")
 	check_eq(p.inv, 120, "a moment of invincibility")
 
@@ -79,7 +80,7 @@ func test_leaving_while_fainted_wakes_you_in_town() -> void:
 	h.ask(2, &"req_leave_character")
 	var saved := h.saved("Ann")
 	check_eq(saved.map_id, ServerHarness.TOWN, "saved in the field's town")
-	check_eq(saved.health.hp, ceili(saved.max_hp() / 2.0), "with half HP")
+	check_eq(saved.health.hp, ceili(saved.max_hearts() / 2.0), "with half HP")
 	h.play(2, "Ann")
 	check_eq(h.server.player_of(2).map.def.id, ServerHarness.TOWN, "and comes back there")
 	check(not h.server.player_of(2).fainted(), "awake")

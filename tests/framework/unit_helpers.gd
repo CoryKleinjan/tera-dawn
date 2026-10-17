@@ -41,8 +41,6 @@ func job(id := &"t_job", family := &"t_family", advances_from := &"") -> JobDef:
 	j.family = family
 	j.base_power = 10
 	j.mastery = 0.5
-	j.base_hp = 50
-	j.hp_growth = 10
 	j.base_mp = 20
 	j.mp_growth = 5
 	j.advances_from = advances_from

@@ -100,22 +100,32 @@ func test_player_hit_is_repeatable_with_same_seed() -> void:
 		b.append(Combat.player_hit(s, m, c))
 	check_eq(a, b, "same seed, same hits")
 
-func test_monster_hit_range_without_dodge() -> void:
-	var c := _fighter()
-	_wear(c, {"defense": 10, "avoid": -CharacterStats.BASE_AVOID})
-	var m := fx.monster(&"t_mob", 10)
-	m.attack = 100
-	# 100 × 0.85..1.15 - 10 × 0.3 = 82..112
-	for i in 300:
-		check_between(Combat.monster_hit(m, c), 82, 112, "touch damage")
-
-func test_monster_hit_never_below_one() -> void:
-	var c := _fighter()
-	_wear(c, {"defense": 1000, "avoid": -CharacterStats.BASE_AVOID})
+func test_a_monster_hit_costs_a_heart() -> void:
+	var c := _fighter({"avoid": -CharacterStats.BASE_AVOID})
 	var m := fx.monster(&"t_mob", 10)
 	m.attack = 5
 	for i in 50:
-		check_eq(Combat.monster_hit(m, c), 1, "at least 1")
+		check_eq(Combat.monster_hit(m, c), 1, "one heart")
+
+func test_the_hardest_hits_cost_two_hearts() -> void:
+	var c := _fighter({"avoid": -CharacterStats.BASE_AVOID})
+	var m := fx.monster(&"t_mob", 10)
+	m.attack = 80
+	check_eq(Combat.monster_hit(m, c), 1, "an ordinary hit")
+	check_eq(Combat.monster_hit(m, c, 1.25), 2, "a move or map strength that takes it to 100")
+	m.attack = 114
+	check_eq(Combat.monster_hit(m, c), 2, "a boss's touch")
+
+func test_defense_blocks_some_hits() -> void:
+	var c := _fighter({"avoid": -CharacterStats.BASE_AVOID, "defense": 5, "magic_defense": 5})  # 10 × 2% = 20%
+	check_near(Combat.block_chance(c.stats), 0.2, "2% a point")
+	check_near(Combat.block_chance(UnitHelpers.stats({"defense": 1000})), Combat.MAX_BLOCK, "capped")
+	var m := fx.monster(&"t_mob", 10)
+	var blocked := 0
+	for i in 2000:
+		if Combat.monster_hit(m, c) == 0:
+			blocked += 1
+	check_between(blocked, 300, 500, "about 20% blocked")
 
 func test_monster_hit_dodge_capped_at_thirty_percent() -> void:
 	var c := _fighter({"avoid": 10000})

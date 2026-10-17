@@ -122,10 +122,10 @@ func test_use_tooltips_say_what_they_restore() -> void:
 		if u == null:
 			continue
 		var texts := _texts(_lines_for(ItemStack.create(u)))
-		var hp := u.hp_for(Game.me.max_hp())
-		var mp := u.mp_for(Game.me.max_mp())
-		check_eq(texts.has("Restores %d HP" % hp), hp > 0, "%s: Restores %d HP" % [u.id, hp])
-		check_eq(texts.has("Restores %d MP" % mp), mp > 0, "%s: Restores %d MP" % [u.id, mp])
+		var hearts := u.hearts_for(Game.me.max_hearts())
+		var mp := mini(100, roundi(100.0 * u.mp_for(Game.me.max_mp()) / Game.me.max_mp()))
+		check_eq(texts.has("Heals %s" % SkillDef.hearts_text(hearts)), hearts > 0, "%s: Heals %d hearts" % [u.id, hearts])
+		check_eq(texts.has("Restores %d%% of your MP" % mp), u.mp_for(Game.me.max_mp()) > 0, "%s: Restores %d%% of MP" % [u.id, mp])
 		if u.pet_food > 0:
 			check(texts.has("Pet food: +%d fullness" % u.pet_food), "%s: says it's pet food" % u.id)
 

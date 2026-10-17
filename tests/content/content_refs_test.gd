@@ -326,7 +326,7 @@ func test_every_use_item_does_something() -> void:
 	for i: ItemDef in Content.items.values():
 		var u := i as UseDef
 		if u:
-			check(u.heal_hp > 0 or u.heal_mp > 0 or u.heal_hp_percent > 0 or u.heal_mp_percent > 0 or u.teleport != &"" or u.pet_food > 0,
+			check(u.heal_hearts > 0 or u.heal_mp > 0 or u.heal_hearts_percent > 0 or u.heal_mp_percent > 0 or u.teleport != &"" or u.pet_food > 0,
 				"%s: heals nothing, teleports nowhere and isn't pet food" % Scan.where(u))
 
 func test_pets_have_food_and_sane_numbers() -> void:

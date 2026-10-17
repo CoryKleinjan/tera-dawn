@@ -30,8 +30,9 @@ of **CutsceneStep**s that run one after another. Each step has a `kind`:
   new spot mid-scene. Otherwise that happens when the cutscene ends.
 
 Then hook it up: a map's `intro_scene` plays the first time a character arrives there, and a
-quest's `start_scene` / `finish_scene` play when it's taken and handed in. Each plays once per
-character. `tests/content/content_cutscenes_test.gd` checks every cutscene, and that a map's
+quest's `start_scene` / `finish_scene` play when it's taken and handed in, and a map's scene
+spot (`MapDef.scene_spots`, see [Maps](maps.md)) plays its `scene` for a player standing on
+it. Each plays once per character. `tests/content/content_cutscenes_test.gd` checks every cutscene, and that a map's
 intro only uses NPCs who stand on that map.
 
 Anything in the main story (Tera, the Dawn curse, the tears, the other dawns, what Dawnshards

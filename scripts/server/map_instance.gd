@@ -131,6 +131,16 @@ func wake_tear(p: SimPlayer) -> void:
 		if m.from_tear:
 			m.wake(x, p.peer)
 
+## A scene spot (MapDef.scene_spots) open to `p` that they stand on does its thing.
+func check_spots(p: SimPlayer) -> void:
+	if p.in_scene():
+		return
+	for s in def.scene_spots:
+		if (s.scene or s.then_map != &"") and s.platform < layout.platforms.size() and s.open_to(p.character) \
+				and p.stands_on(layout.platforms[s.platform]) and s.covers(p.position.x):
+			server.scenes.at_spot(p, s)
+			return
+
 ## Where everyone and everything is, sent to this map's players many times a second as
 ## bytes (SnapshotCodec). Monsters that haven't changed since the last one are left out
 ## unless `full`, which the server asks for now and then in case an update was lost.
@@ -432,20 +442,20 @@ func touch_player(p: SimPlayer, m: SimMob) -> void:
 func hurt_player(p: SimPlayer, def: MonsterDef, from_x: float, power := 1.0) -> void:
 	if p.inv > 0 or p.fainted() or p.in_scene() or p.hidden():
 		return
-	var dmg := Combat.monster_hit(def, p.character, power)
-	p.inv = 40 if dmg == 0 else SimPlayer.HURT_INV
+	var hearts := Combat.monster_hit(def, p.character, power)
+	p.inv = 40 if hearts == 0 else SimPlayer.HURT_INV
 	if p.sitting: # any hit, even a miss, gets you up
 		p.sitting = false
 		Net.send(p.peer, &"ev_sit", [false])
-	broadcast(&"ev_number", [p.position.x, p.position.y - 70, dmg, "miss" if dmg == 0 else "taken"])
-	if dmg == 0:
+	if hearts == 0:
+		broadcast(&"ev_number", [p.position.x, p.position.y - 70, 0, "miss"])
 		return
-	# a guard (Magic Guard) takes its share out of MP while there's MP to take
-	var guarded := mini(p.character.mp, roundi(dmg * p.character.skills.mp_guard()))
-	if guarded > 0:
-		p.character.spend_mp(guarded)
-		dmg -= guarded
-	p.character.health.damage(dmg)
+	# a guard (Magic Guard) may soak a heart with MP while there's MP to pay for it
+	var guard_mp := Combat.guard_mp(p.character)
+	if randf() < p.character.skills.mp_guard() and p.character.mp >= guard_mp:
+		p.character.spend_mp(guard_mp)
+		hearts -= 1
+	p.character.health.damage(hearts)
 	p.dirty_vitals = true
 	p.hurt_here = true
 	Net.send(p.peer, &"ev_hurt", [from_x])

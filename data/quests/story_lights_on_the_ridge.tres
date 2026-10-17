@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="QuestDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
+[ext_resource type="Resource" path="res://data/monsters/grotto_tusker.tres" id="3_tusker"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
+[ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="5_monster_def"]
+
+[sub_resource type="Resource" id="Reach"]
+script = ExtResource("2_quest_objective")
+kind = 3
+map = &"starfall_ridge"
+platform = 6
+spot_name = "the light over Starfall Ridge"
+count = 1
+
+[resource]
+script = ExtResource("1_quest_def")
+id = &"story_lights_on_the_ridge"
+title = "Lights on the Ridge"
+giver = &"lumewood_stargazer"
+requires_any = Array[StringName]([&"jreport_archer", &"jreport_pirate", &"jreport_thief", &"jreport_warrior", &"jtest_mage"])
+requires_beaten = Array[ExtResource("5_monster_def")]([ExtResource("3_tusker")])
+offer_text = "I chart every light in the night sky, and last night there was one too many. Low over Starfall Ridge, white and still, and it didn't move with the stars. Would you go and see what it is?"
+progress_text = "The light hangs over Starfall Ridge."
+complete_text = "It's still there? Then it isn't a star at all. Archmage Celest must hear of this. Go to her, quickly."
+objectives = Array[ExtResource("2_quest_objective")]([SubResource("Reach")])
+reward_essence = 23500
+reward_shards = 1500
+reward_items = Array[ExtResource("4_drop_entry")]([])
