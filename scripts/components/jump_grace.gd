@@ -3,7 +3,7 @@ extends RefCounted
 ## When a press of the jump key turns into a jump. Besides standing on something, you
 ## can still jump for a few ticks after walking off a ledge ("coyote time"), and a press
 ## a few ticks before you land goes off as you land ("jump buffering"). Leaving the
-## ground by jumping, being knocked back or grabbing a rope gives no coyote time.
+## ground by jumping or being knocked back gives no coyote time.
 ##
 ##   if _tapped("jump"): grace.press()
 ##   if grace.can_jump(on_ground): grace.cancel(); jump
@@ -27,7 +27,7 @@ func can_jump(on_ground: bool) -> bool:
 	return since_press <= BUFFER_TICKS and (on_ground or since_ground <= COYOTE_TICKS)
 
 ## The jump happened, or you left the ground some other way than walking off (knockback,
-## a rope, a portal): the press is spent and there's no coyote time until you land.
+## a portal): the press is spent and there's no coyote time until you land.
 func cancel() -> void:
 	since_press = BUFFER_TICKS + 1
 	since_ground = COYOTE_TICKS + 1

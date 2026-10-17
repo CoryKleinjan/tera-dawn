@@ -1,5 +1,5 @@
 extends TestCase
-## Everything shows one pixel size: an art pixel of a building, rope, lantern, portal,
+## Everything shows one pixel size: an art pixel of a building, lantern, portal,
 ## backdrop layer or room piece is TDStage.TEXEL game pixels on screen, like the land
 ## (tests/unit/terrain_builder_test.gd and tools/art/land_pixels.py check the land itself).
 ## Art drawn at its own density 1 would be the old, coarser cut.
@@ -34,14 +34,6 @@ func test_placed_buildings_keep_it() -> void:
 		for b in m.buildings:
 			if b.building:
 				_near_texel(b.building.texel() * b.scale, "%s on %s" % [b.building.id, m.id])
-
-func test_ropes_and_ladders_show_at_the_shared_pixel_size() -> void:
-	for path in Scan.files("res://data/climb_styles"):
-		var st: ClimbStyleDef = load(path)
-		for tex in [st.top, st.middle, st.bottom]:
-			if tex:
-				_cut_for_the_shared_size(tex, path.get_file())
-		_near_texel(st.texel, path.get_file())
 
 func test_lanterns_and_portals_are_cut_for_the_shared_size() -> void:
 	for b in _biomes(false):

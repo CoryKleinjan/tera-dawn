@@ -3,9 +3,6 @@
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/coast.tres" id="2_coast"]
 [ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
-[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
-[ext_resource type="Resource" path="res://data/climb_styles/rope_ladder.tres" id="5_rope_ladder"]
-[ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="6_rope"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/barnacle_boar.tres" id="10_barnacle_boar"]
@@ -113,34 +110,6 @@ platform = 0
 target_map = &"drowned_docks"
 target_x = 2760.0
 
-[sub_resource type="Resource" id="Resource_8"]
-script = ExtResource("4_climbable_def")
-x = 1190.0
-top = 360.0
-bottom = 480.0
-style = ExtResource("6_rope")
-
-[sub_resource type="Resource" id="Resource_7"]
-script = ExtResource("4_climbable_def")
-x = 830.0
-top = 480.0
-bottom = 620.0
-style = ExtResource("5_rope_ladder")
-
-[sub_resource type="Resource" id="Resource_6"]
-script = ExtResource("4_climbable_def")
-x = 570.0
-top = 380.0
-bottom = 490.0
-style = ExtResource("6_rope")
-
-[sub_resource type="Resource" id="Resource_5"]
-script = ExtResource("4_climbable_def")
-x = 360.0
-top = 490.0
-bottom = 620.0
-style = ExtResource("5_rope_ladder")
-
 [sub_resource type="Resource" id="Resource_4"]
 script = ExtResource("3_platform_def")
 x = 940.0
@@ -171,13 +140,6 @@ x = 370.0
 y = 170.0
 width = 140.0
 
-[sub_resource type="Resource" id="Rope_4_0"]
-script = ExtResource("4_climbable_def")
-x = 440.0
-top = 170.0
-bottom = 380.0
-style = ExtResource("6_rope")
-
 [sub_resource type="Resource" id="Variant"]
 script = ExtResource("variant_def")
 light_energy = 1.2
@@ -196,6 +158,42 @@ platform = 0
 target_map = &"titans_pool"
 target_x = 140.0
 
+[sub_resource type="Resource" id="Step_1"]
+script = ExtResource("3_platform_def")
+x = 333.0
+y = 555.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_2"]
+script = ExtResource("3_platform_def")
+x = 803.0
+y = 550.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_3"]
+script = ExtResource("3_platform_def")
+x = 543.0
+y = 435.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_4"]
+script = ExtResource("3_platform_def")
+x = 1163.0
+y = 420.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_5"]
+script = ExtResource("3_platform_def")
+x = 413.0
+y = 310.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_6"]
+script = ExtResource("3_platform_def")
+x = 357.0
+y = 240.0
+width = 110.0
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"titan_grotto"
@@ -206,8 +204,7 @@ width = 2000
 height = 700
 ground_y = 620
 start_x = 120.0
-platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Land_1")])
-climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Rope_4_0")])
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Land_1"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3"), SubResource("Step_4"), SubResource("Step_5"), SubResource("Step_6")])
 portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_9"), SubResource("Portal_arena")])
 spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15")])
 props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_22"), SubResource("Resource_23")])

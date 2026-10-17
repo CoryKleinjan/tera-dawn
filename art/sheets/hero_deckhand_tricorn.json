@@ -23,12 +23,12 @@
       ""
     ],
     [
-      "rope1",
-      "rope2",
-      "rope_hold",
-      "ladder1",
       "",
-      "ladder_hold",
+      "",
+      "",
+      "",
+      "",
+      "",
       "back",
       ""
     ]
@@ -69,11 +69,6 @@
         "walk2": "hero_deckhand_tricorn:walk2",
         "walk3": "hero_deckhand_tricorn:walk3",
         "jump": "hero_deckhand_tricorn:jump",
-        "rope1": "hero_deckhand_tricorn:rope1",
-        "rope2": "hero_deckhand_tricorn:rope2",
-        "rope_hold": "hero_deckhand_tricorn:rope_hold",
-        "ladder1": "hero_deckhand_tricorn:ladder1",
-        "ladder_hold": "hero_deckhand_tricorn:ladder_hold",
         "back": "hero_deckhand_tricorn:back",
         "hurt": "hero_deckhand_tricorn:idle1",
         "swing2": "hero_deckhand_tricorn:idle1",
@@ -139,36 +134,6 @@
         "jump": {
           "frames": [
             "jump"
-          ],
-          "fps": 1
-        },
-        "rope1": {
-          "frames": [
-            "rope1"
-          ],
-          "fps": 1
-        },
-        "rope2": {
-          "frames": [
-            "rope2"
-          ],
-          "fps": 1
-        },
-        "rope_hold": {
-          "frames": [
-            "rope_hold"
-          ],
-          "fps": 1
-        },
-        "ladder1": {
-          "frames": [
-            "ladder1"
-          ],
-          "fps": 1
-        },
-        "ladder_hold": {
-          "frames": [
-            "ladder_hold"
           ],
           "fps": 1
         },

@@ -3,14 +3,12 @@
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="map_def"]
 [ext_resource type="Resource" path="res://data/biomes/lumewood.tres" id="lumewood"]
 [ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="platform_def"]
-[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="climbable_def"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="portal_def"]
 [ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="npc_placement"]
 [ext_resource type="Script" path="res://scripts/data/building_placement.gd" id="building_placement"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="prop_placement"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="backdrop_layer_def"]
-[ext_resource type="Resource" path="res://data/climb_styles/ladder.tres" id="ladder"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/lumewood/panorama.png" id="panorama"]
 [ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_town/cap_left.png" id="p_cap_left"]
 [ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_town/middle_a.png" id="p_middle_a"]
@@ -55,34 +53,6 @@ x = 2500.0
 y = 620.0
 width = 600.0
 solid = true
-
-[sub_resource type="Resource" id="Ladder_west"]
-script = ExtResource("climbable_def")
-x = 1880.0
-top = 770.0
-bottom = 920.0
-style = ExtResource("ladder")
-
-[sub_resource type="Resource" id="Ladder_east"]
-script = ExtResource("climbable_def")
-x = 3320.0
-top = 770.0
-bottom = 920.0
-style = ExtResource("ladder")
-
-[sub_resource type="Resource" id="Ladder_spire_west"]
-script = ExtResource("climbable_def")
-x = 2530.0
-top = 620.0
-bottom = 770.0
-style = ExtResource("ladder")
-
-[sub_resource type="Resource" id="Ladder_spire_east"]
-script = ExtResource("climbable_def")
-x = 3070.0
-top = 620.0
-bottom = 770.0
-style = ExtResource("ladder")
 
 [sub_resource type="Resource" id="Portal_west"]
 script = ExtResource("portal_def")
@@ -377,6 +347,30 @@ platform_right = ExtResource("p_cap_right")
 terrace_left = ExtResource("p_cap_left")
 terrace_right = ExtResource("p_cap_right")
 
+[sub_resource type="Resource" id="Step_1"]
+script = ExtResource("platform_def")
+x = 1734.0
+y = 870.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_2"]
+script = ExtResource("platform_def")
+x = 1734.0
+y = 820.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_3"]
+script = ExtResource("platform_def")
+x = 2384.0
+y = 720.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_4"]
+script = ExtResource("platform_def")
+x = 2384.0
+y = 670.0
+width = 110.0
+
 [resource]
 script = ExtResource("map_def")
 id = &"lumewood"
@@ -388,8 +382,7 @@ height = 1000
 ground_y = 920
 lantern_spacing = 0.0
 start_x = 300.0
-platforms = Array[ExtResource("platform_def")]([SubResource("Plat_terrace"), SubResource("Plat_spire")])
-climbables = Array[ExtResource("climbable_def")]([SubResource("Ladder_west"), SubResource("Ladder_east"), SubResource("Ladder_spire_west"), SubResource("Ladder_spire_east")])
+platforms = Array[ExtResource("platform_def")]([SubResource("Plat_terrace"), SubResource("Plat_spire"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3"), SubResource("Step_4")])
 npcs = Array[ExtResource("npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_shop"), SubResource("Npc_keeper"), SubResource("Npc_apprentice"), SubResource("Npc_kid"), SubResource("Npc_stargazer")])
 props = Array[ExtResource("prop_placement")]([SubResource("Prop_crystals_west"), SubResource("Prop_lamp_west"), SubResource("Prop_planter"), SubResource("Prop_lamp_library"), SubResource("Wall_barrel"), SubResource("Wall_books"), SubResource("Wall_cart"), SubResource("Wall_bench"), SubResource("Wall_urn"), SubResource("Wall_pillar"), SubResource("Prop_lamp_east"), SubResource("Prop_lectern"), SubResource("Prop_lamp_terrace"), SubResource("Prop_fountain"), SubResource("Prop_globe"), SubResource("Prop_telescope"), SubResource("Prop_pillar_spire")])
 buildings = Array[ExtResource("building_placement")]([SubResource("Building_store"), SubResource("Building_library"), SubResource("Building_alchemist"), SubResource("Building_dormitory"), SubResource("Building_observatory")])

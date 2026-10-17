@@ -17,14 +17,14 @@ id = &"tut2_lookout"
 title = "Her Lookout"
 giver = &"girl_on_beach"
 requires = Array[StringName]([&"tut1_race"])
-offer_text = "Up here! This is my lookout. Climb the rope."
-progress_text = "Up here! This is my lookout. Climb the rope."
+offer_text = "Up here! This is my lookout. Jump up the ledges."
+progress_text = "Up here! This is my lookout. Jump up the ledges."
 complete_text = "I come up here every morning. Grandpa says every morning is a fresh start.
 
 See my drawing? That's the brightest morning ever. I dream about it. It's so bright you can't see anything else."
 start_scene = ExtResource("4_f3s1f")
 offer_hint = "Walk to her and press {move_up} to talk"
-hint = "Stand by the rope and hold {move_up} to climb"
+hint = "Press {jump} to hop from ledge to ledge"
 auto_start = true
 objectives = Array[ExtResource("1_5x84g")]([SubResource("Resource_udl0v")])
 reward_essence = 5

@@ -11,7 +11,7 @@ data/                 Content, one .tres per thing
   items/use/ items/etc/ items/scrolls/ items/setup/ items/equips/  Subfolders are scanned too
   hero/               HeroLookDef (look.tres: his layers and animations); held/ has each held
                       weapon or off-hand's pins per frame (HeldDef), set in the pose editor
-  maps/ biomes/ climb_styles/ buildings/    Maps and how they look (maps/rooms/ and
+  maps/ biomes/ buildings/    Maps and how they look (maps/rooms/ and
                                             biomes/rooms/: the insides of buildings)
 scripts/
   autoload/           Settings (controls, audio, video, saved to settings.cfg), Content (data
@@ -55,7 +55,7 @@ art/
   sheets/             One manifest per sheet: how to cut it
   reference/          hero.png (Cory's original hero: proportions, and the start of his new look)
 store/                Steam capsules and key art
-tools/art/            Slicer and its helpers (platform_pieces, climb_pieces, clean_sheet, land_pixels),
+tools/art/            Slicer and its helpers (platform_pieces, clean_sheet, land_pixels),
                       Gemini batch runner (gemini_pass.py + gemini_pass.json), store-art
                       cropper, fx textures, contact-sheet preview;
                       sheet_check.py (checks Gemini results), rekey_sheet.py, strip_template.py,
