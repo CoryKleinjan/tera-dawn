@@ -1,0 +1,28 @@
+{
+  "source": "art/source/dawnharbor_fields_gull_bluffs.png",
+  "detail": 1,
+  "scale": 0.75,
+  "out_dir": "assets/sprites/backgrounds/dawnharbor_fields",
+  "background": [
+    255,
+    0,
+    255
+  ],
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      0,
+      2304
+    ],
+    "cols": [
+      0,
+      4096
+    ]
+  },
+  "cells": [
+    [
+      "gull_bluffs"
+    ]
+  ]
+}
