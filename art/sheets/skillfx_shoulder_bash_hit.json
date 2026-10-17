@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skillfx_shoulder_bash_hit.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 672, 675, 1347],
+    "cols": [0, 596, 599, 1195, 1199, 1795, 1801, 2397]
+  },
+  "cells": [
+    ["shoulder_bash_hit_1", "", "shoulder_bash_hit_2", "", "shoulder_bash_hit_3", "", "shoulder_bash_hit_4"],
+    ["", "", "", "", "", "", ""],
+    ["shoulder_bash_hit_5", "", "shoulder_bash_hit_6", "", "shoulder_bash_hit_7", "", "shoulder_bash_hit_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.1302,
+  "overrides": {
+    "shoulder_bash_hit_1": {
+      "crop": [8, 48, 568, 604]
+    },
+    "shoulder_bash_hit_2": {
+      "crop": [8, 48, 568, 604]
+    },
+    "shoulder_bash_hit_3": {
+      "crop": [8, 48, 568, 604]
+    },
+    "shoulder_bash_hit_4": {
+      "crop": [8, 48, 568, 604]
+    },
+    "shoulder_bash_hit_5": {
+      "crop": [8, 48, 568, 604]
+    },
+    "shoulder_bash_hit_6": {
+      "crop": [8, 48, 568, 604]
+    },
+    "shoulder_bash_hit_7": {
+      "crop": [8, 48, 568, 604]
+    },
+    "shoulder_bash_hit_8": {
+      "crop": [8, 48, 568, 604]
+    }
+  }
+}

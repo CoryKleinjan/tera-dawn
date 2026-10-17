@@ -1,0 +1,49 @@
+{
+  "source": "art/source/skillfx_charge_trail.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 334, 337, 671, 677, 1011, 1015, 1349],
+    "cols": [0, 1200, 1200, 2400]
+  },
+  "cells": [
+    ["charge_trail_1", "", "charge_trail_2"],
+    ["", "", ""],
+    ["charge_trail_3", "", "charge_trail_4"],
+    ["", "", ""],
+    ["charge_trail_5", "", "charge_trail_6"],
+    ["", "", ""],
+    ["charge_trail_7", "", "charge_trail_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.1377,
+  "overrides": {
+    "charge_trail_1": {
+      "crop": [22, 0, 1158, 314]
+    },
+    "charge_trail_2": {
+      "crop": [22, 0, 1158, 314]
+    },
+    "charge_trail_3": {
+      "crop": [22, 0, 1158, 314]
+    },
+    "charge_trail_4": {
+      "crop": [22, 0, 1158, 314]
+    },
+    "charge_trail_5": {
+      "crop": [22, 0, 1158, 314]
+    },
+    "charge_trail_6": {
+      "crop": [22, 0, 1158, 314]
+    },
+    "charge_trail_7": {
+      "crop": [22, 0, 1158, 314]
+    },
+    "charge_trail_8": {
+      "crop": [22, 0, 1158, 314]
+    }
+  }
+}

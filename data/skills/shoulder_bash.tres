@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Resource" path="res://data/effects/swish.tres" id="e_swish"]
-[ext_resource type="Resource" path="res://data/effects/power_strike_hit.tres" id="h_power_strike_hit"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/shoulder_bash.png" id="i_flash_fist"]
+[ext_resource type="Resource" path="res://data/effects/shoulder_bash_hit.tres" id="fx_hit_effect"]
 
 [resource]
 script = ExtResource("1_skill_def")
@@ -26,5 +26,5 @@ height = 100.0
 knockback = 2.5
 animation = &"lunge"
 effect = ExtResource("e_swish")
-hit_effect = ExtResource("h_power_strike_hit")
+hit_effect = ExtResource("fx_hit_effect")
 icon = ExtResource("i_flash_fist")

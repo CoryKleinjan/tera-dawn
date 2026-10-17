@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="SkillDef" load_steps=7 format=3]
+[gd_resource type="Resource" script_class="SkillDef" load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="2_stat_block"]
-[ext_resource type="Resource" path="res://data/effects/haste_aura.tres" id="e_haste_aura"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/haste.png" id="i_haste"]
+[ext_resource type="Resource" path="res://data/effects/haste_burst.tres" id="fx_effect"]
+[ext_resource type="Resource" path="res://data/effects/haste_aura.tres" id="fx_aura"]
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("2_stat_block")
@@ -32,7 +33,8 @@ duration_per_level = 9.0
 animation = &"cast"
 party = true
 flash = Color(0.45, 0.95, 1.0, 1)
-effect = ExtResource("e_haste_aura")
+effect = ExtResource("fx_effect")
+aura = ExtResource("fx_aura")
 icon = ExtResource("i_haste")
 stats = SubResource("Resource_1")
 stats_per_level = SubResource("Resource_2")

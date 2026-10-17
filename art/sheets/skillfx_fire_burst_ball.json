@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skillfx_fire_burst_ball.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 674, 675, 1349],
+    "cols": [1, 599, 601, 1199, 1200, 1798, 1800, 2398]
+  },
+  "cells": [
+    ["fire_burst_ball_1", "", "fire_burst_ball_2", "", "fire_burst_ball_3", "", "fire_burst_ball_4"],
+    ["", "", "", "", "", "", ""],
+    ["fire_burst_ball_5", "", "fire_burst_ball_6", "", "fire_burst_ball_7", "", "fire_burst_ball_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.0865,
+  "overrides": {
+    "fire_burst_ball_1": {
+      "crop": [0, 162, 578, 492]
+    },
+    "fire_burst_ball_2": {
+      "crop": [0, 162, 578, 492]
+    },
+    "fire_burst_ball_3": {
+      "crop": [0, 162, 578, 492]
+    },
+    "fire_burst_ball_4": {
+      "crop": [0, 162, 578, 492]
+    },
+    "fire_burst_ball_5": {
+      "crop": [0, 162, 578, 492]
+    },
+    "fire_burst_ball_6": {
+      "crop": [0, 162, 578, 492]
+    },
+    "fire_burst_ball_7": {
+      "crop": [0, 162, 578, 492]
+    },
+    "fire_burst_ball_8": {
+      "crop": [0, 162, 578, 492]
+    }
+  }
+}

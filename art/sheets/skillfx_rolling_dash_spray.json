@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skillfx_rolling_dash_spray.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 674, 675, 1349],
+    "cols": [0, 600, 600, 1200, 1200, 1800, 1800, 2400]
+  },
+  "cells": [
+    ["rolling_dash_spray_1", "", "rolling_dash_spray_2", "", "rolling_dash_spray_3", "", "rolling_dash_spray_4"],
+    ["", "", "", "", "", "", ""],
+    ["rolling_dash_spray_5", "", "rolling_dash_spray_6", "", "rolling_dash_spray_7", "", "rolling_dash_spray_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.1616,
+  "overrides": {
+    "rolling_dash_spray_1": {
+      "crop": [0, 18, 580, 636]
+    },
+    "rolling_dash_spray_2": {
+      "crop": [0, 18, 580, 636]
+    },
+    "rolling_dash_spray_3": {
+      "crop": [0, 18, 580, 636]
+    },
+    "rolling_dash_spray_4": {
+      "crop": [0, 18, 580, 636]
+    },
+    "rolling_dash_spray_5": {
+      "crop": [0, 18, 580, 636]
+    },
+    "rolling_dash_spray_6": {
+      "crop": [0, 18, 580, 636]
+    },
+    "rolling_dash_spray_7": {
+      "crop": [0, 18, 580, 636]
+    },
+    "rolling_dash_spray_8": {
+      "crop": [0, 18, 580, 636]
+    }
+  }
+}

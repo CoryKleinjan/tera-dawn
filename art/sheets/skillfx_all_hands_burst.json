@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skillfx_all_hands_burst.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 674, 675, 1349],
+    "cols": [0, 598, 599, 1197, 1199, 1797, 1800, 2398]
+  },
+  "cells": [
+    ["all_hands_burst_1", "", "all_hands_burst_2", "", "all_hands_burst_3", "", "all_hands_burst_4"],
+    ["", "", "", "", "", "", ""],
+    ["all_hands_burst_5", "", "all_hands_burst_6", "", "all_hands_burst_7", "", "all_hands_burst_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.2495,
+  "overrides": {
+    "all_hands_burst_1": {
+      "crop": [24, 34, 554, 620]
+    },
+    "all_hands_burst_2": {
+      "crop": [24, 34, 554, 620]
+    },
+    "all_hands_burst_3": {
+      "crop": [24, 34, 554, 620]
+    },
+    "all_hands_burst_4": {
+      "crop": [24, 34, 554, 620]
+    },
+    "all_hands_burst_5": {
+      "crop": [24, 34, 554, 620]
+    },
+    "all_hands_burst_6": {
+      "crop": [24, 34, 554, 620]
+    },
+    "all_hands_burst_7": {
+      "crop": [24, 34, 554, 620]
+    },
+    "all_hands_burst_8": {
+      "crop": [24, 34, 554, 620]
+    }
+  }
+}

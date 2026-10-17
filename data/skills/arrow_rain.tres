@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
+[gd_resource type="Resource" script_class="SkillDef" load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Resource" path="res://data/projectiles/arrow.tres" id="p_arrow"]
-[ext_resource type="Resource" path="res://data/effects/arrow_hit.tres" id="h_arrow_hit"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/arrow_rain.png" id="i_double_shot"]
+[ext_resource type="Resource" path="res://data/effects/arrow_rain_volley.tres" id="fx_effect"]
+[ext_resource type="Resource" path="res://data/effects/arrow_rain_hit.tres" id="fx_hit_effect"]
 
 [resource]
 script = ExtResource("1_skill_def")
@@ -29,5 +30,6 @@ reach = 380.0
 height = 140.0
 animation = &"attack"
 projectile = ExtResource("p_arrow")
-hit_effect = ExtResource("h_arrow_hit")
+hit_effect = ExtResource("fx_hit_effect")
+effect = ExtResource("fx_effect")
 icon = ExtResource("i_double_shot")

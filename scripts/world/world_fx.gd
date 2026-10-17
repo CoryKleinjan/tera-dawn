@@ -17,7 +17,10 @@ func show_skill(peer: int, skill: SkillDef, at: Vector2, face: int, lines: Array
 	var who := world.actor(peer)
 	if who is TDAvatar:
 		(who as TDAvatar).play_skill(skill)
-		add_effect(skill.effect, TDWorldFx.swing_point(at, face, aim), face, null, aim)
+		if skill.effect and skill.effect.follow_player:  # a buff's burst rises round them
+			add_effect(skill.effect, at, face, who)
+		else:
+			add_effect(skill.effect, TDWorldFx.swing_point(at, face, aim), face, null, aim)
 		world.sound_at(skill.cast_sound(), at)
 		if skill.move and skill.ambush > 0.0:
 			# an ambush: `at` is where they landed, the avatar is still where they left
@@ -322,6 +325,25 @@ func add_number(pos: Vector2, value: int, kind: String) -> void:
 
 ## Plays an effect. Effects that follow someone (heal, level up) follow `follow`, or you.
 ## `aim` turns it to point up or down (aimed swings).
+## "<actor instance id>:<skill id>" -> the TDEffect of that buff's aura round them.
+var _auras := {}
+
+## The aura of buff `skill` round `who` for `ticks` (Net.ev_aura), in place of the one it
+## had from casting it before. Round you it also ends when the buff does.
+func add_aura(who: Node2D, skill: SkillDef, ticks: int) -> void:
+	if who == null or skill.aura == null or ticks <= 0:
+		return
+	var key := "%d:%s" % [who.get_instance_id(), skill.id]
+	var old: TDEffect = _auras.get(key)
+	if is_instance_valid(old):
+		old.fade()
+	var e := TDEffect.create(world, skill.aura, who.position, int(who.get("face")), who)
+	e.lasts = ticks
+	if who == world.player:
+		e.buff = skill.id
+	_auras[key] = e
+	world.fx_layer.add_child(e)
+
 func add_effect(def: EffectDef, pos: Vector2, face: int, follow: Node2D = null, aim := Hitbox.Aim.AHEAD) -> void:
 	if def == null:
 		return
