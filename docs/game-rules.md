@@ -95,12 +95,22 @@ update this page when one changes. Each zone's own look and music are in
 
 - The hero has a level (1 to 100, Cory Oct 17). Monsters give EXP equal to the Dawn Essence they
   drop, and quests give EXP equal to their essence reward, on the old MapleStory-style EXP curve.
-  Each level raises power, Max HP and MP by the job's growth and refills them, with a burst, a
-  "LEVEL UP!" ribbon and a jingle. The HUD shows a level badge and HP, MP and EXP bars. Fainting loses 10% of
-  the EXP toward the next level (never a level); essence is safe.
+  Each level raises power and MP by the job's growth and refills them, with a burst, a
+  "LEVEL UP!" ribbon and a jingle. The HUD shows a level badge, the hearts, an MP bar and the EXP
+  bar. Fainting loses 10% of the EXP toward the next level (never a level); essence is safe.
+- Health is hearts, Hollow Knight style (Cory Oct 17): the hero starts with 3, gains one every
+  20 levels (8 at level 100), Warrior and Pirate lines one more, and 4 heart pieces from runes
+  make another. A monster's hit costs 1 heart, or 2 from the hardest hitters and bosses' big
+  moves (attack x power 100 or more); monster HP and the hero's damage are unchanged. Defense
+  gives a chance to block a hit; Magic Guard may pay MP instead of a heart. Potions and First
+  Aid heal whole hearts; a heart comes back on its own every 15 seconds (7.5 sitting). Fainting
+  at 0 hearts; waking with half. Party frames show hearts too.
+- No numbers for health or mana: MP is a number only behind the scenes, and the HUD shows a
+  plain bar. No damage numbers on screen, on monsters or the hero; a hit reads by its flash,
+  effect and sound, and a dodge or miss still says "Miss".
 - No base stats (no STR, DEX, INT, LUK or CHA, Cory Oct 17): the job and the level set them.
   Damage grows from power (the job's own at level 1, plus the same every level, plus the Monster
-  Book's rank); Max HP, MP and Avoidability grow by the job. Nothing is bought with points and
+  Book's rank); MP and Avoidability grow by the job. Nothing is bought with points and
   nothing asks for a stat.
 - Monsters also drop Dawn Essence when they die and it flies to the hero (quests pay it too). It
   buys skill levels only, anywhere, in the skill window; each skill level costs more than the
@@ -158,7 +168,7 @@ update this page when one changes. Each zone's own look and music are in
   piece adds its runes' bonuses (the gear bonuses that already exist). The tooltip lists each
   slot, filled or empty.
 - Runes: every monster in a zone's fields can drop that zone's runes (2-3 kinds, about 1% each),
-  each zone with its own flavour: Dawnharbor Coast Max HP and Weapon Defense, Greenbough
+  each zone with its own flavour: Dawnharbor Coast heart pieces and Weapon Defense, Greenbough
   Accuracy, Speed and Jump, Lumewood Magic Attack, Max MP and Magic Defense, Emberreach Weapon
   Attack and Melee Damage, Lanternfall Critical Rate and Ranged Damage, Driftcove Avoidability
   and Attack Speed. Each zone boss also drops a stronger rune of its own (two bonuses, 30% a

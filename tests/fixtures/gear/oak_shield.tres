@@ -8,7 +8,7 @@
 [sub_resource type="Resource" id="stats"]
 script = ExtResource("stat_block")
 defense = 10
-max_hp = 15
+heart_pieces = 1
 
 [resource]
 script = ExtResource("script")

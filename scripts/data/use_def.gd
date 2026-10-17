@@ -6,10 +6,11 @@ extends ItemDef
 ## `teleport` value for "the town of the map you're on".
 const TELEPORT_TOWN := &"town"
 
-@export var heal_hp := 0
+## Hearts it heals.
+@export var heal_hearts := 0
 @export var heal_mp := 0
-## Extra healing as a percentage of max HP / MP.
-@export_range(0, 100) var heal_hp_percent := 0
+## Extra healing as a percentage of the hearts the user has (at least one) / max MP.
+@export_range(0, 100) var heal_hearts_percent := 0
 @export_range(0, 100) var heal_mp_percent := 0
 ## Shown on the player when used.
 @export var use_effect: EffectDef
@@ -24,9 +25,10 @@ const TELEPORT_TOWN := &"town"
 func tab() -> Tab:
 	return Tab.USE
 
-## How much HP this restores for a character with `max_hp`.
-func hp_for(max_hp: int) -> int:
-	return heal_hp + roundi(max_hp * heal_hp_percent / 100.0)
+## How many hearts this heals for a character with `max_hearts`.
+func hearts_for(max_hearts: int) -> int:
+	var share := maxi(1, roundi(max_hearts * heal_hearts_percent / 100.0)) if heal_hearts_percent > 0 else 0
+	return heal_hearts + share
 
 func mp_for(max_mp: int) -> int:
 	return heal_mp + roundi(max_mp * heal_mp_percent / 100.0)

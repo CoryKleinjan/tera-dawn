@@ -1,18 +1,18 @@
 class_name StatBlock
 extends Resource
-## A bundle of the stats gear and skills add (attack, defense, Max HP, speed and the rest;
+## A bundle of the stats gear and skills add (attack, defense, heart pieces, speed and the rest;
 ## there are no base stats). Used for an equip's bonuses, the rolled stats of one item and a
 ## character's totals.
 
 ## Every stat, in the order windows and tooltips list them.
 const FIELDS: Array[StringName] = [
-	&"max_hp", &"max_mp",
+	&"heart_pieces", &"max_mp",
 	&"attack", &"magic_attack", &"defense", &"magic_defense", &"accuracy", &"avoid",
 	&"speed", &"jump", &"crit", &"attack_speed", &"melee_damage", &"ranged_damage",
 ]
 ## Short names for tooltips and the stats window.
 const LABELS := {
-	&"max_hp": "MaxHP", &"max_mp": "MaxMP", &"attack": "Weapon Attack",
+	&"heart_pieces": "Heart Pieces", &"max_mp": "MaxMP", &"attack": "Weapon Attack",
 	&"magic_attack": "Magic Attack", &"defense": "Weapon Defense",
 	&"magic_defense": "Magic Defense", &"accuracy": "Accuracy", &"avoid": "Avoidability",
 	&"speed": "Speed", &"jump": "Jump", &"crit": "Critical Rate",
@@ -20,12 +20,14 @@ const LABELS := {
 }
 ## Stats shown as a percent.
 const PERCENT: Array[StringName] = [&"speed", &"jump", &"crit", &"attack_speed", &"melee_damage", &"ranged_damage"]
-@export var max_hp := 0
+## Heart pieces: every CharacterStats.HEART_PIECES of them make one more heart.
+@export var heart_pieces := 0
 @export var max_mp := 0
 ## Weapon attack: the main multiplier on physical damage.
 @export var attack := 0
 @export var magic_attack := 0
-## Weapon defense: lowers damage taken from monster touches.
+## Weapon and Magic Defense: each point is a small chance to block a monster's hit
+## entirely (Combat.block_chance).
 @export var defense := 0
 @export var magic_defense := 0
 @export var accuracy := 0

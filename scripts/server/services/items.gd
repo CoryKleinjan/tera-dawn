@@ -62,10 +62,10 @@ func _teleport_target(p: SimPlayer, u: UseDef) -> StringName:
 		return &""
 	return dest
 
-## Potions: HP and MP back.
+## Potions: hearts and MP back.
 func _restore(p: SimPlayer, u: UseDef) -> void:
 	var c := p.character
-	c.health.heal(u.hp_for(c.max_hp()))
+	c.health.heal(u.hearts_for(c.max_hearts()))
 	c.restore_mp(u.mp_for(c.max_mp()))
 
 ## Takes one of the item from its slot and starts the item cooldown.
