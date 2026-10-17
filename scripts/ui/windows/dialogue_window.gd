@@ -107,6 +107,10 @@ func _options() -> Array:
 		out.append(["Open shop", func() -> void:
 			visible = false
 			hud.open_shop(npc), ICON_SHOP])
+	if def.enchants:
+		out.append(["Enchant gear", func() -> void:
+			visible = false
+			hud.windows["enchant"].open(npc)])
 	out.append(["Goodbye", func() -> void: visible = false])
 	return out
 

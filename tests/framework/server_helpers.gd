@@ -247,6 +247,10 @@ func add_item(it: ItemDef) -> ItemDef:
 	_register("items", it.id, it)
 	return it
 
+func add_region(r: RegionDef) -> RegionDef:
+	_register("regions", r.id, r)
+	return r
+
 func add_cutscene(c: CutsceneDef) -> CutsceneDef:
 	_register("cutscenes", c.id, c)
 	return c

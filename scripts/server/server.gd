@@ -28,11 +28,12 @@ var tick := 0
 var _drop_ids := 0
 ## Chat, buddies, parties, trades, guilds and fame.
 var social: TDSocial
-## The requests about the player's things, NPC shops, storage, getting around, quests and
-## jobs, one part each (scripts/server/services/).
+## The requests about the player's things, NPC shops, storage, enchanting, getting around,
+## quests and jobs, one part each (scripts/server/services/).
 var items: ServerItems
 var npc_shop: ServerNpcShop
 var storage: ServerStorage
+var enchanting: ServerEnchanting
 var travel: ServerTravel
 var quests: ServerQuests
 var jobs: ServerJobs
@@ -46,6 +47,7 @@ func _init(save_dir := "user://characters") -> void:
 	items = ServerItems.new(self)
 	npc_shop = ServerNpcShop.new(self)
 	storage = ServerStorage.new(self)
+	enchanting = ServerEnchanting.new(self)
 	travel = ServerTravel.new(self)
 	quests = ServerQuests.new(self)
 	jobs = ServerJobs.new(self)

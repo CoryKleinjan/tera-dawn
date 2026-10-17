@@ -1,6 +1,6 @@
 extends TestCase
-## ItemStack: gear stat rolls, exact()/unrolled(), names, stacking rules and the save format
-## (older saves' scroll upgrade fields ignored).
+## ItemStack: gear stat rolls, exact()/unrolled(), names, stacking rules, rune slots and the
+## save format (older saves' scroll upgrade fields ignored, older gear with empty rune slots).
 
 var fx: UnitHelpers
 
@@ -123,3 +123,36 @@ func test_from_dict_old_scrolled_gear_keeps_its_stats() -> void:
 	check_eq(g.stats.attack, 26, "the upgraded stats stay")
 	check_eq(g.display_name(), "T Sword", "no +2")
 	check_eq(g.to_dict(), {"id": "t_sword", "count": 1, "stats": {"attack": 26}}, "the upgrade fields aren't saved again")
+
+func test_gear_has_three_empty_rune_slots() -> void:
+	for s in [ItemStack.create(fx.equip()), ItemStack.exact(fx.equip())]:
+		check_eq(s.runes.size(), ItemStack.RUNE_SLOTS, "rune slots")
+		check_eq(s.runes_set(), 0, "all empty")
+	check(ItemStack.create(fx.etc()).runes.is_empty(), "etc items have none")
+
+func test_runes_add_to_the_gears_total() -> void:
+	var s := ItemStack.exact(fx.equip(&"t_sword", EquipDef.Slot.WEAPON, {"attack": 20}))
+	s.runes[0] = fx.rune(&"t_rune", {"attack": 2, "max_hp": 15})
+	s.runes[2] = fx.rune(&"t_rune_2", {"attack": 1})
+	check_eq(s.total().attack, 23, "attack")
+	check_eq(s.total().max_hp, 15, "Max HP")
+	check_eq(s.stats.attack, 20, "its own stats untouched")
+	check_eq(s.runes_set(), 2, "two set")
+
+func test_round_trip_keeps_runes_in_their_slots() -> void:
+	var s := ItemStack.exact(fx.equip(&"t_sword", EquipDef.Slot.WEAPON, {"attack": 20}))
+	var r := fx.rune()
+	s.runes[1] = r
+	check_eq(s.to_dict()["runes"], ["", "t_rune", ""], "saved")
+	var back := ItemStack.from_dict(s.to_dict())
+	check(back.runes[0] == null and back.runes[1] == r and back.runes[2] == null, "loaded")
+
+func test_from_dict_old_gear_gets_empty_rune_slots_and_lost_runes_leave_a_gap() -> void:
+	fx.equip(&"t_sword", EquipDef.Slot.WEAPON, {"attack": 20})
+	var old := ItemStack.from_dict({"id": "t_sword", "count": 1, "stats": {"attack": 20}})
+	check_eq(old.runes.size(), ItemStack.RUNE_SLOTS, "three slots")
+	check_eq(old.runes_set(), 0, "empty")
+	check(not old.to_dict().has("runes"), "empty slots aren't saved")
+	var lost := ItemStack.from_dict({"id": "t_sword", "runes": ["t_no_such_rune", "", "", "t_extra"]})
+	check_eq(lost.runes.size(), ItemStack.RUNE_SLOTS, "still three")
+	check_eq(lost.runes_set(), 0, "a rune that's gone leaves its slot empty")

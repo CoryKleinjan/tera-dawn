@@ -62,7 +62,7 @@ func _draw_bonuses() -> void:
 	draw_row(panel)
 	var stack := Game.me.equipment.at(selected) if selected != &"" else null
 	var heading := stack.item.display_name if stack else "Gear bonuses"
-	var bonus := stack.stats if stack else Game.me.equipment.bonus()
+	var bonus := stack.total() if stack else Game.me.equipment.bonus()
 	var x := panel.position.x + 10
 	var y := panel.position.y + 20
 	DrawUtil.text(self, Game.ui_font, Vector2(x, y), heading, 13, Palette.SUN, 1, 3, Palette.NIGHT)
