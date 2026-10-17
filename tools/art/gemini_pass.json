@@ -26635,6 +26635,29 @@
    "refs": [],
    "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Silent Stair, a map of a hidden stone forest in my 2D side-scrolling game: a forest of GIANT oak trees where everything has turned to pale starlit stone, silent and still, as if from a world already gone. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich colours, bold dark outlines, and hand-painted texture (carved bark, stone chips, worn patches). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: looking out across the upper forest high among the stone trunks, where giant trunks rise straight up past the top of the picture and soft, rounded, billowing canopies of stone leaves (irregular cloud-like clumps with ragged leafy edges, never flat tops, never discs, slabs, shelves or rings) rise one above another higher and higher into the haze, as if climbing a stair of trees; faint white light from cracks in the trunks. Colours: deep slate blue at the very top (#2b3140), pale silver-white where the light is brightest (#e9ecf2), cool blue-grey mist low down (#b8c0cc), white crack light. No green, no warm sunlight. It must match the first map of the same forest: giant pale stone oak trunks in ivory and cool blue-grey with carved bark, stone leaf canopies, thin white glowing cracks, tiny still white light motes, silver mist. Strict rules: 1) Side-on view at eye level, every trunk straight up and down. 2) No people, characters, buildings, ruins, statues, animals or birds. No clouds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft misty stone forest floor far away, with nothing close to the viewer (no roots, rocks, logs or leaves up front); the closest shapes are in the middle distance. No level branches, ledges or mounds that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta, and no dark band across the top. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
   }
+ },
+ {
+  "id": "mon_petrified_warden_v3a",
+  "prompts": null,
+  "batch": "Tears pilot: Warden tall cells (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mon_petrified_warden_v3a.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': v1 and v2 ran off the narrow 2x4 cells, so the boss gets two 1x4 sheets of tall cells (600x1350 on a 16:9 base). Sheet A: idle1, idle2, walk1, walk2. Sheet B (walk3, attack, hurt, defeated) is painted from A's cell 1 once A is approved.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x4_tall.png",
+   "refs": [],
+   "text": "The base picture is an EMPTY sheet of 4 tall cells in one row (numbered left to right) on a flat magenta background. Paint ONE new game monster once in every cell, in the pose given for that cell. The monster is the \"Petrified Warden\", a giant boss: an ancient oak tree that walks, from a forest where every living thing has turned to stone. A tall, broad, heavy body like a carved trunk, its whole body carved from pale starlit stone (ivory and cool blue-grey, with soft violet-grey shadows), fine chips and worn patches on the stone, thin cracks across it with soft white light glowing from inside them. Two thick root legs, two long heavy branch arms ending in gnarled branch hands, a stern carved face with a heavy brow and two glowing white eyes, and on top of its head a SMALL, compact canopy of stone leaves, no wider than its shoulders and no taller than its head. The light glows brightest in a large crack across its chest. No crown, helmet, beard, moss, green leaves or armour. Painted in my game's style: rich colours, strong light from the upper left with bright highlights and soft shadow, visible soft painted brush texture at a fairly chunky brush scale, a thin dark slate-plum outline, smooth anti-aliased edges. Never pixel art, never a flat cartoon, never a vector look. It is exactly the same creature in every cell (same body, colours, cracks, canopy and face) and the same size in every cell. The WHOLE creature, from the top of its leaf canopy down to its feet, fits inside the cell with clear magenta space above the canopy, below the feet and on both sides: it fills about three quarters of the cell's height, its feet standing on one shared ground line a little above the bottom of each cell. Nothing touches or crosses any cell border. It is seen strictly from the side in profile, like a side-scrolling game sprite, its body and face turned to the RIGHT. Cell 1, IDLE 1: standing tall, arms hanging. Cell 2, IDLE 2: standing, slightly hunched, chest crack glowing brighter. Cell 3, WALK 1: a long stride, front root leg reaching forward, back leg pushing behind, arms swinging. Cell 4, WALK 2: body raised, one leg straight under it and the other lifted high, bent at the knee. Exactly one monster per cell. Do NOT draw ground lines, dust, speed lines, shadows, ground, grass, sparkles, stray light motes or any effect or object: only the monster. Keep the grid lines thin; no frames, borders or panels. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Never a second copy, a ghost or a different creature."
+  }
  }
 ]
 }
