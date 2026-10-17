@@ -52,12 +52,12 @@ func check() -> void:
 	world.hud.quickslots.assign(1, &"skill", &"dawn_slash")
 	# A Red Potion on a quickslot is drunk with its key.
 	world.hud.quickslots.assign(7, &"item", &"red_potion")
-	ch.health.set_hp(10)
+	ch.health.set_hp(1)
 	await _ticks(2)
 	_me().item_cd = 0
 	await _tap("quick_8")
 	await _ticks(1)
-	_check(Game.me.health.hp > 10, "a potion's quickslot key drinks it")
+	_check(Game.me.health.hp > 1, "a potion's quickslot key drinks it")
 	world.player.cooldown = 0
 	_me().cooldown = 0
 	await _ticks(30)

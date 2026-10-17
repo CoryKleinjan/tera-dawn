@@ -73,10 +73,10 @@ func test_a_self_buff_stays_with_the_caster() -> void:
 func test_first_aid_heals_then_waits_for_its_recharge() -> void:
 	_setup()
 	var c := ann.character
-	c.health.damage(c.max_hp() - 1)
+	c.health.damage(c.max_hearts() - 1)
 	_use(ann, &"first_aid")
 	var aid := Content.skill(&"first_aid")
-	check_eq(c.health.hp, 1 + roundi(c.max_hp() * aid.heal_at(1)), "healed")
+	check_eq(c.health.hp, 2, "healed a heart")
 	check(c.skills.buffs.is_empty(), "nothing lingers after the heal")
 	h.step(aid.cooldown + 1)
 	c.health.damage(c.health.hp - 1)
@@ -85,7 +85,7 @@ func test_first_aid_heals_then_waits_for_its_recharge() -> void:
 	h.step(aid.recharge_ticks(1))
 	c.health.damage(c.health.hp - 1)
 	_use(ann, &"first_aid")
-	check_eq(c.health.hp, 1 + roundi(c.max_hp() * aid.heal_at(1)), "ready again")
+	check_eq(c.health.hp, 2, "ready again")
 
 # ---------- Dark Sight ----------
 
@@ -106,21 +106,29 @@ func test_dark_sight_hides_you_until_you_attack() -> void:
 
 # ---------- Magic Guard ----------
 
-func test_magic_guard_takes_part_of_a_hit_out_of_mp() -> void:
+func test_magic_guard_sometimes_pays_mp_instead_of_a_heart() -> void:
 	_setup()
 	_use(ann, &"magic_guard")
 	var c := ann.character
 	var guard := c.skills.mp_guard()
 	check_near(guard, Content.skill(&"magic_guard").mp_guard_at(1), "guarding")
 	ServerHarness.no_dodge(c)
-	c.mp = c.max_mp()
-	var mp := c.mp
-	var hp := c.health.hp
-	map.hurt_player(ann, mob_def, 400.0)
-	var lost_hp := hp - c.health.hp
-	var lost_mp := mp - c.mp
-	check(lost_mp > 0, "MP took some")
-	check_eq(lost_mp, roundi((lost_hp + lost_mp) * guard), "its share")
+	var soaked := 0
+	var landed := 0
+	for i in 400:
+		c.mp = c.max_mp()
+		c.health.set_hp(c.max_hearts())
+		ann.inv = 0
+		map.hurt_player(ann, mob_def, 400.0)
+		if c.mp < c.max_mp():
+			soaked += 1
+			check_eq(c.max_mp() - c.mp, Combat.guard_mp(c), "paid the guard's MP")
+			check_eq(c.health.hp, c.max_hearts(), "and kept the heart")
+		if c.health.hp < c.max_hearts():
+			check_eq(c.mp, c.max_mp(), "no MP for a heart lost")
+		if ann.inv == SimPlayer.HURT_INV:  # not blocked by defense
+			landed += 1
+	check_between(soaked, roundi(landed * guard * 0.7), roundi(landed * guard * 1.3), "about its share of hits soaked")
 
 func test_magic_guard_lets_hp_take_the_rest_once_mp_runs_out() -> void:
 	_setup()
