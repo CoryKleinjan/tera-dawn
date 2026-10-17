@@ -56,7 +56,7 @@ solid = true
 
 [sub_resource type="Resource" id="Portal_west"]
 script = ExtResource("portal_def")
-x = 60.0
+x = 165.0
 platform = 0
 target_map = &"glimmer_path"
 target_x = 2360.0
@@ -71,7 +71,7 @@ face = 1
 [sub_resource type="Resource" id="Prop_crystals_west"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_prop_crystals")
-x = 170.0
+x = 356.0
 y = -1.0
 depth = -3.0
 scale = 1.0
@@ -218,7 +218,7 @@ scale = 1.0
 [sub_resource type="Resource" id="Prop_lamp_east"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_lamp_post")
-x = 3850.0
+x = 3800.0
 y = -1.0
 depth = -3.0
 scale = 1.0
@@ -228,7 +228,7 @@ light_height = 120.0
 
 [sub_resource type="Resource" id="Portal_east"]
 script = ExtResource("portal_def")
-x = 3940.0
+x = 3860.0
 platform = 0
 target_map = &"starfall_ridge"
 target_x = 120.0
