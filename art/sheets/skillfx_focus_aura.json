@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skillfx_focus_aura.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 674, 675, 1349],
+    "cols": [0, 598, 600, 1198, 1200, 1798, 1800, 2398]
+  },
+  "cells": [
+    ["focus_aura_1", "", "focus_aura_2", "", "focus_aura_3", "", "focus_aura_4"],
+    ["", "", "", "", "", "", ""],
+    ["focus_aura_5", "", "focus_aura_6", "", "focus_aura_7", "", "focus_aura_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.1996,
+  "overrides": {
+    "focus_aura_1": {
+      "crop": [60, 88, 518, 566]
+    },
+    "focus_aura_2": {
+      "crop": [60, 88, 518, 566]
+    },
+    "focus_aura_3": {
+      "crop": [60, 88, 518, 566]
+    },
+    "focus_aura_4": {
+      "crop": [60, 88, 518, 566]
+    },
+    "focus_aura_5": {
+      "crop": [60, 88, 518, 566]
+    },
+    "focus_aura_6": {
+      "crop": [60, 88, 518, 566]
+    },
+    "focus_aura_7": {
+      "crop": [60, 88, 518, 566]
+    },
+    "focus_aura_8": {
+      "crop": [60, 88, 518, 566]
+    }
+  }
+}

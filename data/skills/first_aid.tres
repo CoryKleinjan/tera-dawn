@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="SkillDef" load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
-[ext_resource type="Resource" path="res://data/effects/heal.tres" id="e_heal"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/first_aid.png" id="i_toughness"]
+[ext_resource type="Resource" path="res://data/effects/first_aid_heal.tres" id="fx_effect"]
 
 [resource]
 script = ExtResource("1_skill_def")
@@ -23,5 +23,5 @@ heal = 0.15
 heal_per_level = 0.1
 recharge = 60.0
 flash = Color(1.0, 0.62, 0.66, 1)
-effect = ExtResource("e_heal")
+effect = ExtResource("fx_effect")
 icon = ExtResource("i_toughness")

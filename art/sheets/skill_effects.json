@@ -6,31 +6,31 @@
   "out_dir": "assets/sprites/effects",
   "cells": [
     [
-      "power_strike_1",
-      "power_strike_2",
-      "flash_fist_1",
-      "flash_fist_2",
-      "somersault_kick",
+      "",
+      "",
+      "",
+      "",
+      "",
       ""
     ],
     [
-      "energy_bolt_hit",
-      "arcane_claw_hit",
+      "",
+      "",
       "arrow_hit",
-      "star_hit",
-      "bullet_hit",
+      "",
+      "",
       ""
     ],
     [
-      "quick_step_aura",
-      "iron_body_aura",
-      "focus_aura",
-      "magic_armor_aura",
-      "haste_aura",
+      "",
+      "",
+      "",
+      "",
+      "",
       ""
     ],
     [
-      "bullet_time_aura",
+      "",
       "buff_rise_1",
       "buff_rise_2",
       "mp_restore",
@@ -62,83 +62,6 @@
     0.45
   ],
   "overrides": {
-    "power_strike_1": {
-      "blank": [
-        [
-          0,
-          0,
-          150,
-          17
-        ]
-      ],
-      "scale": 0.6571
-    },
-    "power_strike_2": {
-      "blank": [
-        [
-          0,
-          0,
-          154,
-          17
-        ]
-      ],
-      "scale": 0.6571
-    },
-    "flash_fist_1": {
-      "blank": [
-        [
-          0,
-          0,
-          126,
-          17
-        ]
-      ],
-      "scale": 0.6687
-    },
-    "flash_fist_2": {
-      "blank": [
-        [
-          0,
-          0,
-          130,
-          17
-        ]
-      ],
-      "scale": 0.6687
-    },
-    "somersault_kick": {
-      "blank": [
-        [
-          0,
-          0,
-          176,
-          17
-        ]
-      ],
-      "scale": 0.7
-    },
-    "energy_bolt_hit": {
-      "blank": [
-        [
-          0,
-          0,
-          163,
-          18
-        ]
-      ],
-      "scale": 0.6526
-    },
-    "arcane_claw_hit": {
-      "blank": [
-        [
-          0,
-          0,
-          166,
-          18
-        ]
-      ],
-      "scale": 0.7502
-    },
     "arrow_hit": {
       "blank": [
         [
@@ -149,98 +72,6 @@
         ]
       ],
       "scale": 0.6645
-    },
-    "star_hit": {
-      "blank": [
-        [
-          0,
-          0,
-          88,
-          18
-        ]
-      ],
-      "scale": 0.8257
-    },
-    "bullet_hit": {
-      "blank": [
-        [
-          0,
-          0,
-          114,
-          18
-        ]
-      ],
-      "scale": 0.9048
-    },
-    "quick_step_aura": {
-      "blank": [
-        [
-          0,
-          0,
-          164,
-          18
-        ]
-      ],
-      "scale": 0.6893
-    },
-    "iron_body_aura": {
-      "blank": [
-        [
-          0,
-          0,
-          153,
-          19
-        ]
-      ],
-      "scale": 0.5978
-    },
-    "focus_aura": {
-      "blank": [
-        [
-          0,
-          0,
-          115,
-          18
-        ]
-      ],
-      "scale": 0.5385
-    },
-    "magic_armor_aura": {
-      "blank": [
-        [
-          0,
-          0,
-          183,
-          19
-        ]
-      ],
-      "scale": 0.635
-    },
-    "haste_aura": {
-      "blank": [
-        [
-          0,
-          0,
-          118,
-          18
-        ]
-      ],
-      "scale": 0.6515,
-      "key": [
-        0.3,
-        0.7
-      ]
-    },
-    "bullet_time_aura": {
-      "blank": [
-        [
-          0,
-          0,
-          175,
-          18
-        ]
-      ],
-      "scale": 0.69
     },
     "buff_rise_1": {
       "blank": [

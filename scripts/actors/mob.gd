@@ -25,6 +25,22 @@ const HIT_FLASH_TICKS := 5
 ## Ticks a defeated boss stays on screen: its whole death animation, then the fade
 ## (others take SimMob.DEATH_FADE_TICKS).
 const BOSS_DEATH_TICKS := 120
+## Code-side motion on top of the painted frames (it only moves the whole picture):
+## how much the walk speeds up or slows with how fast it really moves (so feet don't
+## slide), the stretch on take-off and squash on landing, the idle's breathing (share of
+## its height, and how fast), how far a strike lurches forward (game pixels), the lean back
+## when hurt and the topple of a defeated monster (radians), how far that topple slides it
+## back (game pixels), and how long a respawned monster takes to pop up (seconds).
+const WALK_PACE := Vector2(0.75, 1.8)
+const TAKEOFF_STRETCH := 0.7
+const LAND_SQUASH := 0.8
+const BREATH := 0.025
+const BREATH_RATE := 0.6
+const STRIKE_LURCH := 8.0
+const HURT_TILT := 0.14
+const DEATH_TILT := 1.25
+const DEATH_SLIDE := 18.0
+const SPAWN_POP_TIME := 0.3
 
 var world: TDWorld
 var index := 0
@@ -57,6 +73,17 @@ var _fade := 1.0
 var _tinted := Color.WHITE
 ## How much of a flier's hover it shows: 0 while a slam holds it down (SkillDef.slam).
 var _hover := 1.0
+## How fast it really moved last tick (game pixels), for the walk's pace.
+var _pace := 0.0
+## The way the last hit pushed it (1 or -1): it flinches and falls away from that.
+var _push := 0
+## How far a strike has thrown it forward (game pixels, fading) and the tilt it shows now.
+var _lurch := 0.0
+var _tilt := 0.0
+## Seconds since it (re)appeared, for the spawn pop; flags last frame, for take-offs,
+## landings and strikes starting.
+var _shown_t := SPAWN_POP_TIME
+var _last_flags := 0
 
 static func create(w: TDWorld, i: int, d: MonsterDef, p: Platform) -> TDMob:
 	var m := TDMob.new()
@@ -81,6 +108,8 @@ func apply(state: Array) -> void:
 	if not known or (was_dead and not dead) or (was_hidden and flags & SnapshotFlags.MOB_HIDDEN == 0):
 		position = target # first sight, back from the dead or from a blink: no gliding in
 		death_t = 0
+		if was_dead and not dead:
+			_shown_t = 0.0 # respawned: pop up
 	if dead and not was_dead and known:
 		death_t = death_ticks()
 	known = true
@@ -99,6 +128,8 @@ func death_ticks() -> int:
 ## hits, a few frames of hit-stop so the blow lands.
 func hit_react(face: int, stop_ticks := 0) -> void:
 	_recoil = 6.0 * face
+	if face != 0:
+		_push = face
 	_stop_t = maxi(_stop_t, stop_ticks)
 	_flash_until = Engine.get_physics_frames() + HIT_FLASH_TICKS
 	if rig:
@@ -111,10 +142,11 @@ func body_position() -> Vector2:
 ## body_position() where it is drawn this frame (between ticks, see TDWorld.drawn), with
 ## its hit recoil.
 func drawn_body_position() -> Vector2:
-	return world.drawn(self) + SimMob.hover_offset(def, phase) * _hover + Vector2(_recoil, 0)
+	return world.drawn(self) + SimMob.hover_offset(def, phase) * _hover + Vector2(_recoil + _lurch, 0)
 
 func step() -> void:
 	_recoil *= 0.75
+	_lurch *= 0.8
 	if _stop_t > 0:
 		# hit-stop: hold still for a moment
 		_stop_t -= 1
@@ -122,7 +154,9 @@ func step() -> void:
 			rig.freeze(_stop_t > 0)
 		return
 	phase += 0.08
+	var was := position.x
 	position += (target - position) * FOLLOW
+	_pace = absf(position.x - was)
 	_hover = move_toward(_hover, 0.0 if flags & SnapshotFlags.MOB_DOWNED != 0 else 1.0, DOWN_SPEED)
 	if death_t > 0 and incoming <= 0:
 		death_t -= 1
@@ -143,7 +177,7 @@ func _ready() -> void:
 		rig.add_aura(def.aura_color, def.size.y * 0.8)
 	rig.set_opacity(0.0)
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if rig == null or world == null:
 		return
 	rig.visible = known and (not dead or death_t > 0)
@@ -208,7 +242,49 @@ func _process(_delta: float) -> void:
 		rig.play(&"move")
 	else:
 		rig.play(&"idle")
+	_animate(facing, fallen, delta)
 	rig.place(drawn_body_position() + lean, z)
+
+## The code-side motion over its painted frames: the walk keeping pace, a stretch on
+## take-off and squash on landing, a lurch into each strike, breathing at idle, a flinch
+## when hurt, a topple when defeated and a pop when it appears. It only moves, stretches
+## and tilts the whole picture, never repaints it.
+func _animate(facing: int, fallen: bool, delta: float) -> void:
+	var started := flags & ~_last_flags
+	var ended := _last_flags & ~flags
+	_last_flags = flags
+	_shown_t += delta
+	if started & SnapshotFlags.MOB_AIRBORNE:
+		rig.stretch(TAKEOFF_STRETCH)
+	elif ended & SnapshotFlags.MOB_AIRBORNE:
+		rig.squash(LAND_SQUASH)
+	if started & SnapshotFlags.MOB_CASTING and not dead:
+		_lurch = STRIKE_LURCH * facing
+		rig.squash(0.6)
+	var walking := rig.current == &"move" and def.speed > 0.0
+	rig.set_speed(clampf(_pace / def.speed, WALK_PACE.x, WALK_PACE.y) if walking else 1.0)
+	var scale := Vector2.ONE
+	var tilt := 0.0
+	var away := _push if _push != 0 else -facing
+	if fallen and not def.boss:
+		# knocked over backwards, sliding a little, as it fades (bosses paint their own fall)
+		var t := 1.0 - float(death_t) / float(death_ticks())
+		var fall := ease(clampf(t * 2.0, 0.0, 1.0), 0.5)
+		tilt = away * DEATH_TILT * fall
+		_lurch = away * DEATH_SLIDE * fall
+	elif rig.current == &"hurt":
+		tilt = away * HURT_TILT
+	elif rig.current == &"idle" and not stunned():
+		# phase gains 0.08 a tick: this breathes BREATH_RATE times a second
+		var b := sin(phase / (0.08 * 60.0) * BREATH_RATE * TAU)
+		scale = Vector2(1.0 - b * BREATH * 0.6, 1.0 + b * BREATH)
+	_tilt = lerpf(_tilt, tilt, 0.35)
+	if _shown_t < SPAWN_POP_TIME:
+		# appearing: grows up out of the ground with a little overshoot
+		var k := ease(_shown_t / SPAWN_POP_TIME, 0.4)
+		var grow := 0.4 + 0.6 * k + sin(k * PI) * 0.12
+		scale *= Vector2(grow, grow)
+	rig.set_pose(scale, _tilt)
 
 ## The move it is using right now, or null.
 func current_move() -> MonsterMove:

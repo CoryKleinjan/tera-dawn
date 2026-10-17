@@ -22,9 +22,15 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    - Attacks can also `slow` what they hit, `splash` (hit the nearest monster in the area and
      everything within `splash` of it), push harder (`knockback`), or not aim (`aims`).
    - The motion the player makes (`animation`; "cast" makes none) and the effects to show
-     (`effect` on the player, `hit_effect` on each target).
+     (`effect` on the player, `hit_effect` on each target, and for a buff its `aura`).
 2. Effects are **EffectDef**s in `data/effects/`: a flipbook of frames from
    `assets/sprites/effects/`, its speed and size, an optional light and particle burst.
+   Each job skill's are painted 8-frame sheets (`art/sheets/skillfx_<name>.json`, cut with
+   `"glow": true` into `assets/sprites/effects/skills/`, played at 14 fps): a swing in front
+   of the player, a hit on every monster struck, a buff's burst as it's cast, then its aura
+   looping round each player it landed on for as long as the buff lasts (`Net.ev_aura`,
+   `TDWorldFx.add_aura`; casting again replaces it). The paintings fade themselves out, so
+   their defs set `fade_out` false.
    Effects the game fires on its own rather than through a skill or item (celebrate, monster
    poof, critical) are named as constants on `EffectDef`; code uses those, never
    the id as a string.
@@ -42,7 +48,8 @@ it hits (`MapInstance.use_skill`) or starts the buff (`SkillBook.add_buff`, coun
 in `SimPlayer.step`). Passives and buffs feed into the character's stats in `recalc`.
 
 Ranged and magic skills:
-- A `projectile` (a **ProjectileDef** in `data/projectiles/`: texture, speed, spin, light) makes
+- A `projectile` (a **ProjectileDef** in `data/projectiles/`: texture, or painted `frames` it
+  loops in flight, speed, spin, light) makes
   the skill a shot. The server still decides the hit at once; clients fly one projectile per
   hit (`TDProjectile`) and pop the damage number when it lands, holding the monster's death
   until then.

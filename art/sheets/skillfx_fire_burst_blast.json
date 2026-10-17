@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skillfx_fire_burst_blast.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 674, 675, 1349],
+    "cols": [0, 598, 600, 1198, 1200, 1798, 1800, 2398]
+  },
+  "cells": [
+    ["fire_burst_blast_1", "", "fire_burst_blast_2", "", "fire_burst_blast_3", "", "fire_burst_blast_4"],
+    ["", "", "", "", "", "", ""],
+    ["fire_burst_blast_5", "", "fire_burst_blast_6", "", "fire_burst_blast_7", "", "fire_burst_blast_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.173,
+  "overrides": {
+    "fire_burst_blast_1": {
+      "crop": [6, 20, 572, 634]
+    },
+    "fire_burst_blast_2": {
+      "crop": [6, 20, 572, 634]
+    },
+    "fire_burst_blast_3": {
+      "crop": [6, 20, 572, 634]
+    },
+    "fire_burst_blast_4": {
+      "crop": [6, 20, 572, 634]
+    },
+    "fire_burst_blast_5": {
+      "crop": [6, 20, 572, 634]
+    },
+    "fire_burst_blast_6": {
+      "crop": [6, 20, 572, 634]
+    },
+    "fire_burst_blast_7": {
+      "crop": [6, 20, 572, 634]
+    },
+    "fire_burst_blast_8": {
+      "crop": [6, 20, 572, 634]
+    }
+  }
+}

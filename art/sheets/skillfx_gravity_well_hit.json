@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skillfx_gravity_well_hit.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 674, 675, 1349],
+    "cols": [0, 598, 600, 1198, 1200, 1798, 1800, 2398]
+  },
+  "cells": [
+    ["gravity_well_hit_1", "", "gravity_well_hit_2", "", "gravity_well_hit_3", "", "gravity_well_hit_4"],
+    ["", "", "", "", "", "", ""],
+    ["gravity_well_hit_5", "", "gravity_well_hit_6", "", "gravity_well_hit_7", "", "gravity_well_hit_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.1298,
+  "overrides": {
+    "gravity_well_hit_1": {
+      "crop": [0, 22, 578, 632]
+    },
+    "gravity_well_hit_2": {
+      "crop": [0, 22, 578, 632]
+    },
+    "gravity_well_hit_3": {
+      "crop": [0, 22, 578, 632]
+    },
+    "gravity_well_hit_4": {
+      "crop": [0, 22, 578, 632]
+    },
+    "gravity_well_hit_5": {
+      "crop": [0, 22, 578, 632]
+    },
+    "gravity_well_hit_6": {
+      "crop": [0, 22, 578, 632]
+    },
+    "gravity_well_hit_7": {
+      "crop": [0, 22, 578, 632]
+    },
+    "gravity_well_hit_8": {
+      "crop": [0, 22, 578, 632]
+    }
+  }
+}

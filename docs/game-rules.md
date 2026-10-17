@@ -83,7 +83,11 @@ update this page when one changes. Each zone's own look and music are in
 - No chairs: the Sit key sits him on the ground, where he regains HP and MP twice as fast (the
   base part). Moving, the Sit key again or any monster hit gets him up.
 - An aimed attack turns its swing effect up or down.
-- Job skills will be flashy and grand, like MapleStory.
+- Job skills will be flashy and grand, like MapleStory. Their effects are painted (Gemini),
+  8 frames at 14 fps: soft glow with no outline, MapleStory-big, in the job's colours. Attacks
+  show a swing and a hit on each monster struck, shots fly as painted frames, buffs burst as
+  cast and keep an aura round the player while they last; passives get none. Art only: no
+  added screen shake, flash or slow-down.
 
 ## Jobs, levels and skills
 
@@ -298,6 +302,10 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   roar again at their second wind; their defeat is a painted fall (hit pause, collapse, embers
   fading) rather than a quick poof. Molten King has this first; the others follow as painted.
 - Monster HP is 40% lower than first tuned, so fights stay quick.
+- Monsters move with their painted frames, never repainted or recoloured in code: steps keep
+  pace with their speed (no sliding feet), they stretch taking off and squash landing, lurch
+  into each strike, breathe at idle, flinch back when hit, topple over when defeated (bosses
+  play their painted fall) and pop up when they respawn.
 
 ## UI
 
