@@ -52,7 +52,14 @@ func check() -> void:
 	await _ticks(2)
 	_check(Game.me.inventory.count_of(scroll) == 1, "it isn't used up when you're already in town")
 	_check(Content.map(&"hollow").return_town() == Character.START_MAP and Content.map(&"meadow").return_town() == Character.START_MAP, "maps know their town")
-	# Captain Marlo's ship to Dawnharbor, then Brin's storage, then Rook's coach.
+	# Captain Marlo's ship from the village dock to Dawnharbor's docks, then Brin's storage,
+	# then Rook's coach.
+	var dock: PortalDef = Content.map(Character.START_MAP).portals.filter(func(p: PortalDef) -> bool: return p.target_map == &"dawnrise_dock")[0]
+	_teleport(Vector2(dock.x, 620))
+	await _ticks(2)
+	await _tap("move_up")
+	await _until(func() -> bool: return world.map.id == &"dawnrise_dock", 30)
+	_check(world.map.id == &"dawnrise_dock", "the village's dock portal leads to Dawnrise Dock")
 	var marlo: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"captain_marlo")[0]
 	_teleport(Vector2(marlo.position.x - 30, 620))
 	await _ticks(2)
@@ -61,7 +68,10 @@ func check() -> void:
 	talk.choose(labels.find("Travel"))
 	talk.choose(0)
 	await _ticks(3)
-	_check(world.map.id == &"dawnharbor", "Captain Marlo sails to Dawnharbor")
+	_check(world.map.id == &"dawnharbor_docks", "Captain Marlo sails to Dawnharbor's docks")
+	_check(world.npcs().any(func(n: TDNpc) -> bool: return n.def.id == &"dock_marlo"), "and he waits there with his ship")
+	Net.server.enter_map(_me(), &"dawnharbor", 360)
+	await _ticks(3)
 	var brin: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"storage_keeper")[0]
 	_teleport(Vector2(brin.position.x - 30, brin.position.y))
 	await _ticks(2)

@@ -16,7 +16,10 @@ enum Move {
 @export var move := Move.DASH
 ## The move's name, for the line that says it was learned ("Dash").
 @export var move_name := ""
-## Colour of the move's code-drawn trail (values above 1 glow), until painted effects come.
+## Its painted effect, played round him as he does the move (it follows him). Null draws a
+## code-drawn trail in `trail` instead.
+@export var effect: EffectDef
+## Colour of the code-drawn trail (values above 1 glow), for a move with no painted effect.
 @export var trail := Color(1.4, 1.4, 1.6)
 
 ## A trail for the move lasting `ticks` (TDMoveFx).

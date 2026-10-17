@@ -212,7 +212,8 @@ func test_the_start_is_reachable_from_every_map() -> void:
 
 func test_every_town_has_a_storage_keeper() -> void:
 	for m: MapDef in Content.maps.values():
-		if m.town and m.id != Character.START_MAP:
+		# a town-side map (a dock) shares its town's keeper
+		if m.town and m.id != Character.START_MAP and m.return_town() == m.id:
 			check(m.npcs.any(func(p: NpcPlacement) -> bool: return p.npc and p.npc.storage), "%s: town has no storage keeper" % Scan.where(m))
 
 ## Monsters kept in the game's files that no map spawns yet: Ember Hollow's boss, left over
