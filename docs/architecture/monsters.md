@@ -7,7 +7,11 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 1. Get its sprite. A single image goes in `assets/sprites/monsters/<id>.png`; an animated
    one comes from a sheet with a `sets` block that writes `assets/animations/<id>.tres` with
    the animations `idle`, `move`, `attack`, `hurt` and `die` (any missing one falls back to
-   `idle`; single images get a little procedural bob and squash instead).
+   `idle`; single images get a little procedural bob and squash instead). Animated ones get
+   code motion on top of their frames (`TDMob._animate`, constants at the top of `mob.gd`):
+   the walk keeps pace with how fast it moves, a stretch on take-off and squash on landing, a
+   lurch into each strike, breathing at idle, a flinch when hurt, a topple when defeated
+   (not bosses, whose fall is painted) and a pop when it respawns.
 2. Create `data/monsters/<id>.tres` as a **MonsterDef** (in the editor: right-click
    `data/monsters/` → New Resource → MonsterDef). Fill in `id`, name, `level` (a hidden tuning tier, never shown),
    HP, attack and `essence` as it should be on the nearest map to a town it lives on, speed, hitbox `size`, and either `texture` or `sprite_frames`. Use `sprite_scale` if the art
