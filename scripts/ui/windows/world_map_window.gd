@@ -83,6 +83,10 @@ var _fit_zone: StringName = &""
 
 func _init() -> void:
 	super("World Map", WORLD * MAP_SCALE + Vector2((PAD - 4) * 2, TITLE_H + 4 + INFO_H))
+	# opens up close on the zone you're in
+	visibility_changed.connect(func() -> void:
+		if visible:
+			open_zone(here_zone()))
 
 ## Where the world map's area sits in the window.
 func _area() -> Rect2:
@@ -153,6 +157,11 @@ func open_zone(region: StringName) -> void:
 ## The map you're on (the town outside, for a room).
 func _here() -> StringName:
 	return hud.world.map.outside() if hud and hud.world and hud.world.map else &""
+
+## The zone of the map you're on, or none (the world view) when it isn't on the world map.
+func here_zone() -> StringName:
+	var m: MapDef = Content.maps.get(_here())
+	return m.region if m and Content.regions.has(m.region) and not placed_in(m.region).is_empty() else &""
 
 func _draw_body() -> void:
 	var a := _area()
