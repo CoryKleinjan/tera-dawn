@@ -9,7 +9,7 @@
 script = ExtResource("script")
 id = &"orange_potion"
 display_name = "Orange Potion"
-description = "Brewed from sunfruit. Heals 2 hearts."
+description = "Brewed from sunfruit. Heals 2 health."
 icon = ExtResource("icon")
 sprite_scale = 0.36
 glow_color = Color(1.000, 0.690, 0.361, 1.0)

@@ -12,7 +12,7 @@ const FIELDS: Array[StringName] = [
 ]
 ## Short names for tooltips and the stats window.
 const LABELS := {
-	&"heart_pieces": "Heart Pieces", &"max_mp": "MaxMP", &"attack": "Weapon Attack",
+	&"heart_pieces": "Health Pieces", &"max_mp": "MaxMP", &"attack": "Weapon Attack",
 	&"magic_attack": "Magic Attack", &"defense": "Weapon Defense",
 	&"magic_defense": "Magic Defense", &"accuracy": "Accuracy", &"avoid": "Avoidability",
 	&"speed": "Speed", &"jump": "Jump", &"crit": "Critical Rate",
