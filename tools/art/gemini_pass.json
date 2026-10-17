@@ -24703,6 +24703,55 @@
    ],
    "text": "The base picture is a sheet of 3 cells (1 row of 3) showing the boar boss \"Grotto Tusker\" in 3 poses on a flat magenta background. The attached picture shows Grotto Tusker in his idle pose: his look is exactly that (wet dark slate-blue hide with pale barnacles and water drips, dripping strands of dark green kelp for a mane, a short dark kelp beard, a cluster of pale barnacles and small shells on his shoulder, long yellowed tusks, small pale eyes, an old iron lantern glowing warm yellow on a short rope tied around his near tusk). Keep EVERYTHING in the base picture exactly as it is: the same pose, size, position, body shape, leg positions, head angle, mouth and facing in every cell, the same cute chunky cartoon style, smooth soft painted shading and thin dark plum-brown outline, the same grid lines and the same pure flat magenta #FF00FF background. Never take a pose from the attached picture. Change ONLY these things: In cell 1 the lantern hangs below his feet: shorten its rope so the lantern hangs close under his tusk, its bottom higher than his lowest hoof and above the ground line. In cell 2 the lantern is missing: add the old iron lantern glowing warm yellow on a short rope tied around his near tusk, hanging close under the tusk, its bottom higher than his lowest hoof. Keep cell 3 exactly as it is. Write NO text, labels or names anywhere. Draw NO shadow, puddle, ground, glow halo or effect around it: only the boar on flat magenta. Every boar stays fully inside its own cell, never touching the cell borders. Exactly one boar per cell."
   }
+ },
+ {
+  "id": "mon_hollow_stag",
+  "prompts": null,
+  "batch": "Tears test: Hollow Stag (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mon_hollow_stag.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': small test of Greenbough's hidden tear zone (Cory picked the stone forest 19:05Z and OK'd its creatures 19:14Z). Main sheet of the Hollow Stag. Cells idle1, idle2, walk1, walk2, walk3, attack, hurt, defeated. Base is exactly 3:2 so no cell is cropped. No NPC style ref (monster entry).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_2x4_32.png",
+   "refs": [],
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint ONE new game monster once in every cell, in the pose given for that cell. The monster is a \"Hollow Stag\", a deer from a forest where every living thing has turned to stone: a slender, sturdy young stag about the height of a child, its whole body carved from pale starlit stone (ivory and cool blue-grey, with soft violet-grey shadows), fine chips and worn patches on the stone, a short tufted tail, neat hooves, and a pair of wide branching antlers of the same stone. Thin cracks run across its body and antlers, and soft white light glows from inside every crack, brightest in the antlers. Its eyes are two calm glowing white lights with a bright white shine. No fur, no moss, no leaves, no plants, no saddle, nothing worn. Painted in my game's style: rich colours, strong light from the upper left with bright highlights and soft shadow, visible soft painted brush texture at a fairly chunky brush scale, a thin dark slate-plum outline, smooth anti-aliased edges. Never pixel art, never a flat cartoon, never a vector look, never a realistic animal photo. It is cute and chunky like a game monster, not realistic. It is exactly the same creature in every cell (same body, colours, cracks, glow and antlers), and the same size in every cell, its body filling about half of its cell's height. It always faces RIGHT, seen from the side. It stands on four legs on the ground. Cell 1, IDLE 1: standing calmly, head up. Cell 2, IDLE 2: standing, head lowered a little, cracks glowing a bit brighter. Cell 3, WALK 1: walking forward, front right leg raised. Cell 4, WALK 2: walking, legs passing under the body. Cell 5, WALK 3: walking, front left leg raised. Cell 6, ATTACK: charging forward with head lowered, antlers pointed ahead, back legs pushing off. Cell 7, HURT: jolted backward, head tossed up, eyes squeezed into thin lines. Cell 8, DEFEATED: collapsed lying on its side, legs folded, eyes dark, the light in its cracks faded to a faint glow. Exactly one monster per cell. Do NOT draw dust, speed lines, motion flicks, shadows, ground, grass, sparkles, stray light motes, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, antlers included, never touching or cut off by the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Never a second copy, a ghost, an after-image or a different creature."
+  }
+ },
+ {
+  "id": "tear_greenbough_backdrop",
+  "prompts": null,
+  "batch": "Tears test: stone forest backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "tear_greenbough_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "town_check": {
+   "kind": "backdrop"
+  },
+  "note": "2026-10-17 thread 'Tears': small test of Greenbough's hidden tear zone (Cory picked the stone forest 19:05Z and OK'd its creatures 19:14Z). One picture behind the tear's first map (BackdropLayerDef PICTURE, far back). Base 4096x2304, exactly 16:9, a guide gradient in the zone's colours.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/tears/bases/greenbough_tear_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for the first map of a hidden stone forest in my 2D side-scrolling game: a forest of GIANT oak trees where everything has turned to pale starlit stone, silent and still, as if from a world already gone. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich colours, bold dark outlines, and hand-painted texture (carved bark, stone chips, worn patches). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: huge straight oak trunks of pale stone, ivory and cool blue-grey, stand across the picture, the nearest in the middle distance, others fading back layer by layer into silver mist. High above, broad canopies of stone leaves arch over the top. Thin cracks run through the trunks and branches, and soft white light glows out of them. Tiny white motes of light hang in the still air. Far back under the trees, soft stone ground fading into mist. Colours: deep slate blue at the very top (#2b3140), pale silver-white where the light is brightest (#e9ecf2), cool blue-grey mist low down (#b8c0cc), white crack light. No green, no warm sunlight. Strict rules: 1) Side-on view at eye level, every trunk straight up and down. 2) No people, characters, buildings, ruins, statues, animals or birds. No clouds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft misty stone forest floor far away, with nothing close to the viewer (no roots, rocks, logs or leaves up front); the closest trunks are in the middle distance. No level branches, ledges or mounds that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  }
  }
 ]
 }
