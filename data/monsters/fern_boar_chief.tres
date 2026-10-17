@@ -72,3 +72,4 @@ sprite_frames = ExtResource("2_fern_boar_chief")
 sprite_scale = 1.1
 drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot6")])
 boss = true
+respawn_ticks = Vector2i(1800, 2400)

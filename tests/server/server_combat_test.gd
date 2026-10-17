@@ -1,6 +1,6 @@
 extends TestCase
 ## Attacks and skills against monsters on the server: what gets hit, damage, kills, Dawn
-## Essence, cooldowns, MP, buffs and monsters staying down until the map loads fresh.
+## Essence, cooldowns, MP, buffs and monsters coming back.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
@@ -127,14 +127,19 @@ func test_dead_monsters_are_not_hit() -> void:
 	_attack()
 	check_eq(h.last(2, &"ev_skill")[5], [], "nothing to hit")
 
-func test_a_defeated_monster_stays_down_while_you_are_on_the_map() -> void:
+func test_monster_respawns_with_full_hp_after_its_timer() -> void:
 	_setup(5)
 	var m := map.mobs[0]
 	m.health.damage(4)
 	_attack()
 	check(m.dead, "defeated")
-	h.step(3000)
-	check(m.dead, "still gone")
+	# 40 ticks of dying, then respawn_ticks (100)
+	h.step(139)
+	check(m.dead, "still gone one tick early")
+	h.step(1)
+	check(not m.dead, "back")
+	check_eq(m.health.hp, 5, "full HP")
+	check_eq(m.target, 0, "forgot who beat it")
 
 func test_leaving_and_coming_back_brings_the_monsters_back_at_full_hp() -> void:
 	_setup(5)

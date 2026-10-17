@@ -246,8 +246,8 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 
 - Two or three monster kinds per map (a boss counts as one). Each kind belongs to one zone unless
   Cory says otherwise. A monster taken out of a zone stays in the files.
-- Defeated monsters (bosses too) stay down until the map loads fresh: leaving and coming back,
-  or fainting and returning. In co-op a map resets once every player has left it.
+- Defeated monsters respawn on a timer while the map stays loaded (a few seconds; bosses about
+  half a minute). A map nobody is on resets, so coming back finds it full and its ground cleared.
 - No levels are shown anywhere: no "Lv." on monsters, bosses, maps, regions, the Monster Book,
   quests, gear or trips. Monsters and gear keep a hidden tuning tier (MonsterDef.level,
   EquipDef.required_level) only so the balance and content checks can measure them.

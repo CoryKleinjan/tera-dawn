@@ -115,3 +115,4 @@ rage_ticks = 100
 sprite_frames = ExtResource("3_old_clawbeard")
 sprite_scale = 1.0
 drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_14")])
+respawn_ticks = Vector2i(1800, 2400)

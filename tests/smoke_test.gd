@@ -87,13 +87,14 @@ func _hold_mobs(map: MapInstance, keep: Array) -> Array[SimMob]:
 		if not m.dead and m.parent == null and not keep.has(m):
 			m.dead = true
 			m.death_t = 0
+			m.respawn = 1 << 30
 			held.append(m)
 	return held
 
-## Brings monsters taken out by _hold_mobs back, as a fresh map would.
+## Brings monsters taken out by _hold_mobs back on the next tick, as if they respawned.
 func _release_mobs(held: Array[SimMob]) -> void:
 	for m in held:
-		m._reset()
+		m.respawn = 1
 
 func _press(action: String) -> void:
 	var e := InputEventAction.new()

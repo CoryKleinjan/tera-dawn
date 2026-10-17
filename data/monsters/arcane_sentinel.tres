@@ -125,3 +125,4 @@ sprite_frames = ExtResource("anim")
 sprite_scale = 1.5
 light_color = Color(0.690196, 0.564706, 1.0, 1.0)
 drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_18")])
+respawn_ticks = Vector2i(1800, 2400)
