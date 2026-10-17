@@ -24933,6 +24933,131 @@
    ],
    "text": "The base picture is a sheet of 3 cells (1 row of 3) showing the boar boss \"Grotto Tusker\" in 3 poses on a flat magenta background. The attached picture shows Grotto Tusker in his idle pose: his look is exactly that (wet dark slate-blue hide with pale barnacles and water drips, dripping strands of dark green kelp for a mane, a short dark kelp beard, a cluster of pale barnacles and small shells on his shoulder, long yellowed tusks, small pale eyes, an old iron lantern glowing warm yellow on a short rope tied around his near tusk). Keep EVERYTHING in the base picture exactly as it is: the same pose, size, position, body shape, leg positions, head angle, mouth and facing in every cell, the same cute chunky cartoon style, smooth soft painted shading and thin dark plum-brown outline, the same grid lines and the same pure flat magenta #FF00FF background. Never take a pose from the attached picture. Change ONLY these things: In cell 1 the lantern hangs below his feet: shorten its rope so the lantern hangs close under his tusk, its bottom higher than his lowest hoof and above the ground line. In cell 2 the lantern is missing: add the old iron lantern glowing warm yellow on a short rope tied around his near tusk, hanging close under the tusk, its bottom higher than his lowest hoof. Keep cell 3 exactly as it is. Write NO text, labels or names anywhere. Draw NO shadow, puddle, ground, glow halo or effect around it: only the boar on flat magenta. Every boar stays fully inside its own cell, never touching the cell borders. Exactly one boar per cell."
   }
+ },
+ {
+  "id": "newhero_boy_test_walk_idle",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_boy_test_walk_idle.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory 18:53-18:58Z: start the hero over as preset boy and girl looks, each armor set and weapon painted onto the whole character, full animations): first test, one boy in plain clothes, a 6-frame walk and a 2-frame idle on a blank sheet, no old hero art used. Released by Cory 18:58Z (\"Paint the test\") to the priced line 18:57Z (\"Then I'll price a 1-sheet test: one boy's walk and idle, 8 frames, about $0.07.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint ONE character, exactly the same in every cell: a cute chibi boy adventurer of about ten, with a very big round head about half his height on a small body, big glossy eyes with a dark top lash, deep-blue irises and white highlights, a small friendly smile and short messy brown hair. He wears plain everyday clothes: a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and simple brown leather shoes. No armour, cape, hat, bag or weapon, and nothing in his hands; his hands are small and round. He is seen from the side, facing right, like a character in a side-scrolling game, the same size in every cell, with his feet on the same invisible ground line near the bottom of each cell. He fills about 80% of the cell height and stays fully inside his cell with a clear margin all round. The 8 cells are animation frames in reading order (top row left to right, then the bottom row). Cells 1 to 6 are one smooth 6-frame walk cycle that loops, each frame a different step: 1 his near foot forward touching the ground, 2 his body lowest as his weight lands, 3 his far leg passing under him, 4 his far foot forward touching the ground, 5 his body lowest again, 6 his near leg passing under him. His arms swing opposite to his legs. Cells 7 and 8 are an idle breathing loop, standing relaxed: 7 breathing in, his chest and head a little higher, 8 breathing out. Keep his face, hair, clothes, colours, proportions and size exactly the same in every cell. No arm or hand ever covers his face. Style: like the painted villagers in the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture (cloth folds, worn leather), a thin dark plum-brown outline; never pixel art. The attached picture only shows the painting style: do not copy any person, object or background from it. Keep the background flat pure magenta #FF00FF and keep the grid lines. No ground, shadow, dust, motion lines, text, labels or numbers."
+  }
+ },
+ {
+  "id": "newhero_boy_walk_idle",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_boy_walk_idle.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory 19:29Z \"The four options for character looks should be boy, girl, man, and woman. I like the way this one is done\"): the boy in plain clothes, a 6-frame walk with long steps and a 2-frame idle, styled on the approved boy test. Released by Cory 19:31Z (\"Okay. Do them all\") to the priced line 19:29Z (\"Should I paint these 4 walk and idle sheets for about $0.28?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_boy_test_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME boy as in the attached picture, exactly the same face, hair, clothes, colours and size: a cute chibi boy of about ten with a very big round head, deep-blue eyes and short messy brown hair, in plain everyday clothes exactly like the boy in the attached picture: a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round. Only his walk changes: the attached picture's walk steps are too small. Paint the same character in every cell. The character is turned three-quarters toward the viewer and walks toward the right, exactly the way the boy in the attached picture stands, the same size in every cell, with the feet on the same invisible ground line near the bottom of each cell, filling about 85% of the cell height and fully inside the cell with a clear margin all round. The 8 cells are animation frames in reading order (top row left to right, then the bottom row). Cells 1 to 6 are one smooth 6-frame walk cycle that loops, with LONG, clearly different steps: 1 the near leg reaching far forward with its heel down and the far leg stretched far back pushing off its toes, legs wide apart; 2 the body at its lowest as the weight lands on the near leg, knee bent; 3 passing: the far leg swinging forward under the body with its knee lifted high; 4 the far leg reaching far forward with its heel down and the near leg stretched far back, legs wide apart; 5 the body at its lowest on the far leg; 6 passing: the near leg swinging forward with its knee lifted high. The arms swing far forward and back, always opposite to the legs, so every walk frame looks clearly different. Cells 7 and 8 are an idle breathing loop, standing relaxed: 7 breathing in, chest and head a little higher, 8 breathing out. Keep the face, hair, clothes, colours, proportions and size exactly the same in every cell. No arm or hand ever covers the face. Style: exactly like the boy in the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. No ground, shadow, dust, motion lines, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "newhero_girl_walk_idle",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_girl_walk_idle.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory 19:29Z \"The four options for character looks should be boy, girl, man, and woman. I like the way this one is done\"): the girl in plain clothes, a 6-frame walk with long steps and a 2-frame idle, styled on the approved boy test. Released by Cory 19:31Z (\"Okay. Do them all\") to the priced line 19:29Z (\"Should I paint these 4 walk and idle sheets for about $0.28?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_boy_test_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint ONE new character, a cute chibi girl of about ten, the same height, proportions and painting as the boy in the attached picture (a very big round head on a small body): big glossy deep-blue eyes with dark lashes, a small friendly smile, long brown hair tied back in a ponytail, in plain everyday clothes exactly like the boy in the attached picture: a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round. She is a girl, not the boy: do not copy his face or hair. Paint the same character in every cell. The character is turned three-quarters toward the viewer and walks toward the right, exactly the way the boy in the attached picture stands, the same size in every cell, with the feet on the same invisible ground line near the bottom of each cell, filling about 85% of the cell height and fully inside the cell with a clear margin all round. The 8 cells are animation frames in reading order (top row left to right, then the bottom row). Cells 1 to 6 are one smooth 6-frame walk cycle that loops, with LONG, clearly different steps: 1 the near leg reaching far forward with its heel down and the far leg stretched far back pushing off its toes, legs wide apart; 2 the body at its lowest as the weight lands on the near leg, knee bent; 3 passing: the far leg swinging forward under the body with its knee lifted high; 4 the far leg reaching far forward with its heel down and the near leg stretched far back, legs wide apart; 5 the body at its lowest on the far leg; 6 passing: the near leg swinging forward with its knee lifted high. The arms swing far forward and back, always opposite to the legs, so every walk frame looks clearly different. Cells 7 and 8 are an idle breathing loop, standing relaxed: 7 breathing in, chest and head a little higher, 8 breathing out. Keep the face, hair, clothes, colours, proportions and size exactly the same in every cell. No arm or hand ever covers the face. Style: exactly like the boy in the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. No ground, shadow, dust, motion lines, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "newhero_man_walk_idle",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_man_walk_idle.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory 19:29Z \"The four options for character looks should be boy, girl, man, and woman. I like the way this one is done\"): the man in plain clothes, a 6-frame walk with long steps and a 2-frame idle, styled on the approved boy test. Released by Cory 19:31Z (\"Okay. Do them all\") to the priced line 19:29Z (\"Should I paint these 4 walk and idle sheets for about $0.28?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_boy_test_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint ONE new character, a grown man in the same cute chibi painting style as the boy in the attached picture, but taller and grown up: his head is smaller in proportion (about a third of his height), with a longer body and legs, a friendly face with big glossy eyes, short dark brown hair and light stubble, in plain everyday clothes exactly like the boy in the attached picture: a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round. He is a cartoon character like the boy, never realistic. Paint the same character in every cell. The character is turned three-quarters toward the viewer and walks toward the right, exactly the way the boy in the attached picture stands, the same size in every cell, with the feet on the same invisible ground line near the bottom of each cell, filling about 85% of the cell height and fully inside the cell with a clear margin all round. The 8 cells are animation frames in reading order (top row left to right, then the bottom row). Cells 1 to 6 are one smooth 6-frame walk cycle that loops, with LONG, clearly different steps: 1 the near leg reaching far forward with its heel down and the far leg stretched far back pushing off its toes, legs wide apart; 2 the body at its lowest as the weight lands on the near leg, knee bent; 3 passing: the far leg swinging forward under the body with its knee lifted high; 4 the far leg reaching far forward with its heel down and the near leg stretched far back, legs wide apart; 5 the body at its lowest on the far leg; 6 passing: the near leg swinging forward with its knee lifted high. The arms swing far forward and back, always opposite to the legs, so every walk frame looks clearly different. Cells 7 and 8 are an idle breathing loop, standing relaxed: 7 breathing in, chest and head a little higher, 8 breathing out. Keep the face, hair, clothes, colours, proportions and size exactly the same in every cell. No arm or hand ever covers the face. Style: exactly like the boy in the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. No ground, shadow, dust, motion lines, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "newhero_woman_walk_idle",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_woman_walk_idle.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory 19:29Z \"The four options for character looks should be boy, girl, man, and woman. I like the way this one is done\"): the woman in plain clothes, a 6-frame walk with long steps and a 2-frame idle, styled on the approved boy test. Released by Cory 19:31Z (\"Okay. Do them all\") to the priced line 19:29Z (\"Should I paint these 4 walk and idle sheets for about $0.28?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_boy_test_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint ONE new character, a grown woman in the same cute chibi painting style as the boy in the attached picture, but taller and grown up: her head is smaller in proportion (about a third of her height), with a longer body and legs, a friendly face with big glossy eyes and dark lashes, shoulder-length auburn hair, in plain everyday clothes exactly like the boy in the attached picture: a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round. She is a cartoon character like the boy, never realistic. Paint the same character in every cell. The character is turned three-quarters toward the viewer and walks toward the right, exactly the way the boy in the attached picture stands, the same size in every cell, with the feet on the same invisible ground line near the bottom of each cell, filling about 85% of the cell height and fully inside the cell with a clear margin all round. The 8 cells are animation frames in reading order (top row left to right, then the bottom row). Cells 1 to 6 are one smooth 6-frame walk cycle that loops, with LONG, clearly different steps: 1 the near leg reaching far forward with its heel down and the far leg stretched far back pushing off its toes, legs wide apart; 2 the body at its lowest as the weight lands on the near leg, knee bent; 3 passing: the far leg swinging forward under the body with its knee lifted high; 4 the far leg reaching far forward with its heel down and the near leg stretched far back, legs wide apart; 5 the body at its lowest on the far leg; 6 passing: the near leg swinging forward with its knee lifted high. The arms swing far forward and back, always opposite to the legs, so every walk frame looks clearly different. Cells 7 and 8 are an idle breathing loop, standing relaxed: 7 breathing in, chest and head a little higher, 8 breathing out. Keep the face, hair, clothes, colours, proportions and size exactly the same in every cell. No arm or hand ever covers the face. Style: exactly like the boy in the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. No ground, shadow, dust, motion lines, text, labels or numbers, and no extra figures."
+  }
  }
 ]
 }

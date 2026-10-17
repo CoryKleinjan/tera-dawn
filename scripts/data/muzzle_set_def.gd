@@ -6,7 +6,7 @@ extends Resource
 ## own (a sword, a shield, a tome). On a frame where no piece with a muzzle shows (a bow, pistol
 ## or star not placed on its attack frame yet), the shot leaves from his hand there (`hands`).
 ## Kept apart from the held pieces (data/hero/held/) so their
-## placements stay as they were placed. Set in scenes/dev/hero_pose_editor.tscn (M), or here.
+## placements stay as they were placed. Set here by hand.
 
 ## Animation (a HeroLookDef.animations key) -> the frame its shot leaves on, for moves where
 ## that isn't the first (a throw winds up first, then lets go). Others use their first frame.

@@ -217,8 +217,7 @@ func _new_layer() -> Sprite3D:
 
 ## One layer of his stack: a piece of gear (its worn frames or held painting), his face or
 ## hairstyle (HeroStyleDef) or one of LOOK's parts (his body or fists), and where it sits on a
-## frame. Moved by hand in the
-## pose editor (scenes/dev/hero_pose_editor.tscn).
+## frame. Moved by hand in its data file.
 class Layer:
 	## The EquipDef or HeroStyleDef, or LOOK for his body and fists.
 	var owner: Resource
@@ -289,7 +288,7 @@ class Layer:
 			all[frame] = k
 
 	## Frame -> true where it is drawn mirrored around the point it turns around, before it is
-	## turned (the pose editor's Flip).
+	## turned (Flip).
 	func flips() -> Dictionary:
 		if held():
 			return held().flips
@@ -314,8 +313,8 @@ class Layer:
 		else:
 			all.erase(frame)
 
-	## Frame -> the frame whose painting shows there, or &"" for none, set by the pose editor's
-	## Add/Delete (EquipDef.frame_art); frames not listed show their own painting.
+	## Frame -> the frame whose painting shows there, or &"" for none, set by hand
+	## (EquipDef.frame_art); frames not listed show their own painting.
 	func frame_art() -> Dictionary:
 		if _own():
 			return _own().get("frame_art")

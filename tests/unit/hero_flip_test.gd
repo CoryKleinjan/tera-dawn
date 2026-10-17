@@ -1,5 +1,5 @@
 extends TestCase
-## Flip in the pose editor (HeroBody.Layer.flips): a flipped piece is drawn mirrored around the
+## A flipped piece (HeroBody.Layer.flips): a flipped piece is drawn mirrored around the
 ## point it turns around, keeping where it sits and how it is turned, and is kept per frame in
 ## the piece's own file.
 

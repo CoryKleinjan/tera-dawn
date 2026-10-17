@@ -35,11 +35,11 @@ update this page when one changes. Each zone's own look and music are in
   is one painting pinned to his head or hand on every frame (separate paints only where his head
   turns). The weapon is one painting held in his near fist; the shield or tome is in his far
   hand and only shows while the weapon does. Where each sits, its turn and its layer on every
-  frame are set by hand in the pose editor.
+  frame are set by hand.
 - Head gear (helmet, hat, hood, bandana) covers only his head: nothing attached to it reaches his
   shoulders, so no cape, collar or shoulder flap.
 - Draw order, back to front: off-hand (shield), cape, body, trousers, shoes, tome, top, gloves,
-  face, hair (hidden under helmets), hat, weapon, then his fists over its grip. In the pose editor
+  face, hair (hidden under helmets), hat, weapon, then his fists over its grip. By hand,
   any piece (his body, face, hair, fists, each piece of gear) can be moved, turned, resized and
   moved up or down the stack on any frame; nothing is repainted or cut for it. Prefer shrinking
   to growing: a piece drawn bigger than painted looks softer.
