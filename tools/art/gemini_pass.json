@@ -26305,6 +26305,28 @@
    ],
    "text": "The base picture is an EMPTY sheet of 2 cells side by side on a flat magenta background, split by one thin dark line. Paint one game UI icon in each cell, centred, filling about two thirds of the cell, for the health hearts of a hand-painted 2D fantasy side-scroller. Paint them in exactly the style of the second attached image (my game's painted HUD): soft hand-painted shading, visible fairly chunky brush texture, warm light from the upper left with a bright highlight, and the same thin dark plum-brown outline. Cell 1 (left): a FULL HEART, a classic plump symmetrical heart shape, rich glossy ruby red with deeper crimson in the lower right, a bright soft white-pink highlight on the upper left lobe, set in a thin polished gold rim that follows the heart's edge. Cell 2 (right): the EMPTY HEART, the exact same heart shape, size, position and gold rim, but the inside is a dark hollow plum-brown socket with a faint inner shadow and no red at all. Both hearts are the same size, straight-on, upright and not tilted. Never pixel art, never a photo, never a 3D render, never flat vector shapes. The background stays the bright pure flat magenta #FF00FF (RGB 255, 0, 255) in both cells, with no haze, glow or shadow on it. Keep the thin dark dividing line exactly where it is; add no other lines, boxes or frames. Add nothing else: no text, letters, numbers, labels, sparkles or extra hearts."
   }
+ },
+ {
+  "id": "ui_hearts_v2",
+  "prompts": null,
+  "batch": "heart icons v2 (edit)",
+  "with": null,
+  "refs": [],
+  "save": "ui_hearts_v2.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   2
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hearts for health': repaint of the ui_hearts test without the gold rim (Cory 21:59Z 'I don't want the rim'); an edit of the first take, no refs (the HUD ref was copied as stray scraps last time).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/hearts/bases/ui_hearts_take1.png",
+   "text": "This is an edit of the attached sheet of 2 painted game UI heart icons on a flat magenta background, split by one thin dark line. Remove the gold rim from both hearts completely: no gold, brass or metal anywhere. Left cell: the same glossy ruby red heart, with the same painted shading, bright highlight at the upper left and deeper crimson at the lower right, filling the shape where the rim was so the heart keeps the same outer size, edged directly by the same thin dark plum-brown outline. Right cell: the empty heart, the exact same heart shape, size and position, a dark hollow plum-brown heart with a faint inner shadow and the same thin dark plum-brown outline, and no red and no gold. Remove the dark name-plate bar, the blurry pink patch and the pink bar at the bottom of the left cell, leaving flat magenta there. Keep everything else exactly as it is: the same painted look, brush texture and lighting, the same heart shapes and positions. The background stays the bright pure flat magenta #FF00FF (RGB 255, 0, 255) in both cells, with no haze, glow or shadow on it. Keep the thin dark dividing line exactly where it is; add no other lines, boxes or frames. Add nothing else: no text, letters, numbers, labels, sparkles or extra hearts."
+  }
  }
 ]
 }
