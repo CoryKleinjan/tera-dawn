@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="backdrop_layer_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/dawnharbor/panorama.png" id="panorama"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="prop_placement"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/travel/ship_dawnbreaker.png" id="t_ship"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/prop_crates.png" id="prop_crates"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/prop_lobster_pots.png" id="prop_lobster_pots"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor/prop_net_rack.png" id="prop_net_rack"]
@@ -23,27 +24,27 @@ target_x = 360.0
 [sub_resource type="Resource" id="Npc_marlo"]
 script = ExtResource("4_npc_placement")
 npc = ExtResource("5_dock_marlo")
-x = 860.0
+x = 780.0
 face = 1
 
 [sub_resource type="Resource" id="Prop_crates"]
 script = ExtResource("prop_placement")
 texture = ExtResource("prop_crates")
-x = 430.0
+x = 300.0
 y = -1.0
 depth = -3.0
 
 [sub_resource type="Resource" id="Prop_net_rack"]
 script = ExtResource("prop_placement")
 texture = ExtResource("prop_net_rack")
-x = 520.0
+x = 460.0
 y = -1.0
 depth = -3.0
 
 [sub_resource type="Resource" id="Prop_barrels"]
 script = ExtResource("prop_placement")
 texture = ExtResource("prop_barrels")
-x = 700.0
+x = 610.0
 y = -1.0
 depth = -3.0
 flip = true
@@ -51,9 +52,16 @@ flip = true
 [sub_resource type="Resource" id="Prop_lobster_pots"]
 script = ExtResource("prop_placement")
 texture = ExtResource("prop_lobster_pots")
-x = 990.0
+x = 1720.0
 y = -1.0
 depth = -3.0
+
+[sub_resource type="Resource" id="Ship"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_ship")
+x = 1280.0
+y = 665.0
+depth = -2.0
 
 [sub_resource type="Resource" id="Backdrop_picture"]
 script = ExtResource("backdrop_layer_def")
@@ -66,6 +74,7 @@ screen_top = Vector2(-0.2, -0.2)
 script = ExtResource("variant_def")
 hide_layers = PackedInt32Array(0, 2, 3, 4, 5, 6)
 hide_ground_decor = PackedInt32Array(0)
+hide_town_decor = true
 more_backdrop = Array[ExtResource("backdrop_layer_def")]([SubResource("Backdrop_picture")])
 
 [resource]
@@ -74,12 +83,13 @@ id = &"dawnharbor_docks"
 display_name = "Dawnharbor Docks"
 biome = ExtResource("2_harbor")
 variant = SubResource("Variant")
-width = 1400
+width = 1800
 start_x = 200.0
 lantern_spacing = 0.0
+decor_density = 0.0
 region = &"dawnharbor"
 town = true
 return_map = &"dawnharbor"
 portals = Array[ExtResource("3_portal_def")]([SubResource("Portal_town")])
 npcs = Array[ExtResource("4_npc_placement")]([SubResource("Npc_marlo")])
-props = Array[ExtResource("prop_placement")]([SubResource("Prop_crates"), SubResource("Prop_net_rack"), SubResource("Prop_barrels"), SubResource("Prop_lobster_pots")])
+props = Array[ExtResource("prop_placement")]([SubResource("Ship"), SubResource("Prop_crates"), SubResource("Prop_net_rack"), SubResource("Prop_barrels"), SubResource("Prop_lobster_pots")])

@@ -24959,6 +24959,29 @@
    ],
    "text": "The first image is an empty magenta canvas. On it, paint ONE sailing ship, the Dawnbreaker, for my 2D side-scrolling game: the friendly ship that carries new adventurers from a sunny starting island to Dawnharbor, a bright, breezy, prosperous port town of white and cream plaster, blue roof tiles, weathered wood, rope and sails under warm early-morning light. The second image shows four of my game's NPC characters; they are drawn in exactly the art style the whole game must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (wood grain, rope fibres, cloth folds, worn and chipped spots, slight colour variation between planks) at a fairly chunky brush scale. The third image is the shipwright's workshop from Dawnharbor: match its style, palette, outline thickness and level of detail exactly, so the ship clearly belongs to the same town. The ship: a small, sturdy two-masted sailing ship seen exactly from the side, bow pointing RIGHT, about four times as long as it is tall at the hull. A warm honey-brown wooden hull with clearly painted planks, a deep blue painted stripe along the top of the hull with a thin cream line under it, a row of three small round brass-rimmed portholes, a raised deck at the stern with a carved wooden rail, and a short bowsprit at the front. Two straight wooden masts, each with two square cream canvas sails, gently filled with wind and with soft patched cloth folds, held by a few taut ropes that all run from the masts down to the hull rails (every rope is attached at both ends). A small blue pennant at the top of the taller mast. Strict rules: 1) Pure side view at eye level, perfectly level: no deck top, no three-quarter angle, no perspective. 2) The bottom of the hull is cut off by ONE perfectly flat, straight horizontal edge at the waterline, running the whole length of the ship; no keel, water, waves, reflection, shadow or ground under it. 3) The whole ship fills most of the canvas width with a clear band of magenta on every side; nothing touches the edges. 4) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, words, figurehead faces or people on deck. Nothing ends loose in mid-air. Flat pure magenta #FF00FF background everywhere outside the ship, including between the masts, sails and ropes. Do not draw any characters, and do not copy anything else from the reference images."
   }
+ },
+ {
+  "id": "dawnrise_dock_backdrop",
+  "prompts": null,
+  "batch": "Dock maps: Dawnrise Dock sea backdrop (test)",
+  "with": null,
+  "refs": [],
+  "save": "dawnrise_dock_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-17 thread 'Harbormaster dock maps': the Dawnrise panorama shows meadow behind the ship, so Dawnrise Dock gets its own sunrise sea view in the Dawnrise look (docs/zone-vibes.md). Base 3072x1316, exactly 21:9 (copy of the Dawnrise panorama base).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/dawnrise-city/dock_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Dawnrise Dock, the sea shore beside the small, cosy starting village of my 2D side-scrolling game, on a gentle sunny island: the softest, most innocent and hopeful place in the game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted detail (grass, leaves, flowers, soft clouds). Paint the background in that style, a little softer and lighter in contrast so it sits behind the characters. The scene: the island's quiet sea shore at sunrise, seen from a low grassy bank at the water's edge. A calm sea fills most of the picture and stretches away to a low, level horizon, its water sparkling gold in a long glittering path under the sun, which is just rising over the far horizon, low and warm, with long soft golden light shafts and small golden motes floating in the air. On the far left, the gentle green hills of the island slope down to the shore, with a few round friendly trees, wildflowers and, far back on one hill, two tiny thatched cottages and a small windmill. A low, soft green headland and a few small rocks sit far out on the right, pale in the rose-pink haze. Round soft clouds with peach undersides. Colours: deep plum sky at the very top (#2b2152), fading through rose-pink (#e8a49a) to a glowing peach horizon (#ffd3a0), warm gold light (#ffe2b0) on every lit edge, shadows leaning plum-violet, never black. Strict rules: 1) Side-on view at eye level, as if standing on the shore, the horizon level. 2) No people, no characters, no figures of any kind, no animals, no birds. 3) Nothing in the near foreground: the bottom quarter of the picture is open, calm water in the middle distance, with no boats, piers, jetties, large flowers, grass blades, fences or rocks close to the viewer; every flower is a tiny far-away dot. 4) The left and right edges continue naturally (sea, sky and haze), nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters or words anywhere."
+  }
  }
 ]
 }

@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="backdrop_layer_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/dawnrise/panorama.png" id="panorama"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="prop_placement"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/travel/ship_dawnbreaker.png" id="t_ship"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnrise/lamp_post.png" id="t_lamp"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnrise/prop_bench.png" id="t_bench"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnrise/prop_signpost.png" id="t_signpost"]
@@ -22,26 +23,33 @@ target_x = 760.0
 [sub_resource type="Resource" id="Npc_marlo"]
 script = ExtResource("4_npc_placement")
 npc = ExtResource("5_captain_marlo")
-x = 860.0
+x = 780.0
 face = 1
 
 [sub_resource type="Resource" id="Prop_signpost"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_signpost")
-x = 260.0
+x = 240.0
 depth = -1.5
 
 [sub_resource type="Resource" id="Lamp"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_lamp")
-x = 470.0
+x = 420.0
 depth = -1.5
 
 [sub_resource type="Resource" id="Prop_bench"]
 script = ExtResource("prop_placement")
 texture = ExtResource("t_bench")
-x = 640.0
+x = 580.0
 depth = -1.5
+
+[sub_resource type="Resource" id="Ship"]
+script = ExtResource("prop_placement")
+texture = ExtResource("t_ship")
+x = 1280.0
+y = 665.0
+depth = -2.0
 
 [sub_resource type="Resource" id="Backdrop_picture"]
 script = ExtResource("backdrop_layer_def")
@@ -62,12 +70,13 @@ id = &"dawnrise_dock"
 display_name = "Dawnrise Dock"
 biome = ExtResource("2_meadow")
 variant = SubResource("Variant")
-width = 1400
+width = 1800
 start_x = 200.0
 lantern_spacing = 0.0
+decor_density = 0.0
 region = &"dawnrise_isle"
 town = true
 return_map = &"dawnrise_village"
 portals = Array[ExtResource("3_portal_def")]([SubResource("Portal_village")])
 npcs = Array[ExtResource("4_npc_placement")]([SubResource("Npc_marlo")])
-props = Array[ExtResource("prop_placement")]([SubResource("Prop_signpost"), SubResource("Lamp"), SubResource("Prop_bench")])
+props = Array[ExtResource("prop_placement")]([SubResource("Ship"), SubResource("Prop_signpost"), SubResource("Lamp"), SubResource("Prop_bench")])

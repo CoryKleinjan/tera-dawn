@@ -1,0 +1,23 @@
+{
+  "source": "art/source/ship_dawnbreaker.png",
+  "out_dir": "assets/sprites/tiles/travel",
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      0,
+      1600
+    ],
+    "cols": [
+      0,
+      2400
+    ]
+  },
+  "cells": [
+    [
+      "ship_dawnbreaker"
+    ]
+  ],
+  "scale": 0.3,
+  "flat_bottom": true
+}
