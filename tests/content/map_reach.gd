@@ -2,7 +2,7 @@ extends RefCounted
 ## Works out which platforms of a map the player can get to, by running
 ## TDPlayer's movement rules (its constants, no speed or jump bonus, no coyote time) from
 ## every place a player arrives: the map's start, and where each portal, ship or wagon
-## leading here lands. `skills_reaching` tries the jobs' movement skills too, for secret
+## leading here lands. `moves_reaching` tries the moves boss relics unlock too, for secret
 ## ledges (PlatformDef.secret).
 ##
 ##   var reach := MapReach.new(map, arrivals)
@@ -72,9 +72,9 @@ func _edges(n: String) -> Array:
 			out.append_array(_sim(Vector2(e[0], pl.y), Vector2(e[1] * TDPlayer.RUN_SPEED, 0), e[1], -1))
 	return out
 
-## Runs TDPlayer's air physics until landing. Returns the platform landed on. For a movement
-## skill, the first `lock` ticks carry the player along at the speed they start with (no
-## steering), and the first `flat` of those stay level and can't land (a Charge).
+## Runs TDPlayer's air physics until landing. Returns the platform landed on. For a relic's
+## move, the first `lock` ticks carry the player along at the speed they start with (no
+## steering), and the first `flat` of those stay level and can't land (a Dash or Surge).
 func _sim(pos: Vector2, vel: Vector2, dir: int, drop_from: int, lock := 0, flat := 0) -> Array:
 	var out := []
 	var drop_t := TDPlayer.DROP_TICKS if drop_from >= 0 else 0
@@ -104,42 +104,42 @@ func _sim(pos: Vector2, vel: Vector2, dir: int, drop_from: int, lock := 0, flat 
 			return out
 	return out
 
-# ---------- movement skills ----------
+# ---------- moves from boss relics ----------
 
-## Ticks into a jump where the reach test tries a skill in the air: early, mid-rise, near
+## Ticks into a jump where the reach test tries a move in the air: early, mid-rise, near
 ## the top and at the top (a jump tops out after about 20 ticks).
 const AIR_TRIES: Array[int] = [4, 10, 16, 20]
-## How far around a ledge the reach test looks for somewhere to use a skill from.
-const SKILL_REACH := Vector2(520, 420)
+## How far around a ledge the reach test looks for somewhere to use a move from.
+const MOVE_REACH := Vector2(720, 420)
+## The relic moves (RelicDef.Move) that can carry the player across or up to a ledge.
+const MOVES: Array[String] = ["Dash", "Double Jump", "Surge"]
 
-## The movement skills (SkillDef.move) that carry the player onto platform `target` in one
-## go, at level 1, from somewhere this reach already gets to: straight from standing on a
-## platform (a Charge, Backstep Leap or Blink, or a Rolling Dash off its end, jumping out of
-## it or not) or in the air during a jump, standing or running (any of them but the roll).
-## Returns their ids.
-func skills_reaching(target: int) -> Array[StringName]:
-	var out: Array[StringName] = []
-	for s: SkillDef in Content.skills.values():
-		if s.move and _skill_reaches(s.move, target):
-			out.append(s.id)
+## The relic moves that carry the player onto platform `target` in one go, from somewhere
+## this reach already gets to: a Dash or Surge straight from standing on a platform, or in
+## the air during a jump, standing or running, a Dash or a double jump. Returns their names.
+func moves_reaching(target: int) -> Array[String]:
+	var out: Array[String] = []
+	for move in MOVES:
+		if _move_reaches(move, target):
+			out.append(move)
 	return out
 
-func _skill_reaches(move: MoveDef, target: int) -> bool:
+func _move_reaches(move: String, target: int) -> bool:
 	var goal := plats[target]
 	var landed := "p%d" % target
 	for pi in plats.size():
 		var pl := plats[pi]
 		if pi == target or not platform_reached(pi):
 			continue
-		if pl.x > goal.x + goal.w + SKILL_REACH.x or pl.x + pl.w < goal.x - SKILL_REACH.x:
+		if pl.x > goal.x + goal.w + MOVE_REACH.x or pl.x + pl.w < goal.x - MOVE_REACH.x:
 			continue
-		if pl.y < goal.y - SKILL_REACH.y or pl.y > goal.y + SKILL_REACH.y:
+		if pl.y < goal.y - MOVE_REACH.y or pl.y > goal.y + MOVE_REACH.y:
 			continue
 		var x := pl.x + 2.0
 		while x <= pl.x + pl.w - 1.0:
 			var from := Vector2(clampf(x, TDPlayer.EDGE, map.width - TDPlayer.EDGE), pl.y)
 			for dir in [-1, 1]:
-				if landed in _ground_move(move, from, dir, pl):
+				if landed in _ground_move(move, from, dir):
 					return true
 				for run in [0, dir]:
 					for k in AIR_TRIES:
@@ -148,31 +148,19 @@ func _skill_reaches(move: MoveDef, target: int) -> bool:
 			x += 20.0
 	return false
 
-## Where `move` used standing at `from` on `pl`, facing (or for a Backstep Leap, springing)
-## the way `dir` points, lands.
-func _ground_move(move: MoveDef, from: Vector2, dir: int, pl: Platform) -> Array:
-	var speed := move.distance_at(1) / maxf(1.0, move.ticks)
-	match move.style:
-		MoveDef.Style.CHARGE:
-			return _sim(from, Vector2(dir * speed, 0), dir, -1, move.ticks, move.ticks)
-		MoveDef.Style.BACKSTEP:
-			return _sim(from, Vector2(dir * speed, TDPlayer.BACKSTEP_LIFT), dir, -1, move.ticks)
-		MoveDef.Style.BLINK:
-			return _blink(move, from, dir)
-		MoveDef.Style.ROLL:
-			# rolled off the end of the platform with some of the roll left, or jumped out of it
-			var out := []
-			var edge := Vector2(pl.x + pl.w + 1.0 if dir > 0 else pl.x - 1.0, pl.y)
-			for left in range(move.ticks, 0, -4):
-				out.append_array(_sim(edge, Vector2(dir * speed, 0), dir, -1, left))
-				out.append_array(_sim(edge, Vector2(dir * speed, TDPlayer.JUMP_SPEED), dir, -1, left))
-			return out
+## Where `move` used standing at `from`, facing the way `dir` points, lands.
+func _ground_move(move: String, from: Vector2, dir: int) -> Array:
+	match move:
+		"Dash":
+			return _sim(from, Vector2(dir * TDPlayer.DASH_SPEED, 0), dir, -1, TDPlayer.DASH_TICKS, TDPlayer.DASH_TICKS)
+		"Surge":
+			return _sim(from, Vector2(dir * TDPlayer.SURGE_SPEED, 0), dir, -1, TDPlayer.SURGE_TICKS, TDPlayer.SURGE_TICKS)
 	return []
 
 ## Where `move` used `k` ticks into a jump from `from` lands: the jump standing (`run` 0) or
-## running `run`, the move facing (or springing) the way `dir` points.
-func _air_move(move: MoveDef, from: Vector2, dir: int, run: int, k: int) -> Array:
-	if not move.in_air:
+## running `run`, the move facing (or a double jump steering) the way `dir` points.
+func _air_move(move: String, from: Vector2, dir: int, run: int, k: int) -> Array:
+	if move == "Surge":
 		return []
 	var pos := from
 	var vel := Vector2(run * TDPlayer.RUN_SPEED, TDPlayer.JUMP_SPEED)
@@ -182,24 +170,6 @@ func _air_move(move: MoveDef, from: Vector2, dir: int, run: int, k: int) -> Arra
 		vel.y = minf(vel.y + TDPlayer.gravity(vel.y), TDPlayer.MAX_FALL)
 		pos.x = clampf(pos.x + vel.x, TDPlayer.EDGE, map.width - TDPlayer.EDGE)
 		pos.y += vel.y
-	var speed := move.distance_at(1) / maxf(1.0, move.ticks)
-	match move.style:
-		MoveDef.Style.CHARGE:
-			return _sim(pos, Vector2(dir * speed, 0), dir, -1, move.ticks, move.ticks)
-		MoveDef.Style.AIR_JUMP:
-			return _sim(pos, Vector2(dir * speed, TDPlayer.AIR_JUMP_SPEED), dir, -1, move.ticks)
-		MoveDef.Style.BACKSTEP:
-			return _sim(pos, Vector2(dir * speed, TDPlayer.BACKSTEP_LIFT), dir, -1, move.ticks)
-		MoveDef.Style.BLINK:
-			return _blink(move, pos, dir)
-	return []
-
-## Where a Blink from `from` lands: ahead the way `dir` points, or straight up or down,
-## then falling, steering either way or not at all.
-func _blink(move: MoveDef, from: Vector2, dir: int) -> Array:
-	var out := []
-	for aim in [Hitbox.Aim.AHEAD, Hitbox.Aim.UP, Hitbox.Aim.DOWN]:
-		var to := move.blink_to(from, dir, aim, 1, float(map.width), float(map.ground_y))
-		for steer in [-1, 0, 1]:
-			out.append_array(_sim(to, Vector2.ZERO, steer, -1))
-	return out
+	if move == "Dash":
+		return _sim(pos, Vector2(dir * TDPlayer.DASH_SPEED, 0), dir, -1, TDPlayer.DASH_TICKS, TDPlayer.DASH_TICKS)
+	return _sim(pos, Vector2(vel.x, TDPlayer.JUMP_SPEED * TDPlayer.DOUBLE_JUMP_SHARE), dir, -1)

@@ -1,14 +1,15 @@
 class_name TDMoveFx
 extends Node2D
-## The code-drawn look of a job's movement skill (SkillDef.move), in its MoveDef colour, until
-## painted effects replace it: a trail of glowing motes behind whoever moves, and for a Blink
-## a crackle where they vanish, a jagged bolt to where they land and sparks on arrival.
+## The code-drawn look of a move (MoveDef), in its colour, until painted effects replace it:
+## a trail of glowing motes behind whoever moves (a relic's Dash or Surge), and for a blink (an
+## ambush's leap) a crackle where they vanish, a jagged bolt to where they land and sparks on
+## arrival.
 ## Lives on the world's fx layer and removes itself when done.
 
 ## Motes left behind each tick of a trail, and how fast they drift.
 const TRAIL_MOTES := 3
 const TRAIL_SPEED := 0.35
-## Sparks in a Blink's crackle and arrival, and how fast they fly.
+## Sparks in a blink's crackle and arrival, and how fast they fly.
 const CRACKLE_SPARKS := 12
 const CRACKLE_SPEED := 1.1
 ## Ticks the bolt takes to fade, its zigzag (game pixels to each side) and its kinks.
@@ -20,14 +21,14 @@ const MID := 30.0
 
 var world: TDWorld
 var move: MoveDef
-## Who it trails (null for a Blink, which only flashes).
+## Who it trails (null for a blink, which only flashes).
 var follow: Node2D
 var t := 0
 var ticks := 0
 var _bolt: MeshInstance3D
 var _glow: OmniLight3D
 
-## Plays `move` for someone at `from` (their feet) who ends at `to` (a Blink) or moves on as
+## Plays `move` for someone at `from` (their feet) who ends at `to` (a blink) or moves on as
 ## `who` (everything else).
 static func play(w: TDWorld, m: MoveDef, from: Vector2, to: Vector2, who: Node2D) -> TDMoveFx:
 	var fx := TDMoveFx.new()

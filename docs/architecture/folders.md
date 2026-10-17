@@ -20,7 +20,7 @@ scripts/
   settings/           SettingsSection and its sections: Keybinds, AudioSettings, VideoSettings,
                       DevSettings
   server/             TDServer, TDLobby, MapInstance, SimPlayer, SimMob (+ MobMoves), SimDrop,
-                      ServerMoves (job movement skills), TDSocial
+                      TDSocial
   server/social/      TDSocial's parts: chat, parties, trade, guilds
   server/services/    TDServer's parts (ServerPart): items, NPC shops, storage, travel, quests, jobs,
                       cutscenes

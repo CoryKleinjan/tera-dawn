@@ -310,7 +310,7 @@ width = 480.0
 [sub_resource type="Resource" id="Platform_35"]
 script = ExtResource("3_platform_def")
 x = 4060.0
-y = 660.0
+y = 680.0
 width = 150.0
 secret = true
 

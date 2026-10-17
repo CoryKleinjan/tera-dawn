@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="RelicDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/relic_def.gd" id="1_relic_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/arcane_core.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1_relic_def")
+move = 1
+move_name = "Double Jump"
+trail = Color(1.2, 1.1, 1.8, 1)
+id = &"wingstone"
+display_name = "Wingstone"
+description = "Dropped by the Arcane Sentinel. It teaches Double Jump: a second jump in mid-air."
+icon = ExtResource("2_icon")
+sprite_scale = 0.4
+glow_color = Color(0.69, 0.56, 1, 1)
+max_stack = 1
+sell_price = 0
+quest_item = true
