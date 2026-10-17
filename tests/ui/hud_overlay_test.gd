@@ -18,26 +18,25 @@ func after_each() -> void:
 func test_status_bar_draws_any_state() -> void:
 	var bar := ui.hud.status
 	check(bar.visible and bar.size.y == TDStatusBar.HEIGHT, "the status bar runs along the bottom")
-	for state in [[0, 0], [250, 1], [9999999, 5]]:
+	for state in [[1, 0], [30, 1], [99, 5]]:
 		await ui.edit(func(c: Character) -> void:
-			c.essence = state[0]
+			c.level = state[0]
+			c.xp = c.xp_need() / 2
 			c.mp = state[1]
 			c.shards = 9999999)
-		check(await ui.redraw(bar), "the status bar draws with %d Dawn Essence" % state[0])
+		check(await ui.redraw(bar), "the status bar draws at level %d" % state[0])
 
-func test_status_bar_shows_dawn_essence() -> void:
+func test_status_bar_says_max_level_at_the_cap() -> void:
 	var bar := ui.hud.status
-	await ui.edit(func(c: Character) -> void: c.essence = 0)
-	check_eq(bar.essence_text(), "Dawn Essence 0", "no essence")
-	check_eq(TDStatusBar.essence_fill(Game.me), 0.0, "an empty bar")
-	# a fresh character's cheapest buy is a first stat point or skill level, both the base price
-	var cheapest := CharacterStats.stat_price(0)
-	await ui.edit(func(c: Character) -> void: c.essence = cheapest / 2)
-	check_eq(bar.essence_text(), "Dawn Essence %d" % (cheapest / 2), "the essence in hand")
-	check(TDStatusBar.essence_fill(Game.me) > 0.0 and TDStatusBar.essence_fill(Game.me) < 1.0, "part full on the way to the next buy")
-	await ui.edit(func(c: Character) -> void: c.essence = cheapest * 3)
-	check_eq(TDStatusBar.essence_fill(Game.me), 1.0, "full once it pays for something")
-	check(await ui.redraw(bar), "the status bar draws full")
+	await ui.edit(func(c: Character) -> void:
+		c.level = 20
+		c.xp = c.xp_need() / 4)
+	check_eq(bar.exp_text(), "%.1f%%" % (100.0 * Game.me.xp / Game.me.xp_need()), "how far to the next level")
+	await ui.edit(func(c: Character) -> void:
+		c.level = Character.MAX_LEVEL
+		c.xp = 0)
+	check_eq(bar.exp_text(), "Max level", "at the cap")
+	check(await ui.redraw(bar), "the status bar draws at the cap")
 
 func test_quickslots_hold_skills_and_items() -> void:
 	var slots := ui.hud.quickslots

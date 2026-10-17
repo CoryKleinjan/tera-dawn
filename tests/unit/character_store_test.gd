@@ -53,7 +53,7 @@ func test_listed_in_the_order_they_were_made() -> void:
 	var slot: Dictionary = store.slots()[0]
 	check_eq(slot["name"], "Zed", "slot name")
 	check(slot.has("job"), "slot job")
-	check(not slot.has("level"), "no level any more")
+	check_eq(slot["level"], 1, "slot level")
 
 func test_a_new_character_is_a_beginner_with_the_outfit_picked() -> void:
 	var made := NewCharacter.new()

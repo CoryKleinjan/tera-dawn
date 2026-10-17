@@ -1,6 +1,6 @@
 class_name TestCharacters
 extends RefCounted
-## Developer-only test characters: one per job with every stat bought up to STAT, wearing the
+## Developer-only test characters: one per job at Character.MAX_LEVEL with every stat bought up to STAT, wearing the
 ## best gear that job can wear up to GEAR_TIER, with every skill learned to its highest level
 ## and plenty of Dawnshards and Dawn Essence.
 ## Everything is read from the data, so a new job, skill or piece of gear shows up here with
@@ -57,8 +57,8 @@ static func path_to(job: JobDef) -> Array[JobDef]:
 	return out
 
 ## Makes sure `store` has one test character of every job, making the ones missing, or
-## every one again when `rebuild`. Each one kept is put back in its job's town, with its stats
-## topped up to STAT.
+## every one again when `rebuild`. Each one kept is put back in its job's town, at the top level
+## with its stats topped up to STAT.
 static func prepare(store: CharacterStore, rebuild: bool) -> void:
 	var have := {}
 	for n in store.names():
@@ -69,6 +69,7 @@ static func prepare(store: CharacterStore, rebuild: bool) -> void:
 		var kept: Character = have.get(job)
 		if kept and not rebuild:
 			kept.map_id = home_town(job)
+			_max_level(kept)
 			_buy_stats(kept)
 			kept.recalc()
 			kept.refill()
@@ -118,6 +119,7 @@ static func build(char_name: String, job: JobDef) -> Character:
 		if problem != "":
 			push_warning("Test character %s couldn't become a %s: %s" % [char_name, next.display_name, problem])
 			break
+	_max_level(c)
 	_wear_best_gear(c)
 	_buy_stats(c)
 	_learn_every_skill(c)
@@ -239,7 +241,12 @@ static func _wear_best_gear(c: Character) -> void:
 	for e in best_weapons(c.job, GEAR_TIER).slice(1):
 		c.inventory.add_stack(ItemStack.exact(e))
 
-# ---------- stats and skills ----------
+# ---------- level, stats and skills ----------
+
+## Puts `c` at Character.MAX_LEVEL.
+static func _max_level(c: Character) -> void:
+	c.level = Character.MAX_LEVEL
+	c.xp = 0
 
 ## Buys every stat up to STAT, or up to what the worn gear asks for when that's more. Stats
 ## already that high stay as they are.

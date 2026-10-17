@@ -31,9 +31,7 @@ func _raise(c: Character, kind: String, n: int) -> void:
 					c.book.add_card(m)
 				left -= mini(left, CardDef.SET)
 				k += 1
-		"stats":
-			c.base.strength = n
-			c.recalc()
+		"level": c.level = maxi(1, n)
 		"job": c.job.advances_from = &"beginner" if n > 0 else &""
 		"quests":
 			c.quests.done.clear()
@@ -72,10 +70,9 @@ func test_every_achievement_reached_exactly_at_goal() -> void:
 
 func test_check_awards_only_once() -> void:
 	var c := fx.character()
-	c.base.strength = Achievements.find("level_10").goal
-	c.recalc()
+	c.level = Achievements.find("level_10").goal
 	var first := _ids(Achievements.check(c))
-	check_has(first, "level_5", "the first stat goal")
+	check_has(first, "level_5", "the first level goal")
 	check_has(first, "level_10", "the second")
 	check(not first.has("level_30"), "not the third")
 	check_eq(Achievements.check(c).size(), 0, "nothing new the second time")

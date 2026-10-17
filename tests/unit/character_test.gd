@@ -41,28 +41,82 @@ func test_skill_prices_climb_with_each_level_bought() -> void:
 	for k in range(0, 200):
 		check(CharacterStats.skill_price(k + 1) > CharacterStats.skill_price(k), "level %d costs more than %d" % [k + 2, k + 1])
 
-func test_growth_follows_stat_points_bought() -> void:
-	var c := fx.character()
-	check_near(c.growth(), 1.0, "nothing bought")
-	check_eq(c.max_hp(), 60, "50 + 1 × 10")
-	check_eq(c.max_mp(), 25, "20 + 1 × 5")
-	c.base.dexterity = 4
-	c.recalc()
-	check_near(c.growth(), 1.8, "4 points bought")
-	check_eq(c.max_hp(), 68, "50 + 1.8 × 10")
-	c.base.dexterity = 5
-	c.recalc()
-	check_near(c.growth(), 2.0, "one growth step every 5 points")
-	check_eq(c.max_hp(), 70, "50 + 2 × 10")
-	check_eq(c.health.max_hp, 70, "health max follows")
-	check_eq(c.max_mp(), 30, "20 + 2 × 5")
-
-func test_buying_a_stat_raises_max_hp_but_does_not_refill() -> void:
+func test_buying_a_stat_leaves_max_hp_to_levels() -> void:
 	var c := fx.character()
 	c.health.damage(30)
 	c.essence = 1000
 	check_eq(c.ap.buy(&"dexterity", 5), 5, "five points")
-	check_eq(c.health.max_hp, 70, "max HP grew")
+	check_eq(c.health.max_hp, 60, "max HP comes from levels")
+	check_eq(c.health.hp, 30, "still hurt")
+
+# ---------- EXP and levels ----------
+
+func test_xp_need_formula() -> void:
+	var c := fx.character()
+	# 27.5 * lvl^3 up to Lv 10, then 27,500 * (lvl / 10)^1.8
+	var want := {1: 27, 2: 220, 3: 742, 5: 3437, 10: 27500, 11: 32646, 20: 95760, 30: 198678, 35: 262213}
+	for lvl in want:
+		check_eq(c.xp_need(lvl), want[lvl], "level %d" % lvl)
+	c.level = 5
+	check_eq(c.xp_need(), 3437, "defaults to own level")
+
+func test_xp_need_always_grows() -> void:
+	var c := fx.character()
+	for lvl in range(1, 200):
+		check(c.xp_need(lvl + 1) > c.xp_need(lvl), "level %d to %d" % [lvl, lvl + 1])
+
+func test_gain_xp_below_need_keeps_level() -> void:
+	var c := fx.character()
+	check_eq(c.gain_xp(15), 0, "no level")
+	check_eq(c.level, 1, "still 1")
+	check_eq(c.xp, 15, "xp kept")
+	check_eq(c.gain_xp(0), 0, "zero gain")
+	check_eq(c.xp, 15, "unchanged")
+
+func test_gain_xp_exactly_need_levels_up_with_zero_left() -> void:
+	var c := fx.character()
+	check_eq(c.gain_xp(27), 1, "one level")
+	check_eq(c.level, 2, "level 2")
+	check_eq(c.xp, 0, "nothing left over")
+
+func test_gain_xp_many_levels_at_once() -> void:
+	var c := fx.character()
+	check_eq(c.gain_xp(27 + 220 + 742 + 10), 3, "three levels")
+	check_eq(c.level, 4, "level 4")
+	check_eq(c.xp, 10, "leftover")
+
+func test_exp_stops_at_the_level_cap() -> void:
+	var c := fx.character()
+	c.level = Character.MAX_LEVEL - 1
+	c.xp = c.xp_need() - 10
+	check_eq(c.gain_xp(c.xp_need() * 3), 1, "one level, to the cap")
+	check_eq(c.level, Character.MAX_LEVEL, "at the cap")
+	check(c.at_max_level(), "at max level")
+	check_eq(c.xp, 0, "the rest is dropped")
+	check_eq(c.gain_xp(1000), 0, "no more levels")
+	check_eq(c.xp, 0, "and no EXP")
+	check_eq(c.level, Character.MAX_LEVEL, "still at the cap")
+
+func test_many_levels_at_once_stop_at_the_cap() -> void:
+	var c := fx.character()
+	c.level = Character.MAX_LEVEL - 3
+	check_eq(c.gain_xp(1 << 40), 3, "three levels and no further")
+	check_eq(c.level, Character.MAX_LEVEL, "capped")
+
+func test_level_up_raises_max_and_refills() -> void:
+	var c := fx.character()
+	c.health.damage(30)
+	c.spend_mp(10)
+	c.gain_xp(27)
+	check_eq(c.max_hp(), 70, "50 + 2 × 10")
+	check_eq(c.health.max_hp, 70, "health max follows")
+	check_eq(c.health.hp, 70, "refilled")
+	check_eq(c.mp, 30, "MP refilled to 20 + 2 × 5")
+
+func test_no_level_means_no_refill() -> void:
+	var c := fx.character()
+	c.health.damage(30)
+	c.gain_xp(5)
 	check_eq(c.health.hp, 30, "still hurt")
 
 # ---------- HP, MP and recalc ----------
@@ -174,7 +228,6 @@ func test_spent_counts_points_above_the_start_and_what_they_cost() -> void:
 	check_eq(c.ap.bought(&"luck"), 0, "below the start counts as none")
 	check_eq(c.ap.spent(), 3, "2 STR and 1 DEX")
 	check_eq(c.ap.essence_spent(), 17 + 25 + 17, "each stat's points priced from its own first")
-	check_near(c.growth(), 1.6, "growth from the points bought")
 
 func test_refund_all_hands_back_the_essence_of_every_point_above_the_start() -> void:
 	var j := fx.job()
@@ -599,9 +652,10 @@ func test_advance_changes_job_gives_gifts_and_refills() -> void:
 	next.advance_gifts = [UnitHelpers.drop(sword), UnitHelpers.drop(potion, 20)]
 	c.health.damage(50)
 	c.essence = 40
+	c.level = 8
 	check_eq(c.advance(next), "", "advanced")
 	check_eq(c.job.id, &"t_next", "new job")
-	# 35 STR points bought: growth 1 + 35 / 5 = 8
+	# level 8 and 35 STR points bought
 	check_eq(c.max_hp(), 50 + 8 * 20 + 35, "new job's HP growth, plus STR")
 	check_eq(c.essence, 40, "advancing costs and gives no essence")
 	check_eq(c.health.hp, c.max_hp(), "refilled")

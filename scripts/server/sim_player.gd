@@ -17,12 +17,11 @@ const HURTBOX_SIZE := Vector2(19, 40)
 ## Their chest above their feet: where monsters aim their shots (and TDPlayer.CHEST).
 const CHEST := 34.0
 ## Ticks between HP / MP regeneration, and what's regained each time: a base plus
-## growth (Character.growth) / divisor, plus the character's regen bonus. Sitting regains the
-## base part twice.
+## level / divisor, plus the character's regen bonus. Sitting regains the base part twice.
 const REGEN_EVERY := 120
 const REGEN_BASE := 2
-const REGEN_HP_GROWTH := 3.0
-const REGEN_MP_GROWTH := 4.0
+const REGEN_HP_LEVELS := 3
+const REGEN_MP_LEVELS := 4
 
 var peer := 0
 var character: Character
@@ -118,9 +117,8 @@ func step() -> bool:
 	if map.tick % REGEN_EVERY == 0:
 		var bonus := character.skills.regen_bonus()
 		var times := 2 if sitting else 1
-		var growth := character.growth()
-		character.health.heal((REGEN_BASE + floori(growth / REGEN_HP_GROWTH)) * times + bonus.x)
-		character.restore_mp((REGEN_BASE + floori(growth / REGEN_MP_GROWTH)) * times + bonus.y)
+		character.health.heal((REGEN_BASE + character.level / REGEN_HP_LEVELS) * times + bonus.x)
+		character.restore_mp((REGEN_BASE + character.level / REGEN_MP_LEVELS) * times + bonus.y)
 		dirty_vitals = true
 	return false
 

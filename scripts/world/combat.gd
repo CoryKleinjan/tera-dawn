@@ -24,6 +24,6 @@ static func monster_hit(monster: MonsterDef, ch: Character, power := 1.0) -> int
 		return 0
 	return maxi(1, roundi(monster.attack * power * randf_range(0.85, 1.15) - ch.stats.defense * 0.3))
 
-## Dawn Essence (of what's unspent) lost when the player faints.
-static func faint_penalty(essence: int) -> int:
-	return int(essence * 0.1)
+## EXP (of what's toward the next level) lost when the player faints.
+static func faint_penalty(xp: int) -> int:
+	return int(xp * 0.1)

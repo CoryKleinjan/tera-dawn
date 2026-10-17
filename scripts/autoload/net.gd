@@ -505,8 +505,8 @@ func ev_character(character: Dictionary) -> void:
 	Game.apply_character(character)
 
 @rpc("authority", "call_local", "reliable")
-func ev_vitals(hp: int, mp: int, essence: int, shards: int) -> void:
-	Game.apply_vitals(hp, mp, essence, shards)
+func ev_vitals(hp: int, mp: int, xp: int, level: int, essence: int, shards: int) -> void:
+	Game.apply_vitals(hp, mp, xp, level, essence, shards)
 
 @rpc("authority", "call_local", "reliable")
 func ev_enter_map(map_id: StringName, x: float, state: Dictionary, platform: int) -> void:
@@ -600,6 +600,12 @@ func ev_jingle(id: StringName) -> void:
 func ev_scene(scene_id: StringName) -> void:
 	if world:
 		world.play_scene(scene_id)
+
+## A player on your map levelled up (you, or someone near).
+@rpc("authority", "call_local", "reliable")
+func ev_level_up(peer: int, level: int) -> void:
+	if world:
+		world.show_level_up(peer, level)
 
 ## Dawn Essence from a monster that fell at (x, y), flying to you.
 @rpc("authority", "call_local", "reliable")

@@ -75,7 +75,7 @@ func _check_skill_rules() -> void:
 	var back := Character.new()
 	back.load_dict(c.to_dict())
 	_check(back.skills.learned == c.skills.learned and back.skills.paid == c.skills.paid and back.quickslots == c.quickslots, "skills, what was paid for them and quickslots save")
-	# a save from before Dawn Essence: its EXP and unspent Skill Points become essence
+	# a save from before Dawn Essence: its level and EXP stay, unspent Skill Points become essence
 	var old := c.to_dict()
 	old.erase("essence")
 	old.erase("skills")
@@ -89,7 +89,7 @@ func _check_skill_rules() -> void:
 	var legacy := Character.new()
 	legacy.load_dict(old)
 	var sp_worth := CharacterStats.skill_price(0) + CharacterStats.skill_price(1) + CharacterStats.skill_price(2)
-	_check(legacy.essence == 40 + sp_worth and legacy.quickslots[Character.QUICKSLOTS - 2] == [&"item", &"red_potion"], "older saves turn their EXP and Skill Points into Dawn Essence")
+	_check(legacy.level == 12 and legacy.xp == 40 and legacy.essence == sp_worth and legacy.quickslots[Character.QUICKSLOTS - 2] == [&"item", &"red_potion"], "older saves keep their level and turn Skill Points into Dawn Essence")
 	_check(legacy.jobs_passed.size() == 1 and legacy.has_passed(Content.job(&"warrior")), "older saves count the jobs they advanced through as passed")
 
 ## Starting as a Beginner, advancing, and gear only some jobs can use.

@@ -23,6 +23,7 @@ func test_every_job_gets_a_grown_character_in_gear_it_can_wear() -> void:
 	for job in TestCharacters.jobs():
 		var c := TestCharacters.build(TestCharacters.name_for(job), job)
 		check_eq(c.job, job, "%s: the job" % job.id)
+		check_eq([c.level, c.xp], [Character.MAX_LEVEL, 0], "%s: the top level" % job.id)
 		check(c.ap.spent() >= TestCharacters.STAT_POINTS, "%s: its stat points bought (%d)" % [job.id, c.ap.spent()])
 		for stat in StatBlock.BASE:
 			check(c.base.value(stat) >= TestCharacters.STAT, "%s: %s bought up to %d (%d)" % [job.id, stat, TestCharacters.STAT, c.base.value(stat)])
