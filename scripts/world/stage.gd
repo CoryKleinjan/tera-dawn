@@ -91,6 +91,8 @@ var map_root: Node3D
 var locked_portals := {}
 ## The shut gate in front of each gated door (PortalDef.gate) -> that door's PortalDef.
 var gates := {}
+## glow node -> the SceneSpot it belongs to (shown while the spot is open to you)
+var spot_glows := {}
 ## Index in MapDef.breakables -> the picture of that chest or wall (SceneryBuilder._breakable).
 var breakables := {}
 var motes: CPUParticles3D
@@ -410,6 +412,7 @@ func build() -> void:
 	locked_portals.clear()
 	gates.clear()
 	breakables.clear()
+	spot_glows.clear()
 	var map := world.map
 	var biome := TearState.look(map, world.decline)
 	if biome.platform_middle != _platform_art:  # another region: let the last one's built land go
@@ -429,8 +432,10 @@ func build() -> void:
 	if biome.light_shafts:
 		_build_light_shafts(map, biome, rng)
 	_build_tears(map)
+	_build_spot_glows(map)
 	follow(world.cam)
 	show_open_portals(Game.me)
+	show_spot_glows(Game.me)
 	show_breakables(Game.me)
 
 ## Shows the locked portals `c` has opened, or sees shut behind a gate, and hides the rest;
@@ -572,25 +577,45 @@ const OPENING_TEAR_SIZE := 4.2
 func _build_tears(map: MapDef) -> void:
 	var opens := map.tear_platform >= 0
 	for at in map.tears:
-		var mat := StandardMaterial3D.new()
-		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-		mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-		mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
-		mat.albedo_texture = _glow_texture()
-		mat.albedo_color = TEAR_COLOR
-		mat.disable_receive_shadows = true
-		mat.cull_mode = BaseMaterial3D.CULL_DISABLED
-		var q := QuadMesh.new()
-		var size := OPENING_TEAR_SIZE if opens else TEAR_SIZE
-		q.size = Vector2(size, size)
-		var glow := MeshInstance3D.new()
-		glow.mesh = q
-		glow.material_override = mat
-		glow.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-		glow.position = to3d(Vector2(at.x, map.ground_y - at.y), OPENING_TEAR_Z if opens else TEAR_Z)
+		var glow := _tear_glow(map, at, opens)
 		glow.visible = not opens
 		glow.add_to_group(&"tear")
-		map_root.add_child(glow)
+
+## The tears of the map's scene spots (SceneSpot.glow), hidden until show_spot_glows.
+func _build_spot_glows(map: MapDef) -> void:
+	for s in map.scene_spots:
+		if s.glow != Vector2.ZERO:
+			var glow := _tear_glow(map, s.glow, true)
+			glow.visible = false
+			spot_glows[glow] = s
+
+## Shows the scene spots' tears that are open to `c` (SceneSpot.open_to).
+func show_spot_glows(c: Character) -> void:
+	for glow: Node3D in spot_glows:
+		glow.visible = c != null and (spot_glows[glow] as SceneSpot).open_to(c)
+
+## One tear: a soft white glow at `at` (x across, height above the floor); a close one
+## (`near`) hangs just behind the land, bigger and brighter.
+func _tear_glow(map: MapDef, at: Vector2, near: bool) -> MeshInstance3D:
+	var mat := StandardMaterial3D.new()
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.blend_mode = BaseMaterial3D.BLEND_MODE_ADD
+	mat.albedo_texture = _glow_texture()
+	mat.albedo_color = TEAR_COLOR
+	mat.disable_receive_shadows = true
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	var q := QuadMesh.new()
+	var size := OPENING_TEAR_SIZE if near else TEAR_SIZE
+	q.size = Vector2(size, size)
+	var glow := MeshInstance3D.new()
+	glow.mesh = q
+	glow.material_override = mat
+	glow.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	glow.position = to3d(Vector2(at.x, map.ground_y - at.y), OPENING_TEAR_Z if near else TEAR_Z)
+	glow.add_to_group(&"breathing_tear")
+	map_root.add_child(glow)
+	return glow
 
 ## Shows a map's tear once it has opened (a map whose tears are always there ignores it).
 func show_tears(open: bool) -> void:
@@ -720,7 +745,7 @@ func _process(delta: float) -> void:
 	for l: OmniLight3D in get_tree().get_nodes_in_group(&"flicker"):
 		var seed_ := float(l.get_instance_id() % 997)
 		l.light_energy = float(l.get_meta(&"energy")) * (0.88 + 0.08 * sin(t * 7.0 + seed_) + 0.04 * sin(t * 13.0 + seed_ * 2.0))
-	for glow: MeshInstance3D in get_tree().get_nodes_in_group(&"tear"):
+	for glow: MeshInstance3D in get_tree().get_nodes_in_group(&"breathing_tear"):
 		(glow.material_override as StandardMaterial3D).albedo_color.a = TEAR_COLOR.a * (0.75 + 0.25 * sin(t * 1.3))
 	for beam: MeshInstance3D in get_tree().get_nodes_in_group(&"light_shaft"):
 		var m := beam.material_override as StandardMaterial3D

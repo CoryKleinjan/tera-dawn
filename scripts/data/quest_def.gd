@@ -14,6 +14,11 @@ extends Resource
 @export var jobs: Array[StringName] = []
 ## Quests that must be finished first.
 @export var requires: Array[StringName] = []
+## At least one of these quests must be finished first (a story step that follows whichever
+## job's version of the quest before it you did).
+@export var requires_any: Array[StringName] = []
+## Monsters that must have been beaten first (bosses, counted in the Monster Book).
+@export var requires_beaten: Array[MonsterDef] = []
 ## Can be done again after handing it in.
 @export var repeatable := false
 

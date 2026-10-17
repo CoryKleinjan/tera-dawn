@@ -13,6 +13,7 @@ enum Kind { KILL, COLLECT, VISIT, REACH }
 ## VISIT: which map to reach. REACH: the map the spot is on.
 @export var map: StringName
 ## REACH: the platform to stand on (its index on `map`; 0 is the floor), and what to call it.
+## VISIT: what to call the map instead of its name (one whose name is a secret).
 @export var platform := 0
 @export var spot_name := ""
 @export var count := 1
@@ -35,6 +36,8 @@ func describe() -> String:
 		Kind.REACH:
 			return "Reach %s" % spot_name
 		_:
+			if spot_name != "":
+				return "Reach %s" % spot_name
 			var m: MapDef = Content.maps.get(map)
 			return "Reach %s" % (m.display_name if m else String(map))
 

@@ -48,6 +48,7 @@ var hurt_here := false # took damage since arriving on this map (a boss beaten u
 ## Monsters leave them alone meanwhile.
 var scene: StringName = &""
 var scene_t := 0      # ticks before a scene that never ended stops anyway
+var scene_then: SceneSpot  # the scene spot whose scene is playing: it sends them on when it ends
 
 ## The client needs a fresh copy of the whole Character (inventory, gear, stats).
 var dirty_character := false

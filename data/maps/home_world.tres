@@ -1,0 +1,153 @@
+[gd_resource type="Resource" script_class="MapDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/coast.tres" id="2_biome"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="4_variant"]
+[ext_resource type="Script" path="res://scripts/data/scene_spot.gd" id="spot_def"]
+[ext_resource type="Resource" path="res://data/cutscenes/home_beach.tres" id="home_beach"]
+[ext_resource type="Resource" path="res://data/cutscenes/home_lookout.tres" id="home_lookout"]
+[ext_resource type="Resource" path="res://data/cutscenes/home_doorway.tres" id="home_doorway"]
+[ext_resource type="Resource" path="res://data/cutscenes/home_way_back.tres" id="home_way_back"]
+[ext_resource type="Resource" path="res://data/cutscenes/home_back.tres" id="home_back"]
+[ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="prop_def"]
+[ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="backdrop_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/home_world/town.png" id="t_town"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/home_world/cottage.png" id="t_cottage"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/home_world/lookout.png" id="t_lookout"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/home_world/wall.png" id="t_wall"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/home_world/boat.png" id="t_boat"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/home_world/cap_left.png" id="t_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/home_world/middle_a.png" id="t_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/home_world/middle_b.png" id="t_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/home_world/cap_right.png" id="t_cap_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/home_world_side.png" id="t_ground_side"]
+
+[sub_resource type="Resource" id="Backdrop_town"]
+script = ExtResource("backdrop_def")
+textures = Array[Texture2D]([ExtResource("t_town")])
+mode = 2
+depth = 300.0
+screen_top = Vector2(-0.2, -0.2)
+
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("4_variant")
+sky_top = Color(0.52, 0.55, 0.6, 1)
+sky_mid = Color(0.64, 0.67, 0.71, 1)
+sky_low = Color(0.74, 0.76, 0.78, 1)
+sky_horizon = Color(0.8, 0.81, 0.82, 1)
+sun_color = Color(0.78, 0.8, 0.84, 1)
+light_color = Color(0.78, 0.8, 0.86, 1)
+light_energy = 0.7
+ambient_color = Color(0.6, 0.63, 0.68, 1)
+fog_color = Color(0.66, 0.68, 0.72, 1)
+fog_begin = 6.0
+fog_end = 90.0
+fog_density = 0.85
+mote_color = Color(0.8, 0.82, 0.86, 1)
+motes_rise = 2
+light_shafts = 2
+hide_ground_decor = PackedInt32Array(0, 1, 2, 3, 4)
+hide_town_decor = true
+hide_edge_grass = true
+hide_platform_decor = true
+hide_flyers = true
+platform_left = ExtResource("t_cap_left")
+platform_middle = ExtResource("t_middle_a")
+platform_middle_alt = ExtResource("t_middle_b")
+platform_right = ExtResource("t_cap_right")
+ground_side = ExtResource("t_ground_side")
+hide_layers = PackedInt32Array(0, 1, 2, 3, 4, 5, 6)
+more_backdrop = Array[ExtResource("backdrop_def")]([SubResource("Backdrop_town")])
+
+[sub_resource type="Resource" id="P1"]
+script = ExtResource("3_platform")
+x = 820.0
+y = 555.0
+width = 140.0
+
+[sub_resource type="Resource" id="P2"]
+script = ExtResource("3_platform")
+x = 990.0
+y = 490.0
+width = 170.0
+
+[sub_resource type="Resource" id="Lookout_deck"]
+script = ExtResource("3_platform")
+x = 1170.0
+y = 446.0
+width = 104.0
+in_scenery = true
+
+[sub_resource type="Resource" id="Beach"]
+script = ExtResource("spot_def")
+platform = 0
+from_x = 380.0
+to_x = 620.0
+scene = ExtResource("home_beach")
+
+[sub_resource type="Resource" id="Lookout"]
+script = ExtResource("spot_def")
+platform = 3
+scene = ExtResource("home_lookout")
+
+[sub_resource type="Resource" id="Doorway"]
+script = ExtResource("spot_def")
+platform = 0
+from_x = 1500.0
+to_x = 1680.0
+scene = ExtResource("home_doorway")
+
+[sub_resource type="Resource" id="WayBack"]
+script = ExtResource("spot_def")
+platform = 0
+from_x = 2150.0
+to_x = 2340.0
+scene = ExtResource("home_way_back")
+then_map = &"starfall_ridge"
+then_x = 1980.0
+then_scene = ExtResource("home_back")
+glow = Vector2(2240.0, 170.0)
+
+[sub_resource type="Resource" id="Prop_boat"]
+script = ExtResource("prop_def")
+texture = ExtResource("t_boat")
+x = 470.0
+depth = -1.0
+
+[sub_resource type="Resource" id="Prop_lookout"]
+script = ExtResource("prop_def")
+texture = ExtResource("t_lookout")
+x = 1222.0
+depth = -0.5
+scale = 0.8
+
+[sub_resource type="Resource" id="Prop_wall"]
+script = ExtResource("prop_def")
+texture = ExtResource("t_wall")
+x = 1590.0
+depth = -1.0
+
+[sub_resource type="Resource" id="Prop_cottage"]
+script = ExtResource("prop_def")
+texture = ExtResource("t_cottage")
+x = 1880.0
+depth = -3.0
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"home_world"
+display_name = "???"
+biome = ExtResource("2_biome")
+variant = SubResource("Variant")
+width = 2400
+start_x = 200.0
+lantern_spacing = 0.0
+decor_density = 0.4
+silent = true
+solo = true
+region = &"lumewood"
+return_map = &"lumewood"
+platforms = Array[ExtResource("3_platform")]([SubResource("P1"), SubResource("P2"), SubResource("Lookout_deck")])
+props = Array[ExtResource("prop_def")]([SubResource("Prop_boat"), SubResource("Prop_lookout"), SubResource("Prop_wall"), SubResource("Prop_cottage")])
+scene_spots = Array[ExtResource("spot_def")]([SubResource("Beach"), SubResource("Lookout"), SubResource("Doorway"), SubResource("WayBack")])

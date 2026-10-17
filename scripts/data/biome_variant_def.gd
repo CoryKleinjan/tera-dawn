@@ -54,6 +54,8 @@ const KEEP_COLOR := Color(0, 0, 0, 0)
 ## land painted with its own grass and flowers.
 @export var hide_edge_grass := false
 @export var hide_platform_decor := false
+## Leaves out the birds crossing the sky (BiomeDef.flyers), for a place with no life in it.
+@export var hide_flyers := false
 ## Leaves in the screen's top corners (BiomeDef.frame_left / frame_right), when set.
 @export var frame_left: Texture2D
 @export var frame_right: Texture2D
@@ -113,6 +115,8 @@ func apply(base: BiomeDef) -> BiomeDef:
 		b.edge_grass = []
 	if hide_platform_decor:
 		b.platform_decor = []
+	if hide_flyers:
+		b.flyers = null
 	for key in ["frame_left", "frame_right"]:
 		if get(key) != null:
 			b.set(key, get(key))

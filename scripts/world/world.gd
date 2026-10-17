@@ -186,6 +186,7 @@ func show_for_me() -> void:
 		n.refresh()
 	stage.show_open_portals(Game.me)
 	stage.show_breakables(Game.me)
+	stage.show_spot_glows(Game.me)
 
 func show_banner(text: String) -> void:
 	banner_text = text

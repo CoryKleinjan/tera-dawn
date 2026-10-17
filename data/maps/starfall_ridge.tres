@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=43 format=3]
+[gd_resource type="Resource" script_class="MapDef" format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/lumewood.tres" id="2_lumewood"]
@@ -12,6 +12,12 @@
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 [ext_resource type="Resource" path="res://data/monsters/glowcap.tres" id="m_glowcap"]
 [ext_resource type="Resource" path="res://data/monsters/lume_wisp.tres" id="m_lume_wisp"]
+[ext_resource type="Script" path="res://scripts/data/scene_spot.gd" id="spot_def"]
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="quest_def"]
+[ext_resource type="Resource" path="res://data/quests/story_lights_on_the_ridge.tres" id="q_lights"]
+[ext_resource type="Resource" path="res://data/quests/story_a_closer_look.tres" id="q_closer"]
+[ext_resource type="Resource" path="res://data/cutscenes/home_pull.tres" id="home_pull"]
+[ext_resource type="Resource" path="res://data/cutscenes/home_arrive.tres" id="home_arrive"]
 
 [sub_resource type="Resource" id="Resource_27"]
 script = ExtResource("10_prop_placement")
@@ -175,6 +181,22 @@ x = 2093.0
 y = 420.0
 width = 110.0
 
+[sub_resource type="Resource" id="LightGlow"]
+script = ExtResource("spot_def")
+platform = 6
+while_on = Array[ExtResource("quest_def")]([ExtResource("q_lights"), ExtResource("q_closer")])
+glow = Vector2(2240.0, 330.0)
+
+[sub_resource type="Resource" id="LightPull"]
+script = ExtResource("spot_def")
+platform = 6
+while_on = Array[ExtResource("quest_def")]([ExtResource("q_closer")])
+until_ready = true
+scene = ExtResource("home_pull")
+then_map = &"home_world"
+then_x = 200.0
+then_scene = ExtResource("home_arrive")
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"starfall_ridge"
@@ -192,3 +214,4 @@ props = Array[ExtResource("10_prop_placement")]([SubResource("Resource_23"), Sub
 region = &"lumewood"
 world_pos = Vector2(745.0, 170.0)
 return_map = &"lumewood"
+scene_spots = Array[ExtResource("spot_def")]([SubResource("LightGlow"), SubResource("LightPull")])

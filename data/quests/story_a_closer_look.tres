@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="QuestDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
+
+[sub_resource type="Resource" id="Visit"]
+script = ExtResource("2_quest_objective")
+kind = 2
+map = &"home_world"
+spot_name = "the light over Starfall Ridge"
+count = 1
+
+[resource]
+script = ExtResource("1_quest_def")
+id = &"story_a_closer_look"
+title = "A Closer Look"
+giver = &"lumewood_instructor"
+requires = Array[StringName]([&"story_lights_on_the_ridge"])
+offer_text = "A white light, hanging still in the air. Like the one at your Job Test, but quiet. I need to know what it is. Go as close as you dare, and tell me everything you see."
+progress_text = "Get close to the light over Starfall Ridge."
+complete_text = "You went through it? And came back? A whole world on the other side, grey and empty... Then a tear doesn't only let things out. It goes somewhere. My scholars will want every word of this. So do I."
+objectives = Array[ExtResource("2_quest_objective")]([SubResource("Visit")])
+reward_essence = 60000
+reward_shards = 3000
+reward_items = Array[ExtResource("4_drop_entry")]([])
