@@ -213,7 +213,7 @@ face = -1
 [sub_resource type="Resource" id="Npc_hunter"]
 script = ExtResource("npc_placement")
 npc = ExtResource("n_hunter")
-x = 4960.0
+x = 4970.0
 platform = 3
 face = -1
 
