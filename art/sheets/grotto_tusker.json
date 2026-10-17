@@ -1,0 +1,283 @@
+{
+  "source": "art/source/boss_grotto_tusker_main.png",
+  "label_band": 0,
+  "save": false,
+  "out_dir": "art/build/grotto_tusker",
+  "cells": [
+    [
+      "idle1",
+      "",
+      "idle2",
+      "",
+      "move1",
+      "",
+      "move2"
+    ],
+    [
+      ""
+    ],
+    [
+      "move3",
+      "",
+      "windup",
+      "",
+      "strike",
+      "",
+      "special"
+    ],
+    [
+      ""
+    ],
+    [
+      "hurt",
+      "",
+      "enraged",
+      "",
+      "defeated1",
+      "",
+      "defeated2"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      397,
+      401,
+      800,
+      804,
+      1200
+    ],
+    "cols": [
+      [
+        0,
+        398,
+        402,
+        798,
+        802,
+        1199,
+        1203,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        398,
+        402,
+        798,
+        802,
+        1199,
+        1203,
+        1600
+      ],
+      [
+        0,
+        1600
+      ],
+      [
+        0,
+        398,
+        402,
+        798,
+        802,
+        1199,
+        1203,
+        1600
+      ]
+    ]
+  },
+  "inset": 2,
+  "scale": 0.2978,
+  "detail": 2.75,
+  "sets": {
+    "grotto_tusker": {
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/grotto_tusker.png",
+      "sprite_frames": "assets/animations/grotto_tusker.tres",
+      "frames": {
+        "idle1": "grotto_tusker:idle1",
+        "idle2": "grotto_tusker:idle2",
+        "move1": "grotto_tusker:move1",
+        "move2": "grotto_tusker:move2",
+        "move3": "grotto_tusker:move3",
+        "windup": "grotto_tusker:windup",
+        "strike": "grotto_tusker:strike",
+        "special": "grotto_tusker:special",
+        "hurt": "grotto_tusker:hurt",
+        "enraged": "grotto_tusker:enraged",
+        "charge_windup": "boss_grotto_tusker_charge:charge_windup",
+        "charge_windup2": "boss_grotto_tusker_charge:charge_windup2",
+        "charge": "boss_grotto_tusker_charge:charge",
+        "slam_windup": "boss_grotto_tusker_slam:slam_windup",
+        "slam_windup2": "boss_grotto_tusker_slam:slam_windup2",
+        "slam": "boss_grotto_tusker_slam:slam",
+        "pounce_windup": "boss_grotto_tusker_pounce:pounce_windup",
+        "pounce_windup2": "boss_grotto_tusker_pounce:pounce_windup2",
+        "pounce": "boss_grotto_tusker_pounce:pounce",
+        "charge2": "boss_grotto_tusker_ends_a:charge2",
+        "charge_recover": "boss_grotto_tusker_ends_a:charge_recover",
+        "slam2": "boss_grotto_tusker_ends_a:slam2",
+        "slam_recover": "boss_grotto_tusker_ends_b:slam_recover",
+        "pounce2": "boss_grotto_tusker_ends_b:pounce2",
+        "pounce_recover": "boss_grotto_tusker_ends_b:pounce_recover",
+        "intro1": "boss_grotto_tusker_intro:intro1",
+        "intro2": "boss_grotto_tusker_intro:intro2",
+        "intro3": "boss_grotto_tusker_intro:intro3",
+        "death1": "boss_grotto_tusker_death:death1",
+        "death2": "boss_grotto_tusker_death:death2",
+        "death3": "boss_grotto_tusker_death:death3",
+        "phase1": "boss_grotto_tusker_phase:phase1",
+        "phase2": "boss_grotto_tusker_phase:phase2",
+        "phase3": "boss_grotto_tusker_phase:phase3"
+      },
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "move1",
+            "move2",
+            "move3",
+            "move2"
+          ],
+          "fps": 6
+        },
+        "attack": {
+          "frames": [
+            "windup",
+            "strike",
+            "special"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "death1",
+            "death2",
+            "death3"
+          ],
+          "fps": 4,
+          "durations": [
+            1,
+            1,
+            3
+          ],
+          "loop": false
+        },
+        "charge_windup": {
+          "frames": [
+            "charge_windup",
+            "charge_windup2"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "charge": {
+          "frames": [
+            "charge",
+            "charge2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "charge_recover": {
+          "frames": [
+            "charge_recover"
+          ],
+          "fps": 1
+        },
+        "slam_windup": {
+          "frames": [
+            "slam_windup",
+            "slam_windup2"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "slam": {
+          "frames": [
+            "slam",
+            "slam2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "slam_recover": {
+          "frames": [
+            "slam_recover"
+          ],
+          "fps": 1
+        },
+        "pounce_windup": {
+          "frames": [
+            "pounce_windup",
+            "pounce_windup2"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "pounce": {
+          "frames": [
+            "pounce",
+            "pounce2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "pounce_recover": {
+          "frames": [
+            "pounce_recover"
+          ],
+          "fps": 1
+        },
+        "intro": {
+          "frames": [
+            "intro1",
+            "intro2",
+            "intro3"
+          ],
+          "fps": 5,
+          "durations": [
+            2,
+            4,
+            2
+          ],
+          "loop": false
+        },
+        "phase": {
+          "frames": [
+            "phase1",
+            "phase2",
+            "phase3"
+          ],
+          "fps": 5,
+          "durations": [
+            2,
+            4,
+            2
+          ],
+          "loop": false
+        }
+      }
+    }
+  },
+  "key": [
+    0.2,
+    0.5
+  ]
+}

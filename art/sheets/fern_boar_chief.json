@@ -128,7 +128,10 @@
         "intro3": "boss_fern_boar_chief_intro:intro3",
         "death1": "boss_fern_boar_chief_death:death1",
         "death2": "boss_fern_boar_chief_death:death2",
-        "death3": "boss_fern_boar_chief_death:death3"
+        "death3": "boss_fern_boar_chief_death:death3",
+        "phase1": "boss_fern_boar_chief_phase:phase1",
+        "phase2": "boss_fern_boar_chief_phase:phase2",
+        "phase3": "boss_fern_boar_chief_phase:phase3"
       },
       "animations": {
         "idle": {
@@ -247,6 +250,20 @@
             "intro1",
             "intro2",
             "intro3"
+          ],
+          "fps": 5,
+          "durations": [
+            2,
+            4,
+            2
+          ],
+          "loop": false
+        },
+        "phase": {
+          "frames": [
+            "phase1",
+            "phase2",
+            "phase3"
           ],
           "fps": 5,
           "durations": [

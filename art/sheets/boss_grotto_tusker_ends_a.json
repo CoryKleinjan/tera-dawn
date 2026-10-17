@@ -1,0 +1,76 @@
+{
+  "source": "art/source/boss_grotto_tusker_ends_a.png",
+  "save": false,
+  "out_dir": "art/build/boss_grotto_tusker_ends_a",
+  "cells": [
+    [
+      "charge2",
+      "",
+      "charge_recover",
+      "",
+      "slam2"
+    ]
+  ],
+  "inset": 4,
+  "label_band": 0,
+  "scale": 0.2785,
+  "detail": 2.75,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        415,
+        417,
+        833,
+        835,
+        1260
+      ]
+    ]
+  },
+  "overrides": {
+    "charge2": {
+      "blank": [
+        [
+          0,
+          424,
+          407,
+          429
+        ]
+      ]
+    },
+    "charge_recover": {
+      "blank": [
+        [
+          0,
+          424,
+          408,
+          429
+        ],
+        [
+          0,
+          0,
+          5,
+          532
+        ]
+      ]
+    },
+    "slam2": {
+      "blank": [
+        [
+          0,
+          424,
+          417,
+          429
+        ]
+      ]
+    }
+  },
+  "key": [
+    0.2,
+    0.5
+  ]
+}

@@ -24373,6 +24373,338 @@
    "refs": [],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds the flat bright green (#00FF00) shape of a small boy whose body is turned AWAY from the viewer, so we see his BACK: only his head turns to look to the right, his near fist is raised up to the right and his other arm is bent at his side. On it is painted a pirate's long red coat trimmed with gold, with long sleeves ending in wide gold-trimmed cuffs and a black belt, but it is painted from the FRONT: it hangs open down its front, with his white shirt and white cloth showing down the middle, gold-trimmed front edges, and a gold buckle on the belt. Cell 2 holds the same coat painted from BEHIND on the same boy standing with his back to the viewer: leave cell 2 exactly as it is. Cells 3 to 8 are empty and must stay empty. Repaint the coat in cell 1 so that it is seen from BEHIND, with the same back as in cell 2: the coat closed all the way across his back, one red back panel from the collar down to the hem, the black belt as one plain band with no buckle, and a split vent edged in gold in the middle of the hem. Take away the white shirt and all the white cloth down the middle, the open front edges and the buckle: none of them shows from behind. At the top, the collar is seen from behind: a red collar edged in gold across the back of his neck, right under the green head. Keep the coat's outline, size, position, sleeves and length exactly as they are in cell 1, and keep its colours, material, shading and thin dark plum-brown outline. Leave every green pixel the coat does not cover flat pure #00FF00 exactly as it is, and the background flat pure magenta #FF00FF. Do not paint any face, skin, hands, head or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the coat already in cells 1 and 2. Keep the grid lines. No text, no labels."
   }
+ },
+ {
+  "id": "boss_fern_boar_chief_phase_v2",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_fern_boar_chief_phase_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 22:16Z 'yes' to 2 repaints ~$0.14): exact base aspect, no NPC style ref. cells phase1, phase2, phase3.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/fern_boar_chief_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Fern Boar Chief\" once, in its idle pose on magenta: a big old boar chieftain of the green woods with moss-green bristly hide, a mane of curled green fern fronds (round spiral fiddleheads) along its head and back, a rough plate of brown bark armour on its shoulder, a shaggy brown beard under its jaw, long ivory tusks, a pink snout, small amber eyes and pink cheek blush. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, markings, face, the moss-green hide, the curled spiral fern-frond mane, bark shoulder plate, brown beard, tusks and amber eyes, every glowing part and detail it has in its idle pose, the same size as in the first attached picture, the same smooth soft painted style and thin dark plum-brown outline) but NOT its poses: each cell's pose is new and clearly different from the others. Every glowing part and detail it has in the first attached picture is there in every cell. It always faces RIGHT, seen from the side, its face turned to the right. Poses stand on one shared ground line near the bottom of each cell, like in the first attached picture. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and 75% of its height, centred, with a wide magenta margin on every side, every part of it fully inside the cell. It is a cute chunky cartoon game monster painted exactly like the first attached picture, NOT a realistic animal: the same big head, chunky round body, short sturdy legs, the same smooth soft painted shading and thin dark plum-brown outline, in every cell. Keep its colours EXACTLY as in the first attached picture in every cell: the same moss-green hide (never purple, brown or dark), the same mane of small CURLED spiral fern fronds (never big straight or pointed fern leaves), the same bark plate and brown beard. Cell 1, PHASE HUNCH: hunched low and shaking with fury, head down, bristling. Cell 2, PHASE ROAR: reared up to its full height roaring, mouth wide open, front legs raised, its eyes glowing fierce amber and its curled fern fronds standing up a little taller, still the same small curled green spirals. Cell 3, PHASE LAND: back down on all four legs in a wide, low, furious stance, its eyes glowing fierce amber and its curled fern fronds standing up a little taller, still the same small curled green spirals. Exactly one monster per cell. Do NOT draw dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. REPAINT: the background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+ {
+  "id": "boss_grotto_tusker_main_v3",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_grotto_tusker_main_v3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   3,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 22:16Z 'yes' to 2 repaints ~$0.14): exact base aspect, no NPC style ref. Repaints the approved Fern Boar Chief main sheet as Grotto Tusker (two prompt-only tries failed). cells idle1, idle2, move1, move2, move3, windup, strike, special, hurt, enraged, defeated1, defeated2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/boss_fern_boar_chief_main.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 12 cells (3 rows of 4) showing a boar boss in 12 poses on a flat magenta background. Repaint every one of the 12 boars as a DIFFERENT boss, \"Grotto Tusker\", a huge old sea-cave boar. Keep EVERYTHING else exactly as it is: the same pose, size, position, body shape, leg positions, head angle and facing in every cell, the same cute chunky cartoon style, smooth soft painted shading and thin dark plum-brown outline, the same grid lines and the same pure flat magenta #FF00FF background. Change ONLY its colours and details: its hide becomes wet dark slate-blue crusted with pale barnacles and small shells (no green anywhere on its body); the curled fern mane becomes dripping strands of dark green kelp; the bark shoulder plate becomes a cluster of barnacles and small shells; the brown beard becomes a short dark kelp beard; its tusks are long and yellowed; its eyes are small and pale. In EVERY one of the 12 cells an old iron smuggler's lantern glowing warm yellow hangs from a short rope tied around its near tusk; never leave the lantern out. In the cell where its eyes glow with rage, they glow pale sea-green. Write NO text, labels or names anywhere. Draw NO shadow, puddle, ground, glow halo or effect around it: only the boar on flat magenta. Every boar stays fully inside its own cell, never touching the cell borders. Exactly one boar per cell."
+  }
+ },
+ {
+  "id": "boss_grotto_tusker_charge",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_grotto_tusker_charge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 23:02Z 'Yes do it' to Grotto Tusker's 8 boss sheets ~$0.54, painted over Fern Boar Chief's approved boss sheets like his main sheet): exact 21:9 base, no NPC style ref, no refs. Base: Fern Boar Chief's approved charge sheet. cells charge_windup, charge_windup2, charge.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/boss_fern_boar_chief_charge.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 3 cells (1 row of 3) showing a boar boss in 3 poses on a flat magenta background. Repaint every one of the 3 boars as a DIFFERENT boss, \"Grotto Tusker\", a huge old sea-cave boar. Keep EVERYTHING else exactly as it is: the same pose, size, position, body shape, leg positions, head angle, mouth and facing in every cell, the same cute chunky cartoon style, smooth soft painted shading and thin dark plum-brown outline, the same grid lines and the same pure flat magenta #FF00FF background. Change ONLY its colours and details: its hide becomes wet dark slate-blue crusted with pale barnacles and small shells (no green anywhere on its body); the curled fern mane becomes dripping strands of dark green kelp; the bark shoulder plate becomes a cluster of barnacles and small shells; the brown beard becomes a short dark kelp beard; its tusks are long and yellowed; its eyes are small and pale. In EVERY one of the 3 cells an old iron smuggler's lantern glowing warm yellow hangs from a short rope tied around its near tusk; never leave the lantern out. Write NO text, labels or names anywhere. Draw NO shadow, puddle, ground, glow halo or effect around it: only the boar on flat magenta. Every boar stays fully inside its own cell, never touching the cell borders. Exactly one boar per cell."
+  }
+ },
+ {
+  "id": "boss_grotto_tusker_slam",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_grotto_tusker_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 23:02Z 'Yes do it' to Grotto Tusker's 8 boss sheets ~$0.54, painted over Fern Boar Chief's approved boss sheets like his main sheet): exact 21:9 base, no NPC style ref, no refs. Base: Fern Boar Chief's approved slam sheet. cells slam_windup, slam_windup2, slam.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/boss_fern_boar_chief_slam.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 3 cells (1 row of 3) showing a boar boss in 3 poses on a flat magenta background. Repaint every one of the 3 boars as a DIFFERENT boss, \"Grotto Tusker\", a huge old sea-cave boar. Keep EVERYTHING else exactly as it is: the same pose, size, position, body shape, leg positions, head angle, mouth and facing in every cell, the same cute chunky cartoon style, smooth soft painted shading and thin dark plum-brown outline, the same grid lines and the same pure flat magenta #FF00FF background. Change ONLY its colours and details: its hide becomes wet dark slate-blue crusted with pale barnacles and small shells (no green anywhere on its body); the curled fern mane becomes dripping strands of dark green kelp; the bark shoulder plate becomes a cluster of barnacles and small shells; the brown beard becomes a short dark kelp beard; its tusks are long and yellowed; its eyes are small and pale. In EVERY one of the 3 cells an old iron smuggler's lantern glowing warm yellow hangs from a short rope tied around its near tusk; never leave the lantern out. Write NO text, labels or names anywhere. Draw NO shadow, puddle, ground, glow halo or effect around it: only the boar on flat magenta. Every boar stays fully inside its own cell, never touching the cell borders. Exactly one boar per cell."
+  }
+ },
+ {
+  "id": "boss_grotto_tusker_pounce",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_grotto_tusker_pounce.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 23:02Z 'Yes do it' to Grotto Tusker's 8 boss sheets ~$0.54, painted over Fern Boar Chief's approved boss sheets like his main sheet): exact 21:9 base, no NPC style ref, no refs. Base: Fern Boar Chief's approved pounce sheet. cells pounce_windup, pounce_windup2, pounce.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/boss_fern_boar_chief_pounce.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 3 cells (1 row of 3) showing a boar boss in 3 poses on a flat magenta background. Repaint every one of the 3 boars as a DIFFERENT boss, \"Grotto Tusker\", a huge old sea-cave boar. Keep EVERYTHING else exactly as it is: the same pose, size, position, body shape, leg positions, head angle, mouth and facing in every cell, the same cute chunky cartoon style, smooth soft painted shading and thin dark plum-brown outline, the same grid lines and the same pure flat magenta #FF00FF background. Change ONLY its colours and details: its hide becomes wet dark slate-blue crusted with pale barnacles and small shells (no green anywhere on its body); the curled fern mane becomes dripping strands of dark green kelp; the bark shoulder plate becomes a cluster of barnacles and small shells; the brown beard becomes a short dark kelp beard; its tusks are long and yellowed; its eyes are small and pale. In EVERY one of the 3 cells an old iron smuggler's lantern glowing warm yellow hangs from a short rope tied around its near tusk; never leave the lantern out. Write NO text, labels or names anywhere. Draw NO shadow, puddle, ground, glow halo or effect around it: only the boar on flat magenta. Every boar stays fully inside its own cell, never touching the cell borders. Exactly one boar per cell."
+  }
+ },
+ {
+  "id": "boss_grotto_tusker_ends_a",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_grotto_tusker_ends_a.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 23:02Z 'Yes do it' to Grotto Tusker's 8 boss sheets ~$0.54, painted over Fern Boar Chief's approved boss sheets like his main sheet): exact 21:9 base, no NPC style ref, no refs. Base: Fern Boar Chief's approved ends_a sheet. cells charge2, charge_recover, slam2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/boss_fern_boar_chief_ends_a.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 3 cells (1 row of 3) showing a boar boss in 3 poses on a flat magenta background. Repaint every one of the 3 boars as a DIFFERENT boss, \"Grotto Tusker\", a huge old sea-cave boar. Keep EVERYTHING else exactly as it is: the same pose, size, position, body shape, leg positions, head angle, mouth and facing in every cell, the same cute chunky cartoon style, smooth soft painted shading and thin dark plum-brown outline, the same grid lines and the same pure flat magenta #FF00FF background. Change ONLY its colours and details: its hide becomes wet dark slate-blue crusted with pale barnacles and small shells (no green anywhere on its body); the curled fern mane becomes dripping strands of dark green kelp; the bark shoulder plate becomes a cluster of barnacles and small shells; the brown beard becomes a short dark kelp beard; its tusks are long and yellowed; its eyes are small and pale. In EVERY one of the 3 cells an old iron smuggler's lantern glowing warm yellow hangs from a short rope tied around its near tusk; never leave the lantern out. Write NO text, labels or names anywhere. Draw NO shadow, puddle, ground, glow halo or effect around it: only the boar on flat magenta. Every boar stays fully inside its own cell, never touching the cell borders. Exactly one boar per cell."
+  }
+ },
+ {
+  "id": "boss_grotto_tusker_ends_b",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_grotto_tusker_ends_b.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 23:02Z 'Yes do it' to Grotto Tusker's 8 boss sheets ~$0.54, painted over Fern Boar Chief's approved boss sheets like his main sheet): exact 21:9 base, no NPC style ref, no refs. Base: Fern Boar Chief's approved ends_b sheet. cells slam_recover, pounce2, pounce_recover.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/boss_fern_boar_chief_ends_b.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 3 cells (1 row of 3) showing a boar boss in 3 poses on a flat magenta background. Repaint every one of the 3 boars as a DIFFERENT boss, \"Grotto Tusker\", a huge old sea-cave boar. Keep EVERYTHING else exactly as it is: the same pose, size, position, body shape, leg positions, head angle, mouth and facing in every cell, the same cute chunky cartoon style, smooth soft painted shading and thin dark plum-brown outline, the same grid lines and the same pure flat magenta #FF00FF background. Change ONLY its colours and details: its hide becomes wet dark slate-blue crusted with pale barnacles and small shells (no green anywhere on its body); the curled fern mane becomes dripping strands of dark green kelp; the bark shoulder plate becomes a cluster of barnacles and small shells; the brown beard becomes a short dark kelp beard; its tusks are long and yellowed; its eyes are small and pale. In EVERY one of the 3 cells an old iron smuggler's lantern glowing warm yellow hangs from a short rope tied around its near tusk; never leave the lantern out. Write NO text, labels or names anywhere. Draw NO shadow, puddle, ground, glow halo or effect around it: only the boar on flat magenta. Every boar stays fully inside its own cell, never touching the cell borders. Exactly one boar per cell."
+  }
+ },
+ {
+  "id": "boss_grotto_tusker_intro",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_grotto_tusker_intro.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 23:02Z 'Yes do it' to Grotto Tusker's 8 boss sheets ~$0.54, painted over Fern Boar Chief's approved boss sheets like his main sheet): exact 21:9 base, no NPC style ref, no refs. Base: Fern Boar Chief's approved intro sheet. cells intro1, intro2, intro3.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/boss_fern_boar_chief_intro.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 3 cells (1 row of 3) showing a boar boss in 3 poses on a flat magenta background. Repaint every one of the 3 boars as a DIFFERENT boss, \"Grotto Tusker\", a huge old sea-cave boar. Keep EVERYTHING else exactly as it is: the same pose, size, position, body shape, leg positions, head angle, mouth and facing in every cell, the same cute chunky cartoon style, smooth soft painted shading and thin dark plum-brown outline, the same grid lines and the same pure flat magenta #FF00FF background. Change ONLY its colours and details: its hide becomes wet dark slate-blue crusted with pale barnacles and small shells (no green anywhere on its body); the curled fern mane becomes dripping strands of dark green kelp; the bark shoulder plate becomes a cluster of barnacles and small shells; the brown beard becomes a short dark kelp beard; its tusks are long and yellowed; its eyes are small and pale. In EVERY one of the 3 cells an old iron smuggler's lantern glowing warm yellow hangs from a short rope tied around its near tusk; never leave the lantern out. Write NO text, labels or names anywhere. Draw NO shadow, puddle, ground, glow halo or effect around it: only the boar on flat magenta. Every boar stays fully inside its own cell, never touching the cell borders. Exactly one boar per cell."
+  }
+ },
+ {
+  "id": "boss_grotto_tusker_phase",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_grotto_tusker_phase.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 23:02Z 'Yes do it' to Grotto Tusker's 8 boss sheets ~$0.54, painted over Fern Boar Chief's approved boss sheets like his main sheet): exact 21:9 base, no NPC style ref, no refs. Base: Fern Boar Chief's approved phase_v2 sheet. cells phase1, phase2, phase3.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/boss_fern_boar_chief_phase_v2.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 3 cells (1 row of 3) showing a boar boss in 3 poses on a flat magenta background. Repaint every one of the 3 boars as a DIFFERENT boss, \"Grotto Tusker\", a huge old sea-cave boar. Keep EVERYTHING else exactly as it is: the same pose, size, position, body shape, leg positions, head angle, mouth and facing in every cell, the same cute chunky cartoon style, smooth soft painted shading and thin dark plum-brown outline, the same grid lines and the same pure flat magenta #FF00FF background. Change ONLY its colours and details: its hide becomes wet dark slate-blue crusted with pale barnacles and small shells (no green anywhere on its body); the curled fern mane becomes dripping strands of dark green kelp; the bark shoulder plate becomes a cluster of barnacles and small shells; the brown beard becomes a short dark kelp beard; its tusks are long and yellowed; its eyes are small and pale. In EVERY one of the 3 cells an old iron smuggler's lantern glowing warm yellow hangs from a short rope tied around its near tusk; never leave the lantern out. Where its eyes glow with rage, they glow pale sea-green instead of amber, and its kelp mane lifts and bristles where the fern mane stands up. Write NO text, labels or names anywhere. Draw NO shadow, puddle, ground, glow halo or effect around it: only the boar on flat magenta. Every boar stays fully inside its own cell, never touching the cell borders. Exactly one boar per cell."
+  }
+ },
+ {
+  "id": "boss_grotto_tusker_death",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_grotto_tusker_death.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 23:02Z 'Yes do it' to Grotto Tusker's 8 boss sheets ~$0.54, painted over Fern Boar Chief's approved boss sheets like his main sheet): exact 21:9 base, no NPC style ref, no refs. Base: Fern Boar Chief's approved death sheet. cells death1, death2, death3.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/boss_fern_boar_chief_death.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 3 cells (1 row of 3) showing a boar boss in 3 poses on a flat magenta background. Repaint every one of the 3 boars as a DIFFERENT boss, \"Grotto Tusker\", a huge old sea-cave boar. Keep EVERYTHING else exactly as it is: the same pose, size, position, body shape, leg positions, head angle, mouth and facing in every cell, the same cute chunky cartoon style, smooth soft painted shading and thin dark plum-brown outline, the same grid lines and the same pure flat magenta #FF00FF background. Change ONLY its colours and details: its hide becomes wet dark slate-blue crusted with pale barnacles and small shells (no green anywhere on its body); the curled fern mane becomes dripping strands of dark green kelp; the bark shoulder plate becomes a cluster of barnacles and small shells; the brown beard becomes a short dark kelp beard; its tusks are long and yellowed; its eyes are small and pale. In EVERY one of the 3 cells an old iron smuggler's lantern hangs from a short rope tied around its near tusk; never leave the lantern out. It glows warm yellow in cells 1 and 2; in cell 3, where the boar lies fallen, the lantern rests on the ground still tied to its tusk with its light out. Write NO text, labels or names anywhere. Draw NO shadow, puddle, ground, glow halo or effect around it: only the boar on flat magenta. Every boar stays fully inside its own cell, never touching the cell borders. Exactly one boar per cell."
+  }
+ },
+ {
+  "id": "boss_grotto_tusker_slam_v2",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_grotto_tusker_slam_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 23:57Z 'Yes' to repainting 4 Grotto Tusker sheets ~$0.27: slam, death, ends_a, ends_b): fixes painted over Grotto Tusker's own v1 sheet, exact 21:9 base, no NPC style ref. Base: Grotto Tusker's v1 slam sheet. cells slam_windup, slam_windup2, slam.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/boss_grotto_tusker_slam.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/grotto_tusker_idle.png"
+   ],
+   "text": "The base picture is a sheet of 3 cells (1 row of 3) showing the boar boss \"Grotto Tusker\" in 3 poses on a flat magenta background. The attached picture shows Grotto Tusker in his idle pose: his look is exactly that (wet dark slate-blue hide with pale barnacles and water drips, dripping strands of dark green kelp for a mane, a short dark kelp beard, a cluster of pale barnacles and small shells on his shoulder, long yellowed tusks, small pale eyes, an old iron lantern glowing warm yellow on a short rope tied around his near tusk). Keep EVERYTHING in the base picture exactly as it is: the same pose, size, position, body shape, leg positions, head angle, mouth and facing in every cell, the same cute chunky cartoon style, smooth soft painted shading and thin dark plum-brown outline, the same grid lines and the same pure flat magenta #FF00FF background. Never take a pose from the attached picture. Change ONLY these things: remove every curled green spiral, fiddlehead, fern frond and fern leaf from his mane and back and paint long dripping strands of dark green kelp there instead, like in the attached picture; replace the wooden brown bark plate on his shoulder with a cluster of pale barnacles and small shells on his slate-blue hide, like in the attached picture. In cell 3, where his head is down, add the old iron lantern glowing warm yellow on a short rope tied around his near tusk, hanging close under the tusk, its bottom higher than his lowest hoof. Keep the lantern in cells 1 and 2 as it is. Write NO text, labels or names anywhere. Draw NO shadow, puddle, ground, glow halo or effect around it: only the boar on flat magenta. Every boar stays fully inside its own cell, never touching the cell borders. Exactly one boar per cell."
+  }
+ },
+ {
+  "id": "boss_grotto_tusker_death_v2",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_grotto_tusker_death_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 23:57Z 'Yes' to repainting 4 Grotto Tusker sheets ~$0.27: slam, death, ends_a, ends_b): fixes painted over Grotto Tusker's own v1 sheet, exact 21:9 base, no NPC style ref. Base: Grotto Tusker's v1 death sheet. cells death1, death2, death3.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/boss_grotto_tusker_death.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/grotto_tusker_idle.png"
+   ],
+   "text": "The base picture is a sheet of 3 cells (1 row of 3) showing the boar boss \"Grotto Tusker\" in 3 poses on a flat magenta background. The attached picture shows Grotto Tusker in his idle pose: his look is exactly that (wet dark slate-blue hide with pale barnacles and water drips, dripping strands of dark green kelp for a mane, a short dark kelp beard, a cluster of pale barnacles and small shells on his shoulder, long yellowed tusks, small pale eyes, an old iron lantern glowing warm yellow on a short rope tied around his near tusk). Keep EVERYTHING in the base picture exactly as it is: the same pose, size, position, body shape, leg positions, head angle, mouth and facing in every cell, the same cute chunky cartoon style, smooth soft painted shading and thin dark plum-brown outline, the same grid lines and the same pure flat magenta #FF00FF background. Never take a pose from the attached picture. Change ONLY these things: remove every curled green spiral, fiddlehead, fern frond and fern leaf from his mane and back and paint long dripping strands of dark green kelp there instead, like in the attached picture; replace the wooden brown bark plate on his shoulder with a cluster of pale barnacles and small shells on his slate-blue hide, like in the attached picture. Keep the lantern as it is in every cell: glowing on his tusk in cells 1 and 2, lying on the ground by his face with its light out in cell 3. Write NO text, labels or names anywhere. Draw NO shadow, puddle, ground, glow halo or effect around it: only the boar on flat magenta. Every boar stays fully inside its own cell, never touching the cell borders. Exactly one boar per cell."
+  }
+ },
+ {
+  "id": "boss_grotto_tusker_ends_a_v2",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_grotto_tusker_ends_a_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 23:57Z 'Yes' to repainting 4 Grotto Tusker sheets ~$0.27: slam, death, ends_a, ends_b): fixes painted over Grotto Tusker's own v1 sheet, exact 21:9 base, no NPC style ref. Base: Grotto Tusker's v1 ends_a sheet. cells charge2, charge_recover, slam2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/boss_grotto_tusker_ends_a.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/grotto_tusker_idle.png"
+   ],
+   "text": "The base picture is a sheet of 3 cells (1 row of 3) showing the boar boss \"Grotto Tusker\" in 3 poses on a flat magenta background. The attached picture shows Grotto Tusker in his idle pose: his look is exactly that (wet dark slate-blue hide with pale barnacles and water drips, dripping strands of dark green kelp for a mane, a short dark kelp beard, a cluster of pale barnacles and small shells on his shoulder, long yellowed tusks, small pale eyes, an old iron lantern glowing warm yellow on a short rope tied around his near tusk). Keep EVERYTHING in the base picture exactly as it is: the same pose, size, position, body shape, leg positions, head angle, mouth and facing in every cell, the same cute chunky cartoon style, smooth soft painted shading and thin dark plum-brown outline, the same grid lines and the same pure flat magenta #FF00FF background. Never take a pose from the attached picture. Change ONLY these things: In cell 3 the lantern hangs far below his feet: shorten its rope so the lantern hangs close under his tusk, its bottom higher than his lowest hoof and above the ground line. Keep cells 1 and 2 exactly as they are. Write NO text, labels or names anywhere. Draw NO shadow, puddle, ground, glow halo or effect around it: only the boar on flat magenta. Every boar stays fully inside its own cell, never touching the cell borders. Exactly one boar per cell."
+  }
+ },
+ {
+  "id": "boss_grotto_tusker_ends_b_v2",
+  "prompts": null,
+  "batch": "boss animations (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_grotto_tusker_ends_b_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-16 thread 'Boss animations' (Cory 23:57Z 'Yes' to repainting 4 Grotto Tusker sheets ~$0.27: slam, death, ends_a, ends_b): fixes painted over Grotto Tusker's own v1 sheet, exact 21:9 base, no NPC style ref. Base: Grotto Tusker's v1 ends_b sheet. cells slam_recover, pounce2, pounce_recover.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/boss_grotto_tusker_ends_b.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/grotto_tusker_idle.png"
+   ],
+   "text": "The base picture is a sheet of 3 cells (1 row of 3) showing the boar boss \"Grotto Tusker\" in 3 poses on a flat magenta background. The attached picture shows Grotto Tusker in his idle pose: his look is exactly that (wet dark slate-blue hide with pale barnacles and water drips, dripping strands of dark green kelp for a mane, a short dark kelp beard, a cluster of pale barnacles and small shells on his shoulder, long yellowed tusks, small pale eyes, an old iron lantern glowing warm yellow on a short rope tied around his near tusk). Keep EVERYTHING in the base picture exactly as it is: the same pose, size, position, body shape, leg positions, head angle, mouth and facing in every cell, the same cute chunky cartoon style, smooth soft painted shading and thin dark plum-brown outline, the same grid lines and the same pure flat magenta #FF00FF background. Never take a pose from the attached picture. Change ONLY these things: In cell 1 the lantern hangs below his feet: shorten its rope so the lantern hangs close under his tusk, its bottom higher than his lowest hoof and above the ground line. In cell 2 the lantern is missing: add the old iron lantern glowing warm yellow on a short rope tied around his near tusk, hanging close under the tusk, its bottom higher than his lowest hoof. Keep cell 3 exactly as it is. Write NO text, labels or names anywhere. Draw NO shadow, puddle, ground, glow halo or effect around it: only the boar on flat magenta. Every boar stays fully inside its own cell, never touching the cell borders. Exactly one boar per cell."
+  }
  }
 ]
 }

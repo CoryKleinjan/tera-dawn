@@ -67,6 +67,7 @@ size = Vector2(103.0, 87.0)
 sight = 700.0
 moves = Array[ExtResource("mv_script")]([ExtResource("mv_boss_charge"), ExtResource("mv_boss_slam"), ExtResource("mv_boss_pounce")])
 intro_ticks = 100
+rage_ticks = 100
 sprite_frames = ExtResource("2_fern_boar_chief")
 sprite_scale = 1.1
 drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot6")])
