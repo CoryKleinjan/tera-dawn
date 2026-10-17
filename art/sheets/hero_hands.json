@@ -25,7 +25,7 @@
     [
       "bow1",
       "bow2",
-      "",
+      "bow2_sleeved",
       "throw1",
       "throw2",
       "",
@@ -98,6 +98,7 @@
         "hurt": "hero_hands:hurt",
         "bow1": "hero_hands:bow1",
         "bow2": "hero_hands:bow2",
+        "bow2_sleeved": "hero_hands:bow2_sleeved",
         "throw1": "hero_hands:throw1",
         "throw2": "hero_hands:throw2",
         "pistol1": "hero_hands:pistol1",
@@ -195,6 +196,12 @@
         "bow2": {
           "frames": [
             "bow2"
+          ],
+          "fps": 1
+        },
+        "bow2_sleeved": {
+          "frames": [
+            "bow2_sleeved"
           ],
           "fps": 1
         },
