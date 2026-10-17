@@ -15,3 +15,4 @@ greeting = "Gear for the Archer path. Take a look."
 lines = PackedStringArray("Everything here's made in town.", "Check the stat each piece asks for.")
 shop = ExtResource("3_fletcher")
 storage = false
+enchants = true

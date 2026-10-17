@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=18 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=20 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/grotto_tusker.tres" id="2_grotto_tusker"]
@@ -13,6 +13,12 @@
 [ext_resource type="Resource" path="res://data/monster_moves/boss_pounce.tres" id="mv_boss_pounce"]
 [ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
 [ext_resource type="Resource" path="res://data/items/relics/tusk_charm.tres" id="relic_tusk_charm"]
+[ext_resource type="Resource" path="res://data/items/runes/tusker_rune.tres" id="rune_tusker_rune"]
+
+[sub_resource type="Resource" id="Drop_tusker_rune"]
+script = ExtResource("3_drop_entry")
+item = ExtResource("rune_tusker_rune")
+chance = 0.3
 
 [sub_resource type="Resource" id="Resource_5"]
 script = ExtResource("3_drop_entry")
@@ -67,6 +73,6 @@ intro_ticks = 100
 rage_ticks = 100
 sprite_frames = ExtResource("2_grotto_tusker")
 sprite_scale = 0.73
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Drop_tusker_rune")])
 relic = ExtResource("relic_tusk_charm")
 respawn_ticks = Vector2i(1800, 2400)

@@ -75,6 +75,13 @@ func use(id := &"t_use", max_stack := 100) -> UseDef:
 	register("items", it)
 	return it
 
+func rune(id := &"t_rune", values := {}) -> RuneDef:
+	var r := RuneDef.new()
+	r.id = id
+	r.display_name = String(id).capitalize()
+	r.stats = stats(values)
+	register("items", r)
+	return r
 
 func equip(id := &"t_sword", slot := EquipDef.Slot.WEAPON, values := {}, variance := 0) -> EquipDef:
 	var e := EquipDef.new()
