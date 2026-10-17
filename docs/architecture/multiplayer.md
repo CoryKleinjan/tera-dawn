@@ -21,7 +21,7 @@ TDWorld  ───────────────────────�
   gear, portals, fainting. It never keeps characters itself: it sends them back to their
   players' games to save (`TDServer.save`, `ev_save`). `TDServer` itself keeps the players, maps, saving and the requests about moving and
   fighting; the other requests are handled by its parts in `scripts/server/services/`
-  (`ServerItems`, `ServerNpcShop`, `ServerStorage`, `ServerTravel`, `ServerQuests`,
+  (`ServerItems`, `ServerNpcShop`, `ServerStorage`, `ServerEnchanting`, `ServerTravel`, `ServerQuests`,
   `ServerJobs`, `ServerScenes`, each a `ServerPart`), the way `TDSocial` splits into
   `scripts/server/social/`.
 - **Client** (`scripts/world/`, `scripts/actors/`): `TDWorld` shows the map you're on. Your own

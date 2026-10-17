@@ -1,14 +1,17 @@
 class_name TDItemTooltip
 extends Control
 ## The card that follows the mouse over an item slot: name, kind, which jobs can use it (red
-## when yours can't), stats, how gear compares with what's worn in its slot, what a potion restores,
-## the description and what double-clicking does. Drawn above every window.
+## when yours can't), stats, gear's rune slots (filled and empty), how gear compares with
+## what's worn in its slot, what a potion restores or a rune adds, the description and what
+## double-clicking does. Drawn above every window.
 
 const W := 220.0
 ## Room between the frame's edge and the text, inside its painted border.
 const INSET := 20.0
 ## A new item's card fades in over this many seconds.
 const FADE_IN := 0.1
+## Marks each rune slot line (filled ones in the rune colour, empty ones dim).
+const RUNE_MARK := "◆"
 
 var stack: ItemStack
 var at := Vector2.ZERO
@@ -58,6 +61,7 @@ func _lines() -> Array:
 			elif v < base.value(f):
 				col = Palette.WARN
 			out.append(["%s: %s" % [StatBlock.LABELS[f], StatBlock.format(f, v)], col, 12])
+		out.append_array(rune_lines(stack))
 		if compare:
 			out.append_array(_comparison(e))
 	elif item is UseDef:
@@ -80,6 +84,11 @@ func _lines() -> Array:
 	elif item is CardDef:
 		var card := item as CardDef
 		out.append(["Monster Book card · %d/%d found" % [Game.me.book.cards(card.monster), CardDef.SET], Palette.CARD, 11])
+	elif item is RuneDef:
+		var rune := item as RuneDef
+		out.append(["Etc · Boss rune" if rune.boss else "Etc · Rune", Palette.MUTED, 11])
+		out.append([rune.bonus_text(), Palette.RUNE, 12])
+		out.append(["An enchanter sets it in gear for %d Dawnshards" % rune.fee, Palette.MUTED, 11])
 	else:
 		out.append(["Etc", Palette.MUTED, 11])
 	if item.description != "":
@@ -88,15 +97,27 @@ func _lines() -> Array:
 		out.append([hint, Color(Palette.SUN, 0.75), 11])
 	return out
 
+## A line for each of the gear's rune slots: the rune and what it adds, or that it's empty.
+static func rune_lines(s: ItemStack) -> Array:
+	var out := []
+	for r in s.runes:
+		if r:
+			out.append(["%s %s: %s" % [RUNE_MARK, r.display_name, r.bonus_text()], Palette.RUNE, 12])
+		else:
+			out.append(["%s Empty rune slot" % RUNE_MARK, Color(Palette.MUTED, 0.6), 11])
+	return out
+
 ## How wearing this would change each stat, against what's worn where it would go.
 func _comparison(e: EquipDef) -> Array:
 	var worn := Game.me.equipment.at(Game.me.equipment.place_for(e))
 	if worn == null:
 		return [["Nothing worn in this slot", Palette.GOOD, 11]]
 	var out := [["vs. worn %s:" % worn.item.display_name, Palette.MUTED, 11]]
+	var mine := stack.total()
+	var theirs := worn.total()
 	var changed := false
 	for f in StatBlock.FIELDS:
-		var diff := stack.stats.value(f) - worn.stats.value(f)
+		var diff := mine.value(f) - theirs.value(f)
 		if diff != 0:
 			changed = true
 			out.append(["  %s %s" % [StatBlock.format(f, diff), StatBlock.LABELS[f]], Palette.GOOD if diff > 0 else Palette.BAD, 12])

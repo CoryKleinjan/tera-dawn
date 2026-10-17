@@ -16,6 +16,7 @@ const EXPECTED := {
 	"items/etc": ["ItemDef"],
 	"items/setup": ["PetDef"],
 	"items/relics": ["RelicDef"],
+	"items/runes": ["RuneDef"],
 	"skills": ["SkillDef"],
 	"effects": ["EffectDef"],
 	"maps": ["MapDef"],
