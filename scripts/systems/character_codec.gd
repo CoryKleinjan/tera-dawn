@@ -67,10 +67,15 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 			if s:
 				skills.learned[s.id] = clampi(int(data["skills"][k]), 0, s.max_level)
 	skills.paid.clear()
+	var gone: Array[StringName] = []
 	if data.get("skills_paid") is Dictionary:
 		for k in data["skills_paid"]:
 			if skills.learned.has(StringName(k)):
 				skills.paid[StringName(k)] = maxi(0, int(data["skills_paid"][k]))
+			elif data.get("skills") is Dictionary and data["skills"].has(k):
+				# a skill gone from the game (the job movement skills) pays back what it cost
+				c.essence += maxi(0, int(data["skills_paid"][k]))
+				gone.append(StringName(k))
 	skills.buffs.clear()
 	if data.get("buffs") is Dictionary:
 		for k in data["buffs"]:
@@ -81,7 +86,11 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 		var saved: Array = data["quickslots"]
 		for i in Character.QUICKSLOTS:
 			var q: Variant = saved[i] if i < saved.size() else []
-			c.quickslots[i] = [StringName(q[0]), StringName(q[1])] if q is Array and q.size() == 2 else []
+			var slot: Array = [StringName(q[0]), StringName(q[1])] if q is Array and q.size() == 2 else []
+			# a skill gone from the game leaves its quickslot empty
+			if not slot.is_empty() and slot[0] == &"skill" and slot[1] in gone:
+				slot = []
+			c.quickslots[i] = slot
 	elif not data.has("skills"):
 		# a save from before skills and quickslots existed: the job's starting potions
 		c.put_starting_quickslots()

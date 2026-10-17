@@ -28,8 +28,8 @@ const LOOK_GRASS := 7.0
 ## The `look` hangs between two platforms (a rope bridge) instead of standing on the floor:
 ## each end meets another platform at the same height.
 @export var hangs := false
-## A secret ledge: only a job's movement skill gets you up to it (Flash Jump, Blink, Charge,
-## Rolling Dash, Backstep Leap), never a plain jump or a rope, and the minimap leaves it out.
+## A secret ledge: only a move from a boss relic gets you up to it (Dash, Double Jump,
+## Surge), never a plain jump, and the minimap leaves it out.
 @export var secret := false
 ## A deck or ledge already painted into the scenery behind it (a treehouse's deck, a
 ## lookout's floor, a crow's nest, a terrace's railed wing): it draws nothing of its own and

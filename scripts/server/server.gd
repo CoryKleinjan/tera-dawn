@@ -298,8 +298,6 @@ func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int, aim := 0)
 				if skill.effect:
 					p.map.broadcast(&"ev_effect", [skill.effect.id, o.position.x, o.position.y, o.face, o.peer])
 		p.map.broadcast(&"ev_skill", [p.peer, skill.id, p.position.x, p.position.y, p.face, [], Hitbox.Aim.AHEAD])
-	elif skill.kind == SkillDef.Kind.MOVE:
-		ServerMoves.use(p, skill, aimed)
 	else:
 		# attacking gives a hidden player away
 		if c.skills.end_hiding():

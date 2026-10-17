@@ -3,8 +3,8 @@ extends ItemDef
 ## A boss's relic: picking it up unlocks a move for good, on every job, the way Hollow Knight
 ## hands out its moves (Character.relics). It never goes in the bag. A boss drops it
 ## (MonsterDef.relic) for everyone at the fight who hasn't got it yet, and only they can take
-## theirs. The moves sit on top of the job's own movement skill and cost nothing; the hero
-## does them on his own machine (TDPlayer), and the server only breaks what a Slam lands on.
+## theirs. They are the hero's only movement moves and cost nothing; he does them on his own
+## machine (TDPlayer), and the server only breaks what a Slam lands on.
 
 enum Move {
 	DASH,         ## a quick, flat burst ahead, on the ground and once per jump in the air
@@ -19,7 +19,7 @@ enum Move {
 ## Colour of the move's code-drawn trail (values above 1 glow), until painted effects come.
 @export var trail := Color(1.4, 1.4, 1.6)
 
-## A trail for the move lasting `ticks`, drawn the way a job's movement skill's is (TDMoveFx).
+## A trail for the move lasting `ticks` (TDMoveFx).
 func trail_move(ticks: int) -> MoveDef:
 	var m := MoveDef.new()
 	m.ticks = ticks

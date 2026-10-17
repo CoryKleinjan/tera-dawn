@@ -1,7 +1,7 @@
 extends TestCase
 ## Everywhere on a map can be walked to: every platform, portal, NPC and monster
 ## spawn is reachable with the hero's own jump (see map_reach.gd) from where players
-## arrive, and every secret ledge only with a job's movement skill; land-shaped art is a
+## arrive, and every secret ledge only with a move from a boss relic; land-shaped art is a
 ## real platform, never background scenery, and stands on the floor (no floating rock
 ## islands or arches); and no two exits of a map lead to the same place.
 
@@ -15,7 +15,7 @@ func test_everything_on_every_map_can_be_reached() -> void:
 		for i in m.platforms.size():
 			var p := m.platforms[i]
 			if p.secret:
-				continue # test_secret_ledges_need_a_movement_skill
+				continue # test_secret_ledges_need_a_relic_move
 			check(reach.platform_reached(i + 1), "%s: platforms[%d] (x %d-%d, y %d) can't be reached" % [w, i, p.x, p.x + p.width, p.y])
 		for i in m.portals.size():
 			check(reach.platform_reached(m.portals[i].platform), "%s: portals[%d] to %s can't be reached" % [w, i, m.portals[i].target_map])
@@ -24,11 +24,10 @@ func test_everything_on_every_map_can_be_reached() -> void:
 		for i in m.spawns.size():
 			check(reach.platform_reached(m.spawns[i].platform), "%s: spawns[%d] can't be reached" % [w, i])
 
-## A secret ledge (PlatformDef.secret) is out of reach of a plain jump, but a
-## job's movement skill gets there in one go (Flash Jump, Blink, Charge, Rolling Dash or
-## Backstep Leap, at level 1). Nothing a player needs (a portal, an NPC, a spawn) stands on one;
-## a chest may.
-func test_secret_ledges_need_a_movement_skill() -> void:
+## A secret ledge (PlatformDef.secret) is out of reach of a plain jump, but a move from a
+## boss relic gets there in one go (Dash, Double Jump or Surge). Nothing a player needs (a
+## portal, an NPC, a spawn) stands on one; a chest may.
+func test_secret_ledges_need_a_relic_move() -> void:
 	var secrets := 0
 	for m: MapDef in Content.maps.values():
 		if not m.platforms.any(func(p: PlatformDef) -> bool: return p.secret):
@@ -41,8 +40,8 @@ func test_secret_ledges_need_a_movement_skill() -> void:
 				continue
 			secrets += 1
 			var at := "%s: secret platforms[%d] (x %d-%d, y %d)" % [w, i, p.x, p.x + p.width, p.y]
-			check(not reach.platform_reached(i + 1), at + " can be reached without a movement skill")
-			check(not reach.skills_reaching(i + 1).is_empty(), at + " can't be reached with any movement skill")
+			check(not reach.platform_reached(i + 1), at + " can be reached without a relic's move")
+			check(not reach.moves_reaching(i + 1).is_empty(), at + " can't be reached with any relic's move")
 			var on := func(thing: Variant) -> bool: return thing.platform == i + 1
 			check(not m.portals.any(on) and not m.npcs.any(on) and not m.spawns.any(on), at + " holds a portal, NPC or spawn")
 	check(secrets > 0, "no map has a secret ledge")

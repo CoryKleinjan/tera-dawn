@@ -48,13 +48,13 @@ drawn in code (`TDStage._build_tears`); nothing in the game mentions them.
 
 ### Secrets and shortcuts
 
-A **secret ledge** (`PlatformDef.secret`) is reached only with a job's movement skill at level
-1 (Flash Jump, Blink, Charge, Rolling Dash, Backstep Leap), never a plain jump or a fall,
-and the minimap leaves it out. Nothing a player needs stands on one (a chest may);
-`content_reach_test` checks both ways with `map_reach.gd`'s skill moves. A field has two: a
-high one about 130 px over the ledge you jump from, with nothing over it (Flash Jump, Blink),
-and a far one about 220 px out from a ledge's end and 50 px lower, at least 100 px over anything
-below and too far out to drift onto in a fall from anything above (every movement skill).
+A **secret ledge** (`PlatformDef.secret`) is reached only with a move from a boss relic
+(Dash, Double Jump, Surge; see `RelicDef`), never a plain jump or a fall, and the minimap
+leaves it out. Nothing a player needs stands on one (a chest may); `content_reach_test` checks
+both ways with `map_reach.gd`'s relic moves. A field has two: a high one about 130 px over the
+ledge you jump from, with nothing over it (Double Jump), and a far one about 220 px out from a
+ledge's end and 50 px lower, at least 100 px over anything below and too far out to drift onto
+in a fall from anything above (Dash or Surge).
 
 A **shortcut** is a pair of portals: its far end (`PortalDef.shortcut`, an id) is hidden and shut
 until the character has found it; its near end (`opens_shortcut`, the same id) is always open

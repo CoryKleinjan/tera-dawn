@@ -23,8 +23,7 @@ TDWorld  ───────────────────────�
   fighting; the other requests are handled by its parts in `scripts/server/services/`
   (`ServerItems`, `ServerNpcShop`, `ServerStorage`, `ServerTravel`, `ServerQuests`,
   `ServerJobs`, `ServerScenes`, each a `ServerPart`), the way `TDSocial` splits into
-  `scripts/server/social/`. `ServerMoves` (`scripts/server/server_moves.gd`) runs the server's
-  side of the job movement skills.
+  `scripts/server/social/`.
 - **Client** (`scripts/world/`, `scripts/actors/`): `TDWorld` shows the map you're on. Your own
   hero (`TDPlayer`) moves on your machine so it feels instant, like MapleStory, and
   reports where it is 20 times a second; the server checks the report is possible and puts you
