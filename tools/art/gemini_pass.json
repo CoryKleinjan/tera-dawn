@@ -27353,6 +27353,31 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4, numbered in reading order) on a flat magenta background with thin grid lines. Each cell holds a flat green stick-figure POSE GUIDE: a big green circle for the head, a block for the body, dark green bars for her NEAR arm and leg (the ones toward the viewer) and pale green bars for her FAR arm and leg. Paint the SAME woman as in the attached picture over each guide, in EXACTLY the guide's pose: her head where the circle is, her body along the block, each arm and leg along its bar and bent at the same joints, her hands and boots at the bar ends, at the same place, angle and height in the cell as the guide (when a guide is high in its cell, she is up in the air there; when it is tipped or upside down, so is she). The guides are only a pose map: cover them completely, and no green from them is left anywhere. Never paint her standing upright where the guide is not. Copy the woman exactly: the same face, hair, clothes, colours, proportions and size as in the attached picture, a grown woman drawn in the same cute chibi style and at the same size and proportions as in the attached picture, with shoulder-length auburn hair, brown eyes and dark lashes, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round. She is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way she stands in the attached picture. Her face is the same friendly face as in the attached picture. Every figure stays fully inside its own cell and never crosses a grid line. SIZE: paint her BIG, exactly as big as in the attached picture, where her standing figure fills about 90% of the cell height: her head is a little BIGGER than the green guide circle, and when she stretches straight (cells 3 and 4) she fills nearly the whole height of the cell. Never paint her smaller than in the attached picture. The 8 cells are one Double Jump, a second leap in the air with no ground under her: 1 falling a little, knees bent, arms out; 2 tucked in a tight ball; 3 kicking down hard with her near leg, both arms flung straight up; 4 shooting upward, body stretched straight, both arms straight up; 5 tipped forward on her side in a tucked forward somersault; 6 upside down in the tucked somersault, head at the bottom; 7 coming out of the somersault, leaning back, knees bent; 8 at the top, legs a little bent, arms spread wide. No arm or hand ever covers her face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the woman: no ground, wall, streak, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
   }
+ },
+ {
+  "id": "newhero_woman_double_jump_v3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_woman_double_jump_v3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': third try at the woman's Double Jump. The pose guide's head is smaller than hers, so on the guide she came back small twice (v2 also on green); this repaints the right-size girl sheet as the woman, keeping poses and sizes. Released by Cory 22:19Z (\"Yes\") to the priced line 22:16Z (\"Should I try that for $0.07?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/newhero_girl_double_jump.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_woman_walk_idle.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a cute chibi girl with a brown ponytail in 8 frames of a double jump in the air. Repaint the character in EVERY cell as the WOMAN in the attached picture: give her exactly the attached woman's face, shoulder-length auburn hair (loose, no ponytail), brown eyes with dark lashes and her friendly grown-up expression. Keep EVERYTHING else in the base picture exactly as it is: the same pose, size, position and angle in every cell (including the upside-down and tumbling frames), the same body, arms, hands, legs and boots, the same cream linen shirt with rolled sleeves, brown belt, dark brown trousers and brown boots, the same three-quarter facing to the right, the same grid lines and the same flat pure magenta #FF00FF background. Do not make her smaller or bigger than the girl in the base picture. No arm or hand ever covers her face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Paint only the woman: no ground, wall, shadow, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never green or white."
+  }
  }
 ]
 }
