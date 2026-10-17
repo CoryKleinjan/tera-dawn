@@ -39,7 +39,7 @@
       "",
       "",
       "",
-      "back",
+      "",
       ""
     ],
     [
@@ -48,7 +48,7 @@
       "",
       "gravity2",
       "ambush1",
-      "ambush2",
+      "",
       "",
       "anchor2"
     ],
@@ -112,7 +112,6 @@
         "throw2": "hero_body:throw2",
         "pistol1": "hero_body:pistol1",
         "pistol2": "hero_body:pistol2",
-        "back": "hero_body:back",
         "swing2": "hero_body:swing2",
         "swing3": "hero_body:swing3",
         "cast1": "hero_body:cast1",
@@ -126,8 +125,7 @@
         "backstep": "hero_body:backstep",
         "lunge": "hero_body:lunge",
         "roll1": "hero_body:roll1",
-        "roll2": "hero_body:roll2",
-        "ambush2": "hero_body:ambush2"
+        "roll2": "hero_body:roll2"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -230,12 +228,6 @@
           ],
           "fps": 1
         },
-        "back": {
-          "frames": [
-            "back"
-          ],
-          "fps": 1
-        },
         "swing2": {
           "frames": [
             "swing2"
@@ -317,12 +309,6 @@
         "roll2": {
           "frames": [
             "roll2"
-          ],
-          "fps": 1
-        },
-        "ambush2": {
-          "frames": [
-            "ambush2"
           ],
           "fps": 1
         }

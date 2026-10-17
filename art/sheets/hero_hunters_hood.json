@@ -29,7 +29,7 @@
       "",
       "",
       "",
-      "back",
+      "",
       ""
     ]
   ],
@@ -68,7 +68,6 @@
         "walk2": "hero_hunters_hood:walk2",
         "walk3": "hero_hunters_hood:walk3",
         "jump": "hero_hunters_hood:jump",
-        "back": "hero_hunters_hood:back",
         "hurt": "hero_hunters_hood:idle1",
         "swing2": "hero_hunters_hood:idle1",
         "swing3": "hero_hunters_hood:idle1",
@@ -92,7 +91,6 @@
         "throw2": "hero_hunters_hood:idle1",
         "pistol1": "hero_hunters_hood:idle1",
         "pistol2": "hero_hunters_hood:idle1",
-        "ambush2": "hero_hunters_hood:back",
         "faint": "hero_hunters_hood:idle1"
       },
       "anchor": "cell",
@@ -133,12 +131,6 @@
         "jump": {
           "frames": [
             "jump"
-          ],
-          "fps": 1
-        },
-        "back": {
-          "frames": [
-            "back"
           ],
           "fps": 1
         },
@@ -277,12 +269,6 @@
         "pistol2": {
           "frames": [
             "pistol2"
-          ],
-          "fps": 1
-        },
-        "ambush2": {
-          "frames": [
-            "ambush2"
           ],
           "fps": 1
         },

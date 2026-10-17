@@ -20,7 +20,6 @@ slot = 1
 worn = ExtResource("worn")
 nudges = {
 &"ambush1": Vector4(15.899994, 14.800003, -2, 0),
-&"ambush2": Vector4(-9.199997, 2.199997, -14, 0),
 &"anchor2": Vector4(-22.800003, 9.599998, -12, 0),
 &"backstep": Vector4(-12.4, -12.3, 3, 0),
 &"bow1": Vector4(0.3, -1.6, -3, 0),
@@ -47,7 +46,6 @@ nudges = {
 &"throw2": Vector4(0.9000015, 4.699997, -14, 0)
 }
 sizes = {
-&"ambush2": 0.9
 }
 frame_art = {
 &"roll2": &"roll1"

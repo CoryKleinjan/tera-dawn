@@ -29,7 +29,7 @@
       "",
       "",
       "",
-      "back",
+      "",
       ""
     ],
     [
@@ -48,7 +48,7 @@
       "",
       "gravity2",
       "ambush1",
-      "ambush2",
+      "",
       "",
       "anchor2"
     ],
@@ -101,7 +101,6 @@
         "walk2": "hero_hunters_boots:walk2",
         "walk3": "hero_hunters_boots:walk3",
         "jump": "hero_hunters_boots:jump",
-        "back": "hero_hunters_boots:back",
         "swing2": "hero_hunters_boots:swing2",
         "swing3": "hero_hunters_boots:swing3",
         "hurt": "hero_hunters_boots:hurt",
@@ -123,7 +122,6 @@
         "roll1": "hero_hunters_boots:roll1",
         "roll2": "hero_hunters_boots:roll2",
         "faint": "hero_hunters_boots:faint",
-        "ambush2": "hero_hunters_boots:ambush2",
         "cast1": "hero_hunters_boots:cast1",
         "cast2": "hero_hunters_boots:cast2",
         "skyward2": "hero_hunters_boots:skyward2"
@@ -166,12 +164,6 @@
         "jump": {
           "frames": [
             "jump"
-          ],
-          "fps": 1
-        },
-        "back": {
-          "frames": [
-            "back"
           ],
           "fps": 1
         },
@@ -298,12 +290,6 @@
         "faint": {
           "frames": [
             "faint"
-          ],
-          "fps": 1
-        },
-        "ambush2": {
-          "frames": [
-            "ambush2"
           ],
           "fps": 1
         },

@@ -29,7 +29,7 @@
       "",
       "",
       "",
-      "back",
+      "",
       ""
     ]
   ],
@@ -69,7 +69,6 @@
         "walk2": "hero_footpad_bandana:walk2",
         "walk3": "hero_footpad_bandana:walk3",
         "jump": "hero_footpad_bandana:jump",
-        "back": "hero_footpad_bandana:back",
         "hurt": "hero_footpad_bandana:idle1",
         "swing2": "hero_footpad_bandana:idle1",
         "swing3": "hero_footpad_bandana:idle1",
@@ -93,7 +92,6 @@
         "throw2": "hero_footpad_bandana:idle1",
         "pistol1": "hero_footpad_bandana:idle1",
         "pistol2": "hero_footpad_bandana:idle1",
-        "ambush2": "hero_footpad_bandana:back",
         "faint": "hero_footpad_bandana:idle1"
       },
       "anchor": "cell",
@@ -134,12 +132,6 @@
         "jump": {
           "frames": [
             "jump"
-          ],
-          "fps": 1
-        },
-        "back": {
-          "frames": [
-            "back"
           ],
           "fps": 1
         },
@@ -278,12 +270,6 @@
         "pistol2": {
           "frames": [
             "pistol2"
-          ],
-          "fps": 1
-        },
-        "ambush2": {
-          "frames": [
-            "ambush2"
           ],
           "fps": 1
         },

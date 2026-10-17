@@ -29,7 +29,7 @@
       "",
       "",
       "",
-      "back",
+      "",
       ""
     ]
   ],
@@ -73,7 +73,6 @@
         "crouch": "hero_squire_helm:crouch",
         "sit": "hero_squire_helm:idle1",
         "faint": "hero_squire_helm:faint",
-        "back": "hero_squire_helm:back",
         "swing2": "hero_squire_helm:idle1",
         "swing3": "hero_squire_helm:idle1",
         "cast1": "hero_squire_helm:idle1",
@@ -93,8 +92,7 @@
         "throw1": "hero_squire_helm:idle1",
         "throw2": "hero_squire_helm:idle1",
         "pistol1": "hero_squire_helm:idle1",
-        "pistol2": "hero_squire_helm:idle1",
-        "ambush2": "hero_squire_helm:back"
+        "pistol2": "hero_squire_helm:idle1"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -158,12 +156,6 @@
         "faint": {
           "frames": [
             "faint"
-          ],
-          "fps": 1
-        },
-        "back": {
-          "frames": [
-            "back"
           ],
           "fps": 1
         },
@@ -284,12 +276,6 @@
         "pistol2": {
           "frames": [
             "pistol2"
-          ],
-          "fps": 1
-        },
-        "ambush2": {
-          "frames": [
-            "ambush2"
           ],
           "fps": 1
         }

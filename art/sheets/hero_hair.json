@@ -39,7 +39,7 @@
       "",
       "",
       "",
-      "back",
+      "",
       ""
     ]
   ],
@@ -90,7 +90,6 @@
         "throw2": "hero_hair:throw2",
         "pistol1": "hero_hair:pistol1",
         "pistol2": "hero_hair:pistol2",
-        "back": "hero_hair:back",
         "swing2": "hero_hair:idle1",
         "swing3": "hero_hair:idle1",
         "cast1": "hero_hair:idle1",
@@ -104,8 +103,7 @@
         "backstep": "hero_hair:idle1",
         "lunge": "hero_hair:idle1",
         "roll1": "hero_hair:idle1",
-        "roll2": "hero_hair:idle1",
-        "ambush2": "hero_hair:back"
+        "roll2": "hero_hair:idle1"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -208,12 +206,6 @@
           ],
           "fps": 1
         },
-        "back": {
-          "frames": [
-            "back"
-          ],
-          "fps": 1
-        },
         "swing2": {
           "frames": [
             "swing2"
@@ -295,12 +287,6 @@
         "roll2": {
           "frames": [
             "roll2"
-          ],
-          "fps": 1
-        },
-        "ambush2": {
-          "frames": [
-            "ambush2"
           ],
           "fps": 1
         }

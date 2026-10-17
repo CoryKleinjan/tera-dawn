@@ -20,7 +20,6 @@ slot = 2
 worn = ExtResource("worn")
 nudges = {
 &"ambush1": Vector4(1.4000015, 0, 0, 0),
-&"ambush2": Vector4(0, 0, 0, 1),
 &"crouch": Vector4(-2.800003, 5.0999985, 0, 0),
 &"pistol2": Vector4(-4.199997, -3.199997, 0, 1),
 &"roll2": Vector4(10, -31, -180, 0),

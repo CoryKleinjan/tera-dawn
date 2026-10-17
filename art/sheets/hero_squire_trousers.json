@@ -29,7 +29,7 @@
       "",
       "",
       "",
-      "back",
+      "",
       ""
     ],
     [
@@ -48,7 +48,7 @@
       "",
       "gravity2",
       "ambush1",
-      "ambush2",
+      "",
       "",
       "anchor2"
     ],
@@ -103,7 +103,6 @@
         "walk3": "hero_squire_trousers:walk3",
         "crouch": "hero_squire_trousers:crouch",
         "faint": "hero_squire_trousers:faint",
-        "back": "hero_squire_trousers:back",
         "swing2": "hero_squire_trousers:swing2",
         "swing3": "hero_squire_trousers:swing3",
         "hurt": "hero_squire_trousers:hurt",
@@ -123,7 +122,6 @@
         "pistol2": "hero_squire_trousers:pistol2",
         "roll2": "hero_squire_trousers:roll2",
         "roll1": "hero_squire_trousers:roll1",
-        "ambush2": "hero_squire_trousers:ambush2",
         "cast1": "hero_squire_trousers:cast1",
         "cast2": "hero_squire_trousers:cast2",
         "skyward2": "hero_squire_trousers:skyward2"
@@ -178,12 +176,6 @@
         "faint": {
           "frames": [
             "faint"
-          ],
-          "fps": 1
-        },
-        "back": {
-          "frames": [
-            "back"
           ],
           "fps": 1
         },
@@ -298,12 +290,6 @@
         "roll1": {
           "frames": [
             "roll1"
-          ],
-          "fps": 1
-        },
-        "ambush2": {
-          "frames": [
-            "ambush2"
           ],
           "fps": 1
         },

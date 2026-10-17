@@ -29,7 +29,7 @@
       "",
       "",
       "",
-      "back",
+      "",
       ""
     ],
     [
@@ -48,7 +48,7 @@
       "",
       "gravity2",
       "ambush1",
-      "ambush2",
+      "",
       "",
       "anchor2"
     ],
@@ -102,7 +102,6 @@
         "walk2": "hero_footpad_jerkin:walk2",
         "walk3": "hero_footpad_jerkin:walk3",
         "jump": "hero_footpad_jerkin:jump",
-        "back": "hero_footpad_jerkin:back",
         "swing2": "hero_footpad_jerkin:swing2",
         "swing3": "hero_footpad_jerkin:swing3",
         "hurt": "hero_footpad_jerkin:hurt",
@@ -124,7 +123,6 @@
         "faint": "hero_footpad_jerkin:faint",
         "sit": "hero_footpad_jerkin:sit",
         "crouch": "hero_footpad_jerkin:crouch",
-        "ambush2": "hero_footpad_jerkin:ambush2",
         "cast1": "hero_footpad_jerkin:cast1",
         "cast2": "hero_footpad_jerkin:cast2",
         "skyward2": "hero_footpad_jerkin:skyward2"
@@ -167,12 +165,6 @@
         "jump": {
           "frames": [
             "jump"
-          ],
-          "fps": 1
-        },
-        "back": {
-          "frames": [
-            "back"
           ],
           "fps": 1
         },
@@ -299,12 +291,6 @@
         "crouch": {
           "frames": [
             "crouch"
-          ],
-          "fps": 1
-        },
-        "ambush2": {
-          "frames": [
-            "ambush2"
           ],
           "fps": 1
         },

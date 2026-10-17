@@ -29,7 +29,7 @@
       "",
       "",
       "",
-      "back",
+      "",
       ""
     ],
     [
@@ -48,7 +48,7 @@
       "",
       "gravity2",
       "ambush1",
-      "ambush2",
+      "",
       "",
       "anchor2"
     ],
@@ -102,7 +102,6 @@
         "walk2": "hero_deckhand_coat:walk2",
         "walk3": "hero_deckhand_coat:walk3",
         "jump": "hero_deckhand_coat:jump",
-        "back": "hero_deckhand_coat:back",
         "swing2": "hero_deckhand_coat:swing2",
         "swing3": "hero_deckhand_coat:swing3",
         "hurt": "hero_deckhand_coat:hurt",
@@ -124,7 +123,6 @@
         "roll2": "hero_deckhand_coat:roll2",
         "faint": "hero_deckhand_coat:faint",
         "sit": "hero_deckhand_coat:sit",
-        "ambush2": "hero_deckhand_coat:ambush2",
         "cast1": "hero_deckhand_coat:cast1",
         "cast2": "hero_deckhand_coat:cast2",
         "skyward2": "hero_deckhand_coat:skyward2"
@@ -167,12 +165,6 @@
         "jump": {
           "frames": [
             "jump"
-          ],
-          "fps": 1
-        },
-        "back": {
-          "frames": [
-            "back"
           ],
           "fps": 1
         },
@@ -299,12 +291,6 @@
         "sit": {
           "frames": [
             "sit"
-          ],
-          "fps": 1
-        },
-        "ambush2": {
-          "frames": [
-            "ambush2"
           ],
           "fps": 1
         },

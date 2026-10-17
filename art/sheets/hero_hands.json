@@ -38,7 +38,7 @@
       "",
       "gravity2",
       "ambush1",
-      "ambush2",
+      "",
       "",
       "anchor2"
     ],
@@ -111,7 +111,6 @@
         "backstep": "hero_hands:backstep",
         "lunge": "hero_hands:lunge",
         "anchor2": "hero_hands:anchor2",
-        "ambush2": "hero_hands:ambush2",
         "cast1": "hero_hands:cast1",
         "cast2": "hero_hands:cast2",
         "skyward2": "hero_hands:skyward2"
@@ -274,12 +273,6 @@
         "anchor2": {
           "frames": [
             "anchor2"
-          ],
-          "fps": 1
-        },
-        "ambush2": {
-          "frames": [
-            "ambush2"
           ],
           "fps": 1
         },

@@ -30,9 +30,7 @@
     "hero_hair_under_novice_hat": {
       "frames": {
         "idle1": "hero_hair_under_novice_hat:idle1",
-        "faint": "hero_hair_under_novice_hat:faint",
-        "back": "hero_hair:back",
-        "ambush2": "hero_hair:back"
+        "faint": "hero_hair_under_novice_hat:faint"
       },
       "anchor": "cell",
       "baseline": "cell",
@@ -48,18 +46,6 @@
         "faint": {
           "frames": [
             "faint"
-          ],
-          "fps": 1
-        },
-        "back": {
-          "frames": [
-            "back"
-          ],
-          "fps": 1
-        },
-        "ambush2": {
-          "frames": [
-            "ambush2"
           ],
           "fps": 1
         }

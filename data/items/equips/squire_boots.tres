@@ -19,7 +19,6 @@ script = ExtResource("script")
 slot = 4
 worn = ExtResource("worn")
 nudges = {
-&"ambush2": Vector4(0, 0, 0, -1),
 &"anchor2": Vector4(0.5, 0.5, 0, -1),
 &"cast1": Vector4(1.3999939, 3.300003, 0, -1),
 &"cast2": Vector4(0, 0, 0, -1),

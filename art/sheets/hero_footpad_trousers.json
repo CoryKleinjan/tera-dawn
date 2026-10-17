@@ -29,7 +29,7 @@
       "",
       "",
       "",
-      "back",
+      "",
       ""
     ],
     [
@@ -48,7 +48,7 @@
       "",
       "gravity2",
       "ambush1",
-      "ambush2",
+      "",
       "",
       "anchor2"
     ],
@@ -102,7 +102,6 @@
         "walk2": "hero_footpad_trousers:walk2",
         "walk3": "hero_footpad_trousers:walk3",
         "jump": "hero_footpad_trousers:jump",
-        "back": "hero_footpad_trousers:back",
         "swing2": "hero_footpad_trousers:swing2",
         "swing3": "hero_footpad_trousers:swing3",
         "hurt": "hero_footpad_trousers:hurt",
@@ -124,7 +123,6 @@
         "faint": "hero_footpad_trousers:faint",
         "anchor2": "hero_footpad_trousers:anchor2",
         "roll2": "hero_footpad_trousers:roll2",
-        "ambush2": "hero_footpad_trousers:ambush2",
         "cast1": "hero_footpad_trousers:cast1",
         "cast2": "hero_footpad_trousers:cast2",
         "skyward2": "hero_footpad_trousers:skyward2"
@@ -167,12 +165,6 @@
         "jump": {
           "frames": [
             "jump"
-          ],
-          "fps": 1
-        },
-        "back": {
-          "frames": [
-            "back"
           ],
           "fps": 1
         },
@@ -299,12 +291,6 @@
         "roll2": {
           "frames": [
             "roll2"
-          ],
-          "fps": 1
-        },
-        "ambush2": {
-          "frames": [
-            "ambush2"
           ],
           "fps": 1
         },

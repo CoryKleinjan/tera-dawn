@@ -17,7 +17,6 @@ resting_hand_frames = Array[StringName]([&"faint", &"crouch"])
 nudges = {
 &"body": {
 &"ambush1": Vector4(0.5, 1.4000015, 0, 0),
-&"back": Vector4(-0.30000305, 4.199997, 0, 0),
 &"cast1": Vector4(2.800003, 3.199997, 0, 0),
 &"gravity2": Vector4(-0.9000015, -0.5, 0, 0),
 &"roll2": Vector4(0, 0, -180, 0),
@@ -25,7 +24,6 @@ nudges = {
 },
 &"hands": {
 &"ambush1": Vector4(-0.5, 1.800003, 0, 0),
-&"ambush2": Vector4(-1.3999939, 1.9000015, 0, -3),
 &"backstep": Vector4(-12.5, 6.9000015, 0, 0),
 &"cast1": Vector4(1.800003, 3.300003, 0, 0),
 &"cast2": Vector4(0, 0, 0, 5),
@@ -139,7 +137,7 @@ animations = {
 },
 &"shadow_ambush": {
 "fps": 8.0,
-"frames": [&"ambush1", &"ambush2"],
+"frames": [&"ambush1", &"swing3"],
 "loop": false
 },
 &"sit": {
