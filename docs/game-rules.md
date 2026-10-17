@@ -46,6 +46,8 @@ update this page when one changes. Each zone's own look and music are in
 - Every piece of gear has frames for every pose in the game, whatever its job: every job's
   attack (swing, bow, pistol, throw, cast) and every skill pose added later. A new body pose
   means new frames for all gear.
+- His face is a bit serious, never smiling and happy: calm and focused in plain clothes, and in
+  armor ready for battle (focused and determined, not over the top). Every hero prompt says so.
 - His arms, fists and held weapons never cover his face, in any pose; both fists show. Blink
   has no pose of its own: he just vanishes and reappears.
 - Animations are shared across similar actions (one swing for all melee, one cast for all
