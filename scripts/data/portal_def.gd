@@ -31,18 +31,30 @@ extends Resource
 ## The near end of a shortcut: always open, and going through it finds the shortcut with
 ## this id for good, so its far end (`shortcut`) opens too.
 @export var opens_shortcut: StringName
+## A gated door: it shows behind a shut gate (`gate_picture`) and takes nobody through until
+## they have opened the gate with this id (Character.secrets), for good, by hitting its lever
+## (a BreakableDef with this id) or using its `key`. Both ends of a gated way share the id.
+@export var gate: StringName
+## The gate is a lock: pressing Up at it with this key in the bag uses the key up and opens
+## it. Empty: it opens with a lever.
+@export var key: ItemDef
+## The shut gate standing in front of the door, scaled to `gate_height` game pixels tall.
+@export var gate_picture: Texture2D
+@export var gate_height := 170.0
 
-## Whether it is one end of a shortcut (`shortcut` or `opens_shortcut`): a secret, so the
-## world map leaves it out.
+## Whether it is one end of a shortcut (`shortcut` or `opens_shortcut`) or a gated door
+## (`gate`): a secret, or a way that opens later, so the world map leaves it out and it
+## brings no map nearer to a town.
 func is_shortcut() -> bool:
-	return shortcut != &"" or opens_shortcut != &""
+	return shortcut != &"" or opens_shortcut != &"" or gate != &""
 
-## Whether it opens and shuts with a quest, a boss or a shortcut, so it may be hidden.
+## Whether it opens and shuts with a quest, a boss, a shortcut or a gate, so it may be hidden
+## or gated.
 func locked() -> bool:
-	return opens_after != null or while_on != null or after_boss != null or shortcut != &""
+	return opens_after != null or while_on != null or after_boss != null or shortcut != &"" or gate != &""
 
-## Whether `c` can use (and see) it.
-func open_to(c: Character) -> bool:
+## Whether `c` sees it: open, or shut behind its gate.
+func shows_to(c: Character) -> bool:
 	if while_on and not c.quests.active.has(while_on.id):
 		return false
 	if after_boss and c.book.kills(after_boss) <= 0:
@@ -50,3 +62,11 @@ func open_to(c: Character) -> bool:
 	if shortcut != &"" and not c.found_secret(shortcut):
 		return false
 	return opens_after == null or c.quests.done.has(opens_after.id)
+
+## Whether its gate still stands shut for `c`.
+func gated_for(c: Character) -> bool:
+	return gate != &"" and not c.found_secret(gate)
+
+## Whether `c` can use it.
+func open_to(c: Character) -> bool:
+	return shows_to(c) and not gated_for(c)

@@ -1,12 +1,14 @@
 class_name BreakableDef
 extends Resource
 ## Something on a map that breaks open when the player hits it: a chest, whose loot spills
-## out, or a wall, which opens the shortcut behind it (a PortalDef whose `shortcut` is this
-## id). A fake wall (`walk_through`) opens the same way when the player walks into it. Each
-## character breaks their own once, for good (Character.secrets); it stands whole for
-## everyone who hasn't, whoever else broke theirs.
+## out, a wall, which opens the shortcut behind it (a PortalDef whose `shortcut` is this id),
+## or a lever, which swings over (its broken picture) and lifts the gate on the doors whose
+## `gate` is this id. A fake wall (`walk_through`) opens the same way when the player walks
+## into it. Each character breaks their own once, for good (Character.secrets); it stands
+## whole for everyone who hasn't, whoever else broke theirs.
 
-## Its id in Character.secrets, unique across the game. A wall's is the shortcut it opens.
+## Its id in Character.secrets, unique across the game. A wall's is the shortcut it opens, a
+## lever's the gate it lifts.
 @export var id: StringName
 @export var x := 0.0
 ## Index of the platform it stands on (0 is the floor).

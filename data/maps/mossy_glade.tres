@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=173 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=174 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -32,6 +32,7 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest_open.png" id="35_chest_open"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/hollow_trunk.png" id="36_hollow_trunk"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/root_wall.png" id="37_root_wall"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/gate.png" id="38_gate"]
 
 [sub_resource type="Resource" id="Prop_0"]
 script = ExtResource("19_prop_placement")
@@ -598,7 +599,8 @@ x = 150.0
 platform = 3
 target_map = &"deep_canopy"
 target_x = 2880.0
-shortcut = &"greenbough_trunk"
+gate = &"greenbough_trunk"
+gate_picture = ExtResource("38_gate")
 
 [sub_resource type="Resource" id="Portal_2"]
 script = ExtResource("7_portal_def")

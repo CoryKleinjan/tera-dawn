@@ -23242,6 +23242,26 @@
   }
  },
  {
+  "id": "greenbough_fields_locks",
+  "prompts": null,
+  "batch": "Greenbough fields test: lever, gate, locked gate, key (edit)",
+  "with": null,
+  "refs": [],
+  "save": "greenbough_fields_locks.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": true,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Game review' (Cory 12:55Z 'Yes' to the lever and key door plan and its look: weathered oak bound with rope, mossy iron fittings, an old bronze key with a leaf-shaped bow): small test before anything goes in game. Guide: the shut gate (stands in front of a gated door), the same gate with a lock (a key door), the lever up and swung over (BreakableDef whole/broken) and the key (its item icon and drop picture, one painting). Base 2400x1600, exactly 3:2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/greenbough-fields/bases/locks_base.png",
+   "refs": [],
+   "text": "The first image is a guide on a flat magenta #FF00FF background showing five objects for my 2D side-scrolling game as flat colour shapes. Paint each one over its shape as a finished object for Greenbough Wilds, a sunlit hunter's forest of giant oaks, keeping each shape's position, size and outline EXACTLY. 1) LEFT, a shut forest gate that blocks a doorway: two thick posts of weathered oak at the sides and, between them, five upright oak poles with sharpened tops, held by two cross rails. Each rail is lashed to the posts with thick rope and fixed to every pole with a dark iron band. The wood is old and weathered, with grain, cracks and patches of green moss, and the iron is a little mossy. Every gap between the poles stays open, showing flat magenta. 2) MIDDLE, the SAME gate, identical in every way, with a big dark iron lock plate fixed across its middle: a keyhole in it, rivets round its edge and a touch of moss. 3) TOP RIGHT, LEFT ONE, a lever: a squat block of mossy grey stone with two dark iron bands, and an oak handle with a rope-wrapped grip and a round wooden knob, turning on a round iron pivot at the top of the block. The handle leans up to the LEFT. 4) TOP RIGHT, RIGHT ONE, the SAME lever, identical in every way, with its handle swung over so it leans up to the RIGHT. 5) BOTTOM RIGHT, an old bronze key: a long shaft with a toothed bit at one end and, at the other end, a bow shaped like a single pointed leaf with a central vein and a small round hole for a ring. Warm worn bronze, brighter where it has been rubbed smooth. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own warm painted style and bright daylight: soft cel-painted shading with clear light and shadow shapes, bright highlights on the lit edges from the upper left, rich warm saturated colours, a bold dark brown outline, and hand-painted texture at a fairly chunky brush scale. Every object is a flat front view at eye level: no top surface shows (no block top, nothing seen from above), and the gates and levers each stand on ONE flat straight bottom edge with no ground, grass or shadow under it. Nothing glows. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the objects, in every gap between the gate poles and in the key's ring hole, the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
+ },
+ {
   "id": "greenbough_fields_leaves",
   "prompts": null,
   "batch": "Greenbough fields test: dark leaf silhouettes for the top corners (edit)",
