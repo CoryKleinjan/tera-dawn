@@ -26280,6 +26280,104 @@
    "base": "/mnt/project-files/art-sheets/gemini-pass-1/skillfx_quick_step_aura.png",
    "text": "This is an edit of the attached sheet of 8 animation frames (2 rows of 4 cells, numbered left to right, then top to bottom) of a painted glowing skill effect on a flat magenta background. Cells 1 to 7 have a flat magenta rectangle in the middle, like a hole cut out of the effect. Remove it: paint the swirling rings of light straight through where it was, continuing them around it, so no rectangle, box or straight hard edge is left anywhere. Cell 8 is empty: paint a frame there that sits between cell 7 and cell 1, so the 8 cells loop smoothly. Keep everything else exactly as it is: the same painted look, brush strokes, colours, brightness, shapes and positions, in the same 8 cells. The background stays the bright pure flat magenta #FF00FF (RGB 255, 0, 255) in every cell, never a darker plum, mauve, grey or white, with no haze spreading into it beyond the effect's own soft edge. Keep the thin dark grid lines exactly where they are; never add grid lines, boxes, rectangles, panels or cut-out shapes. Add nothing new: no characters, hands, weapons, objects, ground, text, letters or numbers. The effect has no outline, and it uses no pink, magenta, purple or violet."
   }
+ },
+ {
+  "id": "home_world_pieces",
+  "prompts": null,
+  "batch": "Home world test: ruined cottage, broken lookout, empty doorway, upturned boat (edit)",
+  "with": null,
+  "refs": [],
+  "save": "home_world_pieces.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": true,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Main story' (home-world tear, plans/home-world-tear.md): Cory picked the ashen seaside town look (18:11Z 'Your recommendation'). Small test before the kit (land + backdrop). Base 2400x1600, exactly 3:2. Set pieces follow greenbough_fields_pieces (no NPC style ref).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/home-world/bases/pieces_base.png",
+   "refs": [],
+   "text": "The first image is a guide on a flat magenta #FF00FF background showing four objects for my 2D side-scrolling game as flat colour shapes. Paint each one over its shape as a finished object for a small, ordinary seaside town that was abandoned and fell to ruin long ago, keeping each shape's position, size and outline EXACTLY. The whole place is drained of colour: ash greys, pale blue-greys and faded driftwood browns under a flat, sunless, overcast light; quiet and sad, never scary, no blood, no bones, no fire, no plants growing, nobody there. 1) LEFT, a ruined cottage front: a plain whitewashed stone cottage wall, its roof gone, the top of the wall broken into jagged crumbling stone, the plaster cracked and flaking to show grey stones beneath; the two dark squares are empty window holes with a broken shutter hanging from one; the dark doorway is an empty opening with no door. 2) MIDDLE, a broken wooden lookout: an old weathered wooden watchtower of two tall posts with a cross brace and a plank deck on top; the top rail has snapped and hangs at an angle, one rail post is broken short; the wood is grey, split and salt-worn, with rusty iron bolts. 3) RIGHT TOP, a lone standing wall: all that is left of a house, a section of grey stone wall with a crumbling top and an empty door frame, its doorway open onto nothing. 4) RIGHT BOTTOM, an upturned old rowboat lying on the sand, its grey planks cracked, with a broken hole in its side (the dark shape). Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own painted style: soft cel-painted shading with clear light and shadow shapes, soft pale highlights on the lit edges from the upper left, a bold dark outline, and hand-painted texture at a fairly chunky brush scale (stone, cracked plaster, wood grain, worn and chipped spots). Painted, never pixel art. Every object is a flat front view at eye level: no top surface shows, nothing recedes into depth, and each stands on ONE flat level bottom edge. Everything that is not part of an object stays flat pure magenta #FF00FF: no ground, no sky, no shadows on the magenta, no labels, no border."
+  }
+ },
+ {
+  "id": "home_world_land",
+  "prompts": null,
+  "batch": "Home world kit: ash-grey ledges, raised ground and its wall (edit)",
+  "with": null,
+  "refs": [
+   "/mnt/project-files/art-sheets/gemini-pass-1/home_world_pieces.png"
+  ],
+  "save": "home_world_land.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Main story' (home-world tear, plans/home-world-tear.md): kit after the approved test home_world_pieces (Cory 19:27Z 'Looks good to me'). Same layout as greenbough_fields_land (ledge -> cap_left, middle_a, middle_b, cap_right; raised block ends -> terrace_left/right; a square of its wall -> ground_side). Base 2400x1600, exactly 3:2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/home-world/bases/land_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/home_world_pieces.png"
+   ],
+   "text": "The first image is a guide for a sheet of ground pieces for my 2D side-scrolling game, on a flat magenta #FF00FF background. Flat colours show where each piece goes: the pale strip is the top surface, the mid grey is the ground body, the darker grey below is a wall, and the dark line is the outline. Paint over the guide as finished ground for a small, ordinary seaside town that was abandoned and fell to ruin long ago, keeping every shape's position, size and outline EXACTLY, so the pieces still line up and join seamlessly when the sheet is cut apart. The second image shows ruined objects from the same place: match their style, ash-grey palette, outline and level of detail exactly. TOP: one long floating ledge of old broken cobbled street (it will be cut into a left end, two middle pieces and a right end that join side by side). Its top is ONE clean edge of pale ash-grey sand and dust drifted over worn cobbles, with a few loose pebbles and a broken shell or two along it. Under it is a body of grey packed earth and old cracked paving stones, kept simple with little detail inside so it reads at a glance as solid ground. A crisp dark outline runs all round it, a few broken stones hang under its bottom edge, and its two ends are rounded. BOTTOM: a raised block of the same ground: the very same sandy edge and cobble band along its top, with SQUARE ends, then below the band's lower edge a wall of slightly darker old grey stone blocks, running straight down off the bottom of the image between straight vertical outlined sides. Keep the wall's texture even across its whole area, with no big features, bright spots or shading toward its edges, so a square of it can repeat as a tile. The whole place is drained of colour: ash greys, pale blue-greys and faded sand under a flat, sunless, overcast light; quiet and sad, never scary, no blood, no bones, no fire, no plants growing, nobody there. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own painted style: soft cel-painted shading with clear light and shadow shapes, soft pale highlights on the lit edges from the upper left, a bold dark outline, and hand-painted texture at a fairly chunky brush scale. Seen exactly from the side: the sand is a band along the top edge, never ground seen from above, and nothing runs back into the picture. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the pieces the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "home_world_backdrop",
+  "prompts": null,
+  "batch": "Home world kit: the ashen seaside town backdrop (edit)",
+  "with": null,
+  "refs": [
+   "/mnt/project-files/art-sheets/gemini-pass-1/home_world_pieces.png"
+  ],
+  "save": "home_world_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-17 thread 'Main story' (home-world tear): kit after the approved test home_world_pieces (Cory 19:27Z). One picture behind the whole map (BackdropLayerDef PICTURE, far back), like greenbough_fields_glade_backdrop. Base 4096x2304, exactly 16:9: covers home_world (2400x700).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/home-world/bases/backdrop_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/home_world_pieces.png"
+   ],
+   "text": "The first image is a blank canvas showing only a soft grey gradient. Repaint the whole canvas as ONE complete, seamless, detailed background painting for my 2D side-scrolling game: a small, ordinary seaside town that was abandoned and fell to ruin long ago, seen from its beach. The second image shows ruined objects from the same place: match their style and ash-grey palette exactly. Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: a flat, pale, sunless overcast sky with no sun and no light source, fading to a pale grey haze at the horizon; a still, grey sea along the horizon on the right; across the middle distance, the ruins of a little town of plain whitewashed stone cottages climbing a low hill, their roofs gone and walls broken, empty dark windows, a crooked old wooden lookout tower and a broken stone harbour wall; everything fading back layer by layer into grey mist. The whole place is drained of colour: ash greys, pale blue-greys and faded whitewash; quiet and sad, never scary, no blood, no bones, no fire, no plants, nobody there. Colours: pale grey sky (#c8cacc), blue-grey shadows (#8a909a), faded whitewash (#dcdad4). Strict rules: 1) Side-on view at eye level, every wall straight up and down, flat front views, nothing seen from above. 2) No people, characters, animals or birds. No sun, no moon, no stars. 3) Nothing in the near foreground: the bottom quarter of the picture is soft misty beach far away, with nothing close to the viewer (no rocks, shells, boats or rubble up front); the closest ruins are in the middle distance. No level ledges or walls that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "home_world_land2",
+  "prompts": null,
+  "batch": "Home world ground repaint: side-on coping stones on top (edit)",
+  "with": null,
+  "refs": [
+   "/mnt/project-files/art-sheets/gemini-pass-1/home_world_pieces.png"
+  ],
+  "save": "home_world_land2.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Main story': repaint of home_world_land (Cory 20:15Z 'Repaint'). The first paint showed the ledge top as a cobbled street seen from above between two kerb rows; this one asks for one row of coping stones seen side-on. Same base, refs and layout as home_world_land.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/home-world/bases/land_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/home_world_pieces.png"
+   ],
+   "text": "The first image is a guide for a sheet of ground pieces for my 2D side-scrolling game, on a flat magenta #FF00FF background. Flat colours show where each piece goes: the pale strip is the top surface, the mid grey is the ground body, the darker grey below is a wall, and the dark line is the outline. Paint over the guide as finished ground for a small, ordinary seaside town that was abandoned and fell to ruin long ago, keeping every shape's position, size and outline EXACTLY, so the pieces still line up and join seamlessly when the sheet is cut apart. The second image shows ruined objects from the same place: match their style, ash-grey palette, outline and level of detail exactly. TOP: one long floating ledge of an old broken seawall (it will be cut into a left end, two middle pieces and a right end that join side by side). Its top is ONE row of worn, flat coping stones seen exactly side-on, so only their thin front faces show, as one band along the top edge, with a little pale ash-grey sand and dust drifted along the top line, a few loose pebbles and a broken shell or two. The pale strip in the guide is the front face of those coping stones: do NOT paint a cobbled street or any ground surface seen from above, and never a second row of kerb stones. Under it is a body of grey packed earth and old cracked paving stones, kept simple with little detail inside so it reads at a glance as solid ground. A crisp dark outline runs all round it, a few broken stones hang under its bottom edge, and its two ends are rounded. BOTTOM: a raised block of the same ground: the very same side-on row of coping stones along its top, with SQUARE ends, then below the band's lower edge a wall of slightly darker old grey stone blocks, running straight down off the bottom of the image between straight vertical outlined sides. Keep the wall's texture even across its whole area, with no big features, bright spots or shading toward its edges, so a square of it can repeat as a tile. The whole place is drained of colour: ash greys, pale blue-greys and faded sand under a flat, sunless, overcast light; quiet and sad, never scary, no blood, no bones, no fire, no plants growing, nobody there. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own painted style: soft cel-painted shading with clear light and shadow shapes, soft pale highlights on the lit edges from the upper left, a bold dark outline, and hand-painted texture at a fairly chunky brush scale. Seen exactly from the side, like a stone wall face: the top is only the coping stones' front faces, never ground seen from above, and nothing runs back into the picture. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the pieces the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
  }
 ]
 }

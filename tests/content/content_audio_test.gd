@@ -31,6 +31,8 @@ func _sound_ids() -> Dictionary:
 
 func test_every_map_has_music() -> void:
 	for m: MapDef in Content.maps.values():
+		if m.silent:
+			continue
 		var id := m.music_id()
 		if check(id != &"", "%s plays no music: give its region town_music and field_music, or the map its own" % m.id):
 			check(Sound.has_music(id), "%s plays %s, but assets/audio/music/%s.ogg is missing" % [m.id, id, id])

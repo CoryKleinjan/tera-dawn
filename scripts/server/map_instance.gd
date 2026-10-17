@@ -131,6 +131,16 @@ func wake_tear(p: SimPlayer) -> void:
 		if m.from_tear:
 			m.wake(x, p.peer)
 
+## A scene spot (MapDef.scene_spots) open to `p` that they stand on does its thing.
+func check_spots(p: SimPlayer) -> void:
+	if p.in_scene():
+		return
+	for s in def.scene_spots:
+		if (s.scene or s.then_map != &"") and s.platform < layout.platforms.size() and s.open_to(p.character) \
+				and p.stands_on(layout.platforms[s.platform]) and s.covers(p.position.x):
+			server.scenes.at_spot(p, s)
+			return
+
 ## Where everyone and everything is, sent to this map's players many times a second as
 ## bytes (SnapshotCodec). Monsters that haven't changed since the last one are left out
 ## unless `full`, which the server asks for now and then in case an update was lost.
