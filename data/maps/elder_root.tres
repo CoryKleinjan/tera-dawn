@@ -586,37 +586,37 @@ patrol_to = 2070.0
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 2
-count = 2
+count = 1
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 3
-count = 2
+count = 1
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 4
-count = 2
+count = 1
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 5
-count = 2
+count = 1
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 6
-count = 2
+count = 1
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 7
-count = 2
+count = 1
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("7_spawn_def")
@@ -628,7 +628,7 @@ count = 2
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 10
-count = 4
+count = 2
 
 [sub_resource type="Resource" id="Spawn_11"]
 script = ExtResource("7_spawn_def")
@@ -714,7 +714,7 @@ count = 2
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 24
-count = 6
+count = 2
 
 [sub_resource type="Resource" id="Spawn_25"]
 script = ExtResource("7_spawn_def")
@@ -726,7 +726,7 @@ count = 2
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 26
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Spawn_27"]
 script = ExtResource("7_spawn_def")

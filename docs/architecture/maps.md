@@ -123,8 +123,9 @@ spawn at a real platform, so a typo fails a test instead of the game.
 
 A **BiomeDef** is the look shared by many maps: sky and light colours, ground and platform
 textures, parallax backdrop layers (`BackdropLayerDef`: a tiled strip, scattered pieces, or one
-painted `PICTURE` stretched just wide enough to cover the view from either end of the map and
-left out of the fog, all at a depth nearer than `TDStage.FAR`), random decoration (`DecorDef`), lantern and portal art, and
+painted `PICTURE` stretched just wide enough to cover the view from either end of the map (on a
+tall map, raised and stretched so it covers the view from top to bottom too) and left out of
+the fog, all at a depth nearer than `TDStage.FAR`), random decoration (`DecorDef`), lantern and portal art, and
 optional leaves hanging into the screen's top corners (`frame_left` / `frame_right`, drawn as tall as the screen by
 `CornerFrame`, over the world and under the HUD, like Hollow Knight's foreground plants). A new region of the
 world is usually a new biome plus a few maps that use it.
