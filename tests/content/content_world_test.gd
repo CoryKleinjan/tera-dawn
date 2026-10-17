@@ -247,6 +247,8 @@ func _sources() -> Dictionary:
 		var card := Content.card(m)
 		if card:
 			out[card.id] = "card of %s" % m.id
+		if m.relic:
+			out[m.relic.id] = "relic of %s" % m.id
 	for n: NpcDef in Content.npcs.values():
 		if n.shop and placed.has(n.id):
 			for e in n.shop.items:

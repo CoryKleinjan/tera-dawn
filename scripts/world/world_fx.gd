@@ -22,9 +22,6 @@ func show_skill(peer: int, skill: SkillDef, at: Vector2, face: int, lines: Array
 		if skill.move and skill.ambush > 0.0:
 			# an ambush: `at` is where they landed, the avatar is still where they left
 			TDMoveFx.play(world, skill.move, (who as TDAvatar).position, at, who)
-		elif skill.move:
-			var to := skill.move.blink_to(at, face, aim, 1, float(world.map.width), float(world.map.ground_y))
-			TDMoveFx.play(world, skill.move, at, to, who)
 	var views := world.mobs()
 	var mine := who == world.player
 	var way := Hitbox.aim_direction(face, aim)
