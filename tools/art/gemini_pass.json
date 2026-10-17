@@ -23458,6 +23458,170 @@
   }
  },
  {
+  "id": "dawnharbor_fields_pieces",
+  "prompts": null,
+  "batch": "Dawnharbor fields: cliff-rock fake wall, plank barricade, sea chest (edit)",
+  "with": null,
+  "refs": [],
+  "save": "dawnharbor_fields_pieces.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": true,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Zone rework' (Dawnharbor Coast rooms, PR #296; Cory 16:53Z 'Go with your look picks': sandy earth with one clean grassy edge, plank-and-rope barricade walls, cliff-rock fake walls, a sea chest with brass corners and rope handles, iron-banded driftwood gates, a ship's iron lever, a brass anchor-bow key, dark hanging netting and rope in the top corners, one picture backdrop per field): full kit after the land and Harbor Beach test. Guide: Greenbough's pieces guide with the hollow trunk swapped for a copy of the wall block: the fake wall (fake_wall), the barricade whole/broken (BreakableDef whole/broken) and the secret chest closed/open. Base 2400x1600, exactly 3:2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/dawnharbor-fields/bases/pieces_base.png",
+   "refs": [],
+   "text": "The first image is a guide on a flat magenta #FF00FF background showing five objects for my 2D side-scrolling game as flat colour shapes. Paint each one over its shape as a finished object for Dawnharbor Coast, a breezy seaside coast of sandy dunes and sea cliffs beside a busy port, keeping each shape's position, size and outline EXACTLY. 1) LEFT, a block of plain sea-cliff rock that fills a low passage: pale weathered sandstone in big simple rounded slabs with a few cracks, a little dry sea grass in one crack and a few small barnacles near its foot. It must look like ordinary solid cliff, nothing special about it. 2) MIDDLE TOP, a barricade that blocks a low passage: weathered grey-brown planks of old ship timber nailed up close together, criss-crossed by two thick planks, lashed with thick tarred rope, with a few rusty nails and a scrap of old sailcloth. The rounded top is the planks' tops cut to that shape. 3) MIDDLE BOTTOM, the SAME barricade broken open: the identical outside shape, size, colours and planks, but its middle smashed through, with snapped plank ends and frayed rope round a dark hole where the dark arch is. 4) RIGHT TOP, a small sea chest of dark weathered teak planks with brass corners, a domed lid, a little brass lock on the front and a thick rope handle on each side. 5) RIGHT BOTTOM, the SAME chest opened: its box exactly as in the closed chest, and its lid swung open upward so it stands up behind the box, seen from the front, showing the lid's inner side. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own warm painted style and bright daylight: soft cel-painted shading with clear light and shadow shapes, bright highlights on the lit edges from the upper left, rich warm saturated colours, a bold dark brown outline, and hand-painted texture at a fairly chunky brush scale. Every object is a flat front view at eye level: no top surface shows (no lid top, no rock top face, nothing seen from above), and each stands on ONE flat straight bottom edge with no ground, sand or shadow under it. Nothing glows. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the objects the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "dawnharbor_fields_locks",
+  "prompts": null,
+  "batch": "Dawnharbor fields: lever, gate, locked gate, anchor key (edit)",
+  "with": null,
+  "refs": [],
+  "save": "dawnharbor_fields_locks.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": true,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Zone rework' (Dawnharbor Coast rooms, PR #296; Cory 16:53Z 'Go with your look picks': sandy earth with one clean grassy edge, plank-and-rope barricade walls, cliff-rock fake walls, a sea chest with brass corners and rope handles, iron-banded driftwood gates, a ship's iron lever, a brass anchor-bow key, dark hanging netting and rope in the top corners, one picture backdrop per field): full kit after the land and Harbor Beach test. Guide: Greenbough's locks guide with the leaf key redrawn with an anchor bow: the shut gate, the key gate, the lever up and swung over, and the Smugglers' Key (its item icon and drop picture, one painting). Base 2400x1600, exactly 3:2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/dawnharbor-fields/bases/locks_base.png",
+   "refs": [],
+   "text": "The first image is a guide on a flat magenta #FF00FF background showing five objects for my 2D side-scrolling game as flat colour shapes. Paint each one over its shape as a finished object for Dawnharbor Coast, a breezy seaside coast beside a busy port, keeping each shape's position, size and outline EXACTLY. 1) LEFT, a shut gate that blocks a doorway: two thick posts of bleached grey driftwood at the sides and, between them, five upright driftwood stakes with pointed tops, held by two cross rails. Each rail is fixed to the posts and to every stake with a dark iron band and big round rivets, and a little tarred rope is wound round the posts. The wood is pale, smooth and salt-weathered, with grain and cracks, and the iron is dark with a touch of rust. Every gap between the stakes stays open, showing flat magenta. 2) MIDDLE, the SAME gate, identical in every way, with a big dark iron lock plate fixed across its middle: a keyhole in it, rivets round its edge and a touch of rust. 3) TOP RIGHT, LEFT ONE, a ship's lever: a squat block of dark tarred ship timber with two iron bands, and a dark iron handle with a rope-wrapped grip and a round brass knob, turning on a round iron pivot at the top of the block. The handle leans up to the LEFT. 4) TOP RIGHT, RIGHT ONE, the SAME lever, identical in every way, with its handle swung over so it leans up to the RIGHT. 5) BOTTOM RIGHT, a brass key: a long shaft with a toothed bit at the right end and, at the left end, a bow shaped like a small ship's anchor, with a ring at its top, a crossbar, and two curved arms with pointed flukes. Warm polished brass, brighter where it has been rubbed smooth. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own warm painted style and bright daylight: soft cel-painted shading with clear light and shadow shapes, bright highlights on the lit edges from the upper left, rich warm saturated colours, a bold dark brown outline, and hand-painted texture at a fairly chunky brush scale. Every object is a flat front view at eye level: no top surface shows (no block top, nothing seen from above), and the gates and levers each stand on ONE flat straight bottom edge with no ground, sand or shadow under it. Nothing glows. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the objects, in every gap between the gate stakes and in the key's ring hole, the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "dawnharbor_fields_netting",
+  "prompts": null,
+  "batch": "Dawnharbor fields: dark netting for the top corners (edit)",
+  "with": null,
+  "refs": [],
+  "save": "dawnharbor_fields_netting.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Zone rework' (Dawnharbor Coast rooms, PR #296; Cory 16:53Z 'Go with your look picks': sandy earth with one clean grassy edge, plank-and-rope barricade walls, cliff-rock fake walls, a sea chest with brass corners and rope handles, iron-banded driftwood gates, a ship's iron lever, a brass anchor-bow key, dark hanging netting and rope in the top corners, one picture backdrop per field): full kit after the land and Harbor Beach test. Guide: the screen at 16:9 with a net mass and hanging ropes in each top corner, cut into a top-left and a top-right piece drawn over the view. Base 2400x1350, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/dawnharbor-fields/bases/netting_base.png",
+   "refs": [],
+   "text": "The first image is a guide for a frame of foreground fishing nets for my 2D side-scrolling game, on a flat magenta #FF00FF background. The dark shapes in the two top corners are old fishing nets hanging into the top corners of the screen very close to the camera, the way Hollow Knight frames its screen with dark foreground shapes. Paint over the shapes as two heavy sagging masses of old fishing net, keeping their positions, sizes and overall shapes: knotted net with a few holes, a couple of small cork floats tangled in it, and the dark lines hanging down are thick ropes, each ending in a round glass or cork float. They are dark near-silhouettes: deep blackish navy (#10141f to #222a3a), with only a faint lighter rim where morning light from behind catches their edges; simple clean shapes with crisp edges, no bright colours and almost no inner detail, so they frame the picture without drawing the eye. Both nets run off the top edge, the left one also off the left edge and the right one off the right edge. Where the net mesh shows holes, the holes are flat pure magenta. The rest of the image stays flat pure magenta #FF00FF, with no glow, haze or shadow on it. No magenta or pink inside the nets except through the holes. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "dawnharbor_fields_harbor_road_backdrop",
+  "prompts": null,
+  "batch": "Dawnharbor fields: Harbor Road backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "dawnharbor_fields_harbor_road_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-17 thread 'Zone rework' (Dawnharbor Coast rooms, PR #296; Cory 16:53Z 'Go with your look picks': sandy earth with one clean grassy edge, plank-and-rope barricade walls, cliff-rock fake walls, a sea chest with brass corners and rope handles, iron-banded driftwood gates, a ship's iron lever, a brass anchor-bow key, dark hanging netting and rope in the top corners, one picture backdrop per field): full kit after the land and Harbor Beach test. Guide: one picture behind the whole map (BackdropLayerDef PICTURE, depth 300), written like dawnharbor_fields_harbor_beach_backdrop, in this field's colours (zone-vibes.md). Base 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/dawnharbor-fields/bases/harbor_road_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Harbor Road of Dawnharbor Coast, a breezy seaside coast beside a busy port, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and hand-painted texture (rock, grass, water, wood). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: a bright, airy coast road country seen from the side: soft rolling green hills with low dry-stone walls and a pale winding road far away, the calm blue sea on the left, and on the right the first dark green trees of a great forest rising in the distance. A few cream clouds in a pale blue sky, light morning haze. Colours: pale blue sky at the very top (#5b8fc9), very pale blue horizon (#d8ecf8), soft cream light (#fff0d0), fresh hill green (#9dc3a0), cool blue sea haze (#9dc3e7). Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, ships, boats, animals or birds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft hazy land far away, with nothing close to the viewer (no grass blades, rocks, fences or posts up front); the closest things are in the middle distance. No level rocks, ledges, walls or mounds that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "dawnharbor_fields_windmill_downs_backdrop",
+  "prompts": null,
+  "batch": "Dawnharbor fields: Windmill Downs backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "dawnharbor_fields_windmill_downs_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-17 thread 'Zone rework' (Dawnharbor Coast rooms, PR #296; Cory 16:53Z 'Go with your look picks': sandy earth with one clean grassy edge, plank-and-rope barricade walls, cliff-rock fake walls, a sea chest with brass corners and rope handles, iron-banded driftwood gates, a ship's iron lever, a brass anchor-bow key, dark hanging netting and rope in the top corners, one picture backdrop per field): full kit after the land and Harbor Beach test. Guide: one picture behind the whole map (BackdropLayerDef PICTURE, depth 300), written like dawnharbor_fields_harbor_beach_backdrop, in this field's colours (zone-vibes.md). Base 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/dawnharbor-fields/bases/windmill_downs_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Windmill Downs of Dawnharbor Coast, a breezy seaside coast beside a busy port, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and hand-painted texture (rock, grass, water, wood). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: wide sunny grassy downs seen from the side, rolling away in gentle layers. Three or four old white windmills with cream canvas sails stand on the far hills at different distances, fading into haze, with patchwork fields and hedges below them and a strip of blue sea at the far horizon. Big soft cream clouds drift in a bright blue sky; breezy and warm. Colours: bright blue sky at the very top (#3f7cc4), pale sky at the horizon (#cfe6f5), sunlit grass green (#9cc76a), soft cream light (#fff0d0), white windmill plaster (#f4efe4). Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, ships, boats, animals or birds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft hazy land far away, with nothing close to the viewer (no grass blades, rocks, fences or posts up front); the closest things are in the middle distance. No level rocks, ledges, walls or mounds that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "dawnharbor_fields_gull_bluffs_backdrop",
+  "prompts": null,
+  "batch": "Dawnharbor fields: Gull Bluffs backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "dawnharbor_fields_gull_bluffs_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-17 thread 'Zone rework' (Dawnharbor Coast rooms, PR #296; Cory 16:53Z 'Go with your look picks': sandy earth with one clean grassy edge, plank-and-rope barricade walls, cliff-rock fake walls, a sea chest with brass corners and rope handles, iron-banded driftwood gates, a ship's iron lever, a brass anchor-bow key, dark hanging netting and rope in the top corners, one picture backdrop per field): full kit after the land and Harbor Beach test. Guide: one picture behind the whole map (BackdropLayerDef PICTURE, depth 300), written like dawnharbor_fields_harbor_beach_backdrop, in this field's colours (zone-vibes.md). Base 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/dawnharbor-fields/bases/gull_bluffs_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Gull Bluffs of Dawnharbor Coast, a breezy seaside coast beside a busy port, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and hand-painted texture (rock, grass, water, wood). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: tall windy sea cliffs seen from the side: great pale sandstone bluffs with grassy tops and white streaks rise at different distances, the nearest in the middle distance, others fading back into blue sea haze, with many small empty nests tucked into ledges on the far cliff faces. White surf breaks far below on rocks, and the open sea stretches to a level horizon. Wind-torn cream clouds race across a cool blue sky. Colours: deep blue sky at the very top (#2c4f7c), pale grey-blue horizon (#bcd2e2), cool blue sea haze (#9dc3e7), pale sandstone (#e3cfa8), soft cream light (#fff0d0). Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, ships, boats, animals or birds. 3) Nothing in the near foreground: the bottom quarter of the picture is far sea, surf and rocks, with nothing close to the viewer (no grass, rocks or posts up front); the closest cliffs are in the middle distance. No level ledges, rocks or mounds that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "dawnharbor_fields_smugglers_grotto_backdrop",
+  "prompts": null,
+  "batch": "Dawnharbor fields: Smugglers' Grotto backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "dawnharbor_fields_smugglers_grotto_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-17 thread 'Zone rework' (Dawnharbor Coast rooms, PR #296; Cory 16:53Z 'Go with your look picks': sandy earth with one clean grassy edge, plank-and-rope barricade walls, cliff-rock fake walls, a sea chest with brass corners and rope handles, iron-banded driftwood gates, a ship's iron lever, a brass anchor-bow key, dark hanging netting and rope in the top corners, one picture backdrop per field): full kit after the land and Harbor Beach test. Guide: one picture behind the whole map (BackdropLayerDef PICTURE, depth 300), written like dawnharbor_fields_harbor_beach_backdrop, in this field's colours (zone-vibes.md). Base 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/dawnharbor-fields/bases/smugglers_grotto_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Smugglers' Grotto of Dawnharbor Coast, a breezy seaside coast beside a busy port, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and hand-painted texture (rock, grass, water, wood). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: a tall, dim sea cave seen from the side, deep under the cliffs. Great rock pillars and hanging stone points rise and fall at different distances, the far ones fading into blue-green gloom, with dark seawater pooled far below. Old smugglers' lanterns hang on ropes from iron hooks in the far rock, each a small warm orange glow, and a few stacked crates and barrels sit tiny and far away in dark alcoves. A faint shaft of pale daylight falls from a crack high above. Colours: near-black blue at the very top (#0d1a26), deep blue-green cave gloom (#1f3a4a), warm lantern orange (#f0a050), cool wet rock (#3e5562), pale daylight (#cfe0e6). Dim and secretive, but still clearly painted and readable, never black. Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, ships, boats, animals or birds. 3) Nothing in the near foreground: the bottom quarter of the picture is dark water and far rock, with nothing close to the viewer (no rocks, crates, ropes or posts up front); the closest pillars are in the middle distance. No level ledges, shelves, piers or walkways that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
   "id": "mshero_thief_trousers_b5",
   "prompts": null,
   "batch": "maple hero layers (edit)",
