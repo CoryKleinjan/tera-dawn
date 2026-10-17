@@ -1,10 +1,14 @@
-[gd_resource type="Resource" script_class="EquipDef" load_steps=6 format=3]
+[gd_resource type="Resource" script_class="EquipDef" format=3]
 
+[ext_resource type="Texture2D" path="res://assets/sprites/hero/hunters_vest.png" id="1_m6qxk"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
 [ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="script"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="stat_block"]
-[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
-
 [ext_resource type="SpriteFrames" path="res://assets/animations/hero/hunters_vest.tres" id="worn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f18es"]
+atlas = ExtResource("1_m6qxk")
+region = Rect2(93, 81, 56, 52)
 
 [sub_resource type="Resource" id="stats"]
 script = ExtResource("stat_block")
@@ -12,22 +16,24 @@ defense = 6
 
 [resource]
 script = ExtResource("script")
+slot = 2
+worn = ExtResource("worn")
+nudges = {
+&"ambush1": Vector4(-8.400002, 9.800003, 54, 0),
+&"roll2": Vector4(2, -28, -180, 0),
+&"throw2": Vector4(0, 0, 0, 3)
+}
 frame_art = {
 &"roll2": &"roll1"
 }
-nudges = {
-&"roll2": Vector4(2, -28, -180, 0)
-}
-id = &"hunters_vest"
-display_name = "Hunter's Vest"
-description = "A laced leather vest for a new archer."
-sprite_scale = 0.36
-glow_color = Color(0.6, 0.95, 0.55, 1.0)
-pickup_effect = ExtResource("pickup")
-sell_price = 375
-slot = 2
-worn = ExtResource("worn")
 jobs = Array[StringName]([&"archer"])
 required_level = 10
 stats = SubResource("stats")
-variance = 1
+id = &"hunters_vest"
+display_name = "Hunter's Vest"
+description = "A laced leather vest for a new archer."
+icon = SubResource("AtlasTexture_f18es")
+sprite_scale = 0.36
+glow_color = Color(0.6, 0.95, 0.55, 1)
+pickup_effect = ExtResource("pickup")
+sell_price = 375

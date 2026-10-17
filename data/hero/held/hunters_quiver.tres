@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="HeldDef" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="HeldDef" format=3]
 
 [ext_resource type="Script" path="res://scripts/data/held_def.gd" id="1_held"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/hero/held/hunters_quiver.tres" id="2_frames"]
@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_held")
 frames = ExtResource("2_frames")
-anchor = Vector2(39.0, 41.5)
+anchor = Vector2(39, 41.5)
 pins = {
 &"ambush1": Vector4(124.7, 115.3, 18, 0),
 &"anchor2": Vector4(92.1, 107.4, -6, 0),
@@ -16,10 +16,10 @@ pins = {
 &"gravity1": Vector4(106.1, 105, 0, 0),
 &"gravity2": Vector4(118.7, 122.6, 1.5, 0),
 &"hurt": Vector4(104, 102, -20, 0),
-&"idle1": Vector4(112.4, 100.2, 0.0, 0),
+&"idle1": Vector4(112.4, 100.2, 0, 0),
 &"idle2": Vector4(112.3, 99.7, -0.9, 0),
-&"jump": Vector4(118.4, 95.0, 0.0, 0),
-&"leap": Vector4(131, 88.9, 7.5, 0),
+&"jump": Vector4(118.4, 95, 0, 0),
+&"leap": Vector4(121.3, 72.7, 21.5, 0),
 &"lunge": Vector4(133, 103.2, 1.5, 0),
 &"pinning": Vector4(115.3, 104.7, 7.5, 0),
 &"skyward2": Vector4(116, 100, 0, 0),
@@ -27,5 +27,5 @@ pins = {
 &"swing3": Vector4(124, 110, 20, 0),
 &"walk1": Vector4(113.1, 98.7, 3.8, 0),
 &"walk2": Vector4(113.1, 95.2, 2.2, 0),
-&"walk3": Vector4(118.3, 95.0, 0.0, 0)
+&"walk3": Vector4(118.3, 95, 0, 0)
 }

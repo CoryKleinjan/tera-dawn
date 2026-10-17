@@ -1,9 +1,14 @@
-[gd_resource type="Resource" script_class="EquipDef" load_steps=6 format=3]
+[gd_resource type="Resource" script_class="EquipDef" format=3]
 
+[ext_resource type="Texture2D" path="res://assets/sprites/hero/novice_slippers.png" id="1_eu77i"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
 [ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="script"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="stat_block"]
-[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/hero/novice_slippers.tres" id="worn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2qjma"]
+atlas = ExtResource("1_eu77i")
+region = Rect2(102, 144, 49, 15)
 
 [sub_resource type="Resource" id="stats"]
 script = ExtResource("stat_block")
@@ -12,22 +17,23 @@ magic_defense = 4
 
 [resource]
 script = ExtResource("script")
+slot = 4
+worn = ExtResource("worn")
+nudges = {
+&"cast1": Vector4(3.199997, 3.699997, 0, 0),
+&"roll2": Vector4(-42, -73, -180, 0)
+}
 frame_art = {
 &"roll2": &"roll1"
 }
-nudges = {
-&"roll2": Vector4(-42, -73, -180, 0)
-}
-id = &"novice_slippers"
-display_name = "Novice Slippers"
-description = "Soft slippers for a new magician."
-sprite_scale = 0.36
-glow_color = Color(0.55, 0.7, 1.0, 1.0)
-pickup_effect = ExtResource("pickup")
-sell_price = 250
-slot = 4
-worn = ExtResource("worn")
 jobs = Array[StringName]([&"mage"])
 required_level = 10
 stats = SubResource("stats")
-variance = 1
+id = &"novice_slippers"
+display_name = "Novice Slippers"
+description = "Soft slippers for a new magician."
+icon = SubResource("AtlasTexture_2qjma")
+sprite_scale = 0.36
+glow_color = Color(0.55, 0.7, 1, 1)
+pickup_effect = ExtResource("pickup")
+sell_price = 250

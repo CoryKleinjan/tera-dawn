@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="HeldDef" load_steps=3 format=3]
+[gd_resource type="Resource" script_class="HeldDef" format=3]
 
 [ext_resource type="Script" path="res://scripts/data/held_def.gd" id="1_held"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/hero/held/novice_wand.tres" id="2_frames"]
@@ -8,26 +8,26 @@ script = ExtResource("1_held")
 frames = ExtResource("2_frames")
 anchor = Vector2(4.3, 2.6)
 pins = {
-&"ambush1": Vector4(175.5, 104.2, 0, 2),
-&"ambush2": Vector4(165.3, 78.7, 0, 2),
-&"anchor2": Vector4(142, 89.5, -25, 2),
-&"backstep": Vector4(159.9, 69.3, -25, 2),
-&"cast1": Vector4(98.4, 108.2, 160, 2),
-&"cast2": Vector4(172.2, 87.2, -15, 2),
-&"crouch": Vector4(101.9, 76.6, 0.0, 2),
+&"ambush1": Vector4(165.8, 112.1, -60, 2),
+&"ambush2": Vector4(165.3, 78.7, -100, 2),
+&"anchor2": Vector4(130, 124.7, -75, 2),
+&"backstep": Vector4(140.7, 82, -69, 2),
+&"cast1": Vector4(97.4, 110.9, -42, 2),
+&"cast2": Vector4(159.7, 94.6, -61, 2),
+&"crouch": Vector4(100, 128.9, -46, 2),
 &"gravity1": Vector4(131.9, 129.7, 100, 2),
-&"gravity2": Vector4(163.3, 112.9, 65, 2),
+&"gravity2": Vector4(117, 149.5, -21, 1),
 &"hurt": Vector4(84, 120, 40, 2),
-&"idle1": Vector4(102.9, 124.4, 0.0, 2),
+&"idle1": Vector4(102.9, 124.4, 0, 2),
 &"idle2": Vector4(102.7, 123.7, -1.2, 2),
-&"jump": Vector4(72.7, 95.7, 0.0, 2),
-&"leap": Vector4(83.9, 85, 155, 2),
-&"lunge": Vector4(162.1, 123, 0, 2),
-&"pinning": Vector4(170, 99.5, 0, 2),
-&"skyward2": Vector4(172.2, 87.2, -15, 2),
-&"swing2": Vector4(157, 91, -45, 2),
-&"swing3": Vector4(152, 125, 20, 2),
-&"walk1": Vector4(93.9, 126.4, 0.0, 2),
-&"walk2": Vector4(106.9, 117.2, 0.0, 2),
-&"walk3": Vector4(95.5, 118.5, 0.0, 2)
+&"jump": Vector4(85.2, 107.7, 0, 2),
+&"leap": Vector4(79.7, 76.7, 41, 2),
+&"lunge": Vector4(149.6, 127.6, -46, 2),
+&"pinning": Vector4(100.7, 115.2, -26, 2),
+&"skyward2": Vector4(162, 89.5, -55, 2),
+&"swing2": Vector4(161.6, 93.8, -61, 2),
+&"swing3": Vector4(151.1, 130.1, -56, 2),
+&"walk1": Vector4(80, 113, 0, 2),
+&"walk2": Vector4(94.4, 114, -12, 2),
+&"walk3": Vector4(95.5, 118.5, 0, 2)
 }

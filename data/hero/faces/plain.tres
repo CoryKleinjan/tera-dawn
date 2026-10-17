@@ -9,24 +9,25 @@ id = &"plain"
 display_name = "Plain"
 frames = ExtResource("2_frames")
 nudges = {
-&"ambush1": Vector4(15.800003, 12.400002, 10, 0),
+&"ambush1": Vector4(15.800003, 12.400002, 6, 0),
 &"anchor2": Vector4(-25.2, 8.9, -12, 0),
 &"backstep": Vector4(-11.9, -12.3, 3, 0),
 &"cast1": Vector4(2.699997, 1.7000008, 0, 0),
 &"cast2": Vector4(-5.2, -5.9, 0, 0),
 &"gravity1": Vector4(21.6, 11.7, 0, 0),
-&"gravity2": Vector4(7.8, 28, 3, 0),
-&"hurt": Vector4(-5, 10.199997, -16, 0),
+&"gravity2": Vector4(5.0999985, 27.699997, 0, 0),
+&"hurt": Vector4(-6.4000015, 10.699997, -16, 0),
 &"leap": Vector4(23.1, -14.1, 15, 0),
-&"lunge": Vector4(23.899994, 10.699997, 3, 0),
+&"lunge": Vector4(26.199997, 8.400002, 15, 0),
 &"pinning": Vector4(3.4, 5.6, 15, 0),
-&"pistol2": Vector4(0.5, 1.9000015, 0, 0),
+&"pistol2": Vector4(-3.699997, -0.40000153, -8, 0),
 &"roll1": Vector4(8.3, 14.9, 45, 0),
 &"roll2": Vector4(-6.3, 52.1, -135, 0),
 &"sit": Vector4(-3.6, 23.7, 0, 0),
 &"skyward2": Vector4(-5.2, -5.9, 0, 0),
 &"swing2": Vector4(7, 6.5, 15, 0),
-&"swing3": Vector4(17, 13.9, 18, 0)
+&"swing3": Vector4(17, 13.9, 18, 0),
+&"throw1": Vector4(-1.4000015, -0.5, 0, 0)
 }
 frame_art = {
 &"roll2": &"roll1"

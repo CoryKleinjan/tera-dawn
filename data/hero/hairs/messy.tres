@@ -21,7 +21,6 @@ nudges = {
 &"cast1": Vector4(0.2, 2.8, -14, 0),
 &"cast2": Vector4(-5.2, -5.9, 0, 0),
 &"gravity1": Vector4(21.6, 11.7, 0, 0),
-&"gravity2": Vector4(8.1, 28, 3, 0),
 &"hurt": Vector4(-24.5, 11.1, -24, 0),
 &"leap": Vector4(24.7, -13.5, 15, 0),
 &"lunge": Vector4(26, 3.9, 3, 0),

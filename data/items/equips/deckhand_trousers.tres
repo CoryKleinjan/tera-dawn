@@ -1,10 +1,14 @@
-[gd_resource type="Resource" script_class="EquipDef" load_steps=6 format=3]
+[gd_resource type="Resource" script_class="EquipDef" format=3]
 
+[ext_resource type="Texture2D" path="res://assets/sprites/hero/deckhand_trousers.png" id="1_mp13s"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
 [ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="script"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="stat_block"]
-[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="pickup"]
-
 [ext_resource type="SpriteFrames" path="res://assets/animations/hero/deckhand_trousers.tres" id="worn"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0o5o2"]
+atlas = ExtResource("1_mp13s")
+region = Rect2(100, 114, 46, 31)
 
 [sub_resource type="Resource" id="stats"]
 script = ExtResource("stat_block")
@@ -12,22 +16,24 @@ defense = 4
 
 [resource]
 script = ExtResource("script")
+slot = 3
+worn = ExtResource("worn")
+nudges = {
+&"cast2": Vector4(0, 0, 0, 1),
+&"roll2": Vector4(11, -48, -180, 0),
+&"throw1": Vector4(0, 0, 0, 3)
+}
 frame_art = {
 &"roll2": &"roll1"
 }
-nudges = {
-&"roll2": Vector4(11, -48, -180, 0)
-}
-id = &"deckhand_trousers"
-display_name = "Deckhand Trousers"
-description = "Striped sailor trousers for a new pirate."
-sprite_scale = 0.36
-glow_color = Color(1.0, 0.85, 0.45, 1.0)
-pickup_effect = ExtResource("pickup")
-sell_price = 300
-slot = 3
-worn = ExtResource("worn")
 jobs = Array[StringName]([&"pirate"])
 required_level = 10
 stats = SubResource("stats")
-variance = 1
+id = &"deckhand_trousers"
+display_name = "Deckhand Trousers"
+description = "Striped sailor trousers for a new pirate."
+icon = SubResource("AtlasTexture_0o5o2")
+sprite_scale = 0.36
+glow_color = Color(1, 0.85, 0.45, 1)
+pickup_effect = ExtResource("pickup")
+sell_price = 300

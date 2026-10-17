@@ -20,7 +20,6 @@ slot = 2
 worn = ExtResource("worn")
 nudges = {
 &"cast1": Vector4(3.199997, 3.699997, 0, 0),
-&"pistol2": Vector4(0.9000015, -5.0999985, 0, 0),
 &"roll2": Vector4(34, -24, -180, 0)
 }
 frame_art = {
