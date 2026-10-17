@@ -2,7 +2,8 @@ extends TestCase
 ## Moves from boss relics on your own character in a running game: nothing without its relic,
 ## a Dash bursts flat ahead (once per jump in the air), a double jump works once per jump, a
 ## Slam drops straight down, and a Surge charges with Down + Dash held and flies once let go
-## (let go too soon, it fizzles). Runs on Dawnrise Meadow's open floor.
+## (let go too soon, it fizzles). Dash, Double Jump and Surge play their painted effects
+## round him. Runs on Dawnrise Meadow's open floor.
 
 const FLOOR := Vector2(1305, 620)
 
@@ -46,6 +47,12 @@ func _tap(action: String, hold := 2) -> void:
 	await ui.ticks(hold)
 	Input.action_release(action)
 
+## Whether relic `id`'s painted effect is playing round him.
+func _effect_of(id: StringName) -> bool:
+	var def := (Content.item(id) as RelicDef).effect
+	return def != null and ui.world.fx_layer.get_children().any(func(n: Node) -> bool:
+		return n is TDEffect and (n as TDEffect).def == def and (n as TDEffect).follow == me)
+
 func test_no_dash_without_its_relic() -> void:
 	await _stand()
 	await _tap("dash")
@@ -60,6 +67,7 @@ func test_a_dash_bursts_flat_ahead() -> void:
 	check_near(me.position.x - FLOOR.x, TDPlayer.DASH_SPEED * TDPlayer.DASH_TICKS, "about its distance ahead", 16.0)
 	check_eq(me.position.y, FLOOR.y, "along the ground")
 	check_near(ui.player().position.x, me.position.x, "the server agrees", 40.0)
+	check(_effect_of(&"tusk_charm"), "its painted spray follows him")
 
 func test_a_dash_in_the_air_is_flat_and_once_per_jump() -> void:
 	await _learn(&"tusk_charm")
@@ -80,6 +88,7 @@ func test_a_double_jump_works_once_per_jump() -> void:
 	me.vel.y = 4.0
 	await _tap("jump")
 	check(me.vel.y < 0.0, "jumps again in mid-air")
+	check(_effect_of(&"wingstone"), "with its painted burst")
 	me.vel.y = 4.0
 	await _tap("jump")
 	check(me.vel.y > 0.0, "only once")
@@ -118,6 +127,7 @@ func test_a_surge_charges_then_flies_ahead() -> void:
 	Input.action_release("move_down")
 	await ui.ticks(20)
 	check(me.position.x > FLOOR.x + 150.0, "flying ahead")
+	check(_effect_of(&"titans_pearl"), "with its painted trail")
 	check_eq(me.position.y, FLOOR.y, "straight across")
 
 func test_a_surge_let_go_too_soon_fizzles() -> void:
