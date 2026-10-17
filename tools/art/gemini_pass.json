@@ -26512,6 +26512,80 @@
    "refs": [],
    "text": "The first image is a guide for a frame of foreground leaves for my 2D side-scrolling game, on a flat magenta #FF00FF background. The dark shapes in the two top corners are leaves hanging into the top corners of the screen very close to the camera, the way Hollow Knight frames its screen with dark foreground plants. Paint over the shapes as two clusters of big broad oak leaves and twigs turned to stone, and one hanging stone vine on the right, keeping their positions, sizes and overall shapes. They are dark near-silhouettes: deep slate blue-grey (#141821 to #2b3140), with only a faint pale silver rim where light from behind catches their edges and a few soft cracks; simple clean shapes with crisp edges, no bright colours and almost no inner detail, so they frame the picture without drawing the eye. Both clusters run off the top edge, the left one also off the left edge and the right one off the right edge. The rest of the image stays flat pure magenta #FF00FF, with no glow, haze or shadow on it. No magenta or pink inside the leaves. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. Do not draw any characters, animals or birds."
   }
+ },
+ {
+  "id": "mon_petrified_warden_v2",
+  "prompts": null,
+  "batch": "Tears pilot: repaints (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mon_petrified_warden_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': repaint asked by Cory 21:04Z ('Repaint all') after wave A1. First paint faced the camera, ran off the cells, wore a crown and had near-identical idle/walk frames.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_2x4_32.png",
+   "refs": [],
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint ONE new game monster once in every cell, in the pose given for that cell. The monster is the \"Petrified Warden\", a giant boss: an ancient oak tree that walks, from a forest where every living thing has turned to stone. A huge, broad, heavy trunk body, its whole body carved from pale starlit stone (ivory and cool blue-grey, with soft violet-grey shadows), fine chips and worn patches on the stone, thin cracks across it with soft white light glowing from inside them. Two thick root legs, two long heavy branch arms ending in gnarled branch hands, a short, compact cluster of stone branches and stone leaves growing from the top of its head, kept close to the head and well inside the cell, and a deep stern face carved into the trunk with two big glowing white eyes and a dark mouth. The light glows brightest in a large crack across its chest. No moss, no green leaves, no armour. Painted in my game's style: rich colours, strong light from the upper left with bright highlights and soft shadow, visible soft painted brush texture at a fairly chunky brush scale, a thin dark slate-plum outline, smooth anti-aliased edges. Never pixel art, never a flat cartoon, never a vector look. It is exactly the same creature in every cell (same body, colours, cracks, crown and face), and the same size in every cell: the whole creature, branches included, fills only about two thirds of its cell's height and about two thirds of its width, with clear magenta space on all four sides, never touching or crossing any cell border. It is seen STRICTLY FROM THE SIDE in profile, like a side-scrolling game sprite: its body, chest and face all turned to the RIGHT, its face seen in profile with only one eye showing, never facing the viewer. It wears NO crown, helmet, beard or jewellery: its head is plain carved stone with branches growing from it. It walks on its root legs. Cell 1, IDLE 1: standing tall, arms hanging. Cell 2, IDLE 2: standing, slightly hunched, chest crack glowing brighter. Cells 1 to 5 must be clearly different from each other. Cell 3, WALK 1: a long stride, front root leg reaching far forward and lifted off the ground, back leg pushing behind. Cell 4, WALK 2: body raised, one leg straight under the trunk and the other lifted high, bent at the knee. Cell 5, WALK 3: a long stride, the other root leg now forward, arms swinging the opposite way. Cell 6, ATTACK: one huge branch arm raised high behind its head and swinging forward and down in a big overhead smash, leaning forward. Cell 7, HURT: rocked backward, face grimacing, eyes squeezed into thin lines. Cell 8, DEFEATED: fallen forward onto its knees and arms, crown drooping, eyes dark, the light in its cracks faded to a faint glow. Exactly one monster per cell. Do NOT draw dust, speed lines, motion flicks, shadows, ground, grass, sparkles, stray light motes, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching or cut off by the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Never a second copy, a ghost, an after-image or a different creature."
+  }
+ },
+ {
+  "id": "monanim_hollow_stag_v2",
+  "prompts": null,
+  "batch": "Tears pilot: repaints (edit)",
+  "with": null,
+  "refs": [],
+  "save": "monanim_hollow_stag_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': repaint asked by Cory 21:04Z ('Repaint all') after wave A1. First paint: cell 1 was mid-stride not a crouch, cell 6 antlers swept back. Same cells as before.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_2x4_32.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/hollow_stag_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's monster \"Hollow Stag\" once, standing in its idle pose on magenta. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, cracks, glowing antlers and eyes, the same size as in the first attached picture, the same painted style and thin dark slate-plum outline) but NOT its pose: each cell's pose is new and clearly different from the others. It always faces RIGHT, seen from the side, its face turned to the right. Poses on the ground stand on one shared ground line near the bottom of each cell; mid-air poses float clearly above that line. Cell 1, JUMP TAKE-OFF: all four legs folded and bent deeply under its body, belly close to the ground line, every hoof on the ground, coiled like a spring about to leap straight up, head raised; NOT walking or striding. Cell 2, JUMP IN THE AIR: high in the air, legs tucked under its belly. Cell 3, KNOCKED UP: thrown helplessly up into the air, tumbling backwards and tipped onto its back with its legs flailing upward, eyes squeezed shut. Cell 4, KNOCKED DOWN: lying flat on its side on the ground line, legs limp, dazed with dizzy swirl eyes, still clearly alive (not defeated). Cell 5, CHARGE WIND-UP: pulled back on its hind legs, head lowered, antlers aimed ahead, ready to rush forward. Cell 6, CHARGE: rushing forward at full speed, head lowered to chest height with its neck stretched forward, so the antlers point STRAIGHT AHEAD to the right like a battering ram, tips in front of its nose, never swept back over its back; legs in a long galloping stride. Cell 7, STOMP WIND-UP: rearing up high on its hind legs, front hooves raised above its head. Cell 8, STOMP: front hooves crashing down onto the ground line, head low, body bunched. Exactly one monster per cell. Do NOT draw ground lines, impact marks, dust, speed lines, motion flicks, shadows, ground, grass, sparkles, stray light motes, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching or cut off by the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Never a second copy, a ghost, an after-image or a different creature."
+  }
+ },
+ {
+  "id": "tear_greenbough_silent_stair_backdrop_v2",
+  "prompts": null,
+  "batch": "Tears pilot: repaints (edit)",
+  "with": null,
+  "refs": [],
+  "save": "tear_greenbough_silent_stair_backdrop_v2.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "town_check": {
+   "kind": "backdrop"
+  },
+  "note": "2026-10-17 thread 'Tears': repaint asked by Cory 21:04Z ('Repaint all') after wave A1. First paint had flat stacked stone canopies that read as standable ledges.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/tears/bases/greenbough_tear_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Silent Stair, a map of a hidden stone forest in my 2D side-scrolling game: a forest of GIANT oak trees where everything has turned to pale starlit stone, silent and still, as if from a world already gone. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich colours, bold dark outlines, and hand-painted texture (carved bark, stone chips, worn patches). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: looking out across the upper forest high among the stone trunks, where giant trunks rise straight up past the top of the picture and soft, rounded, billowing canopies of stone leaves (irregular cloud-like clumps with ragged leafy edges, never flat tops, never discs, slabs, shelves or rings) rise one above another higher and higher into the haze, as if climbing a stair of trees; faint white light from cracks in the trunks. Colours: deep slate blue at the very top (#2b3140), pale silver-white where the light is brightest (#e9ecf2), cool blue-grey mist low down (#b8c0cc), white crack light. No green, no warm sunlight. It must match the first map of the same forest: giant pale stone oak trunks in ivory and cool blue-grey with carved bark, stone leaf canopies, thin white glowing cracks, tiny still white light motes, silver mist. Strict rules: 1) Side-on view at eye level, every trunk straight up and down. 2) No people, characters, buildings, ruins, statues, animals or birds. No clouds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft misty stone forest floor far away, with nothing close to the viewer (no roots, rocks, logs or leaves up front); the closest shapes are in the middle distance. No level branches, ledges or mounds that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta, and no dark band across the top. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  }
  }
 ]
 }
