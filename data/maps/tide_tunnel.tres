@@ -1,0 +1,178 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=36 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/harbor.tres" id="2_harbor"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="3_biome_variant_def"]
+[ext_resource type="Script" path="res://scripts/data/decor_def.gd" id="4_decor_def"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="5_platform_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/gate.png" id="6_gate"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
+[ext_resource type="Resource" path="res://data/monsters/kelp_lurker.tres" id="8_kelp_lurker"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="9_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/barnacle_boar.tres" id="10_barnacle_boar"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="11_dawnshard"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="12_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="13_white_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="14_blue_potion"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest.png" id="15_chest"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest_open.png" id="16_chest_open"]
+[ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="17_breakable_def"]
+
+[sub_resource type="Resource" id="Copied_Resource_ljweq"]
+script = ExtResource("3_biome_variant_def")
+sky_top = Color(0.0627451, 0.0941176, 0.156863, 1)
+sky_mid = Color(0.164706, 0.227451, 0.345098, 1)
+sky_low = Color(0, 0, 0, 0)
+sky_horizon = Color(0, 0, 0, 0)
+sun_color = Color(0, 0, 0, 0)
+light_color = Color(0, 0, 0, 0)
+light_energy = 1.2
+ambient_color = Color(0.227451, 0.313726, 0.439216, 1)
+ambient_energy = 0.55
+fog_color = Color(0.164706, 0.227451, 0.313726, 1)
+mote_color = Color(0, 0, 0, 0)
+motes_rise = 0
+grade_tint = Color(0, 0, 0, 0)
+grade_lift = Color(0, 0, 0, 0)
+grade_lift_amount = -1.0
+grade_saturation = -1.0
+light_shafts = 0
+light_shaft_color = Color(0, 0, 0, 0)
+fog_begin = 0.0
+fog_end = 130.0
+fog_density = 0.95
+hide_layers = PackedInt32Array(3)
+more_ground_decor = Array[ExtResource("4_decor_def")]([])
+
+[sub_resource type="Resource" id="Platform_1"]
+script = ExtResource("5_platform_def")
+x = 300.0
+y = 545.0
+width = 500.0
+
+[sub_resource type="Resource" id="Platform_2"]
+script = ExtResource("5_platform_def")
+x = 700.0
+y = 470.0
+width = 500.0
+
+[sub_resource type="Resource" id="Platform_3"]
+script = ExtResource("5_platform_def")
+x = 1500.0
+y = 545.0
+width = 500.0
+
+[sub_resource type="Resource" id="Platform_4"]
+script = ExtResource("5_platform_def")
+x = 1900.0
+y = 470.0
+width = 500.0
+
+[sub_resource type="Resource" id="Platform_5"]
+script = ExtResource("5_platform_def")
+x = 1100.0
+y = 395.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_6"]
+script = ExtResource("5_platform_def")
+x = 1570.0
+y = 265.0
+width = 150.0
+secret = true
+
+[sub_resource type="Resource" id="Portal_0"]
+script = ExtResource("7_portal_def")
+x = 80.0
+target_map = &"smugglers_grotto"
+target_x = 2140.0
+target_platform = 24
+gate = &"tide_tunnel_gate"
+gate_picture = ExtResource("6_gate")
+
+[sub_resource type="Resource" id="Portal_1"]
+script = ExtResource("7_portal_def")
+x = 2920.0
+target_map = &"driftwood_hollow"
+target_x = 200.0
+
+[sub_resource type="Resource" id="Spawn_0"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("8_kelp_lurker")
+platform = 0
+count = 4
+patrol_from = 300.0
+patrol_to = 2700.0
+
+[sub_resource type="Resource" id="Spawn_1"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barnacle_boar")
+platform = 1
+count = 2
+
+[sub_resource type="Resource" id="Spawn_2"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("8_kelp_lurker")
+platform = 2
+count = 2
+
+[sub_resource type="Resource" id="Spawn_3"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("10_barnacle_boar")
+platform = 3
+count = 2
+
+[sub_resource type="Resource" id="Spawn_4"]
+script = ExtResource("9_spawn_def")
+monster = ExtResource("8_kelp_lurker")
+platform = 4
+count = 2
+
+[sub_resource type="Resource" id="Loot_0_0"]
+script = ExtResource("12_drop_entry")
+item = ExtResource("11_dawnshard")
+min_amount = 160
+max_amount = 240
+
+[sub_resource type="Resource" id="Loot_0_1"]
+script = ExtResource("12_drop_entry")
+item = ExtResource("13_white_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Loot_0_2"]
+script = ExtResource("12_drop_entry")
+item = ExtResource("14_blue_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Breakable_0"]
+script = ExtResource("17_breakable_def")
+id = &"tide_tunnel_high_chest"
+x = 1645.0
+platform = 6
+hits = 1
+whole = ExtResource("15_chest")
+broken = ExtResource("16_chest_open")
+height = 48.0
+loot = Array[ExtResource("12_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1"), SubResource("Loot_0_2")])
+card = ExtResource("8_kelp_lurker")
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"tide_tunnel"
+display_name = "Tide Tunnel"
+biome = ExtResource("2_harbor")
+variant = SubResource("Copied_Resource_ljweq")
+width = 3000
+height = 700
+ground_y = 620
+start_x = 2600.0
+platforms = Array[ExtResource("5_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6")])
+portals = Array[ExtResource("7_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1")])
+breakables = Array[ExtResource("17_breakable_def")]([SubResource("Breakable_0")])
+spawns = Array[ExtResource("9_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4")])
+region = &"dawnharbor"
+world_pos = Vector2(330.0, 395.0)
+zone_pos = Vector2(-4400.0, 1100.0)
+return_map = &"dawnharbor"

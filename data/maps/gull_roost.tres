@@ -1,0 +1,193 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=38 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/harbor.tres" id="2_harbor"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="3_biome_variant_def"]
+[ext_resource type="Script" path="res://scripts/data/decor_def.gd" id="4_decor_def"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="5_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="6_portal_def"]
+[ext_resource type="Resource" path="res://data/monsters/reef_gull.tres" id="7_reef_gull"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/coral_turret.tres" id="9_coral_turret"]
+[ext_resource type="Resource" path="res://data/items/etc/smugglers_key.tres" id="10_smugglers_key"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="11_drop_entry"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest.png" id="12_chest"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest_open.png" id="13_chest_open"]
+[ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="14_breakable_def"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="15_dawnshard"]
+[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="16_white_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="17_blue_potion"]
+
+[sub_resource type="Resource" id="Copied_Resource_pbvfe"]
+script = ExtResource("3_biome_variant_def")
+sky_top = Color(0, 0, 0, 0)
+sky_mid = Color(0.352941, 0.541176, 0.752941, 1)
+sky_low = Color(0, 0, 0, 0)
+sky_horizon = Color(0, 0, 0, 0)
+sun_color = Color(0, 0, 0, 0)
+light_color = Color(0, 0, 0, 0)
+light_energy = 2.0
+ambient_color = Color(0, 0, 0, 0)
+ambient_energy = -1.0
+fog_color = Color(0.658824, 0.784314, 0.878431, 1)
+mote_color = Color(0, 0, 0, 0)
+motes_rise = 0
+grade_tint = Color(0, 0, 0, 0)
+grade_lift = Color(0, 0, 0, 0)
+grade_lift_amount = -1.0
+grade_saturation = -1.0
+light_shafts = 0
+light_shaft_color = Color(0, 0, 0, 0)
+fog_begin = 0.0
+fog_end = 130.0
+fog_density = 0.45
+hide_layers = PackedInt32Array()
+more_ground_decor = Array[ExtResource("4_decor_def")]([])
+
+[sub_resource type="Resource" id="Platform_1"]
+script = ExtResource("5_platform_def")
+x = 300.0
+y = 845.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_2"]
+script = ExtResource("5_platform_def")
+x = 600.0
+y = 770.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_3"]
+script = ExtResource("5_platform_def")
+x = 900.0
+y = 695.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_4"]
+script = ExtResource("5_platform_def")
+x = 1200.0
+y = 620.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_5"]
+script = ExtResource("5_platform_def")
+x = 1500.0
+y = 545.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_6"]
+script = ExtResource("5_platform_def")
+x = 1600.0
+y = 845.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_7"]
+script = ExtResource("5_platform_def")
+x = 1800.0
+y = 770.0
+width = 300.0
+
+[sub_resource type="Resource" id="Platform_8"]
+script = ExtResource("5_platform_def")
+x = 2120.0
+y = 595.0
+width = 150.0
+secret = true
+
+[sub_resource type="Resource" id="Portal_0"]
+script = ExtResource("6_portal_def")
+x = 1000.0
+target_map = &"gull_bluffs"
+target_x = 2900.0
+target_platform = 26
+
+[sub_resource type="Resource" id="Spawn_0"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("7_reef_gull")
+platform = 0
+count = 4
+patrol_from = 200.0
+patrol_to = 2200.0
+
+[sub_resource type="Resource" id="Spawn_1"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_coral_turret")
+platform = 2
+count = 2
+
+[sub_resource type="Resource" id="Spawn_2"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("7_reef_gull")
+platform = 4
+count = 2
+
+[sub_resource type="Resource" id="Spawn_3"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_coral_turret")
+platform = 6
+count = 2
+
+[sub_resource type="Resource" id="Loot_0_0"]
+script = ExtResource("11_drop_entry")
+item = ExtResource("10_smugglers_key")
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Breakable_0"]
+script = ExtResource("14_breakable_def")
+id = &"smugglers_key_chest"
+x = 1700.0
+platform = 5
+hits = 1
+whole = ExtResource("12_chest")
+broken = ExtResource("13_chest_open")
+height = 48.0
+loot = Array[ExtResource("11_drop_entry")]([SubResource("Loot_0_0")])
+
+[sub_resource type="Resource" id="Loot_1_0"]
+script = ExtResource("11_drop_entry")
+item = ExtResource("15_dawnshard")
+min_amount = 160
+max_amount = 240
+
+[sub_resource type="Resource" id="Loot_1_1"]
+script = ExtResource("11_drop_entry")
+item = ExtResource("16_white_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Loot_1_2"]
+script = ExtResource("11_drop_entry")
+item = ExtResource("17_blue_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Breakable_1"]
+script = ExtResource("14_breakable_def")
+id = &"gull_roost_far_chest"
+x = 2195.0
+platform = 8
+hits = 1
+whole = ExtResource("12_chest")
+broken = ExtResource("13_chest_open")
+height = 48.0
+loot = Array[ExtResource("11_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
+card = ExtResource("7_reef_gull")
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"gull_roost"
+display_name = "Gull Roost"
+biome = ExtResource("2_harbor")
+variant = SubResource("Copied_Resource_pbvfe")
+width = 2400
+height = 1000
+ground_y = 920
+start_x = 1100.0
+platforms = Array[ExtResource("5_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8")])
+portals = Array[ExtResource("6_portal_def")]([SubResource("Portal_0")])
+breakables = Array[ExtResource("14_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1")])
+spawns = Array[ExtResource("8_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3")])
+region = &"dawnharbor"
+world_pos = Vector2(420.0, 250.0)
+zone_pos = Vector2(-2400.0, -3300.0)
+return_map = &"dawnharbor"
