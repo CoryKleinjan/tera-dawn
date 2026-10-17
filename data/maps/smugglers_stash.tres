@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=46 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=49 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/harbor.tres" id="2_harbor"]
@@ -11,18 +11,27 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor_fields/middle_b.png" id="9_middle_b"]
 [ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor_fields/cap_right.png" id="10_cap_right"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/dawnharbor_fields_side.png" id="11_dawnharbor_fields_side"]
-[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="12_platform_def"]
-[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="13_portal_def"]
-[ext_resource type="Resource" path="res://data/monsters/barnacle_boar.tres" id="14_barnacle_boar"]
-[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="15_spawn_def"]
-[ext_resource type="Resource" path="res://data/monsters/kelp_lurker.tres" id="16_kelp_lurker"]
-[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="17_dawnshard"]
-[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="18_drop_entry"]
-[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="19_white_potion"]
-[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="20_blue_potion"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor_fields/chest.png" id="21_chest"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor_fields/chest_open.png" id="22_chest_open"]
-[ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="23_breakable_def"]
+[ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="12_backdrop_layer_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/dawnharbor_fields/smugglers_grotto.png" id="13_smugglers_grotto"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="14_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="15_portal_def"]
+[ext_resource type="Resource" path="res://data/monsters/barnacle_boar.tres" id="16_barnacle_boar"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="17_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/kelp_lurker.tres" id="18_kelp_lurker"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="19_dawnshard"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="20_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="21_white_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="22_blue_potion"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor_fields/chest.png" id="23_chest"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor_fields/chest_open.png" id="24_chest_open"]
+[ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="25_breakable_def"]
+
+[sub_resource type="Resource" id="Backdrop_picture"]
+script = ExtResource("12_backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("13_smugglers_grotto")])
+mode = 2
+depth = 300.0
+screen_top = Vector2(-0.2, -0.2)
 
 [sub_resource type="Resource" id="Copied_Resource_ljweq"]
 script = ExtResource("3_biome_variant_def")
@@ -47,7 +56,6 @@ light_shaft_color = Color(0, 0, 0, 0)
 fog_begin = 0.0
 fog_end = 130.0
 fog_density = 0.95
-hide_layers = PackedInt32Array(3)
 more_ground_decor = Array[ExtResource("4_decor_def")]([])
 hide_ground_decor = PackedInt32Array(0, 1, 3)
 frame_scale = 0.55
@@ -60,154 +68,156 @@ platform_middle = ExtResource("8_middle_a")
 platform_middle_alt = ExtResource("9_middle_b")
 platform_right = ExtResource("10_cap_right")
 ground_side = ExtResource("11_dawnharbor_fields_side")
+hide_layers = PackedInt32Array(0, 1, 2, 3, 4, 5, 6)
+more_backdrop = Array[ExtResource("12_backdrop_layer_def")]([SubResource("Backdrop_picture")])
 
 [sub_resource type="Resource" id="Platform_1"]
-script = ExtResource("12_platform_def")
+script = ExtResource("14_platform_def")
 x = 300.0
 y = 545.0
 width = 400.0
 
 [sub_resource type="Resource" id="Platform_2"]
-script = ExtResource("12_platform_def")
+script = ExtResource("14_platform_def")
 x = 600.0
 y = 470.0
 width = 400.0
 
 [sub_resource type="Resource" id="Platform_3"]
-script = ExtResource("12_platform_def")
+script = ExtResource("14_platform_def")
 x = 900.0
 y = 395.0
 width = 400.0
 
 [sub_resource type="Resource" id="Platform_4"]
-script = ExtResource("12_platform_def")
+script = ExtResource("14_platform_def")
 x = 1500.0
 y = 545.0
 width = 400.0
 
 [sub_resource type="Resource" id="Platform_5"]
-script = ExtResource("12_platform_def")
+script = ExtResource("14_platform_def")
 x = 1800.0
 y = 470.0
 width = 300.0
 
 [sub_resource type="Resource" id="Platform_6"]
-script = ExtResource("12_platform_def")
+script = ExtResource("14_platform_def")
 x = 1370.0
 y = 265.0
 width = 150.0
 secret = true
 
 [sub_resource type="Resource" id="Portal_0"]
-script = ExtResource("13_portal_def")
+script = ExtResource("15_portal_def")
 x = 2320.0
 target_map = &"smugglers_grotto"
 target_x = 200.0
 target_platform = 15
 
 [sub_resource type="Resource" id="Spawn_0"]
-script = ExtResource("15_spawn_def")
-monster = ExtResource("14_barnacle_boar")
+script = ExtResource("17_spawn_def")
+monster = ExtResource("16_barnacle_boar")
 platform = 0
 count = 3
 patrol_from = 300.0
 patrol_to = 2000.0
 
 [sub_resource type="Resource" id="Spawn_1"]
-script = ExtResource("15_spawn_def")
-monster = ExtResource("16_kelp_lurker")
+script = ExtResource("17_spawn_def")
+monster = ExtResource("18_kelp_lurker")
 platform = 2
 count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
-script = ExtResource("18_drop_entry")
-item = ExtResource("17_dawnshard")
+script = ExtResource("20_drop_entry")
+item = ExtResource("19_dawnshard")
 min_amount = 160
 max_amount = 240
 
 [sub_resource type="Resource" id="Loot_0_1"]
-script = ExtResource("18_drop_entry")
-item = ExtResource("19_white_potion")
+script = ExtResource("20_drop_entry")
+item = ExtResource("21_white_potion")
 min_amount = 3
 max_amount = 3
 
 [sub_resource type="Resource" id="Loot_0_2"]
-script = ExtResource("18_drop_entry")
-item = ExtResource("20_blue_potion")
+script = ExtResource("20_drop_entry")
+item = ExtResource("22_blue_potion")
 min_amount = 3
 max_amount = 3
 
 [sub_resource type="Resource" id="Breakable_0"]
-script = ExtResource("23_breakable_def")
+script = ExtResource("25_breakable_def")
 id = &"smugglers_stash_hoard_chest"
 x = 1100.0
 platform = 3
 hits = 1
-whole = ExtResource("21_chest")
-broken = ExtResource("22_chest_open")
+whole = ExtResource("23_chest")
+broken = ExtResource("24_chest_open")
 height = 48.0
-loot = Array[ExtResource("18_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1"), SubResource("Loot_0_2")])
-card = ExtResource("14_barnacle_boar")
+loot = Array[ExtResource("20_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1"), SubResource("Loot_0_2")])
+card = ExtResource("16_barnacle_boar")
 
 [sub_resource type="Resource" id="Loot_1_0"]
-script = ExtResource("18_drop_entry")
-item = ExtResource("17_dawnshard")
+script = ExtResource("20_drop_entry")
+item = ExtResource("19_dawnshard")
 min_amount = 160
 max_amount = 240
 
 [sub_resource type="Resource" id="Loot_1_1"]
-script = ExtResource("18_drop_entry")
-item = ExtResource("19_white_potion")
+script = ExtResource("20_drop_entry")
+item = ExtResource("21_white_potion")
 min_amount = 3
 max_amount = 3
 
 [sub_resource type="Resource" id="Loot_1_2"]
-script = ExtResource("18_drop_entry")
-item = ExtResource("20_blue_potion")
+script = ExtResource("20_drop_entry")
+item = ExtResource("22_blue_potion")
 min_amount = 3
 max_amount = 3
 
 [sub_resource type="Resource" id="Breakable_1"]
-script = ExtResource("23_breakable_def")
+script = ExtResource("25_breakable_def")
 id = &"smugglers_stash_crate_chest"
 x = 450.0
 platform = 1
 hits = 1
-whole = ExtResource("21_chest")
-broken = ExtResource("22_chest_open")
+whole = ExtResource("23_chest")
+broken = ExtResource("24_chest_open")
 height = 48.0
-loot = Array[ExtResource("18_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
-card = ExtResource("16_kelp_lurker")
+loot = Array[ExtResource("20_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
+card = ExtResource("18_kelp_lurker")
 
 [sub_resource type="Resource" id="Loot_2_0"]
-script = ExtResource("18_drop_entry")
-item = ExtResource("17_dawnshard")
+script = ExtResource("20_drop_entry")
+item = ExtResource("19_dawnshard")
 min_amount = 160
 max_amount = 240
 
 [sub_resource type="Resource" id="Loot_2_1"]
-script = ExtResource("18_drop_entry")
-item = ExtResource("19_white_potion")
+script = ExtResource("20_drop_entry")
+item = ExtResource("21_white_potion")
 min_amount = 3
 max_amount = 3
 
 [sub_resource type="Resource" id="Loot_2_2"]
-script = ExtResource("18_drop_entry")
-item = ExtResource("20_blue_potion")
+script = ExtResource("20_drop_entry")
+item = ExtResource("22_blue_potion")
 min_amount = 3
 max_amount = 3
 
 [sub_resource type="Resource" id="Breakable_2"]
-script = ExtResource("23_breakable_def")
+script = ExtResource("25_breakable_def")
 id = &"smugglers_stash_high_chest"
 x = 1445.0
 platform = 6
 hits = 1
-whole = ExtResource("21_chest")
-broken = ExtResource("22_chest_open")
+whole = ExtResource("23_chest")
+broken = ExtResource("24_chest_open")
 height = 48.0
-loot = Array[ExtResource("18_drop_entry")]([SubResource("Loot_2_0"), SubResource("Loot_2_1"), SubResource("Loot_2_2")])
-card = ExtResource("16_kelp_lurker")
+loot = Array[ExtResource("20_drop_entry")]([SubResource("Loot_2_0"), SubResource("Loot_2_1"), SubResource("Loot_2_2")])
+card = ExtResource("18_kelp_lurker")
 
 [resource]
 script = ExtResource("1_map_def")
@@ -219,10 +229,10 @@ width = 2400
 height = 700
 ground_y = 620
 start_x = 2100.0
-platforms = Array[ExtResource("12_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6")])
-portals = Array[ExtResource("13_portal_def")]([SubResource("Portal_0")])
-breakables = Array[ExtResource("23_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1"), SubResource("Breakable_2")])
-spawns = Array[ExtResource("15_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1")])
+platforms = Array[ExtResource("14_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6")])
+portals = Array[ExtResource("15_portal_def")]([SubResource("Portal_0")])
+breakables = Array[ExtResource("25_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1"), SubResource("Breakable_2")])
+spawns = Array[ExtResource("17_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1")])
 region = &"dawnharbor"
 world_pos = Vector2(320.0, 370.0)
 zone_pos = Vector2(-9200.0, 0.0)

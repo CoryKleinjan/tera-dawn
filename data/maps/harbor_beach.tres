@@ -24,7 +24,7 @@
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="22_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/tide_dewling.tres" id="23_tide_dewling"]
 [ext_resource type="Resource" path="res://data/monsters/sea_gull.tres" id="24_sea_gull"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/root_wall.png" id="25_root_wall"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor_fields/cliff_wall.png" id="25_cliff_wall"]
 [ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="26_breakable_def"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="27_dawnshard"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="28_drop_entry"]
@@ -392,7 +392,7 @@ x = 3330.0
 platform = 6
 hits = 1
 walk_through = true
-whole = ExtResource("25_root_wall")
+whole = ExtResource("25_cliff_wall")
 height = 160.0
 
 [sub_resource type="Resource" id="Loot_1_0"]
