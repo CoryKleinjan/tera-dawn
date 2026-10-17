@@ -1,7 +1,7 @@
 class_name CharacterPart
 extends RefCounted
-## One part of a Character's rules that keeps its own state: its skills (SkillBook), its
-## Ability Points (AbilityPoints) and its gear (Gear). A part only keeps a weak reference
+## One part of a Character's rules that keeps its own state: its skills (SkillBook) and its
+## gear (Gear). A part only keeps a weak reference
 ## back to its Character, so the two don't keep each other alive.
 
 ## The Character this part belongs to.

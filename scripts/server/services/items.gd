@@ -1,7 +1,7 @@
 class_name ServerItems
 extends ServerPart
 ## The player's own things: using items (potions, pet food, return scrolls), the Setup tab
-## (pets), upgrade scrolls, wearing gear, and moving or dropping bag items.
+## (pets), wearing gear, and moving or dropping bag items.
 
 # ---------- Use tab ----------
 
@@ -102,26 +102,6 @@ func _call_pet(p: SimPlayer, pet: PetDef) -> void:
 	p.dirty_character = true
 
 # ---------- gear ----------
-
-## Uses the scroll in Use slot `use_slot` on the gear in Equip slot `equip_slot`.
-func on_scroll(peer: int, use_slot: int, equip_slot: int) -> void:
-	var p := player_of(peer)
-	if p == null or p.fainted():
-		return
-	var gear := p.character.inventory.at(ItemDef.Tab.EQUIP, equip_slot)
-	var name := gear.item.display_name if gear else ""
-	var result := p.character.gear.use_scroll(use_slot, equip_slot)
-	if result["problem"] != "":
-		tell(p, result["problem"])
-		return
-	p.dirty_character = true
-	if result["worked"]:
-		p.character.count(Counters.SCROLLS)
-		tell(p, "The scroll worked! %s is now %s." % [name, gear.display_name()], Palette.GOOD)
-		p.map.broadcast(&"ev_effect", [EffectDef.CELEBRATE, p.position.x, p.position.y, 1, peer])
-	else:
-		tell(p, "The scroll failed. %s has %d upgrades left." % [name, gear.slots_left()])
-		p.map.broadcast(&"ev_effect", [EffectDef.MONSTER_POOF, p.position.x, p.position.y - 40, 1, 0])
 
 func on_equip(peer: int, slot: int, place: StringName) -> void:
 	change(peer, func(c: Character) -> String: return c.gear.equip(slot, place))

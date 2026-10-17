@@ -10,7 +10,6 @@ script = ExtResource("4_stat_block")
 defense = 15
 magic_defense = 31
 max_mp = 60
-intelligence = 2
 
 [resource]
 script = ExtResource("1_equip_def")
@@ -27,5 +26,3 @@ jobs = Array[StringName]([&"mage"])
 required_level = 35
 stats = SubResource("Resource_1")
 variance = 3
-upgrade_slots = 7
-required_intelligence = 70

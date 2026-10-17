@@ -233,25 +233,22 @@ func test_a_coach_only_goes_where_you_have_been() -> void:
 
 # ---------- job instructors ----------
 
-## A Warrior (passed) who bought 20 points of STR, spending all their Dawn Essence, and has
-## passed the Magician's Job Test. Returns the STR they started with.
-func _warrior_ready_to_switch() -> int:
-	var start := c.job.starting_stats.strength
+## A level 20 Warrior (passed) with no Dawn Essence who has passed the Magician's Job Test.
+func _warrior_ready_to_switch() -> void:
 	c.job = Content.job(&"warrior")
 	c.jobs_passed.assign(["warrior"])
 	c.quests.done[Content.job(&"mage").advance_quest.id] = true
+	c.level = 20
 	c.essence = 0
-	TestCharacters.grant_stat(c, &"strength", 20)
-	return start
+	c.recalc()
 
-func test_an_instructor_switches_a_warrior_and_the_stats_stay() -> void:
-	var start := _warrior_ready_to_switch()
-	check_eq(c.base.strength, start + 20, "20 points bought")
-	check_eq(c.essence, 0, "all spent")
+func test_an_instructor_switches_a_warrior_and_the_level_stays() -> void:
+	_warrior_ready_to_switch()
 	h.place(p, INSTRUCTOR_X)
 	h.ask(2, &"req_advance", [&"test_instructor", &"mage"])
 	check_eq(c.job.id, &"mage", "a Magician now")
-	check_eq(c.base.strength, start + 20, "the STR bought stays")
+	check_eq(c.level, 20, "the level stays")
+	check_eq(c.power(), CharacterStats.power(c.job, 20), "power is the new job's at that level")
 	check_eq(c.essence, 0, "and no essence comes back for it")
 
 func test_switching_needs_you_by_an_instructor_of_that_job() -> void:

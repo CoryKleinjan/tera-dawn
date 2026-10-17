@@ -25,5 +25,4 @@ jobs = Array[StringName]([&"mage"])
 required_level = 10
 stats = SubResource("Resource_1")
 variance = 1
-required_intelligence = 20
 weapon_kind = &"wand"

@@ -1,6 +1,6 @@
 class_name JobDef
 extends Resource
-## A job (class): which stats drive its damage, how HP and MP grow, what a new character
+## A job (class): how its damage, HP, MP and Avoidability grow with level, what a new character
 ## of this job starts with, and how a character advances into it. Add a job by saving a
 ## JobDef in data/jobs/.
 ##
@@ -8,8 +8,7 @@ extends Resource
 ## `instructs` this job) advances a character from `advances_from`.
 ##
 ## A second-tier job is a blend of two first jobs: `advances_from` and `partner`. Either one can
-## advance into it, both their skill books open to it, both their stats drive its damage and
-## it wears both their gear.
+## advance into it, both their skill books open to it and it wears both their gear.
 
 @export var id: StringName
 @export var display_name := ""
@@ -19,18 +18,15 @@ extends Resource
 @export var family: StringName
 ## The job's colour, for the places that show jobs (the hero now wears his job's gear instead).
 @export var tint := Color.WHITE
-## The one stat that drives the job's damage (STR for warriors). No other stat adds to it.
-@export_enum("strength", "dexterity", "intelligence", "luck", "charisma") var primary_stat := "strength"
-## A second stat that drives damage as much as `primary_stat` (a blend's partner stat): the
-## two are added together. Empty: only `primary_stat`.
-@export var secondary_stat: StringName
-## Hit with whichever base stat is highest instead of `primary_stat`, so any build works
-## (the Beginner, who hasn't picked a path yet).
-@export var uses_best_stat := false
 ## The lowest hit as a fraction of the highest (MapleStory's mastery).
 @export_range(0.1, 0.95) var mastery := 0.6
 
 @export_group("Growth")
+## What its damage (and Magic Attack) grows from at level 1; every level adds
+## CharacterStats.POWER_PER_LEVEL (CharacterStats.power).
+@export var base_power := 4
+## Avoidability gained every level (CharacterStats.avoid).
+@export var avoid_growth := 0.0
 @export var base_hp := 50
 ## Max HP gained every level.
 @export var hp_growth := 14
@@ -54,7 +50,6 @@ extends Resource
 @export var advance_gifts: Array[DropEntry] = []
 
 @export_group("New character")
-@export var starting_stats: StatBlock
 ## Worn from the start.
 @export var starting_gear: Array[EquipDef] = []
 ## Put in the inventory at the start; each entry is rolled once (use chance 1).
@@ -64,16 +59,6 @@ extends Resource
 ## The outfit pieces the character creator offers a new character of this job, any kinds of
 ## gear; the creator lets them pick one of each kind (see NewCharacter).
 @export var creator_gear: Array[EquipDef] = []
-
-## The stat behind weapon damage for these `total` stats: `primary_stat`, or with
-## `uses_best_stat` the highest base stat (`primary_stat` wins ties).
-func damage_stat(total: StatBlock) -> StringName:
-	var main := StringName(primary_stat)
-	if uses_best_stat:
-		for stat in StatBlock.BASE:
-			if total.value(stat) > total.value(main):
-				main = stat
-	return main
 
 ## "Apprentice Wand, 30 Blue Potion": the advance gifts, for the message on advancing.
 func gifts_text() -> String:
@@ -102,23 +87,6 @@ static func paths_from(from: StringName) -> Array[JobDef]:
 			out.append(j)
 	out.sort_custom(func(a: JobDef, b: JobDef) -> bool:
 		return a.display_name < b.display_name if a.tier() == b.tier() else a.tier() < b.tier())
-	return out
-
-## The stats that drive damage: `primary_stat`, and `secondary_stat` when it has one.
-func damage_stats() -> Array[StringName]:
-	var out: Array[StringName] = [StringName(primary_stat)]
-	if secondary_stat != &"" and secondary_stat != StringName(primary_stat):
-		out.append(secondary_stat)
-	return out
-
-## What damage is worked out from: `damage_stat` for one-stat jobs, or both stats added
-## together for a blend, so a point in either is worth the same.
-func damage_stat_value(total: StatBlock) -> int:
-	if uses_best_stat:
-		return total.value(damage_stat(total))
-	var out := 0
-	for stat in damage_stats():
-		out += total.value(stat)
 	return out
 
 ## The jobs that can advance into this one: `advances_from`, and `partner` for a blend.

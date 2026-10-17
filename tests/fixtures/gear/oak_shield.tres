@@ -22,6 +22,5 @@ pickup_effect = ExtResource("pickup")
 sell_price = 60
 slot = 10
 required_level = 5
-required_strength = 20
 stats = SubResource("stats")
 variance = 1

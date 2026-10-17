@@ -226,7 +226,6 @@ func _run() -> void:
 		# Guide Sorrel's Magician page, then a Pirate (tinted hero) next to her.
 		await _go(Character.START_MAP)
 		var guide := _npc(world, &"guide_sorrel")
-		ch.base.intelligence = 20
 		_me().dirty_character = true
 		_teleport(world, Vector2(guide.position.x - 50, 620))
 		await _physics(5)
@@ -558,7 +557,6 @@ func _run() -> void:
 			ch.inventory.add(Content.item(id), randi_range(3, 40))
 		ch.inventory.add(Content.item(&"blue_potion"), 12)
 		ch.gear.equip(0)
-		TestCharacters.grant_stat(ch, &"strength", 30)
 		ch.essence += 300
 		ch.inventory.add(Content.item(&"leaf_cap"))
 		ch.gear.equip(_slot_of(&"leaf_cap"))

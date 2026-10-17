@@ -195,8 +195,6 @@ func test_jobs_link_up() -> void:
 		if j.partner != &"":
 			check(Content.jobs.has(j.partner), "%s: partner %s is not a job" % [Scan.where(j), j.partner])
 			check(j.partner != j.advances_from and j.partner != j.id, "%s: partner must be a second, different parent" % Scan.where(j))
-			check(j.secondary_stat in StatBlock.BASE, "%s: a blend's secondary_stat must be a base stat" % Scan.where(j))
-		check(j.primary_stat in StatBlock.BASE, "%s: primary_stat is not a base stat" % Scan.where(j))
 		for i in j.advance_gifts.size():
 			var g := j.advance_gifts[i]
 			if check(g != null, "%s: advance_gifts[%d] is empty" % [Scan.where(j), i]):
@@ -213,7 +211,6 @@ func test_jobs_link_up() -> void:
 	var start: JobDef = Content.jobs.get(Character.START_JOB)
 	if start:
 		check(start.advances_from == &"", "%s: the starting job advances from another" % Scan.where(start))
-		check(start.starting_stats != null, "%s: starting_stats is empty" % Scan.where(start))
 
 func test_starting_gear_can_be_worn_by_a_new_character() -> void:
 	var c := Character.create("Rookie")
@@ -316,21 +313,6 @@ func test_gear_points_at_real_skills_and_jobs() -> void:
 			check(e.weapon_kind != &"", "%s: weapon has no weapon_kind" % w)
 		for f in e.jobs:
 			check(families.has(f), "%s: jobs lists %s, which is no job's family" % [w, f])
-
-func test_scrolls_fit_some_gear() -> void:
-	var slots := {}
-	for i: ItemDef in Content.items.values():
-		if i is EquipDef:
-			slots[(i as EquipDef).slot] = true
-	for i: ItemDef in Content.items.values():
-		var s := i as ScrollDef
-		if s == null:
-			continue
-		check(not s.slots.is_empty(), "%s: slots is empty" % Scan.where(s))
-		check(s.stats != null and not s.stats.nonzero().is_empty(), "%s: stats adds nothing" % Scan.where(s))
-		for k in s.slots:
-			check(k >= 0 and k < EquipDef.SLOT_NAMES.size(), "%s: slots has %d, not an EquipDef.Slot" % [Scan.where(s), k])
-			check(slots.has(k), "%s: slots has %s, which no gear uses" % [Scan.where(s), EquipDef.SLOT_NAMES[k] if k >= 0 and k < EquipDef.SLOT_NAMES.size() else str(k)])
 
 func test_return_scrolls_go_somewhere() -> void:
 	for i: ItemDef in Content.items.values():

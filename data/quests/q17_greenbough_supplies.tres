@@ -1,18 +1,9 @@
-[gd_resource type="Resource" script_class="QuestDef" load_steps=8 format=3]
+[gd_resource type="Resource" script_class="QuestDef" load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
 [ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
 [ext_resource type="Resource" path="res://data/items/etc/bramble_tusk.tres" id="3_bramble_tusk"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
-[ext_resource type="Resource" path="res://data/items/scrolls/scroll_weapon_att_60.tres" id="5_scroll_weapon_att_60"]
-
-[sub_resource type="Resource" id="Resource_2"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("5_scroll_weapon_att_60")
-chance = 1.0
-min_amount = 2
-max_amount = 2
-
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("2_quest_objective")
 kind = 1
@@ -27,8 +18,8 @@ giver = &"greenbough_shop"
 requires = Array[StringName]([&"q16_greenbough_patrol"])
 offer_text = "I need 20 Bramble Tusks for my work. You'll find them in Thornwood, past Mossy Glade."
 progress_text = "20 Bramble Tusks from Thornwood."
-complete_text = "Perfect quality. Here's a scroll I've been saving. Try it on your weapon."
+complete_text = "Perfect quality. Here's something for your trouble."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
 reward_essence = 23500
 reward_shards = 1500
-reward_items = Array[ExtResource("4_drop_entry")]([SubResource("Resource_2")])
+reward_items = Array[ExtResource("4_drop_entry")]([])

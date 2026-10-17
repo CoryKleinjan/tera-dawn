@@ -463,8 +463,6 @@ func pick_up(p: SimPlayer, d: SimDrop) -> bool:
 		return true
 	var found := d.amount
 	if d.item.is_currency:
-		# Charisma finds a few more
-		found = roundi(d.amount * CharacterStats.shard_bonus(ch.stats))
 		ch.shards += found
 		p.dirty_vitals = true
 	elif d.stack:

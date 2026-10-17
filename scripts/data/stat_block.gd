@@ -1,17 +1,17 @@
 class_name StatBlock
 extends Resource
-## A bundle of MapleStory-style stats: the four base stats plus everything gear can add.
-## Used for a character's base stats, an equip's bonuses and the rolled stats of one item.
+## A bundle of the stats gear and skills add (attack, defense, Max HP, speed and the rest;
+## there are no base stats). Used for an equip's bonuses, the rolled stats of one item and a
+## character's totals.
 
 ## Every stat, in the order windows and tooltips list them.
 const FIELDS: Array[StringName] = [
-	&"strength", &"dexterity", &"intelligence", &"luck", &"charisma", &"max_hp", &"max_mp",
+	&"max_hp", &"max_mp",
 	&"attack", &"magic_attack", &"defense", &"magic_defense", &"accuracy", &"avoid",
 	&"speed", &"jump", &"crit", &"attack_speed", &"melee_damage", &"ranged_damage",
 ]
 ## Short names for tooltips and the stats window.
 const LABELS := {
-	&"strength": "STR", &"dexterity": "DEX", &"intelligence": "INT", &"luck": "LUK", &"charisma": "CHA",
 	&"max_hp": "MaxHP", &"max_mp": "MaxMP", &"attack": "Weapon Attack",
 	&"magic_attack": "Magic Attack", &"defense": "Weapon Defense",
 	&"magic_defense": "Magic Defense", &"accuracy": "Accuracy", &"avoid": "Avoidability",
@@ -20,15 +20,6 @@ const LABELS := {
 }
 ## Stats shown as a percent.
 const PERCENT: Array[StringName] = [&"speed", &"jump", &"crit", &"attack_speed", &"melee_damage", &"ranged_damage"]
-## The base stats Ability Points go into. Each job's damage comes from one of them
-## (JobDef.primary_stat), and each also gives something as it grows (CharacterStats).
-const BASE: Array[StringName] = [&"strength", &"dexterity", &"intelligence", &"luck", &"charisma"]
-
-@export var strength := 0
-@export var dexterity := 0
-@export var intelligence := 0
-@export var luck := 0
-@export var charisma := 0
 @export var max_hp := 0
 @export var max_mp := 0
 ## Weapon attack: the main multiplier on physical damage.
