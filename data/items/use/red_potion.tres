@@ -9,12 +9,12 @@
 script = ExtResource("script")
 id = &"red_potion"
 display_name = "Red Potion"
-description = "A sweet red tonic. Restores a little HP."
+description = "A sweet red tonic. Heals 1 heart."
 icon = ExtResource("icon")
 sprite_scale = 0.36
 glow_color = Color(1.000, 0.478, 0.541, 1.0)
 pickup_effect = ExtResource("pickup")
 sell_price = 5
 max_stack = 100
-heal_hp = 50
+heal_hearts = 1
 use_effect = ExtResource("heal")

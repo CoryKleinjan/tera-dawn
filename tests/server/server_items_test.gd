@@ -24,14 +24,14 @@ func test_a_potion_heals_and_is_used_up() -> void:
 	c.health.set_hp(1)
 	var before := c.inventory.count_of(red)
 	h.ask(2, &"req_use_item", [_red_slot()])
-	check_eq(c.health.hp, mini(c.max_hp(), 1 + red.hp_for(c.max_hp())), "healed by the potion's amount")
+	check_eq(c.health.hp, 2, "healed a heart")
 	check_eq(c.inventory.count_of(red), before - 1, "one used")
 	check(p.dirty_character, "character marked to be sent")
 
-func test_healing_stops_at_max_hp() -> void:
-	c.health.set_hp(c.max_hp() - 3)
+func test_healing_stops_at_max_hearts() -> void:
+	c.health.set_hp(c.max_hearts())
 	h.ask(2, &"req_use_item", [_red_slot()])
-	check_eq(c.health.hp, c.max_hp(), "capped")
+	check_eq(c.health.hp, c.max_hearts(), "capped")
 
 func test_a_mana_potion_restores_mp() -> void:
 	var blue: UseDef = Content.item(&"blue_potion")
