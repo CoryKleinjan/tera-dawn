@@ -29,9 +29,17 @@ const STAT_STEP := 5.0
 const SKILL_PRICE := 17.0
 const SKILL_STEP := 3.0
 const PRICE_GROWTH := 2.1
-## Max HP and MP grow by the job's hp_growth / mp_growth for every this many stat points
-## bought (and once more from the start).
+## Stat points a typical player buys for each level (Balance and the test characters), and
+## what an old save's stat points count for when it gets its level (CharacterCodec).
 const GROWTH_POINTS := 5
+## The EXP curve (xp_need): up to JOB_LEVEL a level takes XP_SCALE × level^XP_GROWTH EXP; after
+## it, the Lv JOB_LEVEL amount times (level / JOB_LEVEL)^XP_JOB_GROWTH. Tuned with the pace bot
+## (playtest/pace-run-3.md in the project files) at scale 55: about 1.5-2 hours to Lv 10, then
+## halved so every level needs half the EXP. Quest EXP is set against it; change them together.
+const XP_SCALE := 27.5
+const XP_GROWTH := 3.0
+const JOB_LEVEL := 10
+const XP_JOB_GROWTH := 1.8
 
 ## Lowest and highest hit before skills, crits and monster level: the stats window's
 ## "Damage" line. max = main stat × MAIN_STAT_WEIGHT × weapon attack / 100, with the stat
@@ -90,15 +98,18 @@ static func speed_multiplier(total: StatBlock) -> float:
 static func jump_multiplier(total: StatBlock) -> float:
 	return clampf(1.0 + total.jump / 100.0, 0.5, 1.23)
 
-## How far a character has grown: 1, plus one for every GROWTH_POINTS stat points bought.
-static func growth(bought: int) -> float:
-	return 1.0 + float(maxi(0, bought)) / GROWTH_POINTS
+## EXP needed to go from `level` to the next (see XP_SCALE).
+static func xp_need(level: int) -> int:
+	var lvl := maxi(1, level)
+	if lvl <= JOB_LEVEL:
+		return int(floor(XP_SCALE * pow(lvl, XP_GROWTH)))
+	return int(floor(XP_SCALE * pow(JOB_LEVEL, XP_GROWTH) * pow(float(lvl) / JOB_LEVEL, XP_JOB_GROWTH)))
 
-static func max_hp(job: JobDef, bought: int, total: StatBlock) -> int:
-	return job.base_hp + roundi(growth(bought) * job.hp_growth) + total.max_hp + roundi(total.strength * HP_PER_STR)
+static func max_hp(job: JobDef, level: int, total: StatBlock) -> int:
+	return job.base_hp + maxi(1, level) * job.hp_growth + total.max_hp + roundi(total.strength * HP_PER_STR)
 
-static func max_mp(job: JobDef, bought: int, total: StatBlock) -> int:
-	return job.base_mp + roundi(growth(bought) * job.mp_growth) + total.max_mp + roundi(total.intelligence * MP_PER_INT)
+static func max_mp(job: JobDef, level: int, total: StatBlock) -> int:
+	return job.base_mp + maxi(1, level) * job.mp_growth + total.max_mp + roundi(total.intelligence * MP_PER_INT)
 
 ## Dawn Essence for the next point of a stat that has had `bought` points bought already.
 static func stat_price(bought: int) -> int:

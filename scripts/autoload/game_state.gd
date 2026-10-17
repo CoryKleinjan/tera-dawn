@@ -32,8 +32,12 @@ func apply_character(data: Dictionary) -> void:
 	me.load_dict(data)
 	character_changed.emit()
 
-func apply_vitals(hp: int, mp: int, essence: int, shards: int) -> void:
+func apply_vitals(hp: int, mp: int, xp: int, level: int, essence: int, shards: int) -> void:
+	if level != me.level:
+		me.level = level
+		me.recalc()
 	me.health.set_hp(hp)
+	me.xp = xp
 	me.mp = mp
 	me.essence = essence
 	me.shards = shards

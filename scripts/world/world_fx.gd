@@ -287,6 +287,18 @@ func fly_essence(from: Vector2, amount: int) -> void:
 			show_gain(&"essence", amount)
 		mote.queue_free())
 
+## Plays over the music when you level up (Sound.jingle id).
+const LEVEL_UP_JINGLE := &"jingle_levelup"
+
+## The level-up burst around whoever levelled up, and the jingle when it's you.
+func show_level_up(peer: int, _level: int) -> void:
+	var who := world.actor(peer)
+	if who == null:
+		return
+	add_effect(Content.effect(EffectDef.LEVEL_UP), who.position, 1, who)
+	if who == world.player:
+		Sound.jingle(LEVEL_UP_JINGLE)
+
 ## A small "+9 Dawn Essence" or "+8 Dawnshards" rising over your hero; gains that arrive
 ## together stack upwards instead of covering each other.
 func show_gain(kind: StringName, amount: int) -> void:

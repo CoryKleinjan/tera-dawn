@@ -16,8 +16,8 @@ a **StatBlock** on top. `Character.stats` is the total. From it, `CharacterStats
   (`shop_discount`, capped at `MAX_DISCOUNT`, used by `ShopEntry.cost_for`) and more
   Dawnshards picked up (`shard_bonus`). Weapon Defense lowers the damage, Speed and Jump scale
   movement.
-- Max HP and MP: the job's base plus its `hp_growth`/`mp_growth` times `CharacterStats.growth`
-  (one step per `GROWTH_POINTS` stat points bought) plus gear, plus STR and INT.
+- Max HP and MP: the job's base plus its `hp_growth`/`mp_growth` times the level, plus gear,
+  plus STR and INT.
 - Attack Speed (%) shortens cooldowns and swings (`attack_ticks`); Melee and Ranged Damage (%)
   raise hits with and without a projectile (`damage_bonus`).
 - When these rules change, `CharacterCodec.STAT_RULES` goes up and older saves get every
@@ -25,13 +25,19 @@ a **StatBlock** on top. `Character.stats` is the total. From it, `CharacterStats
 
 `Combat` uses those numbers, so all balance lives in `character_stats.gd` and `combat.gd`.
 
-Dawn Essence (`Character.essence`) replaces levels and EXP: monsters (`MonsterDef.essence`,
-flown to the killer by `TDWorldFx.fly_essence`) and quests (`QuestDef.reward_essence`) give
-it, and it buys stat points (`AbilityPoints.buy`, `CharacterStats.stat_price`: each point in a
-stat costs more than the last) and skill levels (`SkillBook.learn`,
-`CharacterStats.skill_price`: each skill level bought makes the next dearer). Fainting loses
-10% of what's unspent (`Combat.faint_penalty`). Saves from before essence turn their EXP and
-unspent points into essence (`CharacterCodec._essence_from_levels`).
+Levels (`Character.level`, `xp`, up to `MAX_LEVEL`) come from EXP: `TDServer.give_xp` adds a
+kill's essence (`SimMob.essence`) or a quest's `reward_essence` as EXP, `Character.gain_xp`
+levels up on `CharacterStats.xp_need` and refills HP and MP, and `ev_level_up` plays the
+`level_up` effect and jingle (`TDWorldFx.show_level_up`). Fainting loses 10% of the EXP toward
+the next level (`Combat.faint_penalty`).
+
+Dawn Essence (`Character.essence`): monsters (`MonsterDef.essence`, flown to the killer by
+`TDWorldFx.fly_essence`) and quests (`QuestDef.reward_essence`) give it, and it buys stat
+points (`AbilityPoints.buy`, `CharacterStats.stat_price`: each point in a stat costs more than
+the last) and skill levels (`SkillBook.learn`, `CharacterStats.skill_price`: each skill level
+bought makes the next dearer). Saves from before essence keep their level and EXP and turn
+unspent points into essence (`CharacterCodec._essence_from_points`); saves from the days
+without levels get a level per `GROWTH_POINTS` stat points bought.
 
 There are four inventory tabs, and the class of the item decides which one it goes in:
 
