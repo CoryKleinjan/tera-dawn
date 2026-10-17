@@ -27,7 +27,8 @@ const TAB_NAMES := ["Equip", "Use", "Etc", "Setup"]
 @export var max_stack := 200
 ## What a shop pays for one, in Dawnshards.
 @export var sell_price := 1
-## Only drops while a quest wants it, and can't be dropped or sold.
+## Can't be dropped, sold, stored or traded: a quest piece, which only drops while its quest
+## wants it, or a gated door's key (PortalDef.key), which a chest holds.
 @export var quest_item := false
 
 ## Which inventory tab this item goes in.

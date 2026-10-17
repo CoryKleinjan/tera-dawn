@@ -2,7 +2,8 @@ extends TestCase
 ## Secrets on the server: portals that land on a raised platform, shortcuts that stay shut
 ## until found from their open end, chests and walls that break open after enough blows,
 ## once per character, spilling their loot for whoever broke them, fake walls that open when
-## walked into, and secret ledges found by standing on them.
+## walked into, secret ledges found by standing on them, and gated doors that open with a
+## lever or a key.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
@@ -14,11 +15,16 @@ const WALL_X := 1000.0
 const FAKE_X := 1300.0
 const SECRET_X := 240.0
 const SECRET_Y := 470.0
+const GATE_X := 1550.0
+const LEVER_X := 700.0
+const LOCK_X := 150.0
+const TOWN_GATE_X := 1000.0
 
 var h: ServerHarness
 var p: SimPlayer
 var c: Character
 var potion: ItemDef
+var key: ItemDef
 
 func before_each() -> void:
 	h = ServerHarness.new()
@@ -39,11 +45,23 @@ func before_each() -> void:
 	var ledge := ServerHarness.platform(SECRET_X - 40.0, SECRET_Y, 160.0)
 	ledge.secret = true
 	field.platforms.append(ledge)
+	# a gated door into the town with its lever, and a locked one that takes a key
+	key = ItemDef.new()
+	key.id = &"test_key"
+	key.display_name = "Test Key"
+	key.quest_item = true
+	field.portals.append(_gated(GATE_X, ServerHarness.TOWN, TOWN_GATE_X + 100.0, &"test_gate"))
+	var lever := _breakable(&"test_gate", LEVER_X, 1, [])
+	lever.height = 80.0
+	field.breakables.append(lever)
+	field.portals.append(_gated(LOCK_X, ServerHarness.TOWN, 800.0, &"test_lock", key))
 	h.add_map(field)
 	# the town: the far end of the drop, up to the field's ledge, and a plain way back
 	var town := ServerHarness.town_def()
 	town.portals.append(_portal(FAR_X, ServerHarness.FIELD, 1600.0, 1, &"test_drop"))
 	town.portals.append(_portal(200.0, ServerHarness.FIELD, 300.0))
+	# the gated way's other end, behind the same gate
+	town.portals.append(_gated(TOWN_GATE_X, ServerHarness.FIELD, GATE_X - 100.0, &"test_gate"))
 	h.add_map(town)
 	p = h.join(2, "Ann", ServerHarness.FIELD, 300.0)
 	c = p.character
@@ -59,6 +77,12 @@ func _portal(x: float, to: StringName, to_x: float, to_platform := 0, shortcut :
 	d.target_platform = to_platform
 	d.shortcut = shortcut
 	d.opens_shortcut = opens
+	return d
+
+func _gated(x: float, to: StringName, to_x: float, gate: StringName, opener: ItemDef = null) -> PortalDef:
+	var d := _portal(x, to, to_x)
+	d.gate = gate
+	d.key = opener
 	return d
 
 func _breakable(id: StringName, x: float, hits: int, loot: Array) -> BreakableDef:
@@ -216,6 +240,61 @@ func test_standing_on_a_secret_ledge_finds_it() -> void:
 	_walk(p, SECRET_X + 20.0, SECRET_Y)
 	check(c.found_secret(ledge), "found by standing on it")
 	check(p.dirty_character, "the client hears of it")
+
+# ---------- gated doors ----------
+
+func test_a_gated_door_shows_behind_its_shut_gate() -> void:
+	var d: PortalDef = p.map.def.portals[3]
+	check(d.shows_to(c), "it shows")
+	check(not d.open_to(c), "but takes nobody through")
+
+func test_a_gated_door_stays_shut_until_its_lever_is_hit() -> void:
+	_portal_from(p, GATE_X)
+	check_eq(p.map.def.id, ServerHarness.FIELD, "the gate keeps you out")
+	check(h.told(2, "The gate is shut. A lever opens it."), "told")
+	h.place(p, LEVER_X - 40.0)
+	_hit(p)
+	check(c.found_secret(&"test_gate"), "the lever opens the gate for good")
+	check_eq(h.last(2, &"ev_struck"), [3, true], "the lever swings over")
+	check(h.told(2, "The gate opened."), "told")
+	_portal_from(p, GATE_X)
+	check_eq(p.map.def.id, ServerHarness.TOWN, "through the gate")
+
+func test_a_lever_swings_over_only_once() -> void:
+	c.find_secret(&"test_gate")
+	h.place(p, LEVER_X - 40.0)
+	_hit(p)
+	check_eq(h.count(2, &"ev_struck"), 0, "nothing to hit")
+
+func test_both_ends_of_a_gated_way_open_together() -> void:
+	h.move_to(p, ServerHarness.TOWN, 600.0)
+	_portal_from(p, TOWN_GATE_X)
+	check_eq(p.map.def.id, ServerHarness.TOWN, "shut from the other end too")
+	c.find_secret(&"test_gate")
+	_portal_from(p, TOWN_GATE_X)
+	check_eq(p.map.def.id, ServerHarness.FIELD, "and open once its lever is hit")
+
+func test_a_locked_gate_opens_with_its_key_and_uses_it_up() -> void:
+	_portal_from(p, LOCK_X)
+	check(h.told(2, "It's locked. It takes the Test Key."), "told what it takes")
+	check(not c.found_secret(&"test_lock"), "still locked")
+	c.inventory.add(key, 1)
+	h.clear()
+	_portal_from(p, LOCK_X)
+	check(c.found_secret(&"test_lock"), "unlocked for good")
+	check_eq(c.inventory.count_of(key), 0, "the key is used up")
+	check(h.told(2, "You unlocked the gate with the Test Key."), "told")
+	check_eq(p.map.def.id, ServerHarness.FIELD, "unlocking doesn't take you through")
+	_portal_from(p, LOCK_X)
+	check_eq(p.map.def.id, ServerHarness.TOWN, "through the open gate")
+
+func test_gates_open_for_each_player_on_their_own() -> void:
+	var bob := h.join(3, "Bob", ServerHarness.FIELD, LEVER_X - 40.0)
+	h.place(p, LEVER_X - 40.0)
+	_hit(p)
+	check(c.found_secret(&"test_gate") and not bob.character.found_secret(&"test_gate"), "only Ann's gate is open")
+	_portal_from(bob, GATE_X)
+	check_eq(bob.map.def.id, ServerHarness.FIELD, "Bob's stays shut")
 
 func test_secrets_are_saved_with_the_character() -> void:
 	c.find_secret(&"test_chest")

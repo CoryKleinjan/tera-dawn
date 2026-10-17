@@ -478,11 +478,16 @@ func _meets_monster(skill: SkillDef, aim: Hitbox.Aim) -> bool:
 			return true
 	return false
 
-## Up on the ground: enter a portal, or talk to the NPC in front of you.
+## Up on the ground: enter a portal, try a gated one's gate (the server opens it with its key,
+## or says it's shut), or talk to the NPC in front of you.
 func _interact() -> bool:
 	if not (_tapped("move_up") and on_ground):
 		return false
 	var portal := world.layout.portal_at(position)
+	if portal and portal.shows_to(Game.me) and portal.gated_for(Game.me):
+		_report()
+		Net.ask(&"req_portal")
+		return true
 	if portal and portal.open_to(Game.me):
 		_report()
 		# fade out before asking: a local server answers at once, and the next map's

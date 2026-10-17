@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=172 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=176 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -30,6 +30,9 @@
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="33_backdrop_layer_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/greenbough_fields/deep_canopy.png" id="34_deep_canopy"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/root_wall.png" id="35_root_wall"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/gate.png" id="36_gate"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/lever.png" id="37_lever"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/lever_pulled.png" id="38_lever_pulled"]
 
 [sub_resource type="Resource" id="Prop_0"]
 script = ExtResource("20_prop_placement")
@@ -620,7 +623,8 @@ x = 3050.0
 target_map = &"mossy_glade"
 target_x = 240.0
 target_platform = 3
-opens_shortcut = &"greenbough_trunk"
+gate = &"greenbough_trunk"
+gate_picture = ExtResource("36_gate")
 
 [sub_resource type="Resource" id="Portal_3"]
 script = ExtResource("8_portal_def")
@@ -943,6 +947,16 @@ height = 48.0
 loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_2_0"), SubResource("Loot_2_1"), SubResource("Loot_2_2")])
 card = ExtResource("10_barkcap")
 
+[sub_resource type="Resource" id="Lever_greenbough_trunk"]
+script = ExtResource("12_breakable_def")
+id = &"greenbough_trunk"
+x = 2700.0
+platform = 0
+hits = 1
+whole = ExtResource("37_lever")
+broken = ExtResource("38_lever_pulled")
+height = 80.0
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"deep_canopy"
@@ -955,7 +969,7 @@ ground_y = 2720
 start_x = 1590.0
 platforms = Array[ExtResource("3_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9"), SubResource("Platform_10"), SubResource("Platform_11"), SubResource("Platform_12"), SubResource("Platform_13"), SubResource("Platform_14"), SubResource("Platform_15"), SubResource("Platform_16"), SubResource("Platform_17"), SubResource("Platform_18"), SubResource("Platform_19"), SubResource("Platform_20"), SubResource("Platform_21"), SubResource("Platform_22"), SubResource("Platform_23"), SubResource("Platform_24"), SubResource("Platform_25"), SubResource("Platform_26"), SubResource("Platform_27"), SubResource("Platform_28"), SubResource("Platform_29"), SubResource("Platform_30"), SubResource("Platform_31"), SubResource("Platform_32"), SubResource("Platform_33"), SubResource("Platform_34"), SubResource("Platform_35"), SubResource("Platform_36"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3"), SubResource("Step_4"), SubResource("Step_5"), SubResource("Step_6"), SubResource("Step_7"), SubResource("Step_8"), SubResource("Step_9"), SubResource("Step_10"), SubResource("Step_11"), SubResource("Step_12"), SubResource("Step_13"), SubResource("Step_14"), SubResource("Step_15"), SubResource("Step_16"), SubResource("Step_17"), SubResource("Step_18"), SubResource("Step_19"), SubResource("Step_20"), SubResource("Step_21"), SubResource("Step_22"), SubResource("Step_23"), SubResource("Step_24"), SubResource("Step_25"), SubResource("Step_26"), SubResource("Step_27"), SubResource("Step_28"), SubResource("Step_29"), SubResource("Step_30"), SubResource("Step_31"), SubResource("Step_32"), SubResource("Step_33"), SubResource("Step_34"), SubResource("Step_35"), SubResource("Step_36"), SubResource("Step_37"), SubResource("Step_38"), SubResource("Step_39"), SubResource("Step_40"), SubResource("Step_41"), SubResource("Step_42"), SubResource("Step_43"), SubResource("Step_44"), SubResource("Step_45"), SubResource("Step_46"), SubResource("Step_47")])
 portals = Array[ExtResource("8_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1"), SubResource("Portal_2"), SubResource("Portal_3")])
-breakables = Array[ExtResource("12_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1"), SubResource("Breakable_2")])
+breakables = Array[ExtResource("12_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1"), SubResource("Breakable_2"), SubResource("Lever_greenbough_trunk")])
 spawns = Array[ExtResource("9_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13"), SubResource("Spawn_14"), SubResource("Spawn_15"), SubResource("Spawn_16"), SubResource("Spawn_17"), SubResource("Spawn_18"), SubResource("Spawn_19"), SubResource("Spawn_20"), SubResource("Spawn_21"), SubResource("Spawn_22"), SubResource("Spawn_23"), SubResource("Spawn_24"), SubResource("Spawn_25"), SubResource("Spawn_26"), SubResource("Spawn_27"), SubResource("Spawn_28"), SubResource("Spawn_29"), SubResource("Spawn_30"), SubResource("Spawn_31"), SubResource("Spawn_32"), SubResource("Spawn_33"), SubResource("Spawn_34"), SubResource("Spawn_35"), SubResource("Spawn_36"), SubResource("Spawn_37"), SubResource("Spawn_38")])
 props = Array[ExtResource("20_prop_placement")]([SubResource("Prop_0"), SubResource("Prop_1"), SubResource("Prop_2"), SubResource("Prop_3")])
 region = &"greenbough"

@@ -123,8 +123,10 @@ Lumewood. Towering trees and rope bridges; lively, airy, hunter's forest.
 Giant oak trunks, broad leaf canopies, planks, rope bridges and ladders, moss and bark. Monsters
 are plant and woodland creatures. Fields: one painted backdrop picture each, in its own colours
 below; earth ledges with one grassy edge over plain dark earth; dark oak leaves framing the top
-corners; a hollow trunk at the trunk shortcut, a painted chest on each secret ledge and a wall of
-roots over each hidden way (breakable or fake). The zone fits together like Hollow Knight's rooms:
+corners; a hollow trunk at the trunk gate, a painted chest on each secret ledge and a wall of
+roots over each hidden way (breakable or fake); gates of weathered oak poles bound with rope and
+mossy iron over gated doors, levers on mossy stone blocks, and a bronze key with a leaf bow. The
+zone fits together like Hollow Knight's rooms:
 the village and its two trails across the middle, the canopy rooms above, caves and the Rootway
 below, Elder's Root down the far west side to the boss.
 
@@ -149,9 +151,9 @@ thatch and antler trim.
 | Canopy Walk | Secret | – | Deep Canopy's look: a long hidden path along the treetops | Seedwing, Barkcap |
 | Thorn Thicket | Secret | – | Thornwood's look: a tangled pocket behind a bramble wall | Bramble Boar, Acorn Sentry |
 | Wayside Cave | Secret | – | Bough Trail's warm light, under the trail through a fake wall | Thornling, Bramble Boar |
-| Whisper Pool | Secret | – | Whispering Grove's mint mist, under the grove through a fake wall | Seedwing, Thornling |
-| Rootway | Secret | – | Elder's Root's gold glow: a long tunnel from the roots back to Wayside Cave | Acorn Sentry, Barkcap |
-| Oak Crown | Secret | – | Old Oak Heights' look: the top of the old oak, up a hidden run of ledges | Grove Wisp, Barkcap |
+| Whisper Pool | Secret | – | Whispering Grove's mint mist, under the grove through a fake wall and a gate whose lever is at the top of the grove | Seedwing, Thornling |
+| Rootway | Secret | – | Elder's Root's gold glow: a long tunnel from the roots back to Wayside Cave, gated until its lever at the bottom of Elder's Root is pulled | Acorn Sentry, Barkcap |
+| Oak Crown | Secret | – | Old Oak Heights' look: the top of the old oak, up a hidden run of ledges and through a locked gate (its key is in a chest by Elder's Root's boss door) | Grove Wisp, Barkcap |
 
 ## Lumewood
 

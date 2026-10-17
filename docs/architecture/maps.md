@@ -72,6 +72,18 @@ the same way, so put it where the main way never crosses, at the end of a side l
 looking like the room's wall. Standing on a secret ledge finds it too (`MapDef.ledge_secret`),
 so the zone map can show it.
 
+A **gated door** (`PortalDef.gate`, an id) shows from the start behind its shut gate
+(`gate_picture`, drawn just in front of the portal at `TDStage.Z_GATE`) and takes nobody
+through until the character has opened that gate, once for good (`Character.secrets`). A
+**lever** is a breakable whose id is the gate's (one blow; `whole` is the lever up, `broken`
+swung over): hitting it opens every door with that `gate`, so both ends of a gated way share
+the id. A door with a `key` (an Etc item that is a `quest_item`, so it can't be sold or
+dropped) is a lock instead: Up at it uses the key up and opens it (`ServerTravel._shut_gate`);
+keys come from chests. A gated door counts as a shortcut (`is_shortcut`): it brings no map
+nearer a town and the zone map draws it once it's open. `content_world_test` checks every gate
+has a lever or a key that can be found. Gates guard side rooms and shortcuts, never the main
+way.
+
 A `solo` map gives each player a copy of their own, started fresh every time they come in
 (`TDServer.map_instance` keys it by peer; `_off_map` drops it). It isn't on the world map: you
 show in its `return_map` town (`MapDef.outside`). With `tear_platform` set, its tear stays

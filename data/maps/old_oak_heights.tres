@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=157 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=159 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -29,6 +29,8 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/greenbough_fields_side.png" id="32_ground_side"]
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="33_backdrop_layer_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/greenbough_fields/old_oak_heights.png" id="34_old_oak_heights"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/gate_locked.png" id="35_gate_locked"]
+[ext_resource type="Resource" path="res://data/items/etc/oak_crown_key.tres" id="36_oak_crown_key"]
 
 [sub_resource type="Resource" id="Prop_0"]
 script = ExtResource("20_prop_placement")
@@ -564,6 +566,9 @@ x = 1900.0
 platform = 25
 target_map = &"oak_crown"
 target_x = 1390.0
+gate = &"oak_crown_gate"
+gate_picture = ExtResource("35_gate_locked")
+key = ExtResource("36_oak_crown_key")
 
 [sub_resource type="Resource" id="Spawn_0"]
 script = ExtResource("9_spawn_def")

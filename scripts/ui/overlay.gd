@@ -128,7 +128,7 @@ func _draw_minimap(mm: Rect2) -> void:
 		draw_rect(r, MINIMAP_LAND)
 		draw_rect(Rect2(r.position + Vector2(0, 2), Vector2(r.size.x, 1)), Color(0.35, 0.24, 0.14, 0.9))
 	for p in world.map.portals:
-		if not p.open_to(Game.me):
+		if not p.shows_to(Game.me):
 			continue
 		var at := inner.position + Vector2(p.x * sx, world.platforms[p.platform].y * sy - 5)
 		if p.door:

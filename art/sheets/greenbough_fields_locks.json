@@ -1,0 +1,56 @@
+{
+  "source": "art/source/greenbough_fields_locks.png",
+  "region": [
+    0,
+    180,
+    2400,
+    1560
+  ],
+  "art_px": 8.7,
+  "out_dir": "assets/sprites/tiles/greenbough_fields",
+  "label_band": 0,
+  "inset": 0,
+  "keep": "largest",
+  "flat_bottom": true,
+  "grid": {
+    "rows": [
+      0,
+      1380
+    ],
+    "cols": [
+      0,
+      690,
+      1350,
+      1875,
+      2400
+    ]
+  },
+  "cells": [
+    [
+      "gate",
+      "gate_locked",
+      "lever",
+      "lever_pulled"
+    ]
+  ],
+  "overrides": {
+    "lever": {
+      "crop": [
+        0,
+        0,
+        525,
+        650
+      ],
+      "art_px": 8.2
+    },
+    "lever_pulled": {
+      "crop": [
+        0,
+        0,
+        525,
+        650
+      ],
+      "art_px": 8.2
+    }
+  }
+}

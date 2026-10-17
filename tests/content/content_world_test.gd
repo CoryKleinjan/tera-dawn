@@ -261,6 +261,13 @@ func _sources() -> Dictionary:
 		for o in q.objectives:
 			if o and o.kind == QuestObjective.Kind.COLLECT and o.drop_from and o.item and spawned.has(o.drop_from.id):
 				out[o.item.id] = "quest drop from %s" % o.drop_from.id
+	for m: MapDef in Content.maps.values():
+		for b in m.breakables:
+			if b == null:
+				continue
+			for d in b.loot:
+				if d and d.item:
+					out[d.item.id] = "in a chest on %s" % m.id
 	for j: JobDef in Content.jobs.values():
 		for g in j.advance_gifts + j.starting_items:
 			if g and g.item:
@@ -287,6 +294,27 @@ func test_known_unobtainable_list_is_current() -> void:
 	for id in KNOWN_UNOBTAINABLE:
 		check(Content.items.has(id), "KNOWN_UNOBTAINABLE lists %s, which is not an item" % id)
 		check(not sources.has(id), "%s is %s now: take it off KNOWN_UNOBTAINABLE" % [id, sources.get(id)])
+
+## Every gated door can be opened: a lever (a breakable with the gate's id) stands somewhere,
+## or its key can be found and can't be sold or dropped.
+func test_every_gate_can_be_opened() -> void:
+	var levers := {}
+	for m: MapDef in Content.maps.values():
+		for b in m.breakables:
+			if b:
+				levers[b.id] = m.id
+	var sources := _sources()
+	for m: MapDef in Content.maps.values():
+		for i in m.portals.size():
+			var d := m.portals[i]
+			if d == null or d.gate == &"":
+				continue
+			var w := "%s: portals[%d]" % [Scan.where(m), i]
+			if d.key:
+				check(sources.has(d.key.id), "%s takes %s, which can't be got" % [w, d.key.id])
+				check(d.key.quest_item, "%s: its key %s isn't a quest_item, so it could be sold or dropped" % [w, d.key.id])
+			else:
+				check(levers.has(d.gate), "%s: no lever (a breakable with id %s) opens its gate" % [w, d.gate])
 
 func test_every_quest_item_can_be_found() -> void:
 	var sources := _sources()
