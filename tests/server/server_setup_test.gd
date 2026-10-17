@@ -20,9 +20,14 @@ func before_each() -> void:
 func after_each() -> void:
 	h.close()
 
-## Steps once so that the map's next tick is a regeneration tick.
+## Steps once so that the map's next tick is an MP regeneration tick.
 func _regen_tick() -> void:
-	p.map.tick = 119
+	p.map.tick = SimPlayer.REGEN_EVERY - 1
+	h.step(1)
+
+## Steps once so that the map's next tick is a heart regeneration tick (standing).
+func _heart_tick() -> void:
+	p.map.tick = SimPlayer.HEART_REGEN_EVERY - 1
 	h.step(1)
 
 # ---------- sitting ----------
@@ -34,21 +39,30 @@ func test_sitting_down() -> void:
 	check_eq(int(c.counters.get(Counters.SAT, 0)), 1, "counted")
 
 func test_sitting_doubles_regeneration() -> void:
-	c.health.set_hp(10)
 	c.mp = 0
 	_regen_tick()
-	check_eq(c.health.hp, 12, "2 HP standing, before any stats are bought")
-	check_eq(c.mp, 2, "2 MP standing, before any stats are bought")
+	check_eq(c.mp, 2, "2 MP standing")
 	h.ask(2, &"req_sit", [true])
 	_regen_tick()
-	check_eq(c.health.hp, 12 + 4, "4 HP sitting")
 	check_eq(c.mp, 2 + 4, "4 MP sitting")
 
+func test_a_heart_comes_back_on_its_own() -> void:
+	c.health.set_hp(1)
+	_heart_tick()
+	check_eq(c.health.hp, 2, "a heart back standing")
+	h.ask(2, &"req_sit", [true])
+	p.map.tick = SimPlayer.HEART_REGEN_EVERY / 2 - 1
+	h.step(1)
+	check_eq(c.health.hp, 3, "twice as often sitting")
+
 func test_no_regeneration_between_regen_ticks() -> void:
-	c.health.set_hp(10)
+	c.health.set_hp(1)
+	c.mp = 0
 	p.map.tick = 0
-	h.step(119)
-	check_eq(c.health.hp, 10, "nothing until tick 120")
+	h.step(SimPlayer.REGEN_EVERY - 1)
+	check_eq(c.mp, 0, "no MP until its tick")
+	h.step(SimPlayer.HEART_REGEN_EVERY - SimPlayer.REGEN_EVERY)
+	check_eq(c.health.hp, 1, "no heart until its tick")
 
 func test_getting_up() -> void:
 	h.ask(2, &"req_sit", [true])

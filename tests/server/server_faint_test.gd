@@ -1,6 +1,6 @@
 extends TestCase
-## Fainting: a monster's blow that takes the last HP, the EXP it costs, lying still, and
-## waking up in town with half HP and MP and a moment of invincibility.
+## Fainting: a monster's blow that takes the last heart, the EXP it costs, lying still, and
+## waking up in town with half the hearts and MP and a moment of invincibility.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
@@ -18,6 +18,7 @@ func before_each() -> void:
 	p = h.join(2, "Ann", ServerHarness.FIELD, 300.0)
 	c = p.character
 	ServerHarness.no_dodge(c) # the blow can't be dodged
+	c.health.set_hp(2) # and costs two hearts: the last ones
 	c.essence = 15
 	c.xp = 15
 

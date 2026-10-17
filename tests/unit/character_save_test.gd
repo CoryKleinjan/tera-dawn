@@ -64,7 +64,7 @@ func _rich() -> Character:
 	c.quests.accept(fx.quest(&"t_quest", [q]))
 	c.quests.record_kill(mob)
 	c.recalc()
-	c.health.set_hp(50)
+	c.health.set_hp(2)
 	c.mp = 17
 	return c
 
@@ -84,7 +84,7 @@ func test_round_trip_basics() -> void:
 	check(b.job == c.job, "job")
 	check_eq([b.level, b.xp], [12, 40], "level and EXP")
 	check_eq(b.power(), c.power(), "power")
-	check_eq(b.health.hp, 50, "HP")
+	check_eq(b.health.hp, 2, "hearts")
 	check_eq(b.mp, 17, "MP")
 
 func test_round_trip_gear_keeps_rolled_stats() -> void:

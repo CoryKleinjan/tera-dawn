@@ -97,13 +97,13 @@ func test_level_up_raises_max_and_refills() -> void:
 	check_eq(c.max_hearts(), 4, "a heart more at level 20")
 	check_eq(c.health.max_hp, 4, "health max follows")
 	check_eq(c.health.hp, 4, "refilled")
-	check_eq(c.mp, 30, "MP refilled to 20 + 2 × 5")
+	check_eq(c.mp, c.max_mp(), "MP refilled")
 
 func test_no_level_means_no_refill() -> void:
 	var c := fx.character()
-	c.health.damage(30)
+	c.health.damage(1)
 	c.gain_xp(5)
-	check_eq(c.health.hp, 30, "still hurt")
+	check_eq(c.health.hp, 2, "still hurt")
 
 # ---------- HP, MP and recalc ----------
 
@@ -119,14 +119,14 @@ func test_spend_and_restore_mp() -> void:
 	c.restore_mp(-100)
 	check_eq(c.mp, 0, "never negative")
 
-func test_recalc_clamps_hp_and_mp_when_gear_comes_off() -> void:
+func test_recalc_clamps_hearts_and_mp_when_gear_comes_off() -> void:
 	var c := fx.character()
-	c.equipment.put(&"hat", ItemStack.exact(fx.equip(&"t_hat", EquipDef.Slot.HAT, {"max_hp": 100, "max_mp": 50})))
+	c.equipment.put(&"hat", ItemStack.exact(fx.equip(&"t_hat", EquipDef.Slot.HAT, {"heart_pieces": 8, "max_mp": 50})))
 	c.refill()
-	check_eq(c.health.hp, 160, "full with gear")
+	check_eq(c.health.hp, 5, "full with gear")
 	check_eq(c.mp, 75, "full MP with gear")
 	c.equipment.take(&"hat")
-	check_eq(c.health.hp, 60, "HP clamped")
+	check_eq(c.health.hp, 3, "hearts clamped")
 	check_eq(c.mp, 25, "MP clamped")
 
 func test_recalc_emits_stats_changed() -> void:
