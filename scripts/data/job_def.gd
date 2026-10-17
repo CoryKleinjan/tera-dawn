@@ -32,10 +32,10 @@ extends Resource
 
 @export_group("Growth")
 @export var base_hp := 50
-## Max HP gained for every CharacterStats.GROWTH_POINTS stat points bought with Dawn Essence.
+## Max HP gained every level.
 @export var hp_growth := 14
 @export var base_mp := 20
-## Max MP gained for every CharacterStats.GROWTH_POINTS stat points bought.
+## Max MP gained every level.
 @export var mp_growth := 6
 
 @export_group("Advancement")

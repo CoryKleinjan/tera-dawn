@@ -17,9 +17,9 @@ const SHIPPED := [
 	{"id": "slayer", "steam": "ACH_SLAYER", "title": "Slayer", "text": "Defeat 5,000 monsters.", "kind": "kills", "goal": 5000},
 	{"id": "boss_breaker", "steam": "ACH_BOSS_BREAKER", "title": "Boss Breaker", "text": "Defeat a boss.", "kind": "bosses", "goal": 1},
 	{"id": "boss_hunter", "steam": "ACH_BOSS_HUNTER", "title": "Boss Hunter", "text": "Defeat 25 bosses.", "kind": "bosses", "goal": 25},
-	{"id": "level_5", "steam": "REACH_LEVEL_5", "title": "Growing Up", "text": "Buy 20 stat points.", "kind": "stats", "goal": 20},
-	{"id": "level_10", "steam": "ACH_LEVEL_10", "title": "Finding Your Feet", "text": "Buy 45 stat points.", "kind": "stats", "goal": 45},
-	{"id": "level_30", "steam": "ACH_LEVEL_30", "title": "Seasoned", "text": "Buy 145 stat points.", "kind": "stats", "goal": 145},
+	{"id": "level_5", "steam": "REACH_LEVEL_5", "title": "Growing Up", "text": "Reach level 5.", "kind": "level", "goal": 5},
+	{"id": "level_10", "steam": "ACH_LEVEL_10", "title": "Finding Your Feet", "text": "Reach level 10.", "kind": "level", "goal": 10},
+	{"id": "level_30", "steam": "ACH_LEVEL_30", "title": "Seasoned", "text": "Reach level 30.", "kind": "level", "goal": 30},
 	{"id": "level_50", "steam": "ACH_LEVEL_50", "title": "Hero of Tera", "text": "Defeat every boss in Tera.", "kind": "boss_kinds", "goal": 8},
 	{"id": "first_job", "steam": "ACH_FIRST_JOB", "title": "A Calling", "text": "Take up a job.", "kind": "job", "goal": 1},
 	{"id": "helper", "steam": "ACH_HELPER", "title": "Helping Hand", "text": "Finish 10 quests.", "kind": "quests", "goal": 10},
@@ -142,9 +142,8 @@ func test_goals_of_one_kind_climb() -> void:
 
 func test_goals_are_reachable() -> void:
 	for a in Achievements.all():
-		if a.kind == "stats":
-			# no more than a player at the top of the game's content so far has bought
-			check(a.goal <= TestCharacters.STAT_POINTS, "achievement %s: buy %d stat points, but the content so far is for %d" % [a.id, a.goal, TestCharacters.STAT_POINTS])
+		if a.kind == "level":
+			check(a.goal <= Character.MAX_LEVEL, "achievement %s: level %d, but the cap is %d" % [a.id, a.goal, Character.MAX_LEVEL])
 		if a.kind == "maps":
 			check(a.goal <= Content.maps.size(), "achievement %s: visit %d maps, but there are %d" % [a.id, a.goal, Content.maps.size()])
 		if a.kind == "pages":

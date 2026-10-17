@@ -82,12 +82,15 @@ update this page when one changes. Each zone's own look and music are in
 
 ## Jobs, stats and skills
 
-- There are no levels anywhere. Monsters drop Dawn Essence when they die and it flies to the hero
-  (quests pay it too). It is spent anywhere, in the stats window on stat points and in the skill
-  window on skill levels; each point in a stat costs more than the last one in that stat, and
-  each skill level more than the last skill level bought. Every stat point bought also adds a
-  little Max HP and MP. Fainting loses 10% of the unspent essence, with no way to win it back.
-  The HUD and menus call it "Dawn Essence".
+- The hero has a level (1 to 100, Cory Oct 17). Monsters give EXP equal to the Dawn Essence they
+  drop, and quests give EXP equal to their essence reward, on the old MapleStory-style EXP curve.
+  Each level raises Max HP and MP by the job's growth and refills them, with a burst, a "LEVEL UP!"
+  ribbon and a jingle. The HUD shows a level badge and HP, MP and EXP bars. Fainting loses 10% of
+  the EXP toward the next level (never a level); essence is safe.
+- Monsters also drop Dawn Essence when they die and it flies to the hero (quests pay it too). It
+  is spent anywhere, in the stats window on stat points and in the skill window on skill levels;
+  each point in a stat costs more than the last one in that stat, and each skill level more than
+  the last skill level bought. Menus call it "Dawn Essence".
 - Each first job has one stat that drives its damage, and no other stat adds to it: Warrior STR,
   Magician INT, Thief LUK, Archer DEX, Pirate CHA (Charisma). Gear asks only for the job's own
   stat; Auto spends essence on that stat.
@@ -253,9 +256,10 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   Cory says otherwise. A monster taken out of a zone stays in the files.
 - Defeated monsters respawn on a timer while the map stays loaded (a few seconds; bosses about
   half a minute). A map nobody is on resets, so coming back finds it full and its ground cleared.
-- No levels are shown anywhere: no "Lv." on monsters, bosses, maps, regions, the Monster Book,
-  quests, gear or trips. Monsters and gear keep a hidden tuning tier (MonsterDef.level,
-  EquipDef.required_level) only so the balance and content checks can measure them.
+- Only the hero has a level. No "Lv." on monsters, bosses, maps, regions, the Monster Book,
+  quests, gear or trips, and nothing needs a level. Monsters and gear keep a hidden tuning tier
+  (MonsterDef.level, EquipDef.required_level) only so the balance and content checks can measure
+  them against a hero of that level.
 - Monster strength: each kind's own HP, attack and Dawn Essence are what it is on the map nearest
   a town that it lives on; on each map farther from the nearest town than that it is 15% stronger
   (HP, attack and essence). Shortcuts and one-way ways home (a boss arena's) don't count
