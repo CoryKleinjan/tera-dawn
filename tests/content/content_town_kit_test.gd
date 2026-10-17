@@ -15,10 +15,12 @@ const BEFORE_KIT := {
 	"dawnrise_village": ["buildings", "storage keeper"],
 }
 
+## The towns themselves: not their rooms, nor a small town-side map (a dock) that belongs to
+## another town (its `return_map`).
 func _towns() -> Array[MapDef]:
 	var out: Array[MapDef] = []
 	for m: MapDef in Content.maps.values():
-		if m.town and not m.interior:
+		if m.town and not m.interior and m.return_town() == m.id:
 			out.append(m)
 	return out
 

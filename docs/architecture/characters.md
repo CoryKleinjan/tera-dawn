@@ -67,8 +67,9 @@ then character select shows the list (name and job) with the new character picke
   Picking one up (`MapInstance._learn_relic`) adds its id to `Character.relics` for good,
   never to the bag; `Character.has_move` says what's unlocked. `TDPlayer` does the moves on
   your own machine like any other step (`_relic_moves`, `_air_jump`, the "dash" key); the
-  server only breaks what a Slam lands on (`req_slam`). A relic drop is its owner's alone and
-  never expires (`SimDrop`).
+  server only breaks what a Slam lands on (`req_slam`). A move plays its relic's painted
+  `effect` round him (a code-drawn `trail` while it has none). A relic drop is its owner's
+  alone and never expires (`SimDrop`).
 - **Achievements** are **AchievementDef**s in `data/achievements/`, loaded by `Content`; each
   measures something about the Character (its `kind`, see `Achievements.measure`) against a
   `goal`. `Achievements.all()` lists them in `order` for the collection window and the server.

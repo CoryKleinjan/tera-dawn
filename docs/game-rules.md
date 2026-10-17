@@ -66,8 +66,10 @@ update this page when one changes. Each zone's own look and music are in
   roll pose), Arcane Sentinel Double Jump (the leap pose), Molten King Slam (Down + Jump in the
   air drops straight down and breaks cracked floors), Reef Titan Surge (hold Down + Dash on the
   ground, let go to fly straight ahead; the lunge pose). Elder Treant Wall Jump and Lantern
-  Wraith Glide wait for their poses. The main way never needs a move; secret rooms can. Their
-  effects and the relic icons are stand-ins until painted.
+  Wraith Glide wait for their poses. The main way never needs a move; secret rooms can. Dash,
+  Double Jump and Surge play the painted effects made for the old job moves (rolling dash
+  spray, flash jump burst, charge trail); Slam has none yet, and the relic icons are stand-ins
+  until painted.
 - Attacks and most attack skills aim: up hits overhead, down (in the air only) hits below. Buffs
   don't aim. A downward melee blow that meets a monster bounces him off it (pogo).
 - He can move while swinging and keeps facing the swing until it ends. Buffs and spells make no
@@ -333,7 +335,9 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 - Music feels grown-up, never childish (Hollow Knight's spirit): towns, fields and the title are
   ambient; bosses are cinematic. Each zone keeps its own tone (`docs/zone-vibes.md`).
 - Kenney CC0 sound effects; the jingles stay.
-- Captain Marlo's ship carries players from the start island to Dawnharbor; coachman Rook takes them
+- Captain Marlo's ship carries players from the start island to Dawnharbor. He waits with his ship on
+  a small dock map beside each end (Dawnrise Dock, Dawnharbor Docks), reached by a portal from the
+  town; a dock map belongs to its town (`return_map`). Coachman Rook takes them
   to the job towns (400-500 Dawnshards, the same for everyone), but coaches only go to towns the
   player has already been to; the towns are also joined by a ring
   of portals. Developer test characters start in their job's town.
