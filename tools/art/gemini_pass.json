@@ -25058,6 +25058,181 @@
    ],
    "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint ONE new character, a grown woman in the same cute chibi painting style as the boy in the attached picture, but taller and grown up: her head is smaller in proportion (about a third of her height), with a longer body and legs, a friendly face with big glossy eyes and dark lashes, shoulder-length auburn hair, in plain everyday clothes exactly like the boy in the attached picture: a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round. She is a cartoon character like the boy, never realistic. Paint the same character in every cell. The character is turned three-quarters toward the viewer and walks toward the right, exactly the way the boy in the attached picture stands, the same size in every cell, with the feet on the same invisible ground line near the bottom of each cell, filling about 85% of the cell height and fully inside the cell with a clear margin all round. The 8 cells are animation frames in reading order (top row left to right, then the bottom row). Cells 1 to 6 are one smooth 6-frame walk cycle that loops, with LONG, clearly different steps: 1 the near leg reaching far forward with its heel down and the far leg stretched far back pushing off its toes, legs wide apart; 2 the body at its lowest as the weight lands on the near leg, knee bent; 3 passing: the far leg swinging forward under the body with its knee lifted high; 4 the far leg reaching far forward with its heel down and the near leg stretched far back, legs wide apart; 5 the body at its lowest on the far leg; 6 passing: the near leg swinging forward with its knee lifted high. The arms swing far forward and back, always opposite to the legs, so every walk frame looks clearly different. Cells 7 and 8 are an idle breathing loop, standing relaxed: 7 breathing in, chest and head a little higher, 8 breathing out. Keep the face, hair, clothes, colours, proportions and size exactly the same in every cell. No arm or hand ever covers the face. Style: exactly like the boy in the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. No ground, shadow, dust, motion lines, text, labels or numbers, and no extra figures."
   }
+ },
+ {
+  "id": "newhero_boy_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_boy_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the boy look (approved 19:56Z \"I like these as is\") in plain clothes, his jump, landing and hurt frames, timed in 8-frame beats to match the skill effects. Released by Cory 20:00Z (\"Yes\") to the priced line 19:56Z (\"Should I paint the boy's 7 sheets first for $0.49, so you can check the moves before the other three looks ($1.47 more)?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_boy_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME boy as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a cute chibi boy of about ten with a very big round head, deep-blue eyes, short messy brown hair, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only his pose changes. He is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way he stands in the attached picture, drawn at the same size as there (his standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). Cells 1 to 4 are one jump, with his feet starting on an invisible ground line near the bottom of the cell: 1 crouching low to spring, knees deeply bent and arms swung back; 2 springing up off his toes, body stretched tall, arms swung up; 3 at the top of the jump, high in the cell, knees tucked up and arms out for balance; 4 falling, legs reaching down for the ground and arms raised a little. Cells 5 and 6 are the landing, feet on the ground line: 5 landing with knees bent deeply and arms out; 6 rising back up, knees a little bent. Cells 7 and 8 are being hit, feet on the ground line: 7 flinching backward from a hit in front of him, eyes squeezed shut, head and shoulders thrown back, arms flung out to the sides; 8 staggering back a step, leaning back, eyes shut tight, wincing with a small open mouth. No arm or hand ever covers his face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the boy: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "newhero_boy_idle_faint_sit_crouch",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_boy_idle_faint_sit_crouch.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the boy look (approved 19:56Z \"I like these as is\") in plain clothes, his idle, faint, sit and crouch frames, timed in 8-frame beats to match the skill effects. Released by Cory 20:00Z (\"Yes\") to the priced line 19:56Z (\"Should I paint the boy's 7 sheets first for $0.49, so you can check the moves before the other three looks ($1.47 more)?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_boy_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME boy as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a cute chibi boy of about ten with a very big round head, deep-blue eyes, short messy brown hair, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only his pose changes. He is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way he stands in the attached picture, drawn at the same size as there (his standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). Cells 1 and 2 are two more idle frames, standing relaxed with feet on an invisible ground line near the bottom of the cell, exactly like the attached picture's two standing frames: 1 half way breathing out, 2 half way breathing in (only the chest and head move a tiny bit). Cells 3 to 6 are fainting, on the ground line: 3 knees buckling, eyes closed, swaying; 4 collapsing to his knees; 5 falling forward onto the ground; 6 lying flat on his front on the ground, eyes closed, still. Cell 7: sitting on the ground, legs crossed, hands resting on his knees, smiling. Cell 8: crouching low on both feet, knees deeply bent, hands on his knees, head up and looking ahead. No arm or hand ever covers his face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the boy: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "newhero_boy_dash",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_boy_dash.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the boy look (approved 19:56Z \"I like these as is\") in plain clothes, his 8-frame Dash, a quick forward roll, timed in 8-frame beats to match the skill effects. Released by Cory 20:00Z (\"Yes\") to the priced line 19:56Z (\"Should I paint the boy's 7 sheets first for $0.49, so you can check the moves before the other three looks ($1.47 more)?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_boy_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME boy as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a cute chibi boy of about ten with a very big round head, deep-blue eyes, short messy brown hair, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only his pose changes. He is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way he stands in the attached picture, drawn at the same size as there (his standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). The 8 cells are one 8-frame Dash, a short burst forward as a quick roll, with his feet near an invisible ground line near the bottom of the cell: 1 leaning forward ready to spring, one foot back; 2 diving forward, body stretched out low; 3 tucked into a tight ball, starting to roll forward; 4 upside down in the roll, still tucked; 5 coming round the roll, tucked; 6 landing on his feet low, still crouched; 7 pushing up, leaning forward; 8 standing again, a little forward lean, arms relaxed. No arm or hand ever covers his face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the boy: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "newhero_boy_double_jump",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_boy_double_jump.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the boy look (approved 19:56Z \"I like these as is\") in plain clothes, his 8-frame Double Jump, a leap in the air, timed in 8-frame beats to match the skill effects. Released by Cory 20:00Z (\"Yes\") to the priced line 19:56Z (\"Should I paint the boy's 7 sheets first for $0.49, so you can check the moves before the other three looks ($1.47 more)?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_boy_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME boy as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a cute chibi boy of about ten with a very big round head, deep-blue eyes, short messy brown hair, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only his pose changes. He is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way he stands in the attached picture, drawn at the same size as there (his standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). The 8 cells are one 8-frame Double Jump, a second leap high in the air (no ground under him in any cell, every figure mid-air near the middle of its cell): 1 falling slightly, knees bent, gathering himself; 2 tucking his knees up tight; 3 kicking down hard with both legs, arms swung up high, body stretched upward; 4 rising fast, body stretched straight and tall; 5 starting a forward somersault, tucked; 6 upside down in the somersault, tucked; 7 coming out of the somersault upright; 8 at the top, legs a little bent, arms out wide for balance. No arm or hand ever covers his face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the boy: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "newhero_boy_surge",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_boy_surge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the boy look (approved 19:56Z \"I like these as is\") in plain clothes, his 8-frame Surge, a charged lunge forward, timed in 8-frame beats to match the skill effects. Released by Cory 20:00Z (\"Yes\") to the priced line 19:56Z (\"Should I paint the boy's 7 sheets first for $0.49, so you can check the moves before the other three looks ($1.47 more)?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_boy_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME boy as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a cute chibi boy of about ten with a very big round head, deep-blue eyes, short messy brown hair, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only his pose changes. He is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way he stands in the attached picture, drawn at the same size as there (his standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). The 8 cells are one 8-frame Surge, a charged lunge that flies straight ahead: 1 crouching low on an invisible ground line, gathering power, fists pulled in at his sides; 2 crouched lower still, leaning forward, about to launch; 3 launching forward off the ground, body tipping forward; 4 flying straight ahead, body stretched out flat like a superhero, near fist punched forward, legs straight behind; 5 still flying flat out, the same; 6 still flying, legs starting to swing down; 7 landing on the ground line, skidding to a stop, knees bent, leaning back; 8 standing up again, a little out of breath. No arm or hand ever covers his face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the boy: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "newhero_boy_slam",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_boy_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the boy look (approved 19:56Z \"I like these as is\") in plain clothes, his 8-frame Slam, a drop straight down, timed in 8-frame beats to match the skill effects. Released by Cory 20:00Z (\"Yes\") to the priced line 19:56Z (\"Should I paint the boy's 7 sheets first for $0.49, so you can check the moves before the other three looks ($1.47 more)?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_boy_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME boy as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a cute chibi boy of about ten with a very big round head, deep-blue eyes, short messy brown hair, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only his pose changes. He is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way he stands in the attached picture, drawn at the same size as there (his standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). The 8 cells are one 8-frame Slam, a drop straight down from the air: 1 in the air near the top of the cell, knees pulled up, arms raised high; 2 hanging at the top, tucked; 3 starting to drop, legs pointing straight down, arms straight up; 4 plunging straight down feet first, body straight; 5 plunging, lower in the cell; 6 the impact: landing hard on an invisible ground line in a deep crouch, both fists punching down onto the ground; 7 still crouched, looking up; 8 standing up again. No arm or hand ever covers his face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the boy: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "newhero_boy_wall_glide",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_boy_wall_glide.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the boy look (approved 19:56Z \"I like these as is\") in plain clothes, his wall slide, wall jump and glide, timed in 8-frame beats to match the skill effects. Released by Cory 20:00Z (\"Yes\") to the priced line 19:56Z (\"Should I paint the boy's 7 sheets first for $0.49, so you can check the moves before the other three looks ($1.47 more)?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_boy_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME boy as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a cute chibi boy of about ten with a very big round head, deep-blue eyes, short messy brown hair, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only his pose changes. He is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way he stands in the attached picture, drawn at the same size as there (his standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). Cells 1 and 2 are sliding down a wall: an invisible wall is just behind his back at the LEFT edge of the cell; he has his back to it, one boot and his near hand pressed flat against it, knees bent, sliding down: 1 and 2 are two frames of that slide, slightly different. Cells 3 to 6 are a wall jump away from that wall to the right: 3 pushing off hard with both feet from the wall on the left, body leaving it; 4 flying up and to the right, body stretched; 5 rising, knees tucking up; 6 at the top, legs a little bent, arms out for balance. Cells 7 and 8 are a glide, floating slowly down through the air (no ground): his arms spread wide out to the sides, body tipped a little forward, legs trailing together behind; 7 and 8 are two gentle frames of that, his arms a little higher in 8. No arm or hand ever covers his face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the boy: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures."
+  }
  }
 ]
 }
