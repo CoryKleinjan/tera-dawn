@@ -24703,6 +24703,138 @@
    ],
    "text": "The base picture is a sheet of 3 cells (1 row of 3) showing the boar boss \"Grotto Tusker\" in 3 poses on a flat magenta background. The attached picture shows Grotto Tusker in his idle pose: his look is exactly that (wet dark slate-blue hide with pale barnacles and water drips, dripping strands of dark green kelp for a mane, a short dark kelp beard, a cluster of pale barnacles and small shells on his shoulder, long yellowed tusks, small pale eyes, an old iron lantern glowing warm yellow on a short rope tied around his near tusk). Keep EVERYTHING in the base picture exactly as it is: the same pose, size, position, body shape, leg positions, head angle, mouth and facing in every cell, the same cute chunky cartoon style, smooth soft painted shading and thin dark plum-brown outline, the same grid lines and the same pure flat magenta #FF00FF background. Never take a pose from the attached picture. Change ONLY these things: In cell 1 the lantern hangs below his feet: shorten its rope so the lantern hangs close under his tusk, its bottom higher than his lowest hoof and above the ground line. In cell 2 the lantern is missing: add the old iron lantern glowing warm yellow on a short rope tied around his near tusk, hanging close under the tusk, its bottom higher than his lowest hoof. Keep cell 3 exactly as it is. Write NO text, labels or names anywhere. Draw NO shadow, puddle, ground, glow halo or effect around it: only the boar on flat magenta. Every boar stays fully inside its own cell, never touching the cell borders. Exactly one boar per cell."
   }
+ },
+ {
+  "id": "skillfx_dawn_slash_swing",
+  "prompts": null,
+  "batch": "skill animations test (edit)",
+  "with": null,
+  "refs": [],
+  "save": "skillfx_dawn_slash_swing.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Skill animations' (Cory 14:31Z: soft glow, MapleStory-big, job colours, 8 frames, art only): test of painted skill effects. Warrior Dawn Slash swing, 8 frames.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/skill-anims/bases/blank_2x4_169.png",
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint ONE frame of a single skill effect animation in each cell, so that cells 1 to 8 played in order make one smooth, exciting animation. This is a flashy job skill in a hand-painted 2D fantasy side-scroller, grand and spectacular like the skill effects of MapleStory, but painted: luminous hand-painted light with visible, fairly chunky brush strokes and painted texture, rich saturated colour, a white-hot core fading through bright colour to soft glowing edges, strong contrast between the bright core and the deeper colour around it. Never pixel art, never a photo, never a 3D render, never flat vector shapes. The skill is DAWN SLASH, a Warrior's sweeping sword attack that cuts twice: two huge crescent arcs of blazing dawnlight in gold, amber and warm white, with deep crimson-red along their outer edges and a spray of golden embers. The attacker stands just off the LEFT edge of each cell facing RIGHT, so every arc sweeps out to the right and fills most of the cell. Cell 1: a thin bright spark line just starting at the upper left, the tip of the first arc. Cell 2: the first crescent forming fast, sweeping from the upper left down toward the lower right, a sharp bright leading edge with a softer trail behind. Cell 3: the first crescent at full size and full brightness, a big thick moon-shaped arc from the top of the cell curving around to the lower right, white-hot inner edge, gold body, crimson outer rim, embers flying off it. Cell 4: the first crescent thinning and breaking into embers while the second crescent starts at the lower left, rising. Cell 5: the second crescent sweeping up from the lower left to the upper right, crossing the fading first arc in a big X. Cell 6: the second crescent at full size and brightness, with a burst of sunrise light where the two arcs cross. Cell 7: both arcs dissolving into streams of golden embers and fading crimson wisps. Cell 8: only a few last drifting golden embers and a faint fading glow. Every frame is the SAME effect at the same scale and in the same colours, anchored at the same place in its cell; only its animation stage changes, so the frames flow smoothly from one to the next. It is light and magic, so it has NO outline at all: no dark line or border around any arc, flame, spark or glow; its edges are light fading softly into the background. Draw ONLY the effect: no character, hero, hand, weapon, sword, monster, creature, face, ground, grass, scenery, shadow, smoke cloud, text, title, letters or numbers anywhere. Each frame fits fully inside its own cell with a clear magenta margin on every side, never touching or crossing a cell border; never merge, split or add cells. Keep the grid lines. REPAINT: the background is pure flat magenta #FF00FF (RGB 255, 0, 255) in every cell, never white, grey, black, pink or mauve, with no gradient or glow haze spreading into it beyond the effect's own soft edge. The effect itself uses NO pink, magenta, purple or violet anywhere."
+  }
+ },
+ {
+  "id": "skillfx_dawn_slash_hit",
+  "prompts": null,
+  "batch": "skill animations test (edit)",
+  "with": null,
+  "refs": [],
+  "save": "skillfx_dawn_slash_hit.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Skill animations' (Cory 14:31Z: soft glow, MapleStory-big, job colours, 8 frames, art only): test of painted skill effects. Warrior Dawn Slash hit on each monster, 8 frames.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/skill-anims/bases/blank_2x4_169.png",
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint ONE frame of a single skill effect animation in each cell, so that cells 1 to 8 played in order make one smooth, exciting animation. This is a flashy job skill in a hand-painted 2D fantasy side-scroller, grand and spectacular like the skill effects of MapleStory, but painted: luminous hand-painted light with visible, fairly chunky brush strokes and painted texture, rich saturated colour, a white-hot core fading through bright colour to soft glowing edges, strong contrast between the bright core and the deeper colour around it. Never pixel art, never a photo, never a 3D render, never flat vector shapes. The skill is DAWN SLASH, a Warrior's sword attack of blazing dawnlight in gold, amber and warm white with deep crimson-red accents. This sheet is its HIT: the burst that appears on a monster when the slash strikes it, centred in each cell, about half the cell's height at its biggest. Cell 1: a tiny white-gold flash point in the centre. Cell 2: a sharp four-pointed star of white-gold light bursting out. Cell 3: a bright diagonal cut streak of gold light from upper left to lower right across the centre, with short light rays. Cell 4: the peak: a round blast of gold light with a white-hot centre, the crimson-edged cut streak across it and golden sparks shooting outward. Cell 5: the blast opening into a widening ring of gold light, sparks flying further out. Cell 6: the ring wide and thin, fading, sparks slowing. Cell 7: scattered fading golden embers and faint crimson wisps. Cell 8: a few last tiny embers. Every frame is the SAME effect at the same scale and in the same colours, anchored at the same place in its cell; only its animation stage changes, so the frames flow smoothly from one to the next. It is light and magic, so it has NO outline at all: no dark line or border around any arc, flame, spark or glow; its edges are light fading softly into the background. Draw ONLY the effect: no character, hero, hand, weapon, sword, monster, creature, face, ground, grass, scenery, shadow, smoke cloud, text, title, letters or numbers anywhere. Each frame fits fully inside its own cell with a clear magenta margin on every side, never touching or crossing a cell border; never merge, split or add cells. Keep the grid lines. REPAINT: the background is pure flat magenta #FF00FF (RGB 255, 0, 255) in every cell, never white, grey, black, pink or mauve, with no gradient or glow haze spreading into it beyond the effect's own soft edge. The effect itself uses NO pink, magenta, purple or violet anywhere."
+  }
+ },
+ {
+  "id": "skillfx_fire_burst_ball",
+  "prompts": null,
+  "batch": "skill animations test (edit)",
+  "with": null,
+  "refs": [],
+  "save": "skillfx_fire_burst_ball.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Skill animations' (Cory 14:31Z: soft glow, MapleStory-big, job colours, 8 frames, art only): test of painted skill effects. Magician Fire Burst fireball in flight, 8-frame loop.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/skill-anims/bases/blank_2x4_169.png",
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint ONE frame of a single skill effect animation in each cell, so that cells 1 to 8 played in order make one smooth, exciting animation. This is a flashy job skill in a hand-painted 2D fantasy side-scroller, grand and spectacular like the skill effects of MapleStory, but painted: luminous hand-painted light with visible, fairly chunky brush strokes and painted texture, rich saturated colour, a white-hot core fading through bright colour to soft glowing edges, strong contrast between the bright core and the deeper colour around it. Never pixel art, never a photo, never a 3D render, never flat vector shapes. The skill is FIRE BURST, a Magician's fire spell. This sheet is its FIREBALL FLYING TO THE RIGHT, as a looping animation: cell 8 leads straight back into cell 1. In every cell the same fireball, the same size (about a third of the cell's width) and at the same spot just right of the centre: a round blazing core of white and pale yellow, wrapped in bright orange and deep red flame, with flame tongues streaming back to the LEFT behind it like a comet tail and small orange embers trailing off. Only the flames flicker and roll from frame to frame: the tongues of the tail curl and change shape a little each cell, the core pulses slightly brighter and dimmer, and the embers drift back, so the 8 cells loop smoothly as one burning fireball in flight. Every frame is the SAME effect at the same scale and in the same colours, anchored at the same place in its cell; only its animation stage changes, so the frames flow smoothly from one to the next. It is light and magic, so it has NO outline at all: no dark line or border around any arc, flame, spark or glow; its edges are light fading softly into the background. Draw ONLY the effect: no character, hero, hand, weapon, sword, monster, creature, face, ground, grass, scenery, shadow, smoke cloud, text, title, letters or numbers anywhere. Each frame fits fully inside its own cell with a clear magenta margin on every side, never touching or crossing a cell border; never merge, split or add cells. Keep the grid lines. REPAINT: the background is pure flat magenta #FF00FF (RGB 255, 0, 255) in every cell, never white, grey, black, pink or mauve, with no gradient or glow haze spreading into it beyond the effect's own soft edge. The effect itself uses NO pink, magenta, purple or violet anywhere."
+  }
+ },
+ {
+  "id": "skillfx_fire_burst_blast",
+  "prompts": null,
+  "batch": "skill animations test (edit)",
+  "with": null,
+  "refs": [],
+  "save": "skillfx_fire_burst_blast.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Skill animations' (Cory 14:31Z: soft glow, MapleStory-big, job colours, 8 frames, art only): test of painted skill effects. Magician Fire Burst explosion on the target, 8 frames.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/skill-anims/bases/blank_2x4_169.png",
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint ONE frame of a single skill effect animation in each cell, so that cells 1 to 8 played in order make one smooth, exciting animation. This is a flashy job skill in a hand-painted 2D fantasy side-scroller, grand and spectacular like the skill effects of MapleStory, but painted: luminous hand-painted light with visible, fairly chunky brush strokes and painted texture, rich saturated colour, a white-hot core fading through bright colour to soft glowing edges, strong contrast between the bright core and the deeper colour around it. Never pixel art, never a photo, never a 3D render, never flat vector shapes. The skill is FIRE BURST, a Magician's fire spell: a fireball that bursts on a monster and engulfs everything around it. This sheet is its EXPLOSION, centred in each cell, big and grand: at its peak it fills most of the cell. Colours: white-hot and pale yellow at the core, bright orange and deep red flame, glowing orange embers. Cell 1: a small blinding white-yellow flash at the centre. Cell 2: a fireball swelling outward, bright orange with a white core. Cell 3: a huge bursting ball of flame with a white-hot centre and flame tongues starting to burst outward in every direction. Cell 4: the peak: a towering explosion of roaring orange and red flame that fills most of the cell, with bright flame tongues lashing out and a ring of fire spreading along the bottom. Cell 5: the flames rolling outward and upward, the centre turning from white to orange, a wide ring of fire around it. Cell 6: the fire breaking apart into big curling flames and swirling embers. Cell 7: small dying flames and a swirl of glowing embers rising and fading. Cell 8: only a few last glowing embers drifting up. Every frame is the SAME effect at the same scale and in the same colours, anchored at the same place in its cell; only its animation stage changes, so the frames flow smoothly from one to the next. It is light and magic, so it has NO outline at all: no dark line or border around any arc, flame, spark or glow; its edges are light fading softly into the background. Draw ONLY the effect: no character, hero, hand, weapon, sword, monster, creature, face, ground, grass, scenery, shadow, smoke cloud, text, title, letters or numbers anywhere. Each frame fits fully inside its own cell with a clear magenta margin on every side, never touching or crossing a cell border; never merge, split or add cells. Keep the grid lines. REPAINT: the background is pure flat magenta #FF00FF (RGB 255, 0, 255) in every cell, never white, grey, black, pink or mauve, with no gradient or glow haze spreading into it beyond the effect's own soft edge. The effect itself uses NO pink, magenta, purple or violet anywhere."
+  }
+ },
+ {
+  "id": "skillfx_war_cry_burst",
+  "prompts": null,
+  "batch": "skill animations test (edit)",
+  "with": null,
+  "refs": [],
+  "save": "skillfx_war_cry_burst.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Skill animations' (Cory 14:31Z: soft glow, MapleStory-big, job colours, 8 frames, art only): test of painted skill effects. Warrior War Cry shout burst around the hero, 8 frames.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/skill-anims/bases/blank_2x4_169.png",
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint ONE frame of a single skill effect animation in each cell, so that cells 1 to 8 played in order make one smooth, exciting animation. This is a flashy job skill in a hand-painted 2D fantasy side-scroller, grand and spectacular like the skill effects of MapleStory, but painted: luminous hand-painted light with visible, fairly chunky brush strokes and painted texture, rich saturated colour, a white-hot core fading through bright colour to soft glowing edges, strong contrast between the bright core and the deeper colour around it. Never pixel art, never a photo, never a 3D render, never flat vector shapes. The skill is WAR CRY, a Warrior's rallying battle shout that fills him and his party with power. This sheet is the BURST of the shout around the warrior, centred in each cell; the warrior himself stands in the middle of the cell but is NOT drawn: the middle of every cell stays mostly open, an empty space about a third of the cell's height where he stands, and the effect surrounds it. Colours: gold, amber and warm white light with deep crimson-red flame accents. Cell 1: a soft warm glow around the empty middle, just beginning. Cell 2: a first bright ring of golden light bursting out from the middle. Cell 3: the ring expanding fast, with sharp rays of gold light shooting upward and outward like a sunburst. Cell 4: the peak: a wide blazing shockwave ring around the middle, tall golden rays and crimson-edged flame tongues roaring upward from behind the middle, sparks flying out. Cell 5: a second echo ring pulsing out behind the first, the rays still bright. Cell 6: the rings wide and fading, golden sparks rising. Cell 7: sparks and small embers rising and fading. Cell 8: a faint warm glow and a few last rising sparks. Every frame is the SAME effect at the same scale and in the same colours, anchored at the same place in its cell; only its animation stage changes, so the frames flow smoothly from one to the next. It is light and magic, so it has NO outline at all: no dark line or border around any arc, flame, spark or glow; its edges are light fading softly into the background. Draw ONLY the effect: no character, hero, hand, weapon, sword, monster, creature, face, ground, grass, scenery, shadow, smoke cloud, text, title, letters or numbers anywhere. Each frame fits fully inside its own cell with a clear magenta margin on every side, never touching or crossing a cell border; never merge, split or add cells. Keep the grid lines. REPAINT: the background is pure flat magenta #FF00FF (RGB 255, 0, 255) in every cell, never white, grey, black, pink or mauve, with no gradient or glow haze spreading into it beyond the effect's own soft edge. The effect itself uses NO pink, magenta, purple or violet anywhere."
+  }
+ },
+ {
+  "id": "skillfx_war_cry_aura",
+  "prompts": null,
+  "batch": "skill animations test (edit)",
+  "with": null,
+  "refs": [],
+  "save": "skillfx_war_cry_aura.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Skill animations' (Cory 14:31Z: soft glow, MapleStory-big, job colours, 8 frames, art only): test of painted skill effects. Warrior War Cry buff aura while it lasts, 8-frame loop.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/skill-anims/bases/blank_2x4_169.png",
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint ONE frame of a single skill effect animation in each cell, so that cells 1 to 8 played in order make one smooth, exciting animation. This is a flashy job skill in a hand-painted 2D fantasy side-scroller, grand and spectacular like the skill effects of MapleStory, but painted: luminous hand-painted light with visible, fairly chunky brush strokes and painted texture, rich saturated colour, a white-hot core fading through bright colour to soft glowing edges, strong contrast between the bright core and the deeper colour around it. Never pixel art, never a photo, never a 3D render, never flat vector shapes. The skill is WAR CRY, a Warrior's rallying battle shout. This sheet is the AURA that glows around the warrior for as long as the buff lasts, as a looping animation: cell 8 leads straight back into cell 1. The warrior himself stands in the middle of each cell but is NOT drawn: the middle of every cell stays open, an empty upright space about half the cell's height where he stands. In every cell the same aura, the same size and place: a calm but powerful upright oval of soft golden light around the empty middle, with low gold and crimson-tipped flames licking up from its bottom edge and small golden sparks drifting upward. It is quieter and less bright than an attack: soft warm light, never a blinding flash. Only the flames and sparks move from frame to frame: the flames flicker and sway a little each cell, the glow gently pulses, and the sparks rise, so the 8 cells loop smoothly. Every frame is the SAME effect at the same scale and in the same colours, anchored at the same place in its cell; only its animation stage changes, so the frames flow smoothly from one to the next. It is light and magic, so it has NO outline at all: no dark line or border around any arc, flame, spark or glow; its edges are light fading softly into the background. Draw ONLY the effect: no character, hero, hand, weapon, sword, monster, creature, face, ground, grass, scenery, shadow, smoke cloud, text, title, letters or numbers anywhere. Each frame fits fully inside its own cell with a clear magenta margin on every side, never touching or crossing a cell border; never merge, split or add cells. Keep the grid lines. REPAINT: the background is pure flat magenta #FF00FF (RGB 255, 0, 255) in every cell, never white, grey, black, pink or mauve, with no gradient or glow haze spreading into it beyond the effect's own soft edge. The effect itself uses NO pink, magenta, purple or violet anywhere."
+  }
  }
 ]
 }
