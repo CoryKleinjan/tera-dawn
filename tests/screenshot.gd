@@ -702,6 +702,7 @@ func _monster_anims(world: TDWorld, id: String) -> void:
 	var others := field.mobs.filter(func(m: SimMob) -> bool: return m != mob)
 	for m in others:
 		m.die()
+		m.respawn = 1000000
 	var rig: SpriteRig = world.mobs()[mob.index].rig
 	var moves: Array[MonsterMove] = []
 	for kind in MonsterMove.Kind.values():

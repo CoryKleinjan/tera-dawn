@@ -32,6 +32,7 @@ func test_you_can_swing_while_walking_and_keep_facing_the_swing() -> void:
 	# (hit-stop) or hurt you, and either stops the walk
 	for m in ui.player().map.mobs:
 		m.dead = true
+		m.respawn = 1 << 30
 	await ui.ticks(2)
 	Input.action_press("move_right")
 	await ui.ticks(6)
