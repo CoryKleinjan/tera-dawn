@@ -206,7 +206,7 @@ func _pieces_changed() -> void:
 	for part in PART_NAMES:
 		var owner: Resource = {&"face": _face_style(), &"hair": _hair_style(), &"hair_under": under}.get(part, HeroBody.LOOK)
 		if owner:
-			_pieces.append(HeroBody.Layer.new(owner, part))
+			_pieces.append(HeroBody.fists(_outfit) if part == &"hands" else HeroBody.Layer.new(owner, part))
 	_piece = 0
 	_piece_menu.clear()
 	for i in _pieces.size():

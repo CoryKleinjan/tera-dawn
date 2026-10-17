@@ -157,13 +157,13 @@ func _place(s: Sprite3D, tex: Texture2D, anchor: Vector2, pin: Vector2, deg: flo
 ## his hands. Each held piece's pin says
 ## its layer on that frame; any other piece can be moved up or down the stack on a frame by its
 ## nudge (Vector4.w). The off-hand only shows while the weapon does. Under long sleeves the fists
-## painted with bare forearms are left off.
+## show their paintings for long sleeves (HeroLookDef.SLEEVED), and those painted with bare
+## forearms are left off where there is none.
 static func layers(worn: Dictionary, frame: StringName, face: HeroStyleDef = null, hair_style: HeroStyleDef = null) -> Array[Layer]:
 	var out: Array[Layer] = []
 	var offhand: EquipDef = worn.get(&"shield")
 	var hat: EquipDef = worn.get(&"hat")
 	var weapon: EquipDef = worn.get(&"weapon")
-	var top: EquipDef = worn.get(&"top")
 	var shown := weapon != null and _shows(weapon, frame)
 	if weapon and not shown:
 		offhand = null  # put away with the weapon (sitting, lying down)
@@ -186,8 +186,9 @@ static func layers(worn: Dictionary, frame: StringName, face: HeroStyleDef = nul
 		out.append(Layer.new(hs.under_hats[hat.id], &"hair_under"))  # the bits sticking out
 	_add(out, [hat, weapon])
 	_add(out, held.get(HeldDef.Layer.OVER_CLOTHES, []), true)
-	var hands := Layer.new(LOOK, &"hands")
-	if hands.added(frame) or (shown or frame in LOOK.resting_hand_frames) and not (top and top.long_sleeves and frame in LOOK.bare_arm_frames):
+	var hands := fists(worn)
+	var bare := hands.sleeved and frame in LOOK.bare_arm_frames and not String(hands.art(frame)).ends_with(HeroLookDef.SLEEVED)
+	if hands.added(frame) or (shown or frame in LOOK.resting_hand_frames) and not bare:
 		out.append(hands)
 	_add(out, held.get(HeldDef.Layer.OVER_HANDS, []), true)
 	out = out.filter(func(l: Layer): return l.shows(frame))
@@ -198,6 +199,14 @@ static func layers(worn: Dictionary, frame: StringName, face: HeroStyleDef = nul
 		keys[out[i]] = Vector2(i + w + signf(w) * 0.5, i)
 	out.sort_custom(func(a: Layer, b: Layer): return keys[a] < keys[b])
 	return out
+
+## His fists as a layer for what he wears (place -> EquipDef): under a top with long sleeves
+## they show their paintings for them (Layer.sleeved).
+static func fists(worn: Dictionary) -> Layer:
+	var l := Layer.new(LOOK, &"hands")
+	var top: EquipDef = worn.get(&"top")
+	l.sleeved = top != null and top.long_sleeves
+	return l
 
 static func _shows(e: EquipDef, frame: StringName) -> bool:
 	return Layer.new(e).shows(frame)
@@ -224,6 +233,9 @@ class Layer:
 	var owner: Resource
 	## Which of his parts (&"body", &"face", &"hair", &"hair_under", &"hands"); empty for gear.
 	var part: StringName
+	## Drawn under long sleeves (EquipDef.long_sleeves): his fists then show a frame's painting
+	## for them (HeroLookDef.SLEEVED) where there is one.
+	var sleeved := false
 	## Texture -> the middle of its painted pixels, what a moved piece turns around.
 	static var _middles := {}
 
@@ -330,7 +342,9 @@ class Layer:
 
 	## The frame whose painting it shows on `frame` (&"" for none).
 	func art(frame: StringName) -> StringName:
-		return frame_art().get(frame, frame)
+		var a: StringName = frame_art().get(frame, frame)
+		var for_sleeves := StringName(String(a) + HeroLookDef.SLEEVED)
+		return for_sleeves if sleeved and a != &"" and frames().has_animation(for_sleeves) else a
 
 	## Added to `frame` by hand, so it shows there even where the stack would leave it off (hair
 	## under a hat, fists with no weapon out).

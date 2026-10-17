@@ -25,7 +25,7 @@
     [
       "bow1",
       "bow2",
-      "",
+      "bow2_sleeved",
       "throw1",
       "throw2",
       "",
@@ -46,7 +46,7 @@
       "pinning",
       "leap",
       "backstep",
-      "",
+      "pinning_sleeved",
       "lunge",
       "roll1",
       "roll2",
@@ -98,6 +98,7 @@
         "hurt": "hero_hands:hurt",
         "bow1": "hero_hands:bow1",
         "bow2": "hero_hands:bow2",
+        "bow2_sleeved": "hero_hands:bow2_sleeved",
         "throw1": "hero_hands:throw1",
         "throw2": "hero_hands:throw2",
         "pistol1": "hero_hands:pistol1",
@@ -105,6 +106,7 @@
         "gravity2": "hero_hands:gravity2",
         "ambush1": "hero_hands:ambush1",
         "pinning": "hero_hands:pinning",
+        "pinning_sleeved": "hero_hands:pinning_sleeved",
         "leap": "hero_hands:leap",
         "backstep": "hero_hands:backstep",
         "lunge": "hero_hands:lunge",
@@ -197,6 +199,12 @@
           ],
           "fps": 1
         },
+        "bow2_sleeved": {
+          "frames": [
+            "bow2_sleeved"
+          ],
+          "fps": 1
+        },
         "throw1": {
           "frames": [
             "throw1"
@@ -236,6 +244,12 @@
         "pinning": {
           "frames": [
             "pinning"
+          ],
+          "fps": 1
+        },
+        "pinning_sleeved": {
+          "frames": [
+            "pinning_sleeved"
           ],
           "fps": 1
         },

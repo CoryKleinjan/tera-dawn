@@ -24703,6 +24703,436 @@
    ],
    "text": "The base picture is a sheet of 3 cells (1 row of 3) showing the boar boss \"Grotto Tusker\" in 3 poses on a flat magenta background. The attached picture shows Grotto Tusker in his idle pose: his look is exactly that (wet dark slate-blue hide with pale barnacles and water drips, dripping strands of dark green kelp for a mane, a short dark kelp beard, a cluster of pale barnacles and small shells on his shoulder, long yellowed tusks, small pale eyes, an old iron lantern glowing warm yellow on a short rope tied around his near tusk). Keep EVERYTHING in the base picture exactly as it is: the same pose, size, position, body shape, leg positions, head angle, mouth and facing in every cell, the same cute chunky cartoon style, smooth soft painted shading and thin dark plum-brown outline, the same grid lines and the same pure flat magenta #FF00FF background. Never take a pose from the attached picture. Change ONLY these things: In cell 1 the lantern hangs below his feet: shorten its rope so the lantern hangs close under his tusk, its bottom higher than his lowest hoof and above the ground line. In cell 2 the lantern is missing: add the old iron lantern glowing warm yellow on a short rope tied around his near tusk, hanging close under the tusk, its bottom higher than his lowest hoof. Keep cell 3 exactly as it is. Write NO text, labels or names anywhere. Draw NO shadow, puddle, ground, glow halo or effect around it: only the boar on flat magenta. Every boar stays fully inside its own cell, never touching the cell borders. Exactly one boar per cell."
   }
+ },
+ {
+  "id": "mshero_mage_robe_b14",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mage_robe_b14.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory: 02:13Z 'wizard bow2 is wrong', 02:20Z 'wizard pinning is missing mages back fist'): the Magician robe on bow2 (left sleeve on his raised arm, hip notch closed) and pinning (behind his resting fist, gap under it closed); an edit of its own two paintings. Released by Cory 03:29Z (\"Yes\") to the priced line 03:20Z (\"Should I paint these 4 sheets for about $0.27, and switch the Pirate's swing3 coat to its lunge painting (free)?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b14_mage_robe_b14_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 and 2 each hold the flat bright green (#00FF00) shape of a small boy facing right, wearing a painted blue wizard's robe with short wide sleeves trimmed in gold and a purple sash. Cells 3 to 8 are empty and must stay empty. In cell 1 he draws a bow: one arm reaches straight out to the right, and his other arm is raised to shoulder height on the left, its elbow pointing back and its fist pulled back to his cheek. The robe is wrong there in two places: its left sleeve hangs down at his side as if that arm hung down, leaving his raised left arm bare, and a notch is cut out of the robe at his left hip below the sash, where the green shows through. Repaint the left sleeve so it covers his raised left upper arm from the shoulder to the elbow along the green arm, the same short wide gold-trimmed sleeve as the sleeve on his outstretched arm; take away the hanging sleeve; and close the notch so the robe covers his hip down to its hem. In cell 2 he kneels: one arm reaches out to the right, and his other arm is bent with its forearm and fist resting on his belly, IN FRONT of the robe (the green forearm and fist on the left). The robe must not cover any of that green forearm or fist: its edge runs behind them. Below the fist, close the gap so the robe covers his belly and hip down to its hem. Keep everything else about each robe exactly as it is: its outline, size, position, length, colours, trim, folds, shading and thin dark plum-brown outline. Leave every green pixel the robe does not cover flat pure #00FF00 exactly as it is, and the background flat pure magenta #FF00FF. Do not paint any face, skin, hands, head or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the robe already in the base picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_thief_jerkin_b14",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_thief_jerkin_b14.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory: 02:28Z 'theif pistol1 is wrong'): the Thief jerkin on pistol1 in his three-quarter view; restyled from the Warrior jerkin's pistol1 painting, the Thief jerkin's bow1 painting in cell 2 as the design. Released by Cory 03:29Z (\"Yes\") to the priced line 03:20Z (\"Should I paint these 4 sheets for about $0.27, and switch the Pirate's swing3 coat to its lunge painting (free)?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b14_thief_jerkin_b14_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds the flat bright green (#00FF00) shape of a small boy facing right in a three-quarter view, one arm reaching straight out to the right, wearing a painted tan quilted jerkin with short puffed sleeves and a brown belt. Cell 2 holds the same boy shape in another pose wearing a thief's jerkin of dark brown leather with charcoal grey short sleeves, two leather straps with a metal buckle crossing its front, a dark leather belt with a metal buckle and a small pouch on the belt: leave cell 2 exactly as it is. Cells 3 to 8 are empty and must stay empty. Repaint the jerkin in cell 1 as the thief's jerkin from cell 2: the same dark brown leather, charcoal grey short sleeves, crossing straps with their buckle, dark belt with its buckle and small pouch, seen in the same three-quarter view as the boy in cell 1. Keep the jerkin's outline, size, position and sleeves exactly as they are in cell 1: one sleeve covers his shoulder and the top of his outstretched arm, and no sleeve sticks out at his back. End it at his hips like the jerkin in cell 2, and below that show the flat green. Keep the thin dark plum-brown outline. Leave every green pixel the jerkin does not cover flat pure #00FF00 exactly as it is, and the background flat pure magenta #FF00FF. Do not paint any face, skin, hands, head or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the jerkin already in the base picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_archer_hood_b14",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_archer_hood_b14.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory: 02:32Z 'arche needs a new look for the cown from behind so it fits right', 02:37Z 'we need to switch the archers hood os that it DOES NOT HAVE ANYTHING ON THE NECK OR SHOULDERS'): the Archer hood's front paintings (idle1, idle2, walk1, walk2, jump, walk3) and its back painting (back, also shown on ambush2) covering only his head; its rope and ladder paintings are left out, as ropes and ladders leave the game (03:16Z). Released by Cory 03:29Z (\"Yes\") to the priced line 03:20Z (\"Should I paint these 4 sheets for about $0.27, and switch the Pirate's swing3 coat to its lunge painting (free)?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b14_archer_hood_b14_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 7 each hold the flat bright green (#00FF00) shape of a small boy wearing a painted green hood. Cell 8 is empty and must stay empty. In cells 1 to 6 he faces right in a slight three-quarter view, seen from the FRONT, and each hood's bottom edge wraps around his neck under his chin. Repaint each of these hoods so it covers ONLY his head: its edge runs around his face and ends at his jaw and at the base of his skull, and NOTHING of it lies on his neck, throat, chest or shoulders. Where the hood covered his neck, show the flat pure #00FF00 green of his body. Keep the open space around his face inside the hood as flat green, exactly as it is. In cell 7 he stands with his back to the viewer, so we see the hood from BEHIND, and it narrows into a piece that runs down over the back of his neck. Repaint it so it covers ONLY his head: it ends in a neat rounded hem at the base of his skull, no wider than his head, and NOTHING of it lies on his neck or shoulders. Where the hood covered his neck, show the flat pure #00FF00 green of his body. Keep everything else about each hood exactly as it is: its shape around his head, its pointed tip, size, position, tilt, colour, folds, shading and thin dark outline. Leave every green pixel the hood does not cover flat pure #00FF00 exactly as it is, and the background flat pure magenta #FF00FF. Do not paint any face, skin, hands, head or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the hood already in the base picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_pirate_coat_b14",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_pirate_coat_b14.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory: 02:43Z 'pirate ambush1 is wrong', 02:45Z 'pirate crouch is wrong', 02:40Z 'pirate pistol2 is wrong'): the Pirate coat on ambush1 (hole in its chest closed), crouch (notch at his back closed over his trousers' seat) and pistol2 (collar below his chin); an edit of its own three paintings, its lunge painting in cell 4 as the design. Released by Cory 03:29Z (\"Yes\") to the priced line 03:20Z (\"Should I paint these 4 sheets for about $0.27, and switch the Pirate's swing3 coat to its lunge painting (free)?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b14_pirate_coat_b14_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cells 1 to 4 each hold the flat bright green (#00FF00) shape of a small boy wearing a painted pirate's long red coat trimmed with gold, with long sleeves ending in wide gold-trimmed cuffs, a cream shirt front and a black belt. Cells 5 to 8 are empty and must stay empty. Cell 4 shows the coat as it should look when he lunges: closed over his chest, his far arm bent back behind his body inside its red sleeve. Leave cell 4 exactly as it is. In cell 1 he lunges far forward to the right with his near arm stretched straight out. The coat has a round hole in its chest, just inside the sleeve of his far arm, where the flat green shows through. Close that hole the way the coat in cell 4 is closed: the coat's red front and cream shirt front cover his whole chest with no green inside the coat, and his far sleeve goes back behind his body as in cell 4, with no hand, fist or cuff at his chest. Keep the sleeve on his stretched-out arm as it is. In cell 2 he crouches with both fists up in front of his chest. At his back, below the belt, a notch is cut out of the coat where the green of his hip and seat shows through: close it so the coat hangs straight down over his hip and seat to its gold-trimmed hem, as long at the back as at the front. In cell 3 his body is turned AWAY from the viewer, so we see the back of the coat, and only his head turns to look right. The coat's tall collar rises up over his chin and cheek. Lower the collar so it lies flat around the base of his neck, below his chin: no part of the coat may rise over his head, chin or face, and where the collar covered his head show the flat green of his head. Keep everything else about each coat exactly as it is: its outline, size, position, length, colours, trim, folds, shading and thin dark plum-brown outline. Leave every green pixel the coat does not cover flat pure #00FF00 exactly as it is, and the background flat pure magenta #FF00FF. Do not paint any face, skin, hands, head or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the coat already in the base picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mage_robe_b15",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mage_robe_b15.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory: 02:13Z 'wizard bow2 is wrong'): the Magician robe on bow2 again (left sleeve on his raised arm, hip notch closed), with no bow in his hands this time. Released by Cory 12:45Z (\"Yea\") to the priced line 04:12Z (\"Should I paint these 3 sheets for about $0.20?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b15_mage_robe_b15_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds the flat bright green (#00FF00) shape of a small boy facing right, wearing a painted blue wizard's robe with short wide sleeves trimmed in gold and a purple sash. Cells 2 to 8 are empty and must stay empty. One of his arms reaches straight out to the right, and his other arm is raised to shoulder height on the left, its elbow pointing back and its fist pulled back to his cheek. The robe is wrong there in two places: its left sleeve hangs down at his side as if that arm hung down, leaving his raised left arm bare, and a notch is cut out of the robe at his left hip below the sash, where the green shows through. Repaint the left sleeve so it covers his raised left upper arm from the shoulder to the elbow along the green arm, the same short wide gold-trimmed sleeve as the sleeve on his outstretched arm; take away the hanging sleeve; and close the notch so the robe covers his hip down to its hem. His hands are empty: paint no bow, bowstring, arrow, wand, staff, stick, line or any other object anywhere in the picture. Keep everything else about each robe exactly as it is: its outline, size, position, length, colours, trim, folds, shading and thin dark plum-brown outline. Leave every green pixel the robe does not cover flat pure #00FF00 exactly as it is, and the background flat pure magenta #FF00FF. Do not paint any face, skin, hands, head or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the robe already in the base picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_pirate_coat_b15",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_pirate_coat_b15.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory: 02:45Z 'pirate crouch is wrong'): the Pirate coat on crouch again, its tails over his trousers' seat (drawn as a flat red guide this time). Released by Cory 12:45Z (\"Yea\") to the priced line 04:12Z (\"Should I paint these 3 sheets for about $0.20?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b15_pirate_coat_b15_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds the flat bright green (#00FF00) shape of a small boy wearing a painted pirate's long red coat trimmed with gold, with sleeves ending in wide gold-trimmed cuffs, a cream shirt front and a black belt. Cells 2 to 8 are empty and must stay empty. He faces right and crouches with both fists up in front of his chest, his seat pushed out behind him on the left. At his back on the left, below his back arm, a FLAT red patch with no shading runs from his waist down to the coat's hem: it marks where the coat's tails hang over his seat. Paint that patch as part of the coat: the same red cloth with soft folds and shading, the thin dark plum-brown outline along its outer edge, and the coat's gold-trimmed hem continuing along its bottom edge, joined smoothly to the rest of the coat with no gap, notch, seam or line between them, so no green shows between the coat and the patch. Keep its outer shape as it is. Keep the belt, the cream shirt front, both sleeves and the rest of the coat exactly as they are: their outline, size, position, colours, trim, folds, shading and thin dark plum-brown outline. Leave every green pixel the coat does not cover flat pure #00FF00 exactly as it is, and the background flat pure magenta #FF00FF. Do not paint any face, skin, hands, head or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the coat already in the base picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_front_fist_b15",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_front_fist_b15.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory: 02:20Z 'wizard pinning is missing mages back fist'): his fists on pinning, both fists, so the back fist is drawn over the wand. Released by Cory 12:45Z (\"Yea\") to the priced line 04:12Z (\"Should I paint these 3 sheets for about $0.20?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b15_front_fist_b15_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/b15_front_fist_b15_body.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds one flat bright green (#00FF00) shape: the exact outline of the boy in cell 1 of the first attached picture, in the same pose (kneeling, one arm punched straight out to the right, his other arm bent with its fist resting on his belly). Cells 2 to 8 are empty and must stay empty. On the green shape, paint ONLY his two closed rounded MITTEN fists, each with no separate fingers or thumb, plus its wrist, exactly the same size, shape, angle, skin colour and place as that fist in cell 1 of the first attached picture, so it lies exactly on top of it: the fist punched straight out to the right, and his other fist, the one resting on his belly at the end of his bent back arm. Paint only those two fists and nothing else: no arm, sleeve, body, head, face, weapon or object. Leave every part of the green shape you do not paint over flat pure #00FF00 green, exactly as it is, and leave the rest of the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the skin, warm colours, light from the upper left, smooth soft painted shading and thin dark plum-brown outline of the boy in the first attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mage_robe_b16",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mage_robe_b16.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory: 02:13Z 'wizard bow2 is wrong'): the Magician robe on bow2 a new way: the Pirate coat's bow2 painting (sleeve on his raised arm, side closed to the hem) restyled into the robe, the robe's bow1 painting in cell 2 as the design (b14 and b15 edits of its own painting kept the hanging sleeve and the hip notch). Released by Cory 13:38Z (\"Yes.\") to the priced line 13:31Z (\"Should I paint these 3 sheets a new way for about $0.20, plus a small code change?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b16_mage_robe_b16_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds the flat bright green (#00FF00) shape of a small boy facing right, one arm reaching straight out to the right and his other arm raised to his cheek, wearing a painted pirate's long red coat trimmed with gold over a cream shirt front, with a black belt. Cell 2 holds the same boy shape in another pose wearing a wizard's robe: deep blue cloth trimmed with gold, wide sleeves with gold cuffs, a gold star clasp at the collar, a gold band down its closed front and a purple sash tied at the waist with its ends hanging down: leave cell 2 exactly as it is. Cells 3 to 8 are empty and must stay empty. Repaint the coat in cell 1 as the wizard's robe from cell 2: the same deep blue cloth, gold trim and gold cuffs, the star clasp at the collar, the gold band down the closed front over his chest and belly, and the purple sash tied at his waist with its ends hanging down; no red, no cream shirt and no black belt anywhere. Keep the robe's outline, size, position, length and sleeves exactly as the coat's in cell 1: a wide sleeve on his outstretched arm, the other sleeve on his raised arm at his shoulder, and its left side running straight down from under his raised arm to the hem. Keep the thin dark plum-brown outline. Leave every green pixel the robe does not cover flat pure #00FF00 exactly as it is, and the background flat pure magenta #FF00FF. Do not paint any face, skin, hands, head or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the robe already in the base picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_pirate_coat_b16",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_pirate_coat_b16.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory: 02:45Z 'pirate crouch is wrong'): the Pirate coat on crouch a new way: the Magician robe's crouch painting (covers his seat) restyled into the coat, the coat's bow1 painting in cell 2 as the design (b14's words and b15's flat red guide left his trousers' seat outside the coat). Released by Cory 13:38Z (\"Yes.\") to the priced line 13:31Z (\"Should I paint these 3 sheets a new way for about $0.20, plus a small code change?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b16_pirate_coat_b16_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds the flat bright green (#00FF00) shape of a small boy facing right, crouching with both fists up in front of his chest and his seat pushed out behind him, wearing a painted wizard's robe of deep blue cloth trimmed with gold, with wide sleeves and a purple sash. Cell 2 holds the same boy shape in another pose wearing a pirate's long coat: deep red wool trimmed with gold, sleeves ending in wide gold-trimmed cuffs, worn open over a cream shirt front, a black belt with a gold buckle at the waist, and its skirts hanging to a gold-trimmed hem: leave cell 2 exactly as it is. Cells 3 to 8 are empty and must stay empty. Repaint the robe in cell 1 as the pirate's coat from cell 2: the same deep red wool and gold trim, gold-trimmed cuffs, the coat hanging open down his chest over the cream shirt front, the black belt with its gold buckle across his waist, and its red skirts with their gold-trimmed hem; no blue, no purple sash and no star anywhere. Keep the outline, size, position, length and sleeves exactly as the robe's in cell 1, so at his back the coat's skirt hangs down over his seat to the hem. Keep the thin dark plum-brown outline. Leave every green pixel the coat does not cover flat pure #00FF00 exactly as it is, and the background flat pure magenta #FF00FF. Do not paint any face, skin, hands, head or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the coat already in the base picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_sleeve_fists_b16",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_sleeve_fists_b16.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory: 02:20Z 'wizard pinning is missing mages back fist'): his fists on pinning under long sleeves (the robe): only what shows past the sleeves, so his back fist is drawn over the wand without a bare forearm over the sleeve (b15's both-fists painting paints his forearm too). Released by Cory 13:38Z (\"Yes.\") to the priced line 13:31Z (\"Should I paint these 3 sheets a new way for about $0.20, plus a small code change?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b16_sleeve_fists_b16_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/b15_front_fist_b15_body.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds flat bright green (#00FF00) shapes on a flat magenta background: the parts of a kneeling boy that show outside his long wizard's robe (the robe is not shown), in the same pose as the boy in cell 1 of the first attached picture: kneeling, one arm punched straight out to the right, his other arm bent with its fist resting on his belly. Cells 2 to 8 are empty and must stay empty. The green shapes are his head, his outstretched forearm and fist on the right, his other fist on its own (a small rounded shape at his belly, where it comes out of his long sleeve), and his lower legs and feet. Paint ONLY his two closed rounded MITTEN fists, each with no separate fingers or thumb: the fist on his outstretched arm with the bare forearm it ends, and the small fist at his belly on its own, each exactly the same size, shape, angle, skin colour and place as that fist in cell 1 of the first attached picture, so it lies exactly on its green shape and fills it. Paint nothing outside the green shapes: no arm, sleeve, body, head, face, weapon or object, and nothing on the magenta. Leave his head, legs and feet flat pure #00FF00 green, exactly as they are, and the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the skin, warm colours, light from the upper left, smooth soft painted shading and thin dark plum-brown outline of the boy in the first attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_pirate_coat_b17",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_pirate_coat_b17.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory: 14:15Z 'Repaint', to keep or repaint the spots left by b16): the Pirate coat on crouch with the hole above his forearm closed (his trousers showed through it): his forearm and fist drawn green over the coat where the game draws his fists, the rest of the hole magenta, so the coat is painted whole behind his arm. Released by Cory 14:39Z (\"yes\") to the priced line 14:34Z (\"Should I repaint these 2 sheets for about $0.14?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b17_pirate_coat_b17_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds the flat bright green (#00FF00) shape of a small boy facing right, crouching with both fists up, wearing a painted pirate's long coat: deep red wool trimmed with gold, worn open over a cream shirt front, with a black belt and a gold buckle. His far forearm and fist, bent in front of his belly, are drawn flat green OVER the coat. Just below that forearm, inside the coat, there is a hole in the coat where the flat magenta background shows through. Close that hole: paint the coat's deep red wool there, with its folds and shading, so the coat is whole behind his forearm and no magenta shows anywhere inside the coat. Leave his green forearm and fist exactly as they are, in front of the coat. Cells 2 to 8 are empty and must stay empty. Keep everything else about each coat exactly as it is: its outline, size, position, length, colours, trim, folds, shading and thin dark plum-brown outline. Leave every green pixel flat pure #00FF00 exactly as it is, and the background around him flat pure magenta #FF00FF. Do not paint any face, skin, hands, head or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the coat already in the base picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mage_robe_b17",
+  "prompts": null,
+  "batch": null,
+  "with": null,
+  "refs": [],
+  "save": "mshero_mage_robe_b17.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory: 14:15Z 'Repaint', to keep or repaint the spots left by b16): the Magician robe on bow2 with the gap under his raised forearm closed (his body showed through it): that forearm and fist drawn green over the robe where the game draws his fists, the gap magenta, so the robe is painted whole behind his arm. Released by Cory 14:39Z (\"yes\") to the priced line 14:34Z (\"Should I repaint these 2 sheets for about $0.14?\"). Held 14:53Z and never painted: replaced by mshero_mage_robe_b18 (Cory 14:51Z 'bow2 robe is wrong for wizard'; this one only closed the shirt gap).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b17_mage_robe_b17_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds the flat bright green (#00FF00) shape of a small boy facing right, one arm reaching straight out to the right and his other arm raised with its fist at his cheek, wearing a painted wizard's robe: deep blue cloth trimmed with gold, wide sleeves with gold cuffs, a gold star clasp at the collar and a purple sash. His raised forearm and fist are drawn flat green OVER the robe. Just under that forearm, between the gold cuff of its sleeve and the robe's collar, there is a small gap in the robe where the flat magenta background shows through. Close that gap: paint the robe's deep blue cloth there, with its folds and shading, so his sleeve runs from his shoulder to its gold cuff behind his forearm and no magenta shows anywhere inside the robe. Leave his green forearm and fist exactly as they are, in front of the robe. Cells 2 to 8 are empty and must stay empty. Keep everything else about each robe exactly as it is: its outline, size, position, length, colours, trim, folds, shading and thin dark plum-brown outline. Leave every green pixel flat pure #00FF00 exactly as it is, and the background around him flat pure magenta #FF00FF. Do not paint any face, skin, hands, head or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the robe already in the base picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mage_robe_b18",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mage_robe_b18.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory: 14:51Z 'bow2 robe is wrong for wizard'): the Magician robe on bow2 with its sleeves reaching his wrists (gold cuffs there): his bare forearms lay over the robe and its sleeves stopped short, so his arms didn't come out of them (b17's robe entry only closed the shirt gap and is held). Released by Cory 15:52Z (\"yes repaint\") to the priced line 14:59Z (\"Should I paint these 2 sheets for about $0.14?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b18_mage_robe_b18_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds the flat bright green (#00FF00) shape of a small boy facing right, one arm reaching straight out to the right and his other arm raised with its fist at his cheek, wearing a painted wizard's robe: deep blue cloth trimmed with gold, wide sleeves with gold cuffs, a gold star clasp at the collar and a purple sash. Flat plain blue shapes with no shading lie along both his forearms and under his raised forearm: they show where the robe's long sleeves must reach. Paint each sleeve so it runs from his shoulder all the way along his forearm to his wrist, covering every flat blue shape with the robe's deep blue cloth, folds and shading, and ending in the robe's gold cuff right where his green fist begins. The gold cuff that now hangs under his raised elbow and the one partway along his outstretched arm move to his wrists, so each sleeve has one gold cuff, at the wrist. Leave his two green fists exactly as they are, coming out of the cuffs. Cells 2 to 8 are empty and must stay empty. Keep everything else about the robe exactly as it is: its body, collar, star clasp, front band, sash, hem, size, position, colours, trim, folds, shading and thin dark plum-brown outline. Leave every green pixel flat pure #00FF00 exactly as it is, and the background around him flat pure magenta #FF00FF. Do not paint any face, skin, hands, head or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the robe already in the base picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_sleeve_fists_b18",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_sleeve_fists_b18.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory: 14:51Z 'bow2 robe is wrong for wizard'): his fists on bow2 under long sleeves (the robe): only the fists, coming out of the robe's cuffs, the way pinning was fixed. Released by Cory 15:52Z (\"yes repaint\") to the priced line 14:59Z (\"Should I paint these 2 sheets for about $0.14?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b18_sleeve_fists_b18_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/b18_bow2_body_ref.png",
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds flat bright green (#00FF00) shapes on a flat magenta background: the parts of a boy that show outside his long wizard's robe (the robe is not shown), in the same pose as the boy in the first attached picture: facing right, one arm reaching straight out to the right and his other arm raised with its fist at his cheek. Cells 2 to 8 are empty and must stay empty. The green shapes are his head, his two fists on their own (where they come out of his long sleeves: one at the end of his outstretched arm on the right, one at his cheek), and his lower legs and feet. Paint ONLY his two closed rounded MITTEN fists, each with no separate fingers or thumb, exactly the same size, shape, angle, skin colour and place as those fists in the first attached picture, so each lies exactly on its green shape and fills it. Paint nothing outside the green fist shapes: no forearm, arm, sleeve, body, head, face, weapon or object, and nothing on the magenta. Leave his head, legs and feet flat pure #00FF00 green, exactly as they are, and the background flat pure magenta #FF00FF. Do not move, resize or redraw any shape, and do not add any figure. Style: exactly the skin, warm colours, light from the upper left, smooth soft painted shading and thin dark plum-brown outline of the boy in the first attached picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_sleeve_arm_b20",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_sleeve_arm_b20.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory: 16:30Z 'Repaint', to make his raised arm on bow2 match the other jobs): his raised forearm and fist on bow2 under the robe as their own layer: the forearm level like every other job's, in the robe's long sleeve with a gold cuff, fist at his cheek (b18 left the sleeve at his elbow and his forearm rising at an angle). Released by Cory 16:34Z (\"Yes\") to the priced line 16:34Z (\"Should I paint these 2 sheets for about $0.14?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b20_sleeve_arm_b20_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/maple-hero/bases/b18_bow2_body_ref.png",
+    "/mnt/project-files/art-sheets/maple-hero/bases/b20_bow2_robe_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds two flat guide shapes on a flat magenta background: a long flat BLUE shape, lying level from left to right, and a small flat SKIN-coloured shape at its right end. Together they are a boy's forearm and fist held level in front of him, his fist up at his cheek (the boy himself is not shown), in the same place as the raised forearm and fist of the boy in the first attached picture. Paint the blue shape as the long sleeve of his wizard's robe around his forearm: deep blue cloth with soft folds and shading, exactly the cloth, colours and trim of the robe in the second attached picture, ending at its right end in a wide gold cuff just before the fist. Paint the skin shape as his closed rounded MITTEN fist with no separate fingers or thumb, coming out of the cuff, exactly the skin, size and look of his fists in the first attached picture. Cover each guide shape exactly and completely, staying inside its outline, so no flat blue or flat skin is left, with a thin dark plum-brown outline around the whole sleeve and fist. Style: smooth soft painted shading, warm colours, light from the upper left, like the attached pictures. Keep the background flat pure magenta #FF00FF and keep the grid lines. Do not add any figure, head, body, face or object. Cells 2 to 8 are empty and must stay empty magenta: do not copy the attached pictures into them. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_mage_robe_b20",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_mage_robe_b20.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory: 16:30Z 'Repaint', to make his raised arm on bow2 match the other jobs): the Magician robe on bow2 with the gold cuff under his raised elbow painted as plain sleeve cloth, so it doesn't show under the new sleeve layer. Released by Cory 16:34Z (\"Yes\") to the priced line 16:34Z (\"Should I paint these 2 sheets for about $0.14?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b20_mage_robe_b20_base.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4). Cell 1 holds the flat bright green (#00FF00) shape of a small boy facing right, wearing a painted wizard's robe: deep blue cloth trimmed with gold, a gold star clasp at the collar and a purple sash. Flat plain blue patches with no shading lie on the robe: one on the sleeve at the left, where a gold cuff was, and one just under his raised arm next to the collar. Paint each patch as the robe's plain deep blue cloth, with the same folds and shading as the cloth around it, so no gold cuff shows on that sleeve and no flat blue is left. Keep everything else about the robe exactly as it is: its outline, size, position, collar, star clasp, front band, the gold cuff on the sleeve at the right, sash, hem, colours, trim, folds, shading and thin dark plum-brown outline. Leave every green pixel flat pure #00FF00 exactly as it is, and the background around him flat pure magenta #FF00FF. Do not paint any face, skin, hands, head or other clothing, do not move, resize or redraw the green shape, do not add any figure, and leave empty cells empty. Style: exactly the painting style of the robe already in the base picture. Keep the grid lines. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_body_ambush2_b19",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_ambush2_b19.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory 14:55Z \"i dont like that ambush faces backwards. lets remake that\", 14:58Z \"ambush should jsut be side facing like almost everything else\"): body test for a new side-facing ambush2, two versions of a low slash over drawn colour guides (green body, blue near arm). Released by Cory 16:59Z (\"Yes\") to the priced line 15:55Z (\"Should I paint this 1-sheet body test for about $0.07?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b19_ambush2_body_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 4 holds a painted bald chibi boy standing at rest, turned toward the right, in a cream undershirt with rolled sleeves and brown shorts, barefoot. Leave cell 4 exactly as it is. Cells 1 and 2 each hold a rough flat colour GUIDE of the same boy in a new pose: the GREEN shapes are his head, body, legs and his far arm; the BLUE shape is his NEAR arm, the arm closest to the viewer, ending in his near fist. Paint the SAME boy as cell 4 over each guide in that pose, covering the guide completely so no flat green or blue is left: same size as cell 4, the same proportions as cell 4 (big round head, short body), seen from the side and turned toward the right, with his chest facing right, never turned toward or away from the viewer. The blue arm is always the near arm, painted ON TOP of his body; the far arm is mostly behind his body with only its fist showing at his hip. Both cells show a low slash from an ambush. Cell 1: crouched low with his legs apart, his near arm swung down and forward in front of his body, the near fist low and ahead of his belly; the far fist pulled back at his hip. Cell 2: a deeper lunge, his back leg stretched far behind him and his front knee bent, his near arm swept down and forward, the near fist low ahead of him by his front knee; the far fist pulled back behind his hip. He is bald, with no face and no hair: keep his head bare exactly like the boy in cell 4. No arm, hand or fist ever crosses or touches his head or face, and both fists are visible. Each fist is one round closed mitten with no fingers, seen from the side like the fists in cell 4. He has exactly two arms and two legs. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 3 and 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Style: exactly like the boy in cell 4 (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. No text, no labels."
+  }
+ },
+ {
+  "id": "mshero_body_ambush2_b21",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mshero_body_ambush2_b21.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review' (Cory 14:55Z \"i dont like that ambush faces backwards. lets remake that\", 14:58Z \"ambush should jsut be side facing like almost everything else\"): redo of the b19 ambush2 body test (b19 painted brown gloves, a guard stance, the wrong arm and his back), with the near arm guide reaching further down and forward clear of his body, bare skin fists and his shirt front showing. Released by Cory 17:41Z (\"Sounds good. Do it\") to the priced line 17:32Z (\"Should I repaint this 1-sheet body test for about $0.07?\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/maple-hero/bases/b21_ambush2_body_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/flat-buildings/npc_style_ref.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background. Cell 4 holds a painted bald chibi boy standing at rest, turned toward the right, in a cream undershirt with rolled sleeves and brown shorts, barefoot. Leave cell 4 exactly as it is. Cells 1 and 2 each hold a rough flat colour GUIDE of the same boy in a new pose: the GREEN shapes are his head, body, legs and his far arm; the BLUE shape is his NEAR arm, the arm closest to the viewer, ending in his near fist. Paint the SAME boy as cell 4 over each guide in that pose, covering the guide completely so no flat green or blue is left: same size as cell 4, the same proportions as cell 4 (big round head, short body), seen from the side and turned toward the right, turned the same way as the boy in cell 4 with his shirt front and collar showing, never showing his back. The blue arm is always the near arm, the arm on the viewer's side of his body, painted ON TOP of his body and reaching straight down and forward along the blue shape, well clear of his body, as if he had just slashed a blade down in front of him (do not paint any blade). The far arm is mostly behind his body with only its fist showing at his hip. Cell 1: crouched low with his legs apart, his near arm reaching down and forward, the near fist low and well ahead of his belly; the far fist pulled back at his hip. Cell 2: a deeper lunge, his back leg stretched far behind him and his front knee bent, his near arm reaching down and forward, the near fist low and far ahead of him past his front knee; the far fist pulled back behind his hip. He is bald, with no face and no hair: keep his head bare exactly like the boy in cell 4. No arm, hand or fist ever crosses or touches his head or face, and both fists are visible. His fists are his own bare skin, the same skin colour as his head, exactly like the fists of the boy in cell 4: small round closed hands with no fingers showing. No gloves of any kind. He has exactly two arms and two legs. Do not add any weapon, object, ground, dust, motion lines, text or extra figure. Leave cells 3 and 5 to 8 empty. Keep the background flat pure magenta #FF00FF and keep the grid lines. Style: exactly like the boy in cell 4 (warm colours, light from the upper left, smooth soft painted shading, thin dark plum-brown outline), like the painted villagers in the attached picture. No text, no labels."
+  }
  }
 ]
 }
