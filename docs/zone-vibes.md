@@ -111,7 +111,13 @@ Layout: `/mnt/project-files/plans/done/dawnharbor-city-layout.md`.
 | Harbor Road | Border to Greenbough | 6-9 | Bright, airy coast road, pale blue sky, light haze; first green from Greenbough | Thornling, Sea Gull (borrowed until Dawnharbor has its own) |
 | Windmill Downs | Training | 10-17 | Grassy downs with windmills, sunny and breezy *(inferred; plain harbour look today)* | Bramble Boar, Reef Gull, Tide Slime (borrowed until Dawnharbor has its own) |
 | Gull Bluffs | Training | 15-20 | Windy sea cliffs crowded with gulls *(inferred; plain harbour look today)* | Reef Gull, Coral Turret, Kelp Lurker (borrowed until Dawnharbor has its own) |
-| Smugglers' Grotto | Boss | 20-22 | Dim sea cave lit by smugglers' lanterns *(inferred; plain harbour look today)* | Kelp Lurker, Barnacle Boar (borrowed until Dawnharbor has its own); boss Grotto Tusker |
+| Smugglers' Grotto | Boss | 20-22 | Dim sea cave lit by smugglers' lanterns, a long way down from the top of Gull Bluffs to Tusker's Den *(inferred; plain harbour look today)* | Kelp Lurker, Barnacle Boar (borrowed until Dawnharbor has its own); boss Grotto Tusker |
+| Driftwood Hollow | Secret | – | Harbor Beach's look: a driftwood cave under the beach, through a fake wall in the nook under the cliff | Sand Crab, Tide Dewling |
+| Tide Tunnel | Secret | – | Smugglers' Grotto's look: a sea tunnel from Driftwood Hollow to the bottom of the grotto, gated until its lever by the grotto's gate is pulled | Kelp Lurker, Barnacle Boar |
+| Smugglers' Stash | Secret | – | Smugglers' Grotto's look: the smugglers' hoard behind a locked gate halfway down the grotto (its key is in Gull Roost) | Barnacle Boar, Kelp Lurker |
+| Gull Roost | Secret | – | Gull Bluffs' look: the nests at the very top of the bluffs, through a fake wall | Reef Gull, Coral Turret |
+| Mill Loft | Secret | – | Windmill Downs' look: the old mill's loft, behind a breakable wall at the top of the downs | Bramble Boar, Reef Gull |
+| Hedgerow Lane | Secret | – | Harbor Road's look: a hedged lane up from Harbor Road, whose lever opens a gate into Windmill Downs | Thornling, Sea Gull |
 
 ## Greenbough Wilds
 
