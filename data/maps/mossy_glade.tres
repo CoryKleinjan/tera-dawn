@@ -1,11 +1,8 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=149 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=173 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
 [ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
-[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
-[ext_resource type="Resource" path="res://data/climb_styles/rope_ladder.tres" id="5_rope_ladder"]
-[ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="6_rope"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/bramble_boar.tres" id="9_bramble_boar"]
@@ -34,8 +31,6 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest.png" id="34_chest"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest_open.png" id="35_chest_open"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/hollow_trunk.png" id="36_hollow_trunk"]
-[ext_resource type="Resource" path="res://data/climb_styles/ladder.tres" id="35_ladder"]
-[ext_resource type="Resource" path="res://data/climb_styles/vine.tres" id="36_vine"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/root_wall.png" id="37_root_wall"]
 
 [sub_resource type="Resource" id="Prop_0"]
@@ -320,117 +315,275 @@ y = 660.0
 width = 150.0
 secret = true
 
-[sub_resource type="Resource" id="Climbable_0"]
-script = ExtResource("4_climbable_def")
-x = 520.0
-top = 1420.0
-bottom = 1880.0
-style = ExtResource("5_rope_ladder")
+[sub_resource type="Resource" id="Step_1"]
+script = ExtResource("3_platform_def")
+x = 500.0
+y = 1803.0
+width = 150.0
 
-[sub_resource type="Resource" id="Climbable_1"]
-script = ExtResource("4_climbable_def")
-x = 320.0
-top = 1060.0
-bottom = 1420.0
-style = ExtResource("35_ladder")
+[sub_resource type="Resource" id="Step_2"]
+script = ExtResource("3_platform_def")
+x = 390.0
+y = 1727.0
+width = 150.0
 
-[sub_resource type="Resource" id="Climbable_2"]
-script = ExtResource("4_climbable_def")
-x = 140.0
-top = 700.0
-bottom = 1060.0
-style = ExtResource("35_ladder")
+[sub_resource type="Resource" id="Step_3"]
+script = ExtResource("3_platform_def")
+x = 500.0
+y = 1650.0
+width = 150.0
 
-[sub_resource type="Resource" id="Climbable_3"]
-script = ExtResource("4_climbable_def")
-x = 1160.0
-top = 1800.0
-bottom = 1960.0
-style = ExtResource("6_rope")
+[sub_resource type="Resource" id="Step_4"]
+script = ExtResource("3_platform_def")
+x = 390.0
+y = 1573.0
+width = 150.0
 
-[sub_resource type="Resource" id="Climbable_4"]
-script = ExtResource("4_climbable_def")
-x = 1580.0
-top = 1420.0
-bottom = 1720.0
-style = ExtResource("6_rope")
+[sub_resource type="Resource" id="Step_5"]
+script = ExtResource("3_platform_def")
+x = 390.0
+y = 1497.0
+width = 150.0
 
-[sub_resource type="Resource" id="Climbable_5"]
-script = ExtResource("4_climbable_def")
-x = 2060.0
-top = 1420.0
-bottom = 1900.0
-style = ExtResource("5_rope_ladder")
+[sub_resource type="Resource" id="Step_6"]
+script = ExtResource("3_platform_def")
+x = 300.0
+y = 1348.0
+width = 150.0
 
-[sub_resource type="Resource" id="Climbable_6"]
-script = ExtResource("4_climbable_def")
-x = 1260.0
-top = 1160.0
-bottom = 1420.0
-style = ExtResource("6_rope")
+[sub_resource type="Resource" id="Step_7"]
+script = ExtResource("3_platform_def")
+x = 190.0
+y = 1276.0
+width = 150.0
 
-[sub_resource type="Resource" id="Climbable_7"]
-script = ExtResource("4_climbable_def")
-x = 1940.0
-top = 900.0
-bottom = 1160.0
-style = ExtResource("6_rope")
+[sub_resource type="Resource" id="Step_8"]
+script = ExtResource("3_platform_def")
+x = 300.0
+y = 1204.0
+width = 150.0
 
-[sub_resource type="Resource" id="Climbable_8"]
-script = ExtResource("4_climbable_def")
-x = 1640.0
-top = 640.0
-bottom = 900.0
-style = ExtResource("36_vine")
+[sub_resource type="Resource" id="Step_9"]
+script = ExtResource("3_platform_def")
+x = 190.0
+y = 1132.0
+width = 150.0
 
-[sub_resource type="Resource" id="Climbable_9"]
-script = ExtResource("4_climbable_def")
-x = 2640.0
-top = 1900.0
-bottom = 2120.0
-style = ExtResource("5_rope_ladder")
+[sub_resource type="Resource" id="Step_10"]
+script = ExtResource("3_platform_def")
+x = 120.0
+y = 988.0
+width = 150.0
 
-[sub_resource type="Resource" id="Climbable_10"]
-script = ExtResource("4_climbable_def")
-x = 3210.0
-top = 1600.0
-bottom = 1820.0
-style = ExtResource("5_rope_ladder")
+[sub_resource type="Resource" id="Step_11"]
+script = ExtResource("3_platform_def")
+x = 10.0
+y = 916.0
+width = 150.0
 
-[sub_resource type="Resource" id="Climbable_11"]
-script = ExtResource("4_climbable_def")
-x = 3800.0
-top = 1300.0
-bottom = 1600.0
-style = ExtResource("5_rope_ladder")
+[sub_resource type="Resource" id="Step_12"]
+script = ExtResource("3_platform_def")
+x = 120.0
+y = 844.0
+width = 150.0
 
-[sub_resource type="Resource" id="Climbable_12"]
-script = ExtResource("4_climbable_def")
-x = 2720.0
-top = 1500.0
-bottom = 1820.0
-style = ExtResource("6_rope")
+[sub_resource type="Resource" id="Step_13"]
+script = ExtResource("3_platform_def")
+x = 10.0
+y = 772.0
+width = 150.0
 
-[sub_resource type="Resource" id="Climbable_13"]
-script = ExtResource("4_climbable_def")
-x = 2920.0
-top = 1180.0
-bottom = 1500.0
-style = ExtResource("6_rope")
+[sub_resource type="Resource" id="Step_14"]
+script = ExtResource("3_platform_def")
+x = 1140.0
+y = 1880.0
+width = 150.0
 
-[sub_resource type="Resource" id="Climbable_14"]
-script = ExtResource("4_climbable_def")
-x = 3960.0
-top = 1100.0
-bottom = 1300.0
-style = ExtResource("6_rope")
+[sub_resource type="Resource" id="Step_15"]
+script = ExtResource("3_platform_def")
+x = 2040.0
+y = 1820.0
+width = 150.0
 
-[sub_resource type="Resource" id="Climbable_15"]
-script = ExtResource("4_climbable_def")
-x = 4200.0
-top = 860.0
-bottom = 1100.0
-style = ExtResource("6_rope")
+[sub_resource type="Resource" id="Step_16"]
+script = ExtResource("3_platform_def")
+x = 1930.0
+y = 1740.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_17"]
+script = ExtResource("3_platform_def")
+x = 2040.0
+y = 1660.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_18"]
+script = ExtResource("3_platform_def")
+x = 1930.0
+y = 1580.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_19"]
+script = ExtResource("3_platform_def")
+x = 2040.0
+y = 1500.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_20"]
+script = ExtResource("3_platform_def")
+x = 1240.0
+y = 1355.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_21"]
+script = ExtResource("3_platform_def")
+x = 1130.0
+y = 1290.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_22"]
+script = ExtResource("3_platform_def")
+x = 1240.0
+y = 1225.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_23"]
+script = ExtResource("3_platform_def")
+x = 1920.0
+y = 1095.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_24"]
+script = ExtResource("3_platform_def")
+x = 1810.0
+y = 1030.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_25"]
+script = ExtResource("3_platform_def")
+x = 1920.0
+y = 965.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_26"]
+script = ExtResource("3_platform_def")
+x = 1620.0
+y = 835.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_27"]
+script = ExtResource("3_platform_def")
+x = 1510.0
+y = 770.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_28"]
+script = ExtResource("3_platform_def")
+x = 1620.0
+y = 705.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_29"]
+script = ExtResource("3_platform_def")
+x = 2510.0
+y = 2047.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_30"]
+script = ExtResource("3_platform_def")
+x = 2620.0
+y = 1973.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_31"]
+script = ExtResource("3_platform_def")
+x = 3080.0
+y = 1747.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_32"]
+script = ExtResource("3_platform_def")
+x = 3190.0
+y = 1673.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_33"]
+script = ExtResource("3_platform_def")
+x = 3670.0
+y = 1525.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_34"]
+script = ExtResource("3_platform_def")
+x = 3780.0
+y = 1450.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_35"]
+script = ExtResource("3_platform_def")
+x = 3670.0
+y = 1375.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_36"]
+script = ExtResource("3_platform_def")
+x = 2590.0
+y = 1740.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_37"]
+script = ExtResource("3_platform_def")
+x = 2700.0
+y = 1660.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_38"]
+script = ExtResource("3_platform_def")
+x = 2590.0
+y = 1580.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_39"]
+script = ExtResource("3_platform_def")
+x = 2790.0
+y = 1420.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_40"]
+script = ExtResource("3_platform_def")
+x = 2900.0
+y = 1340.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_41"]
+script = ExtResource("3_platform_def")
+x = 2790.0
+y = 1260.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_42"]
+script = ExtResource("3_platform_def")
+x = 3830.0
+y = 1233.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_43"]
+script = ExtResource("3_platform_def")
+x = 3940.0
+y = 1167.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_44"]
+script = ExtResource("3_platform_def")
+x = 4070.0
+y = 1020.0
+width = 150.0
+
+[sub_resource type="Resource" id="Step_45"]
+script = ExtResource("3_platform_def")
+x = 4180.0
+y = 940.0
+width = 150.0
 
 [sub_resource type="Resource" id="Portal_0"]
 script = ExtResource("7_portal_def")
@@ -793,8 +946,7 @@ width = 4400
 height = 2200
 ground_y = 2120
 start_x = 1820.0
-platforms = Array[ExtResource("3_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9"), SubResource("Platform_10"), SubResource("Platform_11"), SubResource("Platform_12"), SubResource("Platform_13"), SubResource("Platform_14"), SubResource("Platform_15"), SubResource("Platform_16"), SubResource("Platform_17"), SubResource("Platform_18"), SubResource("Platform_19"), SubResource("Platform_20"), SubResource("Platform_21"), SubResource("Platform_22"), SubResource("Platform_23"), SubResource("Platform_24"), SubResource("Platform_25"), SubResource("Platform_26"), SubResource("Platform_27"), SubResource("Platform_28"), SubResource("Platform_29"), SubResource("Platform_30"), SubResource("Platform_31"), SubResource("Platform_32"), SubResource("Platform_33"), SubResource("Platform_34"), SubResource("Platform_35")])
-climbables = Array[ExtResource("4_climbable_def")]([SubResource("Climbable_0"), SubResource("Climbable_1"), SubResource("Climbable_2"), SubResource("Climbable_3"), SubResource("Climbable_4"), SubResource("Climbable_5"), SubResource("Climbable_6"), SubResource("Climbable_7"), SubResource("Climbable_8"), SubResource("Climbable_9"), SubResource("Climbable_10"), SubResource("Climbable_11"), SubResource("Climbable_12"), SubResource("Climbable_13"), SubResource("Climbable_14"), SubResource("Climbable_15")])
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9"), SubResource("Platform_10"), SubResource("Platform_11"), SubResource("Platform_12"), SubResource("Platform_13"), SubResource("Platform_14"), SubResource("Platform_15"), SubResource("Platform_16"), SubResource("Platform_17"), SubResource("Platform_18"), SubResource("Platform_19"), SubResource("Platform_20"), SubResource("Platform_21"), SubResource("Platform_22"), SubResource("Platform_23"), SubResource("Platform_24"), SubResource("Platform_25"), SubResource("Platform_26"), SubResource("Platform_27"), SubResource("Platform_28"), SubResource("Platform_29"), SubResource("Platform_30"), SubResource("Platform_31"), SubResource("Platform_32"), SubResource("Platform_33"), SubResource("Platform_34"), SubResource("Platform_35"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3"), SubResource("Step_4"), SubResource("Step_5"), SubResource("Step_6"), SubResource("Step_7"), SubResource("Step_8"), SubResource("Step_9"), SubResource("Step_10"), SubResource("Step_11"), SubResource("Step_12"), SubResource("Step_13"), SubResource("Step_14"), SubResource("Step_15"), SubResource("Step_16"), SubResource("Step_17"), SubResource("Step_18"), SubResource("Step_19"), SubResource("Step_20"), SubResource("Step_21"), SubResource("Step_22"), SubResource("Step_23"), SubResource("Step_24"), SubResource("Step_25"), SubResource("Step_26"), SubResource("Step_27"), SubResource("Step_28"), SubResource("Step_29"), SubResource("Step_30"), SubResource("Step_31"), SubResource("Step_32"), SubResource("Step_33"), SubResource("Step_34"), SubResource("Step_35"), SubResource("Step_36"), SubResource("Step_37"), SubResource("Step_38"), SubResource("Step_39"), SubResource("Step_40"), SubResource("Step_41"), SubResource("Step_42"), SubResource("Step_43"), SubResource("Step_44"), SubResource("Step_45")])
 portals = Array[ExtResource("7_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1"), SubResource("Portal_2"), SubResource("Portal_3")])
 breakables = Array[ExtResource("11_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1"), SubResource("Breakable_2")])
 spawns = Array[ExtResource("8_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13"), SubResource("Spawn_14"), SubResource("Spawn_15"), SubResource("Spawn_16"), SubResource("Spawn_17"), SubResource("Spawn_18"), SubResource("Spawn_19"), SubResource("Spawn_20"), SubResource("Spawn_21"), SubResource("Spawn_22"), SubResource("Spawn_23"), SubResource("Spawn_24"), SubResource("Spawn_25"), SubResource("Spawn_26"), SubResource("Spawn_27"), SubResource("Spawn_28"), SubResource("Spawn_29"), SubResource("Spawn_30"), SubResource("Spawn_31"), SubResource("Spawn_32"), SubResource("Spawn_33"), SubResource("Spawn_34"), SubResource("Spawn_35"), SubResource("Spawn_36"), SubResource("Spawn_37"), SubResource("Spawn_38"), SubResource("Spawn_39")])

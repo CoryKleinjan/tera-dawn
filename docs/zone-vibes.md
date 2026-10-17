@@ -151,7 +151,7 @@ thatch and antler trim.
 | Wayside Cave | Secret | – | Bough Trail's warm light, under the trail through a fake wall | Thornling, Bramble Boar |
 | Whisper Pool | Secret | – | Whispering Grove's mint mist, under the grove through a fake wall | Seedwing, Thornling |
 | Rootway | Secret | – | Elder's Root's gold glow: a long tunnel from the roots back to Wayside Cave | Acorn Sentry, Barkcap |
-| Oak Crown | Secret | – | Old Oak Heights' look: the top of the old oak, up a hidden climb | Grove Wisp, Barkcap |
+| Oak Crown | Secret | – | Old Oak Heights' look: the top of the old oak, up a hidden run of ledges | Grove Wisp, Barkcap |
 
 ## Lumewood
 
