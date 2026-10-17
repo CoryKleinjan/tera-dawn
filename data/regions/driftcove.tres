@@ -1,6 +1,19 @@
-[gd_resource type="Resource" script_class="RegionDef" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="RegionDef" load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/region_def.gd" id="1_region_def"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="2_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/runes/wave_rune.tres" id="rune_wave_rune"]
+[ext_resource type="Resource" path="res://data/items/runes/gale_rune.tres" id="rune_gale_rune"]
+
+[sub_resource type="Resource" id="Drop_wave_rune"]
+script = ExtResource("2_drop_entry")
+item = ExtResource("rune_wave_rune")
+chance = 0.01
+
+[sub_resource type="Resource" id="Drop_gale_rune"]
+script = ExtResource("2_drop_entry")
+item = ExtResource("rune_gale_rune")
+chance = 0.01
 
 [resource]
 script = ExtResource("1_region_def")
@@ -13,3 +26,4 @@ label_pos = Vector2(195.0, 548.0)
 zone_rect = Rect2(220.0, 390.0, 290.0, 190.0)
 town_music = &"town_driftcove"
 field_music = &"field_driftcove"
+drops = Array[ExtResource("2_drop_entry")]([SubResource("Drop_wave_rune"), SubResource("Drop_gale_rune")])

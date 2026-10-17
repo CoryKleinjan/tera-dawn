@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=21 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=23 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/reef_titan.tres" id="3_reef_titan"]
@@ -14,6 +14,12 @@
 [ext_resource type="Resource" path="res://data/monster_moves/boss_charge.tres" id="mv_boss_charge"]
 [ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
 [ext_resource type="Resource" path="res://data/items/relics/titans_pearl.tres" id="relic_titans_pearl"]
+[ext_resource type="Resource" path="res://data/items/runes/titan_rune.tres" id="rune_titan_rune"]
+
+[sub_resource type="Resource" id="Drop_titan_rune"]
+script = ExtResource("4_drop_entry")
+item = ExtResource("rune_titan_rune")
+chance = 0.3
 
 [sub_resource type="Resource" id="Resource_18"]
 script = ExtResource("4_drop_entry")
@@ -75,6 +81,6 @@ intro_ticks = 100
 rage_ticks = 100
 sprite_frames = ExtResource("3_reef_titan")
 sprite_scale = 1.6
-drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_18")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_18"), SubResource("Drop_titan_rune")])
 relic = ExtResource("relic_titans_pearl")
 respawn_ticks = Vector2i(1800, 2400)

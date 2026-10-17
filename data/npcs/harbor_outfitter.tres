@@ -7,7 +7,8 @@
 script = ExtResource("1_npc_def")
 id = &"harbor_outfitter"
 display_name = "Juno"
-title = "Outfitter"
+title = "Enchanter"
 sprite_frames = ExtResource("2_sprite")
-greeting = "Gloves, boots, capes and trinkets for every kind of hero."
-lines = PackedStringArray("Gear for anyone, any job.", "The roads out of town get rough. Dress for it.")
+greeting = "Bring me a rune and a piece of gear, and I'll set the one in the other. It never fails."
+lines = PackedStringArray("Every piece of gear has room for three runes.", "Monsters out in the fields carry runes. Bosses carry better ones.")
+enchants = true

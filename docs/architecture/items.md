@@ -44,6 +44,22 @@ There are four inventory tabs, and the class of the item decides which one it go
 | **PetDef** | Setup | Pets: `loot_reach`, `loot_every`, `hunger_ticks` and their `chatter` |
 | **CardDef** | (book) | Monster Book cards, made by `Content` for every monster |
 | **RelicDef** | (moves) | A boss's relic: picking it up unlocks its `move` for good (`Character.relics`) |
+| **RuneDef** | Etc | An enchant rune: a `StatBlock` of bonuses, the enchanter's `fee`, `boss` for a boss's own |
+
+## Runes and enchanting
+
+Every piece of gear has `ItemStack.RUNE_SLOTS` (3) rune slots: `ItemStack.runes` holds the
+RuneDef in each, null where it's empty, and saves them by id ("runes"; saves from before runes
+load with three empty slots). `ItemStack.total()` is the piece's own stats plus its runes', and
+that is what worn gear adds (`Equipment.bonus`). An enchanter (`NpcDef.enchants`) opens
+`TDEnchantWindow`; `Net.req_enchant` goes to `ServerEnchanting.on_enchant`, which checks the
+player stands by them, and the rule is `Gear.enchant`: a rune from the Etc tab into a slot of a
+piece in the Equip tab for the rune's `fee`, always working, replacing what was there.
+
+Zone runes drop from every monster on a region's maps (`RegionDef.drops`, rolled in
+`MapInstance.kill_mob` after the monster's own `drops`); a boss's own rune is a line on its
+`drops`. To add a rune, save a RuneDef in `data/items/runes/` and add a DropEntry for it to its
+region or boss.
 
 Equipment slots: Weapon, Hat, Top, Bottom, Shoes, Gloves, Cape, Earrings, Pendant, two Rings
 and Shield (`EquipDef.Slot` and `Equipment.PLACES_FOR`). Adding a slot means adding it to both.

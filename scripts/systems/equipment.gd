@@ -67,7 +67,7 @@ func take(place: StringName) -> ItemStack:
 func bonus() -> StatBlock:
 	var out := StatBlock.new()
 	for s in worn.values():
-		out.add(s.stats)
+		out.add(s.total())
 	return out
 
 ## What's worn as place -> EquipDef (how the hero is drawn, HeroBody.layers).
