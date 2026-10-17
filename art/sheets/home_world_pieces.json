@@ -1,0 +1,26 @@
+{
+  "source": "art/source/home_world_pieces.png",
+  "art_px": 5.0,
+  "out_dir": "assets/sprites/tiles/home_world",
+  "label_band": 0,
+  "inset": 0,
+  "keep": "largest",
+  "flat_bottom": true,
+  "grid": {
+    "rows": [
+      200,
+      1520
+    ],
+    "cols": [
+      20,
+      800,
+      1480
+    ]
+  },
+  "cells": [
+    [
+      "cottage",
+      "lookout"
+    ]
+  ]
+}

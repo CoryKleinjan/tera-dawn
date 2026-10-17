@@ -25007,6 +25007,30 @@
   "town_check": {
    "kind": "backdrop"
   }
+ },
+ {
+  "id": "home_world_land2",
+  "prompts": null,
+  "batch": "Home world ground repaint: side-on coping stones on top (edit)",
+  "with": null,
+  "refs": [
+   "/mnt/project-files/art-sheets/gemini-pass-1/home_world_pieces.png"
+  ],
+  "save": "home_world_land2.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Main story': repaint of home_world_land (Cory 20:15Z 'Repaint'). The first paint showed the ledge top as a cobbled street seen from above between two kerb rows; this one asks for one row of coping stones seen side-on. Same base, refs and layout as home_world_land.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/home-world/bases/land_base.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/home_world_pieces.png"
+   ],
+   "text": "The first image is a guide for a sheet of ground pieces for my 2D side-scrolling game, on a flat magenta #FF00FF background. Flat colours show where each piece goes: the pale strip is the top surface, the mid grey is the ground body, the darker grey below is a wall, and the dark line is the outline. Paint over the guide as finished ground for a small, ordinary seaside town that was abandoned and fell to ruin long ago, keeping every shape's position, size and outline EXACTLY, so the pieces still line up and join seamlessly when the sheet is cut apart. The second image shows ruined objects from the same place: match their style, ash-grey palette, outline and level of detail exactly. TOP: one long floating ledge of an old broken seawall (it will be cut into a left end, two middle pieces and a right end that join side by side). Its top is ONE row of worn, flat coping stones seen exactly side-on, so only their thin front faces show, as one band along the top edge, with a little pale ash-grey sand and dust drifted along the top line, a few loose pebbles and a broken shell or two. The pale strip in the guide is the front face of those coping stones: do NOT paint a cobbled street or any ground surface seen from above, and never a second row of kerb stones. Under it is a body of grey packed earth and old cracked paving stones, kept simple with little detail inside so it reads at a glance as solid ground. A crisp dark outline runs all round it, a few broken stones hang under its bottom edge, and its two ends are rounded. BOTTOM: a raised block of the same ground: the very same side-on row of coping stones along its top, with SQUARE ends, then below the band's lower edge a wall of slightly darker old grey stone blocks, running straight down off the bottom of the image between straight vertical outlined sides. Keep the wall's texture even across its whole area, with no big features, bright spots or shading toward its edges, so a square of it can repeat as a tile. The whole place is drained of colour: ash greys, pale blue-greys and faded sand under a flat, sunless, overcast light; quiet and sad, never scary, no blood, no bones, no fire, no plants growing, nobody there. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own painted style: soft cel-painted shading with clear light and shadow shapes, soft pale highlights on the lit edges from the upper left, a bold dark outline, and hand-painted texture at a fairly chunky brush scale. Seen exactly from the side, like a stone wall face: the top is only the coping stones' front faces, never ground seen from above, and nothing runs back into the picture. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the pieces the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
  }
 ]
 }
