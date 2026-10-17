@@ -495,6 +495,18 @@ func test_world_map_shows_the_major_routes_between_cities() -> void:
 	wm._hovered(Vector2(-50, -50))
 	check_eq(wm.hovered_region, &"", "hovering outside the map finds nothing")
 
+func test_world_map_opens_on_the_zone_you_are_in() -> void:
+	var wm: TDWorldMapWindow = _open("worldmap")
+	var here: MapDef = Content.maps[wm._here()]
+	check(Content.regions.has(here.region), "the start map %s is in a zone" % here.id)
+	check_eq(wm.zone, here.region, "the map opens on %s, where you are" % here.region)
+	await _redrawn(wm, "zone %s" % here.region)
+	await ui.click(wm, wm.back_rect().get_center())
+	check_eq(wm.zone, &"", "the back arrow still leads to the world view")
+	wm.toggle()
+	wm.toggle()
+	check_eq(wm.zone, here.region, "opening it again goes back to %s" % here.region)
+
 func test_world_map_click_opens_a_zone_and_the_arrow_goes_back() -> void:
 	var wm: TDWorldMapWindow = _open("worldmap")
 	for r: RegionDef in Content.regions.values():
