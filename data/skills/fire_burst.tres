@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
-[ext_resource type="Resource" path="res://data/projectiles/mob_ember.tres" id="p_mob_ember"]
-[ext_resource type="Resource" path="res://data/effects/critical.tres" id="h_critical"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/fire_burst.png" id="i_lucky_seven"]
+[ext_resource type="Resource" path="res://data/effects/fire_burst_blast.tres" id="fx_hit_effect"]
+[ext_resource type="Resource" path="res://data/projectiles/fire_burst_ball.tres" id="fx_projectile"]
 
 [resource]
 script = ExtResource("1_skill_def")
@@ -29,6 +29,6 @@ reach = 320.0
 height = 100.0
 animation = &"slash"
 flash = Color(1.0, 0.55, 0.25, 1)
-projectile = ExtResource("p_mob_ember")
-hit_effect = ExtResource("h_critical")
+projectile = ExtResource("fx_projectile")
+hit_effect = ExtResource("fx_hit_effect")
 icon = ExtResource("i_lucky_seven")

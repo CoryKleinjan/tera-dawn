@@ -316,6 +316,8 @@ func _cast_buff(p: SimPlayer, skill: SkillDef, lvl: int) -> void:
 		p.dirty_vitals = true
 	c.skills.add_buff(skill, lvl)
 	p.dirty_character = true
+	if skill.aura and c.skills.buffs.has(skill.id):
+		p.map.broadcast(&"ev_aura", [p.peer, skill.id, c.skills.buffs[skill.id][1]])
 
 ## Puts a skill or item on a quickslot (an empty `kind` clears it).
 func on_set_quickslot(peer: int, i: int, kind: StringName, id: StringName) -> void:

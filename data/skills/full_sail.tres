@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="SkillDef" load_steps=7 format=3]
+[gd_resource type="Resource" script_class="SkillDef" load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="2_stat_block"]
-[ext_resource type="Resource" path="res://data/effects/bullet_time_aura.tres" id="e_bullet_time_aura"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/full_sail.png" id="i_bullet_time"]
+[ext_resource type="Resource" path="res://data/effects/full_sail_burst.tres" id="fx_effect"]
+[ext_resource type="Resource" path="res://data/effects/full_sail_aura.tres" id="fx_aura"]
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("2_stat_block")
@@ -31,7 +32,8 @@ duration = 45.0
 duration_per_level = 6.0
 animation = &"cast"
 flash = Color(1.0, 0.72, 0.3, 1)
-effect = ExtResource("e_bullet_time_aura")
+effect = ExtResource("fx_effect")
+aura = ExtResource("fx_aura")
 icon = ExtResource("i_bullet_time")
 stats = SubResource("Resource_1")
 stats_per_level = SubResource("Resource_2")

@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skillfx_ice_spike_shatter.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 674, 675, 1349],
+    "cols": [0, 598, 600, 1198, 1200, 1798, 1800, 2398]
+  },
+  "cells": [
+    ["ice_spike_shatter_1", "", "ice_spike_shatter_2", "", "ice_spike_shatter_3", "", "ice_spike_shatter_4"],
+    ["", "", "", "", "", "", ""],
+    ["ice_spike_shatter_5", "", "ice_spike_shatter_6", "", "ice_spike_shatter_7", "", "ice_spike_shatter_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.1298,
+  "overrides": {
+    "ice_spike_shatter_1": {
+      "crop": [0, 0, 578, 654]
+    },
+    "ice_spike_shatter_2": {
+      "crop": [0, 0, 578, 654]
+    },
+    "ice_spike_shatter_3": {
+      "crop": [0, 0, 578, 654]
+    },
+    "ice_spike_shatter_4": {
+      "crop": [0, 0, 578, 654]
+    },
+    "ice_spike_shatter_5": {
+      "crop": [0, 0, 578, 654]
+    },
+    "ice_spike_shatter_6": {
+      "crop": [0, 0, 578, 654]
+    },
+    "ice_spike_shatter_7": {
+      "crop": [0, 0, 578, 654]
+    },
+    "ice_spike_shatter_8": {
+      "crop": [0, 0, 578, 654]
+    }
+  }
+}

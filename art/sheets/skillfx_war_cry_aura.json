@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skillfx_war_cry_aura.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 674, 675, 1349],
+    "cols": [0, 598, 600, 1198, 1200, 1798, 1801, 2399]
+  },
+  "cells": [
+    ["war_cry_aura_1", "", "war_cry_aura_2", "", "war_cry_aura_3", "", "war_cry_aura_4"],
+    ["", "", "", "", "", "", ""],
+    ["war_cry_aura_5", "", "war_cry_aura_6", "", "war_cry_aura_7", "", "war_cry_aura_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.1298,
+  "overrides": {
+    "war_cry_aura_1": {
+      "crop": [0, 0, 578, 654]
+    },
+    "war_cry_aura_2": {
+      "crop": [0, 0, 578, 654]
+    },
+    "war_cry_aura_3": {
+      "crop": [0, 0, 578, 654]
+    },
+    "war_cry_aura_4": {
+      "crop": [0, 0, 578, 654]
+    },
+    "war_cry_aura_5": {
+      "crop": [0, 0, 578, 654]
+    },
+    "war_cry_aura_6": {
+      "crop": [0, 0, 578, 654]
+    },
+    "war_cry_aura_7": {
+      "crop": [0, 0, 578, 654]
+    },
+    "war_cry_aura_8": {
+      "crop": [0, 0, 578, 654]
+    }
+  }
+}

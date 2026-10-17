@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skillfx_shadow_ambush_strike.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 674, 675, 1349],
+    "cols": [0, 598, 600, 1198, 1200, 1798, 1800, 2398]
+  },
+  "cells": [
+    ["shadow_ambush_strike_1", "", "shadow_ambush_strike_2", "", "shadow_ambush_strike_3", "", "shadow_ambush_strike_4"],
+    ["", "", "", "", "", "", ""],
+    ["shadow_ambush_strike_5", "", "shadow_ambush_strike_6", "", "shadow_ambush_strike_7", "", "shadow_ambush_strike_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.2163,
+  "overrides": {
+    "shadow_ambush_strike_1": {
+      "crop": [0, 0, 578, 654]
+    },
+    "shadow_ambush_strike_2": {
+      "crop": [0, 0, 578, 654]
+    },
+    "shadow_ambush_strike_3": {
+      "crop": [0, 0, 578, 654]
+    },
+    "shadow_ambush_strike_4": {
+      "crop": [0, 0, 578, 654]
+    },
+    "shadow_ambush_strike_5": {
+      "crop": [0, 0, 578, 654]
+    },
+    "shadow_ambush_strike_6": {
+      "crop": [0, 0, 578, 654]
+    },
+    "shadow_ambush_strike_7": {
+      "crop": [0, 0, 578, 654]
+    },
+    "shadow_ambush_strike_8": {
+      "crop": [0, 0, 578, 654]
+    }
+  }
+}

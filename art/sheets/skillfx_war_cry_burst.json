@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skillfx_war_cry_burst.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 674, 675, 1349],
+    "cols": [52, 598, 652, 1198, 1199, 1745, 1800, 2346]
+  },
+  "cells": [
+    ["war_cry_burst_1", "", "war_cry_burst_2", "", "war_cry_burst_3", "", "war_cry_burst_4"],
+    ["", "", "", "", "", "", ""],
+    ["war_cry_burst_5", "", "war_cry_burst_6", "", "war_cry_burst_7", "", "war_cry_burst_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.202,
+  "overrides": {
+    "war_cry_burst_1": {
+      "crop": [0, 0, 526, 654]
+    },
+    "war_cry_burst_2": {
+      "crop": [0, 0, 526, 654]
+    },
+    "war_cry_burst_3": {
+      "crop": [0, 0, 526, 654]
+    },
+    "war_cry_burst_4": {
+      "crop": [0, 0, 526, 654]
+    },
+    "war_cry_burst_5": {
+      "crop": [0, 0, 526, 654]
+    },
+    "war_cry_burst_6": {
+      "crop": [0, 0, 526, 654]
+    },
+    "war_cry_burst_7": {
+      "crop": [0, 0, 526, 654]
+    },
+    "war_cry_burst_8": {
+      "crop": [0, 0, 526, 654]
+    }
+  }
+}
