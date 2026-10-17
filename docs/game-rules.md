@@ -340,3 +340,18 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   opens and one boss, the same for all five jobs (a hulking beast of pale starlit stone), steps
   out. Beating it and handing the test in makes you that job; the tutor sends you to Archmage
   Celest in Lumewood (Magicians are already with her).
+
+## Tears
+
+- Each mainland zone has one hidden tear: a small zone of its own (3-4 maps, its own look and
+  music, 2-3 monster kinds of its own, a guardian boss at the end). Its way in is a secret room
+  that only a boss move from another zone reaches. Dawnrise Isle and Daybreak Shore have none.
+- Every tear stays sealed until the story first takes the hero through a tear. Gates are progress,
+  never level.
+- Finishing a tear turns its zone for that character: its fields get darker light and fog (never a
+  recolour of the art) and its monsters become more dangerous, painted versions of themselves,
+  1.5x as strong with more EXP and essence to match. Towns never change. In co-op a map follows
+  the host's character.
+- Each zone also has 2-3 secret areas that need its own boss's move, so a new move has a use right
+  after the fight.
+- The second-job tutors are not in these tears.

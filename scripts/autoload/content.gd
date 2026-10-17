@@ -19,6 +19,7 @@ const FOLDERS := {
 	"regions": "res://data/regions",
 	"achievements": "res://data/achievements",
 	"cutscenes": "res://data/cutscenes",
+	"tears": "res://data/tears",
 }
 
 var monsters := {}
@@ -36,6 +37,8 @@ var regions := {}
 ## AchievementDefs; Achievements lists them in order and measures them.
 var achievements := {}
 var cutscenes := {}
+## TearDefs: the hidden tears and what finishing one does to its zone (TearState).
+var tears := {}
 
 func _ready() -> void:
 	for kind in FOLDERS:

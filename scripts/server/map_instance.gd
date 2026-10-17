@@ -33,6 +33,9 @@ var _sent_info := {}
 ## Its tear (MapDef.tear_platform) has opened, and what came out of it has stepped out.
 var tear_open := false
 var _tear_woken := false
+## Its zone has turned for the host: its tear is finished (TearState), so the more dangerous
+## monsters spawn, stronger, and it shows darker.
+var dark := false
 
 func _init(s: TDServer, map_def: MapDef) -> void:
 	server = s
@@ -40,11 +43,13 @@ func _init(s: TDServer, map_def: MapDef) -> void:
 	layout = MapLayout.new(map_def)
 	var steps := WorldRoutes.steps_from_town()
 	var strength := {}
+	dark = TearState.dark(def, TearState.host(s))
 	for r in def.roster():
 		var plat := layout.platforms[r[1]]
 		if not strength.has(r[0]):
-			strength[r[0]] = MonsterStrength.on_map(r[0], def.id, steps)
-		var m := SimMob.new(self, mobs.size(), r[0], plat, r[3].patrol_area(plat), strength[r[0]])
+			strength[r[0]] = MonsterStrength.on_map(r[0], def.id, steps) * TearState.strength(dark)
+		var m := SimMob.new(self, mobs.size(), TearState.kind(r[0], def, dark), plat, r[3].patrol_area(plat),
+			strength[r[0]])
 		if r[2] >= 0:
 			m.sleep()
 			m.parent = mobs[r[2]]
@@ -98,12 +103,12 @@ func remove_player(p: SimPlayer) -> void:
 	for b in breakables:
 		b.forget(p.peer)
 
-## Everything a client needs on arriving: monsters and items as they are right now, and
-## whether the tear is open.
+## Everything a client needs on arriving: monsters and items as they are right now,
+## whether the tear is open and whether the zone has turned.
 func full_state() -> Dictionary:
 	return {"mobs": mobs.map(func(m: SimMob) -> Array: return m.snapshot()),
 		"drops": drops.values().map(func(d: SimDrop) -> Array: return d.snapshot()),
-		"tear": tear_open}
+		"tear": tear_open, "dark": dark}
 
 # ---------- the tear ----------
 
