@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skillfx_magic_guard_aura.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 674, 675, 1349],
+    "cols": [0, 600, 600, 1200, 1200, 1800, 1800, 2400]
+  },
+  "cells": [
+    ["magic_guard_aura_1", "", "magic_guard_aura_2", "", "magic_guard_aura_3", "", "magic_guard_aura_4"],
+    ["", "", "", "", "", "", ""],
+    ["magic_guard_aura_5", "", "magic_guard_aura_6", "", "magic_guard_aura_7", "", "magic_guard_aura_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.1293,
+  "overrides": {
+    "magic_guard_aura_1": {
+      "crop": [0, 8, 580, 646]
+    },
+    "magic_guard_aura_2": {
+      "crop": [0, 8, 580, 646]
+    },
+    "magic_guard_aura_3": {
+      "crop": [0, 8, 580, 646]
+    },
+    "magic_guard_aura_4": {
+      "crop": [0, 8, 580, 646]
+    },
+    "magic_guard_aura_5": {
+      "crop": [0, 8, 580, 646]
+    },
+    "magic_guard_aura_6": {
+      "crop": [0, 8, 580, 646]
+    },
+    "magic_guard_aura_7": {
+      "crop": [0, 8, 580, 646]
+    },
+    "magic_guard_aura_8": {
+      "crop": [0, 8, 580, 646]
+    }
+  }
+}

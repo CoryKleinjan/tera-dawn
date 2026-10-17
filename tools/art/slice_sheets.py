@@ -53,6 +53,7 @@ DEFAULTS = {
     "save": True,             # False: only used by animation sets, not written on its own
     "key": [0.35, 0.8],       # magenta sheets: magenta-ness at which pixels start / stop being background
     "light": False,           # magenta sheets: the art is light with no outline, keyed out exactly (key_light); [r, g, b] also sets its colour
+    "glow": False,            # painted skill effects: glowing light (and dark smoke) on any flat background (key_glow)
     "trim": True,             # False keeps the whole cell (or crop), so separate animation frames line up
     "defringe": True,         # magenta sheets: take the magenta out of the outline pixels at the cut edge
     "dark_key": True,         # magenta sheets: dark magenta is background (floor shadows); False keeps plum line art
@@ -221,6 +222,80 @@ def key_light(cell, bg, floor=0.04, hue=None):
         chroma = (rgb - lo).max(2, keepdims=True)
         rgb = np.clip(lo + chroma * (h - h.min()) / max(np.ptp(h), 1e-3), 0, 1)
     return rgb, alpha
+
+
+def _spread(colour, seeds, sigmas=(4, 12, 36, 108)):
+    """The colour of the nearest `seeds` pixels at every pixel: their colour blurred outwards,
+    widening the blur until every pixel has some. Returns (colour, reached)."""
+    out = np.zeros_like(colour)
+    got = np.zeros(seeds.shape, bool)
+    for k in sigmas:
+        den = cv2.GaussianBlur(seeds, (0, 0), k)
+        num = cv2.GaussianBlur((colour * seeds[..., None]).astype(np.float32), (0, 0), k)
+        ok = (den > 1e-3) & ~got
+        out[ok] = (num / np.maximum(den, 1e-6)[..., None])[ok]
+        got |= ok
+    return out, got
+
+
+def _project(c, b, light):
+    """Opacity of `light` laid over background `b` that best explains each pixel `c`, and
+    how far the pixel is from that (how badly the light explains it)."""
+    d = light - b
+    a = np.clip(((c - b) * d).sum(2) / np.maximum((d * d).sum(2), 1e-4), 0, 1)
+    miss = np.sqrt((((b + a[..., None] * d) - c) ** 2).sum(2))
+    return a, miss
+
+
+def key_glow(cell, bg, ref=None, floor=0.04):
+    """A painted skill effect on a flat background: glowing light with no outline, maybe with
+    dark smoke or deep water in it. The opaque core keeps its paint; every see-through pixel
+    is read as the nearest opaque paint laid over the background (the bright light, or the
+    dark smoke when that explains it better), and its opacity solved from that, so a gold
+    halo stays gold and smoke stays grey, never pink. `ref` [r, g, b]: the effect's light,
+    for a frame that is all faint glow with no opaque core of its own (the last of a fade)."""
+    c = cell / 255.0
+    b = np.asarray(bg, float) / 255.0
+    far = np.where(c > b, (c - b) / np.maximum(1 - b, 0.2), (b - c) / np.maximum(b, 0.2))
+    a0 = np.clip((far.max(2) - floor) / (1 - floor), 0, 1)
+    solid = a0 > min(0.85, 0.8 * a0.max())
+    if solid.mean() < 0.01 and ref is not None:
+        alpha, _ = _project(c, b, np.broadcast_to(np.asarray(ref, float) / 255.0, c.shape))
+        alpha = np.clip((alpha - floor) / (1 - floor), 0, 1)
+        return np.broadcast_to(np.asarray(ref, float) / 255.0, c.shape).copy(), alpha
+    light, got = _spread(c, solid.astype(np.float32))
+    light[~got] = c[~got]
+    alpha, miss = _project(c, b, light)
+    alpha = np.clip((alpha - floor) / (1 - floor), 0, 1)
+    alpha = np.where(solid, 1.0, np.minimum(alpha, 0.999))
+    alpha[~got] = 0
+    rgb = np.where(solid[..., None], c, light)
+    # paint the light can't explain (dark smoke, deep water): a second colour spread from the
+    # opaque dark paint, and each pixel takes whichever of the two explains it better
+    dark = (miss > 0.22) & (a0 > 0.7) & ~solid
+    if dark.sum() > 50:
+        shade, reached = _spread(c, dark.astype(np.float32))
+        ad, miss_d = _project(c, b, shade)
+        ad = np.clip((ad - floor) / (1 - floor), 0, 1)
+        use = reached & (miss_d < miss) & ~solid
+        rgb = np.where(use[..., None], shade, rgb)
+        alpha = np.where(use, np.minimum(ad, 0.999), alpha)
+        rgb = np.where(dark[..., None], c, rgb)
+        alpha = np.where(dark, 1.0, alpha)
+    return np.clip(rgb, 0, 1), alpha
+
+
+def glow_reference(rgb, bg, boxes=()):
+    """The colour of a glow sheet's opaque light, for its faint frames (key_glow `ref`).
+    `boxes` [(x0, y0, x1, y1), ...]: only look inside these (the cells, not the divider lines)."""
+    if boxes:
+        rgb = np.concatenate([rgb[y0:y1:2, x0:x1:2].reshape(-1, 3) for x0, y0, x1, y1 in boxes])[None]
+    c = rgb if boxes else rgb[::2, ::2]
+    c = c / 255.0
+    b = np.asarray(bg, float) / 255.0
+    far = np.where(c > b, (c - b) / np.maximum(1 - b, 0.2), (b - c) / np.maximum(b, 0.2)).max(2)
+    core = c[far > 0.8 * far.max()]
+    return (core.mean(0) * 255).tolist() if len(core) else None
 
 
 def _shifted(x, dy, dx):
@@ -827,6 +902,8 @@ def cut_cell(rgb_full, bg, box, opts):
         label_px = opts["label_band"] * cell.shape[0] if opts["label_band"] < 1 else opts["label_band"]
     if opts["background"] == "dark":
         rgb, alpha = key_dark(cell, bg, opts["shadow"])
+    elif opts.get("glow"):
+        rgb, alpha = key_glow(cell, bg, opts.get("glow_ref"))
     elif opts.get("light"):
         rgb, alpha = key_light(cell, bg, hue=opts["light"] if isinstance(opts["light"], list) else None)
     else:
@@ -1108,6 +1185,10 @@ def process(manifest_path, grid_only=False, sprites=None):
     base = {**DEFAULTS, **{k: v for k, v in man.items() if k in DEFAULTS}}
     bg = np.array(base["background"]) if isinstance(base["background"], list) else background_color(rgb)
     bands = grid_from_manifest(man["grid"], rgb.shape) if "grid" in man else detect_grid(rgb, bg, man.get("grid_threshold", 0.8))
+    if base["glow"]:
+        ins = base["inset"]
+        base["glow_ref"] = glow_reference(rgb, bg, [(x0 + ins, y0 + ins, x1 - ins, y1 - ins) for (y0, y1, cols), row
+                                                    in zip(bands, man["cells"]) for (x0, x1), n in zip(cols, row) if n])
     print(f"{sheet_id}: {len(bands)} rows, cells per row {[len(c) for _, _, c in bands]}")
     if grid_only:
         for y0, y1, cols in bands:

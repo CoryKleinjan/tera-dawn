@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="SkillDef" load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
-[ext_resource type="Resource" path="res://data/effects/dawn_slash.tres" id="e_dawn_slash"]
-[ext_resource type="Resource" path="res://data/effects/hit.tres" id="h_hit"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/dawn_slash.png" id="i_dawn_slash"]
+[ext_resource type="Resource" path="res://data/effects/dawn_slash_swing.tres" id="fx_effect"]
+[ext_resource type="Resource" path="res://data/effects/dawn_slash_hit.tres" id="fx_hit_effect"]
 
 [resource]
 script = ExtResource("1_skill_def")
@@ -26,6 +26,6 @@ action_ticks = 22
 reach = 170.0
 height = 110.0
 animation = &"slash"
-effect = ExtResource("e_dawn_slash")
-hit_effect = ExtResource("h_hit")
+effect = ExtResource("fx_effect")
+hit_effect = ExtResource("fx_hit_effect")
 icon = ExtResource("i_dawn_slash")
