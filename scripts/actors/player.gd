@@ -658,6 +658,7 @@ func _air_jump() -> void:
 	action_t = MOVE_POSE_TICKS
 	action_anim = &"leap"
 	world.fx.dust(position, 0, 4)
+	_trail(RelicDef.Move.DOUBLE_JUMP, MOVE_POSE_TICKS)
 
 ## A Slam hit the ground: the screen jolts and the server breaks what it landed on.
 func _slam_landed() -> void:
@@ -667,10 +668,14 @@ func _slam_landed() -> void:
 	world.fx.dust(position, 0, 10)
 	Net.ask(&"req_slam", [position])
 
-## The code-drawn trail of relic move `m` for `ticks`, until painted effects replace it.
+## Relic move `m`'s painted effect round him, or its code-drawn trail for `ticks`.
 func _trail(m: RelicDef.Move, ticks: int) -> void:
 	var relic := Game.me.relic_for(m)
-	if relic:
+	if relic == null:
+		return
+	if relic.effect:
+		world.fx.add_effect(relic.effect, position, face, self)
+	else:
 		TDMoveFx.play(world, relic.trail_move(ticks), position, position, self)
 
 # ---------- Visuals ----------

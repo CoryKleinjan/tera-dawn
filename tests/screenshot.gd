@@ -424,6 +424,15 @@ func _run() -> void:
 			await _shot("town_" + town)
 		Net.server.enter_map(_me(), &"meadow", 300)
 		await _physics(10)
+	if only == "" or only == "docks":
+		# Captain Marlo with his ship at both docks, and each town's portal to its dock.
+		for spot in [[&"dawnrise_dock", 1000], [&"dawnharbor_docks", 1000], [&"dawnrise_village", 560], [&"dawnharbor", 420]]:
+			Net.server.enter_map(_me(), spot[0], spot[1])
+			await _physics(40)
+			await _frames(3)
+			await _shot("dock_" + spot[0])
+		Net.server.enter_map(_me(), &"meadow", 300)
+		await _physics(10)
 	if only == "" or only == "rooms":
 		# Inside every building you can walk into.
 		for m: MapDef in Content.maps.values():
