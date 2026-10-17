@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="SkillDef" load_steps=7 format=3]
+[gd_resource type="Resource" script_class="SkillDef" load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/skill_def.gd" id="1_skill_def"]
 [ext_resource type="Script" path="res://scripts/data/stat_block.gd" id="2_stat_block"]
-[ext_resource type="Resource" path="res://data/effects/iron_body_aura.tres" id="e_iron_body_aura"]
 [ext_resource type="Texture2D" path="res://assets/sprites/skills/iron_body.png" id="i_iron_body"]
+[ext_resource type="Resource" path="res://data/effects/iron_body_burst.tres" id="fx_effect"]
+[ext_resource type="Resource" path="res://data/effects/iron_body_aura.tres" id="fx_aura"]
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("2_stat_block")
@@ -30,7 +31,8 @@ duration_per_level = 10.28571
 animation = &"cast"
 steady = true
 flash = Color(0.62, 0.74, 1.0, 1)
-effect = ExtResource("e_iron_body_aura")
+effect = ExtResource("fx_effect")
+aura = ExtResource("fx_aura")
 icon = ExtResource("i_iron_body")
 stats = SubResource("Resource_1")
 stats_per_level = SubResource("Resource_2")

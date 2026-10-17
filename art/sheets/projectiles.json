@@ -6,12 +6,12 @@
   "cells": [
     [
       "arrow",
-      "star",
-      "bullet",
+      "",
+      "",
       ""
     ],
     [
-      "energy_bolt",
+      "",
       "",
       "mob_seed",
       "mob_bolt"
@@ -27,15 +27,6 @@
     "arrow": {
       "scale": 0.133,
       "alpha": "smooth"
-    },
-    "star": {
-      "scale": 0.1201
-    },
-    "bullet": {
-      "scale": 0.2248
-    },
-    "energy_bolt": {
-      "scale": 0.1623
     },
     "mob_seed": {
       "scale": 0.1172

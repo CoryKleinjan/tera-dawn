@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skillfx_first_aid_heal.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 672, 675, 1347],
+    "cols": [0, 598, 599, 1197, 1198, 1796, 1799, 2397]
+  },
+  "cells": [
+    ["first_aid_heal_1", "", "first_aid_heal_2", "", "first_aid_heal_3", "", "first_aid_heal_4"],
+    ["", "", "", "", "", "", ""],
+    ["first_aid_heal_5", "", "first_aid_heal_6", "", "first_aid_heal_7", "", "first_aid_heal_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.1622,
+  "overrides": {
+    "first_aid_heal_1": {
+      "crop": [0, 4, 578, 648]
+    },
+    "first_aid_heal_2": {
+      "crop": [0, 4, 578, 648]
+    },
+    "first_aid_heal_3": {
+      "crop": [0, 4, 578, 648]
+    },
+    "first_aid_heal_4": {
+      "crop": [0, 4, 578, 648]
+    },
+    "first_aid_heal_5": {
+      "crop": [0, 4, 578, 648]
+    },
+    "first_aid_heal_6": {
+      "crop": [0, 4, 578, 648]
+    },
+    "first_aid_heal_7": {
+      "crop": [0, 4, 578, 648]
+    },
+    "first_aid_heal_8": {
+      "crop": [0, 4, 578, 648]
+    }
+  }
+}

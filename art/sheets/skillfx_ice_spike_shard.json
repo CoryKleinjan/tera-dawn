@@ -1,0 +1,49 @@
+{
+  "source": "art/source/skillfx_ice_spike_shard.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 334, 337, 671, 678, 1012, 1015, 1349],
+    "cols": [0, 1200, 1200, 2400]
+  },
+  "cells": [
+    ["ice_spike_shard_1", "", "ice_spike_shard_2"],
+    ["", "", ""],
+    ["ice_spike_shard_3", "", "ice_spike_shard_4"],
+    ["", "", ""],
+    ["ice_spike_shard_5", "", "ice_spike_shard_6"],
+    ["", "", ""],
+    ["ice_spike_shard_7", "", "ice_spike_shard_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.09,
+  "overrides": {
+    "ice_spike_shard_1": {
+      "crop": [28, 0, 1152, 314]
+    },
+    "ice_spike_shard_2": {
+      "crop": [28, 0, 1152, 314]
+    },
+    "ice_spike_shard_3": {
+      "crop": [28, 0, 1152, 314]
+    },
+    "ice_spike_shard_4": {
+      "crop": [28, 0, 1152, 314]
+    },
+    "ice_spike_shard_5": {
+      "crop": [28, 0, 1152, 314]
+    },
+    "ice_spike_shard_6": {
+      "crop": [28, 0, 1152, 314]
+    },
+    "ice_spike_shard_7": {
+      "crop": [28, 0, 1152, 314]
+    },
+    "ice_spike_shard_8": {
+      "crop": [28, 0, 1152, 314]
+    }
+  }
+}

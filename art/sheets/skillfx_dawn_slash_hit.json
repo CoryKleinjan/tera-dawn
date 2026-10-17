@@ -1,0 +1,45 @@
+{
+  "source": "art/source/skillfx_dawn_slash_hit.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [0, 674, 675, 1349],
+    "cols": [0, 598, 600, 1198, 1200, 1798, 1800, 2398]
+  },
+  "cells": [
+    ["dawn_slash_hit_1", "", "dawn_slash_hit_2", "", "dawn_slash_hit_3", "", "dawn_slash_hit_4"],
+    ["", "", "", "", "", "", ""],
+    ["dawn_slash_hit_5", "", "dawn_slash_hit_6", "", "dawn_slash_hit_7", "", "dawn_slash_hit_8"]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.1514,
+  "overrides": {
+    "dawn_slash_hit_1": {
+      "crop": [0, 0, 578, 654]
+    },
+    "dawn_slash_hit_2": {
+      "crop": [0, 0, 578, 654]
+    },
+    "dawn_slash_hit_3": {
+      "crop": [0, 0, 578, 654]
+    },
+    "dawn_slash_hit_4": {
+      "crop": [0, 0, 578, 654]
+    },
+    "dawn_slash_hit_5": {
+      "crop": [0, 0, 578, 654]
+    },
+    "dawn_slash_hit_6": {
+      "crop": [0, 0, 578, 654]
+    },
+    "dawn_slash_hit_7": {
+      "crop": [0, 0, 578, 654]
+    },
+    "dawn_slash_hit_8": {
+      "crop": [0, 0, 578, 654]
+    }
+  }
+}
