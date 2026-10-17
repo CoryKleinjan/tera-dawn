@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="map_def"]
 [ext_resource type="Resource" path="res://data/biomes/lantern.tres" id="lantern"]
 [ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="platform_def"]
-[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="climbable_def"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="portal_def"]
 [ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="npc_placement"]
 [ext_resource type="Script" path="res://scripts/data/building_placement.gd" id="building_placement"]
@@ -11,7 +10,6 @@
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="backdrop_layer_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/lanternfall/panorama.png" id="panorama"]
-[ext_resource type="Resource" path="res://data/climb_styles/ladder.tres" id="ladder"]
 [ext_resource type="Resource" path="res://data/buildings/lanternfall_large.tres" id="b_large"]
 [ext_resource type="Resource" path="res://data/buildings/lanternfall_small.tres" id="b_small"]
 [ext_resource type="Resource" path="res://data/buildings/lanternfall_store.tres" id="b_store"]
@@ -56,34 +54,6 @@ width = 900.0
 look = ExtResource("t_rooftop_lane")
 look_span = 0.97
 look_top = 83.0
-
-[sub_resource type="Resource" id="Ladder_0"]
-script = ExtResource("climbable_def")
-x = 3640.0
-top = 753.0
-bottom = 920.0
-style = ExtResource("ladder")
-
-[sub_resource type="Resource" id="Ladder_1"]
-script = ExtResource("climbable_def")
-x = 4260.0
-top = 753.0
-bottom = 920.0
-style = ExtResource("ladder")
-
-[sub_resource type="Resource" id="Ladder_2"]
-script = ExtResource("climbable_def")
-x = 4540.0
-top = 804.9
-bottom = 920.0
-style = ExtResource("ladder")
-
-[sub_resource type="Resource" id="Ladder_3"]
-script = ExtResource("climbable_def")
-x = 5360.0
-top = 804.9
-bottom = 920.0
-style = ExtResource("ladder")
 
 [sub_resource type="Resource" id="Portal_west"]
 script = ExtResource("portal_def")
@@ -297,6 +267,24 @@ script = ExtResource("prop_placement")
 texture = ExtResource("t_prop_cart")
 x = 4400.0
 
+[sub_resource type="Resource" id="Step_1"]
+script = ExtResource("platform_def")
+x = 3613.0
+y = 864.3
+width = 110.0
+
+[sub_resource type="Resource" id="Step_2"]
+script = ExtResource("platform_def")
+x = 3557.0
+y = 808.7
+width = 110.0
+
+[sub_resource type="Resource" id="Step_3"]
+script = ExtResource("platform_def")
+x = 4513.0
+y = 862.5
+width = 110.0
+
 [resource]
 script = ExtResource("map_def")
 id = &"lanternfall"
@@ -308,8 +296,7 @@ height = 1000
 ground_y = 920
 lantern_spacing = 0.0
 start_x = 300.0
-platforms = Array[ExtResource("platform_def")]([SubResource("Balcony"), SubResource("Rooftop")])
-climbables = Array[ExtResource("climbable_def")]([SubResource("Ladder_0"), SubResource("Ladder_1"), SubResource("Ladder_2"), SubResource("Ladder_3")])
+platforms = Array[ExtResource("platform_def")]([SubResource("Balcony"), SubResource("Rooftop"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3")])
 npcs = Array[ExtResource("npc_placement")]([SubResource("Npc_taxi"), SubResource("Npc_shop"), SubResource("Npc_keeper"), SubResource("Npc_urchin"), SubResource("Npc_lamplighter"), SubResource("Npc_card_sharp")])
 props = Array[ExtResource("prop_placement")]([SubResource("Prop_sign"), SubResource("Prop_lamp_west"), SubResource("Prop_barrel"), SubResource("Prop_bench"), SubResource("Prop_stall"), SubResource("Prop_lamp_mid"), SubResource("Prop_kegs"), SubResource("Prop_notice"), SubResource("Prop_crates"), SubResource("Prop_lamp_roof"), SubResource("Prop_sacks"), SubResource("Prop_trough"), SubResource("Prop_pots"), SubResource("Prop_cart")])
 buildings = Array[ExtResource("building_placement")]([SubResource("Building_row"), SubResource("Building_store"), SubResource("Building_den"), SubResource("Building_pawn"), SubResource("Building_inn"), SubResource("Building_tower")])

@@ -110,13 +110,6 @@ func test_holding_the_loot_key_picks_up_a_pile_one_by_one() -> void:
 	check(map.drops.is_empty(), "everything in reach taken")
 	check_eq(ann.character.inventory.count_of(leaf), 3, "all three in the bag")
 
-func test_climbing_players_cant_loot() -> void:
-	var d := _kill()
-	h.place(ann, 340.0)
-	ann.climbing = true
-	h.ask(2, &"req_loot")
-	check(map.drops.has(d.id), "not while on a rope")
-
 func test_dawnshards_go_to_the_wallet_by_walking_over_them() -> void:
 	var shard := Content.item(&"dawnshard")
 	var d := _drop_here(shard, 40, 2, 300.0)

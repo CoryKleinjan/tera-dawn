@@ -65,9 +65,9 @@ func test_you_cant_sit_in_the_air() -> void:
 
 func test_moving_gets_you_up() -> void:
 	h.ask(2, &"req_sit", [true])
-	h.ask(2, &"req_move", [Vector2(301, 600), 1, &"sit", false])
+	h.ask(2, &"req_move", [Vector2(301, 600), 1, &"sit"])
 	check(p.sitting, "a pixel of drift is fine")
-	h.ask(2, &"req_move", [Vector2(310, 600), 1, &"walk", false])
+	h.ask(2, &"req_move", [Vector2(310, 600), 1, &"walk"])
 	check(not p.sitting, "walking off")
 
 func test_getting_hit_gets_you_up() -> void:

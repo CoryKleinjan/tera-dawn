@@ -1,8 +1,6 @@
 [gd_resource type="Resource" script_class="MapDef" format=3]
 
 [ext_resource type="Resource" path="res://data/biomes/meadow.tres" id="1_8hvfq"]
-[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="3_fg3cc"]
-[ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="4_jcelx"]
 [ext_resource type="Resource" path="res://data/cutscenes/daybreak_shore_intro.tres" id="5_1whi3"]
 [ext_resource type="Script" path="res://scripts/data/npc_placement.gd" id="6_y4w3w"]
 [ext_resource type="Resource" path="res://data/npcs/girl_on_beach.tres" id="7_wifi0"]
@@ -16,13 +14,6 @@
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="16_ys0uu"]
 [ext_resource type="Resource" path="res://data/monsters/dewling.tres" id="17_cipxd"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="20_gjxqo"]
-
-[sub_resource type="Resource" id="Resource_yh0k4"]
-script = ExtResource("3_fg3cc")
-x = 1100.0
-top = 410.0
-bottom = 620.0
-style = ExtResource("4_jcelx")
 
 [sub_resource type="Resource" id="Resource_xeban"]
 script = ExtResource("6_y4w3w")
@@ -99,6 +90,18 @@ fog_density = 0.46
 hide_layers = PackedInt32Array(3)
 hide_ground_decor = PackedInt32Array()
 
+[sub_resource type="Resource" id="Step_1"]
+script = ExtResource("12_1lham")
+x = 1073.0
+y = 550.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_2"]
+script = ExtResource("12_1lham")
+x = 1017.0
+y = 480.0
+width = 110.0
+
 [resource]
 script = ExtResource("15_74mwe")
 id = &"daybreak_shore"
@@ -109,8 +112,7 @@ width = 2000
 region = &"dawnrise_isle"
 return_map = &"daybreak_shore"
 intro_scene = ExtResource("5_1whi3")
-platforms = Array[ExtResource("12_1lham")]([SubResource("Resource_63r5f"), SubResource("Resource_7regm"), SubResource("Resource_ual6t")])
-climbables = Array[ExtResource("3_fg3cc")]([SubResource("Resource_yh0k4")])
+platforms = Array[ExtResource("12_1lham")]([SubResource("Resource_63r5f"), SubResource("Resource_7regm"), SubResource("Resource_ual6t"), SubResource("Step_1"), SubResource("Step_2")])
 portals = Array[ExtResource("13_kb7jc")]([SubResource("Resource_kblgp")])
 spawns = Array[ExtResource("16_ys0uu")]([SubResource("Resource_xhnrr")])
 npcs = Array[ExtResource("6_y4w3w")]([SubResource("Resource_xeban"), SubResource("Resource_owawj"), SubResource("Resource_bcsgr"), SubResource("Resource_5q78o")])

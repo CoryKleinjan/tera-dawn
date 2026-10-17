@@ -47,7 +47,7 @@ func test_blink_puts_you_where_it_lands() -> void:
 	var want := Content.skill(&"blink").move.blink_to(from, 1, Hitbox.Aim.UP, 1, float(map.def.width), float(map.def.ground_y))
 	check_eq(p.position, want, "up where the client lands")
 	h.step(3)
-	h.ask(2, &"req_move", [want + Vector2(0, 3), 1, &"fall", false])
+	h.ask(2, &"req_move", [want + Vector2(0, 3), 1, &"fall"])
 	check_eq(p.position, want + Vector2(0, 3), "and the next report from there is fine")
 
 func test_a_roll_cannot_be_hit() -> void:

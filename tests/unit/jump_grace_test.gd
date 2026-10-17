@@ -42,7 +42,7 @@ func test_no_coyote_time_after_a_jump() -> void:
 	g.press()
 	check(not g.can_jump(false), "no second jump in the air")
 
-func test_no_coyote_time_after_a_knockback_or_a_rope() -> void:
+func test_no_coyote_time_after_a_knockback() -> void:
 	_ticks(3, true)
 	g.cancel()
 	g.step(false)

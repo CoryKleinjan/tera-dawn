@@ -3,9 +3,6 @@
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/coast.tres" id="2_coast"]
 [ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
-[ext_resource type="Script" path="res://scripts/data/climbable_def.gd" id="4_climbable_def"]
-[ext_resource type="Resource" path="res://data/climb_styles/rope_ladder.tres" id="5_rope_ladder"]
-[ext_resource type="Resource" path="res://data/climb_styles/rope.tres" id="6_rope"]
 [ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
@@ -165,76 +162,6 @@ platform = 0
 target_map = &"shadow_marsh"
 target_x = 2760.0
 
-[sub_resource type="Resource" id="Resource_20"]
-script = ExtResource("4_climbable_def")
-x = 2280.0
-top = 270.0
-bottom = 380.0
-style = ExtResource("6_rope")
-
-[sub_resource type="Resource" id="Resource_19"]
-script = ExtResource("4_climbable_def")
-x = 2240.0
-top = 380.0
-bottom = 490.0
-style = ExtResource("6_rope")
-
-[sub_resource type="Resource" id="Resource_18"]
-script = ExtResource("4_climbable_def")
-x = 2040.0
-top = 490.0
-bottom = 620.0
-style = ExtResource("5_rope_ladder")
-
-[sub_resource type="Resource" id="Resource_17"]
-script = ExtResource("4_climbable_def")
-x = 1620.0
-top = 260.0
-bottom = 380.0
-style = ExtResource("6_rope")
-
-[sub_resource type="Resource" id="Resource_16"]
-script = ExtResource("4_climbable_def")
-x = 1620.0
-top = 380.0
-bottom = 490.0
-style = ExtResource("6_rope")
-
-[sub_resource type="Resource" id="Resource_15"]
-script = ExtResource("4_climbable_def")
-x = 1490.0
-top = 490.0
-bottom = 620.0
-style = ExtResource("5_rope_ladder")
-
-[sub_resource type="Resource" id="Resource_14"]
-script = ExtResource("4_climbable_def")
-x = 1168.0
-top = 280.0
-bottom = 390.0
-style = ExtResource("6_rope")
-
-[sub_resource type="Resource" id="Resource_13"]
-script = ExtResource("4_climbable_def")
-x = 1060.0
-top = 390.0
-bottom = 500.0
-style = ExtResource("6_rope")
-
-[sub_resource type="Resource" id="Resource_12"]
-script = ExtResource("4_climbable_def")
-x = 900.0
-top = 500.0
-bottom = 620.0
-style = ExtResource("5_rope_ladder")
-
-[sub_resource type="Resource" id="Resource_11"]
-script = ExtResource("4_climbable_def")
-x = 330.0
-top = 500.0
-bottom = 620.0
-style = ExtResource("5_rope_ladder")
-
 [sub_resource type="Resource" id="Resource_10"]
 script = ExtResource("3_platform_def")
 x = 2240.0
@@ -310,6 +237,60 @@ fog_begin = 0.0
 fog_end = 130.0
 fog_density = 0.53
 
+[sub_resource type="Resource" id="Step_1"]
+script = ExtResource("3_platform_def")
+x = 303.0
+y = 560.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_2"]
+script = ExtResource("3_platform_def")
+x = 873.0
+y = 560.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_3"]
+script = ExtResource("3_platform_def")
+x = 1463.0
+y = 555.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_4"]
+script = ExtResource("3_platform_def")
+x = 1033.0
+y = 445.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_5"]
+script = ExtResource("3_platform_def")
+x = 1593.0
+y = 435.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_6"]
+script = ExtResource("3_platform_def")
+x = 2213.0
+y = 435.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_7"]
+script = ExtResource("3_platform_def")
+x = 1141.0
+y = 335.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_8"]
+script = ExtResource("3_platform_def")
+x = 1593.0
+y = 320.0
+width = 110.0
+
+[sub_resource type="Resource" id="Step_9"]
+script = ExtResource("3_platform_def")
+x = 2253.0
+y = 325.0
+width = 110.0
+
 [resource]
 script = ExtResource("1_map_def")
 id = &"saltwind_cliffs"
@@ -320,8 +301,7 @@ width = 3000
 height = 700
 ground_y = 620
 start_x = 120.0
-platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Land_1")])
-climbables = Array[ExtResource("4_climbable_def")]([SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20")])
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Land_1"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3"), SubResource("Step_4"), SubResource("Step_5"), SubResource("Step_6"), SubResource("Step_7"), SubResource("Step_8"), SubResource("Step_9")])
 portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_21"), SubResource("Resource_22")])
 spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_23"), SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28"), SubResource("Resource_29"), SubResource("Resource_30"), SubResource("Resource_31"), SubResource("Resource_32"), SubResource("Resource_33"), SubResource("Resource_34")])
 props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_35"), SubResource("Resource_36"), SubResource("Resource_37"), SubResource("Resource_38"), SubResource("Resource_39"), SubResource("Resource_41"), SubResource("Resource_42")])

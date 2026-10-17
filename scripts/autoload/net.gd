@@ -261,9 +261,9 @@ func req_leave_character() -> void:
 # --- moving and fighting (TDServer) ---
 
 @rpc("any_peer", "call_local", "unreliable_ordered")
-func req_move(at: Vector2, face: int, anim: StringName, climbing: bool) -> void:
+func req_move(at: Vector2, face: int, anim: StringName) -> void:
 	if server:
-		server.on_move(_sender(), at, face, anim, climbing)
+		server.on_move(_sender(), at, face, anim)
 
 ## Sit down on the ground (`down`) or get up.
 @rpc("any_peer", "call_local", "reliable")

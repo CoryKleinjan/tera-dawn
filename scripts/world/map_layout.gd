@@ -1,6 +1,6 @@
 class_name MapLayout
 extends RefCounted
-## The walkable shape of a map: its platforms, ropes and ladders, portals and NPC spots.
+## The walkable shape of a map: its platforms, portals and NPC spots.
 ## The server's MapInstance and the client's TDWorld each build one from the same MapDef,
 ## so both sides agree on where things are.
 
@@ -13,12 +13,6 @@ func _init(def: MapDef) -> void:
 	platforms.append(Platform.floor_of(def))
 	for d in def.platforms:
 		platforms.append(Platform.from_def(d))
-
-func climbable_near(pos: Vector2) -> ClimbableDef:
-	for c in map.climbables:
-		if absf(pos.x - c.x) < 16 and pos.y > c.top - 2 and pos.y <= c.bottom + 2:
-			return c
-	return null
 
 func portal_at(pos: Vector2) -> PortalDef:
 	for p in map.portals:

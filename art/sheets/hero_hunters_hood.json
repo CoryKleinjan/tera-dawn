@@ -23,12 +23,12 @@
       ""
     ],
     [
-      "rope1",
-      "rope2",
-      "rope_hold",
-      "ladder1",
       "",
-      "ladder_hold",
+      "",
+      "",
+      "",
+      "",
+      "",
       "back",
       ""
     ]
@@ -68,11 +68,6 @@
         "walk2": "hero_hunters_hood:walk2",
         "walk3": "hero_hunters_hood:walk3",
         "jump": "hero_hunters_hood:jump",
-        "rope1": "hero_hunters_hood:rope1",
-        "rope2": "hero_hunters_hood:rope2",
-        "rope_hold": "hero_hunters_hood:rope_hold",
-        "ladder1": "hero_hunters_hood:ladder1",
-        "ladder_hold": "hero_hunters_hood:ladder_hold",
         "back": "hero_hunters_hood:back",
         "hurt": "hero_hunters_hood:idle1",
         "swing2": "hero_hunters_hood:idle1",
@@ -138,36 +133,6 @@
         "jump": {
           "frames": [
             "jump"
-          ],
-          "fps": 1
-        },
-        "rope1": {
-          "frames": [
-            "rope1"
-          ],
-          "fps": 1
-        },
-        "rope2": {
-          "frames": [
-            "rope2"
-          ],
-          "fps": 1
-        },
-        "rope_hold": {
-          "frames": [
-            "rope_hold"
-          ],
-          "fps": 1
-        },
-        "ladder1": {
-          "frames": [
-            "ladder1"
-          ],
-          "fps": 1
-        },
-        "ladder_hold": {
-          "frames": [
-            "ladder_hold"
           ],
           "fps": 1
         },

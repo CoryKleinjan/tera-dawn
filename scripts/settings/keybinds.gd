@@ -25,8 +25,8 @@ const PAD_AXIS_NAMES := {JOY_AXIS_TRIGGER_LEFT: "LT", JOY_AXIS_TRIGGER_RIGHT: "R
 const ACTIONS := [
 	{"action": "move_left", "label": "Move left", "group": "Movement", "keys": [KEY_LEFT], "pad": [JOY_BUTTON_DPAD_LEFT], "axis": [JOY_AXIS_LEFT_X, -1.0]},
 	{"action": "move_right", "label": "Move right", "group": "Movement", "keys": [KEY_RIGHT], "pad": [JOY_BUTTON_DPAD_RIGHT], "axis": [JOY_AXIS_LEFT_X, 1.0]},
-	{"action": "move_up", "label": "Up, climb, talk, portals", "group": "Movement", "keys": [KEY_UP], "pad": [JOY_BUTTON_DPAD_UP], "axis": [JOY_AXIS_LEFT_Y, -1.0]},
-	{"action": "move_down", "label": "Down, climb down", "group": "Movement", "keys": [KEY_DOWN], "pad": [JOY_BUTTON_DPAD_DOWN], "axis": [JOY_AXIS_LEFT_Y, 1.0]},
+	{"action": "move_up", "label": "Up, talk, portals", "group": "Movement", "keys": [KEY_UP], "pad": [JOY_BUTTON_DPAD_UP], "axis": [JOY_AXIS_LEFT_Y, -1.0]},
+	{"action": "move_down", "label": "Down, crouch", "group": "Movement", "keys": [KEY_DOWN], "pad": [JOY_BUTTON_DPAD_DOWN], "axis": [JOY_AXIS_LEFT_Y, 1.0]},
 	{"action": "jump", "label": "Jump", "group": "Movement", "keys": [KEY_SPACE, KEY_ALT], "pad": [JOY_BUTTON_A]},
 	{"action": "sit", "label": "Sit", "group": "Movement", "keys": [KEY_C]},
 	{"action": "attack", "label": "Attack", "group": "Combat", "keys": [KEY_X, KEY_CTRL], "pad": [JOY_BUTTON_X]},

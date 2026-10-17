@@ -1,11 +1,9 @@
 class_name SceneryBuilder
 extends RefCounted
 ## Builds everything that stands on the ground: the biome's scattered trees, bushes and
-## rocks (where DecorPlacement puts them), the map's buildings and hand-placed props, ropes
-## and ladders, portals and doors, and lanterns.
+## rocks (where DecorPlacement puts them), the map's buildings and hand-placed props, portals
+## and doors, and lanterns.
 
-## Climbable pieces stand straight up and down on screen.
-const UPRIGHT_SPRITE := preload("res://shaders/upright_sprite.gdshader")
 ## Warm light standing in a doorway.
 const DOOR_LIGHT := Color("ffc47a")
 ## How much nearer a portal's light sorts than where it stands (see _portal).
@@ -57,8 +55,6 @@ func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) 
 		_prop(p, map)
 	for b in map.buildings:
 		_building(b, platforms[b.platform], biome)
-	for c in map.climbables:
-		_climbable(c, platforms)
 	for p in map.portals:
 		if p.door:
 			_door(p, platforms[p.platform], biome)
@@ -248,44 +244,6 @@ func _door(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 	# in front of the doorway, so it lights the door and the land's front around it
 	l.position = TDStage.to3d(base + Vector2(0, -height * 0.45), TDStage.LAND_FRONT + 0.5)
 	root.add_child(l)
-
-## A rope or ladder: its style's pieces stacked edge to edge (ClimbStyleDef.pieces). Each piece
-## is drawn one texture pixel taller than its slot, so the joints never show a hairline gap; the
-## next piece covers the extra row. All the pieces stand straight up and down on screen under
-## the climbable's top (upright_sprite.gdshader), so the stack reads as one straight ladder.
-## Like characters, climbables cast no shadows. One painted into the scenery draws nothing.
-func _climbable(c: ClimbableDef, platforms: Array[Platform]) -> void:
-	var st := c.style
-	if st == null or c.in_scenery:
-		return
-	var z := TDStage.Z_CLIMBABLE
-	var flip := st.top_flipped(ClimbStyleDef.ledge_room(c.x, c.top, platforms))
-	var pieces := st.pieces(c.top, c.bottom)
-	if pieces.is_empty():
-		return
-	var top_y: float = pieces[0].y
-	for p in pieces:
-		var tex: Texture2D = p.texture
-		var flipped: bool = flip and tex == st.top
-		var size := Vector2(TDStage.art_size(tex, st.texel).x, p.height + st.texel / TDStage.art_density(tex))
-		# the end pieces are fitted to the middles where they join (ClimbStyleDef.piece_fit)
-		var fit := st.piece_fit(tex, flipped)
-		size.x *= fit.x
-		var q := QuadMesh.new()
-		q.size = size / TDStage.PX
-		var m := ShaderMaterial.new()
-		m.shader = UPRIGHT_SPRITE
-		m.set_shader_parameter(&"albedo_tex", tex)
-		m.set_shader_parameter(&"flip_h", flipped)
-		m.set_shader_parameter(&"slant", st.slant() / TDStage.PX if tex == st.middle else 0.0)
-		m.set_shader_parameter(&"top", (q.size.y / 2.0) + (p.y - top_y) / TDStage.PX)
-		q.material = m
-		var mi := MeshInstance3D.new()
-		mi.mesh = q
-		mi.position = TDStage.to3d(Vector2(c.x + fit.y, p.y + size.y / 2.0), z)  # hangs from the top edge
-		mi.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-		root.add_child(mi)
-		z += 0.001  # each piece just in front of the one above, so the joints don't flicker
 
 ## A portal: the biome's animated portal frames standing on the platform, with a light and
 ## sparkles rising through it. Doors get one too (see _door). A locked portal only shows once
