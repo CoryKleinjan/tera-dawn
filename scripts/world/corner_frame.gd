@@ -11,6 +11,8 @@ const LAYER := 4
 
 var _left := TextureRect.new()
 var _right := TextureRect.new()
+## BiomeDef.frame_scale of the frame showing.
+var _scale := 1.0
 
 func _init() -> void:
 	layer = LAYER
@@ -25,6 +27,7 @@ func _ready() -> void:
 
 ## Shows `b`'s corner leaves, or none.
 func show_for(b: BiomeDef) -> void:
+	_scale = b.frame_scale
 	_left.texture = b.frame_left
 	_right.texture = b.frame_right
 	visible = b.frame_left != null or b.frame_right != null
@@ -35,6 +38,7 @@ func _fit() -> void:
 	for r: TextureRect in [_left, _right]:
 		if r.texture == null:
 			continue
-		var size := Vector2(view.y * r.texture.get_width() / float(r.texture.get_height()), view.y)
+		var h := view.y * _scale
+		var size := Vector2(h * r.texture.get_width() / float(r.texture.get_height()), h)
 		r.size = size
 		r.position = Vector2(0.0 if r == _left else view.x - size.x, 0.0)
