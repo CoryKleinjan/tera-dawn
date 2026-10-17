@@ -10,8 +10,8 @@ extends Node2D
 ## air) aims an attack that way.
 
 ## How tall he stands, feet to the top of his head, in game pixels: speech bubbles go just
-## over it. Kept from his old look while his new one is made (see HeroBody).
-const HEIGHT := 68.0
+## over it (his looks stand about this tall, HeroLookDef).
+const HEIGHT := 80.0
 ## About how wide he is, in game pixels: what the HUD keeps out of the way of.
 const WIDTH := 42.0
 ## His chest above his feet (game pixels): where skill effects and shots start, and where
@@ -88,8 +88,11 @@ const ATTACK_BUFFER_TICKS := 8
 const PORTAL_FADE_TICKS := 12
 ## Ticks of the combat-ready stance after an attack, before he relaxes into idle.
 const READY_TICKS := 120
-## Ticks a double jump's pose shows.
-const MOVE_POSE_TICKS := 10
+## Ticks the poses after a relic's move show: a double jump's flip (about its rise to the
+## top), a Slam's landing and a Surge's skid to a stop on the ground.
+const DOUBLE_JUMP_POSE_TICKS := 20
+const SLAM_LAND_TICKS := 15
+const SURGE_END_TICKS := 12
 ## Ticks of the turn pose when he turns round while moving fast on the ground.
 const TURN_TICKS := 5
 ## Ground speed above which turning round skids (kicks up dust and shows the turn pose).
@@ -120,6 +123,10 @@ var drop_from: Platform = null
 var drop_t := 0       # ticks to fall through drop_from
 var action_t := 0     # ticks left in the current attack pose
 var action_anim := &"attack"
+## A pose after a relic's move (see _pose), its ticks left and whether landing ends it.
+var move_pose := &""
+var move_pose_t := 0
+var _pose_air := false
 var cooldown := 0     # ticks before the next attack
 ## Skill id -> ticks before that skill can be used again (SkillDef.recharge), as the server keeps.
 var recharge := {}
@@ -161,7 +168,7 @@ var _surge_t := 0
 ## Sitting on the ground (the server said so). Moving or getting hit gets you up.
 var sitting := false
 
-## How you're drawn: your painted layers and pet (see HeroBody).
+## How you're drawn: your look and pet (see HeroBody).
 var body: HeroBody
 var companion: TDCompanion:
 	get:
@@ -280,6 +287,8 @@ func step() -> void:
 		drop_t -= 1
 	if land_t > 0:
 		land_t -= 1
+	if move_pose_t > 0:
+		move_pose_t -= 1
 	if loot_cd > 0:
 		loot_cd -= 1
 	if not Game.me.skills.buffs.is_empty():
@@ -556,6 +565,8 @@ func _move() -> void:
 	elif _surge_t > 0:
 		_surge_t -= 1
 		vel.x = face * SURGE_SPEED
+		if _surge_t == 0 and on_ground:
+			_pose(&"surge_end", SURGE_END_TICKS)
 	if _slamming:
 		vel = Vector2(0.0, SLAM_SPEED)
 	else:
@@ -592,6 +603,8 @@ func _move() -> void:
 	if on_ground:
 		_air_dashed = false
 		_air_jumped = false
+		if _pose_air:
+			move_pose_t = 0
 		if _slamming:
 			_slam_landed()
 
@@ -606,6 +619,14 @@ func _end_relic_moves() -> void:
 	_surge_t = 0
 	_charge_t = -1
 	_slamming = false
+	move_pose_t = 0
+
+## Shows `anim` for `ticks` after a relic's move (the moves themselves show while they last,
+## _animation); with `air`, landing ends it.
+func _pose(anim: StringName, ticks: int, air := false) -> void:
+	move_pose = anim
+	move_pose_t = ticks
+	_pose_air = air
 
 ## The Dash key: a Dash, or with Down held on the ground a Surge's charge, which flies once
 ## it is ready and the key is let go (let go sooner, it fizzles). Jump or Dash ends a Surge.
@@ -655,15 +676,14 @@ func _air_jump() -> void:
 	_air_jumped = true
 	vel.y = JUMP_SPEED * DOUBLE_JUMP_SHARE * CharacterStats.jump_multiplier(Game.me.stats)
 	_jumping = true
-	action_t = MOVE_POSE_TICKS
-	action_anim = &"leap"
+	_pose(&"double_jump", DOUBLE_JUMP_POSE_TICKS, true)
 	world.fx.dust(position, 0, 4)
-	_trail(RelicDef.Move.DOUBLE_JUMP, MOVE_POSE_TICKS)
+	_trail(RelicDef.Move.DOUBLE_JUMP, DOUBLE_JUMP_POSE_TICKS)
 
 ## A Slam hit the ground: the screen jolts and the server breaks what it landed on.
 func _slam_landed() -> void:
 	_slamming = false
-	land_t = LAND_TICKS
+	_pose(&"slam_land", SLAM_LAND_TICKS)
 	world.shake(SLAM_SHAKE)
 	world.fx.dust(position, 0, 10)
 	Net.ask(&"req_slam", [position])
@@ -683,7 +703,7 @@ func _trail(m: RelicDef.Move, ticks: int) -> void:
 func _process(_delta: float) -> void:
 	if body == null or world == null or world.map == null:
 		return
-	body.draw(face, Game.me.pet, _animation(), Game.me.equipment.defs())
+	body.draw(face, Game.me.pet, _animation(), HeroLookDef.of(Game.me.look))
 
 ## What he is doing, as an animation name: the server passes it on to everyone else.
 func _animation() -> StringName:
@@ -694,15 +714,17 @@ func _animation() -> StringName:
 	if sitting:
 		return &"sit"
 	if _slamming:
-		return &"fall"
+		return &"slam"
 	if _charge_t >= 0:
-		return &"crouch"
+		return &"surge_charge"
 	if _dash_t > 0:
-		return &"roll"
+		return &"dash"
 	if _surge_t > 0:
-		return &"lunge"
+		return &"surge"
 	if action_t > 0:
 		return action_anim
+	if move_pose_t > 0:
+		return move_pose
 	if inv > SimPlayer.HURT_INV - HURT_POSE_TICKS and inv <= SimPlayer.HURT_INV: # just got hit (see knock_back)
 		return &"hurt"
 	if not on_ground:

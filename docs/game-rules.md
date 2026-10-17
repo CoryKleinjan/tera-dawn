@@ -22,38 +22,26 @@ update this page when one changes. Each zone's own look and music are in
 
 ## Hero
 
-- The hero is a chibi boy (`art/reference/hero.png`) painted in layers, MapleStory style: one
-  body sheet (bald, blank face, mitten fists), and his face, hair and each piece of gear painted
-  over a flat green silhouette of it so they land in place on every frame.
+- The hero has four looks, picked in the character creator: a boy, a girl, a man and a woman,
+  all chibi and kid-sized as painted, turned three-quarters and facing right. Each look is
+  painted whole on every frame (no layers), one sheet per move. Older saves get the boy.
+- Every move has its full animation, matching the 8-frame skill effects: the relic moves (Dash,
+  Double Jump, Surge, Slam) are 8 painted frames each.
+- Armor is one set item and a weapon is one set item. Each set is painted onto the whole
+  character, for every look and frame; each job only gets the sets and weapons it can use. Until
+  a job's sets are painted, gear doesn't show on him, every attack and skill plays the Surge's
+  punch, and shots leave from that fist.
 - Gear is painted whole on every frame: no holes, gaps, notches or bites where an arm, hand or
   leg crosses it, nothing cut off flat, and both shoes or boots on every pose (sitting and lying
-  down too). On back frames he faces away, so gear shows its BACK: no buttons,
-  buckles, clasps, collar stars, flies, knee patches or toe caps. Every gear prompt says both
-  rules in plain words, names the cells seen from behind, and every result is checked frame by
-  frame on a flat colour before it goes in; a hole is fixed by repainting that piece alone on
-  plain magenta. A helmet, hat, shield or tome
-  is one painting pinned to his head or hand on every frame (separate paints only where his head
-  turns). The weapon is one painting held in his near fist; the shield or tome is in his far
-  hand and only shows while the weapon does. Where each sits, its turn and its layer on every
-  frame are set by hand.
+  down too). Every result is checked frame by frame on a flat colour before it goes in.
 - Head gear (helmet, hat, hood, bandana) covers only his head: nothing attached to it reaches his
   shoulders, so no cape, collar or shoulder flap.
-- Draw order, back to front: off-hand (shield), cape, body, trousers, shoes, tome, top, gloves,
-  face, hair (hidden under helmets), hat, weapon, then his fists over its grip. By hand,
-  any piece (his body, face, hair, fists, each piece of gear) can be moved, turned, resized and
-  moved up or down the stack on any frame; nothing is repainted or cut for it. Prefer shrinking
-  to growing: a piece drawn bigger than painted looks softer.
-- Every piece of gear has frames for every pose in the game, whatever its job: every job's
-  attack (swing, bow, pistol, throw, cast) and every skill pose added later. A new body pose
-  means new frames for all gear.
 - In armor his face is ready for battle: focused and determined, not over the top, never
   smiling and happy. In plain clothes he keeps the friendly face his looks were painted with.
 - His arms, fists and held weapons never cover his face, in any pose; both fists show. Blink
   has no pose of its own: he just vanishes and reappears.
 - Animations are shared across similar actions (one swing for all melee, one cast for all
-  spells); his walk is 4 steps, slow. Melee attacks play one 2-frame swing (swing2, swing3) with the weapon
-  only turning in the picture, never edge-on.
-- Male only for now.
+  spells); his walk is 6 steps. A weapon only turns in the picture, never edge-on.
 
 ## Movement and combat feel
 
@@ -64,11 +52,11 @@ update this page when one changes. Each zone's own look and music are in
 - Jobs have no movement skills (Cory Oct 17): bosses unlock moves instead, Hollow Knight
   style. Each zone boss drops a relic the first time a character beats it, for everyone at the
   fight, and only they can take theirs. The move is theirs for good on every job, with no
-  level, essence or MP: Grotto Tusker Dash (a flat burst ahead, once per jump in the air; the
-  roll pose), Arcane Sentinel Double Jump (the leap pose), Molten King Slam (Down + Jump in the
+  level, essence or MP: Grotto Tusker Dash (a flat burst ahead, once per jump in the air, rolling),
+  Arcane Sentinel Double Jump (with a somersault), Molten King Slam (Down + Jump in the
   air drops straight down and breaks cracked floors), Reef Titan Surge (hold Down + Dash on the
-  ground, let go to fly straight ahead; the lunge pose). Elder Treant Wall Jump and Lantern
-  Wraith Glide wait for their poses. The main way never needs a move; secret rooms can. Dash,
+  ground, let go to fly straight ahead, fist first). Elder Treant Wall Jump and Lantern
+  Wraith Glide wait for their moves (their poses are painted). The main way never needs a move; secret rooms can. Dash,
   Double Jump and Surge play the painted effects made for the old job moves (rolling dash
   spray, flash jump burst, charge trail); Slam has none yet, and the relic icons are stand-ins
   until painted.

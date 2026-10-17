@@ -106,7 +106,7 @@ func test_a_slam_drops_straight_down_to_the_ground() -> void:
 	Input.action_press("move_down")
 	await _tap("jump")
 	check(me._slamming, "slamming")
-	check_eq(me._animation(), &"fall", "in its pose")
+	check_eq(me._animation(), &"slam", "in its pose")
 	for i in 40:
 		await ui.ticks(1)
 		if me.on_ground:
@@ -121,7 +121,7 @@ func test_a_surge_charges_then_flies_ahead() -> void:
 	Input.action_press("move_down")
 	Input.action_press("dash")
 	await ui.ticks(TDPlayer.SURGE_CHARGE + 4)
-	check_eq(me._animation(), &"crouch", "crouched while it charges")
+	check_eq(me._animation(), &"surge_charge", "crouched while it charges")
 	check_near(me.position.x, FLOOR.x, "still while charging", 1.0)
 	Input.action_release("dash")
 	Input.action_release("move_down")

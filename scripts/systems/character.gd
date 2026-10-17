@@ -28,6 +28,8 @@ const STORE_FEE := 10
 const MAX_LEVEL := 100
 
 var name := ""
+## How the hero looks (HeroLookDef.id), picked in the character creator.
+var look: StringName = HeroLookDef.all()[0].id
 ## Levels come from EXP (monsters and quests give it); each one raises power, Max HP and MP by
 ## the job's growth (CharacterStats).
 var level := 1
@@ -92,13 +94,14 @@ func _init() -> void:
 	quickslots.fill([])
 
 ## A fresh character of `job_id` with the job's starting gear and items, and
-## the outfit picked in the character creator (`made`, null for the defaults).
+## the look and outfit picked in the character creator (`made`, null for the defaults).
 static func create(char_name: String, job_id := START_JOB, made: NewCharacter = null) -> Character:
 	var c := Character.new()
 	c.name = char_name
 	c.job = Content.job(job_id)
 	if made == null:
 		made = NewCharacter.new(job_id)
+	c.look = made.look
 	for e in made.starting_gear(c.job):
 		c.equipment.put(c.equipment.place_for(e), ItemStack.exact(e))
 	for entry in c.job.starting_items:

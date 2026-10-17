@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="HeroLookDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/hero_look_def.gd" id="1_look"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/hero/looks/boy.tres" id="2_frames"]
+
+[resource]
+script = ExtResource("1_look")
+id = &"boy"
+display_name = "Boy"
+order = 0
+frames = ExtResource("2_frames")
+fist = Vector2(120.2, 73.4)

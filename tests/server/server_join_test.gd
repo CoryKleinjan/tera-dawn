@@ -166,7 +166,15 @@ func test_an_older_clients_look_choices_are_left_out() -> void:
 	h.play(2, "Ann", {"look": {"hair": "hair_ponytail"}, "outfit": ["meadow_shirt"]})
 	var c: Character = h.server.sessions[2].character
 	check_eq(c.equipment.at(&"top").item.id, &"meadow_shirt", "the top picked")
-	check(not c.to_dict().has("appearance"), "no look kept")
+	check(not c.to_dict().has("appearance"), "no old appearance kept")
+	check_eq(c.look, HeroLookDef.all()[0].id, "the first look")
+
+func test_the_look_picked_is_the_characters_and_others_see_it() -> void:
+	var made := NewCharacter.new()
+	made.look = &"girl"
+	h.play(2, "Ann", made.to_dict())
+	check_eq(h.server.sessions[2].character.look, &"girl", "the look picked")
+	check_eq(h.server.sessions[2].info()[4], &"girl", "in what other players get")
 
 func test_player_info_is_sent_only_when_it_changes() -> void:
 	var a := h.join(2, "Ann")

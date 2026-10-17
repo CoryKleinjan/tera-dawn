@@ -1,9 +1,9 @@
 class_name TDCreator
 extends CenterContainer
-## The character creator, opened from character select: a name and a row of arrows for
-## each starting outfit choice. Every new character starts in the starting job
-## (Character.START_JOB); the options come from the job's `creator_gear`. (No starting outfits
-## are painted yet, so there is no preview or appearance to pick for now.)
+## The character creator, opened from character select: a name, the hero's look (shown
+## standing, HeroLookDef) and a row of arrows for each starting outfit choice. Every new
+## character starts in the starting job (Character.START_JOB); the outfit options come from
+## the job's `creator_gear` (none are painted yet, so it offers none for now).
 
 ## Create was pressed with this name and these choices.
 signal created(char_name: String, made: NewCharacter)
@@ -21,8 +21,10 @@ var name_field: LineEdit
 var create_button: Button
 ## Why the last Create was turned down (a name that's taken...).
 var message: Label
-## Every choice row's value label, keyed by "outfit:<slot>".
+## Every choice row's value label, keyed by "look" or "outfit:<slot>".
 var values := {}
+## The picked look, standing.
+var preview: TextureRect
 ## Waiting for a Create to be answered; another Create meanwhile is ignored.
 var pending := false
 
@@ -54,7 +56,7 @@ func _init() -> void:
 	_style_name_field()
 	left.add_child(name_field)
 	left.add_child(UiBuild.centered_row([
-		_icon_button("creator/random", "Random outfit", func() -> void:
+		_icon_button("creator/random", "Random look", func() -> void:
 			made.roll(job)
 			_refresh()),
 		_icon_button("creator/reset", "Start over", func() -> void:
@@ -74,7 +76,14 @@ func _init() -> void:
 	right.add_theme_constant_override("separation", 2)
 	right.alignment = BoxContainer.ALIGNMENT_CENTER
 	cols.add_child(right)
-	right.add_child(UiBuild.label("Outfit", 15, Palette.EMBER))
+	preview = TextureRect.new()
+	preview.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	preview.custom_minimum_size = Vector2(150, 136)
+	right.add_child(preview)
+	right.add_child(_row("look", "Look", func(step: int) -> void: made.cycle_look(step)))
+	if not NewCharacter.outfit_kinds(job).is_empty():
+		right.add_child(UiBuild.label("Outfit", 15, Palette.EMBER))
 	for kind in NewCharacter.outfit_kinds(job):
 		right.add_child(_row("outfit:%d" % kind, EquipDef.SLOT_NAMES[kind], func(step: int) -> void:
 			made.cycle_outfit(job, kind, step)))
@@ -152,10 +161,16 @@ func value_text(key: String) -> String:
 
 ## Steps one choice row (see `values` for the keys).
 func step(key: String, by: int) -> void:
-	made.cycle_outfit(job, int(key.split(":")[1]), by)
+	if key == "look":
+		made.cycle_look(by)
+	else:
+		made.cycle_outfit(job, int(key.split(":")[1]), by)
 	_refresh()
 
 func _refresh() -> void:
+	var look := HeroLookDef.of(made.look)
+	(values["look"] as Label).text = look.display_name
+	preview.texture = look.frames.get_frame_texture(&"idle", 0)
 	for kind in NewCharacter.outfit_kinds(job):
 		var e: EquipDef = made.outfit.get(kind)
 		(values["outfit:%d" % kind] as Label).text = e.display_name if e else "-"

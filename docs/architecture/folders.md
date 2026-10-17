@@ -9,8 +9,8 @@ data/                 Content, one .tres per thing
   achievements/       Milestones, unlocked on Steam too (AchievementDef)
   quests/ shops/ regions/ cutscenes/ projectiles/    Also looked up by id
   items/use/ items/etc/ items/setup/ items/equips/ items/runes/  Subfolders are scanned too
-  hero/               HeroLookDef (look.tres: his layers and animations); held/ has each held
-                      weapon or off-hand's pins per frame (HeldDef)
+  hero/               looks/: the looks the creator offers (HeroLookDef); held/: the old held
+                      gear paintings, now only their items' icons (HeldDef)
   maps/ biomes/ buildings/    Maps and how they look (maps/rooms/ and
                                             biomes/rooms/: the insides of buildings)
 scripts/
@@ -32,7 +32,7 @@ scripts/
                       Inventory, Equipment,
                       ItemStack, CharacterStats, MonsterBook, Achievements, Counters, Balance
   components/         Health, Hitbox, JumpGrace, SpriteRig, HeroBody (how a hero shows: his painted
-                      layers and his companion)
+                      look and his companion)
   actors/             Player (you), Avatar (other players), Companion (pets), Mob, Npc, Drop views
   world/              World (what you see), WorldCamera, SnapshotSync (server views), WorldFx (hits, numbers, effects), Stage +
                       Terrain/Backdrop/Scenery builders, MapLayout, Platform, DropFlight, Combat

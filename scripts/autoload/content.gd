@@ -1,6 +1,6 @@
 extends Node
 ## Autoload "Content": every monster, NPC, item, skill, effect, job, map, shop, quest,
-## achievement and cutscene in data/, by id.
+## achievement, cutscene and hero look in data/, by id.
 ##
 ## Content is plain Godot resources (.tres) loaded from these folders at startup, so adding
 ## a monster or a map means adding a file, not code. Lookups by an unknown id push an error
@@ -19,6 +19,7 @@ const FOLDERS := {
 	"regions": "res://data/regions",
 	"achievements": "res://data/achievements",
 	"cutscenes": "res://data/cutscenes",
+	"looks": "res://data/hero/looks",
 }
 
 var monsters := {}
@@ -36,6 +37,8 @@ var regions := {}
 ## AchievementDefs; Achievements lists them in order and measures them.
 var achievements := {}
 var cutscenes := {}
+## HeroLookDefs, the looks the creator offers (HeroLookDef.all lists them in order).
+var looks := {}
 
 func _ready() -> void:
 	for kind in FOLDERS:

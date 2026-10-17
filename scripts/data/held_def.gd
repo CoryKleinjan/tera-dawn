@@ -1,7 +1,8 @@
 class_name HeldDef
 extends Resource
-## A weapon or off-hand as the hero holds it, the MapleStory way: ONE painting, pinned to its
-## spot on each of his frames, turned and stacked per frame. Placed by hand in this file.
+## A weapon or off-hand as the old layered hero held it: ONE painting, pinned to its spot on
+## each of his old frames. The hero is now painted whole (HeroLookDef) and no longer shows it;
+## the painting is only where its item's icon comes from until the job sets replace it.
 
 ## Where the piece goes in his stack on a frame (HeroBody.layers).
 enum Layer { BEHIND, UNDER_TOP, OVER_CLOTHES, OVER_HANDS }
@@ -16,7 +17,7 @@ enum Layer { BEHIND, UNDER_TOP, OVER_CLOTHES, OVER_HANDS }
 ## Frame name -> how big the painting is drawn there (1.0 as painted), around its anchor.
 @export var sizes: Dictionary = {}
 ## Frame name -> true where the painting is drawn mirrored around its anchor, before it is
-## turned (Flip). Its muzzle (MuzzleSetDef) mirrors with it.
+## turned (Flip).
 @export var flips: Dictionary = {}
 
 func texture() -> Texture2D:

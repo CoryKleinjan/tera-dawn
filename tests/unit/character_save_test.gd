@@ -16,6 +16,7 @@ func after_each() -> void:
 func _rich() -> Character:
 	var c := fx.character()
 	c.name = "Saver"
+	c.look = &"woman"
 	c.level = 12
 	c.xp = 40
 	c.essence = 345
@@ -77,6 +78,7 @@ func test_round_trip_basics() -> void:
 	var c := _rich()
 	var b := _round_trip(c)
 	check_eq(b.name, "Saver", "name")
+	check_eq(b.look, &"woman", "look")
 	check_eq(b.essence, 345, "essence")
 	check_eq(b.shards, 9876, "shards")
 	check_eq(Array(b.jobs_passed), ["t_next", "t_other"], "jobs passed")
@@ -214,7 +216,13 @@ func test_save_with_an_old_appearance_loads_without_it() -> void:
 	c.load_dict({"name": "Old", "job": "t_job", "essence": 3, "base": {},
 		"appearance": {"skin": "", "face": "", "eyes": "", "hair": "hair_ponytail", "hair_color": ""}})
 	check_eq([c.name, c.essence], ["Old", 3], "the rest loads")
-	check(not c.to_dict().has("appearance"), "and the look is not saved again")
+	check(not c.to_dict().has("appearance"), "and the old appearance is not saved again")
+	check_eq(c.look, HeroLookDef.all()[0].id, "a save from before the looks gets the first one")
+
+func test_a_look_the_game_does_not_know_loads_as_the_first() -> void:
+	var c := fx.character()
+	c.load_dict({"name": "Odd", "job": "t_job", "look": "dragon"})
+	check_eq(c.look, HeroLookDef.all()[0].id, "the first look")
 
 func test_save_from_before_essence_keeps_its_level_and_turns_points_into_essence() -> void:
 	var c := fx.character()

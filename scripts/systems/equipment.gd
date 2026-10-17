@@ -70,27 +70,11 @@ func bonus() -> StatBlock:
 		out.add(s.total())
 	return out
 
-## What's worn as place -> EquipDef (how the hero is drawn, HeroBody.layers).
+## What's worn as place -> EquipDef.
 func defs() -> Dictionary:
 	var out := {}
 	for p in worn:
 		out[p] = worn[p].equip_def()
-	return out
-
-## What's worn as place -> item id, for other players to draw (SimPlayer.info).
-func ids() -> Dictionary:
-	var out := {}
-	for p in worn:
-		out[String(p)] = String(worn[p].item.id)
-	return out
-
-## Turns ids() back into place -> EquipDef, skipping anything this game doesn't know.
-static func defs_from_ids(ids: Dictionary) -> Dictionary:
-	var out := {}
-	for p in ids:
-		var e := Content.items.get(StringName(str(ids[p]))) as EquipDef
-		if e and StringName(str(p)) in PLACES and fits(e, StringName(str(p))):
-			out[StringName(str(p))] = e
 	return out
 
 func to_dict() -> Dictionary:

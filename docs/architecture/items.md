@@ -75,7 +75,8 @@ The Shield slot is called Off-hand in the game (its place key stays `shield`): i
 1. Give it an icon in `assets/sprites/items/<id>.png`: a painted cell on an item sheet (a Gemini
    edit in `tools/art/gemini_pass.json`, cut by its `art/sheets/items_*.json` manifest). Gear
    has no icon yet; an item slot shows the item's name instead, and a drop shows only its glow.
-   Gear the hero wears also sets `worn` (its layer, see [characters](characters.md)).
+   Gear doesn't show on the hero yet: armor and weapons will each be one set item painted onto
+   the whole character (see [characters](characters.md)).
 2. Create the `.tres` in `data/items/equips/`, `use/`, `etc/` or `setup/` as an
    **EquipDef**, **UseDef** or **ItemDef**. Fill in `id`, name, description, icon and
    `sell_price`; for gear, the slot, its job lines and a **StatBlock** in `stats`.
@@ -93,5 +94,5 @@ for the loot key, and stays there if its tab is full.
 
 A weapon is an **EquipDef** in the Weapon slot with a `weapon_kind` (sword, dagger, bow, wand,
 staff, knuckle...), which skills can ask for (`SkillDef.weapons`), and optionally a
-`basic_attack` that replaces the plain attack while it is wielded. How it looks and is held is
-its hero painting (`data/hero/held/`, see characters.md); it has no icon yet.
+`basic_attack` that replaces the plain attack while it is wielded. It doesn't show in his hand
+yet (see characters.md).

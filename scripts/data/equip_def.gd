@@ -25,8 +25,10 @@ const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book
 @export var offhand_kind: StringName = &"shield"
 
 @export_group("Worn look")
-## Its painted layer on the hero (art/sheets/hero_<id>.json), frames named as in HeroLookDef.
-## Frames it has no painting for show the hero without it. Null shows nothing.
+## The old layered hero's paintings of it (this group): the hero is now painted whole
+## (HeroLookDef) and no longer shows gear, so they are only where its icon comes from until
+## the job sets replace them.
+## Its painted layer on the old hero (art/sheets/hero_<id>.json).
 @export var worn: SpriteFrames:
 	set(v):
 		worn = v
