@@ -26680,6 +26680,531 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4, numbered in reading order) on a flat magenta background with thin grid lines. Each cell holds a flat green stick-figure POSE GUIDE: a big green circle for the head, a block for the body, dark green bars for his NEAR arm and leg (the ones toward the viewer) and pale green bars for his FAR arm and leg. Paint the SAME boy as in the attached picture over each guide, in EXACTLY the guide's pose: his head where the circle is, his body along the block, each arm and leg along its bar and bent at the same joints, his hands and boots at the bar ends, at the same place, angle and height in the cell as the guide (when a guide is high in its cell, he is up in the air there; when it is tipped or upside down, so is he). The guides are only a pose map: cover them completely, and no green from them is left anywhere. Never paint him standing upright where the guide is not. Copy the boy exactly: the same face, hair, clothes, colours, proportions and size as in the attached picture, a cute chibi boy of about ten with a very big round head, deep-blue eyes, short messy brown hair, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round. He is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way he stands in the attached picture. His face is the same friendly face as in the attached picture. Every figure stays fully inside its own cell and never crosses a grid line. The 8 cells are one Slam, a cannonball drop straight down from high in the air: 1 high up, knees pulled up, both arms raised; 2 at the very top, curled up in a tight ball, knees hugged to his chest; 3, 4 and 5 dropping straight down as a CANNONBALL, still curled in a tight ball with both arms wrapped around his shins and knees hugged to his chest, a little lower in each cell (high in cell 3, in the middle in cell 4, just above the bottom in cell 5), never standing; 6 the impact: landed in a deep squat, both arms straight down and both fists pressed onto the ground right beside his boots; 7 still squatting, hands on his knees, looking ahead; 8 standing again. No arm or hand ever covers his face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the boy: no ground, wall, streak, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures."
   }
+ },
+ {
+  "id": "newhero_girl_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_girl_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the girl look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_jump_land_hurt. Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_girl_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME girl as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a cute chibi girl of about ten with a very big round head, big glossy deep-blue eyes with dark lashes, long brown hair tied back in a ponytail, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only her pose changes. She is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way she stands in the attached picture, drawn at the same size as there (her standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). Cells 1 to 4 are one jump, with her feet starting on an invisible ground line near the bottom of the cell: 1 crouching low to spring, a deep squat with her hips dropped to about half her standing height, arms swung back; 2 springing up off her toes, body stretched tall, arms swung up; 3 at the top of the jump, high in the cell, knees tucked up and arms out for balance; 4 falling, legs reaching down for the ground and arms raised a little. Cells 5 and 6 are the landing, feet on the ground line: 5 landing in a deep squat, knees bent so far that her hips drop to about half her standing height, arms out; 6 rising back up, knees a little bent. Cells 7 and 8 are being hit, feet on the ground line: 7 flinching backward from a hit in front of her, eyes squeezed shut, head and shoulders thrown back, arms flung out to the sides; 8 staggering back a step, leaning back, eyes shut tight, wincing with a small open mouth. No arm or hand ever covers her face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the girl: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_girl_idle_faint_sit_crouch",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_girl_idle_faint_sit_crouch.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the girl look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_idle_faint_sit_crouch. Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_girl_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME girl as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a cute chibi girl of about ten with a very big round head, big glossy deep-blue eyes with dark lashes, long brown hair tied back in a ponytail, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only her pose changes. She is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way she stands in the attached picture, drawn at the same size as there (her standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). Cells 1 and 2 are two more idle frames, standing relaxed with feet on an invisible ground line near the bottom of the cell, exactly like the attached picture's two standing frames: 1 half way breathing out, 2 half way breathing in (only the chest and head move a tiny bit), with the same relaxed friendly face as in the attached picture. Cells 3 to 6 are fainting, on the ground line: 3 knees buckling, eyes closed, swaying; 4 collapsing to her knees; 5 falling forward onto the ground; 6 lying flat on her front on the ground, eyes closed, still. Cell 7: sitting on the ground, legs crossed, hands resting on her knees, smiling. Cell 8: crouching low in a deep squat, her hips down near her heels, hands on her knees, head up and looking ahead. No arm or hand ever covers her face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the girl: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_girl_dash",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_girl_dash.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the girl look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_dash. Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_girl_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME girl as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a cute chibi girl of about ten with a very big round head, big glossy deep-blue eyes with dark lashes, long brown hair tied back in a ponytail, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only her pose changes. She is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way she stands in the attached picture, drawn at the same size as there (her standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). The 8 cells are one 8-frame Dash, a short burst forward as a quick roll, with her feet near an invisible ground line near the bottom of the cell: 1 leaning forward ready to spring, one foot back; 2 diving forward, body stretched out low; 3 tucked into a tight ball, starting to roll forward; 4 upside down in the roll, still tucked; 5 coming round the roll, tucked; 6 landing on her feet low, still crouched; 7 pushing up, leaning forward; 8 standing again, a little forward lean, arms relaxed. No arm or hand ever covers her face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the girl: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_girl_surge",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_girl_surge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the girl look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_surge. Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_girl_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME girl as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a cute chibi girl of about ten with a very big round head, big glossy deep-blue eyes with dark lashes, long brown hair tied back in a ponytail, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only her pose changes. She is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way she stands in the attached picture, drawn at the same size as there (her standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). The 8 cells are one 8-frame Surge, a charged lunge that flies straight ahead: 1 crouching low on an invisible ground line, gathering power, fists pulled in at her sides; 2 crouched lower still, leaning forward, about to launch; 3 launching forward off the ground, body tipping forward; 4 flying straight ahead, body stretched out flat like a superhero, near fist punched forward, legs straight behind; 5 still flying flat out, the same; 6 still flying, legs starting to swing down; 7 landing on the ground line, skidding to a stop, knees bent, leaning back; 8 standing up again, a little out of breath. No arm or hand ever covers her face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the girl: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_girl_slam",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_girl_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the girl look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_slam_v3 (on its pose guide). Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/boy_slam_v3_guide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_girl_walk_idle.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4, numbered in reading order) on a flat magenta background with thin grid lines. Each cell holds a flat green stick-figure POSE GUIDE: a big green circle for the head, a block for the body, dark green bars for her NEAR arm and leg (the ones toward the viewer) and pale green bars for her FAR arm and leg. Paint the SAME girl as in the attached picture over each guide, in EXACTLY the guide's pose: her head where the circle is, her body along the block, each arm and leg along its bar and bent at the same joints, her hands and boots at the bar ends, at the same place, angle and height in the cell as the guide (when a guide is high in its cell, she is up in the air there; when it is tipped or upside down, so is she). The guides are only a pose map: cover them completely, and no green from them is left anywhere. Never paint her standing upright where the guide is not. Copy the girl exactly: the same face, hair, clothes, colours, proportions and size as in the attached picture, a cute chibi girl of about ten with a very big round head, big glossy deep-blue eyes with dark lashes, long brown hair tied back in a ponytail, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round. She is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way she stands in the attached picture. Her face is the same friendly face as in the attached picture. Every figure stays fully inside its own cell and never crosses a grid line. The 8 cells are one Slam, a cannonball drop straight down from high in the air: 1 high up, knees pulled up, both arms raised; 2 at the very top, curled up in a tight ball, knees hugged to her chest; 3, 4 and 5 dropping straight down as a CANNONBALL, still curled in a tight ball with both arms wrapped around her shins and knees hugged to her chest, a little lower in each cell (high in cell 3, in the middle in cell 4, just above the bottom in cell 5), never standing; 6 the impact: landed in a deep squat, both arms straight down and both fists pressed onto the ground right beside her boots; 7 still squatting, hands on her knees, looking ahead; 8 standing again. No arm or hand ever covers her face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the girl: no ground, wall, streak, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_girl_double_jump",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_girl_double_jump.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the girl look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_double_jump_v2 (on its pose guide). Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/boy_double_jump_guide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_girl_walk_idle.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4, numbered in reading order) on a flat magenta background with thin grid lines. Each cell holds a flat green stick-figure POSE GUIDE: a big green circle for the head, a block for the body, dark green bars for her NEAR arm and leg (the ones toward the viewer) and pale green bars for her FAR arm and leg. Paint the SAME girl as in the attached picture over each guide, in EXACTLY the guide's pose: her head where the circle is, her body along the block, each arm and leg along its bar and bent at the same joints, her hands and boots at the bar ends, at the same place, angle and height in the cell as the guide (when a guide is high in its cell, she is up in the air there; when it is tipped or upside down, so is she). The guides are only a pose map: cover them completely, and no green from them is left anywhere. Never paint her standing upright where the guide is not. Copy the girl exactly: the same face, hair, clothes, colours, proportions and size as in the attached picture, a cute chibi girl of about ten with a very big round head, big glossy deep-blue eyes with dark lashes, long brown hair tied back in a ponytail, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round. She is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way she stands in the attached picture. Her face is the same friendly face as in the attached picture. Every figure stays fully inside its own cell and never crosses a grid line. The 8 cells are one Double Jump, a second leap in the air with no ground under her: 1 falling a little, knees bent, arms out; 2 tucked in a tight ball; 3 kicking down hard with her near leg, both arms flung straight up; 4 shooting upward, body stretched straight, both arms straight up; 5 tipped forward on her side in a tucked forward somersault; 6 upside down in the tucked somersault, head at the bottom; 7 coming out of the somersault, leaning back, knees bent; 8 at the top, legs a little bent, arms spread wide. No arm or hand ever covers her face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the girl: no ground, wall, streak, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_girl_wall_glide",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_girl_wall_glide.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the girl look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_wall_glide_v2 (on its pose guide). Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/boy_wall_glide_guide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_girl_walk_idle.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4, numbered in reading order) on a flat magenta background with thin grid lines. Each cell holds a flat green stick-figure POSE GUIDE: a big green circle for the head, a block for the body, dark green bars for her NEAR arm and leg (the ones toward the viewer) and pale green bars for her FAR arm and leg. Paint the SAME girl as in the attached picture over each guide, in EXACTLY the guide's pose: her head where the circle is, her body along the block, each arm and leg along its bar and bent at the same joints, her hands and boots at the bar ends, at the same place, angle and height in the cell as the guide (when a guide is high in its cell, she is up in the air there; when it is tipped or upside down, so is she). The guides are only a pose map: cover them completely, and no green from them is left anywhere. Never paint her standing upright where the guide is not. Copy the girl exactly: the same face, hair, clothes, colours, proportions and size as in the attached picture, a cute chibi girl of about ten with a very big round head, big glossy deep-blue eyes with dark lashes, long brown hair tied back in a ponytail, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round. She is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way she stands in the attached picture. Her face is the same friendly face as in the attached picture. Every figure stays fully inside its own cell and never crosses a grid line. Cells 1 and 2 are a wall slide: her back and near hand pressed flat against an invisible wall at the LEFT edge of the cell, her far boot flat against it, knees bent, sliding down (do not paint the wall). Cells 3 to 6 are a wall jump away from it: 3 kicking off to the right with both legs stretched back to the left, arms reaching up and right; 4 flying up and to the right, body stretched out on a diagonal; 5 rising, knees tucking up, arms out; 6 at the top, legs a little bent, arms spread wide. Cells 7 and 8 are a glide: her body tipped far forward, nearly flat, head in front, legs straight and trailing behind together, arms spread wide like wings, gliding slowly down; 8 is the same with her arms a little higher. No arm or hand ever covers her face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the girl: no ground, wall, streak, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_man_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_man_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the man look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_jump_land_hurt. Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_man_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME man as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a grown man drawn in the same cute chibi style and at the same size and proportions as in the attached picture, with short dark brown hair, light stubble and brown eyes, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only his pose changes. He is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way he stands in the attached picture, drawn at the same size as there (his standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). Cells 1 to 4 are one jump, with his feet starting on an invisible ground line near the bottom of the cell: 1 crouching low to spring, a deep squat with his hips dropped to about half his standing height, arms swung back; 2 springing up off his toes, body stretched tall, arms swung up; 3 at the top of the jump, high in the cell, knees tucked up and arms out for balance; 4 falling, legs reaching down for the ground and arms raised a little. Cells 5 and 6 are the landing, feet on the ground line: 5 landing in a deep squat, knees bent so far that his hips drop to about half his standing height, arms out; 6 rising back up, knees a little bent. Cells 7 and 8 are being hit, feet on the ground line: 7 flinching backward from a hit in front of him, eyes squeezed shut, head and shoulders thrown back, arms flung out to the sides; 8 staggering back a step, leaning back, eyes shut tight, wincing with a small open mouth. No arm or hand ever covers his face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the man: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_man_idle_faint_sit_crouch",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_man_idle_faint_sit_crouch.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the man look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_idle_faint_sit_crouch. Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_man_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME man as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a grown man drawn in the same cute chibi style and at the same size and proportions as in the attached picture, with short dark brown hair, light stubble and brown eyes, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only his pose changes. He is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way he stands in the attached picture, drawn at the same size as there (his standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). Cells 1 and 2 are two more idle frames, standing relaxed with feet on an invisible ground line near the bottom of the cell, exactly like the attached picture's two standing frames: 1 half way breathing out, 2 half way breathing in (only the chest and head move a tiny bit), with the same relaxed friendly face as in the attached picture. Cells 3 to 6 are fainting, on the ground line: 3 knees buckling, eyes closed, swaying; 4 collapsing to his knees; 5 falling forward onto the ground; 6 lying flat on his front on the ground, eyes closed, still. Cell 7: sitting on the ground, legs crossed, hands resting on his knees, smiling. Cell 8: crouching low in a deep squat, his hips down near his heels, hands on his knees, head up and looking ahead. No arm or hand ever covers his face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the man: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_man_dash",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_man_dash.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the man look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_dash. Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_man_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME man as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a grown man drawn in the same cute chibi style and at the same size and proportions as in the attached picture, with short dark brown hair, light stubble and brown eyes, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only his pose changes. He is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way he stands in the attached picture, drawn at the same size as there (his standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). The 8 cells are one 8-frame Dash, a short burst forward as a quick roll, with his feet near an invisible ground line near the bottom of the cell: 1 leaning forward ready to spring, one foot back; 2 diving forward, body stretched out low; 3 tucked into a tight ball, starting to roll forward; 4 upside down in the roll, still tucked; 5 coming round the roll, tucked; 6 landing on his feet low, still crouched; 7 pushing up, leaning forward; 8 standing again, a little forward lean, arms relaxed. No arm or hand ever covers his face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the man: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_man_surge",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_man_surge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the man look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_surge. Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_man_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME man as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a grown man drawn in the same cute chibi style and at the same size and proportions as in the attached picture, with short dark brown hair, light stubble and brown eyes, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only his pose changes. He is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way he stands in the attached picture, drawn at the same size as there (his standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). The 8 cells are one 8-frame Surge, a charged lunge that flies straight ahead: 1 crouching low on an invisible ground line, gathering power, fists pulled in at his sides; 2 crouched lower still, leaning forward, about to launch; 3 launching forward off the ground, body tipping forward; 4 flying straight ahead, body stretched out flat like a superhero, near fist punched forward, legs straight behind; 5 still flying flat out, the same; 6 still flying, legs starting to swing down; 7 landing on the ground line, skidding to a stop, knees bent, leaning back; 8 standing up again, a little out of breath. No arm or hand ever covers his face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the man: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_man_slam",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_man_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the man look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_slam_v3 (on its pose guide). Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/boy_slam_v3_guide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_man_walk_idle.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4, numbered in reading order) on a flat magenta background with thin grid lines. Each cell holds a flat green stick-figure POSE GUIDE: a big green circle for the head, a block for the body, dark green bars for his NEAR arm and leg (the ones toward the viewer) and pale green bars for his FAR arm and leg. Paint the SAME man as in the attached picture over each guide, in EXACTLY the guide's pose: his head where the circle is, his body along the block, each arm and leg along its bar and bent at the same joints, his hands and boots at the bar ends, at the same place, angle and height in the cell as the guide (when a guide is high in its cell, he is up in the air there; when it is tipped or upside down, so is he). The guides are only a pose map: cover them completely, and no green from them is left anywhere. Never paint him standing upright where the guide is not. Copy the man exactly: the same face, hair, clothes, colours, proportions and size as in the attached picture, a grown man drawn in the same cute chibi style and at the same size and proportions as in the attached picture, with short dark brown hair, light stubble and brown eyes, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round. He is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way he stands in the attached picture. His face is the same friendly face as in the attached picture. Every figure stays fully inside its own cell and never crosses a grid line. The 8 cells are one Slam, a cannonball drop straight down from high in the air: 1 high up, knees pulled up, both arms raised; 2 at the very top, curled up in a tight ball, knees hugged to his chest; 3, 4 and 5 dropping straight down as a CANNONBALL, still curled in a tight ball with both arms wrapped around his shins and knees hugged to his chest, a little lower in each cell (high in cell 3, in the middle in cell 4, just above the bottom in cell 5), never standing; 6 the impact: landed in a deep squat, both arms straight down and both fists pressed onto the ground right beside his boots; 7 still squatting, hands on his knees, looking ahead; 8 standing again. No arm or hand ever covers his face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the man: no ground, wall, streak, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_man_double_jump",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_man_double_jump.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the man look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_double_jump_v2 (on its pose guide). Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/boy_double_jump_guide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_man_walk_idle.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4, numbered in reading order) on a flat magenta background with thin grid lines. Each cell holds a flat green stick-figure POSE GUIDE: a big green circle for the head, a block for the body, dark green bars for his NEAR arm and leg (the ones toward the viewer) and pale green bars for his FAR arm and leg. Paint the SAME man as in the attached picture over each guide, in EXACTLY the guide's pose: his head where the circle is, his body along the block, each arm and leg along its bar and bent at the same joints, his hands and boots at the bar ends, at the same place, angle and height in the cell as the guide (when a guide is high in its cell, he is up in the air there; when it is tipped or upside down, so is he). The guides are only a pose map: cover them completely, and no green from them is left anywhere. Never paint him standing upright where the guide is not. Copy the man exactly: the same face, hair, clothes, colours, proportions and size as in the attached picture, a grown man drawn in the same cute chibi style and at the same size and proportions as in the attached picture, with short dark brown hair, light stubble and brown eyes, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round. He is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way he stands in the attached picture. His face is the same friendly face as in the attached picture. Every figure stays fully inside its own cell and never crosses a grid line. The 8 cells are one Double Jump, a second leap in the air with no ground under him: 1 falling a little, knees bent, arms out; 2 tucked in a tight ball; 3 kicking down hard with his near leg, both arms flung straight up; 4 shooting upward, body stretched straight, both arms straight up; 5 tipped forward on his side in a tucked forward somersault; 6 upside down in the tucked somersault, head at the bottom; 7 coming out of the somersault, leaning back, knees bent; 8 at the top, legs a little bent, arms spread wide. No arm or hand ever covers his face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the man: no ground, wall, streak, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_man_wall_glide",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_man_wall_glide.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the man look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_wall_glide_v2 (on its pose guide). Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/boy_wall_glide_guide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_man_walk_idle.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4, numbered in reading order) on a flat magenta background with thin grid lines. Each cell holds a flat green stick-figure POSE GUIDE: a big green circle for the head, a block for the body, dark green bars for his NEAR arm and leg (the ones toward the viewer) and pale green bars for his FAR arm and leg. Paint the SAME man as in the attached picture over each guide, in EXACTLY the guide's pose: his head where the circle is, his body along the block, each arm and leg along its bar and bent at the same joints, his hands and boots at the bar ends, at the same place, angle and height in the cell as the guide (when a guide is high in its cell, he is up in the air there; when it is tipped or upside down, so is he). The guides are only a pose map: cover them completely, and no green from them is left anywhere. Never paint him standing upright where the guide is not. Copy the man exactly: the same face, hair, clothes, colours, proportions and size as in the attached picture, a grown man drawn in the same cute chibi style and at the same size and proportions as in the attached picture, with short dark brown hair, light stubble and brown eyes, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round. He is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way he stands in the attached picture. His face is the same friendly face as in the attached picture. Every figure stays fully inside its own cell and never crosses a grid line. Cells 1 and 2 are a wall slide: his back and near hand pressed flat against an invisible wall at the LEFT edge of the cell, his far boot flat against it, knees bent, sliding down (do not paint the wall). Cells 3 to 6 are a wall jump away from it: 3 kicking off to the right with both legs stretched back to the left, arms reaching up and right; 4 flying up and to the right, body stretched out on a diagonal; 5 rising, knees tucking up, arms out; 6 at the top, legs a little bent, arms spread wide. Cells 7 and 8 are a glide: his body tipped far forward, nearly flat, head in front, legs straight and trailing behind together, arms spread wide like wings, gliding slowly down; 8 is the same with his arms a little higher. No arm or hand ever covers his face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the man: no ground, wall, streak, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_woman_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_woman_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the woman look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_jump_land_hurt. Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_woman_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME woman as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a grown woman drawn in the same cute chibi style and at the same size and proportions as in the attached picture, with shoulder-length auburn hair, brown eyes and dark lashes, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only her pose changes. She is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way she stands in the attached picture, drawn at the same size as there (her standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). Cells 1 to 4 are one jump, with her feet starting on an invisible ground line near the bottom of the cell: 1 crouching low to spring, a deep squat with her hips dropped to about half her standing height, arms swung back; 2 springing up off her toes, body stretched tall, arms swung up; 3 at the top of the jump, high in the cell, knees tucked up and arms out for balance; 4 falling, legs reaching down for the ground and arms raised a little. Cells 5 and 6 are the landing, feet on the ground line: 5 landing in a deep squat, knees bent so far that her hips drop to about half her standing height, arms out; 6 rising back up, knees a little bent. Cells 7 and 8 are being hit, feet on the ground line: 7 flinching backward from a hit in front of her, eyes squeezed shut, head and shoulders thrown back, arms flung out to the sides; 8 staggering back a step, leaning back, eyes shut tight, wincing with a small open mouth. No arm or hand ever covers her face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the woman: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_woman_idle_faint_sit_crouch",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_woman_idle_faint_sit_crouch.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the woman look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_idle_faint_sit_crouch. Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_woman_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME woman as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a grown woman drawn in the same cute chibi style and at the same size and proportions as in the attached picture, with shoulder-length auburn hair, brown eyes and dark lashes, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only her pose changes. She is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way she stands in the attached picture, drawn at the same size as there (her standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). Cells 1 and 2 are two more idle frames, standing relaxed with feet on an invisible ground line near the bottom of the cell, exactly like the attached picture's two standing frames: 1 half way breathing out, 2 half way breathing in (only the chest and head move a tiny bit), with the same relaxed friendly face as in the attached picture. Cells 3 to 6 are fainting, on the ground line: 3 knees buckling, eyes closed, swaying; 4 collapsing to her knees; 5 falling forward onto the ground; 6 lying flat on her front on the ground, eyes closed, still. Cell 7: sitting on the ground, legs crossed, hands resting on her knees, smiling. Cell 8: crouching low in a deep squat, her hips down near her heels, hands on her knees, head up and looking ahead. No arm or hand ever covers her face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the woman: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_woman_dash",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_woman_dash.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the woman look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_dash. Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_woman_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME woman as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a grown woman drawn in the same cute chibi style and at the same size and proportions as in the attached picture, with shoulder-length auburn hair, brown eyes and dark lashes, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only her pose changes. She is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way she stands in the attached picture, drawn at the same size as there (her standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). The 8 cells are one 8-frame Dash, a short burst forward as a quick roll, with her feet near an invisible ground line near the bottom of the cell: 1 leaning forward ready to spring, one foot back; 2 diving forward, body stretched out low; 3 tucked into a tight ball, starting to roll forward; 4 upside down in the roll, still tucked; 5 coming round the roll, tucked; 6 landing on her feet low, still crouched; 7 pushing up, leaning forward; 8 standing again, a little forward lean, arms relaxed. No arm or hand ever covers her face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the woman: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_woman_surge",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_woman_surge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the woman look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_surge. Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_woman_walk_idle.png"
+   ],
+   "text": "The base picture is an empty sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines. Paint the SAME woman as in the attached picture in every cell, exactly the same face, hair, clothes, colours, proportions and size: a grown woman drawn in the same cute chibi style and at the same size and proportions as in the attached picture, with shoulder-length auburn hair, brown eyes and dark lashes, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round, like in the attached picture. Only her pose changes. She is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way she stands in the attached picture, drawn at the same size as there (her standing height about 85% of a cell). Every figure stays fully inside its own cell with a clear margin all round and never crosses a grid line. The 8 cells are numbered in reading order (top row left to right, then the bottom row). The 8 cells are one 8-frame Surge, a charged lunge that flies straight ahead: 1 crouching low on an invisible ground line, gathering power, fists pulled in at her sides; 2 crouched lower still, leaning forward, about to launch; 3 launching forward off the ground, body tipping forward; 4 flying straight ahead, body stretched out flat like a superhero, near fist punched forward, legs straight behind; 5 still flying flat out, the same; 6 still flying, legs starting to swing down; 7 landing on the ground line, skidding to a stop, knees bent, leaning back; 8 standing up again, a little out of breath. No arm or hand ever covers her face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the woman: no ground, wall, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_woman_slam",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_woman_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the woman look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_slam_v3 (on its pose guide). Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/boy_slam_v3_guide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_woman_walk_idle.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4, numbered in reading order) on a flat magenta background with thin grid lines. Each cell holds a flat green stick-figure POSE GUIDE: a big green circle for the head, a block for the body, dark green bars for her NEAR arm and leg (the ones toward the viewer) and pale green bars for her FAR arm and leg. Paint the SAME woman as in the attached picture over each guide, in EXACTLY the guide's pose: her head where the circle is, her body along the block, each arm and leg along its bar and bent at the same joints, her hands and boots at the bar ends, at the same place, angle and height in the cell as the guide (when a guide is high in its cell, she is up in the air there; when it is tipped or upside down, so is she). The guides are only a pose map: cover them completely, and no green from them is left anywhere. Never paint her standing upright where the guide is not. Copy the woman exactly: the same face, hair, clothes, colours, proportions and size as in the attached picture, a grown woman drawn in the same cute chibi style and at the same size and proportions as in the attached picture, with shoulder-length auburn hair, brown eyes and dark lashes, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round. She is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way she stands in the attached picture. Her face is the same friendly face as in the attached picture. Every figure stays fully inside its own cell and never crosses a grid line. The 8 cells are one Slam, a cannonball drop straight down from high in the air: 1 high up, knees pulled up, both arms raised; 2 at the very top, curled up in a tight ball, knees hugged to her chest; 3, 4 and 5 dropping straight down as a CANNONBALL, still curled in a tight ball with both arms wrapped around her shins and knees hugged to her chest, a little lower in each cell (high in cell 3, in the middle in cell 4, just above the bottom in cell 5), never standing; 6 the impact: landed in a deep squat, both arms straight down and both fists pressed onto the ground right beside her boots; 7 still squatting, hands on her knees, looking ahead; 8 standing again. No arm or hand ever covers her face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the woman: no ground, wall, streak, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_woman_double_jump",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_woman_double_jump.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the woman look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_double_jump_v2 (on its pose guide). Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/boy_double_jump_guide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_woman_walk_idle.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4, numbered in reading order) on a flat magenta background with thin grid lines. Each cell holds a flat green stick-figure POSE GUIDE: a big green circle for the head, a block for the body, dark green bars for her NEAR arm and leg (the ones toward the viewer) and pale green bars for her FAR arm and leg. Paint the SAME woman as in the attached picture over each guide, in EXACTLY the guide's pose: her head where the circle is, her body along the block, each arm and leg along its bar and bent at the same joints, her hands and boots at the bar ends, at the same place, angle and height in the cell as the guide (when a guide is high in its cell, she is up in the air there; when it is tipped or upside down, so is she). The guides are only a pose map: cover them completely, and no green from them is left anywhere. Never paint her standing upright where the guide is not. Copy the woman exactly: the same face, hair, clothes, colours, proportions and size as in the attached picture, a grown woman drawn in the same cute chibi style and at the same size and proportions as in the attached picture, with shoulder-length auburn hair, brown eyes and dark lashes, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round. She is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way she stands in the attached picture. Her face is the same friendly face as in the attached picture. Every figure stays fully inside its own cell and never crosses a grid line. The 8 cells are one Double Jump, a second leap in the air with no ground under her: 1 falling a little, knees bent, arms out; 2 tucked in a tight ball; 3 kicking down hard with her near leg, both arms flung straight up; 4 shooting upward, body stretched straight, both arms straight up; 5 tipped forward on her side in a tucked forward somersault; 6 upside down in the tucked somersault, head at the bottom; 7 coming out of the somersault, leaning back, knees bent; 8 at the top, legs a little bent, arms spread wide. No arm or hand ever covers her face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the woman: no ground, wall, streak, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
+ },
+ {
+  "id": "newhero_woman_wall_glide",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "newhero_woman_wall_glide.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Hero pose review': the woman look (approved 19:56Z \"I like these as is\") in plain clothes, the same move sheet as the boy's newhero_boy_wall_glide_v2 (on its pose guide). Released by Cory 21:16Z (\"Yes\") to the priced line 21:14Z (\"Should I paint the same 7 sheets for the girl, man and woman for $1.47? I'd use the pose guides for their Slam, Double Jump and wall/glide from the start.\").",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/boy_wall_glide_guide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/gemini-pass-1/newhero_woman_walk_idle.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4, numbered in reading order) on a flat magenta background with thin grid lines. Each cell holds a flat green stick-figure POSE GUIDE: a big green circle for the head, a block for the body, dark green bars for her NEAR arm and leg (the ones toward the viewer) and pale green bars for her FAR arm and leg. Paint the SAME woman as in the attached picture over each guide, in EXACTLY the guide's pose: her head where the circle is, her body along the block, each arm and leg along its bar and bent at the same joints, her hands and boots at the bar ends, at the same place, angle and height in the cell as the guide (when a guide is high in its cell, she is up in the air there; when it is tipped or upside down, so is she). The guides are only a pose map: cover them completely, and no green from them is left anywhere. Never paint her standing upright where the guide is not. Copy the woman exactly: the same face, hair, clothes, colours, proportions and size as in the attached picture, a grown woman drawn in the same cute chibi style and at the same size and proportions as in the attached picture, with shoulder-length auburn hair, brown eyes and dark lashes, a loose cream linen shirt with the sleeves rolled to the elbow, a brown leather belt, dark brown trousers and brown leather boots. No armour, cape, hat, bag or weapon, and nothing in the hands; the hands are small and round. She is turned three-quarters toward the viewer and faces RIGHT in every cell, exactly the way she stands in the attached picture. Her face is the same friendly face as in the attached picture. Every figure stays fully inside its own cell and never crosses a grid line. Cells 1 and 2 are a wall slide: her back and near hand pressed flat against an invisible wall at the LEFT edge of the cell, her far boot flat against it, knees bent, sliding down (do not paint the wall). Cells 3 to 6 are a wall jump away from it: 3 kicking off to the right with both legs stretched back to the left, arms reaching up and right; 4 flying up and to the right, body stretched out on a diagonal; 5 rising, knees tucking up, arms out; 6 at the top, legs a little bent, arms spread wide. Cells 7 and 8 are a glide: her body tipped far forward, nearly flat, head in front, legs straight and trailing behind together, arms spread wide like wings, gliding slowly down; 8 is the same with her arms a little higher. No arm or hand ever covers her face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF and keep the grid lines. Paint only the woman: no ground, wall, streak, shadow, dust, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never white."
+  }
  }
 ]
 }
