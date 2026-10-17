@@ -1,0 +1,202 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=48 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/harbor.tres" id="2_harbor"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="3_biome_variant_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/dawnharbor_fields/netting_left.png" id="4_netting_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/dawnharbor_fields/netting_right.png" id="5_netting_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor_fields/cap_left.png" id="6_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor_fields/middle_a.png" id="7_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor_fields/middle_b.png" id="8_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor_fields/cap_right.png" id="9_cap_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/dawnharbor_fields_side.png" id="10_dawnharbor_fields_side"]
+[ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="11_backdrop_layer_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/dawnharbor_fields/harbor_road.png" id="12_harbor_road"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="13_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="14_portal_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor_fields/gate.png" id="15_gate"]
+[ext_resource type="Resource" path="res://data/monsters/thornling.tres" id="16_thornling"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="17_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/sea_gull.tres" id="18_sea_gull"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor_fields/lever.png" id="19_lever"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor_fields/lever_pulled.png" id="20_lever_pulled"]
+[ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="21_breakable_def"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="22_dawnshard"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="23_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="24_white_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="25_blue_potion"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor_fields/chest.png" id="26_chest"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor_fields/chest_open.png" id="27_chest_open"]
+
+[sub_resource type="Resource" id="Backdrop_picture"]
+script = ExtResource("11_backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("12_harbor_road")])
+mode = 2
+depth = 300.0
+screen_top = Vector2(-0.2, -0.2)
+
+[sub_resource type="Resource" id="Copied_Variant"]
+script = ExtResource("3_biome_variant_def")
+sky_mid = Color(0.4784, 0.5647, 0.6902, 1)
+light_energy = 1.6
+grade_saturation = 1.0
+fog_color = Color(0.7216, 0.7686, 0.8314, 1)
+fog_begin = 0.0
+fog_end = 130.0
+fog_density = 0.46
+hide_ground_decor = PackedInt32Array(0, 1, 3)
+frame_scale = 0.55
+hide_edge_grass = true
+hide_platform_decor = true
+frame_left = ExtResource("4_netting_left")
+frame_right = ExtResource("5_netting_right")
+platform_left = ExtResource("6_cap_left")
+platform_middle = ExtResource("7_middle_a")
+platform_middle_alt = ExtResource("8_middle_b")
+platform_right = ExtResource("9_cap_right")
+ground_side = ExtResource("10_dawnharbor_fields_side")
+hide_layers = PackedInt32Array(0, 1, 2, 3, 4, 5, 6)
+more_backdrop = Array[ExtResource("11_backdrop_layer_def")]([SubResource("Backdrop_picture")])
+
+[sub_resource type="Resource" id="Platform_1"]
+script = ExtResource("13_platform_def")
+x = 300.0
+y = 845.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_2"]
+script = ExtResource("13_platform_def")
+x = 600.0
+y = 770.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_3"]
+script = ExtResource("13_platform_def")
+x = 900.0
+y = 695.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_4"]
+script = ExtResource("13_platform_def")
+x = 1200.0
+y = 620.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_5"]
+script = ExtResource("13_platform_def")
+x = 1700.0
+y = 845.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_6"]
+script = ExtResource("13_platform_def")
+x = 1900.0
+y = 770.0
+width = 300.0
+
+[sub_resource type="Resource" id="Platform_7"]
+script = ExtResource("13_platform_def")
+x = 1670.0
+y = 490.0
+width = 150.0
+secret = true
+
+[sub_resource type="Resource" id="Portal_0"]
+script = ExtResource("14_portal_def")
+x = 1250.0
+target_map = &"harbor_road"
+target_x = 3400.0
+target_platform = 19
+
+[sub_resource type="Resource" id="Portal_1"]
+script = ExtResource("14_portal_def")
+x = 80.0
+target_map = &"windmill_downs"
+target_x = 5740.0
+gate = &"hedgerow_lane_gate"
+gate_picture = ExtResource("15_gate")
+
+[sub_resource type="Resource" id="Spawn_0"]
+script = ExtResource("17_spawn_def")
+monster = ExtResource("16_thornling")
+platform = 0
+count = 4
+patrol_from = 300.0
+patrol_to = 2300.0
+
+[sub_resource type="Resource" id="Spawn_1"]
+script = ExtResource("17_spawn_def")
+monster = ExtResource("18_sea_gull")
+platform = 2
+count = 2
+
+[sub_resource type="Resource" id="Spawn_2"]
+script = ExtResource("17_spawn_def")
+monster = ExtResource("16_thornling")
+platform = 3
+count = 2
+
+[sub_resource type="Resource" id="Spawn_3"]
+script = ExtResource("17_spawn_def")
+monster = ExtResource("18_sea_gull")
+platform = 6
+count = 2
+
+[sub_resource type="Resource" id="Breakable_0"]
+script = ExtResource("21_breakable_def")
+id = &"hedgerow_lane_gate"
+x = 1400.0
+platform = 4
+hits = 1
+whole = ExtResource("19_lever")
+broken = ExtResource("20_lever_pulled")
+height = 80.0
+
+[sub_resource type="Resource" id="Loot_1_0"]
+script = ExtResource("23_drop_entry")
+item = ExtResource("22_dawnshard")
+min_amount = 160
+max_amount = 240
+
+[sub_resource type="Resource" id="Loot_1_1"]
+script = ExtResource("23_drop_entry")
+item = ExtResource("24_white_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Loot_1_2"]
+script = ExtResource("23_drop_entry")
+item = ExtResource("25_blue_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Breakable_1"]
+script = ExtResource("21_breakable_def")
+id = &"hedgerow_lane_high_chest"
+x = 1745.0
+platform = 7
+hits = 1
+whole = ExtResource("26_chest")
+broken = ExtResource("27_chest_open")
+height = 48.0
+loot = Array[ExtResource("23_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
+card = ExtResource("16_thornling")
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"hedgerow_lane"
+display_name = "Hedgerow Lane"
+biome = ExtResource("2_harbor")
+variant = SubResource("Copied_Variant")
+width = 2480
+height = 1000
+ground_y = 920
+start_x = 1500.0
+platforms = Array[ExtResource("13_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7")])
+portals = Array[ExtResource("14_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1")])
+breakables = Array[ExtResource("21_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1")])
+spawns = Array[ExtResource("17_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3")])
+region = &"dawnharbor"
+world_pos = Vector2(600.0, 300.0)
+zone_pos = Vector2(7400.0, -1300.0)
+return_map = &"dawnharbor"

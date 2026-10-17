@@ -85,6 +85,9 @@ extends Resource
 ## HUD, as tall as the screen, so they keep their place on any screen shape.
 @export var frame_left: Texture2D
 @export var frame_right: Texture2D
+## How tall the corner frame is drawn, as a share of the screen's height (each half keeps its
+## corner and its shape): below 1 for a frame painted bigger than it should hang.
+@export var frame_scale := 1.0
 
 @export_group("Ambient life")
 ## Birds or other small creatures crossing the sky behind the scene (their "move" or
