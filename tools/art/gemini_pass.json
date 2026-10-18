@@ -29746,6 +29746,130 @@
    "refs": [],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi grown man with short dark brown hair and light stubble in plain clothes in 8 animation frames of idling, fainting, sitting and crouching. Each cell keeps EXACTLY the pose of the base, which is: cell 1: standing idle; cell 2: standing idle; cell 3: dazed and swaying on his feet, eyes closed; cell 4: down on one knee, dazed, eyes closed; cell 5: falling forward toward the ground; cell 6: lying flat on his front on the ground, eyes closed, fainted; cell 7: SITTING on the ground with his legs crossed in front of him; cell 8: CROUCHING low, knees deeply bent, body lowered. Cell 7 is NOT standing: he sits on the ground with his legs crossed in front of him, the sword lying across his lap in his near hand and the shield resting beside him. Cell 8 is NOT standing: a low crouch with knees deeply bent and the body lowered, holding the sword and shield. Cell 4 is down on one knee and cell 6 is lying flat on the ground. Keep his pose, arms, legs, body, head size, proportions, size, place in the cell, which way he faces and turns, and his eyes exactly as in the base in every cell (only his expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows him standing there. Only dress him, the same in every cell, in one full suit of WARRIOR armour. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (his face fully visible; nothing on the neck or shoulders attached to the helm). His short dark brown hair is hidden under the helm except a little at the front; his light stubble stays. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. He holds ONE steel longsword with a crossguard and a brown leather grip in his NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on his FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow his hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In cells 3 to 6 he may look dazed or have his eyes closed as in the base. When sitting, the sword lies across his lap in his near hand; when lying down, the sword and shield lie close beside him. His face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
   }
+ },
+ {
+  "id": "warrior_vanguard_girl_slam_v3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_slam_v3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': detail fix after wave 337. Wave 337 got the poses but painted a riveted dome band, the ponytail through the dome, and an open mouth in cell 8. Second step of the route that worked for the boy (wave 331 poses, then wave 332 details): edits the result, whose poses are right, and changes only the named details; the only ref is a faceless crop of this look's own approved walk. Priced line: \"Should I paint these 5 detail fixes (the helm on the three slams, the man's helm and stripe on his idle sheet, and the girl's ponytail on her fall frames), for about $0.34?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_girl_slam_v2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_girl_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl warrior in 8 animation frames. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, sword, shield, size and place in the cell; never change a pose. Change only three things, the same in all 8 cells. First, the top of her steel helm has a raised riveted metal band running down the middle of the dome. Remove that band and its rivets in every cell so the dome above the brow band is painted exactly like the attached close-up, which shows only the top of her approved helm. Keep the riveted brow band, the short nose strip, the cheek guards and the helm's shape and size. Second, her long brown ponytail comes out through the back of the helm dome, which a real ponytail under a helmet could not do. Repaint it so it comes out from UNDER the back bottom rim of the helm at the nape of her neck and hangs or trails from there the way it would in that pose; nothing pokes out through or above the dome. Keep its colour, strands and length. Where the old ponytail was, paint the flat magenta background and finish the back of the helm dome. Third, her face is ready for battle in cells 1 to 8: focused and determined, eyebrows a little lowered, mouth closed, not smiling. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "warrior_vanguard_man_slam_v3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_man_slam_v3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': detail fix after wave 337. Wave 337 got the poses but brought back the riveted dome band his walk fix removed (wave 334). Second step of the route that worked for the boy (wave 331 poses, then wave 332 details): edits the result, whose poses are right, and changes only the named details; the only ref is a faceless crop of this look's own approved walk. Priced line: \"Should I paint these 5 detail fixes (the helm on the three slams, the man's helm and stripe on his idle sheet, and the girl's ponytail on her fall frames), for about $0.34?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_man_slam_v2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_man_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with light stubble warrior in 8 animation frames. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, sword, shield, size and place in the cell; never change a pose. Change only one thing, the same in all 8 cells: the top of his steel helm has a raised riveted metal band running down the middle of the dome. Remove that band and its rivets in every cell so the dome above the brow band is painted exactly like the attached close-up, which shows only the top of his approved helm. Keep the riveted brow band, the short nose strip, the cheek guards and the helm's shape and size. His face and stubble stay as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "warrior_vanguard_woman_slam_v3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_woman_slam_v3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': detail fix after wave 337. Wave 337 painted a riveted dome band; its standing cells 4-5 are replaced at cut time by reusing the tuck cells 2-3. Second step of the route that worked for the boy (wave 331 poses, then wave 332 details): edits the result, whose poses are right, and changes only the named details; the only ref is a faceless crop of this look's own approved walk. Priced line: \"Should I paint these 5 detail fixes (the helm on the three slams, the man's helm and stripe on his idle sheet, and the girl's ponytail on her fall frames), for about $0.34?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_woman_slam_v2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_woman_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair warrior in 8 animation frames. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, sword, shield, size and place in the cell; never change a pose. Change only one thing, the same in all 8 cells: the top of her steel helm has a raised riveted metal band running down the middle of the dome. Remove that band and its rivets in every cell so the dome above the brow band is painted exactly like the attached close-up, which shows only the top of her approved helm. Keep the riveted brow band, the short nose strip, the cheek guards and the helm's shape and size. Her auburn hair stays as it is, hanging from under the rim. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "warrior_vanguard_man_idle_faint_sit_crouch_v3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_man_idle_faint_sit_crouch_v3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': detail fix after wave 337. Wave 337 got the sit and crouch poses but lost the helm in cells 5-8, put a cross band on the dome in cells 1-4, widened the stripe and dropped the shield in cells 3-6 and 8. Second step of the route that worked for the boy (wave 331 poses, then wave 332 details): edits the result, whose poses are right, and changes only the named details; the only ref is a faceless crop of this look's own approved walk. Priced line: \"Should I paint these 5 detail fixes (the helm on the three slams, the man's helm and stripe on his idle sheet, and the girl's ponytail on her fall frames), for about $0.34?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_man_idle_faint_sit_crouch_v2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_man_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_man_chest_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with light stubble warrior in 8 animation frames. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, sword, shield, size and place in the cell; never change a pose. The two attached close-ups show his approved armour with no face and no pose: the first only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Change only the armour so every cell matches them exactly. First, in cells 5, 6, 7 and 8 he has no helm and his bare hair shows: put the same steel open-face helm on his head in those cells, sitting on his head the way it would in that pose (smooth plain dome like the first close-up, riveted brow band, short nose strip, cheek guards, covering only the head, his face fully visible, his hair hidden under it except a little at the front). Second, in cells 1 to 4 the helm dome has a cross-shaped band on it: remove it so the dome is plain like the first close-up. Third, in every cell the tabard has a wide white stripe: make it ONE NARROW white stripe down the middle of the dark navy tabard, exactly like the second close-up. Fourth, in cells 3, 4, 5, 6 and 8 he has no shield: give him the same PLAIN deep blue heater shield with a steel rim on his FAR forearm, close to his body and following the pose; in cell 6 (lying) it lies close beside him, and in cell 7 (sitting) it may rest on the ground beside him as now. His face is ready for battle in cells 1, 2, 7 and 8 (mouth closed, not smiling); in cells 3 to 6 he stays dazed as he is now. Keep his stubble. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_idle_faint_sit_crouch_v3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_idle_faint_sit_crouch_v3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': detail fix after wave 337. Wave 337 fixed the ponytail in 6 cells but left it through the dome in cells 5 (falling) and 6 (lying); cell 7 smiles and cell 8 has an open mouth. Second step of the route that worked for the boy (wave 331 poses, then wave 332 details): edits the result, whose poses are right, and changes only the named details; the only ref is a faceless crop of this look's own approved walk. Priced line: \"Should I paint these 5 detail fixes (the helm on the three slams, the man's helm and stripe on his idle sheet, and the girl's ponytail on her fall frames), for about $0.34?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_girl_idle_faint_sit_crouch_v2.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl warrior in 8 animation frames. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, sword, shield, size and place in the cell; never change a pose. Change only two things. First, in cells 5 and 6 only: Her long brown ponytail comes out through the back of the helm dome, which a real ponytail under a helmet could not do. Repaint it so it comes out from UNDER the back bottom rim of the helm at the nape of her neck and hangs or trails from there the way it would in that pose; nothing pokes out through or above the dome. Keep its colour, strands and length. Where the old ponytail was, paint the flat magenta background and finish the back of the helm dome. Leave the hair in cells 1 to 4, 7 and 8 as it is. Second, her face is ready for battle in cells 7 and 8: focused and determined, eyebrows a little lowered, mouth closed, not smiling. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
  }
 ]
 }
