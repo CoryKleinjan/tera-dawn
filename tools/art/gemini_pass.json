@@ -27557,6 +27557,242 @@
   "town_check": {
    "kind": "backdrop"
   }
+ },
+ {
+  "id": "emberreach_fields_pieces",
+  "prompts": null,
+  "batch": "Emberreach fields: stone fake wall, slag wall, iron-banded chest (edit)",
+  "with": null,
+  "refs": [],
+  "save": "emberreach_fields_pieces.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": true,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Zone rework' (Emberreach rooms, PR #312; look picks OK'd by Cory 12:51Z Oct 18; test kept 14:16Z Oct 18 'Yes'): full kit after the land and Slag Fields test. Guide: the Dawnharbor pieces guide unchanged, as Lumewood's kept kit used: the fake wall (fake_wall), the slag wall whole/broken (BreakableDef whole/broken) and the secret chest closed/open. Base 2400x1600, exactly 3:2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/emberreach-fields/bases/pieces_base.png",
+   "refs": [],
+   "text": "The first image is a guide on a flat magenta #FF00FF background showing five objects for my 2D side-scrolling game as flat colour shapes. Paint each one over its shape as a finished object for Emberreach, proud cinder hills and forges of grey stone and dark iron under a glowing ember sky, keeping each shape's position, size and outline EXACTLY: each painted object fills its whole shape and nothing goes outside it. 1) LEFT, a wall of plain grey stone that fills a low passage: warm grey forge stone in a few big simple blocks fitted together, with a few faint cracks and a little dark cinder grit in one crack. It must look like ordinary solid stone, nothing special about it, and keep the guide's wide block shape. 2) MIDDLE TOP, a wall of slag rock that blocks a low passage: a lumpy mass of dark glassy black-brown slag with rough rounded lumps up to the shape's rounded top, a few thin cracks glowing ember orange, set in a little grey stone at the base. 3) MIDDLE BOTTOM, the SAME slag wall smashed open: the identical outside shape, size and colours, but its middle broken through, with jagged slag edges and a few broken chunks round a dark hole where the dark arch is. 4) RIGHT TOP, a small sturdy chest of dark oak planks bound with black iron bands and round rivets, a domed lid, a heavy iron hasp and a small iron lock on the front. 5) RIGHT BOTTOM, the SAME chest opened: its box exactly as in the closed chest, and its lid swung open upward so it stands up behind the box, seen from the front, showing the lid's inner side. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own painted style: soft cel-painted shading with clear light and shadow shapes, bright highlights on the lit edges from the upper left, rich saturated colours, a bold dark outline, and hand-painted texture at a fairly chunky brush scale. Palette: warm grey forge stone (#8a7f78) with amber highlights (#ffd0a0), dark slag (#2e2220) with glassy highlights, ember-orange cracks (#ff8a3c), dark oak (#5a3a26), black iron (#3a3434) with bright rivet highlights. Every object is a flat front view at eye level: no top surface shows (no lid top, no stone top face, nothing seen from above), and each stands on ONE flat straight bottom edge with no ground, grit or shadow under it. The cracks may be bright but nothing gives off a glow or halo. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the objects the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "emberreach_fields_locks",
+  "prompts": null,
+  "batch": "Emberreach fields: lever, iron portcullis, locked gate, Foundry Key (edit)",
+  "with": null,
+  "refs": [],
+  "save": "emberreach_fields_locks.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": true,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Zone rework' (Emberreach rooms, PR #312; look picks OK'd by Cory 12:51Z Oct 18; test kept 14:16Z Oct 18 'Yes'): full kit after the land and Slag Fields test. Guide: the Lumewood locks guide unchanged (ring-bow key): the shut gate, the key gate, the lever up and swung over, and the Foundry Key (its item icon and drop picture, one painting). Base 2400x1600, exactly 3:2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/emberreach-fields/bases/locks_base.png",
+   "refs": [],
+   "text": "The first image is a guide on a flat magenta #FF00FF background showing five objects for my 2D side-scrolling game as flat colour shapes. Paint each one over its shape as a finished object for Emberreach, proud cinder hills and forges of grey stone and dark iron under a glowing ember sky, keeping each shape's position, size and outline EXACTLY. 1) LEFT, a shut iron portcullis that blocks a doorway: two posts of grey forge stone at the sides and, between them, five upright bars of dark iron with pointed tops, held by two riveted iron cross rails. Where the rails meet the posts are big round rivets. Every gap between the bars stays open, showing flat magenta. 2) MIDDLE, the SAME gate, identical in every way, with a heavy black iron lock plate fixed across its middle: a keyhole in it, a small ember-orange stone above the keyhole and a ring of rivets round its edge. 3) TOP RIGHT, LEFT ONE, a lever: a squat block of grey forge stone with two dark iron bands, and a dark iron handle with a round brass knob, turning on a round iron pivot at the top of the block. The handle leans up to the LEFT. 4) TOP RIGHT, RIGHT ONE, the SAME lever, identical in every way, with its handle swung over so it leans up to the RIGHT. 5) BOTTOM RIGHT, a heavy black iron key: a long shaft with a toothed bit at the right end and, at the left end, a round ring bow with an ember-orange stone set in its middle where the diamond is. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own painted style: soft cel-painted shading with clear light and shadow shapes, bright highlights on the lit edges from the upper left, rich saturated colours, a bold dark outline, and hand-painted texture at a fairly chunky brush scale. Palette: warm grey forge stone (#8a7f78), dark iron (#3a3434) with bright steel highlights, warm brass (#c89a4a), ember-orange stone (#ff8a3c). Every object is a flat front view at eye level: no top surface shows, and the gates and levers each stand on ONE flat straight bottom edge with no ground, grit or shadow under it. The stones may shine with bright highlights but nothing gives off a glow or halo. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the objects and in every gap between the gate bars the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "emberreach_fields_overhangs",
+  "prompts": null,
+  "batch": "Emberreach fields: dark rock overhangs for the top corners (edit)",
+  "with": null,
+  "refs": [],
+  "save": "emberreach_fields_overhangs.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Zone rework' (Emberreach rooms, PR #312; look picks OK'd by Cory 12:51Z Oct 18; test kept 14:16Z Oct 18 'Yes'): full kit after the land and Slag Fields test. Guide: the Lumewood vines guide with the hanging lines and buds removed (Cory's pick: dark ember-lit rock overhangs, nothing hanging that could look climbable): the two corner masses only, shown at frame_scale. Base 2400x1350, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/emberreach-fields/bases/frame_base.png",
+   "refs": [],
+   "text": "The first image is a guide for a frame of foreground rock for my 2D side-scrolling game, on a flat magenta #FF00FF background. The dark shapes in the two top corners hang into the top corners of the screen very close to the camera, the way Hollow Knight frames its screen with dark foreground shapes. Paint over the shapes as two heavy overhangs of dark craggy rock jutting in from above, keeping their positions, sizes and overall shapes exactly; their lower edges are rough and jagged rock, with nothing hanging down from them (no vines, roots, chains, ropes or drips). They are dark near-silhouettes: deep blackish brown (#120a08 to #2a1814), with only a thin warm ember-orange rim light along their lower edges and a few faint ember-orange cracks as the only bright touches; simple clean shapes with crisp edges and almost no inner detail, so they frame the picture without drawing the eye. Both masses run off the top edge, the left one also off the left edge and the right one off the right edge. The rest of the image stays flat pure magenta #FF00FF, with no glow, haze, smoke or shadow spreading onto it. No magenta or pink inside the rock. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "emberreach_fields_seals",
+  "prompts": null,
+  "batch": "Emberreach fields: cracked wall and cracked floor, whole and broken (edit)",
+  "with": null,
+  "refs": [],
+  "save": "emberreach_fields_seals.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": true,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Zone rework' (Emberreach rooms, PR #312; look picks OK'd by Cory 12:51Z Oct 18; test kept 14:16Z Oct 18 'Yes'): full kit after the land and Slag Fields test. The cracked floor is the Slam floor (BreakableDef slam_only) in Smoke Pits, Ironworks Depths and Molten Throne; the cracked wall is for the sealed areas later (plans/zone-rework.md 'Sealed areas'), painted now with the kit. Guide: the Lumewood seals guide unchanged. Base 2400x1600, exactly 3:2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/emberreach-fields/bases/seals_base.png",
+   "refs": [],
+   "text": "The first image is a guide on a flat magenta #FF00FF background showing four objects for my 2D side-scrolling game as flat colour shapes. Paint each one over its shape as a finished object for Emberreach, proud cinder hills and forges of grey stone and dark iron under a glowing ember sky, keeping each shape's position, size and outline EXACTLY: each painted object fills its whole shape and nothing goes outside it. 1) TOP LEFT, an old wall of grey forge-stone blocks that seals a passage, badly cracked: deep dark cracks run through it from top to bottom, a few chips have fallen out, and a faint ember-orange light shows deep inside the widest crack. It still stands whole. 2) TOP RIGHT, the SAME wall broken open: the identical outside shape, size and colours, but its middle has crumbled away into a dark hole where the dark arch is, with broken block edges round it. 3) BOTTOM LEFT, a long flat slab of the same grey forge stone set into the ground, badly cracked across with deep dark cracks glowing faint ember orange inside and a few chips missing. A thin band of dark cinder grit runs along its top edge. 4) BOTTOM RIGHT, the SAME slab broken open: the identical shape, size and colours, but broken through where the dark zigzag is, a dark gap with jagged broken edges and a few small loose chips at its rim. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own painted style: soft cel-painted shading with clear light and shadow shapes, bright highlights on the lit edges from the upper left, rich saturated colours, a bold dark outline, and hand-painted texture at a fairly chunky brush scale. Palette: warm grey forge stone (#8a7f78) with amber highlights (#ffd0a0), deep brown-grey (#4a3a33) in the cracks and shadows, dark cinder grit (#2c201c), faint ember-orange light (#ff8a3c). Every object is a flat front view at eye level: no top surface shows (nothing seen from above), and each stands on ONE flat straight bottom edge with no ground, rubble or shadow under or beside it. Nothing gives off a glow or halo. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the objects the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "emberreach_fields_cinder_pass_backdrop",
+  "prompts": null,
+  "batch": "Emberreach fields: Cinder Pass backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "emberreach_fields_cinder_pass_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Emberreach rooms, PR #312; look picks OK'd by Cory 12:51Z Oct 18; test kept 14:16Z Oct 18 'Yes'): full kit after the land and Slag Fields test. Guide: one picture behind the whole map (BackdropLayerDef PICTURE, depth 300), written like emberreach_fields_slag_fields_backdrop (kept), in Cinder Pass's colours (zone-vibes.md). Base 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/emberreach-fields/bases/cinder_pass_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Cinder Pass, the dusty mountain pass on the border of Emberreach, climbing over a ridge, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture (stone, iron, slag, smoke). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: a dusty mountain pass seen from the side: craggy brown-orange cinder mountains in layers fading back into dusty haze, a winding old stone road climbing over a far ridge, a few lonely stone watchtowers and old forge chimneys far away, dust blowing in the wind and a few drifting embers. Colours: dark brown dusty sky at the very top (#2a1810), dusty orange horizon (#d99a62), brown-orange haze (#a8683e), muted colour overall; the mood is muted, dusty and wind-blown. Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft hazy ground far away, with nothing close to the viewer (no rocks, rails, posts, beams or chains up front); the closest things are in the middle distance, and the bottom is soft and hazy, not big dark shapes. No level rocks, ledges, walkways, beams or roofs close enough to look like places to stand, and no ropes, ladders or chains that look climbable. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "emberreach_fields_ashen_wastes_backdrop",
+  "prompts": null,
+  "batch": "Emberreach fields: Ashen Wastes backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "emberreach_fields_ashen_wastes_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Emberreach rooms, PR #312; look picks OK'd by Cory 12:51Z Oct 18; test kept 14:16Z Oct 18 'Yes'): full kit after the land and Slag Fields test. Guide: one picture behind the whole map (BackdropLayerDef PICTURE, depth 300), written like emberreach_fields_slag_fields_backdrop (kept), in Ashen Wastes's colours (zone-vibes.md). Base 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/emberreach-fields/bases/ashen_wastes_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Ashen Wastes, a wide grey ash plain on the border of Emberreach, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture (stone, iron, slag, smoke). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: a wide flat ash plain seen from the side: low grey ash dunes in layers fading back into pale grey haze, a few dead blackened trees and broken old stone pillars far away, white ash flakes drifting down like snow, and a pale sun behind the haze. Colours: dark grey sky at the very top (#2e2a28), pale washed-out grey horizon (#c9bfb4), grey ash (#8f8680), faint warm haze (#b39a84), washed-out colour overall; the mood is quiet, washed-out and still. Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft hazy ground far away, with nothing close to the viewer (no rocks, rails, posts, beams or chains up front); the closest things are in the middle distance, and the bottom is soft and hazy, not big dark shapes. No level rocks, ledges, walkways, beams or roofs close enough to look like places to stand, and no ropes, ladders or chains that look climbable. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "emberreach_fields_smoke_pits_backdrop",
+  "prompts": null,
+  "batch": "Emberreach fields: Smoke Pits backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "emberreach_fields_smoke_pits_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Emberreach rooms, PR #312; look picks OK'd by Cory 12:51Z Oct 18; test kept 14:16Z Oct 18 'Yes'): full kit after the land and Slag Fields test. Guide: one picture behind the whole map (BackdropLayerDef PICTURE, depth 300), written like emberreach_fields_slag_fields_backdrop (kept), in Smoke Pits's colours (zone-vibes.md). Base 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/emberreach-fields/bases/smoke_pits_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Smoke Pits, deep smoky pits in Emberreach, the first real drop, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture (stone, iron, slag, smoke). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: deep pits seen from the side: dark rock walls dropping away in layers, thick grey-brown smoke rising slowly from vents far below, old iron walkways and chimneys dim in the smoke, a few faint ember glows deep in the pits. Colours: smoky near-black at the very top (#1c1613), dim grey-brown smoke (#8a725e), deep brown shadow (#3a2c24), a few faint ember glows (#ff8a3c), dim and choking; the mood is dim, smoky and close. Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft hazy ground far away, with nothing close to the viewer (no rocks, rails, posts, beams or chains up front); the closest things are in the middle distance, and the bottom is soft and hazy, not big dark shapes. No level rocks, ledges, walkways, beams or roofs close enough to look like places to stand, and no ropes, ladders or chains that look climbable. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "emberreach_fields_magma_falls_backdrop",
+  "prompts": null,
+  "batch": "Emberreach fields: Magma Falls backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "emberreach_fields_magma_falls_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Emberreach rooms, PR #312; look picks OK'd by Cory 12:51Z Oct 18; test kept 14:16Z Oct 18 'Yes'): full kit after the land and Slag Fields test. Guide: one picture behind the whole map (BackdropLayerDef PICTURE, depth 300), written like emberreach_fields_slag_fields_backdrop (kept), in Magma Falls's colours (zone-vibes.md). Base 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/emberreach-fields/bases/magma_falls_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Magma Falls, a tall cavern in Emberreach beside falling lava, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture (stone, iron, slag, smoke). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: a tall cavern seen from the side: great falls of bright molten lava pouring down far-off dark rock cliffs into glowing pools, red-orange light washing up the cliffs, dark rock pillars in layers fading back into red haze, bright ember motes rising. Colours: dark red-black at the very top (#2a0c06), bright red-orange lava glow (#ff7a3a), molten yellow highlights (#ffd060), red haze (#bf3a1f), the most glowing Emberreach picture; the mood is fierce, bright and roaring. Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft hazy ground far away, with nothing close to the viewer (no rocks, rails, posts, beams or chains up front); the closest things are in the middle distance, and the bottom is soft and hazy, not big dark shapes. No level rocks, ledges, walkways, beams or roofs close enough to look like places to stand, and no ropes, ladders or chains that look climbable. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "emberreach_fields_ironworks_depths_backdrop",
+  "prompts": null,
+  "batch": "Emberreach fields: Ironworks Depths backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "emberreach_fields_ironworks_depths_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Emberreach rooms, PR #312; look picks OK'd by Cory 12:51Z Oct 18; test kept 14:16Z Oct 18 'Yes'): full kit after the land and Slag Fields test. Guide: one picture behind the whole map (BackdropLayerDef PICTURE, depth 300), written like emberreach_fields_slag_fields_backdrop (kept), in Ironworks Depths's colours (zone-vibes.md). Base 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/emberreach-fields/bases/ironworks_depths_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Ironworks Depths, old abandoned ironworks deep in Emberreach, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture (stone, iron, slag, smoke). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: a vast old ironworks seen from the side: huge dark iron furnaces, great gears, chains of cold buckets and riveted iron girders in layers fading back into darkness, a low forge-red glow from banked furnaces far below. Colours: near-black sky at the very top (#0e0a0a), low forge-red glow (#7a2a1c), dark iron (#2a2626), dull rust (#6a3a28), muted colour overall; the mood is dark, heavy and old. Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft hazy ground far away, with nothing close to the viewer (no rocks, rails, posts, beams or chains up front); the closest things are in the middle distance, and the bottom is soft and hazy, not big dark shapes. No level rocks, ledges, walkways, beams or roofs close enough to look like places to stand, and no ropes, ladders or chains that look climbable. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "emberreach_fields_molten_throne_backdrop",
+  "prompts": null,
+  "batch": "Emberreach fields: Molten Throne backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "emberreach_fields_molten_throne_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Emberreach rooms, PR #312; look picks OK'd by Cory 12:51Z Oct 18; test kept 14:16Z Oct 18 'Yes'): full kit after the land and Slag Fields test. Guide: one picture behind the whole map (BackdropLayerDef PICTURE, depth 300), written like emberreach_fields_slag_fields_backdrop (kept), in Molten Throne's colours (zone-vibes.md). Base 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/emberreach-fields/bases/molten_throne_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Molten Throne, the long way down to the Molten King, the hottest, darkest place in Emberreach, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture (stone, iron, slag, smoke). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: a great deep chasm seen from the side: dark obsidian rock walls in layers, rivers of molten lava glowing deep red far below, a huge carved stone throne hall half sunk in the rock far away, heat shimmer and a few slow rising embers. Colours: near-black red sky at the very top (#120505), deep red lift near the bottom (#9c1e12), dark obsidian (#1e1414), molten red (#d0301a), the hottest, darkest Emberreach picture; the mood is dread, heat and majesty. Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft hazy ground far away, with nothing close to the viewer (no rocks, rails, posts, beams or chains up front); the closest things are in the middle distance, and the bottom is soft and hazy, not big dark shapes. No level rocks, ledges, walkways, beams or roofs close enough to look like places to stand, and no ropes, ladders or chains that look climbable. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
  }
 ]
 }
