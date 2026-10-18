@@ -1,0 +1,159 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=35 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/lantern.tres" id="2_lantern"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="3_biome_variant_def"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="4_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="5_portal_def"]
+[ext_resource type="Resource" path="res://data/monsters/crypt_shell.tres" id="6_crypt_shell"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="7_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/gloomcap.tres" id="8_gloomcap"]
+[ext_resource type="Resource" path="res://data/monsters/marsh_horror.tres" id="9_marsh_horror"]
+[ext_resource type="Resource" path="res://data/items/etc/chapel_key.tres" id="10_chapel_key"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="11_drop_entry"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/chest.png" id="12_chest"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/chest_open.png" id="13_chest_open"]
+[ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="14_breakable_def"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="15_dawnshard"]
+[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="16_white_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="17_blue_potion"]
+
+[sub_resource type="Resource" id="Copied_Variant"]
+script = ExtResource("3_biome_variant_def")
+sky_top = Color(0.04, 0.04, 0.08, 1)
+sky_mid = Color(0.15, 0.17, 0.25, 1)
+fog_color = Color(0.25, 0.3, 0.35, 1)
+fog_begin = 0.0
+fog_end = 130.0
+fog_density = 0.92
+mote_color = Color(0.6, 0.9, 0.8, 1)
+
+[sub_resource type="Resource" id="Platform_1"]
+script = ExtResource("4_platform_def")
+x = 300.0
+y = 845.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_2"]
+script = ExtResource("4_platform_def")
+x = 600.0
+y = 770.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_3"]
+script = ExtResource("4_platform_def")
+x = 900.0
+y = 695.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_4"]
+script = ExtResource("4_platform_def")
+x = 1400.0
+y = 845.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_5"]
+script = ExtResource("4_platform_def")
+x = 1700.0
+y = 770.0
+width = 300.0
+
+[sub_resource type="Resource" id="Platform_6"]
+script = ExtResource("4_platform_def")
+x = 600.0
+y = 520.0
+width = 150.0
+secret = true
+
+[sub_resource type="Resource" id="Portal_0"]
+script = ExtResource("5_portal_def")
+x = 2340.0
+target_map = &"sunken_graveyard"
+target_x = 200.0
+target_platform = 46
+
+[sub_resource type="Resource" id="Spawn_0"]
+script = ExtResource("7_spawn_def")
+monster = ExtResource("6_crypt_shell")
+platform = 0
+count = 4
+patrol_from = 200.0
+patrol_to = 2000.0
+
+[sub_resource type="Resource" id="Spawn_1"]
+script = ExtResource("7_spawn_def")
+monster = ExtResource("8_gloomcap")
+platform = 2
+count = 2
+
+[sub_resource type="Resource" id="Spawn_2"]
+script = ExtResource("7_spawn_def")
+monster = ExtResource("9_marsh_horror")
+platform = 4
+count = 1
+
+[sub_resource type="Resource" id="Loot_0_0"]
+script = ExtResource("11_drop_entry")
+item = ExtResource("10_chapel_key")
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Breakable_0"]
+script = ExtResource("14_breakable_def")
+id = &"chapel_key_chest"
+x = 1050.0
+platform = 3
+hits = 1
+whole = ExtResource("12_chest")
+broken = ExtResource("13_chest_open")
+height = 48.0
+loot = Array[ExtResource("11_drop_entry")]([SubResource("Loot_0_0")])
+
+[sub_resource type="Resource" id="Loot_1_0"]
+script = ExtResource("11_drop_entry")
+item = ExtResource("15_dawnshard")
+min_amount = 160
+max_amount = 240
+
+[sub_resource type="Resource" id="Loot_1_1"]
+script = ExtResource("11_drop_entry")
+item = ExtResource("16_white_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Loot_1_2"]
+script = ExtResource("11_drop_entry")
+item = ExtResource("17_blue_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Breakable_1"]
+script = ExtResource("14_breakable_def")
+id = &"drowned_chapel_high_chest"
+x = 675.0
+platform = 6
+hits = 1
+whole = ExtResource("12_chest")
+broken = ExtResource("13_chest_open")
+height = 48.0
+loot = Array[ExtResource("11_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
+card = ExtResource("6_crypt_shell")
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"drowned_chapel"
+display_name = "Drowned Chapel"
+biome = ExtResource("2_lantern")
+variant = SubResource("Copied_Variant")
+width = 2400
+height = 1000
+ground_y = 920
+start_x = 2150.0
+platforms = Array[ExtResource("4_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6")])
+portals = Array[ExtResource("5_portal_def")]([SubResource("Portal_0")])
+breakables = Array[ExtResource("14_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1")])
+spawns = Array[ExtResource("7_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2")])
+region = &"lanternfall"
+world_pos = Vector2(770.0, 500.0)
+zone_pos = Vector2(-1820.0, 4000.0)
+return_map = &"lanternfall"

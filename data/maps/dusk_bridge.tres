@@ -1,261 +1,326 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=47 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=61 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/lantern.tres" id="2_lantern"]
-[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
-[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
-[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
-[ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/tree_small.png" id="13_tree_small"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/stump.png" id="15_stump"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/fire_lilies.png" id="16_fire_lilies"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/rock_large.png" id="17_rock_large"]
-[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
-[ext_resource type="Resource" path="res://data/monsters/shade_imp.tres" id="m_shade_imp"]
-[ext_resource type="Resource" path="res://data/monsters/lantern_wisp.tres" id="m_lantern_wisp"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="3_biome_variant_def"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="4_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="5_portal_def"]
+[ext_resource type="Resource" path="res://data/monsters/shade_imp.tres" id="6_shade_imp"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="7_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/lantern_wisp.tres" id="8_lantern_wisp"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="9_dawnshard"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="10_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/use/orange_potion.tres" id="11_orange_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="12_blue_potion"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/chest.png" id="13_chest"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/chest_open.png" id="14_chest_open"]
+[ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="15_breakable_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/stone_wall.png" id="16_stone_wall"]
 
-[sub_resource type="Resource" id="Resource_28"]
-script = ExtResource("12_prop_placement")
-texture = ExtResource("15_stump")
-x = 517.0
-y = -1.0
-depth = -5.1
-scale = 1.04
-flip = false
-
-[sub_resource type="Resource" id="Resource_27"]
-script = ExtResource("12_prop_placement")
-texture = ExtResource("17_rock_large")
-x = 1702.0
-y = -1.0
-depth = -7.9
-scale = 1.01
-flip = true
-
-[sub_resource type="Resource" id="Resource_26"]
-script = ExtResource("12_prop_placement")
-texture = ExtResource("16_fire_lilies")
-x = 1080.0
-y = -1.0
-depth = -6.5
-scale = 1.04
-flip = false
-
-[sub_resource type="Resource" id="Resource_25"]
-script = ExtResource("12_prop_placement")
-texture = ExtResource("15_stump")
-x = 715.0
-y = -1.0
-depth = -7.3
-scale = 1.04
-flip = true
-
-[sub_resource type="Resource" id="Resource_23"]
-script = ExtResource("12_prop_placement")
-texture = ExtResource("13_tree_small")
-x = 1974.0
-y = -1.0
-depth = -6.8
-scale = 1.04
-flip = false
-
-[sub_resource type="Resource" id="Resource_22"]
-script = ExtResource("8_spawn_def")
-monster = ExtResource("m_shade_imp")
-platform = 6
-count = 2
-
-[sub_resource type="Resource" id="Resource_21"]
-script = ExtResource("8_spawn_def")
-monster = ExtResource("m_lantern_wisp")
-platform = 5
-count = 2
-
-[sub_resource type="Resource" id="Resource_20"]
-script = ExtResource("8_spawn_def")
-monster = ExtResource("m_shade_imp")
-platform = 4
-count = 3
-
-[sub_resource type="Resource" id="Resource_19"]
-script = ExtResource("8_spawn_def")
-monster = ExtResource("m_shade_imp")
-platform = 3
-count = 2
-
-[sub_resource type="Resource" id="Resource_18"]
-script = ExtResource("8_spawn_def")
-monster = ExtResource("m_lantern_wisp")
-platform = 2
-count = 2
-
-[sub_resource type="Resource" id="Resource_17"]
-script = ExtResource("8_spawn_def")
-monster = ExtResource("m_shade_imp")
-platform = 1
-count = 2
-
-[sub_resource type="Resource" id="Resource_16"]
-script = ExtResource("8_spawn_def")
-monster = ExtResource("m_lantern_wisp")
-platform = 0
-count = 3
-
-[sub_resource type="Resource" id="Resource_15"]
-script = ExtResource("8_spawn_def")
-monster = ExtResource("m_shade_imp")
-platform = 0
-count = 3
-
-[sub_resource type="Resource" id="Resource_14"]
-script = ExtResource("7_portal_def")
-x = 2540.0
-platform = 0
-target_map = &"lanternfall"
-target_x = 120.0
-
-[sub_resource type="Resource" id="Resource_13"]
-script = ExtResource("7_portal_def")
-x = 60.0
-platform = 0
-target_map = &"ashen_wastes"
-target_x = 4160.0
-
-[sub_resource type="Resource" id="Resource_6"]
-script = ExtResource("3_platform_def")
-x = 1780.0
-y = 480.0
-width = 300.0
-
-[sub_resource type="Resource" id="Resource_5"]
-script = ExtResource("3_platform_def")
-x = 1360.0
-y = 360.0
-width = 260.0
-
-[sub_resource type="Resource" id="Resource_4"]
-script = ExtResource("3_platform_def")
-x = 1220.0
-y = 490.0
-width = 340.0
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("3_platform_def")
-x = 760.0
-y = 500.0
-width = 300.0
-
-[sub_resource type="Resource" id="Resource_2"]
-script = ExtResource("3_platform_def")
-x = 440.0
-y = 360.0
-width = 320.0
-
-[sub_resource type="Resource" id="Resource_1"]
-script = ExtResource("3_platform_def")
-x = 300.0
-y = 490.0
-width = 300.0
-
-[sub_resource type="Resource" id="Land_1"]
-script = ExtResource("3_platform_def")
-x = 2160.0
-y = 170.0
-width = 140.0
-
-[sub_resource type="Resource" id="Variant"]
-script = ExtResource("variant_def")
+[sub_resource type="Resource" id="Copied_Variant"]
+script = ExtResource("3_biome_variant_def")
 sky_low = Color(0.7843, 0.4157, 0.251, 1)
 sky_horizon = Color(1, 0.6902, 0.3765, 1)
 light_color = Color(1, 0.8157, 0.6275, 1)
 light_energy = 1.5
 
-[sub_resource type="Resource" id="Step_1"]
-script = ExtResource("3_platform_def")
-x = 333.0
-y = 555.0
-width = 110.0
+[sub_resource type="Resource" id="Platform_1"]
+script = ExtResource("4_platform_def")
+x = 2700.0
+y = 1245.0
+width = 400.0
 
-[sub_resource type="Resource" id="Step_2"]
-script = ExtResource("3_platform_def")
-x = 793.0
-y = 560.0
-width = 110.0
+[sub_resource type="Resource" id="Platform_2"]
+script = ExtResource("4_platform_def")
+x = 3700.0
+y = 1245.0
+width = 300.0
 
-[sub_resource type="Resource" id="Step_3"]
-script = ExtResource("3_platform_def")
-x = 1223.0
-y = 555.0
-width = 110.0
+[sub_resource type="Resource" id="Platform_3"]
+script = ExtResource("4_platform_def")
+x = 300.0
+y = 1245.0
+width = 500.0
 
-[sub_resource type="Resource" id="Step_4"]
-script = ExtResource("3_platform_def")
-x = 1813.0
-y = 550.0
-width = 110.0
+[sub_resource type="Resource" id="Platform_4"]
+script = ExtResource("4_platform_def")
+x = 650.0
+y = 1170.0
+width = 500.0
 
-[sub_resource type="Resource" id="Step_5"]
-script = ExtResource("3_platform_def")
-x = 2203.0
-y = 555.7
-width = 110.0
+[sub_resource type="Resource" id="Platform_5"]
+script = ExtResource("4_platform_def")
+x = 300.0
+y = 1095.0
+width = 500.0
 
-[sub_resource type="Resource" id="Step_6"]
-script = ExtResource("3_platform_def")
-x = 2147.0
-y = 491.4
-width = 110.0
+[sub_resource type="Resource" id="Platform_6"]
+script = ExtResource("4_platform_def")
+x = 650.0
+y = 1020.0
+width = 500.0
 
-[sub_resource type="Resource" id="Step_7"]
-script = ExtResource("3_platform_def")
-x = 2203.0
-y = 427.1
-width = 110.0
+[sub_resource type="Resource" id="Platform_7"]
+script = ExtResource("4_platform_def")
+x = 300.0
+y = 945.0
+width = 500.0
 
-[sub_resource type="Resource" id="Step_8"]
-script = ExtResource("3_platform_def")
-x = 2147.0
-y = 362.9
-width = 110.0
+[sub_resource type="Resource" id="Platform_8"]
+script = ExtResource("4_platform_def")
+x = 650.0
+y = 870.0
+width = 500.0
 
-[sub_resource type="Resource" id="Step_9"]
-script = ExtResource("3_platform_def")
-x = 2203.0
-y = 298.6
-width = 110.0
+[sub_resource type="Resource" id="Platform_9"]
+script = ExtResource("4_platform_def")
+x = 300.0
+y = 795.0
+width = 500.0
 
-[sub_resource type="Resource" id="Step_10"]
-script = ExtResource("3_platform_def")
-x = 2147.0
-y = 234.3
-width = 110.0
+[sub_resource type="Resource" id="Platform_10"]
+script = ExtResource("4_platform_def")
+x = 650.0
+y = 720.0
+width = 500.0
 
-[sub_resource type="Resource" id="Step_11"]
-script = ExtResource("3_platform_def")
-x = 453.0
-y = 425.0
-width = 110.0
+[sub_resource type="Resource" id="Platform_11"]
+script = ExtResource("4_platform_def")
+x = 300.0
+y = 645.0
+width = 500.0
 
-[sub_resource type="Resource" id="Step_12"]
-script = ExtResource("3_platform_def")
-x = 1373.0
-y = 425.0
-width = 110.0
+[sub_resource type="Resource" id="Platform_12"]
+script = ExtResource("4_platform_def")
+x = 3300.0
+y = 1245.0
+width = 500.0
+
+[sub_resource type="Resource" id="Platform_13"]
+script = ExtResource("4_platform_def")
+x = 2950.0
+y = 1170.0
+width = 500.0
+
+[sub_resource type="Resource" id="Platform_14"]
+script = ExtResource("4_platform_def")
+x = 3300.0
+y = 1095.0
+width = 500.0
+
+[sub_resource type="Resource" id="Platform_15"]
+script = ExtResource("4_platform_def")
+x = 2950.0
+y = 1020.0
+width = 500.0
+
+[sub_resource type="Resource" id="Platform_16"]
+script = ExtResource("4_platform_def")
+x = 3300.0
+y = 945.0
+width = 500.0
+
+[sub_resource type="Resource" id="Platform_17"]
+script = ExtResource("4_platform_def")
+x = 2950.0
+y = 870.0
+width = 500.0
+
+[sub_resource type="Resource" id="Platform_18"]
+script = ExtResource("4_platform_def")
+x = 3300.0
+y = 795.0
+width = 500.0
+
+[sub_resource type="Resource" id="Platform_19"]
+script = ExtResource("4_platform_def")
+x = 2950.0
+y = 720.0
+width = 500.0
+
+[sub_resource type="Resource" id="Platform_20"]
+script = ExtResource("4_platform_def")
+x = 3300.0
+y = 645.0
+width = 500.0
+
+[sub_resource type="Resource" id="Platform_21"]
+script = ExtResource("4_platform_def")
+x = 700.0
+y = 570.0
+width = 2600.0
+
+[sub_resource type="Resource" id="Platform_22"]
+script = ExtResource("4_platform_def")
+x = 400.0
+y = 400.0
+width = 150.0
+secret = true
+
+[sub_resource type="Resource" id="Platform_23"]
+script = ExtResource("4_platform_def")
+x = 4075.0
+y = 795.0
+width = 150.0
+secret = true
+
+[sub_resource type="Resource" id="Portal_0"]
+script = ExtResource("5_portal_def")
+x = 60.0
+target_map = &"ashen_wastes"
+target_x = 4160.0
+
+[sub_resource type="Resource" id="Portal_1"]
+script = ExtResource("5_portal_def")
+x = 4340.0
+target_map = &"lanternfall"
+target_x = 120.0
+
+[sub_resource type="Resource" id="Portal_2"]
+script = ExtResource("5_portal_def")
+x = 2000.0
+target_map = &"under_the_bridge"
+target_x = 1000.0
+target_platform = 6
+shortcut = &"dusk_bridge_fake_wall"
+
+[sub_resource type="Resource" id="Spawn_0"]
+script = ExtResource("7_spawn_def")
+monster = ExtResource("6_shade_imp")
+platform = 0
+count = 4
+patrol_from = 300.0
+patrol_to = 1700.0
+
+[sub_resource type="Resource" id="Spawn_1"]
+script = ExtResource("7_spawn_def")
+monster = ExtResource("8_lantern_wisp")
+platform = 0
+count = 4
+patrol_from = 2200.0
+patrol_to = 4100.0
+
+[sub_resource type="Resource" id="Spawn_2"]
+script = ExtResource("7_spawn_def")
+monster = ExtResource("8_lantern_wisp")
+platform = 21
+count = 3
+
+[sub_resource type="Resource" id="Spawn_3"]
+script = ExtResource("7_spawn_def")
+monster = ExtResource("6_shade_imp")
+platform = 1
+count = 2
+
+[sub_resource type="Resource" id="Spawn_4"]
+script = ExtResource("7_spawn_def")
+monster = ExtResource("8_lantern_wisp")
+platform = 5
+count = 2
+
+[sub_resource type="Resource" id="Spawn_5"]
+script = ExtResource("7_spawn_def")
+monster = ExtResource("6_shade_imp")
+platform = 9
+count = 2
+
+[sub_resource type="Resource" id="Spawn_6"]
+script = ExtResource("7_spawn_def")
+monster = ExtResource("6_shade_imp")
+platform = 14
+count = 2
+
+[sub_resource type="Resource" id="Spawn_7"]
+script = ExtResource("7_spawn_def")
+monster = ExtResource("8_lantern_wisp")
+platform = 18
+count = 2
+
+[sub_resource type="Resource" id="Loot_0_0"]
+script = ExtResource("10_drop_entry")
+item = ExtResource("9_dawnshard")
+min_amount = 100
+max_amount = 160
+
+[sub_resource type="Resource" id="Loot_0_1"]
+script = ExtResource("10_drop_entry")
+item = ExtResource("11_orange_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Loot_0_2"]
+script = ExtResource("10_drop_entry")
+item = ExtResource("12_blue_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Breakable_0"]
+script = ExtResource("15_breakable_def")
+id = &"dusk_bridge_high_chest"
+x = 475.0
+platform = 22
+hits = 1
+whole = ExtResource("13_chest")
+broken = ExtResource("14_chest_open")
+height = 48.0
+loot = Array[ExtResource("10_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1"), SubResource("Loot_0_2")])
+card = ExtResource("6_shade_imp")
+
+[sub_resource type="Resource" id="Loot_1_0"]
+script = ExtResource("10_drop_entry")
+item = ExtResource("9_dawnshard")
+min_amount = 100
+max_amount = 160
+
+[sub_resource type="Resource" id="Loot_1_1"]
+script = ExtResource("10_drop_entry")
+item = ExtResource("11_orange_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Loot_1_2"]
+script = ExtResource("10_drop_entry")
+item = ExtResource("12_blue_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Breakable_1"]
+script = ExtResource("15_breakable_def")
+id = &"dusk_bridge_far_chest"
+x = 4150.0
+platform = 23
+hits = 1
+whole = ExtResource("13_chest")
+broken = ExtResource("14_chest_open")
+height = 48.0
+loot = Array[ExtResource("10_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
+card = ExtResource("8_lantern_wisp")
+
+[sub_resource type="Resource" id="Breakable_2"]
+script = ExtResource("15_breakable_def")
+id = &"dusk_bridge_fake_wall"
+x = 1900.0
+platform = 0
+hits = 1
+walk_through = true
+whole = ExtResource("16_stone_wall")
+height = 160.0
 
 [resource]
 script = ExtResource("1_map_def")
 id = &"dusk_bridge"
 display_name = "Dusk Bridge"
 biome = ExtResource("2_lantern")
-variant = SubResource("Variant")
-width = 2600
-height = 700
-ground_y = 620
+variant = SubResource("Copied_Variant")
+width = 4400
+height = 1400
+ground_y = 1320
 start_x = 120.0
-platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Land_1"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3"), SubResource("Step_4"), SubResource("Step_5"), SubResource("Step_6"), SubResource("Step_7"), SubResource("Step_8"), SubResource("Step_9"), SubResource("Step_10"), SubResource("Step_11"), SubResource("Step_12")])
-portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_13"), SubResource("Resource_14")])
-spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_21"), SubResource("Resource_22")])
-props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_23"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28")])
+platforms = Array[ExtResource("4_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9"), SubResource("Platform_10"), SubResource("Platform_11"), SubResource("Platform_12"), SubResource("Platform_13"), SubResource("Platform_14"), SubResource("Platform_15"), SubResource("Platform_16"), SubResource("Platform_17"), SubResource("Platform_18"), SubResource("Platform_19"), SubResource("Platform_20"), SubResource("Platform_21"), SubResource("Platform_22"), SubResource("Platform_23")])
+portals = Array[ExtResource("5_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1"), SubResource("Portal_2")])
+breakables = Array[ExtResource("15_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1"), SubResource("Breakable_2")])
+spawns = Array[ExtResource("7_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7")])
 region = &"lanternfall"
 world_pos = Vector2(700.0, 375.0)
+zone_pos = Vector2(-4400.0, -480.0)
 return_map = &"lanternfall"

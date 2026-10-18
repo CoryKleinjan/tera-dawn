@@ -1,0 +1,206 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=43 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/lantern.tres" id="2_lantern"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="3_biome_variant_def"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="4_platform_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/gate.png" id="5_gate"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="6_portal_def"]
+[ext_resource type="Resource" path="res://data/monsters/gloomcap.tres" id="7_gloomcap"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/night_boar.tres" id="9_night_boar"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/lever.png" id="10_lever"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/lever_pulled.png" id="11_lever_pulled"]
+[ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="12_breakable_def"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="13_dawnshard"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="14_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="15_white_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="16_blue_potion"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/chest.png" id="17_chest"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/chest_open.png" id="18_chest_open"]
+
+[sub_resource type="Resource" id="Copied_Variant"]
+script = ExtResource("3_biome_variant_def")
+fog_color = Color(0.4157, 0.4784, 0.6039, 1)
+mote_color = Color(1.6, 2.2, 2.6, 1)
+grade_saturation = 0.8
+sky_horizon = Color(0.6275, 0.6902, 0.8157, 1)
+
+[sub_resource type="Resource" id="Platform_1"]
+script = ExtResource("4_platform_def")
+x = 300.0
+y = 845.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_2"]
+script = ExtResource("4_platform_def")
+x = 700.0
+y = 770.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_3"]
+script = ExtResource("4_platform_def")
+x = 1100.0
+y = 695.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_4"]
+script = ExtResource("4_platform_def")
+x = 800.0
+y = 545.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_5"]
+script = ExtResource("4_platform_def")
+x = 950.0
+y = 395.0
+width = 350.0
+
+[sub_resource type="Resource" id="Platform_6"]
+script = ExtResource("4_platform_def")
+x = 950.0
+y = 245.0
+width = 450.0
+
+[sub_resource type="Resource" id="Platform_7"]
+script = ExtResource("4_platform_def")
+x = 1600.0
+y = 845.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_8"]
+script = ExtResource("4_platform_def")
+x = 1900.0
+y = 770.0
+width = 300.0
+
+[sub_resource type="Resource" id="Platform_9"]
+script = ExtResource("4_platform_def")
+x = 650.0
+y = 80.0
+width = 150.0
+secret = true
+
+[sub_resource type="Resource" id="Portal_0"]
+script = ExtResource("6_portal_def")
+x = 1150.0
+platform = 6
+target_map = &"wraith_moor"
+target_x = 1700.0
+gate = &"moor_barrow_gate"
+gate_picture = ExtResource("5_gate")
+
+[sub_resource type="Resource" id="Portal_1"]
+script = ExtResource("6_portal_def")
+x = 60.0
+target_map = &"sunken_graveyard"
+target_x = 2950.0
+
+[sub_resource type="Resource" id="Spawn_0"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("7_gloomcap")
+platform = 0
+count = 4
+patrol_from = 300.0
+patrol_to = 2200.0
+
+[sub_resource type="Resource" id="Spawn_1"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_night_boar")
+platform = 2
+count = 2
+
+[sub_resource type="Resource" id="Spawn_2"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("7_gloomcap")
+platform = 7
+count = 2
+
+[sub_resource type="Resource" id="Breakable_0"]
+script = ExtResource("12_breakable_def")
+id = &"barrow_gate"
+x = 1800.0
+platform = 7
+hits = 1
+whole = ExtResource("10_lever")
+broken = ExtResource("11_lever_pulled")
+height = 80.0
+
+[sub_resource type="Resource" id="Loot_1_0"]
+script = ExtResource("14_drop_entry")
+item = ExtResource("13_dawnshard")
+min_amount = 160
+max_amount = 240
+
+[sub_resource type="Resource" id="Loot_1_1"]
+script = ExtResource("14_drop_entry")
+item = ExtResource("15_white_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Loot_1_2"]
+script = ExtResource("14_drop_entry")
+item = ExtResource("16_blue_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Breakable_1"]
+script = ExtResource("12_breakable_def")
+id = &"moor_barrow_hoard_chest"
+x = 1200.0
+platform = 0
+hits = 1
+whole = ExtResource("17_chest")
+broken = ExtResource("18_chest_open")
+height = 48.0
+loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
+card = ExtResource("7_gloomcap")
+
+[sub_resource type="Resource" id="Loot_2_0"]
+script = ExtResource("14_drop_entry")
+item = ExtResource("13_dawnshard")
+min_amount = 160
+max_amount = 240
+
+[sub_resource type="Resource" id="Loot_2_1"]
+script = ExtResource("14_drop_entry")
+item = ExtResource("15_white_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Loot_2_2"]
+script = ExtResource("14_drop_entry")
+item = ExtResource("16_blue_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Breakable_2"]
+script = ExtResource("12_breakable_def")
+id = &"moor_barrow_high_chest"
+x = 725.0
+platform = 9
+hits = 1
+whole = ExtResource("17_chest")
+broken = ExtResource("18_chest_open")
+height = 48.0
+loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_2_0"), SubResource("Loot_2_1"), SubResource("Loot_2_2")])
+card = ExtResource("9_night_boar")
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"moor_barrow"
+display_name = "Moor Barrow"
+biome = ExtResource("2_lantern")
+variant = SubResource("Copied_Variant")
+width = 2400
+height = 1000
+ground_y = 920
+start_x = 1150.0
+platforms = Array[ExtResource("4_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9")])
+portals = Array[ExtResource("6_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1")])
+breakables = Array[ExtResource("12_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1"), SubResource("Breakable_2")])
+spawns = Array[ExtResource("8_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2")])
+region = &"lanternfall"
+world_pos = Vector2(750.0, 470.0)
+zone_pos = Vector2(3780.0, 4720.0)
+return_map = &"lanternfall"
