@@ -36,6 +36,8 @@ update this page when one changes. Each zone's own look and music are in
   down too). Every result is checked frame by frame on a flat colour before it goes in.
 - Head gear (helmet, hat, hood, bandana) covers only his head: nothing attached to it reaches his
   shoulders, so no cape, collar or shoulder flap.
+- Head gear doesn't hide all hair: hair lies under it as it would in real life (long hair hangs
+  below a helmet, a ponytail hangs from under the back rim), never poking out through it.
 - In armor his face is ready for battle: focused and determined, not over the top, never
   smiling and happy. In plain clothes he keeps the friendly face his looks were painted with.
 - His arms, fists and held weapons never cover his face, in any pose; both fists show. Blink
