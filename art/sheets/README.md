@@ -76,7 +76,8 @@ screen. `detail` and `alpha` default to this for every asset;
 
 `fix` names one of `FIXES` in `slice_sheets.py`:
 
-- `glow_backdrop`, `glow_backdrop_holes`: the warm glow painted behind icons.
+- `glow_backdrop`, `glow_backdrop_holes`: the warm glow painted behind icons; `glow_backdrop_pink_holes`
+  takes only pink holes, for a cream or ivory item the cream test would eat.
 - `card_backdrop`: an item drawn on a framed pastel card or pale disc; `card_glow` also takes a
   pink glow round it; `card_flat` is a card fill for an item that runs out of its cell (with `crop`).
 - `round_top`: rebuilds a round button's rim that ran under the label box.

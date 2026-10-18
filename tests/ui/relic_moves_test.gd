@@ -114,6 +114,22 @@ func test_a_slam_drops_straight_down_to_the_ground() -> void:
 	Input.action_release("move_down")
 	check(me.on_ground and not me._slamming, "landed")
 	check_near(me.position.x, FLOOR.x, "straight down", 4.0)
+	var impact := (Content.item(&"magma_heart") as RelicDef).effect
+	check(ui.world.fx_layer.get_children().any(func(n: Node) -> bool:
+		return n is TDEffect and (n as TDEffect).def == impact and (n as TDEffect).follow == null),
+		"its painted impact bursts where he landed")
+
+## The Slam's frames run off their edges as painted, so they fade out there as they play.
+func test_the_slam_impact_fades_at_its_edges() -> void:
+	var def := (Content.item(&"magma_heart") as RelicDef).effect
+	check(def.edge_fade > 0.0, "it fades its edges")
+	var frame := def.frames[3]
+	var faded := TDEffect.faded(frame, def.edge_fade)
+	var img := faded.get_image()
+	var h := img.get_height()
+	check(img.get_pixel(0, h / 2).a < 0.01, "clear at its side")
+	check_eq(img.get_pixel(img.get_width() / 2, h / 2), frame.get_image().get_pixel(img.get_width() / 2, h / 2), "its middle as painted")
+	check_eq(TDStage.art_density(faded), TDStage.art_density(frame), "the same size")
 
 func test_a_surge_charges_then_flies_ahead() -> void:
 	await _learn(&"titans_pearl")

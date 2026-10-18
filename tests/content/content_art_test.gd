@@ -46,8 +46,8 @@ const AWAITING_ICON: Array[StringName] = [&"stone_petal"]
 func test_items_have_icons() -> void:
 	for i: ItemDef in Content.items.values():
 		var w := Scan.where(i)
-		# gear and runes show their names until their icons are painted
-		if i.icon or not (i is EquipDef or i is RuneDef or i.id in AWAITING_ICON):
+		# gear, and the few items awaiting their painted icon, show their names until it is painted
+		if i.icon or not (i is EquipDef or i.id in AWAITING_ICON):
 			_texture(i.icon, w + ": icon")
 		for k in i.world_frames.size():
 			_texture(i.world_frames[k], "%s: world_frames[%d]" % [w, k])

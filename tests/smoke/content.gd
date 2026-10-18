@@ -59,8 +59,8 @@ func check() -> void:
 				problems.append("monster %s drops nothing" % id)
 	for id in Content.items:
 		var item: ItemDef = Content.items[id]
-		# gear, runes and the few items awaiting their painted icon have none yet
-		if item.icon == null and not (item is EquipDef or item is RuneDef or item.id in preload("res://tests/content/content_art_test.gd").AWAITING_ICON):
+		# gear and the few items awaiting their painted icon have none yet
+		if item.icon == null and not (item is EquipDef or item.id in preload("res://tests/content/content_art_test.gd").AWAITING_ICON):
 			problems.append("item %s has no icon" % id)
 		if item is EquipDef and (item as EquipDef).stats == null:
 			problems.append("equip %s has no stats" % id)
