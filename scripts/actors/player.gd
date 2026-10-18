@@ -46,8 +46,9 @@ const RECOIL := 2.5
 const RECOIL_TICKS := 4
 ## Moves from boss relics (RelicDef.Move). A Dash's speed (game pixels a tick), how many
 ## ticks it lasts, and the wait before the next one on the ground (in the air it works once
-## per jump).
-const DASH_SPEED := 12.0
+## per jump). It goes 180 px, well past what a Double Jump carries you sideways (about 137),
+## so a far ledge can need a Dash alone.
+const DASH_SPEED := 20.0
 const DASH_TICKS := 9
 const DASH_COOLDOWN := 24
 ## A double jump's upward speed, as a share of a plain jump's.

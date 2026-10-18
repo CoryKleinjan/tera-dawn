@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=85 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=89 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -26,6 +26,8 @@
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="33_backdrop_layer_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/greenbough_fields/old_oak_heights.png" id="34_old_oak_heights"]
 [ext_resource type="Resource" path="res://data/items/use/honey_bun.tres" id="34_honey_bun"]
+[ext_resource type="Script" path="res://scripts/data/scene_spot.gd" id="35_scene_spot"]
+[ext_resource type="Resource" path="res://data/tears/greenbough_tear.tres" id="36_greenbough_tear"]
 [sub_resource type="Resource" id="Prop_0"]
 script = ExtResource("20_prop_placement")
 texture = ExtResource("21_stump")
@@ -171,6 +173,21 @@ x = 370.0
 y = 90.0
 width = 150.0
 secret = true
+
+[sub_resource type="Resource" id="Platform_tear"]
+script = ExtResource("3_platform_def")
+x = 1515.0
+y = 185.0
+width = 140.0
+secret = true
+
+[sub_resource type="Resource" id="Spot_tear"]
+script = ExtResource("35_scene_spot")
+platform = 27
+then_map = &"stilled_grove"
+then_x = 260.0
+glow = Vector2(1585.0, 780.0)
+tear = ExtResource("36_greenbough_tear")
 
 [sub_resource type="Resource" id="Platform_14"]
 script = ExtResource("3_platform_def")
@@ -436,7 +453,7 @@ width = 2600
 height = 1000
 ground_y = 920
 start_x = 1390.0
-platforms = Array[ExtResource("3_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9"), SubResource("Platform_10"), SubResource("Platform_11"), SubResource("Platform_12"), SubResource("Platform_13"), SubResource("Platform_14"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3"), SubResource("Step_4"), SubResource("Step_5"), SubResource("Step_6"), SubResource("Step_7"), SubResource("Step_8"), SubResource("Step_9"), SubResource("Step_10"), SubResource("Step_11"), SubResource("Step_12")])
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9"), SubResource("Platform_10"), SubResource("Platform_11"), SubResource("Platform_12"), SubResource("Platform_13"), SubResource("Platform_14"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3"), SubResource("Step_4"), SubResource("Step_5"), SubResource("Step_6"), SubResource("Step_7"), SubResource("Step_8"), SubResource("Step_9"), SubResource("Step_10"), SubResource("Step_11"), SubResource("Step_12"), SubResource("Platform_tear")])
 portals = Array[ExtResource("8_portal_def")]([SubResource("Portal_0")])
 breakables = Array[ExtResource("12_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1")])
 spawns = Array[ExtResource("9_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13"), SubResource("Spawn_14"), SubResource("Spawn_15"), SubResource("Spawn_16"), SubResource("Spawn_17"), SubResource("Spawn_18")])
@@ -445,3 +462,4 @@ region = &"greenbough"
 world_pos = Vector2(310.0, 89.0)
 zone_pos = Vector2(-5200.0, -5200.0)
 return_map = &"greenbough"
+scene_spots = Array[ExtResource("35_scene_spot")]([SubResource("Spot_tear")])

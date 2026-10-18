@@ -1,0 +1,33 @@
+{
+  "source": "art/source/tear_greenbough_land.png",
+  "art_px": 5.0,
+  "out_dir": "assets/sprites/platforms/tear_greenbough",
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      0,
+      790
+    ],
+    "cols": [
+      0,
+      520,
+      1200,
+      1880,
+      2400
+    ]
+  },
+  "cells": [
+    [
+      "cap_left",
+      "middle_a",
+      "middle_b",
+      "cap_right"
+    ]
+  ],
+  "platform": {
+    "loop_middles": 40,
+    "max_depth": 120,
+    "top_share": 0.72
+  }
+}

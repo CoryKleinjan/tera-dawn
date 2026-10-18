@@ -2,7 +2,8 @@ extends TestCase
 ## Monsters across the zones (Cory, 2026-10-12): a map has at most three kinds of monster;
 ## each kind lives in one region (major zone) only; and the walk between towns stays easy, so
 ## every border field (a field with a portal into another region) spawns only monsters of
-## tuning tier (MonsterDef.level) 10 or below.
+## tuning tier (MonsterDef.level) 10 or below. A tear's own maps (TearDef.inside) are off the
+## way between towns: their way back out isn't a border.
 
 const Scan := preload("res://tests/content/content_scan.gd")
 
@@ -36,7 +37,7 @@ func test_each_monster_lives_in_one_region() -> void:
 
 func test_border_fields_are_easy() -> void:
 	for m: MapDef in Content.maps.values():
-		if m.town or m.interior:
+		if m.town or m.interior or TearState.inside_tear(m.region):
 			continue
 		for p in m.portals:
 			var to: MapDef = Content.maps.get(p.target_map)

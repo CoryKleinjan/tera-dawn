@@ -161,6 +161,19 @@ thatch and antler trim.
 | Rootway | Secret | – | Elder's Root's gold glow: a long tunnel from the roots back to Wayside Cave, gated until its lever at the bottom of Elder's Root is pulled | Acorn Sentry, Barkcap |
 | Oak Crown | Secret | – | Old Oak Heights' look: the top of the old oak, up a hidden run of ledges and through a locked gate (its key is in a chest by Elder's Root's boss door) | Grove Wisp, Barkcap |
 
+**Greenbough's tear: the stone forest** (behind a Dash ledge on Oak Crown; its own zone, never
+declines). Giant oaks turned to pale starlit stone, white light leaking from the cracks, still
+air, drifting white motes. Cool grey-blue light and pale fog over its own painted backdrops, pale
+stone ledges, a hollow stone trunk at the way out, a cracked stone wall and a stone chest. No
+tear music yet (the fields are silent; the arena plays Greenbough's boss track).
+
+| Sub-zone | Role | What changes | Monsters |
+| --- | --- | --- | --- |
+| Stilled Grove | Entry and way out | The first stone grove, quiet and open | Shardling, Pale Moth |
+| Ivory Hollow | Wide, several levels | A broad hollow of pale stone | Hollow Stag, Shardling |
+| Silent Stair | A long climb | Up through stone canopies; a cracked wall at the top | Pale Moth, Hollow Stag |
+| Warden's Ring | Arena | The guardian's ring of stone | boss Petrified Warden |
+
 ## Lumewood
 
 Lv 9-30 · town Lumewood Sanctum (Magicians) · `lumewood` biome · neighbours Greenbough and

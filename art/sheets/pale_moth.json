@@ -1,0 +1,143 @@
+{
+  "source": "art/source/mon_pale_moth.png",
+  "label_band": 0,
+  "save": false,
+  "out_dir": "art/build/pale_moth",
+  "cells": [
+    [
+      "hover1",
+      "",
+      "hover2",
+      "",
+      "fly1",
+      "",
+      "fly2"
+    ],
+    [
+      ""
+    ],
+    [
+      "fly3",
+      "",
+      "attack",
+      "",
+      "hurt",
+      "",
+      "defeated"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      559,
+      562,
+      1120
+    ],
+    "cols": [
+      [
+        0,
+        417,
+        419,
+        839,
+        842,
+        1262,
+        1264,
+        1680
+      ],
+      [
+        0,
+        1680
+      ],
+      [
+        0,
+        417,
+        419,
+        839,
+        842,
+        1262,
+        1264,
+        1680
+      ]
+    ]
+  },
+  "inset": 3,
+  "scale": 0.111,
+  "detail": 2.56,
+  "sets": {
+    "pale_moth": {
+      "frames": {
+        "hover1": "pale_moth:hover1",
+        "hover2": "pale_moth:hover2",
+        "fly1": "pale_moth:fly1",
+        "fly2": "pale_moth:fly2",
+        "fly3": "pale_moth:fly3",
+        "attack": "pale_moth:attack",
+        "hurt": "pale_moth:hurt",
+        "defeated": "pale_moth:defeated",
+        "swoop_windup": "monanim_pale_moth:swoop_windup",
+        "swoop": "monanim_pale_moth:swoop",
+        "knock_down": "monanim_pale_moth:knock_down"
+      },
+      "anchor": "mass",
+      "baseline": "cell",
+      "out": "assets/sprites/monsters/pale_moth.png",
+      "sprite_frames": "assets/animations/pale_moth.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "hover1",
+            "hover2"
+          ],
+          "fps": 5
+        },
+        "move": {
+          "frames": [
+            "fly1",
+            "fly2",
+            "fly3",
+            "fly2"
+          ],
+          "fps": 8
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "swoop_windup": {
+          "frames": [
+            "swoop_windup"
+          ],
+          "fps": 1
+        },
+        "swoop": {
+          "frames": [
+            "swoop"
+          ],
+          "fps": 1
+        }
+      }
+    }
+  }
+}

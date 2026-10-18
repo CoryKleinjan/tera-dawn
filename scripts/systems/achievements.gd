@@ -52,10 +52,13 @@ static func boss_kinds(c: Character) -> int:
 			n += 1
 	return n
 
-## The bosses that stand on a map (the ones "every boss" means).
+## The bosses that stand on a map of Tera (the ones "every boss" means): not a tear's guardian,
+## whose maps are another dawn's (TearState.inside_tear).
 static func bosses_on_maps() -> int:
 	var seen := {}
 	for m: MapDef in Content.maps.values():
+		if TearState.inside_tear(m.region):
+			continue
 		for s in m.spawns:
 			if s and s.monster and s.monster.boss and not s.from_tear:
 				seen[s.monster.id] = true

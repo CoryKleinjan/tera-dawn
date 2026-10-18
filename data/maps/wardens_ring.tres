@@ -1,0 +1,114 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=25 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="4_portal_def"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="5_spawn_def"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="6_biome_variant_def"]
+[ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="7_backdrop_layer_def"]
+[ext_resource type="Resource" path="res://data/monsters/petrified_warden.tres" id="8_petrified_warden"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/tear_greenbough/wardens_ring.png" id="9_wardens_ring"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/tear_greenbough/leaves_left.png" id="10_leaves_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/tear_greenbough/leaves_right.png" id="11_leaves_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/tear_greenbough/cap_left.png" id="12_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/tear_greenbough/middle_a.png" id="13_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/tear_greenbough/middle_b.png" id="14_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/tear_greenbough/cap_right.png" id="15_cap_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/tear_greenbough_side.png" id="16_tear_greenbough_side"]
+
+[sub_resource type="Resource" id="Platform_1"]
+script = ExtResource("3_platform_def")
+x = 200.0
+y = 535.0
+width = 240.0
+
+[sub_resource type="Resource" id="Platform_2"]
+script = ExtResource("3_platform_def")
+x = 510.0
+y = 450.0
+width = 240.0
+
+[sub_resource type="Resource" id="Platform_3"]
+script = ExtResource("3_platform_def")
+x = 820.0
+y = 535.0
+width = 240.0
+
+[sub_resource type="Resource" id="Portal_0"]
+script = ExtResource("4_portal_def")
+x = 60.0
+platform = 0
+target_map = &"silent_stair"
+target_x = 1170.0
+target_platform = 36
+
+[sub_resource type="Resource" id="Portal_1"]
+script = ExtResource("4_portal_def")
+x = 630.0
+platform = 2
+target_map = &"greenbough"
+target_x = 300.0
+target_platform = 0
+one_way = true
+after_boss = ExtResource("8_petrified_warden")
+
+[sub_resource type="Resource" id="Spawn_0"]
+script = ExtResource("5_spawn_def")
+monster = ExtResource("8_petrified_warden")
+platform = 0
+count = 1
+patrol_from = 420.0
+patrol_to = 1100.0
+
+[sub_resource type="Resource" id="Backdrop_picture"]
+script = ExtResource("7_backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("9_wardens_ring")])
+mode = 2
+depth = 300.0
+screen_top = Vector2(-0.2, -0.2)
+
+[sub_resource type="Resource" id="Variant"]
+script = ExtResource("6_biome_variant_def")
+light_color = Color(0.86, 0.89, 0.96, 1)
+light_energy = 1.2
+ambient_color = Color(0.72, 0.75, 0.84, 1)
+ambient_energy = 0.5
+fog_color = Color(0.62, 0.65, 0.72, 1)
+fog_begin = 0.0
+fog_end = 130.0
+fog_density = 0.6
+mote_color = Color(2.2, 2.2, 2.4, 1)
+light_shafts = 1
+light_shaft_color = Color(1, 1, 1, 0.12)
+hide_layers = PackedInt32Array(0, 1, 2, 3, 4, 5, 6)
+more_backdrop = Array[ExtResource("7_backdrop_layer_def")]([SubResource("Backdrop_picture")])
+hide_edge_grass = true
+hide_platform_decor = true
+hide_flyers = true
+frame_left = ExtResource("10_leaves_left")
+frame_right = ExtResource("11_leaves_right")
+platform_left = ExtResource("12_cap_left")
+platform_middle = ExtResource("13_middle_a")
+platform_middle_alt = ExtResource("14_middle_b")
+platform_right = ExtResource("15_cap_right")
+ground_side = ExtResource("16_tear_greenbough_side")
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"wardens_ring"
+display_name = "Warden's Ring"
+biome = ExtResource("2_greenwood")
+variant = SubResource("Variant")
+width = 1260
+height = 700
+ground_y = 620
+start_x = 140.0
+lantern_spacing = 0.0
+decor_density = 0.0
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3")])
+portals = Array[ExtResource("4_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1")])
+spawns = Array[ExtResource("5_spawn_def")]([SubResource("Spawn_0")])
+region = &"greenbough_tear"
+return_map = &"greenbough"
+music = &"boss_greenbough"

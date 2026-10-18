@@ -1,0 +1,174 @@
+{
+  "source": "art/source/mon_shardling.png",
+  "label_band": 0,
+  "save": false,
+  "out_dir": "art/build/shardling",
+  "cells": [
+    [
+      "idle1",
+      "",
+      "idle2",
+      "",
+      "hop1",
+      "",
+      "hop2"
+    ],
+    [
+      ""
+    ],
+    [
+      "hop3",
+      "",
+      "attack",
+      "",
+      "hurt",
+      "",
+      "defeated"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      559,
+      562,
+      1120
+    ],
+    "cols": [
+      [
+        0,
+        417,
+        419,
+        839,
+        842,
+        1262,
+        1264,
+        1680
+      ],
+      [
+        0,
+        1680
+      ],
+      [
+        0,
+        417,
+        419,
+        839,
+        842,
+        1262,
+        1264,
+        1680
+      ]
+    ]
+  },
+  "inset": 3,
+  "scale": 0.128,
+  "detail": 2.56,
+  "sets": {
+    "shardling": {
+      "frames": {
+        "idle1": "shardling:idle1",
+        "idle2": "shardling:idle2",
+        "hop1": "shardling:hop1",
+        "hop2": "shardling:hop2",
+        "hop3": "shardling:hop3",
+        "attack": "shardling:attack",
+        "hurt": "shardling:hurt",
+        "defeated": "shardling:defeated",
+        "jump1": "monanim_shardling:jump1",
+        "jump2": "monanim_shardling:jump2",
+        "knock_up": "monanim_shardling:knock_up",
+        "knock_down": "monanim_shardling:knock_down",
+        "pounce_windup": "monanim_shardling:pounce_windup",
+        "pounce": "monanim_shardling:pounce",
+        "lunge_windup": "monanim_shardling:lunge_windup",
+        "lunge": "monanim_shardling:lunge"
+      },
+      "anchor": "mass",
+      "baseline": "cell",
+      "out": "assets/sprites/monsters/shardling.png",
+      "sprite_frames": "assets/animations/shardling.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "hop1",
+            "hop2",
+            "hop3",
+            "hop2"
+          ],
+          "fps": 7
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "knock_up": {
+          "frames": [
+            "knock_up"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "pounce_windup": {
+          "frames": [
+            "pounce_windup"
+          ],
+          "fps": 1
+        },
+        "pounce": {
+          "frames": [
+            "pounce"
+          ],
+          "fps": 1
+        },
+        "lunge_windup": {
+          "frames": [
+            "lunge_windup"
+          ],
+          "fps": 1
+        },
+        "lunge": {
+          "frames": [
+            "lunge"
+          ],
+          "fps": 1
+        }
+      }
+    }
+  }
+}

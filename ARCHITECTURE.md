@@ -54,6 +54,7 @@ second. Only the stage turns that into 3D (32 game pixels per 3D unit).
   screen, the settings menu.
 - [NPCs, quests and shops](docs/architecture/npcs-quests-shops.md): how to add an NPC, a quest or a shop.
 - [Cutscenes](docs/architecture/cutscenes.md): how to add a cutscene and play it on a map or quest.
+- [Tears and the decline](docs/architecture/tears.md): hidden tear zones and how finished ones make the world decline; how to add a tear or a decline step.
 - [Art](docs/architecture/art.md): how to add art, the slicer, Gemini batch generation.
 - [Zone vibes](docs/zone-vibes.md): each zone's style and music guide, and how its town and sub-zones vary it.
 - [Music and sound](docs/architecture/audio.md): how to add music or a sound effect, where they play, making music with Lyria.

@@ -1,0 +1,27 @@
+{
+  "source": "art/source/tear_greenbough_land.png",
+  "art_px": 5.0,
+  "out_dir": "assets/sprites/ground",
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      1110,
+      1595
+    ],
+    "cols": [
+      900,
+      1450
+    ]
+  },
+  "cells": [
+    [
+      "tear_greenbough_side"
+    ]
+  ],
+  "overrides": {
+    "tear_greenbough_side": {
+      "seamless": true
+    }
+  }
+}

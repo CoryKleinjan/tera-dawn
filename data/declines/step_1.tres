@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="DeclineDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/decline_def.gd" id="1_decline_def"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="2_variant"]
+
+[sub_resource type="Resource" id="Look"]
+script = ExtResource("2_variant")
+light_color = Color(0.86, 0.87, 0.92, 1)
+light_energy = 1.45
+ambient_color = Color(0.62, 0.64, 0.7, 1)
+ambient_energy = 0.3
+fog_color = Color(0.52, 0.54, 0.58, 1)
+fog_density = 0.8
+mote_color = Color(0.78, 0.79, 0.84, 0.6)
+
+[resource]
+script = ExtResource("1_decline_def")
+id = &"step_1"
+step = 1
+look = SubResource("Look")

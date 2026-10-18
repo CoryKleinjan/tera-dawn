@@ -414,7 +414,7 @@ func build() -> void:
 	breakables.clear()
 	spot_glows.clear()
 	var map := world.map
-	var biome := map.look()
+	var biome := TearState.look(map, world.decline)
 	if biome.platform_middle != _platform_art:  # another region: let the last one's built land go
 		_platform_art = biome.platform_middle
 		PlatformSkin.forget()
@@ -509,7 +509,7 @@ func _apply_biome(b: BiomeDef) -> void:
 ## The backdrop haze (BiomeDef fog_*), measured back from the play line. Towns are for looking
 ## around, so theirs is lighter; a room's back wall is close, so it stays sharp with none.
 func _apply_fog(map: MapDef) -> void:
-	var b := map.look()
+	var b := TearState.look(map, world.decline)
 	env.fog_depth_begin = dist + b.fog_begin
 	env.fog_depth_end = dist + b.fog_end
 	env.fog_density = 0.0 if map.interior else b.fog_density * (TOWN_FOG if map.town else 1.0)

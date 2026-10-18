@@ -26605,6 +26605,632 @@
   }
  },
  {
+  "id": "mon_hollow_stag",
+  "prompts": null,
+  "batch": "Tears test: Hollow Stag (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mon_hollow_stag.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': small test of Greenbough's hidden tear zone (Cory picked the stone forest 19:05Z and OK'd its creatures 19:14Z). Main sheet of the Hollow Stag. Cells idle1, idle2, walk1, walk2, walk3, attack, hurt, defeated. Base is exactly 3:2 so no cell is cropped. No NPC style ref (monster entry).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_2x4_32.png",
+   "refs": [],
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint ONE new game monster once in every cell, in the pose given for that cell. The monster is a \"Hollow Stag\", a deer from a forest where every living thing has turned to stone: a slender, sturdy young stag about the height of a child, its whole body carved from pale starlit stone (ivory and cool blue-grey, with soft violet-grey shadows), fine chips and worn patches on the stone, a short tufted tail, neat hooves, and a pair of wide branching antlers of the same stone. Thin cracks run across its body and antlers, and soft white light glows from inside every crack, brightest in the antlers. Its eyes are two calm glowing white lights with a bright white shine. No fur, no moss, no leaves, no plants, no saddle, nothing worn. Painted in my game's style: rich colours, strong light from the upper left with bright highlights and soft shadow, visible soft painted brush texture at a fairly chunky brush scale, a thin dark slate-plum outline, smooth anti-aliased edges. Never pixel art, never a flat cartoon, never a vector look, never a realistic animal photo. It is cute and chunky like a game monster, not realistic. It is exactly the same creature in every cell (same body, colours, cracks, glow and antlers), and the same size in every cell, its body filling about half of its cell's height. It always faces RIGHT, seen from the side. It stands on four legs on the ground. Cell 1, IDLE 1: standing calmly, head up. Cell 2, IDLE 2: standing, head lowered a little, cracks glowing a bit brighter. Cell 3, WALK 1: walking forward, front right leg raised. Cell 4, WALK 2: walking, legs passing under the body. Cell 5, WALK 3: walking, front left leg raised. Cell 6, ATTACK: charging forward with head lowered, antlers pointed ahead, back legs pushing off. Cell 7, HURT: jolted backward, head tossed up, eyes squeezed into thin lines. Cell 8, DEFEATED: collapsed lying on its side, legs folded, eyes dark, the light in its cracks faded to a faint glow. Exactly one monster per cell. Do NOT draw dust, speed lines, motion flicks, shadows, ground, grass, sparkles, stray light motes, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, antlers included, never touching or cut off by the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Never a second copy, a ghost, an after-image or a different creature."
+  }
+ },
+ {
+  "id": "tear_greenbough_backdrop",
+  "prompts": null,
+  "batch": "Tears test: stone forest backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "tear_greenbough_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "town_check": {
+   "kind": "backdrop"
+  },
+  "note": "2026-10-17 thread 'Tears': small test of Greenbough's hidden tear zone (Cory picked the stone forest 19:05Z and OK'd its creatures 19:14Z). One picture behind the tear's first map (BackdropLayerDef PICTURE, far back). Base 4096x2304, exactly 16:9, a guide gradient in the zone's colours.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/tears/bases/greenbough_tear_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for the first map of a hidden stone forest in my 2D side-scrolling game: a forest of GIANT oak trees where everything has turned to pale starlit stone, silent and still, as if from a world already gone. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich colours, bold dark outlines, and hand-painted texture (carved bark, stone chips, worn patches). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: huge straight oak trunks of pale stone, ivory and cool blue-grey, stand across the picture, the nearest in the middle distance, others fading back layer by layer into silver mist. High above, broad canopies of stone leaves arch over the top. Thin cracks run through the trunks and branches, and soft white light glows out of them. Tiny white motes of light hang in the still air. Far back under the trees, soft stone ground fading into mist. Colours: deep slate blue at the very top (#2b3140), pale silver-white where the light is brightest (#e9ecf2), cool blue-grey mist low down (#b8c0cc), white crack light. No green, no warm sunlight. Strict rules: 1) Side-on view at eye level, every trunk straight up and down. 2) No people, characters, buildings, ruins, statues, animals or birds. No clouds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft misty stone forest floor far away, with nothing close to the viewer (no roots, rocks, logs or leaves up front); the closest trunks are in the middle distance. No level branches, ledges or mounds that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  }
+ },
+ {
+  "id": "mon_shardling",
+  "prompts": null,
+  "batch": "Tears pilot: Shardling (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mon_shardling.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': Greenbough pilot tear, wave A1 (Cory OK'd the four maps and art list 20:37Z; price asked separately). Main sheet; cells idle1, idle2, hop1, hop2, hop3, attack, hurt, defeated (hopper).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_2x4_32.png",
+   "refs": [],
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint ONE new game monster once in every cell, in the pose given for that cell. The monster is a \"Shardling\", a small creature from a forest where every living thing has turned to stone: a round, knee-high lump of stone about the size of a cat, its whole body carved from pale starlit stone (ivory and cool blue-grey, with soft violet-grey shadows), fine chips and worn patches on the stone, thin cracks across it with soft white light glowing from inside them. Two short stubby stone legs, no arms, a few sharp crystal-like stone shards sticking up from its back like a crest, the light brightest in those shards, and two small glowing white eyes. No fur, no moss, no leaves, no face paint. Painted in my game's style: rich colours, strong light from the upper left with bright highlights and soft shadow, visible soft painted brush texture at a fairly chunky brush scale, a thin dark slate-plum outline, smooth anti-aliased edges. Never pixel art, never a flat cartoon, never a vector look. It is exactly the same creature in every cell (same body, colours, cracks and glow), and the same size in every cell. It always faces RIGHT, seen from the side. Its body fills about a third of its cell's height. It moves by hopping. Cell 1, IDLE 1: sitting still on the ground. Cell 2, IDLE 2: sitting, squashed down a little, shards glowing brighter. Cell 3, HOP 1: crouched low, about to hop forward. Cell 4, HOP 2: in mid-hop, high above the ground, legs tucked. Cell 5, HOP 3: landing, squashed flat a little. Cell 6, ATTACK: leaping forward shard-crest first, eyes narrowed. Cell 7, HURT: jolted backward, eyes squeezed into thin lines, a shard knocked crooked. Cell 8, DEFEATED: tipped over on its side, eyes dark, the light in its cracks faded to a faint glow. Exactly one monster per cell. Do NOT draw dust, speed lines, motion flicks, shadows, ground, grass, sparkles, stray light motes, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching or cut off by the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Never a second copy, a ghost, an after-image or a different creature."
+  }
+ },
+ {
+  "id": "mon_pale_moth",
+  "prompts": null,
+  "batch": "Tears pilot: Pale Moth (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mon_pale_moth.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': Greenbough pilot tear, wave A1 (Cory OK'd the four maps and art list 20:37Z; price asked separately). Main sheet; cells hover1, hover2, fly1, fly2, fly3, attack, hurt, defeated (flyer).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_2x4_32.png",
+   "refs": [],
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint ONE new game monster once in every cell, in the pose given for that cell. The monster is a \"Pale Moth\", a large flying moth from a forest where every living thing has turned to stone: a plump body the size of a large bird, its whole body carved from pale starlit stone (ivory and cool blue-grey, with soft violet-grey shadows), fine chips and worn patches on the stone, thin cracks across it with soft white light glowing from inside them. Four broad wings made of thin flakes of pale stone, layered like slate, with white light glowing along the cracks between the flakes, two feathery stone antennae, and two big glowing white eyes. No fur, no colourful patterns, no legs showing. Painted in my game's style: rich colours, strong light from the upper left with bright highlights and soft shadow, visible soft painted brush texture at a fairly chunky brush scale, a thin dark slate-plum outline, smooth anti-aliased edges. Never pixel art, never a flat cartoon, never a vector look. It is exactly the same creature in every cell (same body, colours, cracks and glow), and the same size in every cell. It always faces RIGHT, seen from the side. Its body with spread wings fills about half of its cell's height. It flies: every pose floats in the air. Cell 1, HOVER 1: floating in place, wings raised. Cell 2, HOVER 2: floating a little lower, wings spread down and out. Cell 3, FLY 1: flying forward, wings up. Cell 4, FLY 2: flying forward, wings level. Cell 5, FLY 3: gliding forward, wings swept down. Cell 6, ATTACK: diving forward, wings flared back, eyes narrowed. Cell 7, HURT: jolted backward, wings crumpled forward, eyes squeezed shut. Cell 8, DEFEATED: falling limp, tipped sideways, wings hanging, eyes dark, cracks faded to a faint glow. Exactly one monster per cell. Do NOT draw dust, speed lines, motion flicks, shadows, ground, grass, sparkles, stray light motes, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching or cut off by the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Never a second copy, a ghost, an after-image or a different creature."
+  }
+ },
+ {
+  "id": "mon_petrified_warden",
+  "prompts": null,
+  "batch": "Tears pilot: Petrified Warden (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mon_petrified_warden.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': Greenbough pilot tear, wave A1 (Cory OK'd the four maps and art list 20:37Z; price asked separately). Boss main sheet; cells idle1, idle2, walk1, walk2, walk3, attack, hurt, defeated. Its move sheets follow after Cory sees it.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_2x4_32.png",
+   "refs": [],
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint ONE new game monster once in every cell, in the pose given for that cell. The monster is the \"Petrified Warden\", a giant boss: an ancient oak tree that walks, from a forest where every living thing has turned to stone. A huge, broad, heavy trunk body, its whole body carved from pale starlit stone (ivory and cool blue-grey, with soft violet-grey shadows), fine chips and worn patches on the stone, thin cracks across it with soft white light glowing from inside them. Two thick root legs, two long heavy branch arms ending in gnarled branch hands, a crown of stone branches and stone leaves on top, and a deep stern face carved into the trunk with two big glowing white eyes and a dark mouth. The light glows brightest in a large crack across its chest. No moss, no green leaves, no armour. Painted in my game's style: rich colours, strong light from the upper left with bright highlights and soft shadow, visible soft painted brush texture at a fairly chunky brush scale, a thin dark slate-plum outline, smooth anti-aliased edges. Never pixel art, never a flat cartoon, never a vector look. It is exactly the same creature in every cell (same body, colours, cracks, crown and face), and the same size in every cell, filling about three quarters of its cell's height. It always faces RIGHT, seen from the side, its face turned to the right. It walks on its root legs. Cell 1, IDLE 1: standing tall, arms hanging. Cell 2, IDLE 2: standing, slightly hunched, chest crack glowing brighter. Cell 3, WALK 1: stepping forward, right root leg forward. Cell 4, WALK 2: legs passing under the trunk. Cell 5, WALK 3: stepping, left root leg forward. Cell 6, ATTACK: swinging one huge branch arm forward and down. Cell 7, HURT: rocked backward, face grimacing, eyes squeezed into thin lines. Cell 8, DEFEATED: fallen forward onto its knees and arms, crown drooping, eyes dark, the light in its cracks faded to a faint glow. Exactly one monster per cell. Do NOT draw dust, speed lines, motion flicks, shadows, ground, grass, sparkles, stray light motes, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching or cut off by the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Never a second copy, a ghost, an after-image or a different creature."
+  }
+ },
+ {
+  "id": "monanim_hollow_stag",
+  "prompts": null,
+  "batch": "Tears pilot: Hollow Stag poses (edit)",
+  "with": null,
+  "refs": [],
+  "save": "monanim_hollow_stag.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': Greenbough pilot tear, wave A1 (Cory OK'd the four maps and art list 20:37Z; price asked separately). The approved Hollow Stag's pose sheet; reference is cell 1 of mon_hollow_stag (Cory kept it as painted 20:02Z). Cells jump1, jump2, knock_up, knock_down, charge_windup, charge, stomp_windup, stomp.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_2x4_32.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/hollow_stag_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's monster \"Hollow Stag\" once, standing in its idle pose on magenta. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, cracks, glowing antlers and eyes, the same size as in the first attached picture, the same painted style and thin dark slate-plum outline) but NOT its pose: each cell's pose is new and clearly different from the others. It always faces RIGHT, seen from the side, its face turned to the right. Poses on the ground stand on one shared ground line near the bottom of each cell; mid-air poses float clearly above that line. Cell 1, JUMP TAKE-OFF: crouched low on bent legs, about to spring up, head up. Cell 2, JUMP IN THE AIR: high in the air, legs tucked under its belly. Cell 3, KNOCKED UP: thrown helplessly up into the air, tumbling backwards and tipped onto its back with its legs flailing upward, eyes squeezed shut. Cell 4, KNOCKED DOWN: lying flat on its side on the ground line, legs limp, dazed with dizzy swirl eyes, still clearly alive (not defeated). Cell 5, CHARGE WIND-UP: pulled back on its hind legs, head lowered, antlers aimed ahead, ready to rush forward. Cell 6, CHARGE: rushing forward at full speed, head down with antlers pointed straight ahead, legs in a long galloping stride. Cell 7, STOMP WIND-UP: rearing up high on its hind legs, front hooves raised above its head. Cell 8, STOMP: front hooves crashing down onto the ground line, head low, body bunched. Exactly one monster per cell. Do NOT draw dust, speed lines, motion flicks, shadows, ground, grass, sparkles, stray light motes, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching or cut off by the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Never a second copy, a ghost, an after-image or a different creature."
+  }
+ },
+ {
+  "id": "tear_greenbough_ivory_hollow_backdrop",
+  "prompts": null,
+  "batch": "Tears pilot: Ivory Hollow backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "tear_greenbough_ivory_hollow_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "town_check": {
+   "kind": "backdrop"
+  },
+  "note": "2026-10-17 thread 'Tears': Greenbough pilot tear, wave A1 (Cory OK'd the four maps and art list 20:37Z; price asked separately). One picture behind Ivory Hollow (BackdropLayerDef PICTURE, far back), same base and palette as the approved tear_greenbough_backdrop.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/tears/bases/greenbough_tear_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Ivory Hollow, a map of a hidden stone forest in my 2D side-scrolling game: a forest of GIANT oak trees where everything has turned to pale starlit stone, silent and still, as if from a world already gone. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich colours, bold dark outlines, and hand-painted texture (carved bark, stone chips, worn patches). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: a vast low hollow beneath the forest, under huge arching stone roots that curve down from above like the ribs of a cathedral, the spaces between them opening into deep layers of silver mist, faint white light seeping from cracks in the roots. Colours: deep slate blue at the very top (#2b3140), pale silver-white where the light is brightest (#e9ecf2), cool blue-grey mist low down (#b8c0cc), white crack light. No green, no warm sunlight. It must match the first map of the same forest: giant pale stone oak trunks in ivory and cool blue-grey with carved bark, stone leaf canopies, thin white glowing cracks, tiny still white light motes, silver mist. Strict rules: 1) Side-on view at eye level, every trunk straight up and down. 2) No people, characters, buildings, ruins, statues, animals or birds. No clouds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft misty stone forest floor far away, with nothing close to the viewer (no roots, rocks, logs or leaves up front); the closest shapes are in the middle distance. No level branches, ledges or mounds that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta, and no dark band across the top. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  }
+ },
+ {
+  "id": "tear_greenbough_silent_stair_backdrop",
+  "prompts": null,
+  "batch": "Tears pilot: Silent Stair backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "tear_greenbough_silent_stair_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "town_check": {
+   "kind": "backdrop"
+  },
+  "note": "2026-10-17 thread 'Tears': Greenbough pilot tear, wave A1 (Cory OK'd the four maps and art list 20:37Z; price asked separately). One picture behind Silent Stair (BackdropLayerDef PICTURE, far back), same base and palette as the approved tear_greenbough_backdrop.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/tears/bases/greenbough_tear_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Silent Stair, a map of a hidden stone forest in my 2D side-scrolling game: a forest of GIANT oak trees where everything has turned to pale starlit stone, silent and still, as if from a world already gone. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich colours, bold dark outlines, and hand-painted texture (carved bark, stone chips, worn patches). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: looking out across the upper forest high among the stone trunks, where giant trunks rise straight up past the top of the picture and broad stone canopies stack one above another into the haze, as if climbing a stair of branches; faint white light from cracks in the trunks. Colours: deep slate blue at the very top (#2b3140), pale silver-white where the light is brightest (#e9ecf2), cool blue-grey mist low down (#b8c0cc), white crack light. No green, no warm sunlight. It must match the first map of the same forest: giant pale stone oak trunks in ivory and cool blue-grey with carved bark, stone leaf canopies, thin white glowing cracks, tiny still white light motes, silver mist. Strict rules: 1) Side-on view at eye level, every trunk straight up and down. 2) No people, characters, buildings, ruins, statues, animals or birds. No clouds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft misty stone forest floor far away, with nothing close to the viewer (no roots, rocks, logs or leaves up front); the closest shapes are in the middle distance. No level branches, ledges or mounds that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta, and no dark band across the top. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  }
+ },
+ {
+  "id": "tear_greenbough_wardens_ring_backdrop",
+  "prompts": null,
+  "batch": "Tears pilot: Warden's Ring backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "tear_greenbough_wardens_ring_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "town_check": {
+   "kind": "backdrop"
+  },
+  "note": "2026-10-17 thread 'Tears': Greenbough pilot tear, wave A1 (Cory OK'd the four maps and art list 20:37Z; price asked separately). One picture behind Warden's Ring (BackdropLayerDef PICTURE, far back), same base and palette as the approved tear_greenbough_backdrop.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/tears/bases/greenbough_tear_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Warden's Ring, a map of a hidden stone forest in my 2D side-scrolling game: a forest of GIANT oak trees where everything has turned to pale starlit stone, silent and still, as if from a world already gone. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich colours, bold dark outlines, and hand-painted texture (carved bark, stone chips, worn patches). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: a wide round clearing ringed by the oldest and largest stone oaks, their trunks leaning in slightly toward the middle so their canopies almost meet above, a pale white glow filling the open air in the centre of the ring, the cracks in the trunks glowing brighter here than anywhere else. Colours: deep slate blue at the very top (#2b3140), pale silver-white where the light is brightest (#e9ecf2), cool blue-grey mist low down (#b8c0cc), white crack light. No green, no warm sunlight. It must match the first map of the same forest: giant pale stone oak trunks in ivory and cool blue-grey with carved bark, stone leaf canopies, thin white glowing cracks, tiny still white light motes, silver mist. Strict rules: 1) Side-on view at eye level, every trunk straight up and down. 2) No people, characters, buildings, ruins, statues, animals or birds. No clouds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft misty stone forest floor far away, with nothing close to the viewer (no roots, rocks, logs or leaves up front); the closest shapes are in the middle distance. No level branches, ledges or mounds that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta, and no dark band across the top. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  }
+ },
+ {
+  "id": "tear_greenbough_land",
+  "prompts": null,
+  "batch": "Tears pilot: stone land (edit)",
+  "with": null,
+  "refs": [],
+  "save": "tear_greenbough_land.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': Greenbough pilot tear, wave A1 (Cory OK'd the four maps and art list 20:37Z; price asked separately). stone land for the tear's maps, on the same guide as Greenbough's field kit so it cuts the same way. Ledge (left end, two middles, right end) and a raised block with a repeating wall.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/greenbough-fields/bases/land_base.png",
+   "refs": [],
+   "text": "The first image is a guide for a sheet of ground pieces for my 2D side-scrolling game, on a flat magenta #FF00FF background. Flat colours show where each piece goes: green is the top edge, dark brown is the body, the darker brown below is a wall, and the dark line is the outline. Paint over the guide as finished ground for a hidden forest where everything has turned to pale starlit stone, keeping every shape's position, size and outline EXACTLY, so the pieces still line up and join seamlessly when the sheet is cut apart. TOP: one long floating ledge of stone forest ground (it will be cut into a left end, two middle pieces and a right end that join side by side). Its top is ONE clean edge of smooth worn pale stone with a few small stone leaves, tiny stone sprigs and pebbles along it, where the green guide is. Under it is a body of cooler blue-grey carved stone like petrified bark and roots, with a few thin glowing white cracks, kept simple with little detail inside so it reads at a glance as solid ground. A crisp dark outline runs all round it, a few short stone roots hang under its bottom edge, and its two ends are rounded. BOTTOM: a raised block of the same ground: the very same pale top edge and stone band along its top, with SQUARE ends, then below the band's lower edge a wall of slightly darker plain stone with a few faint cracks, running straight down off the bottom of the image between straight vertical outlined sides. Keep the wall's texture even across its whole area, with no big features, bright spots or shading toward its edges, so a square of it can repeat as a tile. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own painted style: soft cel-painted shading with clear light and shadow shapes, bright highlights on the lit edges from the upper left, rich colours, a bold dark slate-plum outline, and hand-painted texture at a fairly chunky brush scale. Palette: pale starlit stone in ivory and cool blue-grey (#e9ecf2 to #8d97a8) with soft violet-grey shadows, thin cracks with soft white light glowing inside them; no green, no grass, no moss, no warm colours. Seen exactly from the side: the top edge is a band along the top, never a floor seen from above, and nothing runs back into the picture. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the pieces the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "tear_greenbough_pieces",
+  "prompts": null,
+  "batch": "Tears pilot: stone pieces (edit)",
+  "with": null,
+  "refs": [],
+  "save": "tear_greenbough_pieces.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": true,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': Greenbough pilot tear, wave A1 (Cory OK'd the four maps and art list 20:37Z; price asked separately). stone pieces for the tear's maps, on the same guide as Greenbough's field kit so it cuts the same way. Hollow trunk passage, cracked wall whole/broken, chest closed/open.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/greenbough-fields/bases/pieces_base.png",
+   "refs": [],
+   "text": "The first image is a guide on a flat magenta #FF00FF background showing five objects for my 2D side-scrolling game as flat colour shapes. Paint each one over its shape as a finished object for a hidden forest where everything has turned to pale starlit stone, keeping each shape's position, size and outline EXACTLY. 1) LEFT, the hollow trunk: the lower part of a giant old oak turned to pale stone, broken off high up into jagged chipped stone, its carved stone bark crossed by thin glowing white cracks, kept inside the trunk's shape. The dark arch at its bottom is a tall hollow opening into the trunk, deep dark inside, big enough for a person to step into, framed by the rim of the stone bark. 2) MIDDLE TOP, the cracked wall: a wall of tightly packed stone roots and stone blocks blocking a low passage, with a few thin glowing white cracks. 3) MIDDLE BOTTOM, the SAME wall broken open: the identical outside shape, size and colours, but its middle smashed through, with broken stone edges and loose rubble round a dark hole where the dark arch is. 4) RIGHT TOP, a small treasure chest of pale carved stone with dark iron bands and corners, a domed lid, a little iron lock and a carved leaf on the front, a thin glowing crack on its side. 5) RIGHT BOTTOM, the SAME chest opened: its box exactly as in the closed chest, and its lid swung open upward so it stands up behind the box, seen from the front, showing the lid's inner side, a soft white glow inside. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own painted style: soft cel-painted shading with clear light and shadow shapes, bright highlights on the lit edges from the upper left, rich colours, a bold dark slate-plum outline, and hand-painted texture at a fairly chunky brush scale. Palette: pale starlit stone in ivory and cool blue-grey (#e9ecf2 to #8d97a8) with soft violet-grey shadows, thin cracks with soft white light glowing inside them; no green, no grass, no moss, no warm colours. Every object is a flat front view at eye level: no top surface shows (no lid top, no stump top face, nothing seen from above), and each stands on ONE flat straight bottom edge with no ground or shadow under it. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the pieces the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "tear_greenbough_leaves",
+  "prompts": null,
+  "batch": "Tears pilot: stone leaf corners (edit)",
+  "with": null,
+  "refs": [],
+  "save": "tear_greenbough_leaves.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': Greenbough pilot tear, wave A1 (Cory OK'd the four maps and art list 20:37Z; price asked separately). stone leaf corners for the tear's maps, on the same guide as Greenbough's field kit so it cuts the same way. Two dark corner clusters.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/greenbough-fields/bases/leaves_base.png",
+   "refs": [],
+   "text": "The first image is a guide for a frame of foreground leaves for my 2D side-scrolling game, on a flat magenta #FF00FF background. The dark shapes in the two top corners are leaves hanging into the top corners of the screen very close to the camera, the way Hollow Knight frames its screen with dark foreground plants. Paint over the shapes as two clusters of big broad oak leaves and twigs turned to stone, and one hanging stone vine on the right, keeping their positions, sizes and overall shapes. They are dark near-silhouettes: deep slate blue-grey (#141821 to #2b3140), with only a faint pale silver rim where light from behind catches their edges and a few soft cracks; simple clean shapes with crisp edges, no bright colours and almost no inner detail, so they frame the picture without drawing the eye. Both clusters run off the top edge, the left one also off the left edge and the right one off the right edge. The rest of the image stays flat pure magenta #FF00FF, with no glow, haze or shadow on it. No magenta or pink inside the leaves. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "mon_petrified_warden_v2",
+  "prompts": null,
+  "batch": "Tears pilot: repaints (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mon_petrified_warden_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': repaint asked by Cory 21:04Z ('Repaint all') after wave A1. First paint faced the camera, ran off the cells, wore a crown and had near-identical idle/walk frames.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_2x4_32.png",
+   "refs": [],
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint ONE new game monster once in every cell, in the pose given for that cell. The monster is the \"Petrified Warden\", a giant boss: an ancient oak tree that walks, from a forest where every living thing has turned to stone. A huge, broad, heavy trunk body, its whole body carved from pale starlit stone (ivory and cool blue-grey, with soft violet-grey shadows), fine chips and worn patches on the stone, thin cracks across it with soft white light glowing from inside them. Two thick root legs, two long heavy branch arms ending in gnarled branch hands, a short, compact cluster of stone branches and stone leaves growing from the top of its head, kept close to the head and well inside the cell, and a deep stern face carved into the trunk with two big glowing white eyes and a dark mouth. The light glows brightest in a large crack across its chest. No moss, no green leaves, no armour. Painted in my game's style: rich colours, strong light from the upper left with bright highlights and soft shadow, visible soft painted brush texture at a fairly chunky brush scale, a thin dark slate-plum outline, smooth anti-aliased edges. Never pixel art, never a flat cartoon, never a vector look. It is exactly the same creature in every cell (same body, colours, cracks, crown and face), and the same size in every cell: the whole creature, branches included, fills only about two thirds of its cell's height and about two thirds of its width, with clear magenta space on all four sides, never touching or crossing any cell border. It is seen STRICTLY FROM THE SIDE in profile, like a side-scrolling game sprite: its body, chest and face all turned to the RIGHT, its face seen in profile with only one eye showing, never facing the viewer. It wears NO crown, helmet, beard or jewellery: its head is plain carved stone with branches growing from it. It walks on its root legs. Cell 1, IDLE 1: standing tall, arms hanging. Cell 2, IDLE 2: standing, slightly hunched, chest crack glowing brighter. Cells 1 to 5 must be clearly different from each other. Cell 3, WALK 1: a long stride, front root leg reaching far forward and lifted off the ground, back leg pushing behind. Cell 4, WALK 2: body raised, one leg straight under the trunk and the other lifted high, bent at the knee. Cell 5, WALK 3: a long stride, the other root leg now forward, arms swinging the opposite way. Cell 6, ATTACK: one huge branch arm raised high behind its head and swinging forward and down in a big overhead smash, leaning forward. Cell 7, HURT: rocked backward, face grimacing, eyes squeezed into thin lines. Cell 8, DEFEATED: fallen forward onto its knees and arms, crown drooping, eyes dark, the light in its cracks faded to a faint glow. Exactly one monster per cell. Do NOT draw dust, speed lines, motion flicks, shadows, ground, grass, sparkles, stray light motes, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching or cut off by the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Never a second copy, a ghost, an after-image or a different creature."
+  }
+ },
+ {
+  "id": "monanim_hollow_stag_v2",
+  "prompts": null,
+  "batch": "Tears pilot: repaints (edit)",
+  "with": null,
+  "refs": [],
+  "save": "monanim_hollow_stag_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': repaint asked by Cory 21:04Z ('Repaint all') after wave A1. First paint: cell 1 was mid-stride not a crouch, cell 6 antlers swept back. Same cells as before.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_2x4_32.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/hollow_stag_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's monster \"Hollow Stag\" once, standing in its idle pose on magenta. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, cracks, glowing antlers and eyes, the same size as in the first attached picture, the same painted style and thin dark slate-plum outline) but NOT its pose: each cell's pose is new and clearly different from the others. It always faces RIGHT, seen from the side, its face turned to the right. Poses on the ground stand on one shared ground line near the bottom of each cell; mid-air poses float clearly above that line. Cell 1, JUMP TAKE-OFF: all four legs folded and bent deeply under its body, belly close to the ground line, every hoof on the ground, coiled like a spring about to leap straight up, head raised; NOT walking or striding. Cell 2, JUMP IN THE AIR: high in the air, legs tucked under its belly. Cell 3, KNOCKED UP: thrown helplessly up into the air, tumbling backwards and tipped onto its back with its legs flailing upward, eyes squeezed shut. Cell 4, KNOCKED DOWN: lying flat on its side on the ground line, legs limp, dazed with dizzy swirl eyes, still clearly alive (not defeated). Cell 5, CHARGE WIND-UP: pulled back on its hind legs, head lowered, antlers aimed ahead, ready to rush forward. Cell 6, CHARGE: rushing forward at full speed, head lowered to chest height with its neck stretched forward, so the antlers point STRAIGHT AHEAD to the right like a battering ram, tips in front of its nose, never swept back over its back; legs in a long galloping stride. Cell 7, STOMP WIND-UP: rearing up high on its hind legs, front hooves raised above its head. Cell 8, STOMP: front hooves crashing down onto the ground line, head low, body bunched. Exactly one monster per cell. Do NOT draw ground lines, impact marks, dust, speed lines, motion flicks, shadows, ground, grass, sparkles, stray light motes, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching or cut off by the cell borders. Keep the grid lines. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Never a second copy, a ghost, an after-image or a different creature."
+  }
+ },
+ {
+  "id": "tear_greenbough_silent_stair_backdrop_v2",
+  "prompts": null,
+  "batch": "Tears pilot: repaints (edit)",
+  "with": null,
+  "refs": [],
+  "save": "tear_greenbough_silent_stair_backdrop_v2.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "town_check": {
+   "kind": "backdrop"
+  },
+  "note": "2026-10-17 thread 'Tears': repaint asked by Cory 21:04Z ('Repaint all') after wave A1. First paint had flat stacked stone canopies that read as standable ledges.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/tears/bases/greenbough_tear_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Silent Stair, a map of a hidden stone forest in my 2D side-scrolling game: a forest of GIANT oak trees where everything has turned to pale starlit stone, silent and still, as if from a world already gone. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich colours, bold dark outlines, and hand-painted texture (carved bark, stone chips, worn patches). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: looking out across the upper forest high among the stone trunks, where giant trunks rise straight up past the top of the picture and soft, rounded, billowing canopies of stone leaves (irregular cloud-like clumps with ragged leafy edges, never flat tops, never discs, slabs, shelves or rings) rise one above another higher and higher into the haze, as if climbing a stair of trees; faint white light from cracks in the trunks. Colours: deep slate blue at the very top (#2b3140), pale silver-white where the light is brightest (#e9ecf2), cool blue-grey mist low down (#b8c0cc), white crack light. No green, no warm sunlight. It must match the first map of the same forest: giant pale stone oak trunks in ivory and cool blue-grey with carved bark, stone leaf canopies, thin white glowing cracks, tiny still white light motes, silver mist. Strict rules: 1) Side-on view at eye level, every trunk straight up and down. 2) No people, characters, buildings, ruins, statues, animals or birds. No clouds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft misty stone forest floor far away, with nothing close to the viewer (no roots, rocks, logs or leaves up front); the closest shapes are in the middle distance. No level branches, ledges or mounds that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta, and no dark band across the top. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  }
+ },
+ {
+  "id": "mon_petrified_warden_v3a",
+  "prompts": null,
+  "batch": "Tears pilot: Warden tall cells (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mon_petrified_warden_v3a.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': v1 and v2 ran off the narrow 2x4 cells, so the boss gets two 1x4 sheets of tall cells (600x1350 on a 16:9 base). Sheet A: idle1, idle2, walk1, walk2. Sheet B (walk3, attack, hurt, defeated) is painted from A's cell 1 once A is approved.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x4_tall.png",
+   "refs": [],
+   "text": "The base picture is an EMPTY sheet of 4 tall cells in one row (numbered left to right) on a flat magenta background. Paint ONE new game monster once in every cell, in the pose given for that cell. The monster is the \"Petrified Warden\", a giant boss: an ancient oak tree that walks, from a forest where every living thing has turned to stone. A tall, broad, heavy body like a carved trunk, its whole body carved from pale starlit stone (ivory and cool blue-grey, with soft violet-grey shadows), fine chips and worn patches on the stone, thin cracks across it with soft white light glowing from inside them. Two thick root legs, two long heavy branch arms ending in gnarled branch hands, a stern carved face with a heavy brow and two glowing white eyes, and on top of its head a SMALL, compact canopy of stone leaves, no wider than its shoulders and no taller than its head. The light glows brightest in a large crack across its chest. No crown, helmet, beard, moss, green leaves or armour. Painted in my game's style: rich colours, strong light from the upper left with bright highlights and soft shadow, visible soft painted brush texture at a fairly chunky brush scale, a thin dark slate-plum outline, smooth anti-aliased edges. Never pixel art, never a flat cartoon, never a vector look. It is exactly the same creature in every cell (same body, colours, cracks, canopy and face) and the same size in every cell. The WHOLE creature, from the top of its leaf canopy down to its feet, fits inside the cell with clear magenta space above the canopy, below the feet and on both sides: it fills about three quarters of the cell's height, its feet standing on one shared ground line a little above the bottom of each cell. Nothing touches or crosses any cell border. It is seen strictly from the side in profile, like a side-scrolling game sprite, its body and face turned to the RIGHT. Cell 1, IDLE 1: standing tall, arms hanging. Cell 2, IDLE 2: standing, slightly hunched, chest crack glowing brighter. Cell 3, WALK 1: a long stride, front root leg reaching forward, back leg pushing behind, arms swinging. Cell 4, WALK 2: body raised, one leg straight under it and the other lifted high, bent at the knee. Exactly one monster per cell. Do NOT draw ground lines, dust, speed lines, shadows, ground, grass, sparkles, stray light motes or any effect or object: only the monster. Keep the grid lines thin; no frames, borders or panels. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Never a second copy, a ghost or a different creature."
+  }
+ },
+ {
+  "id": "mon_petrified_warden_v4",
+  "prompts": null,
+  "batch": "Tears pilot: chunky Warden (edit)",
+  "with": null,
+  "refs": [],
+  "save": "mon_petrified_warden_v4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': Cory 22:06Z 'It should be chunkier' (v3a came out lean). One 2x4 sheet of near-square cells (600x675 on a 16:9 base) so a broad boss fits: idle1, idle2, walk1, walk2, walk3, attack, hurt, defeated.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_2x4_169.png",
+   "refs": [],
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint ONE new game monster once in every cell, in the pose given for that cell. The monster is the \"Petrified Warden\", a giant boss: a huge, ancient, gnarled oak tree that has come alive and walks, from a forest where every living thing has turned to stone. It is CHUNKY and MASSIVE: short, squat and very heavy, about as wide as it is tall, its body one enormous thick barrel-shaped oak trunk with carved bark, a broad hunched top, no neck, and a deep stern face carved into the front of the trunk with a heavy brow, two glowing white eyes and a dark mouth. Two very thick, short, stumpy root legs. Two enormous heavy branch arms, as thick as logs, ending in big gnarled branch hands. A few short broken stone branches and small clumps of stone leaves grow from its broad top. Its whole body is carved from pale starlit stone (ivory and cool blue-grey, with soft violet-grey shadows), fine chips and worn patches on the stone, thin cracks across it with soft white light glowing from inside them, brightest in a large crack across its front. It is a tree, not a man: no human muscles, no human body shape, no crown, helmet, beard, moss, green leaves or armour. Painted in my game's style: rich colours, strong light from the upper left with bright highlights and soft shadow, visible soft painted brush texture at a fairly chunky brush scale, a thin dark slate-plum outline, smooth anti-aliased edges. Never pixel art, never a flat cartoon, never a vector look. It is exactly the same creature in every cell (same body, colours, cracks and face) and the same size in every cell. The WHOLE creature fits inside its cell with clear magenta space above it, below it and on both sides: it fills about three quarters of the cell's height and about three quarters of its width. Nothing touches or crosses any cell border. It is seen from the side, like a side-scrolling game sprite, its body and face turned to the RIGHT. Cell 1, IDLE 1: standing, arms hanging to the ground. Cell 2, IDLE 2: standing, sunk a little lower, front crack glowing brighter. Cell 3, WALK 1: a heavy step, front root leg lifted forward. Cell 4, WALK 2: both feet planted, body rocked to one side. Cell 5, WALK 3: a heavy step, the other root leg lifted forward. Cell 6, ATTACK: one huge branch arm raised and smashing forward and down, leaning in. Cell 7, HURT: rocked backward, face grimacing, eyes squeezed into thin lines. Cell 8, DEFEATED: slumped forward onto its knees and arms, eyes dark, the light in its cracks faded to a faint glow. Exactly one monster per cell. Do NOT draw ground lines, dust, speed lines, shadows, ground, grass, sparkles, stray light motes or any effect or object: only the monster. Keep the grid lines thin; no frames, borders or panels. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Never a second copy, a ghost or a different creature."
+  }
+ },
+ {
+  "id": "monanim_shardling",
+  "prompts": null,
+  "batch": "Tears pilot wave A2 (edit)",
+  "with": null,
+  "refs": [],
+  "save": "monanim_shardling.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': Greenbough tear pilot wave A2 (pose sheets from the kept main sheets). Cells jump1, jump2, knock_up, knock_down, pounce_windup, pounce, lunge_windup, lunge. Ref: cell 1 of mon_shardling.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_2x4_32.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/shardling_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's monster \"Shardling\" once, standing in its idle pose on magenta: a small round stone creature with a crest of pale ice-blue crystal shards on its back, two small ears, glowing white eyes and thin glowing cracks. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, face, every crack and glowing part it has in its idle pose, the same size as in the first attached picture, the same painted style and thin dark slate-plum outline) but NOT its pose: each cell's pose is new and clearly different from the others. It always faces RIGHT, its face turned to the right. Poses on the ground stand on one shared ground line near the bottom of each cell, like in the first attached picture; mid-air poses float clearly above that line. Cell 1, JUMP TAKE-OFF: squatting very deep and low, body coiled like a spring, about to spring straight up. Cell 2, JUMP IN THE AIR: high in the air, legs tucked up under it. Cell 3, KNOCKED UP: thrown helplessly up into the air, tumbling backwards and tipped upside down with its belly up and legs flailing upward, eyes squeezed shut. Cell 4, KNOCKED DOWN: lying flat on its side on the ground line, limp, dazed with dizzy swirl eyes, still clearly alive (not defeated). Cell 5, POUNCE WIND-UP: crouched very low with its rear raised, head forward and eyes fixed ahead, ready to leap forward. Cell 6, POUNCE: leaping forward through the air in a long arc, shard crest first. Cell 7, LUNGE WIND-UP: leaning far back on its hind legs, crest bristling, about to burst forward. Cell 8, LUNGE: thrust far forward along the ground, body stretched long, crest of shards pointing ahead. Exactly one monster per cell. Do NOT draw ground lines, dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines thin; no frames, borders or panels. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+ {
+  "id": "monanim_pale_moth",
+  "prompts": null,
+  "batch": "Tears pilot wave A2 (edit)",
+  "with": null,
+  "refs": [],
+  "save": "monanim_pale_moth.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': Greenbough tear pilot wave A2 (pose sheets from the kept main sheets). Cells swoop_windup, swoop, knock_down (flier on the exact 21:9 base). Ref: cell 1 of mon_pale_moth.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/pale_moth_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's monster \"Pale Moth\" once, floating in its idle pose on magenta: a large moth made of pale stone, with cracked stone-flake wings, feathery antennae and big glowing white eyes. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, face, every crack and glowing part it has in its idle pose, the same size as in the first attached picture, the same painted style and thin dark slate-plum outline) but NOT its pose: each cell's pose is new and clearly different from the others. It always faces RIGHT, its face turned to the right. It flies: every pose is in the air above the ground line except the knocked-down pose, which lies on it. Cell 1, SWOOP WIND-UP: pulled up and back in the air, wings drawn back and raised high, ready to dive. Cell 2, SWOOP: diving steeply down and forward through the air, wings swept back, head first. Cell 3, KNOCKED DOWN: fallen out of the air and lying flat on its side on the ground line, wings limp and spread on the ground, dazed with dizzy swirl eyes, still clearly alive (not defeated). Exactly one monster per cell. Do NOT draw ground lines, dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines thin; no frames, borders or panels. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+ {
+  "id": "monanim_petrified_warden",
+  "prompts": null,
+  "batch": "Tears pilot wave A2 (edit)",
+  "with": null,
+  "refs": [],
+  "save": "monanim_petrified_warden.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': Greenbough tear pilot wave A2 (pose sheets from the kept main sheets). Boss pose sheet; cells jump1, jump2, charge_windup, charge, slam_windup, slam, shot_windup, shot. Moves boss_charge, boss_slam, boss_shot_bolt. Ref: cell 1 of mon_petrified_warden_v4 (Cory kept it 22:38Z).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_2x4_169.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/petrified_warden_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Petrified Warden\" once, standing in its idle pose on magenta: a squat, chunky walking stone oak with bare stone branches growing from its head, a scowling carved face with glowing white eyes, log-thick arms and a glowing white crack across its chest. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, face, every crack and glowing part it has in its idle pose, the same size as in the first attached picture, the same painted style and thin dark slate-plum outline) but NOT its pose: each cell's pose is new and clearly different from the others. It always faces RIGHT, its face turned to the right. Poses on the ground stand on one shared ground line near the bottom of each cell, like in the first attached picture; mid-air poses float clearly above that line. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and height, centred, with a wide magenta margin on every side, its branches fully inside the cell. Cell 1, JUMP TAKE-OFF: squatting very deep and low on its stumpy root legs, about to spring up. Cell 2, JUMP IN THE AIR: high in the air, root legs tucked up under it. Cell 3, CHARGE WIND-UP: all feet on the ground, head and shoulders lowered and pointing forward, body pulled back, one root foot scraping behind it, about to rush forward; it does NOT rear up. Cell 4, CHARGE: rushing forward, head and shoulders down and forward like a battering ram, in a long heavy stride. Cell 5, SLAM WIND-UP: rising up as tall as it can, both huge arms raised high above its head, about to crash down. Cell 6, SLAM: both arms smashing down onto the ground line in front of it, body bent forward and bunched. Cell 7, SHOT WIND-UP: leaning back, arms drawn back, its chest crack glowing its brightest, about to fire light forward (draw no projectile). Cell 8, SHOT: chest thrust forward and arms flung wide as if it has just fired a bolt of light from its chest (draw no projectile, flash or effect). Exactly one monster per cell. Do NOT draw ground lines, dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines thin; no frames, borders or panels. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+ {
+  "id": "boss_petrified_warden_charge",
+  "prompts": null,
+  "batch": "Tears pilot wave A2 (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_petrified_warden_charge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': Greenbough tear pilot wave A2 (pose sheets from the kept main sheets). Boss charge sheet like the Molten King's, on the exact 21:9 base; cells charge_windup2, charge2, charge_recover. Ref: cell 1 of mon_petrified_warden_v4.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/petrified_warden_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Petrified Warden\" once, standing in its idle pose on magenta: a squat, chunky walking stone oak with bare stone branches growing from its head, a scowling carved face with glowing white eyes, log-thick arms and a glowing white crack across its chest. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, face, every crack and glowing part it has in its idle pose, the same size as in the first attached picture, the same painted style and thin dark slate-plum outline) but NOT its pose: each cell's pose is new and clearly different from the others. It always faces RIGHT, its face turned to the right. Poses on the ground stand on one shared ground line near the bottom of each cell, like in the first attached picture; mid-air poses float clearly above that line. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and height, centred, with a wide magenta margin on every side, its branches fully inside the cell. Cell 1, CHARGE WIND-UP (DEEPEST): crouched even lower than a normal wind-up, head and shoulders down and pointing straight forward, one root foot dug in behind, about to explode forward. Cell 2, CHARGE (OTHER STRIDE): rushing forward, head down, in the other heavy stride: the other root leg reaching far forward. Cell 3, CHARGE RECOVER: skidding to a stop, root legs braced stiff and planted forward, body leaning back, head tossed up. Exactly one monster per cell. Do NOT draw ground lines, dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines thin; no frames, borders or panels. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+ {
+  "id": "boss_petrified_warden_slam",
+  "prompts": null,
+  "batch": "Tears pilot wave A2 (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_petrified_warden_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': Greenbough tear pilot wave A2 (pose sheets from the kept main sheets). Boss slam sheet like the Molten King's, on the exact 21:9 base; cells slam_windup2, slam2, slam_recover. Ref: cell 1 of mon_petrified_warden_v4.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/petrified_warden_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Petrified Warden\" once, standing in its idle pose on magenta: a squat, chunky walking stone oak with bare stone branches growing from its head, a scowling carved face with glowing white eyes, log-thick arms and a glowing white crack across its chest. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, face, every crack and glowing part it has in its idle pose, the same size as in the first attached picture, the same painted style and thin dark slate-plum outline) but NOT its pose: each cell's pose is new and clearly different from the others. It always faces RIGHT, its face turned to the right. Poses on the ground stand on one shared ground line near the bottom of each cell, like in the first attached picture; mid-air poses float clearly above that line. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and height, centred, with a wide magenta margin on every side, its branches fully inside the cell. Cell 1, SLAM WIND-UP (HIGHEST): stretched up taller than ever on its root legs, both arms high overhead with hands clasped together like a hammer. Cell 2, SLAM (IMPACT): both fists driven into the ground line in front of it, body folded low over them. Cell 3, SLAM RECOVER: pushing itself back up from the ground with both arms, shaking its head, half-risen. Exactly one monster per cell. Do NOT draw ground lines, dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines thin; no frames, borders or panels. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+ {
+  "id": "boss_petrified_warden_shot",
+  "prompts": null,
+  "batch": "Tears pilot wave A2 (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_petrified_warden_shot.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': Greenbough tear pilot wave A2 (pose sheets from the kept main sheets). Boss shot sheet like the Molten King's, on the exact 21:9 base; cells shot_windup2, shot2, shot_recover. Ref: cell 1 of mon_petrified_warden_v4.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/petrified_warden_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Petrified Warden\" once, standing in its idle pose on magenta: a squat, chunky walking stone oak with bare stone branches growing from its head, a scowling carved face with glowing white eyes, log-thick arms and a glowing white crack across its chest. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, face, every crack and glowing part it has in its idle pose, the same size as in the first attached picture, the same painted style and thin dark slate-plum outline) but NOT its pose: each cell's pose is new and clearly different from the others. It always faces RIGHT, its face turned to the right. Poses on the ground stand on one shared ground line near the bottom of each cell, like in the first attached picture; mid-air poses float clearly above that line. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and height, centred, with a wide magenta margin on every side, its branches fully inside the cell. Cell 1, SHOT WIND-UP (GATHER): arms spread wide and drawn back, chest pushed out, its chest crack blazing white (draw no projectile). Cell 2, SHOT (RELEASE): chest thrust forward hard, head back, arms flung behind it as if light just burst from its chest (draw no projectile, flash or effect). Cell 3, SHOT RECOVER: settling back into a heavy stance, arms dropping, chest crack fading back to its normal glow. Exactly one monster per cell. Do NOT draw ground lines, dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines thin; no frames, borders or panels. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+ {
+  "id": "boss_petrified_warden_intro",
+  "prompts": null,
+  "batch": "Tears pilot wave A2 (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_petrified_warden_intro.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': Greenbough tear pilot wave A2 (pose sheets from the kept main sheets). Boss intro sheet like the Molten King's, on the exact 21:9 base; cells intro1, intro2, intro3. Ref: cell 1 of mon_petrified_warden_v4.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/petrified_warden_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Petrified Warden\" once, standing in its idle pose on magenta: a squat, chunky walking stone oak with bare stone branches growing from its head, a scowling carved face with glowing white eyes, log-thick arms and a glowing white crack across its chest. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, face, every crack and glowing part it has in its idle pose, the same size as in the first attached picture, the same painted style and thin dark slate-plum outline) but NOT its pose: each cell's pose is new and clearly different from the others. It always faces RIGHT, its face turned to the right. Poses on the ground stand on one shared ground line near the bottom of each cell, like in the first attached picture; mid-air poses float clearly above that line. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and height, centred, with a wide magenta margin on every side, its branches fully inside the cell. This is its ENTRANCE when the player walks into its arena. Cell 1, INTRO RISE: hunched low and still like a dead stone tree, eyes dark, arms resting on the ground. Cell 2, INTRO ROAR: head thrown back roaring at the sky, arms raised wide, eyes and chest crack glowing their brightest. Cell 3, INTRO READY: dropped into a wide heavy fighting stance, arms forward, head lowered toward the right, ready to fight. Exactly one monster per cell. Do NOT draw ground lines, dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines thin; no frames, borders or panels. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+ {
+  "id": "boss_petrified_warden_phase",
+  "prompts": null,
+  "batch": "Tears pilot wave A2 (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_petrified_warden_phase.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': Greenbough tear pilot wave A2 (pose sheets from the kept main sheets). Boss phase sheet like the Molten King's, on the exact 21:9 base; cells phase1, phase2, phase3. Ref: cell 1 of mon_petrified_warden_v4.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/petrified_warden_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Petrified Warden\" once, standing in its idle pose on magenta: a squat, chunky walking stone oak with bare stone branches growing from its head, a scowling carved face with glowing white eyes, log-thick arms and a glowing white crack across its chest. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, face, every crack and glowing part it has in its idle pose, the same size as in the first attached picture, the same painted style and thin dark slate-plum outline) but NOT its pose: each cell's pose is new and clearly different from the others. It always faces RIGHT, its face turned to the right. Poses on the ground stand on one shared ground line near the bottom of each cell, like in the first attached picture; mid-air poses float clearly above that line. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and height, centred, with a wide magenta margin on every side, its branches fully inside the cell. This is its HALF-HEALTH ROAR. Cell 1, PHASE STAGGER: rocked back on its heels, one arm raised to its face. Cell 2, PHASE ROAR: roaring forward with both fists clenched at its sides, every crack across its body blazing bright white, more cracks than in its idle pose. Cell 3, PHASE LAND: stamped down into a wide, low, furious stance, arms spread, its cracks glowing brighter than in its idle pose. Exactly one monster per cell. Do NOT draw ground lines, dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines thin; no frames, borders or panels. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+ {
+  "id": "boss_petrified_warden_death",
+  "prompts": null,
+  "batch": "Tears pilot wave A2 (edit)",
+  "with": null,
+  "refs": [],
+  "save": "boss_petrified_warden_death.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   1,
+   3
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 thread 'Tears': Greenbough tear pilot wave A2 (pose sheets from the kept main sheets). Boss death sheet like the Molten King's, on the exact 21:9 base; cells death1, death2, death3. Ref: cell 1 of mon_petrified_warden_v4.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/monster-anims/bases/blank_1x3_wide.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/monster-anims/refs/petrified_warden_idle.png"
+   ],
+   "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Petrified Warden\" once, standing in its idle pose on magenta: a squat, chunky walking stone oak with bare stone branches growing from its head, a scowling carved face with glowing white eyes, log-thick arms and a glowing white crack across its chest. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, face, every crack and glowing part it has in its idle pose, the same size as in the first attached picture, the same painted style and thin dark slate-plum outline) but NOT its pose: each cell's pose is new and clearly different from the others. It always faces RIGHT, its face turned to the right. Poses on the ground stand on one shared ground line near the bottom of each cell, like in the first attached picture; mid-air poses float clearly above that line. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and height, centred, with a wide magenta margin on every side, its branches fully inside the cell. This is its DEFEAT. Cell 1, DEATH STAGGER: reeling back from a final blow, head tossed back, root legs wobbling. Cell 2, DEATH KNEEL: sinking down onto its knees, arms hanging, head drooping, its cracks dimming. Cell 3, DEATH FALLEN: collapsed face-down flat on the ground line like a fallen stone tree, eyes dark, its cracks dark with only a faint glow. Exactly one monster per cell. Do NOT draw ground lines, dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines thin; no frames, borders or panels. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
+  }
+ },
+ {
   "id": "lumewood_fields_land",
   "prompts": null,
   "batch": "Lumewood fields test: stone ledges, raised ground and its wall (edit)",
