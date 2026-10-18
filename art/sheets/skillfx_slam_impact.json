@@ -1,0 +1,43 @@
+{
+  "source": "art/source/skillfx_slam_impact.png",
+  "out_dir": "assets/sprites/effects/skills",
+  "grid": {
+    "rows": [
+      0,
+      675,
+      1350
+    ],
+    "cols": [
+      0,
+      600,
+      1200,
+      1800,
+      2400
+    ]
+  },
+  "cells": [
+    [
+      "slam_impact_1",
+      "slam_impact_2",
+      "slam_impact_3",
+      "slam_impact_4"
+    ],
+    [
+      "slam_impact_5",
+      "slam_impact_6",
+      "slam_impact_7",
+      ""
+    ]
+  ],
+  "glow": true,
+  "alpha": "soft",
+  "trim": false,
+  "label_band": 0,
+  "inset": 10,
+  "scale": 0.1302,
+  "overrides": {
+    "slam_impact_7": {
+      "min_area": 1
+    }
+  }
+}
