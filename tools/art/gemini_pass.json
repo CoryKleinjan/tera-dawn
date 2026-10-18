@@ -27668,7 +27668,7 @@
   ],
   "anchor": null,
   "size": "2K",
-  "note": "2026-10-18 thread 'Hero pose review': fix of the Vanguard test (wave 325). Cause: the first prompt said the tabard hangs 'over the breastplate to his thighs', which Gemini read as below the belt only in cells 1-3, and it dropped the shield band. Cory 00:30Z picked 'Blue tabard' (over the chest, as in cells 4-8). Edits the test result itself so the 5 good frames stay. Priced line and Cory's reply to be added before it runs.",
+  "note": "2026-10-18 thread 'Hero pose review': fix of the Vanguard test (wave 325). Cause: the first prompt said the tabard hangs 'over the breastplate to his thighs', which Gemini read as below the belt only in cells 1-3, and it dropped the shield band. Cory 00:30Z picked 'Blue tabard' (over the chest, as in cells 4-8). Edits the test result itself so the 5 good frames stay. Priced 00:32Z \"Should I paint this fix to the boy's Vanguard test sheet for about $0.07?\"; Cory 00:49Z \"Yea\".",
   "edit": {
    "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_boy_walk_idle_test.png",
    "refs": [],
