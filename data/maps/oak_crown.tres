@@ -176,8 +176,8 @@ secret = true
 
 [sub_resource type="Resource" id="Platform_tear"]
 script = ExtResource("3_platform_def")
-x = 880.0
-y = 275.0
+x = 1515.0
+y = 185.0
 width = 140.0
 secret = true
 
@@ -186,7 +186,7 @@ script = ExtResource("35_scene_spot")
 platform = 27
 then_map = &"stilled_grove"
 then_x = 260.0
-glow = Vector2(950.0, 705.0)
+glow = Vector2(1585.0, 780.0)
 tear = ExtResource("36_greenbough_tear")
 
 [sub_resource type="Resource" id="Platform_14"]

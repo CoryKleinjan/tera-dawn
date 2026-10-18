@@ -62,8 +62,8 @@ update this page when one changes. Each zone's own look and music are in
 - Jobs have no movement skills (Cory Oct 17): bosses unlock moves instead, Hollow Knight
   style. Each zone boss drops a relic the first time a character beats it, for everyone at the
   fight, and only they can take theirs. The move is theirs for good on every job, with no
-  level, essence or MP: Grotto Tusker Dash (a flat burst ahead, once per jump in the air; the
-  roll pose), Arcane Sentinel Double Jump (the leap pose), Molten King Slam (Down + Jump in the
+  level, essence or MP: Grotto Tusker Dash (a flat burst of 180 px ahead, farther than a Double Jump carries you
+  sideways, once per jump in the air; the roll pose), Arcane Sentinel Double Jump (the leap pose), Molten King Slam (Down + Jump in the
   air drops straight down and breaks cracked floors), Reef Titan Surge (hold Down + Dash on the
   ground, let go to fly straight ahead; the lunge pose). Elder Treant Wall Jump and Lantern
   Wraith Glide wait for their poses. The main way never needs a move; secret rooms can. Dash,
@@ -394,7 +394,7 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 - Each zone also has 2-3 secret areas that need its own boss's move, so a new move has a use right
   after the fight.
 - The second-job tutors are not in these tears.
-- Greenbough's tear (the pilot) is a stone forest of four maps behind a Dash ledge on Oak Crown:
+- Greenbough's tear (the pilot) is a stone forest of four maps behind a ledge on Oak Crown that only Dash reaches:
   Stilled Grove, Ivory Hollow, Silent Stair and the Petrified Warden's ring. Old Fenwick gives
   its three quests. Its Hollow Stags and the Warden's charge and slam cost 2 segments a hit;
   everything else there costs 1. Its guardian isn't one of the bosses of Tera (the "every boss"

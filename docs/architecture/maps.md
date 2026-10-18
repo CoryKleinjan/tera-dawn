@@ -54,7 +54,9 @@ leaves it out. Nothing a player needs stands on one (a chest may); `content_reac
 both ways with `map_reach.gd`'s relic moves. A field has two: a high one about 130 px over the
 ledge you jump from, with nothing over it (Double Jump), and a far one about 220 px out from a
 ledge's end and 50 px lower, at least 100 px over anything below and too far out to drift onto
-in a fall from anything above (Dash or Surge).
+in a fall from anything above (Dash or Surge). A Dash goes 180 px (`TDPlayer.DASH_SPEED` x
+`DASH_TICKS`), farther sideways than a Double Jump (about 137 px), so a far ledge across a wide
+gap can need a Dash alone.
 
 A **shortcut** is a pair of portals: its far end (`PortalDef.shortcut`, an id) is hidden and shut
 until the character has found it; its near end (`opens_shortcut`, the same id) is always open

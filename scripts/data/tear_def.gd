@@ -13,6 +13,9 @@ extends Resource
 ## The zone of its own maps (their MapDef.region), which never decline. Not a RegionDef: a
 ## tear is off the world map, with no town or routes (TearState.inside_tear).
 @export var inside: StringName
+## The one boss move (another zone's boss relic) that reaches its way in: the secret ledge its
+## scene spot (SceneSpot.tear) stands on is out of reach of a plain jump and of every other move.
+@export var way_in := RelicDef.Move.DASH
 ## Done, it unseals the tear (the story quest where the hero first goes through one).
 @export var seal_quest: StringName = &"story_a_closer_look"
 ## Done, the tear is finished and the world declines a step. Empty: it can't be finished yet.

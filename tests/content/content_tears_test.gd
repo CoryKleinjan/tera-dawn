@@ -1,4 +1,8 @@
 extends TestCase
+
+const MapReach := preload("res://tests/content/map_reach.gd")
+## The names map_reach.gd gives the relic moves it tries (MapReach.MOVES).
+const MOVE_NAMES := {RelicDef.Move.DASH: "Dash", RelicDef.Move.DOUBLE_JUMP: "Double Jump", RelicDef.Move.SURGE: "Surge"}
 ## Every tear (data/tears) opens from a real zone and is sealed by a story quest; every decline
 ## step (data/declines) is a step of its own, darkens only with light and fog (art is never
 ## recoloured in code) and swaps in dangerous versions that are monsters of their own.
@@ -100,3 +104,15 @@ func test_every_tear_ends_with_its_guardian() -> void:
 			continue
 		var lives := _inside(t).any(func(m: MapDef) -> bool: return m.spawns.any(func(s: SpawnDef) -> bool: return s.monster == guardian))
 		check(lives, "%s: its guardian %s doesn't live inside it" % [t.id, guardian.id])
+
+## Only its own boss move (TearDef.way_in) reaches its way in: a plain jump and every other
+## move fall short.
+func test_every_tears_way_in_needs_its_own_move() -> void:
+	for t: TearDef in Content.tears.values():
+		for w: Array in _ways_in(t):
+			var m: MapDef = w[0]
+			var s: SceneSpot = w[1]
+			var reach := MapReach.new(m, MapReach.arrivals_of(m))
+			check(not reach.platform_reached(s.platform), "%s: a plain jump reaches its way in on %s" % [t.id, m.id])
+			var want: Array[String] = [MOVE_NAMES[t.way_in]]
+			check_eq(reach.moves_reaching(s.platform), want, "%s: the moves that reach its way in on %s" % [t.id, m.id])

@@ -7,5 +7,6 @@ script = ExtResource("1_tear_def")
 id = &"greenbough_tear"
 region = &"greenbough"
 inside = &"greenbough_tear"
+way_in = 0
 seal_quest = &"story_a_closer_look"
 finish_quest = &"tear_greenbough_3"

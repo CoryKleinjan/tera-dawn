@@ -32,12 +32,13 @@ but the tears' own, and each one after takes it further.
 1. Make its maps (`MapDef.region` is the tear's `inside`), its quests and its guardian. A
    one-way portal leads back out; its arena follows the boss arena rules.
 2. Save a `TearDef` in `data/tears/` with `region`, `inside` and `finish_quest` (the last quest).
-3. Add its way in: a secret ledge on a map of `region` and a `SceneSpot` on it with `tear`,
-   `then_map`, `then_x` and `glow`.
+3. Add its way in: a secret ledge on a map of `region` that only its `way_in` move reaches,
+   and a `SceneSpot` on it with `tear`, `then_map`, `then_x` and `glow`.
 
 ## The Greenbough tear (the pilot)
-- Way in: a far Dash ledge on Oak Crown (x 880-1020, y 275; Double Jump and Surge reach it
-  too), the only change to that map. Out: a one-way portal from the Stilled Grove back to
+- Way in: a Dash-only ledge on Oak Crown (x 1515-1655, y 185, out past P10's left end), the
+  only change to that map. `TearDef.way_in` names the move; `content_tears_test` checks that
+  only it reaches the ledge. Out: a one-way portal from the Stilled Grove back to
   Oak Crown's floor.
 - Maps (region `greenbough_tear`): Stilled Grove (Shardling, Pale Moth), Ivory Hollow
   (Hollow Stag, Shardling, a chest), Silent Stair (Pale Moth, Hollow Stag; a cracked wall at the
