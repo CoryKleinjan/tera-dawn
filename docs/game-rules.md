@@ -158,6 +158,13 @@ update this page when one changes. Each zone's own look and music are in
   rune's Dawnshard fee; it always works, and a rune set over another loses the old one. A worn
   piece adds its runes' bonuses (the gear bonuses that already exist). The tooltip lists each
   slot, filled or empty.
+- Tiers (Cory Oct 18): every piece of gear has a tier, I to VII, so older gear stays useful the
+  whole game. An enchanter raises a piece in the bag one tier for that tier's Dawnshard fee; it
+  always works, keeps its runes and never changes its look (only its own stats grow, not its
+  runes'). Tiers aren't tied to zones or levels. The tooltip shows the tier.
+- Gear never drops (Cory Oct 18): no monster, boss or chest drops gear. Vendors sell it, secret
+  ones included, and better gear joins a vendor's list as the story goes on or a secret is
+  found (a quest handed in, a boss beaten, a secret found); until then the line is hidden.
 - Runes: every monster in a zone's fields can drop that zone's runes (2-3 kinds, about 1% each),
   each zone with its own flavour: Dawnharbor Coast heart pieces and Weapon Defense, Greenbough
   Accuracy, Speed and Jump, Lumewood Magic Attack, Max MP and Magic Defense, Emberreach Weapon
@@ -172,7 +179,7 @@ update this page when one changes. Each zone's own look and music are in
 ## Weapons
 
 - No ammo for any weapon. Claws were dropped; thieves use a dagger and throwing stars.
-- Shops sell only basic weapons; better weapons come from monster drops.
+- Weapons, like all gear, come from vendors, never from drops (see Gear).
 
 ## Maps and scenery
 

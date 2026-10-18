@@ -9,13 +9,16 @@ func _shop_npc(p: SimPlayer, npc_id: StringName) -> NpcDef:
 	var npc := p.map.npc_near(p, npc_id) if p else null
 	return npc if npc and npc.shop else null
 
-## Buys `count` of a shop's entry `index` from the NPC `npc_id` the player stands by.
+## Buys `count` of a shop's entry `index` from the NPC `npc_id` the player stands by, if they've
+## unlocked it (ShopEntry.open_to).
 func on_buy(peer: int, npc_id: StringName, index: int, count: int) -> void:
 	var p := player_of(peer)
 	var npc := _shop_npc(p, npc_id)
 	if npc == null or index < 0 or index >= npc.shop.items.size():
 		return
 	var entry := npc.shop.items[index]
+	if not entry.open_to(p.character):
+		return
 	count = clampi(count, 1, entry.item.stack_size())
 	var c := p.character
 	var total := entry.cost() * count

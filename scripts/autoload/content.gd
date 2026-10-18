@@ -22,6 +22,7 @@ const FOLDERS := {
 	"looks": "res://data/hero/looks",
 	"tears": "res://data/tears",
 	"declines": "res://data/declines",
+	"gear_tiers": "res://data/gear_tiers",
 }
 
 var monsters := {}
@@ -45,6 +46,8 @@ var looks := {}
 var tears := {}
 ## DeclineDefs: each step of the world's decline as tears are finished (TearState).
 var declines := {}
+## GearTierDefs: the tiers an enchanter can raise gear through (ItemStack.tier).
+var gear_tiers := {}
 
 func _ready() -> void:
 	for kind in FOLDERS:
@@ -63,6 +66,17 @@ func add_items_from(path: String) -> void:
 	for id: StringName in more:
 		items[id] = more[id]
 		extra_items.append(id)
+
+## The gear tier at `rank` (1 is where every piece starts), or null past the last.
+func gear_tier(rank: int) -> GearTierDef:
+	for t: GearTierDef in gear_tiers.values():
+		if t.rank == rank:
+			return t
+	return null
+
+## How many gear tiers there are: the highest a piece can reach.
+func top_gear_tier() -> int:
+	return gear_tiers.size()
 
 ## The Monster Book card of a monster.
 func card(m: MonsterDef) -> CardDef:

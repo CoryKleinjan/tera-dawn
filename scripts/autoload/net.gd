@@ -375,6 +375,12 @@ func req_enchant(npc_id: StringName, gear_slot: int, rune_slot: int, socket: int
 	if server:
 		server.enchanting.on_enchant(_sender(), npc_id, gear_slot, rune_slot, socket)
 
+## Raises the gear in Equip slot `gear_slot` one tier, at the enchanter `npc_id`.
+@rpc("any_peer", "call_local", "reliable")
+func req_upgrade(npc_id: StringName, gear_slot: int) -> void:
+	if server:
+		server.enchanting.on_upgrade(_sender(), npc_id, gear_slot)
+
 # --- quests (ServerQuests) ---
 
 @rpc("any_peer", "call_local", "reliable")

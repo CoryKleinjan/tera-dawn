@@ -1,7 +1,7 @@
 class_name ItemStack
 extends RefCounted
 ## One inventory slot's worth of an item: what it is, how many, and for gear the stats this
-## particular copy rolled when it dropped and the runes set in it.
+## particular copy rolled, its tier and the runes set in it.
 
 ## Rune slots on every piece of gear.
 const RUNE_SLOTS := 3
@@ -10,6 +10,9 @@ var item: ItemDef
 var count := 1
 ## Gear only: this copy's stats (its EquipDef's stats, rolled).
 var stats: StatBlock
+## Gear only: its tier (GearTierDef.rank), raised by an enchanter (Gear.upgrade). Every piece
+## starts at 1; a higher tier makes its own stats bigger and never changes its look.
+var tier := 1
 ## Gear only: the rune in each of its RUNE_SLOTS slots, null where it's empty.
 var runes: Array[RuneDef] = []
 
@@ -45,9 +48,20 @@ func equip_def() -> EquipDef:
 func display_name() -> String:
 	return item.display_name
 
-## Gear only: what it adds while worn, its stats and its runes'.
+## Gear only: its own stats at its tier (runes not counted).
+func own_stats() -> StatBlock:
+	if stats == null:
+		return StatBlock.new()
+	var t := Content.gear_tier(tier)
+	return stats.scaled(t.stat_scale) if t else stats.copy()
+
+## Gear only: the next tier up, or null at the top.
+func next_tier() -> GearTierDef:
+	return Content.gear_tier(tier + 1) if item is EquipDef else null
+
+## Gear only: what it adds while worn, its stats at its tier and its runes'.
 func total() -> StatBlock:
-	var out := stats.copy() if stats else StatBlock.new()
+	var out := own_stats()
 	for r in runes:
 		if r:
 			out.add(r.stats)
@@ -64,13 +78,16 @@ func to_dict() -> Dictionary:
 	var d := {"id": String(item.id), "count": count}
 	if stats:
 		d["stats"] = stats.to_dict()
+	if tier > 1:
+		d["tier"] = tier
 	if runes.any(func(r: RuneDef) -> bool: return r != null):
 		d["runes"] = runes.map(func(r: RuneDef) -> String: return String(r.id) if r else "")
 	return d
 
 ## Rebuilds a saved stack, or null if its item no longer exists (an upgrade scroll). Gear
-## keeps the stats it was saved with, scroll upgrades and all, and its runes (none in saves
-## from before runes; a rune that no longer exists leaves its slot empty).
+## keeps the stats it was saved with, scroll upgrades and all, its tier (1 in saves from before
+## tiers) and its runes (none in saves from before runes; a rune that no longer exists leaves
+## its slot empty).
 static func from_dict(d: Dictionary) -> ItemStack:
 	var id := StringName(str(d.get("id", "")))
 	if not Content.items.has(id):
@@ -81,6 +98,7 @@ static func from_dict(d: Dictionary) -> ItemStack:
 	if s.item is EquipDef:
 		var saved: Variant = d.get("stats")
 		s.stats = StatBlock.from_dict(saved) if saved is Dictionary else ItemStack.exact(s.item).stats
+		s.tier = clampi(int(d.get("tier", 1)), 1, maxi(1, Content.top_gear_tier()))
 		s.runes.resize(RUNE_SLOTS)
 		var set_in: Variant = d.get("runes")
 		if set_in is Array:

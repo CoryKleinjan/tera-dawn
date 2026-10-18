@@ -1,7 +1,7 @@
 class_name TDItemTooltip
 extends Control
 ## The card that follows the mouse over an item slot: name, kind, which jobs can use it (red
-## when yours can't), stats, gear's rune slots (filled and empty), how gear compares with
+## when yours can't), gear's tier, stats, gear's rune slots (filled and empty), how gear compares with
 ## what's worn in its slot, what a potion restores or a rune adds, the description and what
 ## double-clicking does. Drawn above every window.
 
@@ -52,9 +52,14 @@ func _lines() -> Array:
 		out.append(["Equip · %s%s" % [e.slot_name(), kind], Palette.MUTED, 11])
 		if not e.jobs.is_empty():
 			out.append(["%s only" % EquipDef.families_text(e.jobs), Palette.MIST if Game.me.gear.can_use(e.jobs) else Palette.BAD, 12])
-		var base := e.stats if e.stats else StatBlock.new()
-		for f in stack.stats.nonzero():
-			var v := stack.stats.value(f)
+		var tier := Content.gear_tier(stack.tier)
+		if tier:
+			out.append([tier.display_name, Palette.SUN if stack.tier > 1 else Palette.MIST, 12])
+		# rolled stats show green or orange against what the piece lists, at the same tier
+		var own := stack.own_stats()
+		var base := e.stats.scaled(tier.stat_scale) if e.stats and tier else (e.stats if e.stats else StatBlock.new())
+		for f in own.nonzero():
+			var v := own.value(f)
 			var col := Palette.MIST
 			if v > base.value(f):
 				col = Palette.GOOD
