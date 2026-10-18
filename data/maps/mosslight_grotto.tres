@@ -1,132 +1,144 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=33 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=38 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/lumewood.tres" id="2_lumewood"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="3_biome_variant_def"]
-[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="4_platform_def"]
-[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="5_portal_def"]
-[ext_resource type="Resource" path="res://data/monsters/lume_wisp.tres" id="6_lume_wisp"]
-[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="7_spawn_def"]
-[ext_resource type="Resource" path="res://data/monsters/star_bat.tres" id="8_star_bat"]
-[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="9_dawnshard"]
-[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="10_drop_entry"]
-[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="11_white_potion"]
-[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="12_blue_potion"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest.png" id="13_chest"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest_open.png" id="14_chest_open"]
-[ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="15_breakable_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_fields/cap_left.png" id="4_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_fields/middle_a.png" id="5_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_fields/middle_b.png" id="6_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_fields/cap_right.png" id="7_cap_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/lumewood_fields_side.png" id="8_lumewood_fields_side"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="9_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="10_portal_def"]
+[ext_resource type="Resource" path="res://data/monsters/lume_wisp.tres" id="11_lume_wisp"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="12_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/star_bat.tres" id="13_star_bat"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="14_dawnshard"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="15_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="16_white_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="17_blue_potion"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest.png" id="18_chest"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest_open.png" id="19_chest_open"]
+[ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="20_breakable_def"]
 
 [sub_resource type="Resource" id="Copied_Variant"]
 script = ExtResource("3_biome_variant_def")
 mote_color = Color(0.8, 2.4, 2.2, 1)
 fog_color = Color(0.2275, 0.4784, 0.6039, 1)
 sky_low = Color(0.2902, 0.5412, 0.8157, 1)
+hide_edge_grass = true
+hide_platform_decor = true
+platform_left = ExtResource("4_cap_left")
+platform_middle = ExtResource("5_middle_a")
+platform_middle_alt = ExtResource("6_middle_b")
+platform_right = ExtResource("7_cap_right")
+ground_side = ExtResource("8_lumewood_fields_side")
 
 [sub_resource type="Resource" id="Platform_1"]
-script = ExtResource("4_platform_def")
+script = ExtResource("9_platform_def")
 x = 300.0
 y = 845.0
 width = 400.0
 
 [sub_resource type="Resource" id="Platform_2"]
-script = ExtResource("4_platform_def")
+script = ExtResource("9_platform_def")
 x = 600.0
 y = 770.0
 width = 400.0
 
 [sub_resource type="Resource" id="Platform_3"]
-script = ExtResource("4_platform_def")
+script = ExtResource("9_platform_def")
 x = 900.0
 y = 695.0
 width = 400.0
 
 [sub_resource type="Resource" id="Platform_4"]
-script = ExtResource("4_platform_def")
+script = ExtResource("9_platform_def")
 x = 1200.0
 y = 620.0
 width = 400.0
 
 [sub_resource type="Resource" id="Platform_5"]
-script = ExtResource("4_platform_def")
+script = ExtResource("9_platform_def")
 x = 1500.0
 y = 845.0
 width = 400.0
 
 [sub_resource type="Resource" id="Platform_6"]
-script = ExtResource("4_platform_def")
+script = ExtResource("9_platform_def")
 x = 1800.0
 y = 770.0
 width = 300.0
 
 [sub_resource type="Resource" id="Platform_7"]
-script = ExtResource("4_platform_def")
+script = ExtResource("9_platform_def")
 x = 900.0
 y = 440.0
 width = 150.0
 secret = true
 
 [sub_resource type="Resource" id="Portal_0"]
-script = ExtResource("5_portal_def")
+script = ExtResource("10_portal_def")
 x = 2300.0
 target_map = &"glowcap_hollow"
 target_x = 400.0
 target_platform = 16
 
 [sub_resource type="Resource" id="Spawn_0"]
-script = ExtResource("7_spawn_def")
-monster = ExtResource("6_lume_wisp")
+script = ExtResource("12_spawn_def")
+monster = ExtResource("11_lume_wisp")
 platform = 0
 count = 4
 patrol_from = 200.0
 patrol_to = 2000.0
 
 [sub_resource type="Resource" id="Spawn_1"]
-script = ExtResource("7_spawn_def")
-monster = ExtResource("8_star_bat")
+script = ExtResource("12_spawn_def")
+monster = ExtResource("13_star_bat")
 platform = 2
 count = 2
 
 [sub_resource type="Resource" id="Spawn_2"]
-script = ExtResource("7_spawn_def")
-monster = ExtResource("6_lume_wisp")
+script = ExtResource("12_spawn_def")
+monster = ExtResource("11_lume_wisp")
 platform = 4
 count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
-script = ExtResource("7_spawn_def")
-monster = ExtResource("8_star_bat")
+script = ExtResource("12_spawn_def")
+monster = ExtResource("13_star_bat")
 platform = 6
 count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
-script = ExtResource("10_drop_entry")
-item = ExtResource("9_dawnshard")
+script = ExtResource("15_drop_entry")
+item = ExtResource("14_dawnshard")
 min_amount = 160
 max_amount = 240
 
 [sub_resource type="Resource" id="Loot_0_1"]
-script = ExtResource("10_drop_entry")
-item = ExtResource("11_white_potion")
+script = ExtResource("15_drop_entry")
+item = ExtResource("16_white_potion")
 min_amount = 3
 max_amount = 3
 
 [sub_resource type="Resource" id="Loot_0_2"]
-script = ExtResource("10_drop_entry")
-item = ExtResource("12_blue_potion")
+script = ExtResource("15_drop_entry")
+item = ExtResource("17_blue_potion")
 min_amount = 3
 max_amount = 3
 
 [sub_resource type="Resource" id="Breakable_0"]
-script = ExtResource("15_breakable_def")
+script = ExtResource("20_breakable_def")
 id = &"mosslight_grotto_high_chest"
 x = 975.0
 platform = 7
 hits = 1
-whole = ExtResource("13_chest")
-broken = ExtResource("14_chest_open")
+whole = ExtResource("18_chest")
+broken = ExtResource("19_chest_open")
 height = 48.0
-loot = Array[ExtResource("10_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1"), SubResource("Loot_0_2")])
-card = ExtResource("6_lume_wisp")
+loot = Array[ExtResource("15_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1"), SubResource("Loot_0_2")])
+card = ExtResource("11_lume_wisp")
 
 [resource]
 script = ExtResource("1_map_def")
@@ -138,10 +150,10 @@ width = 2400
 height = 1000
 ground_y = 920
 start_x = 2100.0
-platforms = Array[ExtResource("4_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7")])
-portals = Array[ExtResource("5_portal_def")]([SubResource("Portal_0")])
-breakables = Array[ExtResource("15_breakable_def")]([SubResource("Breakable_0")])
-spawns = Array[ExtResource("7_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3")])
+platforms = Array[ExtResource("9_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7")])
+portals = Array[ExtResource("10_portal_def")]([SubResource("Portal_0")])
+breakables = Array[ExtResource("20_breakable_def")]([SubResource("Breakable_0")])
+spawns = Array[ExtResource("12_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3")])
 region = &"lumewood"
 world_pos = Vector2(580.0, 90.0)
 zone_pos = Vector2(-2400.0, -1400.0)
