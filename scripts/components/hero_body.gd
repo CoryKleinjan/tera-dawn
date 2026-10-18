@@ -11,6 +11,12 @@ extends RefCounted
 const STANDING := [&"ready", &"turn", &"level_up"]
 ## What every attack and skill motion plays until the job sets paint their own (HeroLookDef).
 const ATTACK := &"attack"
+## The moves that last a set time (TDPlayer): their frames are spread over that time whatever
+## speed they were cut at, so a longer Dash still plays the whole roll.
+const TIMED := {
+	&"dash": TDPlayer.DASH_TICKS, &"double_jump": TDPlayer.DOUBLE_JUMP_POSE_TICKS,
+	&"slam_land": TDPlayer.SLAM_LAND_TICKS, &"surge_end": TDPlayer.SURGE_END_TICKS,
+}
 
 ## The pet trotting after them.
 var companion: TDCompanion
@@ -58,7 +64,7 @@ func draw(face: int, pet: StringName, anim: StringName, look: HeroLookDef) -> vo
 		_since = Engine.get_physics_frames()
 	_look = look
 	var a := resolve(look.frames, anim)
-	var i := frame_at(look.frames, a, float(Engine.get_physics_frames() - _since) / Engine.physics_ticks_per_second)
+	var i := frame_at(look.frames, a, float(Engine.get_physics_frames() - _since) / Engine.physics_ticks_per_second, TIMED.get(a, 0))
 	var shown := [look, a, i, face]
 	if shown != _shown:
 		_shown = shown
@@ -91,13 +97,15 @@ static func resolve(frames: SpriteFrames, anim: StringName) -> StringName:
 	return &"idle" if anim in STANDING else ATTACK
 
 ## The frame of `anim` showing `seconds` after it started: at its speed and each frame's
-## duration, round again if it loops, else held on its last frame.
-static func frame_at(frames: SpriteFrames, anim: StringName, seconds: float) -> int:
+## duration (or spread over `ticks` physics ticks, TIMED), round again if it loops, else held
+## on its last frame.
+static func frame_at(frames: SpriteFrames, anim: StringName, seconds: float, ticks := 0) -> int:
 	var n := frames.get_frame_count(anim)
 	var total := 0.0
 	for i in n:
 		total += frames.get_frame_duration(anim, i)
-	var t := seconds * frames.get_animation_speed(anim)
+	var speed := total * Engine.physics_ticks_per_second / ticks if ticks > 0 else frames.get_animation_speed(anim)
+	var t := seconds * speed
 	if frames.get_animation_loop(anim):
 		t = fmod(t, total)
 	for i in n:

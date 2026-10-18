@@ -43,6 +43,20 @@ func test_frames_run_at_their_speed_and_hold_at_the_end() -> void:
 	frames.set_animation_loop(&"a", true)
 	check_eq(HeroBody.frame_at(frames, &"a", 0.45), 0, "a loop goes round")
 
+func test_timed_moves_spread_over_their_ticks() -> void:
+	var frames := SpriteFrames.new()
+	frames.add_animation(&"a")
+	frames.set_animation_speed(&"a", 100.0)
+	frames.set_animation_loop(&"a", false)
+	for i in 3:
+		frames.add_frame(&"a", PlaceholderTexture2D.new(), 2.0 if i == 1 else 1.0)
+	var second := Engine.physics_ticks_per_second
+	check_eq(HeroBody.frame_at(frames, &"a", 0.2, second), 0, "first")
+	check_eq(HeroBody.frame_at(frames, &"a", 0.5, second), 1, "the long middle frame")
+	check_eq(HeroBody.frame_at(frames, &"a", 0.9, second), 2, "last, just as the move ends")
+	for move: StringName in HeroBody.TIMED:
+		check(HeroLookDef.all()[0].frames.has_animation(move), "%s is painted" % move)
+
 func test_the_looks_stand_about_as_tall_as_he_is() -> void:
 	for look in HeroLookDef.all():
 		var tex := look.frames.get_frame_texture(&"idle", 0)
