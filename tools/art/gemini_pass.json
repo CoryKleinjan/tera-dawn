@@ -27403,6 +27403,29 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a cute chibi girl with a brown ponytail in 8 frames of a double jump in the air. Repaint the character in EVERY cell as the WOMAN in the attached picture (one standing picture of her, only to show her face and hair): give her exactly the attached woman's face, shoulder-length auburn hair (loose, no ponytail), brown eyes with dark lashes and her friendly grown-up expression. Keep EVERYTHING else in the base picture exactly as it is: the same pose, size, position and angle in every cell (including the upside-down and tumbling frames), the same body, arms, hands, legs and boots, the same cream linen shirt with rolled sleeves, brown belt, dark brown trousers and brown boots, the same three-quarter facing to the right, the same grid lines and the same flat pure magenta #FF00FF background. Every cell keeps the girl's in-air pose from the base picture, never a walking or standing pose: 1 jumping with legs bent and arms out; 2 tucked in a ball hugging her knees; 3 one knee kicked out, both arms up; 4 stretched straight up, both arms high over her head; 5 tumbling on her side; 6 upside down, head at the bottom; 7 falling, leaning back with knees bent; 8 arms spread wide, legs a little bent. Do not make her smaller or bigger than the girl in the base picture. No arm or hand ever covers her face. Style: exactly like the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Paint only the woman: no ground, wall, shadow, glow, speed lines, effects, text, labels or numbers, and no extra figures. The background stays flat pure magenta #FF00FF everywhere in every cell, never green or white."
   }
+ },
+ {
+  "id": "warrior_vanguard_boy_walk_idle_test",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_boy_walk_idle_test.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': small test of the Warrior's starter set (Vanguard, look approved by Cory 00:09Z \"Yes\") on the boy's approved walk and idle sheet, battle-ready face. Priced line and Cory's release to be added before it runs.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/newhero_boy_walk_idle.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a cute chibi boy in 8 animation frames: cells 1 to 6 a walk, cells 7 and 8 standing idle. Keep EVERYTHING about him exactly as it is in every cell: the same pose, body, head size, proportions, size, place in the cell, feet on the same ground line, hair colour and three-quarter view facing right. Only dress him in a full suit of WARRIOR armour, painted the same in every cell, generic but well equipped and cool: a steel open-face helm with cheek guards that covers only his head (his face fully visible, a little hair showing at the front; nothing on his neck or shoulders attached to the helm); a polished steel breastplate over a chainmail shirt whose sleeves reach his elbows; brown leather shoulder guards; steel gauntlets on both hands; a deep blue tabard with a plain white border hanging over the breastplate to his thighs; a thick brown leather belt with a small pouch; brown leather trousers with steel knee guards; sturdy brown leather boots. In his NEAR hand (the one toward the viewer) he holds a well-made steel longsword with a crossguard and a brown leather grip, the whole sword always shown flat to the viewer, never edge-on, its blade held low and pointing forward and down while walking and standing. On his FAR arm he carries a steel-rimmed heater shield painted deep blue with one white band down the middle, partly behind his body. His face is ready for battle: focused and determined, eyebrows a little lowered, mouth set in a calm line, not smiling, not angry, not shouting. No arm, hand, sword or shield ever covers his face. Clean steel and brown leather with deep blue as the one strong colour. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF everywhere in every cell and keep the grid lines. Paint only the boy: no ground, shadow, dust, glow, effects, text, labels or numbers, and no extra figures. Every figure stays fully inside its own cell."
+  }
  }
 ]
 }
