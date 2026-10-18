@@ -58,11 +58,14 @@ class PlatformPieces(unittest.TestCase):
         self.assertEqual(platform_pieces.best_row(end, cap, slice(10, 20), 30), 5)
 
 
-def top_line(a, side, cols=12, run=7):
+def top_line(a, side, cols=12, run=7, deep=5):
     """Where the top edge is at a piece's left or right end: the median over `cols` columns of
-    the first row solid `run` texels across (so grass blades and flowers don't count)."""
+    the first row solid `run` texels across and `deep` rows down (so grass blades, flowers and
+    the thin caps of mushrooms standing on the ledge don't count)."""
     solid = a[..., 3] > 127
     wide = np.stack([np.convolve(r.astype(int), np.ones(run, int), "same") >= run for r in solid])
+    for k in range(1, deep):
+        wide[:-k] &= wide[k:]
     edge = wide[:, -cols - run // 2:-(run // 2)] if side == "right" else wide[:, run // 2:cols + run // 2]
     return float(np.median([np.nonzero(c)[0][0] for c in edge.T if c.any()]))
 

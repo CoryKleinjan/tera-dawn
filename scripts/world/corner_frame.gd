@@ -13,13 +13,26 @@ var _left := TextureRect.new()
 var _right := TextureRect.new()
 ## BiomeDef.frame_scale of the frame showing.
 var _scale := 1.0
+## Fades the bottom `fade` share of each half out (BiomeDef.frame_fade), at draw time.
+var _fade := ShaderMaterial.new()
 
 func _init() -> void:
 	layer = LAYER
+	_fade.shader = Shader.new()
+	_fade.shader.code = """shader_type canvas_item;
+uniform float fade = 0.0;
+void fragment() {
+	COLOR = texture(TEXTURE, UV) * COLOR;
+	if (fade > 0.0) {
+		COLOR.a *= smoothstep(1.0, 1.0 - fade, UV.y);
+	}
+}
+"""
 	for r: TextureRect in [_left, _right]:
 		r.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		r.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		r.stretch_mode = TextureRect.STRETCH_SCALE
+		r.material = _fade
 		add_child(r)
 
 func _ready() -> void:
@@ -28,6 +41,7 @@ func _ready() -> void:
 ## Shows `b`'s corner leaves, or none.
 func show_for(b: BiomeDef) -> void:
 	_scale = b.frame_scale
+	_fade.set_shader_parameter("fade", b.frame_fade)
 	_left.texture = b.frame_left
 	_right.texture = b.frame_right
 	visible = b.frame_left != null or b.frame_right != null

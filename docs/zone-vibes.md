@@ -201,7 +201,13 @@ planters.
 | Crystal Caves | Training | 15-17 | Deep indigo cave lit by violet crystals | Star Bat, Prism Slime |
 | Prism Lake | Training | 17-20 | Pink-violet sky over a lake, most saturated map in the zone | Prism Slime, Crystal Golem |
 | Glass Dome Ruins | Training | 20-27 | Ruined glass domes under a cool blue-violet sky, pale blue motes | Crystal Golem, Spell Imp, Starfall Golem |
-| Arcane Spire | Boss | 22-30 | Purple magic fog, magenta motes, heavy violet grade | Spell Imp, Starfall Golem; boss Arcane Sentinel |
+| Arcane Spire | Boss | 22-30 | Purple magic fog, magenta motes, heavy violet grade; the long climb UP from Glass Dome Ruins to Spire Summit | Spell Imp, Starfall Golem; boss Arcane Sentinel |
+| Mosslight Grotto | Secret | – | Glowcap Hollow's look: a glowing moss cave west of the hollow, through a fake wall | Lume Wisp, Star Bat |
+| Geode Hollow | Secret | – | Crystal Caves' look: a geode above the caves, behind a breakable crystal wall; holds the Spire Key | Prism Slime, Star Bat |
+| Lakebed Passage | Secret | – | Prism Lake's look: a passage from the lake down and back to Glowcap Hollow, gated until its lever is pulled | Prism Slime, Crystal Golem |
+| Shattered Atrium | Secret | – | Glass Dome Ruins' look: the atrium above the broken domes, through a fake wall on the roof | Spell Imp, Crystal Golem |
+| Spire Vault | Secret | – | Arcane Spire's look: a vault halfway up the spire behind a locked gate (its key is in Geode Hollow) | Starfall Golem, Spell Imp |
+| Stargazer's Perch | Secret | – | Starfall Ridge's look: a perch above the ridge, up tucked-away ledges at its east end | Lume Wisp, Glowcap |
 
 ## Emberreach
 
