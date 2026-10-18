@@ -28789,6 +28789,474 @@
    ],
    "text": "The base picture is an EMPTY sheet of 3 cells (1 row of 3, numbered left to right, then top to bottom) on a flat magenta background. The first attached picture shows the game's boss monster \"Petrified Warden\" once, standing in its idle pose on magenta: a squat, chunky walking stone oak with bare stone branches growing from its head, a scowling carved face with glowing white eyes, log-thick arms and a glowing white crack across its chest. Paint this exact monster once in every cell, in the pose given for that cell: copy its look exactly (same body, shape, colours, face, every crack and glowing part it has in its idle pose, the same size as in the first attached picture, the same painted style and thin dark slate-plum outline) but NOT its pose: each cell's pose is new and clearly different from the others. It always faces RIGHT, its face turned to the right. Poses on the ground stand on one shared ground line near the bottom of each cell, like in the first attached picture; mid-air poses float clearly above that line. It is a boss: every pose is big, bold and dramatic, with strong clear body shapes that read at a glance. Draw it SMALLER than its cell: it fills only about 70% of the cell's width and height, centred, with a wide magenta margin on every side, its branches fully inside the cell. This is its DEFEAT. Cell 1, DEATH STAGGER: reeling back from a final blow, head tossed back, root legs wobbling. Cell 2, DEATH KNEEL: sinking down onto its knees, arms hanging, head drooping, its cracks dimming. Cell 3, DEATH FALLEN: collapsed face-down flat on the ground line like a fallen stone tree, eyes dark, its cracks dark with only a faint glow. Exactly one monster per cell. Do NOT draw ground lines, dust, speed lines, impact marks, motion flicks, shadows, ground, grass, projectiles or any effect or object: only the monster. Each monster fits fully inside its own cell with space around it, never touching the cell borders. Keep the grid lines thin; no frames, borders or panels. Write NO text anywhere: no pose names, titles, captions, labels, letters or numbers in any cell; every cell holds only the monster on flat magenta. The background is pure flat magenta #FF00FF in every cell (never white, grey, pink or mauve). Each cell holds exactly ONE monster: never a second copy, a ghost, a faded or overlapping copy, or a different creature. Every cell is the same size; never merge, split or add cells. Every monster is whole and fully inside its cell, never cut off by a cell edge. Copy nothing from the attached pictures except the monster's look: no text, frames, borders or background colour. It is ONE single monster in each cell: never a second body, a copy behind it, an after-image or a motion trail."
   }
+ },
+ {
+  "id": "warrior_vanguard_girl_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the girl's jump_land_hurt sheet in the Warrior starter set Vanguard, matching that look's approved Vanguard walk. Edits that look's plain sheet with every cell's pose named (read from that sheet), the outfit in exact words, and the two faceless crops of the boy's approved walk as refs (no face or pose to copy). Hair as it lies in real life under a helm (Cory 03:03Z). Priced line: \"Should I paint the girl's, man's and woman's other 6 Vanguard sheets each (18 sheets), for about $1.22?\"",
+  "edit": {
+   "base": "art/source/hero/looks/girl_jump_land_hurt.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_chest_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a cute chibi girl with a long brown ponytail in plain clothes in 8 animation frames of a jump, a landing and getting hurt. Each cell keeps EXACTLY the pose of the base, which is: cell 1: crouching a little with knees bent, about to jump; cell 2: springing up off the ground, both arms raised; cell 3: high in the air with both knees tucked up; cell 4: in the air with legs kicked out and arms spread; cell 5: just landed, standing; cell 6: standing; cell 7: hurt: flinching back with both arms flung out, wincing; cell 8: hurt: wincing, leaning back a little. Keep her pose, arms, legs, body, head size, proportions, size, place in the cell, which way she faces and turns, and her eyes exactly as in the base in every cell (only her expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows her standing there. Only dress her, the same in every cell, in the warrior armour shown in the two attached close-ups: the first shows only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Copy exactly their design, colours and details; they show no face and no pose, so keep the face, head size and pose of the base. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (her face fully visible; nothing on the neck or shoulders attached to the helm). Her hair lies as it would in real life under a helmet: gathered under the helm with a little brown fringe at the forehead inside the face opening, and her long brown ponytail comes out from UNDER the back bottom rim of the helm at the nape of her neck and hangs down behind her, swinging with the pose the way her ponytail moves in the base; it never pokes out through or above the helm dome. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. She holds ONE steel longsword with a crossguard and a brown leather grip in her NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on her FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow her hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In the hurt cells 7 and 8 she may wince as in the base. Her face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_idle_faint_sit_crouch",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_idle_faint_sit_crouch.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the girl's idle_faint_sit_crouch sheet in the Warrior starter set Vanguard, matching that look's approved Vanguard walk. Edits that look's plain sheet with every cell's pose named (read from that sheet), the outfit in exact words, and the two faceless crops of the boy's approved walk as refs (no face or pose to copy). Hair as it lies in real life under a helm (Cory 03:03Z). Priced line: \"Should I paint the girl's, man's and woman's other 6 Vanguard sheets each (18 sheets), for about $1.22?\"",
+  "edit": {
+   "base": "art/source/hero/looks/girl_idle_faint_sit_crouch.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_chest_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a cute chibi girl with a long brown ponytail in plain clothes in 8 animation frames of idling, fainting, sitting and crouching. Each cell keeps EXACTLY the pose of the base, which is: cell 1: standing idle; cell 2: standing idle; cell 3: dazed and swaying on her feet, eyes closed; cell 4: down on one knee, dazed, eyes closed; cell 5: falling forward toward the ground; cell 6: lying flat on her front on the ground, eyes closed, fainted; cell 7: SITTING on the ground with her knees up in front of her; cell 8: CROUCHING low, knees deeply bent, body lowered. Keep her pose, arms, legs, body, head size, proportions, size, place in the cell, which way she faces and turns, and her eyes exactly as in the base in every cell (only her expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows her standing there. Only dress her, the same in every cell, in the warrior armour shown in the two attached close-ups: the first shows only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Copy exactly their design, colours and details; they show no face and no pose, so keep the face, head size and pose of the base. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (her face fully visible; nothing on the neck or shoulders attached to the helm). Her hair lies as it would in real life under a helmet: gathered under the helm with a little brown fringe at the forehead inside the face opening, and her long brown ponytail comes out from UNDER the back bottom rim of the helm at the nape of her neck and hangs down behind her, swinging with the pose the way her ponytail moves in the base; it never pokes out through or above the helm dome. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. She holds ONE steel longsword with a crossguard and a brown leather grip in her NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on her FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow her hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In cells 3 to 6 she may look dazed or have her eyes closed as in the base. When sitting, the sword lies across her lap in her near hand; when lying down, the sword and shield lie close beside her. Her face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_dash",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_dash.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the girl's dash sheet in the Warrior starter set Vanguard, matching that look's approved Vanguard walk. Edits that look's plain sheet with every cell's pose named (read from that sheet), the outfit in exact words, and the two faceless crops of the boy's approved walk as refs (no face or pose to copy). Hair as it lies in real life under a helm (Cory 03:03Z). Priced line: \"Should I paint the girl's, man's and woman's other 6 Vanguard sheets each (18 sheets), for about $1.22?\"",
+  "edit": {
+   "base": "art/source/hero/looks/girl_dash.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_chest_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a cute chibi girl with a long brown ponytail in plain clothes in 8 animation frames of a fast forward roll. Each cell keeps EXACTLY the pose of the base, which is: cell 1: stepping forward, about to dash; cell 2: diving forward, body stretched out flat; cell 3: curled into a ball, rolling; cell 4: UPSIDE DOWN mid-roll, feet up; cell 5: curled into a ball, rolling; cell 6: coming out of the roll in a low crouch; cell 7: standing; cell 8: standing. Keep her pose, arms, legs, body, head size, proportions, size, place in the cell, which way she faces and turns, and her eyes exactly as in the base in every cell (only her expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows her standing there. Only dress her, the same in every cell, in the warrior armour shown in the two attached close-ups: the first shows only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Copy exactly their design, colours and details; they show no face and no pose, so keep the face, head size and pose of the base. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (her face fully visible; nothing on the neck or shoulders attached to the helm). Her hair lies as it would in real life under a helmet: gathered under the helm with a little brown fringe at the forehead inside the face opening, and her long brown ponytail comes out from UNDER the back bottom rim of the helm at the nape of her neck and hangs down behind her, swinging with the pose the way her ponytail moves in the base; it never pokes out through or above the helm dome. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. She holds ONE steel longsword with a crossguard and a brown leather grip in her NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on her FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow her hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In rolls and curls she keeps the sword and shield tucked close to her body. Her face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_surge",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_surge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the girl's surge sheet in the Warrior starter set Vanguard, matching that look's approved Vanguard walk. Edits that look's plain sheet with every cell's pose named (read from that sheet), the outfit in exact words, and the two faceless crops of the boy's approved walk as refs (no face or pose to copy). Hair as it lies in real life under a helm (Cory 03:03Z). Priced line: \"Should I paint the girl's, man's and woman's other 6 Vanguard sheets each (18 sheets), for about $1.22?\"",
+  "edit": {
+   "base": "art/source/hero/looks/girl_surge.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_chest_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a cute chibi girl with a long brown ponytail in plain clothes in 8 animation frames of a charge: bracing, flying forward and landing. Each cell keeps EXACTLY the pose of the base, which is: cell 1: standing in a wide braced stance, ready; cell 2: stepping forward, leaning into a charge; cell 3: leaning far forward, pushing off to charge; cell 4: FLYING forward through the air, body stretched out horizontally, near arm thrust straight forward; cell 5: FLYING forward through the air, body stretched out horizontally, near arm thrust straight forward; cell 6: FLYING forward through the air, body stretched out, near arm thrust straight forward; cell 7: landing from the charge, knees bent; cell 8: standing. Keep her pose, arms, legs, body, head size, proportions, size, place in the cell, which way she faces and turns, and her eyes exactly as in the base in every cell (only her expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows her standing there. Only dress her, the same in every cell, in the warrior armour shown in the two attached close-ups: the first shows only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Copy exactly their design, colours and details; they show no face and no pose, so keep the face, head size and pose of the base. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (her face fully visible; nothing on the neck or shoulders attached to the helm). Her hair lies as it would in real life under a helmet: gathered under the helm with a little brown fringe at the forehead inside the face opening, and her long brown ponytail comes out from UNDER the back bottom rim of the helm at the nape of her neck and hangs down behind her, swinging with the pose the way her ponytail moves in the base; it never pokes out through or above the helm dome. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. She holds ONE steel longsword with a crossguard and a brown leather grip in her NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on her FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow her hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In cells 4, 5 and 6, where the base shows her punching forward with her near fist, her near hand instead thrusts the ONE sword straight forward, point first, the blade flat to the viewer; the shield stays on the far arm close to her body. There is never a second sword. Her face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_slam",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the girl's slam sheet in the Warrior starter set Vanguard, matching that look's approved Vanguard walk. Edits that look's plain sheet with every cell's pose named (read from that sheet), the outfit in exact words, and the two faceless crops of the boy's approved walk as refs (no face or pose to copy). Hair as it lies in real life under a helm (Cory 03:03Z). Priced line: \"Should I paint the girl's, man's and woman's other 6 Vanguard sheets each (18 sheets), for about $1.22?\"",
+  "edit": {
+   "base": "art/source/hero/looks/girl_slam.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_chest_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a cute chibi girl with a long brown ponytail in plain clothes in 8 animation frames of a jump into a ball that drops and lands. Each cell keeps EXACTLY the pose of the base, which is: cell 1: JUMPING up off the ground with both arms raised high; cell 2: curled into a tight ball in mid air, knees hugged to the chest; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch, knees bent; cell 7: standing; cell 8: standing. Keep her pose, arms, legs, body, head size, proportions, size, place in the cell, which way she faces and turns, and her eyes exactly as in the base in every cell (only her expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows her standing there. Only dress her, the same in every cell, in the warrior armour shown in the two attached close-ups: the first shows only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Copy exactly their design, colours and details; they show no face and no pose, so keep the face, head size and pose of the base. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (her face fully visible; nothing on the neck or shoulders attached to the helm). Her hair lies as it would in real life under a helmet: gathered under the helm with a little brown fringe at the forehead inside the face opening, and her long brown ponytail comes out from UNDER the back bottom rim of the helm at the nape of her neck and hangs down behind her, swinging with the pose the way her ponytail moves in the base; it never pokes out through or above the helm dome. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. She holds ONE steel longsword with a crossguard and a brown leather grip in her NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on her FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow her hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In the curled cells she keeps the sword and shield tucked close to her body. Her face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_double_jump",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_double_jump.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the girl's double_jump sheet in the Warrior starter set Vanguard, matching that look's approved Vanguard walk. Edits that look's plain sheet with every cell's pose named (read from that sheet), the outfit in exact words, and the two faceless crops of the boy's approved walk as refs (no face or pose to copy). Hair as it lies in real life under a helm (Cory 03:03Z). Priced line: \"Should I paint the girl's, man's and woman's other 6 Vanguard sheets each (18 sheets), for about $1.22?\"",
+  "edit": {
+   "base": "art/source/hero/looks/girl_double_jump.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_chest_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a cute chibi girl with a long brown ponytail in plain clothes in 8 animation frames of a second jump in mid air with a forward flip. Each cell keeps EXACTLY the pose of the base, which is: cell 1: in the air, leaning back with legs forward; cell 2: tucked into a ball in mid air; cell 3: rising, both arms raised, one knee up; cell 4: stretched upward, both arms raised high; cell 5: tipping over sideways in the flip, body nearly flat; cell 6: UPSIDE DOWN in the flip, feet up; cell 7: coming upright out of the flip; cell 8: upright in the air, arms spread out. Keep her pose, arms, legs, body, head size, proportions, size, place in the cell, which way she faces and turns, and her eyes exactly as in the base in every cell (only her expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows her standing there. Only dress her, the same in every cell, in the warrior armour shown in the two attached close-ups: the first shows only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Copy exactly their design, colours and details; they show no face and no pose, so keep the face, head size and pose of the base. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (her face fully visible; nothing on the neck or shoulders attached to the helm). Her hair lies as it would in real life under a helmet: gathered under the helm with a little brown fringe at the forehead inside the face opening, and her long brown ponytail comes out from UNDER the back bottom rim of the helm at the nape of her neck and hangs down behind her, swinging with the pose the way her ponytail moves in the base; it never pokes out through or above the helm dome. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. She holds ONE steel longsword with a crossguard and a brown leather grip in her NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on her FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow her hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In flips and tucks she keeps the sword and shield close to her body. Her face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_man_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_man_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the man's jump_land_hurt sheet in the Warrior starter set Vanguard, matching that look's approved Vanguard walk. Edits that look's plain sheet with every cell's pose named (read from that sheet), the outfit in exact words, and the two faceless crops of the boy's approved walk as refs (no face or pose to copy). Hair as it lies in real life under a helm (Cory 03:03Z). Priced line: \"Should I paint the girl's, man's and woman's other 6 Vanguard sheets each (18 sheets), for about $1.22?\"",
+  "edit": {
+   "base": "art/source/hero/looks/man_jump_land_hurt.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_chest_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi grown man with short dark brown hair and light stubble in plain clothes in 8 animation frames of a jump, a landing and getting hurt. Each cell keeps EXACTLY the pose of the base, which is: cell 1: crouching a little with knees bent, about to jump; cell 2: springing up off the ground, both arms raised; cell 3: high in the air with both knees tucked up; cell 4: in the air with legs kicked out and arms spread; cell 5: just landed, standing; cell 6: standing; cell 7: hurt: flinching back with both arms flung out, wincing; cell 8: hurt: wincing, leaning back a little. Keep his pose, arms, legs, body, head size, proportions, size, place in the cell, which way he faces and turns, and his eyes exactly as in the base in every cell (only his expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows him standing there. Only dress him, the same in every cell, in the warrior armour shown in the two attached close-ups: the first shows only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Copy exactly their design, colours and details; they show no face and no pose, so keep the face, head size and pose of the base. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (his face fully visible; nothing on the neck or shoulders attached to the helm). His short dark brown hair is hidden under the helm except a little at the front; his light stubble stays. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. He holds ONE steel longsword with a crossguard and a brown leather grip in his NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on his FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow his hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In the hurt cells 7 and 8 he may wince as in the base. His face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_man_idle_faint_sit_crouch",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_man_idle_faint_sit_crouch.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the man's idle_faint_sit_crouch sheet in the Warrior starter set Vanguard, matching that look's approved Vanguard walk. Edits that look's plain sheet with every cell's pose named (read from that sheet), the outfit in exact words, and the two faceless crops of the boy's approved walk as refs (no face or pose to copy). Hair as it lies in real life under a helm (Cory 03:03Z). Priced line: \"Should I paint the girl's, man's and woman's other 6 Vanguard sheets each (18 sheets), for about $1.22?\"",
+  "edit": {
+   "base": "art/source/hero/looks/man_idle_faint_sit_crouch.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_chest_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi grown man with short dark brown hair and light stubble in plain clothes in 8 animation frames of idling, fainting, sitting and crouching. Each cell keeps EXACTLY the pose of the base, which is: cell 1: standing idle; cell 2: standing idle; cell 3: dazed and swaying on his feet, eyes closed; cell 4: down on one knee, dazed, eyes closed; cell 5: falling forward toward the ground; cell 6: lying flat on his front on the ground, eyes closed, fainted; cell 7: SITTING on the ground with his legs crossed in front of him; cell 8: CROUCHING low, knees deeply bent, body lowered. Keep his pose, arms, legs, body, head size, proportions, size, place in the cell, which way he faces and turns, and his eyes exactly as in the base in every cell (only his expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows him standing there. Only dress him, the same in every cell, in the warrior armour shown in the two attached close-ups: the first shows only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Copy exactly their design, colours and details; they show no face and no pose, so keep the face, head size and pose of the base. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (his face fully visible; nothing on the neck or shoulders attached to the helm). His short dark brown hair is hidden under the helm except a little at the front; his light stubble stays. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. He holds ONE steel longsword with a crossguard and a brown leather grip in his NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on his FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow his hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In cells 3 to 6 he may look dazed or have his eyes closed as in the base. When sitting, the sword lies across his lap in his near hand; when lying down, the sword and shield lie close beside him. His face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_man_dash",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_man_dash.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the man's dash sheet in the Warrior starter set Vanguard, matching that look's approved Vanguard walk. Edits that look's plain sheet with every cell's pose named (read from that sheet), the outfit in exact words, and the two faceless crops of the boy's approved walk as refs (no face or pose to copy). Hair as it lies in real life under a helm (Cory 03:03Z). Priced line: \"Should I paint the girl's, man's and woman's other 6 Vanguard sheets each (18 sheets), for about $1.22?\"",
+  "edit": {
+   "base": "art/source/hero/looks/man_dash.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_chest_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi grown man with short dark brown hair and light stubble in plain clothes in 8 animation frames of a fast forward roll. Each cell keeps EXACTLY the pose of the base, which is: cell 1: stepping forward, about to dash; cell 2: diving forward, body stretched out flat; cell 3: curled into a ball, rolling; cell 4: UPSIDE DOWN mid-roll, feet up; cell 5: tilted sideways, rolling; cell 6: standing; cell 7: stepping; cell 8: standing. Keep his pose, arms, legs, body, head size, proportions, size, place in the cell, which way he faces and turns, and his eyes exactly as in the base in every cell (only his expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows him standing there. Only dress him, the same in every cell, in the warrior armour shown in the two attached close-ups: the first shows only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Copy exactly their design, colours and details; they show no face and no pose, so keep the face, head size and pose of the base. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (his face fully visible; nothing on the neck or shoulders attached to the helm). His short dark brown hair is hidden under the helm except a little at the front; his light stubble stays. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. He holds ONE steel longsword with a crossguard and a brown leather grip in his NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on his FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow his hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In rolls and curls he keeps the sword and shield tucked close to his body. His face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_man_surge",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_man_surge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the man's surge sheet in the Warrior starter set Vanguard, matching that look's approved Vanguard walk. Edits that look's plain sheet with every cell's pose named (read from that sheet), the outfit in exact words, and the two faceless crops of the boy's approved walk as refs (no face or pose to copy). Hair as it lies in real life under a helm (Cory 03:03Z). Priced line: \"Should I paint the girl's, man's and woman's other 6 Vanguard sheets each (18 sheets), for about $1.22?\"",
+  "edit": {
+   "base": "art/source/hero/looks/man_surge.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_chest_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi grown man with short dark brown hair and light stubble in plain clothes in 8 animation frames of a charge: bracing, flying forward and landing. Each cell keeps EXACTLY the pose of the base, which is: cell 1: standing in a wide braced stance, ready; cell 2: stepping forward, leaning into a charge; cell 3: leaning far forward, pushing off to charge; cell 4: FLYING forward through the air, body stretched out horizontally, near arm thrust straight forward; cell 5: FLYING forward through the air, body stretched out horizontally, near arm thrust straight forward; cell 6: FLYING forward through the air, body stretched out, near arm thrust straight forward; cell 7: landing from the charge, knees bent; cell 8: standing. Keep his pose, arms, legs, body, head size, proportions, size, place in the cell, which way he faces and turns, and his eyes exactly as in the base in every cell (only his expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows him standing there. Only dress him, the same in every cell, in the warrior armour shown in the two attached close-ups: the first shows only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Copy exactly their design, colours and details; they show no face and no pose, so keep the face, head size and pose of the base. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (his face fully visible; nothing on the neck or shoulders attached to the helm). His short dark brown hair is hidden under the helm except a little at the front; his light stubble stays. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. He holds ONE steel longsword with a crossguard and a brown leather grip in his NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on his FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow his hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In cells 4, 5 and 6, where the base shows him punching forward with his near fist, his near hand instead thrusts the ONE sword straight forward, point first, the blade flat to the viewer; the shield stays on the far arm close to his body. There is never a second sword. His face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_man_slam",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_man_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the man's slam sheet in the Warrior starter set Vanguard, matching that look's approved Vanguard walk. Edits that look's plain sheet with every cell's pose named (read from that sheet), the outfit in exact words, and the two faceless crops of the boy's approved walk as refs (no face or pose to copy). Hair as it lies in real life under a helm (Cory 03:03Z). Priced line: \"Should I paint the girl's, man's and woman's other 6 Vanguard sheets each (18 sheets), for about $1.22?\"",
+  "edit": {
+   "base": "art/source/hero/looks/man_slam.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_chest_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi grown man with short dark brown hair and light stubble in plain clothes in 8 animation frames of a jump into a ball that drops and lands. Each cell keeps EXACTLY the pose of the base, which is: cell 1: JUMPING up off the ground with both arms raised high; cell 2: curled into a tight ball in mid air, knees hugged to the chest; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch, knees bent; cell 7: standing; cell 8: standing. Keep his pose, arms, legs, body, head size, proportions, size, place in the cell, which way he faces and turns, and his eyes exactly as in the base in every cell (only his expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows him standing there. Only dress him, the same in every cell, in the warrior armour shown in the two attached close-ups: the first shows only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Copy exactly their design, colours and details; they show no face and no pose, so keep the face, head size and pose of the base. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (his face fully visible; nothing on the neck or shoulders attached to the helm). His short dark brown hair is hidden under the helm except a little at the front; his light stubble stays. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. He holds ONE steel longsword with a crossguard and a brown leather grip in his NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on his FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow his hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In the curled cells he keeps the sword and shield tucked close to his body. His face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_man_double_jump",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_man_double_jump.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the man's double_jump sheet in the Warrior starter set Vanguard, matching that look's approved Vanguard walk. Edits that look's plain sheet with every cell's pose named (read from that sheet), the outfit in exact words, and the two faceless crops of the boy's approved walk as refs (no face or pose to copy). Hair as it lies in real life under a helm (Cory 03:03Z). Priced line: \"Should I paint the girl's, man's and woman's other 6 Vanguard sheets each (18 sheets), for about $1.22?\"",
+  "edit": {
+   "base": "art/source/hero/looks/man_double_jump.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_chest_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi grown man with short dark brown hair and light stubble in plain clothes in 8 animation frames of a second jump in mid air with a forward flip. Each cell keeps EXACTLY the pose of the base, which is: cell 1: in the air, leaning back with legs forward; cell 2: tucked into a ball in mid air; cell 3: rising, both arms raised, one knee up; cell 4: stretched upward, both arms raised high; cell 5: tipping over sideways in the flip, body nearly flat; cell 6: UPSIDE DOWN in the flip, feet up; cell 7: coming upright out of the flip; cell 8: upright in the air, arms spread out. Keep his pose, arms, legs, body, head size, proportions, size, place in the cell, which way he faces and turns, and his eyes exactly as in the base in every cell (only his expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows him standing there. Only dress him, the same in every cell, in the warrior armour shown in the two attached close-ups: the first shows only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Copy exactly their design, colours and details; they show no face and no pose, so keep the face, head size and pose of the base. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (his face fully visible; nothing on the neck or shoulders attached to the helm). His short dark brown hair is hidden under the helm except a little at the front; his light stubble stays. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. He holds ONE steel longsword with a crossguard and a brown leather grip in his NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on his FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow his hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In flips and tucks he keeps the sword and shield close to his body. His face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_woman_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_woman_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the woman's jump_land_hurt sheet in the Warrior starter set Vanguard, matching that look's approved Vanguard walk. Edits that look's plain sheet with every cell's pose named (read from that sheet), the outfit in exact words, and the two faceless crops of the boy's approved walk as refs (no face or pose to copy). Hair as it lies in real life under a helm (Cory 03:03Z). Priced line: \"Should I paint the girl's, man's and woman's other 6 Vanguard sheets each (18 sheets), for about $1.22?\"",
+  "edit": {
+   "base": "art/source/hero/looks/woman_jump_land_hurt.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_chest_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi grown woman with long auburn hair in plain clothes in 8 animation frames of a jump, a landing and getting hurt. Each cell keeps EXACTLY the pose of the base, which is: cell 1: crouching a little with knees bent, about to jump; cell 2: springing up off the ground, both arms raised; cell 3: high in the air with both knees tucked up; cell 4: in the air with legs kicked out and arms spread; cell 5: just landed, standing; cell 6: standing; cell 7: hurt: flinching back with both arms flung out, wincing; cell 8: hurt: wincing, leaning back a little. Keep her pose, arms, legs, body, head size, proportions, size, place in the cell, which way she faces and turns, and her eyes exactly as in the base in every cell (only her expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows her standing there. Only dress her, the same in every cell, in the warrior armour shown in the two attached close-ups: the first shows only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Copy exactly their design, colours and details; they show no face and no pose, so keep the face, head size and pose of the base. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (her face fully visible; nothing on the neck or shoulders attached to the helm). Her hair lies as it would in real life under a helmet: a little auburn fringe at the forehead inside the face opening, and her long auburn hair hangs from under the helm rim past her cheeks to her shoulders, moving with the pose the way it moves in the base. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. She holds ONE steel longsword with a crossguard and a brown leather grip in her NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on her FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow her hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In the hurt cells 7 and 8 she may wince as in the base. Her face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_woman_idle_faint_sit_crouch",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_woman_idle_faint_sit_crouch.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the woman's idle_faint_sit_crouch sheet in the Warrior starter set Vanguard, matching that look's approved Vanguard walk. Edits that look's plain sheet with every cell's pose named (read from that sheet), the outfit in exact words, and the two faceless crops of the boy's approved walk as refs (no face or pose to copy). Hair as it lies in real life under a helm (Cory 03:03Z). Priced line: \"Should I paint the girl's, man's and woman's other 6 Vanguard sheets each (18 sheets), for about $1.22?\"",
+  "edit": {
+   "base": "art/source/hero/looks/woman_idle_faint_sit_crouch.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_chest_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi grown woman with long auburn hair in plain clothes in 8 animation frames of idling, fainting, sitting and crouching. Each cell keeps EXACTLY the pose of the base, which is: cell 1: standing idle, one foot stepping; cell 2: standing idle; cell 3: dazed and swaying on her feet, eyes closed; cell 4: down on her knees, dazed, eyes closed; cell 5: falling forward toward the ground; cell 6: lying flat on her front on the ground, eyes closed, fainted; cell 7: SITTING on the ground with her legs crossed in front of her; cell 8: CROUCHING low, knees deeply bent, body lowered. Keep her pose, arms, legs, body, head size, proportions, size, place in the cell, which way she faces and turns, and her eyes exactly as in the base in every cell (only her expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows her standing there. Only dress her, the same in every cell, in the warrior armour shown in the two attached close-ups: the first shows only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Copy exactly their design, colours and details; they show no face and no pose, so keep the face, head size and pose of the base. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (her face fully visible; nothing on the neck or shoulders attached to the helm). Her hair lies as it would in real life under a helmet: a little auburn fringe at the forehead inside the face opening, and her long auburn hair hangs from under the helm rim past her cheeks to her shoulders, moving with the pose the way it moves in the base. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. She holds ONE steel longsword with a crossguard and a brown leather grip in her NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on her FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow her hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In cells 3 to 6 she may look dazed or have her eyes closed as in the base. When sitting, the sword lies across her lap in her near hand; when lying down, the sword and shield lie close beside her. Her face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_woman_dash",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_woman_dash.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the woman's dash sheet in the Warrior starter set Vanguard, matching that look's approved Vanguard walk. Edits that look's plain sheet with every cell's pose named (read from that sheet), the outfit in exact words, and the two faceless crops of the boy's approved walk as refs (no face or pose to copy). Hair as it lies in real life under a helm (Cory 03:03Z). Priced line: \"Should I paint the girl's, man's and woman's other 6 Vanguard sheets each (18 sheets), for about $1.22?\"",
+  "edit": {
+   "base": "art/source/hero/looks/woman_dash.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_chest_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi grown woman with long auburn hair in plain clothes in 8 animation frames of a fast forward roll. Each cell keeps EXACTLY the pose of the base, which is: cell 1: stepping forward, about to dash; cell 2: diving forward, body stretched out flat; cell 3: curled into a ball, rolling; cell 4: UPSIDE DOWN mid-roll, feet up; cell 5: curled into a ball, rolling; cell 6: standing; cell 7: stepping; cell 8: standing. Keep her pose, arms, legs, body, head size, proportions, size, place in the cell, which way she faces and turns, and her eyes exactly as in the base in every cell (only her expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows her standing there. Only dress her, the same in every cell, in the warrior armour shown in the two attached close-ups: the first shows only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Copy exactly their design, colours and details; they show no face and no pose, so keep the face, head size and pose of the base. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (her face fully visible; nothing on the neck or shoulders attached to the helm). Her hair lies as it would in real life under a helmet: a little auburn fringe at the forehead inside the face opening, and her long auburn hair hangs from under the helm rim past her cheeks to her shoulders, moving with the pose the way it moves in the base. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. She holds ONE steel longsword with a crossguard and a brown leather grip in her NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on her FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow her hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In rolls and curls she keeps the sword and shield tucked close to her body. Her face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_woman_surge",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_woman_surge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the woman's surge sheet in the Warrior starter set Vanguard, matching that look's approved Vanguard walk. Edits that look's plain sheet with every cell's pose named (read from that sheet), the outfit in exact words, and the two faceless crops of the boy's approved walk as refs (no face or pose to copy). Hair as it lies in real life under a helm (Cory 03:03Z). Priced line: \"Should I paint the girl's, man's and woman's other 6 Vanguard sheets each (18 sheets), for about $1.22?\"",
+  "edit": {
+   "base": "art/source/hero/looks/woman_surge.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_chest_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi grown woman with long auburn hair in plain clothes in 8 animation frames of a charge: bracing, flying forward and landing. Each cell keeps EXACTLY the pose of the base, which is: cell 1: standing in a wide braced stance, ready; cell 2: stepping forward, leaning into a charge; cell 3: leaning far forward, pushing off to charge; cell 4: FLYING forward through the air, body stretched out horizontally, near arm thrust straight forward; cell 5: FLYING forward through the air, body stretched out horizontally, near arm thrust straight forward; cell 6: FLYING forward through the air, body stretched out, near arm thrust straight forward; cell 7: landing from the charge, knees bent; cell 8: standing. Keep her pose, arms, legs, body, head size, proportions, size, place in the cell, which way she faces and turns, and her eyes exactly as in the base in every cell (only her expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows her standing there. Only dress her, the same in every cell, in the warrior armour shown in the two attached close-ups: the first shows only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Copy exactly their design, colours and details; they show no face and no pose, so keep the face, head size and pose of the base. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (her face fully visible; nothing on the neck or shoulders attached to the helm). Her hair lies as it would in real life under a helmet: a little auburn fringe at the forehead inside the face opening, and her long auburn hair hangs from under the helm rim past her cheeks to her shoulders, moving with the pose the way it moves in the base. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. She holds ONE steel longsword with a crossguard and a brown leather grip in her NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on her FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow her hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In cells 4, 5 and 6, where the base shows her punching forward with her near fist, her near hand instead thrusts the ONE sword straight forward, point first, the blade flat to the viewer; the shield stays on the far arm close to her body. There is never a second sword. Her face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_woman_slam",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_woman_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the woman's slam sheet in the Warrior starter set Vanguard, matching that look's approved Vanguard walk. Edits that look's plain sheet with every cell's pose named (read from that sheet), the outfit in exact words, and the two faceless crops of the boy's approved walk as refs (no face or pose to copy). Hair as it lies in real life under a helm (Cory 03:03Z). Priced line: \"Should I paint the girl's, man's and woman's other 6 Vanguard sheets each (18 sheets), for about $1.22?\"",
+  "edit": {
+   "base": "art/source/hero/looks/woman_slam.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_chest_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi grown woman with long auburn hair in plain clothes in 8 animation frames of a jump into a ball that drops and lands. Each cell keeps EXACTLY the pose of the base, which is: cell 1: JUMPING up off the ground with both arms raised high; cell 2: curled into a tight ball in mid air, knees hugged to the chest; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch, knees bent; cell 7: standing; cell 8: standing. Keep her pose, arms, legs, body, head size, proportions, size, place in the cell, which way she faces and turns, and her eyes exactly as in the base in every cell (only her expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows her standing there. Only dress her, the same in every cell, in the warrior armour shown in the two attached close-ups: the first shows only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Copy exactly their design, colours and details; they show no face and no pose, so keep the face, head size and pose of the base. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (her face fully visible; nothing on the neck or shoulders attached to the helm). Her hair lies as it would in real life under a helmet: a little auburn fringe at the forehead inside the face opening, and her long auburn hair hangs from under the helm rim past her cheeks to her shoulders, moving with the pose the way it moves in the base. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. She holds ONE steel longsword with a crossguard and a brown leather grip in her NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on her FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow her hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In the curled cells she keeps the sword and shield tucked close to her body. Her face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_woman_double_jump",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_woman_double_jump.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the woman's double_jump sheet in the Warrior starter set Vanguard, matching that look's approved Vanguard walk. Edits that look's plain sheet with every cell's pose named (read from that sheet), the outfit in exact words, and the two faceless crops of the boy's approved walk as refs (no face or pose to copy). Hair as it lies in real life under a helm (Cory 03:03Z). Priced line: \"Should I paint the girl's, man's and woman's other 6 Vanguard sheets each (18 sheets), for about $1.22?\"",
+  "edit": {
+   "base": "art/source/hero/looks/woman_double_jump.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_chest_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi grown woman with long auburn hair in plain clothes in 8 animation frames of a second jump in mid air with a forward flip. Each cell keeps EXACTLY the pose of the base, which is: cell 1: in the air, leaning back with legs forward; cell 2: tucked into a ball in mid air; cell 3: rising, both arms raised, one knee up; cell 4: stretched upward, both arms raised high; cell 5: tipping over sideways in the flip, body nearly flat; cell 6: UPSIDE DOWN in the flip, feet up; cell 7: coming upright out of the flip; cell 8: upright in the air, arms spread out. Keep her pose, arms, legs, body, head size, proportions, size, place in the cell, which way she faces and turns, and her eyes exactly as in the base in every cell (only her expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows her standing there. Only dress her, the same in every cell, in the warrior armour shown in the two attached close-ups: the first shows only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Copy exactly their design, colours and details; they show no face and no pose, so keep the face, head size and pose of the base. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (her face fully visible; nothing on the neck or shoulders attached to the helm). Her hair lies as it would in real life under a helmet: a little auburn fringe at the forehead inside the face opening, and her long auburn hair hangs from under the helm rim past her cheeks to her shoulders, moving with the pose the way it moves in the base. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. She holds ONE steel longsword with a crossguard and a brown leather grip in her NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on her FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow her hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In flips and tucks she keeps the sword and shield close to her body. Her face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
  }
 ]
 }
