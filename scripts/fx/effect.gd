@@ -21,6 +21,8 @@ const AURA_FADE_IN := 8
 const AURA_FADE_OUT := 24
 var sprite: Sprite3D
 var flash: OmniLight3D
+## Frames with their edges faded (EffectDef.edge_fade), made once per frame and kept.
+static var _faded := {}
 
 static func create(w: TDWorld, d: EffectDef, at: Vector2, facing: int, follows: Node2D = null, aiming := Hitbox.Aim.AHEAD) -> TDEffect:
 	var e := TDEffect.new()
@@ -34,7 +36,7 @@ static func create(w: TDWorld, d: EffectDef, at: Vector2, facing: int, follows: 
 
 func _ready() -> void:
 	if not def.frames.is_empty():
-		sprite = TDStage.effect_sprite(def.frames[0], Color(def.energy, def.energy, def.energy), def.texel)
+		sprite = TDStage.effect_sprite(_frame(0), Color(def.energy, def.energy, def.energy), def.texel)
 		sprite.flip_h = face < 0
 		sprite.rotation.z = -_turn()  # the stage's y points up, the game's down
 		add_child(sprite)
@@ -99,7 +101,7 @@ func _sync() -> void:
 		var i := mini(int(t / 60.0 * def.fps), def.frames.size() - 1)
 		if def.lifetime > 0 or lasts > 0:
 			i = int(t / 60.0 * def.fps) % def.frames.size()  # long effects loop their frames
-		sprite.texture = def.frames[i]
+		sprite.texture = _frame(i)
 		sprite.position = TDStage.to3d(at, TDStage.Z_EFFECT)
 		if lasts > 0:
 			sprite.transparency = 1.0 - clampf(minf(float(t) / AURA_FADE_IN, float(lasts - t) / AURA_FADE_OUT), 0.0, 1.0)
@@ -108,6 +110,40 @@ func _sync() -> void:
 	if flash:
 		flash.position = TDStage.to3d(at, TDStage.Z_EFFECT + 0.6)
 		flash.light_energy = def.light_energy * (1.0 - k)
+
+## Frame `i`, with its edges faded in if the def asks for it.
+func _frame(i: int) -> Texture2D:
+	var tex := def.frames[i]
+	if def.edge_fade <= 0.0 or tex == null:
+		return tex
+	var key := [tex, def.edge_fade]
+	if not _faded.has(key):
+		_faded[key] = faded(tex, def.edge_fade)
+	return _faded[key]
+
+## `tex` with its alpha fading in from each edge over `share` of its width and height.
+static func faded(tex: Texture2D, share: float) -> Texture2D:
+	var img := tex.get_image()
+	if img.is_compressed():
+		img.decompress()
+	img.clear_mipmaps()
+	img.convert(Image.FORMAT_RGBA8)
+	var w := img.get_width()
+	var h := img.get_height()
+	var bx := maxf(1.0, w * share)
+	var by := maxf(1.0, h * share)
+	for y in h:
+		var fy := smoothstep(0.0, 1.0, minf(y + 0.5, h - y - 0.5) / by)
+		for x in w:
+			var f := fy * smoothstep(0.0, 1.0, minf(x + 0.5, w - x - 0.5) / bx)
+			if f < 1.0:
+				var c := img.get_pixel(x, y)
+				c.a *= f
+				img.set_pixel(x, y, c)
+	img.generate_mipmaps()
+	var out := ImageTexture.create_from_image(img)
+	out.set_meta(&"art_density", TDStage.art_density(tex))  # it has no file path to go by
+	return out
 
 ## The caption, drawn by the overlay so it stays sharp.
 func draw_caption(ci: CanvasItem, at: Vector2) -> void:
