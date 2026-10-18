@@ -31412,6 +31412,466 @@
    ],
    "text": "The base picture is a blank flat magenta #FF00FF sheet split into 2 cells side by side by one thin grey grid line. Paint only objects, never a person: no face, head, hands, arms, legs or body anywhere, even though the first attached picture shows a boy wearing them. Paint one game inventory icon in each cell, centred, filling about 80 percent of the cell, sitting on the flat pure magenta. The three attached pictures show a chibi warrior's approved armour and sword: the first shows him standing in it, the second only the top of his helm, the third only his chest armour and shield. Copy the objects exactly as they are painted there: the same shapes, colours, rivets, trim and details. Left cell: the armour set alone, with no person in it, as one neat group: at the top the steel open-face helm exactly like the second picture (the same dome, riveted brow band, short nose strip and cheek guards); below it the chest armour standing upright on its own as if on an invisible stand, empty inside: grey chainmail with the steel collar, brown leather shoulder guards, the deep navy tabard with ONE narrow white stripe down the middle, and the brown leather belt with its square buckle and small pouch; and the plain deep blue heater shield with its steel rim leaning behind the chest armour on the right, turned a little. Right cell: the steel sword alone, lying diagonally with the hilt at the bottom left and the point at the top right: the same straight steel blade, simple steel crossguard, brown wrapped grip and round steel pommel as the sword he holds in the first picture. No person anywhere: no face, head, hands, arms, legs or body, and nothing worn by anyone. Style: exactly like the attached paintings: hand-painted, rich colour, strong light from the upper left with bright highlights, visible painted texture, clean dark outline of the same thickness. Keep the background flat pure magenta #FF00FF everywhere and keep the grid line. No ground, shadow, glow, effects, tiles, panels, text, labels or numbers; each object stays fully inside its own cell."
   }
+ },
+ {
+  "id": "warrior_sword_boy_jump_land_hurt_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_boy_jump_land_hurt_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_boy_jump_land_hurt.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy with brown hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: crouching a little with knees bent, about to jump; cell 2: springing up off the ground, both arms raised; cell 3: high in the air with both knees tucked up; cell 4: in the air with legs kicked out and arms spread; cell 5: just landed, standing; cell 6: standing; cell 7: hurt: flinching back with both arms flung out, wincing; cell 8: hurt: wincing, leaning back a little. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 1, there are two swords; remove the sword held in the fist on the RIGHT side of the picture (his far hand), so that fist is empty; keep the one sword in the fist on the LEFT side of the picture exactly as it is. In cell 5, there are two swords; remove the sword held in the fist on the RIGHT side of the picture (his far hand), so that fist is empty; keep the one sword in the fist on the LEFT side of the picture exactly as it is. In cell 8, there are two swords; remove the sword held in the fist on the RIGHT side of the picture (his far hand), so that fist is empty; keep the one sword in the fist on the LEFT side of the picture exactly as it is. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 2, 3, 4, 6, 7 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_boy_idle_faint_sit_crouch_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_boy_idle_faint_sit_crouch_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_boy_idle_faint_sit_crouch.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy with brown hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing idle; cell 2: standing idle; cell 3: dazed and swaying on his feet, eyes closed; cell 4: down on one knee, dazed, eyes closed; cell 5: falling forward toward the ground; cell 6: lying flat on his front on the ground, eyes closed, fainted; cell 7: SITTING on the ground with his legs crossed in front of him; cell 8: CROUCHING low, knees bent, body lowered. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 5, there are two swords; remove the sword held in the fist on the RIGHT side of the picture (his far hand), so that fist is empty; keep the one sword in the fist on the LEFT side of the picture exactly as it is. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 1, 2, 3, 4, 6, 7, 8 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_boy_slam_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_boy_slam_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_boy_slam.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy with brown hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: JUMPING up off the ground with both arms raised high; cell 2: curled into a tight ball in mid air, knees hugged to the chest; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch, knees bent; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 1, the sword is held in the fist on the RIGHT side of the picture (his far hand), which is wrong; remove it from that fist, which becomes an empty fist, and put the same sword in the fist on the LEFT side of the picture (his near hand), raised up with that fist. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 2, 3, 4, 5, 6, 7, 8 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_boy_double_jump_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_boy_double_jump_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_boy_double_jump.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy with brown hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: in the air, leaning back with legs forward; cell 2: tucked into a ball in mid air; cell 3: rising, both arms raised, one knee up; cell 4: stretched upward, both arms raised high; cell 5: tipping over sideways in the flip, body nearly flat; cell 6: UPSIDE DOWN in the flip, feet up; cell 7: coming upright out of the flip; cell 8: upright in the air, arms spread out. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 7, there are two swords; remove the sword held in the fist on the RIGHT side of the picture (his far hand), so that fist is empty; keep the one sword in the fist on the LEFT side of the picture exactly as it is. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 1, 2, 3, 4, 5, 6, 8 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_girl_walk_idle_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_girl_walk_idle_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_girl_walk_idle.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: walking; cell 2: walking; cell 3: walking; cell 4: walking; cell 5: walking; cell 6: walking; cell 7: standing still; cell 8: standing still. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 5, there are two swords; remove the sword held in the fist on the RIGHT side of the picture (her far hand), so that fist is empty; keep the one sword in the fist on the LEFT side of the picture exactly as it is. In cell 6, there are two swords; remove the sword held in the fist on the RIGHT side of the picture (her far hand), so that fist is empty; keep the one sword in the fist on the LEFT side of the picture exactly as it is. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 1, 2, 3, 4, 7, 8 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_girl_jump_land_hurt_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_girl_jump_land_hurt_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_girl_jump_land_hurt.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: crouching a little with knees bent, about to jump; cell 2: springing up off the ground, both arms raised; cell 3: high in the air with both knees tucked up; cell 4: in the air with legs kicked out and arms spread; cell 5: just landed, standing; cell 6: standing; cell 7: hurt: flinching back with both arms flung out, wincing; cell 8: hurt: wincing, leaning back a little. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 2, the sword is held in the fist on the RIGHT side of the picture (her far hand), which is wrong; remove it from that fist, which becomes an empty fist, and put the same sword in the fist on the LEFT side of the picture (her near hand), raised up with that fist. In cell 7, the sword is held in the fist on the RIGHT side of the picture (her far hand), which is wrong; remove it from that fist, which becomes an empty fist, and put the same sword in the fist on the LEFT side of the picture (her near hand), held out with that arm. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 1, 3, 4, 5, 6, 8 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_girl_idle_faint_sit_crouch_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_girl_idle_faint_sit_crouch_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_girl_idle_faint_sit_crouch.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing idle; cell 2: standing idle; cell 3: dazed and swaying on her feet, eyes closed; cell 4: down on one knee, dazed, eyes closed; cell 5: falling forward toward the ground; cell 6: lying flat on her front on the ground, eyes closed, fainted; cell 7: SITTING on the ground with her knees up in front of her; cell 8: CROUCHING low, knees deeply bent, body lowered. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 5, there are two swords; remove the sword held in the fist on the RIGHT side of the picture (her far hand), so that fist is empty; keep the one sword in the fist on the LEFT side of the picture exactly as it is. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 1, 2, 3, 4, 6, 7, 8 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_boy_dash_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_boy_dash_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_boy_dash.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy with brown hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: stepping forward, about to dash; cell 2: diving forward, body stretched out flat; cell 3: curled into a ball, rolling; cell 4: UPSIDE DOWN mid-roll, feet up; cell 5: curled into a ball, rolling; cell 6: standing; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 2, the point of the sword reaches past the right edge of cell 2 into cell 3, which is wrong; keep the same pose and grip, but angle the sword a little downward and keep it a little shorter in view so the whole sword, point included, stays inside cell 2 with clear magenta between the point and the grid line. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 1, 3, 4, 5, 6, 7, 8 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_man_dash_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_man_dash_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_man_dash.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with short dark brown hair and light stubble in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: stepping forward, about to dash; cell 2: diving forward, body stretched out flat; cell 3: curled into a ball, rolling; cell 4: UPSIDE DOWN mid-roll, feet up; cell 5: tilted sideways, rolling; cell 6: standing; cell 7: stepping; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 2, the point of the sword reaches past the right edge of cell 2 into cell 3, which is wrong; keep the same pose and grip, but angle the sword a little downward and keep it a little shorter in view so the whole sword, point included, stays inside cell 2 with clear magenta between the point and the grid line. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 1, 3, 4, 5, 6, 7, 8 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_girl_dash_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_girl_dash_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_girl_dash.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: stepping forward, about to dash; cell 2: diving forward, body stretched out flat; cell 3: curled into a ball, rolling; cell 4: UPSIDE DOWN mid-roll, feet up; cell 5: curled into a ball, rolling; cell 6: coming out of the roll in a low crouch; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 2, the point of the sword reaches past the right edge of cell 2 into cell 3, which is wrong; keep the same pose and grip, but angle the sword a little downward and keep it a little shorter in view so the whole sword, point included, stays inside cell 2 with clear magenta between the point and the grid line. In cell 3, the sword lies loose on the ground under the figure, which is wrong; remove it from the ground and put it in the fist on the LEFT side of the picture (her near hand), held close along the body with the blade pointing back and down. In cell 4, the sword lies loose on the ground under the figure, which is wrong; remove it from the ground and put it in the fist on the LEFT side of the picture (her near hand), held close along the body with the blade pointing back and down. In cell 5, the sword lies loose on the ground under the figure, which is wrong; remove it from the ground and put it in the fist on the LEFT side of the picture (her near hand), held close along the body with the blade pointing back and down. In cell 7, there are two swords; remove the sword held in the fist on the RIGHT side of the picture (her far hand), so that fist is empty; keep the one sword in the fist on the LEFT side of the picture exactly as it is. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 1, 6, 8 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_girl_surge_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_girl_surge_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_girl_surge.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing in a wide braced stance, ready; cell 2: stepping forward, leaning into a charge; cell 3: leaning far forward, pushing off to charge; cell 4: leaping forward on a diagonal, far fist thrust forward, near arm tucked back; cell 5: leaping forward on a diagonal, far fist thrust forward, near arm tucked back; cell 6: leaping forward on a diagonal, far fist thrust forward, near arm tucked back; cell 7: landing from the charge, knees bent; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 7, there are two swords; remove the sword held in the fist on the RIGHT side of the picture (her far hand), so that fist is empty; keep the one sword in the fist on the LEFT side of the picture exactly as it is. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 1, 2, 3, 4, 5, 6, 8 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_girl_slam_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_girl_slam_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_girl_slam.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: JUMPING up off the ground with both arms raised high; cell 2: curled into a tight ball in mid air, knees hugged to the chest; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch, knees bent; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 1, the sword is held in the fist on the RIGHT side of the picture (her far hand), which is wrong; remove it from that fist, which becomes an empty fist, and put the same sword in the fist on the LEFT side of the picture (her near hand), raised up with that fist. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 2, 3, 4, 5, 6, 7, 8 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_girl_double_jump_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_girl_double_jump_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_girl_double_jump.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: in the air, leaning back with legs forward; cell 2: tucked into a ball in mid air; cell 3: rising, both arms raised, one knee up; cell 4: stretched upward, both arms raised high; cell 5: tipping over sideways in the flip, body nearly flat; cell 6: UPSIDE DOWN in the flip, feet up; cell 7: coming upright out of the flip; cell 8: upright in the air, arms spread out. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 7, there are two swords; remove the sword held in the fist on the RIGHT side of the picture (her far hand), so that fist is empty; keep the one sword in the fist on the LEFT side of the picture exactly as it is. In cell 8, the sword is held in the fist on the RIGHT side of the picture (her far hand), which is wrong; remove it from that fist, which becomes an empty fist, and put the same sword in the fist on the LEFT side of the picture (her near hand), raised up with that arm. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 1, 2, 3, 4, 5, 6 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_man_jump_land_hurt_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_man_jump_land_hurt_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_man_jump_land_hurt.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with short dark brown hair and light stubble in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: crouching a little with knees bent, about to jump; cell 2: springing up off the ground, both arms raised; cell 3: high in the air with both knees tucked up; cell 4: in the air with legs kicked out and arms spread; cell 5: just landed, standing; cell 6: standing; cell 7: hurt: flinching back with both arms flung out, wincing; cell 8: hurt: wincing, leaning back a little. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 1, there are two swords; remove the sword held in the fist on the RIGHT side of the picture (his far hand), so that fist is empty; keep the one sword in the fist on the LEFT side of the picture exactly as it is. In cell 5, there are two swords; remove the sword held in the fist on the RIGHT side of the picture (his far hand), so that fist is empty; keep the one sword in the fist on the LEFT side of the picture exactly as it is. In cell 6, there are two swords; remove the sword held in the fist on the RIGHT side of the picture (his far hand), so that fist is empty; keep the one sword in the fist on the LEFT side of the picture exactly as it is. In cell 7, the sword is held in the fist on the RIGHT side of the picture (his far hand), which is wrong; remove it from that fist, which becomes an empty fist, and put the same sword in the fist on the LEFT side of the picture (his near hand), held out with that arm. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 2, 3, 4, 8 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_man_surge_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_man_surge_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_man_surge.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with short dark brown hair and light stubble in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing in a wide braced stance, ready; cell 2: stepping forward, leaning into a charge; cell 3: leaning far forward, pushing off to charge; cell 4: leaping forward on a diagonal, far fist thrust forward, near arm tucked back; cell 5: leaping forward on a diagonal, far fist thrust forward, near arm tucked back; cell 6: leaping forward on a diagonal, far fist thrust forward, near arm tucked back; cell 7: landing from the charge, knees bent; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 3, there are two swords; remove the sword held in the fist on the RIGHT side of the picture (his far hand), so that fist is empty; keep the one sword in the fist on the LEFT side of the picture exactly as it is. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 1, 2, 4, 5, 6, 7, 8 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_man_double_jump_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_man_double_jump_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_man_double_jump.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with short dark brown hair and light stubble in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: in the air, leaning back with legs forward; cell 2: tucked into a ball in mid air; cell 3: rising, both arms raised, one knee up; cell 4: stretched upward, both arms raised high; cell 5: tipping over sideways in the flip, body nearly flat; cell 6: UPSIDE DOWN in the flip, feet up; cell 7: coming upright out of the flip; cell 8: upright in the air, arms spread out. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 7, the sword is held in the fist on the RIGHT side of the picture (his far hand), which is wrong; remove it from that fist, which becomes an empty fist, and put the same sword in the fist on the LEFT side of the picture (his near hand), carried low, pointing down and forward. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 1, 2, 3, 4, 5, 6, 8 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_woman_jump_land_hurt_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_woman_jump_land_hurt_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_woman_jump_land_hurt.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: crouching a little with knees bent, about to jump; cell 2: springing up off the ground, both arms raised; cell 3: high in the air with both knees tucked up; cell 4: in the air with legs kicked out and arms spread; cell 5: just landed, standing; cell 6: standing; cell 7: hurt: flinching back with both arms flung out, wincing; cell 8: hurt: wincing, leaning back a little. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 5, there are two swords; remove the sword held in the fist on the RIGHT side of the picture (her far hand), so that fist is empty; keep the one sword in the fist on the LEFT side of the picture exactly as it is. In cell 6, there are two swords; remove the sword held in the fist on the RIGHT side of the picture (her far hand), so that fist is empty; keep the one sword in the fist on the LEFT side of the picture exactly as it is. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 1, 2, 3, 4, 7, 8 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_woman_dash_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_woman_dash_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_woman_dash.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: stepping forward, about to dash; cell 2: diving forward, body stretched out flat; cell 3: curled into a ball, rolling; cell 4: UPSIDE DOWN mid-roll, feet up; cell 5: curled into a ball, rolling; cell 6: standing; cell 7: stepping; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 2, the point of the sword reaches past the right edge of cell 2 into cell 3, which is wrong; keep the same pose and grip, but angle the sword a little downward and keep it a little shorter in view so the whole sword, point included, stays inside cell 2 with clear magenta between the point and the grid line. In cell 3, the sword lies loose on the ground under the figure, which is wrong; remove it from the ground and put it in the fist on the LEFT side of the picture (her near hand), held close along the body with the blade pointing back and down. In cell 5, the sword lies loose on the ground under the figure, which is wrong; remove it from the ground and put it in the fist on the LEFT side of the picture (her near hand), held close along the body with the blade pointing back and down. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 1, 4, 6, 7, 8 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_woman_slam_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_woman_slam_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_woman_slam.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: JUMPING up off the ground with both arms raised high; cell 2: curled into a tight ball in mid air, knees hugged to the chest; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch, knees bent; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 6, the sword is held in the fist on the RIGHT side of the picture (her far hand), which is wrong; remove it from that fist, which becomes an empty fist, and put the same sword in the fist on the LEFT side of the picture (her near hand), carried low, pointing down and forward. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 1, 2, 3, 4, 5, 7, 8 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_woman_double_jump_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_woman_double_jump_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': sword fix after wave 343, which added a second sword in the far fist, put the sword in the far fist, laid it on the ground in rolls, or let the dash sword poke into the next cell. Edits that wave's result (poses right) with no refs and changes only the named cells; the hand is named by its side of the picture, since near/far alone was misread. Priced line: \"Should I repaint the flawed sword frames (an extra sword, the sword in the wrong hand, the sword lying on the ground, or the sword poking into the next frame) on 20 of the sword-only sheets, for about $1.36?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_sword_woman_double_jump.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: in the air, leaning back with legs forward; cell 2: tucked into a ball in mid air; cell 3: rising, both arms raised, one knee up; cell 4: stretched upward, both arms raised high; cell 5: tipping over sideways in the flip, body nearly flat; cell 6: UPSIDE DOWN in the flip, feet up; cell 7: coming upright out of the flip; cell 8: upright in the air, arms spread out. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 7, there are two swords; remove the sword held in the fist on the RIGHT side of the picture (her far hand), so that fist is empty; keep the one sword in the fist on the LEFT side of the picture exactly as it is. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 1, 2, 3, 4, 5, 6, 8 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
  }
 ]
 }
