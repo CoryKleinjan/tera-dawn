@@ -29870,6 +29870,133 @@
    "refs": [],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl warrior in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing idle; cell 2: standing idle; cell 3: dazed and swaying, eyes closed; cell 4: down on one knee, dazed; cell 5: falling forward; cell 6: lying flat on her front, fainted; cell 7: sitting on the ground, legs in front; cell 8: crouching low, knees deeply bent. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, sword, shield, size and place in the cell; never change a pose. Change only two things. First, in cells 5 and 6 only: Her long brown ponytail comes out through the back of the helm dome, which a real ponytail under a helmet could not do. Repaint it so it comes out from UNDER the back bottom rim of the helm at the nape of her neck and hangs or trails from there the way it would in that pose; nothing pokes out through or above the dome. Keep its colour, strands and length. Where the old ponytail was, paint the flat magenta background and finish the back of the helm dome. Leave the hair in cells 1 to 4, 7 and 8 as it is. Second, her face is ready for battle in cells 7 and 8: focused and determined, eyebrows a little lowered, mouth closed, not smiling. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
   }
+ },
+ {
+  "id": "warrior_vanguard_girl_idle_faint_sit_crouch_v4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_idle_faint_sit_crouch_v4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': girl ponytail fix after wave 338. Picks use cells 1-5 and 7-8 of v2: cell 5 has the ponytail over the dome, cell 7 smiles, and the dome has a riveted band her walk and slam don't have. Fixes cell 6 too, so all 8 come from one sheet. New approach after two word-only tries failed on fast frames: the ref is a faceless crop of the back of her own approved helm (walk_v2 cell 8 and dash_v2 cell 2) showing where the ponytail leaves the helm, each bad cell gets its own direction, and the rule says no hair above the brow band. Edits the sheet the picks use, whose poses are right. Priced line: \"Keep these, or repaint the girl's ponytail on her 8 fast frames across 5 sheets (and fix her two smiles and the riveted dome band on two of them) for about $0.34?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_girl_idle_faint_sit_crouch_v2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_girl_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_girl_ponytail_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl warrior in a steel helm in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing idle; cell 2: standing idle; cell 3: dazed and swaying, eyes closed; cell 4: down on one knee, dazed; cell 5: falling forward, head tipped forward; cell 6: lying flat on her front, fainted; cell 7: sitting on the ground, legs in front; cell 8: crouching low, knees bent. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, helm, armour, sword, shield, size and place in the cell; never change a pose. The first attached close-up shows only the top of her approved helm; the second shows only the back of it. In every cell the top of her helm has a riveted metal band running down the middle of the dome: remove that band and its rivets so the dome above the brow band is smooth plain steel like the first close-up. Keep the riveted brow band, the short nose strip, the cheek guards and the helm's shape and size. The second close-up shows only the back of her approved helm with no face: her long brown ponytail starts UNDER the back bottom rim of the helm, behind her neck, and hangs down or streams back from there. In cell 5 (falling forward) her ponytail comes out through or above the back of the helm dome, which a real ponytail under a helmet could not do. Repaint it so it starts under the back bottom rim of the helm behind her neck, exactly like the close-up, and streams back to the left behind her shoulders, below the top of the helm. No hair anywhere above the riveted brow band; the back of the dome is plain steel with the magenta background around it. Keep its colour, strands and length. In cell 6 (lying flat on her front) her ponytail comes out through or above the back of the helm dome, which a real ponytail under a helmet could not do. Repaint it so it starts under the back bottom rim of the helm behind her neck, exactly like the close-up, and lies along the ground behind her neck and shoulders, lower than the top of the helm. No hair anywhere above the riveted brow band; the back of the dome is plain steel with the magenta background around it. Keep its colour, strands and length. In cell 7 her face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_dash_v3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_dash_v3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': girl ponytail fix after wave 338. Cells 5-6 of v2 have the ponytail over the dome. New approach after two word-only tries failed on fast frames: the ref is a faceless crop of the back of her own approved helm (walk_v2 cell 8 and dash_v2 cell 2) showing where the ponytail leaves the helm, each bad cell gets its own direction, and the rule says no hair above the brow band. Edits the sheet the picks use, whose poses are right. Priced line: \"Keep these, or repaint the girl's ponytail on her 8 fast frames across 5 sheets (and fix her two smiles and the riveted dome band on two of them) for about $0.34?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_girl_dash_v2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_girl_ponytail_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl warrior in a steel helm in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: stepping forward, about to dash; cell 2: diving forward, body stretched out flat; cell 3: curled into a ball, rolling; cell 4: upside down mid-roll; cell 5: curled into a ball coming out of the roll, head tipped forward; cell 6: rising out of the roll; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, helm, armour, sword, shield, size and place in the cell; never change a pose. The attached close-up shows only the back of her approved helm with no face: her long brown ponytail starts UNDER the back bottom rim of the helm, behind her neck, and hangs down or streams back from there. In cell 5 (coming out of the roll) her ponytail comes out through or above the back of the helm dome, which a real ponytail under a helmet could not do. Repaint it so it starts under the back bottom rim of the helm behind her neck, exactly like the close-up, and streams back to the left behind her shoulders, like cell 3, below the top of the helm. No hair anywhere above the riveted brow band; the back of the dome is plain steel with the magenta background around it. Keep its colour, strands and length. In cell 6 (rising out of the roll) her ponytail comes out through or above the back of the helm dome, which a real ponytail under a helmet could not do. Repaint it so it starts under the back bottom rim of the helm behind her neck, exactly like the close-up, and hangs straight down her back behind her neck, like cells 7 and 8. No hair anywhere above the riveted brow band; the back of the dome is plain steel with the magenta background around it. Keep its colour, strands and length. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_surge_v3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_surge_v3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': girl ponytail fix after wave 338. Cell 6 of v2 has the ponytail over the dome. New approach after two word-only tries failed on fast frames: the ref is a faceless crop of the back of her own approved helm (walk_v2 cell 8 and dash_v2 cell 2) showing where the ponytail leaves the helm, each bad cell gets its own direction, and the rule says no hair above the brow band. Edits the sheet the picks use, whose poses are right. Priced line: \"Keep these, or repaint the girl's ponytail on her 8 fast frames across 5 sheets (and fix her two smiles and the riveted dome band on two of them) for about $0.34?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_girl_surge_v2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_girl_ponytail_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl warrior in a steel helm in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing in a wide braced stance; cell 2: stepping forward; cell 3: lunging forward, sword thrust forward; cell 4: flying forward, body stretched out, far fist thrust forward; cell 5: braced stance; cell 6: striding forward, legs apart; cell 7: landing from the charge, knees bent; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, helm, armour, sword, shield, size and place in the cell; never change a pose. The attached close-up shows only the back of her approved helm with no face: her long brown ponytail starts UNDER the back bottom rim of the helm, behind her neck, and hangs down or streams back from there. In cell 6 (striding forward) her ponytail comes out through or above the back of the helm dome, which a real ponytail under a helmet could not do. Repaint it so it starts under the back bottom rim of the helm behind her neck, exactly like the close-up, and trails back to the left behind her shoulders, like cell 5, below the top of the helm. No hair anywhere above the riveted brow band; the back of the dome is plain steel with the magenta background around it. Keep its colour, strands and length. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_slam_v4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_slam_v4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': girl ponytail fix after wave 338. Cells 5-6 of v3 have the ponytail high above the dome; cell 1 smiles a little. New approach after two word-only tries failed on fast frames: the ref is a faceless crop of the back of her own approved helm (walk_v2 cell 8 and dash_v2 cell 2) showing where the ponytail leaves the helm, each bad cell gets its own direction, and the rule says no hair above the brow band. Edits the sheet the picks use, whose poses are right. Priced line: \"Keep these, or repaint the girl's ponytail on her 8 fast frames across 5 sheets (and fix her two smiles and the riveted dome band on two of them) for about $0.34?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_girl_slam_v3.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_girl_ponytail_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl warrior in a steel helm in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: in the air after a jump, sword raised high; cell 2: curled into a tight ball in mid air; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: tucked low as she drops, sword raised; cell 6: landed in a low crouch, knees bent; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, helm, armour, sword, shield, size and place in the cell; never change a pose. The attached close-up shows only the back of her approved helm with no face: her long brown ponytail starts UNDER the back bottom rim of the helm, behind her neck, and hangs down or streams back from there. In cell 5 (dropping) her ponytail comes out through or above the back of the helm dome, which a real ponytail under a helmet could not do. Repaint it so it starts under the back bottom rim of the helm behind her neck, exactly like the close-up, and streams back to the left behind her neck and shoulders, below the top of the helm. No hair anywhere above the riveted brow band; the back of the dome is plain steel with the magenta background around it. Keep its colour, strands and length. In cell 6 (landed in a crouch) her ponytail comes out through or above the back of the helm dome, which a real ponytail under a helmet could not do. Repaint it so it starts under the back bottom rim of the helm behind her neck, exactly like the close-up, and hangs straight down her back behind her neck, like cell 7. No hair anywhere above the riveted brow band; the back of the dome is plain steel with the magenta background around it. Keep its colour, strands and length. In cell 1 her face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_double_jump_v3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_double_jump_v3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': girl ponytail fix after wave 338. Picks use cells 1, 2, 4-8 of v2: cells 5 and 7 have the ponytail over the dome, cell 5 smiles, and the dome has a riveted band her walk and slam don't have. New approach after two word-only tries failed on fast frames: the ref is a faceless crop of the back of her own approved helm (walk_v2 cell 8 and dash_v2 cell 2) showing where the ponytail leaves the helm, each bad cell gets its own direction, and the rule says no hair above the brow band. Edits the sheet the picks use, whose poses are right. Priced line: \"Keep these, or repaint the girl's ponytail on her 8 fast frames across 5 sheets (and fix her two smiles and the riveted dome band on two of them) for about $0.34?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_girl_double_jump_v2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_girl_helm_only.png",
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_girl_ponytail_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl warrior in a steel helm in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: in the air, leaning back with legs forward; cell 2: tucked into a ball in mid air; cell 3: rising, both arms raised, one knee up; cell 4: stretched upward, both arms raised high; cell 5: tipping forward into the flip, head and body tilted; cell 6: upside down in the flip, feet up; cell 7: coming upright out of the flip, legs bent; cell 8: upright in the air, sword raised. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, helm, armour, sword, shield, size and place in the cell; never change a pose. The first attached close-up shows only the top of her approved helm; the second shows only the back of it. In every cell the top of her helm has a riveted metal band running down the middle of the dome: remove that band and its rivets so the dome above the brow band is smooth plain steel like the first close-up. Keep the riveted brow band, the short nose strip, the cheek guards and the helm's shape and size. The second close-up shows only the back of her approved helm with no face: her long brown ponytail starts UNDER the back bottom rim of the helm, behind her neck, and hangs down or streams back from there. In cell 5 (tipping into the flip) her ponytail comes out through or above the back of the helm dome, which a real ponytail under a helmet could not do. Repaint it so it starts under the back bottom rim of the helm behind her neck, exactly like the close-up, and streams back to the left behind her shoulders, below the top of the helm. No hair anywhere above the riveted brow band; the back of the dome is plain steel with the magenta background around it. Keep its colour, strands and length. In cell 7 (coming upright) her ponytail comes out through or above the back of the helm dome, which a real ponytail under a helmet could not do. Repaint it so it starts under the back bottom rim of the helm behind her neck, exactly like the close-up, and hangs down and a little back behind her neck, like cell 8. No hair anywhere above the riveted brow band; the back of the dome is plain steel with the magenta background around it. Keep its colour, strands and length. In cell 5 her face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
  }
 ]
 }
