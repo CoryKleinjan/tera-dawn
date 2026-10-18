@@ -1,0 +1,164 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=37 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/lumewood.tres" id="2_lumewood"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="3_biome_variant_def"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="4_platform_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/gate.png" id="5_gate"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="6_portal_def"]
+[ext_resource type="Resource" path="res://data/monsters/prism_slime.tres" id="7_prism_slime"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/crystal_golem.tres" id="9_crystal_golem"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/lever.png" id="10_lever"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/lever_pulled.png" id="11_lever_pulled"]
+[ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="12_breakable_def"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="13_dawnshard"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="14_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="15_white_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="16_blue_potion"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest.png" id="17_chest"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest_open.png" id="18_chest_open"]
+
+[sub_resource type="Resource" id="Copied_Variant"]
+script = ExtResource("3_biome_variant_def")
+sky_low = Color(0.7529, 0.4392, 0.8157, 1)
+sky_horizon = Color(1, 0.7529, 0.8784, 1)
+grade_tint = Color(1, 0.95, 1, 1)
+grade_saturation = 1.15
+
+[sub_resource type="Resource" id="Platform_1"]
+script = ExtResource("4_platform_def")
+x = 500.0
+y = 545.0
+width = 500.0
+
+[sub_resource type="Resource" id="Platform_2"]
+script = ExtResource("4_platform_def")
+x = 1000.0
+y = 470.0
+width = 500.0
+
+[sub_resource type="Resource" id="Platform_3"]
+script = ExtResource("4_platform_def")
+x = 1800.0
+y = 545.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_4"]
+script = ExtResource("4_platform_def")
+x = 2600.0
+y = 545.0
+width = 500.0
+
+[sub_resource type="Resource" id="Platform_5"]
+script = ExtResource("4_platform_def")
+x = 3000.0
+y = 470.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_6"]
+script = ExtResource("4_platform_def")
+x = 700.0
+y = 290.0
+width = 150.0
+secret = true
+
+[sub_resource type="Resource" id="Portal_0"]
+script = ExtResource("6_portal_def")
+x = 60.0
+target_map = &"glowcap_hollow"
+target_x = 2560.0
+target_platform = 9
+gate = &"lakebed_passage_gate"
+gate_picture = ExtResource("5_gate")
+
+[sub_resource type="Resource" id="Portal_1"]
+script = ExtResource("6_portal_def")
+x = 3800.0
+target_map = &"prism_lake"
+target_x = 700.0
+
+[sub_resource type="Resource" id="Spawn_0"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("7_prism_slime")
+platform = 0
+count = 4
+patrol_from = 600.0
+patrol_to = 3500.0
+
+[sub_resource type="Resource" id="Spawn_1"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_crystal_golem")
+platform = 1
+count = 2
+
+[sub_resource type="Resource" id="Spawn_2"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("7_prism_slime")
+platform = 3
+count = 2
+
+[sub_resource type="Resource" id="Spawn_3"]
+script = ExtResource("8_spawn_def")
+monster = ExtResource("9_crystal_golem")
+platform = 5
+count = 2
+
+[sub_resource type="Resource" id="Breakable_0"]
+script = ExtResource("12_breakable_def")
+id = &"lakebed_passage_gate"
+x = 300.0
+platform = 0
+hits = 1
+whole = ExtResource("10_lever")
+broken = ExtResource("11_lever_pulled")
+height = 80.0
+
+[sub_resource type="Resource" id="Loot_1_0"]
+script = ExtResource("14_drop_entry")
+item = ExtResource("13_dawnshard")
+min_amount = 160
+max_amount = 240
+
+[sub_resource type="Resource" id="Loot_1_1"]
+script = ExtResource("14_drop_entry")
+item = ExtResource("15_white_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Loot_1_2"]
+script = ExtResource("14_drop_entry")
+item = ExtResource("16_blue_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Breakable_1"]
+script = ExtResource("12_breakable_def")
+id = &"lakebed_passage_high_chest"
+x = 775.0
+platform = 6
+hits = 1
+whole = ExtResource("17_chest")
+broken = ExtResource("18_chest_open")
+height = 48.0
+loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
+card = ExtResource("9_crystal_golem")
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"lakebed_passage"
+display_name = "Lakebed Passage"
+biome = ExtResource("2_lumewood")
+variant = SubResource("Copied_Variant")
+width = 4200
+height = 700
+ground_y = 620
+start_x = 3600.0
+platforms = Array[ExtResource("4_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6")])
+portals = Array[ExtResource("6_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1")])
+breakables = Array[ExtResource("12_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1")])
+spawns = Array[ExtResource("8_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3")])
+region = &"lumewood"
+world_pos = Vector2(690.0, 85.0)
+zone_pos = Vector2(2800.0, -1000.0)
+return_map = &"lumewood"

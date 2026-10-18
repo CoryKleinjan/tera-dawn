@@ -30,6 +30,7 @@ color = Color(0.694118, 0.54902, 1.0, 1.0)
 capital = &"lumewood"
 label_pos = Vector2(820.0, 52.0)
 zone_rect = Rect2(540.0, 30.0, 280.0, 184.0)
+shaped_zone = true
 town_music = &"town_lumewood"
 field_music = &"field_lumewood"
 drops = Array[ExtResource("2_drop_entry")]([SubResource("Drop_glow_rune"), SubResource("Drop_moon_rune"), SubResource("Drop_prism_rune")])

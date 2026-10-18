@@ -122,7 +122,7 @@ city inside its region. The world map (W) draws the major routes city to city; c
 region opens its zone view (its `zone_rect` of the painting, zoomed in) with every map and path,
 and where each exit leads. A new region needs a `capital`, `label_pos` and `zone_rect`.
 
-A region with `shaped_zone` (Greenbough first, then Dawnharbor Coast) is drawn the Hollow Knight way instead: every map
+A region with `shaped_zone` (Greenbough first, then Dawnharbor Coast and Lumewood) is drawn the Hollow Knight way instead: every map
 is a room of its own width and height placed at its `zone_pos` (game pixels on one zone map), so
 the canopy sits above the town and the roots below. Rooms never overlap; two rooms a portal joins
 touch, and the portal stands by the edge they share: within 300 px of a side edge, or along a top
