@@ -27691,7 +27691,7 @@
   ],
   "anchor": null,
   "size": "2K",
-  "note": "2026-10-18 thread 'Hero pose review': second fix of the Vanguard test. Wave 327 fixed the tabard but painted the shield band only in cells 3-8; Cory 01:06Z \"The shield should be plain blue\", so this removes the band from cells 3-8 to match cells 1-2. Edits the v2 result. Priced line and Cory's reply to be added before it runs.",
+  "note": "2026-10-18 thread 'Hero pose review': second fix of the Vanguard test. Wave 327 fixed the tabard but painted the shield band only in cells 3-8; Cory 01:06Z \"The shield should be plain blue\", so this removes the band from cells 3-8 to match cells 1-2. Edits the v2 result. Priced 01:07Z \"Should I paint this fix to make the shield plain blue in every frame, for about $0.07?\"; Cory 01:08Z \"Yes\".",
   "edit": {
    "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_boy_walk_idle_test_v2.png",
    "refs": [],
