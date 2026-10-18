@@ -32345,6 +32345,806 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames of a charge, wearing a steel helm, a deep navy tabard with one narrow white stripe, and carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cell 1: standing in a wide braced stance, sword held low; cell 2: stepping forward, leaning into a charge; cell 3: lunging forward, sword thrust straight forward; cell 4: flying forward through the air, body stretched out, the fist on the RIGHT side of the picture thrust forward and the sword held low in the fist on the LEFT side of the picture; cell 5: braced stance; cell 6: striding forward, ponytail streaming back; cell 7: landing from the charge, knees bent; cell 8: crouched low after landing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, ponytail, armour, tabard, sword, shield, size and place in the cell; never change a pose. Change the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it, as in the approved art. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell. One more change, in cell 4 only: her plain blue heater shield is missing there. Strap that same plain blue heater shield with its steel rim onto the forearm of the fist thrust forward on the RIGHT side of the picture, its face toward the viewer, as it is held in cells 5 to 8. Her hair stays one ponytail hanging from under the back rim of the helm in every cell, as now. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
   }
+ },
+ {
+  "id": "vanguard_ridge_man_set_walk_idle",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_man_set_walk_idle.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/man_vanguard_walk_idle.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with light stubble in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cells 1 to 6: walking, one step after another; cell 7: standing at rest; cell 8: standing at rest. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, armour, tabard, shield, sword, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_man_armor_walk_idle",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_man_armor_walk_idle.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/man_vanguard_armor_walk_idle.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with light stubble in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and no sword. The poses in this sheet are right and stay exactly as they are: cells 1 to 6: walking, one step after another; cell 7: standing at rest; cell 8: standing at rest. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, armour, tabard, shield, empty hands, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_man_set_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_man_set_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/man_vanguard_jump_land_hurt.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with light stubble in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cell 1: crouching a little, about to jump; cell 2: springing up off the ground; cell 3: high in the air, knees tucked up; cell 4: in the air, legs kicked out; cell 5: just landed, standing; cell 6: standing; cell 7: hurt, flinching back and wincing; cell 8: hurt, wincing and leaning back. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, armour, tabard, shield, sword, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_man_armor_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_man_armor_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/man_vanguard_armor_jump_land_hurt.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with light stubble in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and no sword. The poses in this sheet are right and stay exactly as they are: cell 1: crouching a little, about to jump; cell 2: springing up off the ground; cell 3: high in the air, knees tucked up; cell 4: in the air, legs kicked out; cell 5: just landed, standing; cell 6: standing; cell 7: hurt, flinching back and wincing; cell 8: hurt, wincing and leaning back. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, armour, tabard, shield, empty hands, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_man_set_idle_faint_sit_crouch",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_man_set_idle_faint_sit_crouch.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/man_vanguard_idle_faint_sit_crouch.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with light stubble in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cell 1: standing at rest; cell 2: standing at rest; cell 3: swaying, eyes closed; cell 4: sinking down to the knees, eyes closed; cell 5: falling, eyes closed; cell 6: lying face down on the ground, eyes closed; cell 7: sitting on the ground; cell 8: crouching low. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, armour, tabard, shield, sword, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_man_armor_idle_faint_sit_crouch",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_man_armor_idle_faint_sit_crouch.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/man_vanguard_armor_idle_faint_sit_crouch.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with light stubble in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and no sword. The poses in this sheet are right and stay exactly as they are: cell 1: standing at rest; cell 2: standing at rest; cell 3: swaying, eyes closed; cell 4: sinking down to the knees, eyes closed; cell 5: falling, eyes closed; cell 6: lying face down on the ground, eyes closed; cell 7: sitting on the ground; cell 8: crouching low. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, armour, tabard, shield, empty hands, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_man_set_dash",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_man_set_dash.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/man_vanguard_dash.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with light stubble in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cell 1: standing braced, ready to dash; cell 2: diving forward low; cell 3: curled up, rolling; cell 4: upside down in the middle of the roll; cell 5: curled up, rolling; cell 6: back on the feet; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, armour, tabard, shield, sword, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_man_armor_dash",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_man_armor_dash.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/man_vanguard_armor_dash.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with light stubble in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and no sword. The poses in this sheet are right and stay exactly as they are: cell 1: standing braced, ready to dash; cell 2: diving forward low; cell 3: curled up, rolling; cell 4: upside down in the middle of the roll; cell 5: curled up, rolling; cell 6: back on the feet; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, armour, tabard, shield, empty hands, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_man_set_surge",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_man_set_surge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/man_vanguard_surge.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with light stubble in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cell 1: standing in a wide braced stance; cell 2: stepping forward, leaning into a charge; cell 3: lunging forward; cell 4: flying forward through the air, body stretched out; cell 5: flying or striding forward; cell 6: striding forward; cell 7: landing from the charge, knees bent; cell 8: standing or crouched after landing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, armour, tabard, shield, sword, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_man_armor_surge",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_man_armor_surge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/man_vanguard_armor_surge.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with light stubble in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and no sword. The poses in this sheet are right and stay exactly as they are: cell 1: standing in a wide braced stance; cell 2: stepping forward, leaning into a charge; cell 3: lunging forward; cell 4: flying forward through the air, body stretched out; cell 5: flying or striding forward; cell 6: striding forward; cell 7: landing from the charge, knees bent; cell 8: standing or crouched after landing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, armour, tabard, shield, empty hands, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_man_set_slam",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_man_set_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/man_vanguard_slam.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with light stubble in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cell 1: leaping up; cell 2: curled into a tight ball in mid air; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, armour, tabard, shield, sword, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_man_armor_slam",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_man_armor_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/man_vanguard_armor_slam.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with light stubble in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and no sword. The poses in this sheet are right and stay exactly as they are: cell 1: leaping up; cell 2: curled into a tight ball in mid air; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, armour, tabard, shield, empty hands, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_man_set_double_jump",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_man_set_double_jump.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/man_vanguard_double_jump.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with light stubble in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cell 1: standing ready; cell 2: curled up in mid air; cell 3: springing up, arms raised; cell 4: springing up, arms raised; cell 5: flipping sideways in mid air; cell 6: upside down in the middle of the flip; cell 7: coming out of the flip; cell 8: landing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, armour, tabard, shield, sword, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_man_armor_double_jump",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_man_armor_double_jump.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/man_vanguard_armor_double_jump.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with light stubble in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and no sword. The poses in this sheet are right and stay exactly as they are: cell 1: standing ready; cell 2: curled up in mid air; cell 3: springing up, arms raised; cell 4: springing up, arms raised; cell 5: flipping sideways in mid air; cell 6: upside down in the middle of the flip; cell 7: coming out of the flip; cell 8: landing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, armour, tabard, shield, empty hands, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_girl_set_walk_idle",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_girl_set_walk_idle.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/girl_vanguard_walk_idle.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cells 1 to 6: walking, one step after another; cell 7: standing at rest; cell 8: standing at rest. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, armour, tabard, shield, sword, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_girl_armor_walk_idle",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_girl_armor_walk_idle.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/girl_vanguard_armor_walk_idle.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and no sword. The poses in this sheet are right and stay exactly as they are: cells 1 to 6: walking, one step after another; cell 7: standing at rest; cell 8: standing at rest. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, armour, tabard, shield, empty hands, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_girl_set_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_girl_set_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/girl_vanguard_jump_land_hurt.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cell 1: crouching a little, about to jump; cell 2: springing up off the ground; cell 3: high in the air, knees tucked up; cell 4: in the air, legs kicked out; cell 5: just landed, standing; cell 6: standing; cell 7: hurt, flinching back and wincing; cell 8: hurt, wincing and leaning back. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, armour, tabard, shield, sword, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_girl_armor_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_girl_armor_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/girl_vanguard_armor_jump_land_hurt.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and no sword. The poses in this sheet are right and stay exactly as they are: cell 1: crouching a little, about to jump; cell 2: springing up off the ground; cell 3: high in the air, knees tucked up; cell 4: in the air, legs kicked out; cell 5: just landed, standing; cell 6: standing; cell 7: hurt, flinching back and wincing; cell 8: hurt, wincing and leaning back. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, armour, tabard, shield, empty hands, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_girl_set_idle_faint_sit_crouch",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_girl_set_idle_faint_sit_crouch.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/girl_vanguard_idle_faint_sit_crouch.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cell 1: standing at rest; cell 2: standing at rest; cell 3: swaying, eyes closed; cell 4: sinking down to the knees, eyes closed; cell 5: falling, eyes closed; cell 6: lying face down on the ground, eyes closed; cell 7: sitting on the ground; cell 8: crouching low. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, armour, tabard, shield, sword, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_girl_armor_idle_faint_sit_crouch",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_girl_armor_idle_faint_sit_crouch.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/girl_vanguard_armor_idle_faint_sit_crouch.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and no sword. The poses in this sheet are right and stay exactly as they are: cell 1: standing at rest; cell 2: standing at rest; cell 3: swaying, eyes closed; cell 4: sinking down to the knees, eyes closed; cell 5: falling, eyes closed; cell 6: lying face down on the ground, eyes closed; cell 7: sitting on the ground; cell 8: crouching low. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, armour, tabard, shield, empty hands, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_girl_set_dash",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_girl_set_dash.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/girl_vanguard_dash.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cell 1: standing braced, ready to dash; cell 2: diving forward low; cell 3: curled up, rolling; cell 4: upside down in the middle of the roll; cell 5: curled up, rolling; cell 6: back on the feet; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, armour, tabard, shield, sword, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_girl_armor_dash",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_girl_armor_dash.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/girl_vanguard_armor_dash.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and no sword. The poses in this sheet are right and stay exactly as they are: cell 1: standing braced, ready to dash; cell 2: diving forward low; cell 3: curled up, rolling; cell 4: upside down in the middle of the roll; cell 5: curled up, rolling; cell 6: back on the feet; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, armour, tabard, shield, empty hands, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_girl_set_surge",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_girl_set_surge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/girl_vanguard_surge.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cell 1: standing in a wide braced stance; cell 2: stepping forward, leaning into a charge; cell 3: lunging forward; cell 4: flying forward through the air, body stretched out; cell 5: flying or striding forward; cell 6: striding forward; cell 7: landing from the charge, knees bent; cell 8: standing or crouched after landing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, armour, tabard, shield, sword, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_girl_armor_surge",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_girl_armor_surge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/girl_vanguard_armor_surge.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and no sword. The poses in this sheet are right and stay exactly as they are: cell 1: standing in a wide braced stance; cell 2: stepping forward, leaning into a charge; cell 3: lunging forward; cell 4: flying forward through the air, body stretched out; cell 5: flying or striding forward; cell 6: striding forward; cell 7: landing from the charge, knees bent; cell 8: standing or crouched after landing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, armour, tabard, shield, empty hands, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_girl_set_slam",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_girl_set_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/girl_vanguard_slam.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cell 1: leaping up; cell 2: curled into a tight ball in mid air; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, armour, tabard, shield, sword, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_girl_armor_slam",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_girl_armor_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/girl_vanguard_armor_slam.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and no sword. The poses in this sheet are right and stay exactly as they are: cell 1: leaping up; cell 2: curled into a tight ball in mid air; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, armour, tabard, shield, empty hands, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_girl_set_double_jump",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_girl_set_double_jump.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/girl_vanguard_double_jump.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cell 1: standing ready; cell 2: curled up in mid air; cell 3: springing up, arms raised; cell 4: springing up, arms raised; cell 5: flipping sideways in mid air; cell 6: upside down in the middle of the flip; cell 7: coming out of the flip; cell 8: landing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, armour, tabard, shield, sword, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_girl_armor_double_jump",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_girl_armor_double_jump.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/girl_vanguard_armor_double_jump.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and no sword. The poses in this sheet are right and stay exactly as they are: cell 1: standing ready; cell 2: curled up in mid air; cell 3: springing up, arms raised; cell 4: springing up, arms raised; cell 5: flipping sideways in mid air; cell 6: upside down in the middle of the flip; cell 7: coming out of the flip; cell 8: landing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, armour, tabard, shield, empty hands, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_boy_set_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_boy_set_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/boy_vanguard_jump_land_hurt.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy with short brown hair in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cell 1: crouching a little, about to jump; cell 2: springing up off the ground; cell 3: high in the air, knees tucked up; cell 4: in the air, legs kicked out; cell 5: just landed, standing; cell 6: standing; cell 7: hurt, flinching back and wincing; cell 8: hurt, wincing and leaning back. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, armour, tabard, shield, sword, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_boy_armor_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_boy_armor_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/boy_vanguard_armor_jump_land_hurt.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy with short brown hair in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and no sword. The poses in this sheet are right and stay exactly as they are: cell 1: crouching a little, about to jump; cell 2: springing up off the ground; cell 3: high in the air, knees tucked up; cell 4: in the air, legs kicked out; cell 5: just landed, standing; cell 6: standing; cell 7: hurt, flinching back and wincing; cell 8: hurt, wincing and leaning back. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, armour, tabard, shield, empty hands, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_woman_set_slam",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_woman_set_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/woman_vanguard_slam.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi woman (kid-sized, chibi proportions) with long auburn hair in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cell 1: leaping up; cell 2: curled into a tight ball in mid air; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, armour, tabard, shield, sword, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_woman_armor_slam",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_woman_armor_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': the approved Vanguard helm (refs/vanguard_boy_final_stand.png; Cory 17:56Z \"The ridge should stay\") on every sheet missing it. Same route as the ridge test (wave 351), which put the ridge back on the man's walk and the girl's flying punch with this one ref; adds 'no rivets on the ridge' because the test put rivets on the man's. Edits the approved sheet; helm only. Priced line: \"Should I paint the approved helm (ridge with no rivets, short pointed nose strip) onto every sheet missing it: 32 sheets for the man, the girl, the boy's jump and the woman's slam, about $2.18?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/woman_vanguard_armor_slam.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi woman (kid-sized, chibi proportions) with long auburn hair in 8 animation frames, wearing a steel helm and a deep navy tabard with one narrow white stripe, carrying a plain blue heater shield and no sword. The poses in this sheet are right and stay exactly as they are: cell 1: leaping up; cell 2: curled into a tight ball in mid air; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, armour, tabard, shield, empty hands, size and place in the cell; never change a pose and add or remove nothing. Change only the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it; the ridge is plain smooth steel with no rivets on it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a short pointed steel nose strip comes down: wide where it meets the brow band and tapering to a point that ends between the eyes, at the top of the nose bridge, so the nose shows below it. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell; where a cell already shows this helm, keep it as it is. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
  }
 ]
 }
