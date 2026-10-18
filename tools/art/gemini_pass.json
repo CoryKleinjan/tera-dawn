@@ -27939,6 +27939,106 @@
    "refs": [],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a cute chibi boy in plain clothes in 8 animation frames. Each cell keeps EXACTLY the pose of the base, which is: cell 1: JUMPING up off the ground with both arms raised high; cell 2: curled into a tight ball in mid air, knees hugged to his chest; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: standing; cell 7: standing; cell 8: standing. Keep his pose, arms, legs, body, head size, proportions, size, place in the cell and which way he faces exactly as in the base in every cell; never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows him standing there. Only dress him, in every cell, in one full suit of WARRIOR armour, painted the same in every cell: a steel open-face helm with a riveted brow band, a short nose strip and cheek guards, covering only his head (his face fully visible, a little brown hair at the front; nothing on his neck or shoulders attached to the helm); the steel collar of a breastplate at his neck; a deep blue tabard with ONE white stripe down the middle that COVERS HIS CHEST AND BELLY over the breastplate and hangs below the belt to his thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. He holds a steel longsword with a crossguard and a brown leather grip in his NEAR hand (the hand toward the viewer) and carries a PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on his FAR forearm. The sword and shield follow his hands and arms in the base pose; in curls and tucks he keeps them close to his body. The sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers his face. His face is ready for battle: focused and determined, eyebrows a little lowered, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF everywhere in every cell and keep the grid lines. Paint only the boy: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure stays fully inside its own cell."
   }
+ },
+ {
+  "id": "warrior_vanguard_boy_jump_land_hurt_v3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_boy_jump_land_hurt_v3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': Cory 02:07Z \"the animation need to be consistent\" / \"repaint.\": the v2 sheet (wave 331, poses right) painted a ridged helm and a wider, lighter tabard stripe than the approved walk, dash and double jump. Edits the v2 result; the only ref is a head-and-chest close-up cut from the approved walk (no legs, hands or pose) to anchor the helm and stripe. Priced line: \"Should I repaint these 4 boy sheets so the helm and tabard match the walk, and fix the hurt and Surge frames, for about $0.27?\"; Cory's OK in the thread.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_boy_jump_land_hurt_v2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_boy_bust.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi boy warrior in 8 animation frames. Keep EVERYTHING in every cell exactly as it is: his pose, arms, legs, body, head, face, size, place in the cell, the sword, the shield, the shoulder guards, gauntlets, belt, knee guards and boots. Change only two details of his armour in every cell so they match the attached close-up picture of the same boy exactly: 1) the HELM: a smooth rounded steel dome with NO ridge, crest or raised line over the top; a riveted steel brow band around it, a short nose strip and cheek guards, exactly like the close-up. 2) the TABARD: the same dark deep navy blue as the close-up, with ONE NARROW white stripe down the middle, as narrow as in the close-up. The attached close-up only shows those details; never copy its pose. Also fix cell 7 (bottom row, third cell): his hands are empty there; keep his flinching pose with both arms flung out exactly as it is, but put the same steel longsword in his NEAR hand and the same plain blue shield on his FAR forearm, like in cell 8. Style: exactly like the base. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures. Every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_boy_surge_v3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_boy_surge_v3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': Cory 02:07Z \"the animation need to be consistent\" / \"repaint.\": the v2 sheet (wave 331, poses right) painted a ridged helm and a wider, lighter tabard stripe than the approved walk, dash and double jump. Edits the v2 result; the only ref is a head-and-chest close-up cut from the approved walk (no legs, hands or pose) to anchor the helm and stripe. Priced line: \"Should I repaint these 4 boy sheets so the helm and tabard match the walk, and fix the hurt and Surge frames, for about $0.27?\"; Cory's OK in the thread.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_boy_surge_v2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_boy_bust.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi boy warrior in 8 animation frames. Keep EVERYTHING in every cell exactly as it is: his pose, arms, legs, body, head, face, size, place in the cell, the sword, the shield, the shoulder guards, gauntlets, belt, knee guards and boots. Change only two details of his armour in every cell so they match the attached close-up picture of the same boy exactly: 1) the HELM: a smooth rounded steel dome with NO ridge, crest or raised line over the top; a riveted steel brow band around it, a short nose strip and cheek guards, exactly like the close-up. 2) the TABARD: the same dark deep navy blue as the close-up, with ONE NARROW white stripe down the middle, as narrow as in the close-up. The attached close-up only shows those details; never copy its pose. Also fix cells 5 and 6 (bottom row, first two cells): he wrongly holds TWO swords there. Keep his flying pose exactly as it is, but he holds only ONE sword, in his NEAR hand, and his FAR forearm carries the plain blue shield, like in cell 4. Remove the second sword. Style: exactly like the base. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures. Every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_boy_idle_faint_sit_crouch_v3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_boy_idle_faint_sit_crouch_v3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': Cory 02:07Z \"the animation need to be consistent\" / \"repaint.\": the v2 sheet (wave 331, poses right) painted a ridged helm and a wider, lighter tabard stripe than the approved walk, dash and double jump. Edits the v2 result; the only ref is a head-and-chest close-up cut from the approved walk (no legs, hands or pose) to anchor the helm and stripe. Priced line: \"Should I repaint these 4 boy sheets so the helm and tabard match the walk, and fix the hurt and Surge frames, for about $0.27?\"; Cory's OK in the thread.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_boy_idle_faint_sit_crouch_v2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_boy_bust.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi boy warrior in 8 animation frames. Keep EVERYTHING in every cell exactly as it is: his pose, arms, legs, body, head, face, size, place in the cell, the sword, the shield, the shoulder guards, gauntlets, belt, knee guards and boots. Change only two details of his armour in every cell so they match the attached close-up picture of the same boy exactly: 1) the HELM: a smooth rounded steel dome with NO ridge, crest or raised line over the top; a riveted steel brow band around it, a short nose strip and cheek guards, exactly like the close-up. 2) the TABARD: the same dark deep navy blue as the close-up, with ONE NARROW white stripe down the middle, as narrow as in the close-up. The attached close-up only shows those details; never copy its pose. Style: exactly like the base. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures. Every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_boy_slam_v3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_boy_slam_v3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': Cory 02:07Z \"the animation need to be consistent\" / \"repaint.\": the v2 sheet (wave 331, poses right) painted a ridged helm and a wider, lighter tabard stripe than the approved walk, dash and double jump. Edits the v2 result; the only ref is a head-and-chest close-up cut from the approved walk (no legs, hands or pose) to anchor the helm and stripe. Priced line: \"Should I repaint these 4 boy sheets so the helm and tabard match the walk, and fix the hurt and Surge frames, for about $0.27?\"; Cory's OK in the thread.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_boy_slam_v2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_boy_bust.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi boy warrior in 8 animation frames. Keep EVERYTHING in every cell exactly as it is: his pose, arms, legs, body, head, face, size, place in the cell, the sword, the shield, the shoulder guards, gauntlets, belt, knee guards and boots. Change only two details of his armour in every cell so they match the attached close-up picture of the same boy exactly: 1) the HELM: a smooth rounded steel dome with NO ridge, crest or raised line over the top; a riveted steel brow band around it, a short nose strip and cheek guards, exactly like the close-up. 2) the TABARD: the same dark deep navy blue as the close-up, with ONE NARROW white stripe down the middle, as narrow as in the close-up. The attached close-up only shows those details; never copy its pose. Style: exactly like the base. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures. Every figure stays fully inside its own cell."
+  }
  }
 ]
 }
