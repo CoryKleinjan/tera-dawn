@@ -21,10 +21,10 @@
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="19_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/use/orange_potion.tres" id="20_orange_potion"]
 [ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="21_blue_potion"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/chest.png" id="22_chest"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/chest_open.png" id="23_chest_open"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach_fields/chest.png" id="22_chest"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach_fields/chest_open.png" id="23_chest_open"]
 [ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="24_breakable_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/stone_wall.png" id="25_stone_wall"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach_fields/stone_wall.png" id="25_stone_wall"]
 
 [sub_resource type="Resource" id="Backdrop_picture"]
 script = ExtResource("11_backdrop_layer_def")
@@ -367,7 +367,7 @@ platform = 0
 hits = 1
 walk_through = true
 whole = ExtResource("25_stone_wall")
-height = 160.0
+height = 260.0
 
 [resource]
 script = ExtResource("1_map_def")

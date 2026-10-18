@@ -22,8 +22,8 @@
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="20_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/use/orange_potion.tres" id="21_orange_potion"]
 [ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="22_blue_potion"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/chest.png" id="23_chest"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/chest_open.png" id="24_chest_open"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach_fields/chest.png" id="23_chest"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach_fields/chest_open.png" id="24_chest_open"]
 [ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="25_breakable_def"]
 
 [sub_resource type="Resource" id="Backdrop_picture"]

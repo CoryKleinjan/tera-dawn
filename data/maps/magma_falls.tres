@@ -21,11 +21,11 @@
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="19_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/use/orange_potion.tres" id="20_orange_potion"]
 [ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="21_blue_potion"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/chest.png" id="22_chest"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/chest_open.png" id="23_chest_open"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach_fields/chest.png" id="22_chest"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach_fields/chest_open.png" id="23_chest_open"]
 [ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="24_breakable_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/crystal_wall.png" id="25_crystal_wall"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/crystal_wall_broken.png" id="26_crystal_wall_broken"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach_fields/slag_wall.png" id="25_slag_wall"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach_fields/slag_wall_broken.png" id="26_slag_wall_broken"]
 
 [sub_resource type="Resource" id="Backdrop_picture"]
 script = ExtResource("11_backdrop_layer_def")
@@ -688,8 +688,8 @@ id = &"magma_falls_slag_wall"
 x = 2960.0
 platform = 46
 hits = 3
-whole = ExtResource("25_crystal_wall")
-broken = ExtResource("26_crystal_wall_broken")
+whole = ExtResource("25_slag_wall")
+broken = ExtResource("26_slag_wall_broken")
 height = 160.0
 
 [resource]
