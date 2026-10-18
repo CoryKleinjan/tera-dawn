@@ -27865,6 +27865,52 @@
   "town_check": {
    "kind": "backdrop"
   }
+ },
+ {
+  "id": "emberreach_fields_pieces_v3",
+  "prompts": null,
+  "batch": "Emberreach fields fix: fake wall fully grey (edit of v2)",
+  "with": null,
+  "refs": [],
+  "save": "emberreach_fields_pieces_v3.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": true,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Zone rework' (Emberreach rooms, PR #312; Cory 17:16Z Oct 18 'Go with your recommendations' = repaint): v2 left the fake wall's top cap and left-column blocks tan. Edit of the v2 output, which already has the grey on the right-hand blocks. Base: emberreach_fields_pieces_v2.png (2400x1600, exactly 3:2).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/emberreach_fields_pieces_v2.png",
+   "refs": [],
+   "text": "The image is a finished sheet of five painted objects for my 2D side-scrolling game on a flat magenta #FF00FF background. Keep the whole sheet EXACTLY as it is: every object's position, size, shape, outline, lighting and brush texture, and the magenta background. Change ONE thing only, on the tall stone wall on the LEFT: its blocks on the right-hand side are already the right cool mid-grey, but its rounded top block and the blocks down its left-hand side are still warm tan and peach. Repaint those tan and peach blocks in exactly the same cool mid-grey as the grey blocks on the right-hand side of the same wall, so every block of the wall is one even grey stone with no tan, peach, sand or beige left anywhere. Keep its exact block pattern, cracks, rounded top and outline. The dark slag walls in the middle and the two chests on the right stay exactly as they are. No magenta or pink inside the art. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  }
+ },
+{
+  "id": "emberreach_fields_ironworks_depths_backdrop_v3",
+  "prompts": null,
+  "batch": "Emberreach fields fix: Ironworks far background cleared (edit of v2)",
+  "with": null,
+  "refs": [],
+  "save": "emberreach_fields_ironworks_depths_backdrop_v3.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Emberreach rooms, PR #312; Cory 17:16Z Oct 18 'Go with your recommendations' = repaint): v2 removed the chains but its prompt asked to paint 'girders and machinery' in their place, so Gemini added far-back girder lattice with a ladder (middle) and a railed catwalk (top right). Edit of the v2 output; the prompt names places, not the shapes, so it can't draw them again. Base: emberreach_fields_ironworks_depths_backdrop_v2.png (4096x2304, exactly 16:9).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/emberreach_fields_ironworks_depths_backdrop_v2.png",
+   "refs": [],
+   "text": "The image is a finished background painting for my 2D side-scrolling game. Keep it EXACTLY as it is: the same composition, the furnaces, the gears, the two big front horizontal beams, the tall front pillars, the brick wall on the left, the smoke, colours, red glow, haze and painted style. Change only the faint far background: everything thin and far away that is painted BEHIND the front beams and pillars in the middle third of the picture and in the upper right corner becomes plain dark red smoky haze, with no thin bars, frames or structures in it at all. Do not add anything new anywhere. No people, characters, animals or birds. No border, no frame, no magenta. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
  }
 ]
 }
