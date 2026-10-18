@@ -3,15 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c7mxmxi66x3ma"
-path="res://.godot/imported/glimmer_path.png-798ec6d9d0f3507a74878030c6b113df.ctex"
+path.bptc="res://.godot/imported/glimmer_path.png-798ec6d9d0f3507a74878030c6b113df.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/backgrounds/lumewood_fields/glimmer_path.png"
-dest_files=["res://.godot/imported/glimmer_path.png-798ec6d9d0f3507a74878030c6b113df.ctex"]
+dest_files=["res://.godot/imported/glimmer_path.png-798ec6d9d0f3507a74878030c6b113df.bptc.ctex"]
 
 [params]
 
