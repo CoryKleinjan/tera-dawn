@@ -31895,6 +31895,31 @@
    "refs": [],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi woman (kid-sized, chibi proportions) with long auburn hair in 8 animation frames, wearing a steel helmet, a deep navy tabard with one narrow white stripe, and carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cells 1 to 6: walking, one step after another; cell 7: standing at rest; cell 8: standing at rest. Change ONLY the helmet, in every cell, so it matches this exact design: the dome is one single smooth unbroken steel bowl from the brow band up to the top, evenly rounded and polished with soft highlights, plain metal all over like a round bowl. Around the head runs a riveted steel brow band, as now. Steel cheek guards hang down beside the cheeks, as now. From the middle of the brow band a narrow nose strip hangs straight down over the nose: a slim steel strip of even width from top to bottom with a squared-off bottom end. The helmet looks exactly the same in all 8 cells. Change nothing else in the picture: the face, expression, eyes, hair, tabard, shield, sword, hands, colours, outline and pose of every cell stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
   }
+ },
+ {
+  "id": "vanguard_helm_woman_walk_idle_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_helm_woman_walk_idle_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': wave 350 straightened her nose strip but kept the dome ridge (a no-ref edit keeps a painted part). Same route that fixed the girl's helm (warrior_vanguard_girl_surge_v4): edit wave 350's result, whose nose strip is now right, with one faceless close-up of the top of the boy's new smooth dome (wave 350 cell 1). Priced line: \"The boy came out right. The woman's ridge stayed, because a text-only edit keeps a part that's already painted. The girl's helm was fixed the same way before, using a close-up of a smooth dome, and that worked. Should I retest the woman's walk sheet with a close-up of the boy's new dome for $0.07?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/vanguard_helm_woman_walk_idle.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_boy_helm_smooth_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi woman (kid-sized, chibi proportions) with long auburn hair in 8 animation frames, wearing a steel helmet, a deep navy tabard with one narrow white stripe, and carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cells 1 to 6: walking, one step after another; cell 7: standing at rest; cell 8: standing at rest. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, armour, tabard, sword, shield, size and place in the cell; never change a pose. Change only one thing, the same in all 8 cells: the top of her steel helm has a raised ridge running down the middle of the dome, with seam lines from the top to the brow band. Remove that ridge and those seams so the dome above the brow band is one smooth, rounded piece of plain steel with soft shading and a highlight, exactly like the attached close-up, which shows only the top of an approved helm. Keep the riveted brow band, the narrow straight nose strip, the cheek guards and the helm's shape, size and angle in each cell. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
  }
 ]
 }
