@@ -3,15 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://b55mkv0cw3cvu"
-path="res://.godot/imported/vines_left.png-9eaedd9f1f6f2f8647b975c2b8fd06f6.ctex"
+path.bptc="res://.godot/imported/vines_left.png-9eaedd9f1f6f2f8647b975c2b8fd06f6.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/backgrounds/lumewood_fields/vines_left.png"
-dest_files=["res://.godot/imported/vines_left.png-9eaedd9f1f6f2f8647b975c2b8fd06f6.ctex"]
+dest_files=["res://.godot/imported/vines_left.png-9eaedd9f1f6f2f8647b975c2b8fd06f6.bptc.ctex"]
 
 [params]
 

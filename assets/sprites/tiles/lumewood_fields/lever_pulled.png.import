@@ -3,15 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://kebfjhgwwixi"
-path="res://.godot/imported/lever_pulled.png-729d25c94a4392788a94d7a54af7220d.ctex"
+path.bptc="res://.godot/imported/lever_pulled.png-729d25c94a4392788a94d7a54af7220d.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/tiles/lumewood_fields/lever_pulled.png"
-dest_files=["res://.godot/imported/lever_pulled.png-729d25c94a4392788a94d7a54af7220d.ctex"]
+dest_files=["res://.godot/imported/lever_pulled.png-729d25c94a4392788a94d7a54af7220d.bptc.ctex"]
 
 [params]
 

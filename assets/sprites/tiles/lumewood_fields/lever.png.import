@@ -3,15 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bvt28x84254eg"
-path="res://.godot/imported/lever.png-82c6823bcd4b4a064b85aa23193bd4b7.ctex"
+path.bptc="res://.godot/imported/lever.png-82c6823bcd4b4a064b85aa23193bd4b7.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/tiles/lumewood_fields/lever.png"
-dest_files=["res://.godot/imported/lever.png-82c6823bcd4b4a064b85aa23193bd4b7.ctex"]
+dest_files=["res://.godot/imported/lever.png-82c6823bcd4b4a064b85aa23193bd4b7.bptc.ctex"]
 
 [params]
 

@@ -3,15 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://3bacd801diew"
-path="res://.godot/imported/glass_dome_ruins.png-e42fa575f3b97c1342f9615e4d9f44ab.ctex"
+path.bptc="res://.godot/imported/glass_dome_ruins.png-e42fa575f3b97c1342f9615e4d9f44ab.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/backgrounds/lumewood_fields/glass_dome_ruins.png"
-dest_files=["res://.godot/imported/glass_dome_ruins.png-e42fa575f3b97c1342f9615e4d9f44ab.ctex"]
+dest_files=["res://.godot/imported/glass_dome_ruins.png-e42fa575f3b97c1342f9615e4d9f44ab.bptc.ctex"]
 
 [params]
 

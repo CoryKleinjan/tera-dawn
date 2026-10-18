@@ -3,15 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dwygwym1t20pd"
-path="res://.godot/imported/glowcap_hollow.png-ecd7ffa3e9e4b2446171700c48a4170b.ctex"
+path.bptc="res://.godot/imported/glowcap_hollow.png-ecd7ffa3e9e4b2446171700c48a4170b.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/backgrounds/lumewood_fields/glowcap_hollow.png"
-dest_files=["res://.godot/imported/glowcap_hollow.png-ecd7ffa3e9e4b2446171700c48a4170b.ctex"]
+dest_files=["res://.godot/imported/glowcap_hollow.png-ecd7ffa3e9e4b2446171700c48a4170b.bptc.ctex"]
 
 [params]
 

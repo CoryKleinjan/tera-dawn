@@ -3,15 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bjbcu7rx73k26"
-path="res://.godot/imported/arcane_spire.png-a85de9e8afd238e8d61fdf69c42d6593.ctex"
+path.bptc="res://.godot/imported/arcane_spire.png-a85de9e8afd238e8d61fdf69c42d6593.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/backgrounds/lumewood_fields/arcane_spire.png"
-dest_files=["res://.godot/imported/arcane_spire.png-a85de9e8afd238e8d61fdf69c42d6593.ctex"]
+dest_files=["res://.godot/imported/arcane_spire.png-a85de9e8afd238e8d61fdf69c42d6593.bptc.ctex"]
 
 [params]
 

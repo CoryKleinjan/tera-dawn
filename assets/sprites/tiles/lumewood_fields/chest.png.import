@@ -3,15 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bioge88pr3g5l"
-path="res://.godot/imported/chest.png-0a16e2c0d9aee7d8097c60b7c541815b.ctex"
+path.bptc="res://.godot/imported/chest.png-0a16e2c0d9aee7d8097c60b7c541815b.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/tiles/lumewood_fields/chest.png"
-dest_files=["res://.godot/imported/chest.png-0a16e2c0d9aee7d8097c60b7c541815b.ctex"]
+dest_files=["res://.godot/imported/chest.png-0a16e2c0d9aee7d8097c60b7c541815b.bptc.ctex"]
 
 [params]
 
