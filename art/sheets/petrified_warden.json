@@ -1,0 +1,256 @@
+{
+  "source": "art/source/mon_petrified_warden.png",
+  "label_band": 0,
+  "save": false,
+  "out_dir": "art/build/petrified_warden",
+  "cells": [
+    [
+      "idle1",
+      "",
+      "idle2",
+      "",
+      "walk1",
+      "",
+      "walk2"
+    ],
+    [
+      ""
+    ],
+    [
+      "walk3",
+      "",
+      "attack",
+      "",
+      "hurt",
+      "",
+      ""
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      674,
+      677,
+      1350
+    ],
+    "cols": [
+      [
+        0,
+        599,
+        601,
+        1199,
+        1201,
+        1799,
+        1801,
+        2400
+      ],
+      [
+        0,
+        2400
+      ],
+      [
+        0,
+        599,
+        601,
+        1199,
+        1201,
+        1799,
+        1801,
+        2400
+      ]
+    ]
+  },
+  "inset": 2,
+  "scale": 0.16,
+  "detail": 3.2,
+  "sets": {
+    "petrified_warden": {
+      "frames": {
+        "idle1": "petrified_warden:idle1",
+        "idle2": "petrified_warden:idle2",
+        "walk1": "petrified_warden:walk1",
+        "walk2": "petrified_warden:walk2",
+        "walk3": "petrified_warden:walk3",
+        "attack": "petrified_warden:attack",
+        "hurt": "petrified_warden:hurt",
+        "jump1": "monanim_petrified_warden:jump1",
+        "jump2": "monanim_petrified_warden:jump2",
+        "charge_windup": "monanim_petrified_warden:charge_windup",
+        "charge": "monanim_petrified_warden:charge",
+        "slam_windup": "monanim_petrified_warden:slam_windup",
+        "slam": "monanim_petrified_warden:slam",
+        "shot_windup": "monanim_petrified_warden:shot_windup",
+        "shot": "monanim_petrified_warden:shot",
+        "charge_windup2": "boss_petrified_warden_charge:charge_windup2",
+        "charge2": "boss_petrified_warden_charge:charge2",
+        "charge_recover": "boss_petrified_warden_charge:charge_recover",
+        "slam_windup2": "boss_petrified_warden_slam:slam_windup2",
+        "slam2": "boss_petrified_warden_slam:slam2",
+        "slam_recover": "boss_petrified_warden_slam:slam_recover",
+        "shot_windup2": "boss_petrified_warden_shot:shot_windup2",
+        "shot2": "boss_petrified_warden_shot:shot2",
+        "shot_recover": "boss_petrified_warden_shot:shot_recover",
+        "intro1": "boss_petrified_warden_intro:intro1",
+        "intro2": "boss_petrified_warden_intro_b:intro2",
+        "intro3": "boss_petrified_warden_intro:intro3",
+        "phase1": "boss_petrified_warden_phase:phase1",
+        "phase2": "boss_petrified_warden_phase:phase2",
+        "phase3": "boss_petrified_warden_phase:phase3",
+        "death1": "boss_petrified_warden_death:death1",
+        "death2": "boss_petrified_warden_death:death2",
+        "death3": "boss_petrified_warden_death:death3"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/petrified_warden.png",
+      "sprite_frames": "assets/animations/petrified_warden.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "walk1",
+            "walk2",
+            "walk3",
+            "walk2"
+          ],
+          "fps": 6
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "death1",
+            "death2",
+            "death3"
+          ],
+          "fps": 4,
+          "durations": [
+            1,
+            1,
+            3
+          ],
+          "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "charge_windup": {
+          "frames": [
+            "charge_windup",
+            "charge_windup2"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "charge": {
+          "frames": [
+            "charge",
+            "charge2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "charge_recover": {
+          "frames": [
+            "charge_recover"
+          ],
+          "fps": 1
+        },
+        "slam_windup": {
+          "frames": [
+            "slam_windup",
+            "slam_windup2"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "slam": {
+          "frames": [
+            "slam",
+            "slam2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "slam_recover": {
+          "frames": [
+            "slam_recover"
+          ],
+          "fps": 1
+        },
+        "shot_windup": {
+          "frames": [
+            "shot_windup",
+            "shot_windup2"
+          ],
+          "fps": 3,
+          "loop": false
+        },
+        "shot": {
+          "frames": [
+            "shot",
+            "shot2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "shot_recover": {
+          "frames": [
+            "shot_recover"
+          ],
+          "fps": 1
+        },
+        "intro": {
+          "frames": [
+            "intro1",
+            "intro2",
+            "intro3"
+          ],
+          "fps": 5,
+          "durations": [
+            2,
+            4,
+            2
+          ],
+          "loop": false
+        },
+        "phase": {
+          "frames": [
+            "phase1",
+            "phase2",
+            "phase3"
+          ],
+          "fps": 5,
+          "durations": [
+            2,
+            4,
+            2
+          ],
+          "loop": false
+        }
+      }
+    }
+  }
+}

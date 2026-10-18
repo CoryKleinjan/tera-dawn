@@ -1,0 +1,66 @@
+{
+  "source": "art/source/monanim_shardling.png",
+  "save": false,
+  "out_dir": "art/build/monanim_shardling",
+  "cells": [
+    [
+      "jump1",
+      "",
+      "jump2",
+      "",
+      "knock_up",
+      "",
+      "knock_down"
+    ],
+    [
+      ""
+    ],
+    [
+      "pounce_windup",
+      "",
+      "pounce",
+      "",
+      "lunge_windup",
+      "",
+      "lunge"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      559,
+      562,
+      1120
+    ],
+    "cols": [
+      [
+        0,
+        417,
+        419,
+        839,
+        842,
+        1262,
+        1264,
+        1680
+      ],
+      [
+        0,
+        1680
+      ],
+      [
+        0,
+        417,
+        419,
+        839,
+        842,
+        1262,
+        1264,
+        1680
+      ]
+    ]
+  },
+  "inset": 3,
+  "label_band": 0,
+  "scale": 0.128,
+  "detail": 2.56
+}

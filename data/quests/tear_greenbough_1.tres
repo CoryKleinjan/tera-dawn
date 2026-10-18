@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="QuestDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
+[ext_resource type="Resource" path="res://data/items/etc/stone_petal.tres" id="3_stone_petal"]
+[ext_resource type="Resource" path="res://data/monsters/pale_moth.tres" id="4_pale_moth"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="5_drop_entry"]
+
+[sub_resource type="Resource" id="Petals"]
+script = ExtResource("2_quest_objective")
+kind = 1
+item = ExtResource("3_stone_petal")
+count = 5
+drop_from = ExtResource("4_pale_moth")
+drop_chance = 0.5
+
+[resource]
+script = ExtResource("1_quest_def")
+id = &"tear_greenbough_1"
+title = "Where the Birds Went Quiet"
+giver = &"greenbough_forager"
+requires = Array[StringName]([&"story_a_closer_look"])
+offer_text = "Sixty years I've picked these woods, and I know every sound in them. Past the old roots there's a spot where nothing sings. No birds, no bugs, not even wind. I found this there yesterday. (He turns a small grey acorn over in his fingers.) It's stone. It was a real acorn the day before, I'd swear to it. Go and look, would you? Bring me back a few of whatever's growing in there."
+progress_text = "Look behind the old roots. That wall isn't as solid as it looks, if you come at it fast enough."
+complete_text = "Petals. Stone, every one of them, and still soft at the edges, like they only just turned. A whole grove of this? (He is quiet for a moment.) It's beautiful. I don't like it one bit."
+objectives = Array[ExtResource("2_quest_objective")]([SubResource("Petals")])
+reward_essence = 23500
+reward_shards = 1500
+reward_items = Array[ExtResource("5_drop_entry")]([])
