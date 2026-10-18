@@ -18,7 +18,7 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    is too big or small next to the hero.
 3. Add drops: each `DropEntry` is an item, a chance and an amount range.
 4. Optional: `flying` with `hover_height`, `boss`, a `light_color` or `aura_color` for
-   glowing monsters, a `tint` (one sprite can stand in for several monsters), and
+   glowing monsters, a `tint` (legacy, only the Fern Boar: never recolour art for a new monster, paint its own sheet), and
    `respawn_ticks` (how long a defeated one takes to come back). A map nobody is on any
    more is dropped (`TDServer._off_map`) and loads fresh when someone next enters. A zone
    boss can have a `relic` (a **RelicDef** in `data/items/relics/`), which drops for each
@@ -45,7 +45,7 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 
 The server runs monsters (`SimMob`), so co-op players all see the same fight.
 
-- **Targeting.** A monster notices the nearest player within its `sight` (and level with it),
+- **Targeting.** A monster notices the nearest player within its `sight` (and at its height),
   or anyone who hits it, and gives up `SimMob.SIGHT_TICKS` after losing sight (longer after a
   hit). It keeps after its target while it can see them; whoever else hit it meanwhile is next.
   Bosses go for whoever has done the most damage lately (`threat`, fading over time).

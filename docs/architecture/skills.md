@@ -53,7 +53,7 @@ Ranged and magic skills:
 - A `projectile` (a **ProjectileDef** in `data/projectiles/`: texture, or painted `frames` it
   loops in flight, speed, spin, light) makes
   the skill a shot. The server still decides the hit at once; clients fly one projectile per
-  hit (`TDProjectile`) and pop the damage number when it lands, holding the monster's death
+  hit (`TDProjectile`) and play the hit when it lands (no damage numbers, only "Miss"), holding the monster's death
   until then.
 - A weapon (`EquipDef`) names its `weapon_kind` (sword, dagger, bow, wand, staff, knuckle, star, gun)
   and an optional `basic_attack` skill that replaces the plain swing (a bow's Shoot). Ranged

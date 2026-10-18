@@ -1,7 +1,7 @@
 class_name TDFloatText
 extends Node2D
-## A floating number, drawn by the overlay at its projected screen position: damage (hit,
-## crit, taken or miss), or something you gained (exp, essence, shards) as a smaller "+9 EXP".
+## A floating word, drawn by the overlay at its projected screen position: "MISS" (the game
+## shows no damage numbers), or something you gained (exp, essence, shards) as a smaller "+9 EXP".
 
 ## Gains younger than this stack above each other (see TDWorldFx.show_gain).
 const GAIN_STACK_TICKS := 30
@@ -14,7 +14,7 @@ const GAINS := {
 
 var world: TDWorld
 var value := 0
-var kind := "hit" # hit, crit, taken, miss, or a gain (exp, essence, shards)
+var kind := "miss" # miss, or a gain (exp, essence, shards)
 var t := 0
 
 func is_gain() -> bool:
@@ -41,13 +41,7 @@ func draw_at(ci: CanvasItem, at: Vector2) -> void:
 	if is_gain():
 		DrawUtil.text(ci, Game.num_font, at, gain_text(), 14, Color(GAINS[kind][1], a), 0, 4, Color(Palette.NIGHT, 0.8 * a))
 		return
-	var size := 34 if kind == "crit" else (26 if kind == "taken" else 28)
 	var pop := 1.0 + (6 - t) * 0.08 if t < 6 else 1.0
-	var fill := Color("ff5d73") if kind == "crit" else (Color("d79bff") if kind == "taken" else Color("ffb347"))
-	var edge := Color("3b1550") if kind == "taken" else Color("5a2a10")
 	ci.draw_set_transform(at, 0, Vector2(pop, pop))
-	if kind == "miss":
-		DrawUtil.text(ci, Game.num_font, Vector2.ZERO, "MISS", 24, Color(Color("c9d6ff"), a), 0, 8, Color(Color("27305a"), a))
-	else:
-		DrawUtil.text(ci, Game.num_font, Vector2.ZERO, str(value), size, Color(fill, a), 0, 8, Color(edge, a))
+	DrawUtil.text(ci, Game.num_font, Vector2.ZERO, "MISS", 24, Color(Color("c9d6ff"), a), 0, 8, Color(Color("27305a"), a))
 	ci.draw_set_transform(Vector2.ZERO)

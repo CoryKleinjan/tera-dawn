@@ -19,7 +19,6 @@ script = ExtResource("1_job_def")
 id = &"mage"
 display_name = "Magician"
 family = &"mage"
-tint = Color(0.788235, 0.768627, 1.0, 1.0)
 mastery = 0.65
 description = "Scholars of dawnlight who hurl spells with wands and staves."
 base_power = 4

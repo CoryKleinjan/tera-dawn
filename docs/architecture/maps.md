@@ -135,12 +135,12 @@ shortcuts and fake or breakable walls once found, and the player where they stan
 
 An NpcDef with `storage = true` keeps the player's storage (`Character.storage`, an
 Inventory saved with the character; `ServerStorage.on_store` / `on_retrieve`, `TDStorageWindow`).
-The same NpcDef can stand in several maps (Brin is in every town).
+The same NpcDef can stand in several maps.
 
 Travel NPCs (ships, wagons) list **TravelRoute**s in `NpcDef.travel` (destination, arrival x,
 fare, "Ship"/"Wagon"); their dialogue offers "Travel" and `ServerTravel.on_travel` moves the
 player, charging `TravelRoute.price` (everyone pays the same fare). Each trip's label shows the
-destination and fare ("Wagon to Fern Hollow (150 Dawnshards)", `TDDialogueWindow.travel_label`). A **UseDef** with `teleport` set to a map id, or to `town`, is a return scroll.
+destination and fare ("Coach to Lumewood (400 Dawnshards)", `TDDialogueWindow.travel_label`). A **UseDef** with `teleport` set to a map id, or to `town`, is a return scroll.
 
 The content tests (`tests/content/`) check that every portal points at a real map and every
 spawn at a real platform, so a typo fails a test instead of the game.
@@ -174,8 +174,8 @@ door you walk through by pressing Up, into a small room that is its own map.
    `door_x` (the middle of its doorway, 0 at the picture's left edge to 1 at its right) and
    an optional `chimney` that smokes when the biome has `chimney_smoke`.
 2. **On the street**: add a **BuildingPlacement** to the town's `buildings`. Its `x` is where
-   its door is, so NPCs and doors line up with the doorway; `platform`, `flip`, `scale` and a
-   `tint` let one picture stand in for several houses. It stands at `depth` -2 (behind the
+   its door is, so NPCs and doors line up with the doorway; `platform`, `flip` and `scale` place it;
+   every building is its own picture. It stands at `depth` -2 (behind the
    lanterns and the people) and is sized to keep its `height` there.
 3. **Making it enterable**: create the room, a **MapDef** in `data/maps/rooms/<id>.tres` with
    `interior = true`, `return_map` set to the town (so return scrolls and the world map treat

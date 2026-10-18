@@ -16,8 +16,6 @@ extends Resource
 ## The job line it belongs to (warrior, archer, mage, thief, pirate, beginner). Gear that
 ## names a line can be worn by every job in it.
 @export var family: StringName
-## The job's colour, for the places that show jobs (the hero now wears his job's gear instead).
-@export var tint := Color.WHITE
 ## The lowest hit as a fraction of the highest (MapleStory's mastery).
 @export_range(0.1, 0.95) var mastery := 0.6
 
@@ -43,9 +41,8 @@ extends Resource
 ## right away when nothing else stands in the way (ServerQuests.on_quest_complete); a job
 ## passed once is free to switch back to.
 @export var advance_quest: QuestDef
-## Items handed over when advancing (each gives `min_amount`): the job's basic weapon (the
-## first weapon here is worn right away, see Character.advance), and potions.
-## Better weapons only drop.
+## Items handed over when advancing (each gives `min_amount`): potions. A weapon listed here
+## would be worn right away (see Character.advance); gear comes from vendors and secrets.
 @export var advance_gifts: Array[DropEntry] = []
 
 @export_group("New character")

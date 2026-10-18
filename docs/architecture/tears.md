@@ -1,5 +1,7 @@
 # Tears and the world's decline
 
+Part of the [architecture docs](../../ARCHITECTURE.md).
+
 A tear is a small hidden zone of its own (3-4 maps and a guardian) past a secret room in a
 mainland zone. Only a boss move from another zone reaches that room. Finishing what waits
 inside takes the whole world a step into its decline: the first finished tear turns every map

@@ -12,6 +12,7 @@ camera). The layers are constants at the top of `scripts/world/stage.gd`, back t
 | Backdrop | far behind | Sky, mountains, distant trees (`BackdropLayerDef.depth`) |
 | Land | `-SCENERY_LAYER` to `LAND_FRONT` | The floor and platforms (flat painted front skins), and just behind them buildings, decoration, props, lanterns, signs |
 | `Z_PORTAL` | 0.17 | Portals, in front of all the land and scenery (NPCs are never placed over one) |
+| `Z_GATE` | 0.2 | A locked door's shut gate, just in front of its portal |
 | `Z_NPC` | 0.3 | NPCs |
 | `Z_MONSTER` | 0.38 to 0.52 | Monsters, each at a slightly different depth so overlapping ones don't flicker |
 | `Z_DROP` | 0.56 | Dawnshards and other drops |
@@ -68,6 +69,6 @@ ambient occlusion or depth of field. The game is made for Vulkan (Forward+); a c
 without it falls back to the compatibility renderer, which has no ambient occlusion or depth
 of field, and the video page says so. Store pages should list Vulkan as recommended.
 
-Text that belongs to a spot in the world (name tags, hints, damage numbers)
+Text that belongs to a spot in the world (name tags, hints, "Miss")
 is never put in the 3D stage: `TDOverlay` projects the spot to the screen and draws it there,
 so depth of field never blurs it and nothing in the world covers it.
