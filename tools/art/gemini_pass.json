@@ -31897,12 +31897,12 @@
   }
  },
  {
-  "id": "vanguard_helm_woman_walk_idle_v2",
+  "id": "vanguard_ridge_man_walk_idle",
   "prompts": null,
   "batch": "maple hero layers (edit)",
   "with": null,
   "refs": [],
-  "save": "vanguard_helm_woman_walk_idle_v2.png",
+  "save": "vanguard_ridge_man_walk_idle.png",
   "replaces": null,
   "kind": "anim",
   "stands": false,
@@ -31912,13 +31912,38 @@
   ],
   "anchor": null,
   "size": "2K",
-  "note": "2026-10-18 thread 'Hero pose review': wave 350 straightened her nose strip but kept the dome ridge (a no-ref edit keeps a painted part). Same route that fixed the girl's helm (warrior_vanguard_girl_surge_v4): edit wave 350's result, whose nose strip is now right, with one faceless close-up of the top of the boy's new smooth dome (wave 350 cell 1). Priced line: \"The boy came out right. The woman's ridge stayed, because a text-only edit keeps a part that's already painted. The girl's helm was fixed the same way before, using a close-up of a smooth dome, and that worked. Should I retest the woman's walk sheet with a close-up of the boy's new dome for $0.07?\"",
+  "note": "2026-10-18 thread 'Hero pose review': Cory 17:56Z \"The ridge should stay\": the approved Vanguard helm (refs/vanguard_boy_final_stand.png) has a ridge over the dome and a pointed nose strip; earlier fixes painted it off the man and girl. Test of putting it back by editing the approved full-set sheet (poses right) with one ref, the faceless close-up of the top of the approved helm (refs/vanguard_helm_only.png). Priced line: \"Should I paint a 2-sheet test for $0.14: the ridge and pointed nose strip on the man's walk, and the girl's flying punch with the ridge, nose strip and her missing shield?\"",
   "edit": {
-   "base": "/mnt/project-files/art-sheets/gemini-pass-1/vanguard_helm_woman_walk_idle.png",
+   "base": "art/source/hero/outfits/man_vanguard_walk_idle.png",
    "refs": [
-    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_boy_helm_smooth_only.png"
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
    ],
-   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi woman (kid-sized, chibi proportions) with long auburn hair in 8 animation frames, wearing a steel helmet, a deep navy tabard with one narrow white stripe, and carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cells 1 to 6: walking, one step after another; cell 7: standing at rest; cell 8: standing at rest. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, armour, tabard, sword, shield, size and place in the cell; never change a pose. Change only one thing, the same in all 8 cells: the top of her steel helm has a raised ridge running down the middle of the dome, with seam lines from the top to the brow band. Remove that ridge and those seams so the dome above the brow band is one smooth, rounded piece of plain steel with soft shading and a highlight, exactly like the attached close-up, which shows only the top of an approved helm. Keep the riveted brow band, the narrow straight nose strip, the cheek guards and the helm's shape, size and angle in each cell. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with light stubble in 8 animation frames, wearing a steel helm, a deep navy tabard with one narrow white stripe, and carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cells 1 to 6: walking, one step after another; cell 7: standing at rest; cell 8: standing at rest. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, stubble, armour, tabard, sword, shield, size and place in the cell; never change a pose. Change the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a pointed steel nose strip hangs down over the nose: wide where it meets the brow band and tapering to a point. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_ridge_girl_surge",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_ridge_girl_surge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': Cory 17:56Z \"The ridge should stay\": the approved Vanguard helm (refs/vanguard_boy_final_stand.png) has a ridge over the dome and a pointed nose strip; earlier fixes painted it off the man and girl. Test of putting it back by editing the approved full-set sheet (poses right) with one ref, the faceless close-up of the top of the approved helm (refs/vanguard_helm_only.png). Priced line: \"Should I paint a 2-sheet test for $0.14: the ridge and pointed nose strip on the man's walk, and the girl's flying punch with the ridge, nose strip and her missing shield?\"",
+  "edit": {
+   "base": "art/source/hero/outfits/girl_vanguard_surge.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_helm_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames of a charge, wearing a steel helm, a deep navy tabard with one narrow white stripe, and carrying a plain blue heater shield and a steel longsword. The poses in this sheet are right and stay exactly as they are: cell 1: standing in a wide braced stance, sword held low; cell 2: stepping forward, leaning into a charge; cell 3: lunging forward, sword thrust straight forward; cell 4: flying forward through the air, body stretched out, the fist on the RIGHT side of the picture thrust forward and the sword held low in the fist on the LEFT side of the picture; cell 5: braced stance; cell 6: striding forward, ponytail streaming back; cell 7: landing from the charge, knees bent; cell 8: crouched low after landing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, ponytail, armour, tabard, sword, shield, size and place in the cell; never change a pose. Change the helm, the same in all 8 cells, so it matches the approved Vanguard helm exactly: a raised steel ridge runs from the front to the back over the middle of the dome, with a seam line along each side of it, exactly like the attached close-up, which shows only the top of the approved helm. From the middle of the riveted brow band, a pointed steel nose strip hangs down over the nose: wide where it meets the brow band and tapering to a point. Keep the riveted brow band, the cheek guards and the helm's size and angle in each cell. One more change, in cell 4 only: her plain blue heater shield is missing there. Strap that same plain blue heater shield with its steel rim onto the forearm of the fist thrust forward on the RIGHT side of the picture, its face toward the viewer, as it is held in cells 5 to 8. Her hair stays one ponytail hanging from under the back rim of the helm in every cell, as now. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
   }
  }
 ]
