@@ -1,6 +1,6 @@
 {
   "source": "art/source/lumewood_fields_land.png",
-  "art_px": 5.0,
+  "art_px": 8.0,
   "out_dir": "assets/sprites/platforms/lumewood_fields",
   "label_band": 0,
   "inset": 0,

@@ -148,8 +148,9 @@ textures, parallax backdrop layers (`BackdropLayerDef`: a tiled strip, scattered
 painted `PICTURE` stretched just wide enough to cover the view from either end of the map (on a
 tall map, raised and stretched so it covers the view from top to bottom too) and left out of
 the fog, all at a depth nearer than `TDStage.FAR`), random decoration (`DecorDef`), lantern and portal art, and
-optional leaves hanging into the screen's top corners (`frame_left` / `frame_right`, drawn as tall as the screen by
-`CornerFrame`, over the world and under the HUD, like Hollow Knight's foreground plants). A new region of the
+optional leaves hanging into the screen's top corners (`frame_left` / `frame_right`, drawn by `CornerFrame` over the
+world and under the HUD, like Hollow Knight's foreground plants; `frame_scale` sets their share of the screen's
+height and `frame_fade` fades their bottom out at draw time, for a frame painted down to its bottom edge). A new region of the
 world is usually a new biome plus a few maps that use it.
 
 Each region has **one** biome (its style); its fields differ within it. A field keeps its region's `biome` and sets a **BiomeVariantDef** as `MapDef.variant`: only

@@ -88,6 +88,10 @@ extends Resource
 ## How tall the corner frame is drawn, as a share of the screen's height (each half keeps its
 ## corner and its shape): below 1 for a frame painted bigger than it should hang.
 @export var frame_scale := 1.0
+## How much of the corner frame's height, from its bottom, fades out as it is drawn (0 to 1):
+## for a frame painted down to its bottom edge but drawn shorter than the screen, so it
+## doesn't stop in a hard line. Faded at draw time; the painting is never changed.
+@export var frame_fade := 0.0
 
 @export_group("Ambient life")
 ## Birds or other small creatures crossing the sky behind the scene (their "move" or
