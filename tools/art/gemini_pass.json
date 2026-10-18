@@ -29997,6 +29997,106 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl warrior in a steel helm in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: in the air, leaning back with legs forward; cell 2: tucked into a ball in mid air; cell 3: rising, both arms raised, one knee up; cell 4: stretched upward, both arms raised high; cell 5: tipping forward into the flip, head and body tilted; cell 6: upside down in the flip, feet up; cell 7: coming upright out of the flip, legs bent; cell 8: upright in the air, sword raised. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, helm, armour, sword, shield, size and place in the cell; never change a pose. The first attached close-up shows only the top of her approved helm; the second shows only the back of it. In every cell the top of her helm has a riveted metal band running down the middle of the dome: remove that band and its rivets so the dome above the brow band is smooth plain steel like the first close-up. Keep the riveted brow band, the short nose strip, the cheek guards and the helm's shape and size. The second close-up shows only the back of her approved helm with no face: her long brown ponytail starts UNDER the back bottom rim of the helm, behind her neck, and hangs down or streams back from there. In cell 5 (tipping into the flip) her ponytail comes out through or above the back of the helm dome, which a real ponytail under a helmet could not do. Repaint it so it starts under the back bottom rim of the helm behind her neck, exactly like the close-up, and streams back to the left behind her shoulders, below the top of the helm. No hair anywhere above the riveted brow band; the back of the dome is plain steel with the magenta background around it. Keep its colour, strands and length. In cell 7 (coming upright) her ponytail comes out through or above the back of the helm dome, which a real ponytail under a helmet could not do. Repaint it so it starts under the back bottom rim of the helm behind her neck, exactly like the close-up, and hangs down and a little back behind her neck, like cell 8. No hair anywhere above the riveted brow band; the back of the dome is plain steel with the magenta background around it. Keep its colour, strands and length. In cell 5 her face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
   }
+ },
+ {
+  "id": "warrior_vanguard_girl_walk_idle_v3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_walk_idle_v3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': girl helm consistency after wave 339. walk_idle_v2 (Cory approved it 03:09Z otherwise) has a ridge down the dome. Her idle, slam and double jump (waves 338-339) have a smooth dome, and the hero rule is a helm with no ridge. Same route as the slam v3 dome fix: edit the sheet the picks use, whose poses are right; the only ref is a faceless crop of the top of her own smooth helm (idle_faint_sit_crouch_v4 cell 2). Priced line: \"Should I repaint the girl's helm on her walk, jump, dash and surge sheets so the dome is smooth with no seam, like her other moves, for about $0.27?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_girl_walk_idle_v2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_girl_helm_smooth_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl warrior in a steel helm in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: walking; cell 2: walking; cell 3: walking; cell 4: walking; cell 5: walking; cell 6: walking; cell 7: walking; cell 8: walking. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair and ponytail, armour, tabard, sword, shield, size and place in the cell; never change a pose. Change only one thing, the same in all 8 cells: the top of her steel helm has a raised ridge running down the middle of the dome from the top to the nose strip. Remove that ridge so the dome above the brow band is one smooth, rounded piece of plain steel with soft shading and a highlight, exactly like the attached close-up, which shows only the top of her approved helm. Keep the riveted brow band, the short nose strip, the cheek guards and the helm's shape, size and angle in each cell. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_jump_land_hurt_v3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_jump_land_hurt_v3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': girl helm consistency after wave 339. jump_land_hurt_v2 has a ridge down the dome. Her idle, slam and double jump (waves 338-339) have a smooth dome, and the hero rule is a helm with no ridge. Same route as the slam v3 dome fix: edit the sheet the picks use, whose poses are right; the only ref is a faceless crop of the top of her own smooth helm (idle_faint_sit_crouch_v4 cell 2). Priced line: \"Should I repaint the girl's helm on her walk, jump, dash and surge sheets so the dome is smooth with no seam, like her other moves, for about $0.27?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_girl_jump_land_hurt_v2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_girl_helm_smooth_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl warrior in a steel helm in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: crouching to jump, knees bent; cell 2: rising off the ground, legs together; cell 3: in the air, sword raised, knees tucked; cell 4: dropping, legs forward; cell 5: landed, standing; cell 6: standing; cell 7: hurt, flinching with arms thrown out, eyes shut; cell 8: hurt, flinching, eyes shut, mouth open. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair and ponytail, armour, tabard, sword, shield, size and place in the cell; never change a pose. Change only one thing, the same in all 8 cells: the top of her steel helm has a raised ridge running down the middle of the dome from the top to the nose strip. Remove that ridge so the dome above the brow band is one smooth, rounded piece of plain steel with soft shading and a highlight, exactly like the attached close-up, which shows only the top of her approved helm. Keep the riveted brow band, the short nose strip, the cheek guards and the helm's shape, size and angle in each cell. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_dash_v4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_dash_v4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': girl helm consistency after wave 339. dash_v2 has a ridge down the dome (its cells 5-6 are not used; picks reuse cells 3 and 7). Her idle, slam and double jump (waves 338-339) have a smooth dome, and the hero rule is a helm with no ridge. Same route as the slam v3 dome fix: edit the sheet the picks use, whose poses are right; the only ref is a faceless crop of the top of her own smooth helm (idle_faint_sit_crouch_v4 cell 2). Priced line: \"Should I repaint the girl's helm on her walk, jump, dash and surge sheets so the dome is smooth with no seam, like her other moves, for about $0.27?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_girl_dash_v2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_girl_helm_smooth_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl warrior in a steel helm in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: stepping forward, about to dash; cell 2: diving forward, body stretched out flat; cell 3: curled into a ball, rolling; cell 4: upside down mid-roll; cell 5: curled into a ball coming out of the roll, head tipped forward; cell 6: rising out of the roll; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair and ponytail, armour, tabard, sword, shield, size and place in the cell; never change a pose. Change only one thing, the same in all 8 cells: the top of her steel helm has a raised ridge running down the middle of the dome from the top to the nose strip. Remove that ridge so the dome above the brow band is one smooth, rounded piece of plain steel with soft shading and a highlight, exactly like the attached close-up, which shows only the top of her approved helm. Keep the riveted brow band, the short nose strip, the cheek guards and the helm's shape, size and angle in each cell. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_surge_v4",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_surge_v4.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': girl helm consistency after wave 339. surge_v3 has a ridge down the dome. Her idle, slam and double jump (waves 338-339) have a smooth dome, and the hero rule is a helm with no ridge. Same route as the slam v3 dome fix: edit the sheet the picks use, whose poses are right; the only ref is a faceless crop of the top of her own smooth helm (idle_faint_sit_crouch_v4 cell 2). Priced line: \"Should I repaint the girl's helm on her walk, jump, dash and surge sheets so the dome is smooth with no seam, like her other moves, for about $0.27?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_girl_surge_v3.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_girl_helm_smooth_only.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl warrior in a steel helm in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing in a wide braced stance; cell 2: stepping forward; cell 3: lunging forward, sword thrust forward; cell 4: flying forward, body stretched out, far fist thrust forward; cell 5: braced stance; cell 6: striding forward, legs apart, ponytail streaming back; cell 7: landing from the charge, knees bent; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair and ponytail, armour, tabard, sword, shield, size and place in the cell; never change a pose. Change only one thing, the same in all 8 cells: the top of her steel helm has a raised ridge running down the middle of the dome from the top to the nose strip. Remove that ridge so the dome above the brow band is one smooth, rounded piece of plain steel with soft shading and a highlight, exactly like the attached close-up, which shows only the top of her approved helm. Keep the riveted brow band, the short nose strip, the cheek guards and the helm's shape, size and angle in each cell. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
  }
 ]
 }
