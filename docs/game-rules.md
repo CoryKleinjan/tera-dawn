@@ -52,8 +52,9 @@ update this page when one changes. Each zone's own look and music are in
 - Jobs have no movement skills (Cory Oct 17): bosses unlock moves instead, Hollow Knight
   style. Each zone boss drops a relic the first time a character beats it, for everyone at the
   fight, and only they can take theirs. The move is theirs for good on every job, with no
-  level, essence or MP: Grotto Tusker Dash (a flat burst ahead, once per jump in the air, rolling),
-  Arcane Sentinel Double Jump (with a somersault), Molten King Slam (Down + Jump in the
+  level, essence or MP: Grotto Tusker Dash (a flat burst of 180 px ahead, farther than a Double Jump
+  carries you sideways, once per jump in the air, rolling), Arcane Sentinel Double Jump (with a
+  somersault), Molten King Slam (Down + Jump in the
   air drops straight down and breaks cracked floors), Reef Titan Surge (hold Down + Dash on the
   ground, let go to fly straight ahead, fist first). Elder Treant Wall Jump and Lantern
   Wraith Glide wait for their moves (their poses are painted). The main way never needs a move; secret rooms can. Dash,
@@ -364,3 +365,28 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   opens and one boss, the same for all five jobs (a hulking beast of pale starlit stone), steps
   out. Beating it and handing the test in makes you that job; the tutor sends you to Archmage
   Celest in Lumewood (Magicians are already with her).
+
+## Tears
+
+- Each mainland zone has one hidden tear: a small zone of its own (3-4 maps, its own look and
+  music, 2-3 monster kinds of its own, a guardian boss at the end). Its way in is a secret room
+  that only a boss move from another zone reaches. Dawnrise Isle and Daybreak Shore have none.
+- Every tear stays sealed until the story first takes the hero through a tear. Gates are progress,
+  never level.
+- Finishing a tear makes the world decline: the first one turns the whole world (every map but
+  the tears' own) and each one after takes it further. The game goes from bright and happy to
+  dreary and sullen: darker light and fog (never a recolour of the art), new painted scenery and
+  more dangerous, less cute painted versions of the monsters, +50% stronger a step with more EXP
+  and essence to match. In co-op a map follows the host's character.
+- Some maps have areas no one can reach until the world declines: a cracked wall or floor gives
+  way and leads into an extended zone with the next part of the story, harder to cross and with
+  more dangerous monsters. Two are shared (Greenbough with Lumewood, Lanternfall with
+  Driftcove), Emberreach has its own that opens last, and none joins Dawnharbor.
+- Each zone also has 2-3 secret areas that need its own boss's move, so a new move has a use right
+  after the fight.
+- The second-job tutors are not in these tears.
+- Greenbough's tear (the pilot) is a stone forest of four maps behind a ledge on Oak Crown that only Dash reaches:
+  Stilled Grove, Ivory Hollow, Silent Stair and the Petrified Warden's ring. Old Fenwick gives
+  its three quests. Its Hollow Stags and the Warden's charge and slam cost 2 segments a hit;
+  everything else there costs 1. Its guardian isn't one of the bosses of Tera (the "every boss"
+  achievement).

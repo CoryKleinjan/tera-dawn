@@ -1,0 +1,58 @@
+{
+  "source": "art/source/monanim_hollow_stag.png",
+  "save": false,
+  "out_dir": "art/build/monanim_hollow_stag",
+  "cells": [
+    [
+      "jump1",
+      "jump2",
+      "",
+      "knock_down"
+    ],
+    [
+      "charge_windup",
+      "charge",
+      "slam_windup",
+      "slam"
+    ]
+  ],
+  "inset": 0,
+  "label_band": 0,
+  "scale": 0.21,
+  "detail": 2.56,
+  "grid": {
+    "rows": [
+      0,
+      560,
+      1120
+    ],
+    "cols": [
+      [
+        0,
+        424,
+        840,
+        1268,
+        1680
+      ],
+      [
+        0,
+        424,
+        840,
+        1262,
+        1680
+      ]
+    ]
+  },
+  "overrides": {
+    "knock_down": {
+      "blank": [
+        [
+          0,
+          200,
+          52,
+          360
+        ]
+      ]
+    }
+  }
+}

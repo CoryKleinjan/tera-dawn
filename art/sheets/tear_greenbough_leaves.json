@@ -1,0 +1,26 @@
+{
+  "source": "art/source/tear_greenbough_leaves.png",
+  "scale": 1.0,
+  "detail": 1,
+  "out_dir": "assets/sprites/backgrounds/tear_greenbough",
+  "label_band": 0,
+  "inset": 0,
+  "trim": false,
+  "grid": {
+    "rows": [
+      0,
+      1350
+    ],
+    "cols": [
+      0,
+      1200,
+      2400
+    ]
+  },
+  "cells": [
+    [
+      "leaves_left",
+      "leaves_right"
+    ]
+  ]
+}

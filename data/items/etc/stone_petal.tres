@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/item_def.gd" id="1_item_def"]
+[ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
+
+[resource]
+script = ExtResource("1_item_def")
+id = &"stone_petal"
+display_name = "Stone Petal"
+description = "A petal of pale stone, carried by the Pale Moths. (Quest item)"
+sprite_scale = 0.36
+glow_color = Color(0.92, 0.94, 1.0, 1.0)
+pickup_effect = ExtResource("3_shard_pickup")
+sell_price = 0
+max_stack = 100
+quest_item = true

@@ -26,9 +26,13 @@ extends Resource
 ## A tear drawn here while the spot is open, for the players it's open to: x across the map
 ## and height above the floor (zero: none). See TDStage.show_spot_glows.
 @export var glow := Vector2.ZERO
+## The way into this tear: sealed (shut, no glow) until it's open to them (TearState.open).
+@export var tear: TearDef
 
 ## Whether it's there for `c` at this point of their quests.
 func open_to(c: Character) -> bool:
+	if tear and not TearState.open(tear, c):
+		return false
 	if while_on.is_empty():
 		return true
 	for q in while_on:

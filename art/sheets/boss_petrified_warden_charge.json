@@ -1,0 +1,35 @@
+{
+  "source": "art/source/boss_petrified_warden_charge.png",
+  "save": false,
+  "out_dir": "art/build/boss_petrified_warden_charge",
+  "cells": [
+    [
+      "charge_windup2",
+      "",
+      "charge2",
+      "",
+      "charge_recover"
+    ]
+  ],
+  "inset": 3,
+  "label_band": 0,
+  "scale": 0.245,
+  "detail": 3.2,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        422,
+        425,
+        846,
+        849,
+        1260
+      ]
+    ]
+  },
+  "overrides": {}
+}

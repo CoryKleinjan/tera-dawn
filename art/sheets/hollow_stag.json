@@ -1,0 +1,174 @@
+{
+  "source": "art/source/mon_hollow_stag.png",
+  "label_band": 0,
+  "save": false,
+  "out_dir": "art/build/hollow_stag",
+  "cells": [
+    [
+      "idle1",
+      "",
+      "idle2",
+      "",
+      "walk1",
+      "",
+      "walk2"
+    ],
+    [
+      ""
+    ],
+    [
+      "walk3",
+      "",
+      "attack",
+      "",
+      "hurt",
+      "",
+      "defeated"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      559,
+      562,
+      1120
+    ],
+    "cols": [
+      [
+        0,
+        417,
+        419,
+        839,
+        842,
+        1262,
+        1264,
+        1680
+      ],
+      [
+        0,
+        1680
+      ],
+      [
+        0,
+        417,
+        419,
+        839,
+        842,
+        1262,
+        1264,
+        1680
+      ]
+    ]
+  },
+  "inset": 3,
+  "scale": 0.17,
+  "detail": 2.56,
+  "sets": {
+    "hollow_stag": {
+      "frames": {
+        "idle1": "hollow_stag:idle1",
+        "idle2": "hollow_stag:idle2",
+        "walk1": "hollow_stag:walk1",
+        "walk2": "hollow_stag:walk2",
+        "walk3": "hollow_stag:walk3",
+        "attack": "hollow_stag:attack",
+        "hurt": "hollow_stag:hurt",
+        "defeated": "hollow_stag:defeated",
+        "jump1": "monanim_hollow_stag:jump1",
+        "jump2": "monanim_hollow_stag:jump2",
+        "knock_down": "monanim_hollow_stag:knock_down",
+        "charge_windup": "monanim_hollow_stag:charge_windup",
+        "charge": "monanim_hollow_stag:charge",
+        "slam_windup": "monanim_hollow_stag:slam_windup",
+        "slam": "monanim_hollow_stag:slam",
+        "knock_up": "monanim_hollow_stag_b:knock_up"
+      },
+      "anchor": "mass",
+      "baseline": "bottom",
+      "out": "assets/sprites/monsters/hollow_stag.png",
+      "sprite_frames": "assets/animations/hollow_stag.tres",
+      "animations": {
+        "idle": {
+          "frames": [
+            "idle1",
+            "idle2"
+          ],
+          "fps": 3
+        },
+        "move": {
+          "frames": [
+            "walk1",
+            "walk2",
+            "walk3",
+            "walk2"
+          ],
+          "fps": 7
+        },
+        "attack": {
+          "frames": [
+            "attack"
+          ],
+          "fps": 4,
+          "loop": true
+        },
+        "hurt": {
+          "frames": [
+            "hurt"
+          ],
+          "fps": 1
+        },
+        "die": {
+          "frames": [
+            "defeated"
+          ],
+          "fps": 1,
+          "loop": false
+        },
+        "jump": {
+          "frames": [
+            "jump1",
+            "jump2"
+          ],
+          "fps": 8,
+          "loop": false
+        },
+        "knock_up": {
+          "frames": [
+            "knock_up"
+          ],
+          "fps": 1
+        },
+        "knock_down": {
+          "frames": [
+            "knock_down"
+          ],
+          "fps": 1
+        },
+        "charge_windup": {
+          "frames": [
+            "charge_windup"
+          ],
+          "fps": 1
+        },
+        "charge": {
+          "frames": [
+            "charge"
+          ],
+          "fps": 1
+        },
+        "slam_windup": {
+          "frames": [
+            "slam_windup"
+          ],
+          "fps": 1
+        },
+        "slam": {
+          "frames": [
+            "slam"
+          ],
+          "fps": 1
+        }
+      }
+    }
+  }
+}

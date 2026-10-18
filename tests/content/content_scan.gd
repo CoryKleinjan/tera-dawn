@@ -29,6 +29,8 @@ const EXPECTED := {
 	"projectiles": ["ProjectileDef"],
 	"achievements": ["AchievementDef"],
 	"cutscenes": ["CutsceneDef"],
+	"tears": ["TearDef"],
+	"declines": ["DeclineDef"],
 	"hero": ["HeroLookDef", "HeldDef"],
 }
 

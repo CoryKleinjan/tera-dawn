@@ -84,7 +84,7 @@ width = 300.0
 
 [sub_resource type="Resource" id="Platform_6"]
 script = ExtResource("13_platform_def")
-x = 2000.0
+x = 2140.0
 y = 320.0
 width = 150.0
 secret = true
@@ -150,7 +150,7 @@ max_amount = 3
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("24_breakable_def")
 id = &"driftwood_hollow_high_chest"
-x = 2075.0
+x = 2215.0
 platform = 6
 hits = 1
 whole = ExtResource("22_chest")

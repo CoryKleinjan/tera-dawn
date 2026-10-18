@@ -171,7 +171,8 @@ func test_portals_lead_to_real_maps() -> void:
 func test_maps_have_a_biome_region_and_town() -> void:
 	for m: MapDef in Content.maps.values():
 		check(m.biome != null, "%s: biome is empty" % Scan.where(m))
-		check(Content.regions.has(m.region), "%s: region %s is not a region" % [Scan.where(m), m.region])
+		# a tear's own maps are a zone off the world map (TearDef.inside), not a RegionDef
+		check(Content.regions.has(m.region) or TearState.inside_tear(m.region), "%s: region %s is not a region" % [Scan.where(m), m.region])
 		var home: MapDef = Content.maps.get(m.return_town())
 		if check(home != null, "%s: return_map %s is not a map" % [Scan.where(m), m.return_town()]):
 			# the tutorial beach wakes you on the beach: its way to town opens only at its end
