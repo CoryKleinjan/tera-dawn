@@ -32,6 +32,7 @@
   "inset": 6,
   "label_band": 0,
   "keep": "largest",
+  "dark_key": false,
   "scale": 0.102,
   "save": false
 }

@@ -32,24 +32,7 @@
   "inset": 6,
   "label_band": 0,
   "keep": "largest",
+  "dark_key": false,
   "scale": 0.102,
-  "save": false,
-  "overrides": {
-    "surge7": {
-      "blank": [
-        [
-          1,
-          627,
-          336,
-          646
-        ],
-        [
-          401,
-          627,
-          587,
-          646
-        ]
-      ]
-    }
-  }
+  "save": false
 }
