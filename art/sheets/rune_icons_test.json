@@ -1,0 +1,35 @@
+{
+  "source": "art/source/rune_icons_test.png",
+  "out_dir": "assets/sprites/items",
+  "scale": 0.068,
+  "label_band": 0,
+  "inset": 12,
+  "keep": "largest",
+  "grid": {
+    "rows": [
+      0,
+      1024,
+      2048
+    ],
+    "cols": [
+      0,
+      1024,
+      2048
+    ]
+  },
+  "cells": [
+    [
+      "tide_rune",
+      "thorn_rune"
+    ],
+    [
+      "",
+      "tusk_charm"
+    ]
+  ],
+  "overrides": {
+    "tusk_charm": {
+      "fix": "glow_backdrop_pink_holes"
+    }
+  }
+}
