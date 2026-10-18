@@ -29539,6 +29539,213 @@
   "town_check": {
    "kind": "backdrop"
   }
+ },
+ {
+  "id": "warrior_vanguard_girl_jump_land_hurt_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_jump_land_hurt_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': fix after wave 336. Her ponytail came out through the back of the helm dome in every cell (Cory 02:50Z: it wouldn't stick out the back of the helmet; 03:03Z: hair lies as in real life). Edits that result and changes only the ponytail, the same fix that worked on her walk (wave 335). Priced line: \"Should I repaint these 9 Vanguard sheets (the girl's ponytail on 5, and the lost poses on the girl's, man's and woman's slam and the man's idle/sit/crouch), for about $0.61?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_girl_jump_land_hurt.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl warrior in a steel helm in 8 animation frames. Keep EVERYTHING exactly as it is in every cell: her pose, body, head, face, helm, armour, sword, shield, size and place in the cell. Change only one thing: her long brown ponytail comes out through the back of the helm dome, high up, which a real ponytail under a helmet could not do. In all 8 cells, repaint the ponytail so it lies as it would in real life: her hair is gathered under the helm, and the ponytail comes out from UNDER the back bottom rim of the helm at the nape of her neck and hangs from there behind her neck and back, swinging with her movement in that cell (in flips, rolls and upside-down cells it still starts at the nape under the back rim and falls or trails the way it would in that pose); nothing pokes out through or above the helm dome. Keep the same brown colour, painted strands and length. Where the old ponytail was above or behind the helm dome, paint the flat magenta background, and finish the back of the helm dome there, matching the same cell. Keep the small bit of brown fringe at her forehead inside the face opening. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_idle_faint_sit_crouch_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_idle_faint_sit_crouch_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': fix after wave 336. Her ponytail came out through the back of the helm dome in every cell (Cory 02:50Z: it wouldn't stick out the back of the helmet; 03:03Z: hair lies as in real life). Edits that result and changes only the ponytail, the same fix that worked on her walk (wave 335). Priced line: \"Should I repaint these 9 Vanguard sheets (the girl's ponytail on 5, and the lost poses on the girl's, man's and woman's slam and the man's idle/sit/crouch), for about $0.61?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_girl_idle_faint_sit_crouch.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl warrior in a steel helm in 8 animation frames. Keep EVERYTHING exactly as it is in every cell: her pose, body, head, face, helm, armour, sword, shield, size and place in the cell. Change only one thing: her long brown ponytail comes out through the back of the helm dome, high up, which a real ponytail under a helmet could not do. In all 8 cells, repaint the ponytail so it lies as it would in real life: her hair is gathered under the helm, and the ponytail comes out from UNDER the back bottom rim of the helm at the nape of her neck and hangs from there behind her neck and back, swinging with her movement in that cell (in flips, rolls and upside-down cells it still starts at the nape under the back rim and falls or trails the way it would in that pose); nothing pokes out through or above the helm dome. Keep the same brown colour, painted strands and length. Where the old ponytail was above or behind the helm dome, paint the flat magenta background, and finish the back of the helm dome there, matching the same cell. Keep the small bit of brown fringe at her forehead inside the face opening. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_dash_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_dash_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': fix after wave 336. Her ponytail came out through the back of the helm dome in every cell (Cory 02:50Z: it wouldn't stick out the back of the helmet; 03:03Z: hair lies as in real life). Edits that result and changes only the ponytail, the same fix that worked on her walk (wave 335). Priced line: \"Should I repaint these 9 Vanguard sheets (the girl's ponytail on 5, and the lost poses on the girl's, man's and woman's slam and the man's idle/sit/crouch), for about $0.61?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_girl_dash.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl warrior in a steel helm in 8 animation frames. Keep EVERYTHING exactly as it is in every cell: her pose, body, head, face, helm, armour, sword, shield, size and place in the cell. Change only one thing: her long brown ponytail comes out through the back of the helm dome, high up, which a real ponytail under a helmet could not do. In all 8 cells, repaint the ponytail so it lies as it would in real life: her hair is gathered under the helm, and the ponytail comes out from UNDER the back bottom rim of the helm at the nape of her neck and hangs from there behind her neck and back, swinging with her movement in that cell (in flips, rolls and upside-down cells it still starts at the nape under the back rim and falls or trails the way it would in that pose); nothing pokes out through or above the helm dome. Keep the same brown colour, painted strands and length. Where the old ponytail was above or behind the helm dome, paint the flat magenta background, and finish the back of the helm dome there, matching the same cell. Keep the small bit of brown fringe at her forehead inside the face opening. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_surge_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_surge_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': fix after wave 336. Her ponytail came out through the back of the helm dome in every cell (Cory 02:50Z: it wouldn't stick out the back of the helmet; 03:03Z: hair lies as in real life). Edits that result and changes only the ponytail, the same fix that worked on her walk (wave 335). Priced line: \"Should I repaint these 9 Vanguard sheets (the girl's ponytail on 5, and the lost poses on the girl's, man's and woman's slam and the man's idle/sit/crouch), for about $0.61?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_girl_surge.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl warrior in a steel helm in 8 animation frames. Keep EVERYTHING exactly as it is in every cell: her pose, body, head, face, helm, armour, sword, shield, size and place in the cell. Change only one thing: her long brown ponytail comes out through the back of the helm dome, high up, which a real ponytail under a helmet could not do. In all 8 cells, repaint the ponytail so it lies as it would in real life: her hair is gathered under the helm, and the ponytail comes out from UNDER the back bottom rim of the helm at the nape of her neck and hangs from there behind her neck and back, swinging with her movement in that cell (in flips, rolls and upside-down cells it still starts at the nape under the back rim and falls or trails the way it would in that pose); nothing pokes out through or above the helm dome. Keep the same brown colour, painted strands and length. Where the old ponytail was above or behind the helm dome, paint the flat magenta background, and finish the back of the helm dome there, matching the same cell. Keep the small bit of brown fringe at her forehead inside the face opening. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_double_jump_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_double_jump_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': fix after wave 336. Her ponytail came out through the back of the helm dome in every cell (Cory 02:50Z: it wouldn't stick out the back of the helmet; 03:03Z: hair lies as in real life). Edits that result and changes only the ponytail, the same fix that worked on her walk (wave 335). Priced line: \"Should I repaint these 9 Vanguard sheets (the girl's ponytail on 5, and the lost poses on the girl's, man's and woman's slam and the man's idle/sit/crouch), for about $0.61?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_girl_double_jump.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl warrior in a steel helm in 8 animation frames. Keep EVERYTHING exactly as it is in every cell: her pose, body, head, face, helm, armour, sword, shield, size and place in the cell. Change only one thing: her long brown ponytail comes out through the back of the helm dome, high up, which a real ponytail under a helmet could not do. In all 8 cells, repaint the ponytail so it lies as it would in real life: her hair is gathered under the helm, and the ponytail comes out from UNDER the back bottom rim of the helm at the nape of her neck and hangs from there behind her neck and back, swinging with her movement in that cell (in flips, rolls and upside-down cells it still starts at the nape under the back rim and falls or trails the way it would in that pose); nothing pokes out through or above the helm dome. Keep the same brown colour, painted strands and length. Where the old ponytail was above or behind the helm dome, paint the flat magenta background, and finish the back of the helm dome there, matching the same cell. Keep the small bit of brown fringe at her forehead inside the face opening. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_slam_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_slam_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': fix after wave 336. Wave 336 painted most of this sheet's tucked, crouching or sitting cells standing. Cause: its refs were crops of the standing walk (arms, sword and shield in the walk pose), the same pull a standing ref had on the boy's wave 330; the boy's no-ref redo (wave 331) kept the poses. So this repaints girl's plain sheet again with NO refs, every cell's pose named, the cells that came back standing said to be NOT standing, and the outfit in exact words. Priced line: \"Should I repaint these 9 Vanguard sheets (the girl's ponytail on 5, and the lost poses on the girl's, man's and woman's slam and the man's idle/sit/crouch), for about $0.61?\"",
+  "edit": {
+   "base": "art/source/hero/looks/girl_slam.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a cute chibi girl with a long brown ponytail in plain clothes in 8 animation frames of a jump into a ball that drops and lands. Each cell keeps EXACTLY the pose of the base, which is: cell 1: JUMPING up off the ground with both arms raised high; cell 2: curled into a tight ball in mid air, knees hugged to the chest; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch, knees bent; cell 7: standing; cell 8: standing. Cells 2, 3, 4 and 5 are NOT standing: the body is curled into a tight ball in the air, knees pulled up to the chest, both feet off the ground, arms hugging the knees with the sword and shield held tight against the body. Cell 1 is NOT standing: both arms are raised high and the feet are off the ground. Cell 6 is NOT standing straight: a low crouch with knees deeply bent. Keep her pose, arms, legs, body, head size, proportions, size, place in the cell, which way she faces and turns, and her eyes exactly as in the base in every cell (only her expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows her standing there. Only dress her, the same in every cell, in one full suit of WARRIOR armour. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (her face fully visible; nothing on the neck or shoulders attached to the helm). Her hair lies as it would in real life under a helmet: gathered under the helm with a little brown fringe at the forehead inside the face opening, and her long brown ponytail comes out from UNDER the back bottom rim of the helm at the nape of her neck and hangs down behind her, swinging with the pose the way her ponytail moves in the base; it never pokes out through or above the helm dome. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. She holds ONE steel longsword with a crossguard and a brown leather grip in her NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on her FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow her hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In the curled cells she keeps the sword and shield tucked close to her body. Her face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_man_slam_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_man_slam_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': fix after wave 336. Wave 336 painted most of this sheet's tucked, crouching or sitting cells standing. Cause: its refs were crops of the standing walk (arms, sword and shield in the walk pose), the same pull a standing ref had on the boy's wave 330; the boy's no-ref redo (wave 331) kept the poses. So this repaints man's plain sheet again with NO refs, every cell's pose named, the cells that came back standing said to be NOT standing, and the outfit in exact words. Priced line: \"Should I repaint these 9 Vanguard sheets (the girl's ponytail on 5, and the lost poses on the girl's, man's and woman's slam and the man's idle/sit/crouch), for about $0.61?\"",
+  "edit": {
+   "base": "art/source/hero/looks/man_slam.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi grown man with short dark brown hair and light stubble in plain clothes in 8 animation frames of a jump into a ball that drops and lands. Each cell keeps EXACTLY the pose of the base, which is: cell 1: JUMPING up off the ground with both arms raised high; cell 2: curled into a tight ball in mid air, knees hugged to the chest; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch, knees bent; cell 7: standing; cell 8: standing. Cells 2, 3, 4 and 5 are NOT standing: the body is curled into a tight ball in the air, knees pulled up to the chest, both feet off the ground, arms hugging the knees with the sword and shield held tight against the body. Cell 1 is NOT standing: both arms are raised high and the feet are off the ground. Cell 6 is NOT standing straight: a low crouch with knees deeply bent. Keep his pose, arms, legs, body, head size, proportions, size, place in the cell, which way he faces and turns, and his eyes exactly as in the base in every cell (only his expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows him standing there. Only dress him, the same in every cell, in one full suit of WARRIOR armour. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (his face fully visible; nothing on the neck or shoulders attached to the helm). His short dark brown hair is hidden under the helm except a little at the front; his light stubble stays. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. He holds ONE steel longsword with a crossguard and a brown leather grip in his NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on his FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow his hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In the curled cells he keeps the sword and shield tucked close to his body. His face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_woman_slam_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_woman_slam_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': fix after wave 336. Wave 336 painted most of this sheet's tucked, crouching or sitting cells standing. Cause: its refs were crops of the standing walk (arms, sword and shield in the walk pose), the same pull a standing ref had on the boy's wave 330; the boy's no-ref redo (wave 331) kept the poses. So this repaints woman's plain sheet again with NO refs, every cell's pose named, the cells that came back standing said to be NOT standing, and the outfit in exact words. Priced line: \"Should I repaint these 9 Vanguard sheets (the girl's ponytail on 5, and the lost poses on the girl's, man's and woman's slam and the man's idle/sit/crouch), for about $0.61?\"",
+  "edit": {
+   "base": "art/source/hero/looks/woman_slam.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi grown woman with long auburn hair in plain clothes in 8 animation frames of a jump into a ball that drops and lands. Each cell keeps EXACTLY the pose of the base, which is: cell 1: JUMPING up off the ground with both arms raised high; cell 2: curled into a tight ball in mid air, knees hugged to the chest; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch, knees bent; cell 7: standing; cell 8: standing. Cells 2, 3, 4 and 5 are NOT standing: the body is curled into a tight ball in the air, knees pulled up to the chest, both feet off the ground, arms hugging the knees with the sword and shield held tight against the body. Cell 1 is NOT standing: both arms are raised high and the feet are off the ground. Cell 6 is NOT standing straight: a low crouch with knees deeply bent. Keep her pose, arms, legs, body, head size, proportions, size, place in the cell, which way she faces and turns, and her eyes exactly as in the base in every cell (only her expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows her standing there. Only dress her, the same in every cell, in one full suit of WARRIOR armour. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (her face fully visible; nothing on the neck or shoulders attached to the helm). Her hair lies as it would in real life under a helmet: a little auburn fringe at the forehead inside the face opening, and her long auburn hair hangs from under the helm rim past her cheeks to her shoulders, moving with the pose the way it moves in the base. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. She holds ONE steel longsword with a crossguard and a brown leather grip in her NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on her FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow her hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In the curled cells she keeps the sword and shield tucked close to her body. Her face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_man_idle_faint_sit_crouch_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_man_idle_faint_sit_crouch_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': fix after wave 336. Wave 336 painted most of this sheet's tucked, crouching or sitting cells standing. Cause: its refs were crops of the standing walk (arms, sword and shield in the walk pose), the same pull a standing ref had on the boy's wave 330; the boy's no-ref redo (wave 331) kept the poses. So this repaints man's plain sheet again with NO refs, every cell's pose named, the cells that came back standing said to be NOT standing, and the outfit in exact words. Priced line: \"Should I repaint these 9 Vanguard sheets (the girl's ponytail on 5, and the lost poses on the girl's, man's and woman's slam and the man's idle/sit/crouch), for about $0.61?\"",
+  "edit": {
+   "base": "art/source/hero/looks/man_idle_faint_sit_crouch.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi grown man with short dark brown hair and light stubble in plain clothes in 8 animation frames of idling, fainting, sitting and crouching. Each cell keeps EXACTLY the pose of the base, which is: cell 1: standing idle; cell 2: standing idle; cell 3: dazed and swaying on his feet, eyes closed; cell 4: down on one knee, dazed, eyes closed; cell 5: falling forward toward the ground; cell 6: lying flat on his front on the ground, eyes closed, fainted; cell 7: SITTING on the ground with his legs crossed in front of him; cell 8: CROUCHING low, knees deeply bent, body lowered. Cell 7 is NOT standing: he sits on the ground with his legs crossed in front of him, the sword lying across his lap in his near hand and the shield resting beside him. Cell 8 is NOT standing: a low crouch with knees deeply bent and the body lowered, holding the sword and shield. Cell 4 is down on one knee and cell 6 is lying flat on the ground. Keep his pose, arms, legs, body, head size, proportions, size, place in the cell, which way he faces and turns, and his eyes exactly as in the base in every cell (only his expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows him standing there. Only dress him, the same in every cell, in one full suit of WARRIOR armour. The armour: a smooth rounded steel open-face helm with NO ridge, crest or band over the top of the dome, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (his face fully visible; nothing on the neck or shoulders attached to the helm). His short dark brown hair is hidden under the helm except a little at the front; his light stubble stays. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. He holds ONE steel longsword with a crossguard and a brown leather grip in his NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on his FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow his hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In cells 3 to 6 he may look dazed or have his eyes closed as in the base. When sitting, the sword lies across his lap in his near hand; when lying down, the sword and shield lie close beside him. His face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
+  }
  }
 ]
 }
