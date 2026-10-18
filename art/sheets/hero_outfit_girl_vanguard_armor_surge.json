@@ -34,5 +34,10 @@
   "keep": "largest",
   "dark_key": false,
   "scale": 0.102,
-  "save": false
+  "save": false,
+  "overrides": {
+    "surge4": {
+      "fix": "solid_inside"
+    }
+  }
 }
