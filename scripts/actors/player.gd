@@ -708,7 +708,8 @@ func _trail(m: RelicDef.Move, ticks: int) -> void:
 func _process(_delta: float) -> void:
 	if body == null or world == null or world.map == null:
 		return
-	body.draw(face, Game.me.pet, _animation(), HeroLookDef.of(Game.me.look))
+	var shown := Game.me.gear.shown()
+	body.draw(face, Game.me.pet, _animation(), HeroLookDef.of(Game.me.look), shown[0], shown[1])
 
 ## What he is doing, as an animation name: the server passes it on to everyone else.
 func _animation() -> StringName:

@@ -121,11 +121,11 @@ func test_spend_and_restore_mp() -> void:
 
 func test_recalc_clamps_hearts_and_mp_when_gear_comes_off() -> void:
 	var c := fx.character()
-	c.equipment.put(&"hat", ItemStack.exact(fx.equip(&"t_hat", EquipDef.Slot.HAT, {"heart_pieces": 8, "max_mp": 50})))
+	c.equipment.put(&"armor", ItemStack.exact(fx.equip(&"t_hat", EquipDef.Slot.ARMOR, {"heart_pieces": 8, "max_mp": 50})))
 	c.refill()
 	check_eq(c.health.hp, 7, "full with gear")
 	check_eq(c.mp, 75, "full MP with gear")
-	c.equipment.take(&"hat")
+	c.equipment.take(&"armor")
 	check_eq(c.health.hp, 5, "health clamped")
 	check_eq(c.mp, 25, "MP clamped")
 
@@ -166,7 +166,7 @@ func test_avoid_grows_with_the_jobs_avoid_growth() -> void:
 	j.avoid_growth = 2.0
 	c.level = 6
 	check_eq(c.avoid(), CharacterStats.BASE_AVOID + 10, "two a level past the first")
-	c.equipment.put(&"shoes", ItemStack.exact(fx.equip(&"t_shoes", EquipDef.Slot.SHOES, {"avoid": 4})))
+	c.equipment.put(&"armor", ItemStack.exact(fx.equip(&"t_shoes", EquipDef.Slot.ARMOR, {"avoid": 4})))
 	c.recalc()
 	check_eq(c.avoid(), CharacterStats.BASE_AVOID + 10 + 4, "plus gear")
 

@@ -242,7 +242,7 @@ func test_job_gifts_suit_the_job() -> void:
 func test_skills_link_up() -> void:
 	for s: SkillDef in Content.skills.values():
 		var w := Scan.where(s)
-		if s.innate:
+		if s.innate or GearSetDef.with_buff(s):  # known by everyone, or a set's effect
 			check(s.job == &"" or Content.jobs.has(s.job), "%s: job %s is not a job" % [w, s.job])
 		else:
 			check(Content.jobs.has(s.job), "%s: job %s is not a job" % [w, s.job])

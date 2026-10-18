@@ -289,18 +289,15 @@ func _run() -> void:
 		# the full run): `_old` from the chest as it used to, `_new` from his punching fist
 		# (HeroBody.muzzle).
 		await _go(&"greenbough", 900)  # a town: nothing to hit
-		for job: Array in [[&"archer", &"hunters_bow", &"", &"bow_shot"], [&"pirate", &"deckhand_scimitar", &"deckhand_pistol", &"broadside"],
-				[&"thief", &"footpad_dagger", &"footpad_star", &"star_scatter"], [&"mage", &"novice_wand", &"novice_tome", &"fire_burst"]]:
+		for job: Array in [[&"archer", &"hunters_bow", &"bow_shot"], [&"pirate", &"deckhand_scimitar", &"broadside"],
+				[&"thief", &"footpad_dagger", &"star_scatter"], [&"mage", &"novice_wand", &"fire_burst"]]:
 			for c: Character in [ch, Game.me]:
 				c.job = Content.job(job[0])
 				c.equipment.take(&"weapon")
-				c.equipment.take(&"shield")
 				c.equipment.put(&"weapon", ItemStack.exact(Content.item(job[1])))
-				if job[2] != &"":
-					c.equipment.put(&"shield", ItemStack.exact(Content.item(job[2])))
 			_me().dirty_character = true
 			await _physics(150)  # the job's ribbon and light fade
-			var skill: SkillDef = Content.skill(job[3])
+			var skill: SkillDef = Content.skill(job[2])
 			# the shot leaves on the attack's last frame (the punch)
 			var frames := HeroLookDef.of(Game.me.look).frames
 			var into := 0.4
@@ -582,7 +579,7 @@ func _run() -> void:
 	if only == "" or only == "windows":
 		# Inventory, equipment and character windows with some loot, one tooltip showing.
 		world.scenes.skip()  # (the intro cutscene would hide the windows)
-		for id in [&"leather_boots", &"petal_cape", &"moss_ring", &"oak_shield", &"dawn_blade"]:
+		for id in [&"bronze_mail", &"ember_helm", &"moss_ring", &"dawn_blade"]:
 			ch.inventory.add(Content.item(id))
 		for id in [&"boar_tusk", &"petal_wing", &"dewling_droplet"]:
 			ch.inventory.add(Content.item(id), randi_range(3, 40))

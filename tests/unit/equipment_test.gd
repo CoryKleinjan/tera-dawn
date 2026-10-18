@@ -20,8 +20,8 @@ func test_fits_only_matching_places() -> void:
 	var ring := fx.equip(&"t_ring", EquipDef.Slot.RING)
 	check(Equipment.fits(ring, &"ring_1"), "ring_1")
 	check(Equipment.fits(ring, &"ring_2"), "ring_2")
-	check(not Equipment.fits(ring, &"hat"), "not hat")
-	check(not Equipment.fits(fx.equip(), &"shield"), "sword not in shield")
+	check(not Equipment.fits(ring, &"armor"), "not armor")
+	check(not Equipment.fits(fx.equip(), &"armor"), "sword not in armor")
 
 func test_rings_fill_both_ring_places_then_first() -> void:
 	var eq := Equipment.new()
@@ -45,7 +45,7 @@ func test_put_returns_previous_and_take_removes() -> void:
 func test_bonus_sums_every_worn_piece() -> void:
 	var eq := Equipment.new()
 	eq.put(&"weapon", ItemStack.exact(fx.equip(&"t_a", EquipDef.Slot.WEAPON, {"attack": 10, "accuracy": 2})))
-	eq.put(&"hat", ItemStack.exact(fx.equip(&"t_b", EquipDef.Slot.HAT, {"defense": 5, "accuracy": 3})))
+	eq.put(&"armor", ItemStack.exact(fx.equip(&"t_b", EquipDef.Slot.ARMOR, {"defense": 5, "accuracy": 3})))
 	var b := eq.bonus()
 	check_eq(b.attack, 10, "attack")
 	check_eq(b.defense, 5, "defense")
@@ -85,6 +85,14 @@ func test_load_drops_bad_places_and_misfits() -> void:
 		"shoes": {"id": "t_unknown"},
 	})
 	check_eq(eq.worn.size(), 0, "nothing loaded")
+
+func test_old_saves_drop_what_was_in_the_slots_that_are_gone() -> void:
+	fx.equip(&"t_cap", EquipDef.Slot.ARMOR)
+	fx.equip(&"t_a", EquipDef.Slot.WEAPON)
+	var eq := Equipment.new()
+	eq.load_dict({"hat": {"id": "t_cap"}, "top": {"id": "t_cap"}, "shield": {"id": "t_cap"},
+		"weapon": {"id": "t_a"}})
+	check_eq(eq.worn.keys(), [&"weapon"], "the weapon stays on; the old hat, top and off-hand places are dropped")
 
 # ---------- wearing through the character ----------
 
@@ -151,8 +159,8 @@ func test_equip_to_named_place_and_invalid_place_falls_back() -> void:
 	c.inventory.add(ring, 2)
 	c.gear.equip(0, &"ring_2")
 	check(c.equipment.at(&"ring_2") != null, "went to ring_2")
-	c.gear.equip(1, &"hat")
-	check(c.equipment.at(&"ring_1") != null, "a hat place isn't for rings: first free ring place")
+	c.gear.equip(1, &"armor")
+	check(c.equipment.at(&"ring_1") != null, "the armor place isn't for rings: first free ring place")
 
 func test_unequip_to_chosen_free_slot() -> void:
 	var c := fx.character()
@@ -169,8 +177,8 @@ func test_unequip_to_taken_or_invalid_slot_uses_first_free() -> void:
 	c.equipment.put(&"weapon", ItemStack.exact(fx.equip(&"t_a")))
 	c.gear.unequip(&"weapon", 0)
 	check_eq(c.inventory.at(ItemDef.Tab.EQUIP, 1).item.id, &"t_a", "slot 0 taken: went to 1")
-	c.equipment.put(&"hat", ItemStack.exact(fx.equip(&"t_h", EquipDef.Slot.HAT)))
-	c.gear.unequip(&"hat", 99)
+	c.equipment.put(&"armor", ItemStack.exact(fx.equip(&"t_h", EquipDef.Slot.ARMOR)))
+	c.gear.unequip(&"armor", 99)
 	check_eq(c.inventory.at(ItemDef.Tab.EQUIP, 2).item.id, &"t_h", "bad index: first free")
 
 func test_unequip_with_full_bag_is_refused() -> void:

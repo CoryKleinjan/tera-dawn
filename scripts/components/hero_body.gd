@@ -1,11 +1,11 @@
 class_name HeroBody
 extends RefCounted
 ## How a hero shows in the world, yours (TDPlayer) or another player's (TDAvatar): his look
-## (HeroLookDef), painted whole frame by frame, and the pet trotting after him (TDCompanion).
-## Both kinds of hero draw the same way.
+## (HeroLookDef) wearing his set pieces (HeroOutfitDef), painted whole frame by frame, and the
+## pet trotting after him (TDCompanion). Both kinds of hero draw the same way.
 ##
-##   body = HeroBody.new(self, world, z)               # in _ready: adds the companion
-##   body.draw(face, pet, animation, look)             # every frame
+##   body = HeroBody.new(self, world, z)                       # in _ready: adds the companion
+##   body.draw(face, pet, animation, look, armor, weapon)      # every frame
 
 ## What he is doing that shows him standing: these have no frames of their own.
 const STANDING := [&"ready", &"turn", &"level_up"]
@@ -54,8 +54,9 @@ func hold(ticks: int) -> void:
 	_since += ticks
 
 ## Draws the hero this frame, between his last two ticks (TDWorld.drawn), facing `face`, doing
-## `anim` (TDPlayer._animation) in `look`. His pet (an item id, or empty) follows him.
-func draw(face: int, pet: StringName, anim: StringName, look: HeroLookDef) -> void:
+## `anim` (TDPlayer._animation) in `look`, wearing `armor` and holding `weapon` (EquipDef ids,
+## empty for none). His pet (an item id, or empty) follows him.
+func draw(face: int, pet: StringName, anim: StringName, look: HeroLookDef, armor := &"", weapon := &"") -> void:
 	var at := _world.drawn(_owner)
 	companion.set_pet(pet, _owner.position)
 	companion.follow(at, face, _z, _world.layout.ground_below(_owner.position))
@@ -63,12 +64,13 @@ func draw(face: int, pet: StringName, anim: StringName, look: HeroLookDef) -> vo
 		_anim = anim
 		_since = Engine.get_physics_frames()
 	_look = look
-	var a := resolve(look.frames, anim)
-	var i := frame_at(look.frames, a, float(Engine.get_physics_frames() - _since) / Engine.physics_ticks_per_second, TIMED.get(a, 0))
-	var shown := [look, a, i, face]
+	var frames := look.frames_for(armor, weapon)
+	var a := resolve(frames, anim)
+	var i := frame_at(frames, a, float(Engine.get_physics_frames() - _since) / Engine.physics_ticks_per_second, TIMED.get(a, 0))
+	var shown := [frames, a, i, face]
 	if shown != _shown:
 		_shown = shown
-		var tex := look.frames.get_frame_texture(a, i)
+		var tex := frames.get_frame_texture(a, i)
 		TDStage.style_sprite(_sprite, TDStage.TEXEL / TDStage.art_density(tex))
 		_sprite.texture = tex
 		_sprite.flip_h = face < 0

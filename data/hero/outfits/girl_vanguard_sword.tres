@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="HeroOutfitDef" format=3]
+
+[ext_resource type="Script" path="res://scripts/data/hero_outfit_def.gd" id="1_outfit"]
+[ext_resource type="SpriteFrames" path="res://assets/animations/hero/outfits/girl_vanguard_sword.tres" id="2_frames"]
+
+[resource]
+script = ExtResource("1_outfit")
+id = &"girl_vanguard_sword"
+look = &"girl"
+armor = &""
+weapon = &"vanguard_sword"
+frames = ExtResource("2_frames")

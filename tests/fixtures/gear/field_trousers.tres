@@ -19,6 +19,6 @@ sprite_scale = 0.4
 glow_color = Color(0.62, 0.85, 1.0, 1.0)
 pickup_effect = ExtResource("pickup")
 sell_price = 6
-slot = 3
+slot = 1
 stats = SubResource("stats")
 variance = 1

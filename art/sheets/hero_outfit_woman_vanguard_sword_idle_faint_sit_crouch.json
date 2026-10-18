@@ -1,0 +1,37 @@
+{
+  "source": "art/source/hero/outfits/woman_vanguard_sword_idle_faint_sit_crouch.png",
+  "out_dir": "art/build/hero/outfits/woman_vanguard_sword",
+  "cells": [
+    [
+      "idle3",
+      "idle4",
+      "faint1",
+      "faint2"
+    ],
+    [
+      "faint3",
+      "faint4",
+      "sit",
+      "crouch"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      675,
+      1350
+    ],
+    "cols": [
+      0,
+      600,
+      1200,
+      1800,
+      2400
+    ]
+  },
+  "inset": 6,
+  "label_band": 0,
+  "keep": "largest",
+  "scale": 0.102,
+  "save": false
+}

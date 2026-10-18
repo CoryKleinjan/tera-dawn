@@ -334,6 +334,8 @@ func kill_mob(m: SimMob, killer: SimPlayer) -> void:
 	for i in m.children.size():
 		m.children[i].wake(m.position.x + (i - (m.children.size() - 1) / 2.0) * 30.0, killer.peer)
 	var from := m.body_position()
+	if killer.character.gear.on_kill():  # a whole set's kill buff (Battle Fury)
+		killer.dirty_character = true
 	# a kill pays as much EXP as Dawn Essence
 	server.give_essence(killer, m.essence(), from)
 	server.give_xp(killer, m.essence())

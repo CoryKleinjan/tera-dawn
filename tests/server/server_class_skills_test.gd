@@ -165,12 +165,7 @@ func test_all_hands_makes_attacks_come_sooner() -> void:
 	_use(ann, &"basic_attack")
 	check(ann.cooldown < plain, "shorter cooldown (%d < %d)" % [ann.cooldown, plain])
 
-func test_an_off_hand_skill_needs_its_off_hand() -> void:
+func test_throwing_stars_need_nothing_but_the_skill() -> void:
 	_setup()
 	_use(ann, &"star_scatter")
-	check(h.told(2, "Star Scatter needs throwing stars in your off-hand slot."), "told what's missing")
-	ann.character.equipment.put(&"shield", ItemStack.exact(Content.item(&"iron_star")))
-	ann.character.recalc()
-	ann.recharge.clear()
-	_use(ann, &"star_scatter")
-	check_eq(h.last(2, &"ev_skill")[1], &"star_scatter", "thrown with stars in the off-hand slot")
+	check_eq(h.last(2, &"ev_skill")[1], &"star_scatter", "thrown with no off-hand (there is none) and no ammo")

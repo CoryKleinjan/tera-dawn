@@ -23,7 +23,7 @@ func before_each() -> void:
 	cap = EquipDef.new()
 	cap.id = &"test_cap"
 	cap.display_name = "Test Cap"
-	cap.slot = EquipDef.Slot.HAT
+	cap.slot = EquipDef.Slot.ARMOR
 	cap.stats = StatBlock.new()
 	cap.stats.attack = 2
 	h.add_item(cap)

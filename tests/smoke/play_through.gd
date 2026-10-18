@@ -20,9 +20,9 @@ func start_game() -> void:
 	var creator := world.hud.title.creator
 	_check(creator.visible and not select.visible and not world.started, "Create opens the character creator")
 	creator.name_field.text = "Tester"
-	creator.step("outfit:%d" % EquipDef.Slot.TOP, 1)
-	var top: EquipDef = creator.made.outfit[EquipDef.Slot.TOP]
-	_check(creator.value_text("outfit:%d" % EquipDef.Slot.TOP) == top.display_name, "the creator shows the outfit picked")
+	creator.step("outfit:%d" % EquipDef.Slot.ARMOR, 1)
+	var top: EquipDef = creator.made.outfit[EquipDef.Slot.ARMOR]
+	_check(creator.value_text("outfit:%d" % EquipDef.Slot.ARMOR) == top.display_name, "the creator shows the outfit picked")
 	creator.create_button.pressed.emit()
 	await _ticks(2)
 	_check(select.visible and select.selected == "Tester" and not world.started, "Create goes back to character select with the new character picked")
@@ -30,7 +30,7 @@ func start_game() -> void:
 	await _ticks(2)
 	_me().inv = 100000 # keep monsters from hurting the player mid-test
 	_check(world.started and not world.hud.title.visible and Game.me.name == "Tester", "Play starts a single-player game as the named character")
-	_check(Game.me.equipment.at(&"top").item == top, "the character has the outfit picked")
+	_check(Game.me.equipment.at(&"armor").item == top, "the character has the outfit picked")
 	_check(Game.me.job.id == Character.START_JOB, "a new character starts as a Beginner")
 	_check(Net.server != null and _me() != null, "single player runs its own server")
 	p = world.player

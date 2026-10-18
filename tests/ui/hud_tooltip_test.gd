@@ -112,9 +112,9 @@ func test_gear_compares_with_what_is_worn() -> void:
 		check(lines.has("  %s %s" % [StatBlock.format(&"attack", diff), StatBlock.LABELS[&"attack"]]), "the comparison gives the attack difference %+d" % diff)
 	var same := _texts(_lines_for(ItemStack.exact(sword.item), "", true))
 	check(same.has("  Same stats"), "the same weapon compares as Same stats")
-	var hat: EquipDef = Content.item(&"leaf_cap")
-	check(_texts(_lines_for(ItemStack.exact(hat), "", true)).has("Nothing worn in this slot"), "a hat with no hat worn")
-	check(not _texts(_lines_for(ItemStack.exact(hat), "", false)).has("Nothing worn in this slot"), "no comparison unless asked")
+	var ring: EquipDef = Content.item(&"moss_ring")
+	check(_texts(_lines_for(ItemStack.exact(ring), "", true)).has("Nothing worn in this slot"), "a ring with no ring worn")
+	check(not _texts(_lines_for(ItemStack.exact(ring), "", false)).has("Nothing worn in this slot"), "no comparison unless asked")
 
 func test_use_tooltips_say_what_they_restore() -> void:
 	for item: ItemDef in Content.items.values():

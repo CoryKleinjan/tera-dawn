@@ -66,9 +66,6 @@ const AMBUSH_GROUP := 110.0
 @export var projectile: ProjectileDef
 ## Weapon kinds it needs (EquipDef.weapon_kind); empty for any.
 @export var weapons: Array[StringName] = []
-## What it needs in the off-hand slot (EquipDef.offhand_kind: "star", "book", "quiver",
-## "pistol"); empty for anything or nothing.
-@export var offhand: Array[StringName] = []
 ## How hard it knocks monsters back, against a normal hit.
 @export var knockback := 1.0
 ## Above 0, the blast lands on the nearest monster in reach and also hits every monster within

@@ -7,7 +7,7 @@ var cap: EquipDef
 func before_each() -> void:
 	cap = EquipDef.new()
 	cap.id = &"test_cap"
-	cap.slot = EquipDef.Slot.HAT
+	cap.slot = EquipDef.Slot.ARMOR
 	cap.stats = StatBlock.new()
 	cap.stats.attack = 10
 	cap.stats.defense = 4
@@ -34,7 +34,7 @@ func test_the_top_tier_has_no_next() -> void:
 	check(ItemStack.create(Content.item(&"green_leaf")).next_tier() == null, "only gear has tiers")
 
 func test_the_tier_is_saved_and_old_saves_load_at_tier_1() -> void:
-	var real: EquipDef = Content.item(&"squire_helm")
+	var real: EquipDef = Content.item(&"vanguard_armor")
 	var s := ItemStack.exact(real)
 	s.tier = 4
 	check_eq(ItemStack.from_dict(s.to_dict()).tier, 4, "round trip")

@@ -1,46 +1,22 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=15 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
-[ext_resource type="Resource" path="res://data/items/equips/squire_helm.tres" id="e_squire_helm"]
-[ext_resource type="Resource" path="res://data/items/equips/squire_jerkin.tres" id="e_squire_jerkin"]
-[ext_resource type="Resource" path="res://data/items/equips/squire_trousers.tres" id="e_squire_trousers"]
-[ext_resource type="Resource" path="res://data/items/equips/squire_boots.tres" id="e_squire_boots"]
-[ext_resource type="Resource" path="res://data/items/equips/squire_sword.tres" id="e_squire_sword"]
-[ext_resource type="Resource" path="res://data/items/equips/squire_shield.tres" id="e_squire_shield"]
+[ext_resource type="Resource" path="res://data/items/equips/vanguard_armor.tres" id="e_vanguard_armor"]
+[ext_resource type="Resource" path="res://data/items/equips/vanguard_sword.tres" id="e_vanguard_sword"]
 
-[sub_resource type="Resource" id="Entry_squire_helm"]
+[sub_resource type="Resource" id="Entry_vanguard_armor"]
 script = ExtResource("2_shop_entry")
-item = ExtResource("e_squire_helm")
+item = ExtResource("e_vanguard_armor")
 price = 0
 
-[sub_resource type="Resource" id="Entry_squire_jerkin"]
+[sub_resource type="Resource" id="Entry_vanguard_sword"]
 script = ExtResource("2_shop_entry")
-item = ExtResource("e_squire_jerkin")
-price = 0
-
-[sub_resource type="Resource" id="Entry_squire_trousers"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("e_squire_trousers")
-price = 0
-
-[sub_resource type="Resource" id="Entry_squire_boots"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("e_squire_boots")
-price = 0
-
-[sub_resource type="Resource" id="Entry_squire_sword"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("e_squire_sword")
-price = 0
-
-[sub_resource type="Resource" id="Entry_squire_shield"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("e_squire_shield")
+item = ExtResource("e_vanguard_sword")
 price = 0
 
 [resource]
 script = ExtResource("1_shop_def")
 id = &"forge_armory"
 display_name = "Emberforge Armory"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Entry_squire_helm"), SubResource("Entry_squire_jerkin"), SubResource("Entry_squire_trousers"), SubResource("Entry_squire_boots"), SubResource("Entry_squire_sword"), SubResource("Entry_squire_shield")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Entry_vanguard_armor"), SubResource("Entry_vanguard_sword")])

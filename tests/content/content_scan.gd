@@ -32,7 +32,8 @@ const EXPECTED := {
 	"tears": ["TearDef"],
 	"declines": ["DeclineDef"],
 	"gear_tiers": ["GearTierDef"],
-	"hero": ["HeroLookDef", "HeldDef"],
+	"gear_sets": ["GearSetDef"],
+	"hero": ["HeroLookDef", "HeroOutfitDef", "HeldDef"],
 }
 
 ## Every .tres file under `dir`, sorted.

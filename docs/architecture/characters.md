@@ -23,10 +23,17 @@ then character select shows the list (name and job) with the new character picke
   look's animation of that name (`HeroBody.resolve`: a few poses such as "ready" stand, and every
   skill's motion plays "attack", the Surge's punch, until the job sets paint their own), and the
   companion (the pet). Shots leave from his punching fist (`HeroLookDef.fist`,
-  `HeroBody.muzzle`). Other players' looks reach you in their info (`SimPlayer.info`). Gear
-  doesn't show on him yet: armor and weapons will each be one set item painted onto the whole
-  character for every look. The sizes the game needs for a hero (`TDPlayer.HEIGHT`, `WIDTH`,
+  `HeroBody.muzzle`). Other players' looks and worn set pieces reach you in their info
+  (`SimPlayer.info`, `Gear.shown`). The sizes the game needs for a hero (`TDPlayer.HEIGHT`, `WIDTH`,
   `CHEST`, `SimPlayer.HURTBOX_SIZE`) are constants.
+- **Outfits** are `HeroOutfitDef`s (`data/hero/outfits/`, `Content.outfits`): a look painted
+  wearing a set's pieces, one per pair (armor and weapon, armor with an empty fist, plain clothes
+  with the weapon), every frame painted whole like the look itself (`art/sheets/hero_outfit_<look>_<set>_<move>.json`,
+  sources in `art/source/hero/outfits/`). `HeroLookDef.frames_for(armor, weapon)` picks the
+  painting of that pair, else the armor's, else the weapon's, else plain clothes, and
+  `HeroBody.draw` plays it. A frame whose art crosses its cell line gets a manifest of its own
+  over a wider `region` (the sword-only dash's second frame). Adding a set means painting its
+  three outfits for every look, cutting them and adding a `HeroOutfitDef` for each.
 - **Adding a look**: paint its sheets (one per move, the cells the other looks' manifests name),
   copy a look's manifests with its id, cut them, and add its `HeroLookDef` with its `order` and
   `fist` (where the punching fist is on the last "attack" frame).

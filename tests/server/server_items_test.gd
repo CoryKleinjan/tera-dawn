@@ -82,12 +82,13 @@ func test_equipping_gear_from_the_bag() -> void:
 	var cap: EquipDef = Content.item(&"leaf_cap")
 	c.inventory.put(ItemDef.Tab.EQUIP, 2, ItemStack.exact(cap))
 	var def_before := c.stats.defense
-	h.ask(2, &"req_equip", [2, &"hat"])
-	check(c.equipment.at(&"hat") != null and c.equipment.at(&"hat").item == cap, "wearing it")
-	check(c.inventory.at(ItemDef.Tab.EQUIP, 2) == null, "out of the bag")
-	check_eq(c.stats.defense, def_before + cap.stats.defense, "stats added")
+	var old := c.equipment.at(&"armor")
+	h.ask(2, &"req_equip", [2, &"armor"])
+	check(c.equipment.at(&"armor") != null and c.equipment.at(&"armor").item == cap, "wearing it")
+	check(c.inventory.at(ItemDef.Tab.EQUIP, 2) == old, "out of the bag, the armor it replaced in its slot")
+	check_eq(c.stats.defense, def_before - old.total().defense + cap.stats.defense, "stats swapped")
 	h.step(1)
-	check_eq(h.last(2, &"ev_character")[0]["equipment"]["hat"]["id"], "leaf_cap", "client told")
+	check_eq(h.last(2, &"ev_character")[0]["equipment"]["armor"]["id"], "leaf_cap", "client told")
 
 func test_equipping_swaps_with_what_was_worn() -> void:
 	var old := c.equipment.at(&"weapon")
@@ -110,20 +111,20 @@ func test_gear_has_no_level_to_wear_it() -> void:
 	var cap := (Content.item(&"leaf_cap") as EquipDef).duplicate() as EquipDef
 	cap.required_level = 5
 	c.inventory.put(ItemDef.Tab.EQUIP, 0, ItemStack.exact(cap))
-	h.ask(2, &"req_equip", [0, &"hat"])
-	check(c.equipment.at(&"hat") != null and c.equipment.at(&"hat").item == cap, "worn: levels are gone")
+	h.ask(2, &"req_equip", [0, &"armor"])
+	check(c.equipment.at(&"armor") != null and c.equipment.at(&"armor").item == cap, "worn: levels are gone")
 
 func test_taking_gear_off_puts_it_in_the_bag() -> void:
-	var top := c.equipment.at(&"top")
-	h.ask(2, &"req_unequip", [&"top", 7])
-	check(c.equipment.at(&"top") == null, "not worn")
+	var top := c.equipment.at(&"armor")
+	h.ask(2, &"req_unequip", [&"armor", 7])
+	check(c.equipment.at(&"armor") == null, "not worn")
 	check(c.inventory.at(ItemDef.Tab.EQUIP, 7) == top, "in the chosen slot")
 
 func test_taking_gear_off_into_a_full_bag_is_refused() -> void:
 	for i in Inventory.SLOTS:
 		c.inventory.put(ItemDef.Tab.EQUIP, i, ItemStack.exact(Content.item(&"leaf_cap")))
-	h.ask(2, &"req_unequip", [&"top", -1])
-	check(c.equipment.at(&"top") != null, "still worn")
+	h.ask(2, &"req_unequip", [&"armor", -1])
+	check(c.equipment.at(&"armor") != null, "still worn")
 	check(h.told(2, "Your Equip inventory is full."), "told why")
 
 func test_moving_items_in_the_bag() -> void:

@@ -136,6 +136,7 @@ func motion() -> Array:
 	return [peer, position.x, position.y, face, animation, flags]
 
 ## What else other clients need to show this player, which changes rarely:
-## [name, job, guild, pet, look (HeroLookDef.id)].
+## [name, job, guild, pet, look (HeroLookDef.id), armor, weapon (Gear.shown)].
 func info() -> Array:
-	return [character.name, character.job.id, character.guild, character.pet, character.look]
+	var shown := character.gear.shown()
+	return [character.name, character.job.id, character.guild, character.pet, character.look, shown[0], shown[1]]

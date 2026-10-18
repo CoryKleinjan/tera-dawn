@@ -3,26 +3,20 @@ extends ItemDef
 ## A piece of gear: where it's worn, what it takes to wear it and the stats it gives.
 ## Each one that drops rolls its own stats around `stats` (see `variance`).
 
-## Kinds of gear. A slot kind can have several places on the body (two rings).
-enum Slot { WEAPON, HAT, TOP, BOTTOM, SHOES, GLOVES, CAPE, EARRINGS, PENDANT, RING, SHIELD }
-const SLOT_NAMES := ["Weapon", "Hat", "Top", "Bottom", "Shoes", "Gloves", "Cape", "Earrings", "Pendant", "Ring", "Off-hand"]
+## Kinds of gear. A slot kind can have several places on the body (two rings). A job set is
+## one Armor piece (hat to shoes, cape and off-hand all in one) and one weapon; earrings,
+## pendants and rings only give stats. The numbers are what the data files hold.
+enum Slot { WEAPON = 0, ARMOR = 1, EARRINGS = 7, PENDANT = 8, RING = 9 }
+const SLOT_NAMES := {Slot.WEAPON: "Weapon", Slot.ARMOR: "Armor", Slot.EARRINGS: "Earrings",
+	Slot.PENDANT: "Pendant", Slot.RING: "Ring"}
 
 @export var slot: Slot = Slot.WEAPON
-## What each off-hand kind is called in messages ("Learn Star Scatter: needs throwing stars").
-const OFFHAND_NAMES := {&"shield": "a shield", &"star": "throwing stars", &"book": "a book",
-	&"quiver": "a quiver", &"pistol": "a pistol"}
 
 @export_group("Weapon")
 ## "sword", "dagger", "bow", "wand", "staff", "knuckle"... Skills can require one.
 @export var weapon_kind: StringName
 ## Replaces the plain attack while wielded (a bow's shot). Null keeps the basic attack.
 @export var basic_attack: SkillDef
-
-@export_group("Off-hand slot")
-## What a piece worn in the off-hand slot is: "shield", or a job's off-hand ("star" for a
-## Thief's throwing stars, "book" for a Magician, "quiver" for an Archer, "pistol" for a
-## Pirate). Skills can need one (SkillDef.offhand). Off-hands are gear, never used up.
-@export var offhand_kind: StringName = &"shield"
 
 @export_group("Worn look")
 ## The old layered hero's paintings of it (this group): the hero is now painted whole
@@ -95,10 +89,6 @@ func _icon_from_look() -> void:
 
 func stack_size() -> int:
 	return 1
-
-## How an off-hand kind reads in a sentence: "throwing stars", "a pistol".
-static func offhand_name(kind: StringName) -> String:
-	return OFFHAND_NAMES.get(kind, "a " + String(kind))
 
 ## "Warriors and Pirates" for a list of job lines.
 static func families_text(families: Array[StringName]) -> String:

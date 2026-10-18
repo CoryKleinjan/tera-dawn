@@ -1,6 +1,6 @@
 extends Node
 ## Autoload "Content": every monster, NPC, item, skill, effect, job, map, shop, quest,
-## achievement, cutscene and hero look in data/, by id.
+## achievement, cutscene, hero look and outfit in data/, by id.
 ##
 ## Content is plain Godot resources (.tres) loaded from these folders at startup, so adding
 ## a monster or a map means adding a file, not code. Lookups by an unknown id push an error
@@ -20,9 +20,11 @@ const FOLDERS := {
 	"achievements": "res://data/achievements",
 	"cutscenes": "res://data/cutscenes",
 	"looks": "res://data/hero/looks",
+	"outfits": "res://data/hero/outfits",
 	"tears": "res://data/tears",
 	"declines": "res://data/declines",
 	"gear_tiers": "res://data/gear_tiers",
+	"gear_sets": "res://data/gear_sets",
 }
 
 var monsters := {}
@@ -42,12 +44,16 @@ var achievements := {}
 var cutscenes := {}
 ## HeroLookDefs, the looks the creator offers (HeroLookDef.all lists them in order).
 var looks := {}
+## HeroOutfitDefs, each look painted wearing set pieces (HeroOutfitDef.find).
+var outfits := {}
 ## TearDefs: the hidden tears and what finishing one does to its zone (TearState).
 var tears := {}
 ## DeclineDefs: each step of the world's decline as tears are finished (TearState).
 var declines := {}
 ## GearTierDefs: the tiers an enchanter can raise gear through (ItemStack.tier).
 var gear_tiers := {}
+## GearSetDefs: each job set's two pieces and the effect of wearing both (Gear.full_set).
+var gear_sets := {}
 
 func _ready() -> void:
 	for kind in FOLDERS:

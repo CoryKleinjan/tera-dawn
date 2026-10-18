@@ -6,27 +6,19 @@ signal changed
 
 ## Places on the body, in the order the equipment window lays them out.
 const PLACES: Array[StringName] = [
-	&"hat", &"earrings", &"pendant", &"cape", &"top", &"weapon",
-	&"gloves", &"bottom", &"shield", &"shoes", &"ring_1", &"ring_2",
+	&"armor", &"weapon", &"earrings", &"pendant", &"ring_1", &"ring_2",
 ]
 ## Which places each kind of gear can go in.
 const PLACES_FOR := {
 	EquipDef.Slot.WEAPON: [&"weapon"],
-	EquipDef.Slot.HAT: [&"hat"],
-	EquipDef.Slot.TOP: [&"top"],
-	EquipDef.Slot.BOTTOM: [&"bottom"],
-	EquipDef.Slot.SHOES: [&"shoes"],
-	EquipDef.Slot.GLOVES: [&"gloves"],
-	EquipDef.Slot.CAPE: [&"cape"],
+	EquipDef.Slot.ARMOR: [&"armor"],
 	EquipDef.Slot.EARRINGS: [&"earrings"],
 	EquipDef.Slot.PENDANT: [&"pendant"],
 	EquipDef.Slot.RING: [&"ring_1", &"ring_2"],
-	EquipDef.Slot.SHIELD: [&"shield"],
 }
 const PLACE_NAMES := {
-	&"hat": "Hat", &"earrings": "Earrings", &"pendant": "Pendant", &"cape": "Cape",
-	&"top": "Top", &"weapon": "Weapon", &"gloves": "Gloves", &"bottom": "Bottom",
-	&"shield": "Off-hand", &"shoes": "Shoes", &"ring_1": "Ring", &"ring_2": "Ring",
+	&"armor": "Armor", &"weapon": "Weapon", &"earrings": "Earrings", &"pendant": "Pendant",
+	&"ring_1": "Ring", &"ring_2": "Ring",
 }
 
 ## place -> ItemStack
@@ -83,6 +75,8 @@ func to_dict() -> Dictionary:
 		out[String(p)] = worn[p].to_dict()
 	return out
 
+## Loads what to_dict() wrote. Gear in places that are gone (the old hat, top, bottom, shoes,
+## gloves, cape and off-hand) or that the game no longer has is dropped.
 func load_dict(data: Dictionary) -> void:
 	worn.clear()
 	for key in data:

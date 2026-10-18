@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="GearSetDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/gear_set_def.gd" id="1_set"]
+[ext_resource type="Resource" path="res://data/items/equips/vanguard_armor.tres" id="2_armor"]
+[ext_resource type="Resource" path="res://data/items/equips/vanguard_sword.tres" id="3_weapon"]
+[ext_resource type="Resource" path="res://data/skills/sets/battle_fury.tres" id="4_buff"]
+
+[resource]
+script = ExtResource("1_set")
+id = &"vanguard"
+display_name = "Vanguard"
+armor = ExtResource("2_armor")
+weapon = ExtResource("3_weapon")
+kill_buff = ExtResource("4_buff")

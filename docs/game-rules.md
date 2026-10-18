@@ -28,9 +28,10 @@ update this page when one changes. Each zone's own look and music are in
 - Every move has its full animation, matching the 8-frame skill effects: the relic moves (Dash,
   Double Jump, Surge, Slam) are 8 painted frames each.
 - Armor is one set item and a weapon is one set item. Each set is painted onto the whole
-  character, for every look and frame; each job only gets the sets and weapons it can use. Until
-  a job's sets are painted, gear doesn't show on him, every attack and skill plays the Surge's
-  punch, and shots leave from that fist.
+  character, for every look and frame; each job only gets the sets and weapons it can use. The
+  armor shows whenever it's worn: armor and weapon together, armor with an empty fist, plain
+  clothes with the weapon, or plain clothes. Until a job's sets are painted, its gear doesn't
+  show on him, every attack and skill plays the Surge's punch, and shots leave from that fist.
 - Gear is painted whole on every frame: no holes, gaps, notches or bites where an arm, hand or
   leg crosses it, nothing cut off flat, and both shoes or boots on every pose (sitting and lying
   down too). Every result is checked frame by frame on a flat colour before it goes in.
@@ -140,19 +141,22 @@ update this page when one changes. Each zone's own look and music are in
   and weapons (no two-handed weapons), and it adds four skills of
   its own that differ by lean: three skills and one ultimate that hits a very large area.
 - There is no Harbinger job: the harbinger is only a story reveal.
-- Off-hand slot (once the Shield slot): Warriors and Beginners wear a shield, a Thief throwing
-  stars (with a dagger in hand), a Magician a book, an Archer a quiver worn on the back, a Pirate a pistol (with a scimitar). Stars
-  and pistols never run out. A Thief's dagger hits one monster and the stars hit a crowd; a
-  Pirate's scimitar hits one and the pistol a crowd.
+- No off-hand slot (Cory Oct 18): a shield, stars, book, quiver or pistol is part of the job
+  set's armor, painted on with it. Star Scatter and Broadside need no off-hand and never run
+  out. A Thief's dagger hits one monster and the stars hit a crowd; a Pirate's scimitar hits
+  one and the pistol a crowd.
 
 ## Gear
 
-- Gear is drawn on the hero (see Hero) but has no icons yet: a slot shows an item's name in
-  place of its icon. Each first job has a
-  starter armor set (hat, top, trousers, shoes; that job and its blends only), sold in its
-  town's shop: Warrior Squire set (Emberforge), Magician Novice set (Lumewood), Thief Footpad set
-  (Lanternfall), Archer Hunter's set (Greenbough), Pirate Deckhand set (Driftcove). Tests still
-  bring their own plain gear (`tests/fixtures/gear`) for what the game doesn't have yet.
+- Slots (Cory Oct 18): Weapon, Armor, Earrings, Pendant and two Rings. The Armor piece is hat,
+  top, bottom, shoes, gloves, cape and off-hand in one; earrings, pendants and rings only give
+  stats. A job set is one Armor piece and one weapon (that job and its blends only), each with
+  its own painted icon matching what the hero wears, and its own effect while both are worn.
+  Each job gets two sets. The Warrior's Vanguard set (helm, navy tabard, blue shield; a steel
+  longsword) is sold at the Emberforge Armory from the start; its Battle Fury makes each kill
+  swing 6% faster, up to 5 stacks, until 8 seconds pass with no kill, and ends when a piece
+  comes off. Other jobs keep only their starter weapons and wear plain clothes until their sets
+  are painted. Tests bring their own plain gear (`tests/fixtures/gear`).
 - No upgrade scrolls (Cory Oct 17): gear gets better through enchantments. Every piece has 3
   rune slots. An enchanter sets a rune from the bag in a slot of a piece in the bag for the
   rune's Dawnshard fee; it always works, and a rune set over another loses the old one. A worn
@@ -323,8 +327,8 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 - Painted travel leather and parchment. No fake stitching; the close X fits the style; the minimap
   frame matches the bottom bar.
 - Monster HP bars have no dragon emblem. Quest marks are a painted "!", "?" and three dots.
-- The equipment window lays its slots out like a person (hat on top, shoes at the bottom), with
-  what the gear adds beside them.
+- The equipment window lays its slots out like a person (earrings on top, the armor in the
+  middle with the weapon beside it, rings at the bottom), with what the gear adds beside them.
 - No clouds on the title screen.
 - The world map shows towns always and a field only once visited (as "???" before). A zone drawn
   to shape (Greenbough, Dawnharbor Coast, Lumewood) shows a room only once visited, like Hollow Knight: its ledges and

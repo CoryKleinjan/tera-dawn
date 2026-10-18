@@ -16,6 +16,16 @@ extends Resource
 ## shots leave from it until the job sets put a weapon in his hand.
 @export var fist := Vector2.ZERO
 
+## His animations wearing `armor` and holding `weapon` (EquipDef ids, empty for none), each
+## set piece painted onto him whole (HeroOutfitDef): the painting of that pair, else of the
+## armor with an empty hand, else of plain clothes with the weapon, else plain clothes.
+func frames_for(armor: StringName, weapon: StringName) -> SpriteFrames:
+	for pair in [[armor, weapon], [armor, &""], [&"", weapon]]:
+		var o := HeroOutfitDef.find(id, pair[0], pair[1]) if pair != [&"", &""] else null
+		if o:
+			return o.frames
+	return frames
+
 ## Every look, in the creator's order.
 static func all() -> Array[HeroLookDef]:
 	var out: Array[HeroLookDef] = []

@@ -57,15 +57,9 @@ func check() -> void:
 	ch.equipment.take(&"weapon")
 	ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"rusty_dagger")))
 	ch.skills.learned[&"star_scatter"] = 1
-	_check(ch.skills.use_problem(Content.skill(&"star_scatter")).contains("throwing stars"), "Star Scatter needs stars in the off-hand slot")
-	var shield := ch.equipment.take(&"shield")
-	ch.equipment.put(&"shield", ItemStack.exact(Content.item(&"iron_star")))
-	_check(ch.skills.use_problem(Content.skill(&"star_scatter")) == "", "and needs no ammo")
+	_check(ch.skills.use_problem(Content.skill(&"star_scatter")) == "", "Star Scatter needs no off-hand and no ammo")
 	ch.skills.learned[&"riptide_combo"] = 1
 	_check(ch.skills.use_problem(Content.skill(&"riptide_combo")).contains("needs a sword"), "Riptide Combo needs a scimitar (a sword)")
-	ch.equipment.take(&"shield")
-	if shield:
-		ch.equipment.put(&"shield", shield)
 	# back to a Warrior with a sword for the rest of the test
 	ch.job = Content.job(&"warrior")
 	ch.equipment.take(&"weapon")

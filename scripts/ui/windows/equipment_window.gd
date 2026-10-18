@@ -1,23 +1,21 @@
 class_name TDEquipmentWindow
 extends TDWindow
-## What the hero is wearing (E): gear slots laid out the way a person wears them (hat on top,
-## shoes at the bottom), and a panel listing what the gear adds to each stat (all of it, or the
+## What the hero is wearing (E): gear slots laid out the way a person wears them (earrings on
+## top, the armor in the middle with the weapon at its side, rings at the bottom), and a panel listing what the gear adds to each stat (all of it, or the
 ## worn item you clicked).
 ## Double-click a worn item to take it off, drag gear here from the inventory to wear it, or
 ## drag a worn item onto the inventory.
 
 const GAP := 6.0
 const GRID_Y := 40.0
-const COLS := 5
-const ROWS := 6
+const COLS := 3
+const ROWS := 4
 ## Where each place sits, in a COLS×ROWS grid laid out like a person facing right.
 const LAYOUT := {
-	&"hat": Vector2i(2, 0),
-	&"earrings": Vector2i(1, 1),
-	&"cape": Vector2i(1, 2), &"pendant": Vector2i(2, 2),
-	&"shield": Vector2i(0, 3), &"top": Vector2i(2, 3), &"weapon": Vector2i(4, 3),
-	&"ring_1": Vector2i(0, 4), &"bottom": Vector2i(2, 4), &"gloves": Vector2i(3, 4), &"ring_2": Vector2i(4, 4),
-	&"shoes": Vector2i(2, 5),
+	&"earrings": Vector2i(1, 0),
+	&"pendant": Vector2i(1, 1),
+	&"armor": Vector2i(1, 2), &"weapon": Vector2i(2, 2),
+	&"ring_1": Vector2i(0, 3), &"ring_2": Vector2i(2, 3),
 }
 const PANEL_W := 176.0
 const ROW_H := 16.0

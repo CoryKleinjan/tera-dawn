@@ -129,13 +129,14 @@ func test_inventory_hover_shows_the_item_under_the_mouse() -> void:
 
 func test_inventory_double_click_equips_through_the_server() -> void:
 	await ui.edit(func(c: Character) -> void:
+		c.gear.unequip(&"armor")
 		c.inventory.clear()
 		c.inventory.add(Content.item(&"leaf_cap")))
 	var inv: TDInventoryWindow = _open("inventory")
 	inv.tab = ItemDef.Tab.EQUIP
 	await ui.click(inv, inv.slot_rect(0).get_center(), MOUSE_BUTTON_LEFT, true)
 	await ui.ticks(3)
-	check(Game.me.equipment.at(&"hat") != null and Game.me.equipment.at(&"hat").item.id == &"leaf_cap", "the Leaf Cap is worn")
+	check(Game.me.equipment.at(&"armor") != null and Game.me.equipment.at(&"armor").item.id == &"leaf_cap", "the Leaf Cap is worn")
 	check(Game.me.inventory.at(ItemDef.Tab.EQUIP, 0) == null, "and left the bag")
 
 # ---------- equipment ----------

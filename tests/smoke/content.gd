@@ -22,7 +22,7 @@ func check() -> void:
 		var sk: SkillDef = Content.skills[id]
 		if sk.icon == null:
 			problems.append("skill %s has no icon" % id)
-		if not sk.innate and not Content.jobs.has(sk.job):
+		if not sk.innate and not GearSetDef.with_buff(sk) and not Content.jobs.has(sk.job):
 			problems.append("skill %s belongs to unknown job %s" % [id, sk.job])
 		if sk.requires != &"" and not Content.skills.has(sk.requires):
 			problems.append("skill %s requires unknown skill %s" % [id, sk.requires])
