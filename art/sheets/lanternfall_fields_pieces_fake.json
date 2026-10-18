@@ -1,0 +1,30 @@
+{
+  "source": "art/source/lanternfall_fields_pieces.png",
+  "art_px": 5.4,
+  "out_dir": "assets/sprites/tiles/lanternfall_fields",
+  "label_band": 0,
+  "inset": 0,
+  "keep": "largest",
+  "flat_bottom": true,
+  "region": [
+    0,
+    0,
+    820,
+    1600
+  ],
+  "grid": {
+    "rows": [
+      0,
+      1600
+    ],
+    "cols": [
+      0,
+      820
+    ]
+  },
+  "cells": [
+    [
+      "plaster_wall"
+    ]
+  ]
+}
