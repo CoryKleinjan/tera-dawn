@@ -10,7 +10,8 @@ extends Resource
 @export var id: StringName
 ## The zone (RegionDef id) its way in is in.
 @export var region: StringName
-## The zone (RegionDef id) of its own maps, which never decline.
+## The zone of its own maps (their MapDef.region), which never decline. Not a RegionDef: a
+## tear is off the world map, with no town or routes (TearState.inside_tear).
 @export var inside: StringName
 ## Done, it unseals the tear (the story quest where the hero first goes through one).
 @export var seal_quest: StringName = &"story_a_closer_look"

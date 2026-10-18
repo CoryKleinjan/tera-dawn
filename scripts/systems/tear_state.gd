@@ -31,13 +31,20 @@ static func decline(c: Character) -> int:
 			n += 1
 	return n
 
+## Whether `region` is a tear's own zone (TearDef.inside). It isn't a RegionDef: a tear is
+## off the world map, has no town and no routes, and its maps never decline.
+static func inside_tear(region: StringName) -> bool:
+	if region == &"":
+		return false
+	for t: TearDef in Content.tears.values():
+		if t.inside == region:
+			return true
+	return false
+
 ## How far map `map` has declined for `c`: the world's step, except inside a tear.
 static func decline_of(map: MapDef, c: Character) -> int:
-	if map == null:
+	if map == null or inside_tear(map.region):
 		return 0
-	for t: TearDef in Content.tears.values():
-		if t.inside != &"" and t.inside == map.region:
-			return 0
 	return decline(c)
 
 ## The character a shared map on `server` follows: the host's, or anyone's when the host

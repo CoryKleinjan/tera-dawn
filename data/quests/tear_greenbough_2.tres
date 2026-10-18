@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="QuestDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
+[ext_resource type="Resource" path="res://data/monsters/hollow_stag.tres" id="3_hollow_stag"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="5_drop_entry"]
+
+[sub_resource type="Resource" id="Stags"]
+script = ExtResource("2_quest_objective")
+kind = 0
+monster = ExtResource("3_hollow_stag")
+count = 8
+
+[sub_resource type="Resource" id="Top"]
+script = ExtResource("2_quest_objective")
+kind = 3
+map = &"silent_stair"
+platform = 36
+spot_name = "the top of the Silent Stair"
+count = 1
+
+[resource]
+script = ExtResource("1_quest_def")
+id = &"tear_greenbough_2"
+title = "Antlers Like Bone"
+giver = &"greenbough_forager"
+requires = Array[StringName]([&"tear_greenbough_1"])
+offer_text = "TODO story text (Cory reviews)"
+progress_text = "TODO story text (Cory reviews)"
+complete_text = "TODO story text (Cory reviews)"
+objectives = Array[ExtResource("2_quest_objective")]([SubResource("Stags"), SubResource("Top")])
+reward_essence = 23500
+reward_shards = 1500
+reward_items = Array[ExtResource("5_drop_entry")]([])

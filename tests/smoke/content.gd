@@ -42,7 +42,7 @@ func check() -> void:
 				problems.append("%s: bad NPC" % id)
 			elif n.npc.instructs.any(func(j: StringName) -> bool: return not Content.jobs.has(j)):
 				problems.append("%s: %s teaches an unknown job" % [id, n.npc.id])
-		if map.region != &"" and not Content.regions.has(map.region):
+		if map.region != &"" and not Content.regions.has(map.region) and not TearState.inside_tear(map.region):
 			problems.append("%s: unknown region %s" % [id, map.region])
 		if not Content.maps.has(map.return_town()):
 			problems.append("%s: returns to unknown map %s" % [id, map.return_town()])
@@ -59,7 +59,8 @@ func check() -> void:
 				problems.append("monster %s drops nothing" % id)
 	for id in Content.items:
 		var item: ItemDef = Content.items[id]
-		if item.icon == null and not (item is EquipDef or item is RuneDef): # gear and runes have no icons yet
+		# gear, runes and the few items awaiting their painted icon have none yet
+		if item.icon == null and not (item is EquipDef or item is RuneDef or item.id in preload("res://tests/content/content_art_test.gd").AWAITING_ICON):
 			problems.append("item %s has no icon" % id)
 		if item is EquipDef and (item as EquipDef).stats == null:
 			problems.append("equip %s has no stats" % id)

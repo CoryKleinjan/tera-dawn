@@ -1,0 +1,29 @@
+[gd_resource type="Resource" script_class="QuestDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
+[ext_resource type="Resource" path="res://data/items/etc/stone_petal.tres" id="3_stone_petal"]
+[ext_resource type="Resource" path="res://data/monsters/pale_moth.tres" id="4_pale_moth"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="5_drop_entry"]
+
+[sub_resource type="Resource" id="Petals"]
+script = ExtResource("2_quest_objective")
+kind = 1
+item = ExtResource("3_stone_petal")
+count = 5
+drop_from = ExtResource("4_pale_moth")
+drop_chance = 0.5
+
+[resource]
+script = ExtResource("1_quest_def")
+id = &"tear_greenbough_1"
+title = "Where the Birds Went Quiet"
+giver = &"greenbough_forager"
+requires = Array[StringName]([&"story_a_closer_look"])
+offer_text = "TODO story text (Cory reviews)"
+progress_text = "TODO story text (Cory reviews)"
+complete_text = "TODO story text (Cory reviews)"
+objectives = Array[ExtResource("2_quest_objective")]([SubResource("Petals")])
+reward_essence = 23500
+reward_shards = 1500
+reward_items = Array[ExtResource("5_drop_entry")]([])

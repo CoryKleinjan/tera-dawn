@@ -72,10 +72,11 @@ static func routes_of(region: StringName) -> Array:
 static func other_end(route: Dictionary, region: StringName) -> StringName:
 	return route.b if route.a == region else route.a
 
-## The region a map belongs to; a room counts as the town outside it.
+## The region a map belongs to; a room counts as the town outside it. A map outside every
+## RegionDef (a tear's own maps) has none: no route leads there.
 static func _region_of(map_id: StringName) -> StringName:
 	var m: MapDef = Content.maps.get(map_id)
-	if m == null:
+	if m == null or not Content.regions.has(m.region) and not m.interior:
 		return &""
 	if m.interior:
 		var outside: MapDef = Content.maps.get(m.outside())

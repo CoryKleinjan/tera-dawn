@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="QuestDef" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
+[ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
+[ext_resource type="Resource" path="res://data/monsters/petrified_warden.tres" id="3_petrified_warden"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="5_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="6_power_elixir"]
+
+[sub_resource type="Resource" id="Elixirs"]
+script = ExtResource("5_drop_entry")
+item = ExtResource("6_power_elixir")
+chance = 1.0
+min_amount = 5
+max_amount = 5
+
+[sub_resource type="Resource" id="Warden"]
+script = ExtResource("2_quest_objective")
+kind = 0
+monster = ExtResource("3_petrified_warden")
+count = 1
+
+[resource]
+script = ExtResource("1_quest_def")
+id = &"tear_greenbough_3"
+title = "The Warden's Ring"
+giver = &"greenbough_forager"
+requires = Array[StringName]([&"tear_greenbough_2"])
+offer_text = "TODO story text (Cory reviews)"
+progress_text = "TODO story text (Cory reviews)"
+complete_text = "TODO story text (Cory reviews)"
+objectives = Array[ExtResource("2_quest_objective")]([SubResource("Warden")])
+reward_essence = 120000
+reward_shards = 5000
+reward_items = Array[ExtResource("5_drop_entry")]([SubResource("Elixirs")])

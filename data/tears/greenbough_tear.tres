@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="TearDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/tear_def.gd" id="1_tear_def"]
+
+[resource]
+script = ExtResource("1_tear_def")
+id = &"greenbough_tear"
+region = &"greenbough"
+inside = &"greenbough_tear"
+seal_quest = &"story_a_closer_look"
+finish_quest = &"tear_greenbough_3"
