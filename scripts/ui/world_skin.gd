@@ -79,8 +79,8 @@ static func bar_groove(frame: String, pos: Vector2, scale: float, extra := 0.0) 
 	var g: Rect2 = GROOVES[frame]
 	return Rect2(pos + g.position * scale, g.size * scale + Vector2(extra, 0))
 
-## Splits a health bar's `groove` into `hearts` equal cells with thin dark marks, so it reads
-## as hearts until the painted heart icons replace it.
+## Splits a health bar's `groove` into `hearts` equal cells with thin dark marks: the bar's
+## segments (there are no heart icons).
 static func draw_heart_marks(ci: CanvasItem, groove: Rect2, hearts: int) -> void:
 	for i in range(1, hearts):
 		var x := roundf(groove.position.x + groove.size.x * i / hearts)

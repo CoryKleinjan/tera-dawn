@@ -16,8 +16,6 @@ extends Resource
 ## Depth: 0 is where the characters walk, negative is further back. Buildings stand just
 ## behind the lanterns and NPCs, close enough to keep their full size.
 @export var depth := -2.0
-## Multiplied into its colours, so one picture can stand in for a few houses.
-@export var tint := Color.WHITE
 
 ## The x of the building's middle (its picture is centred there).
 func center_x() -> float:

@@ -7,7 +7,6 @@ script = ExtResource("1_job_def")
 id = &"wildhunter"
 display_name = "Wildhunter"
 family = &"wildhunter"
-tint = Color(0.9, 0.88, 0.7, 1.0)
 mastery = 0.65
 description = "Archers and Warriors who mark their prey and charge in, with blade and bow at point-blank range. They learn every Archer and Warrior skill and wield both jobs' weapons."
 base_power = 17

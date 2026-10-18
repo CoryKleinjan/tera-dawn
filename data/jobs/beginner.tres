@@ -20,7 +20,6 @@ script = ExtResource("1_job_def")
 id = &"beginner"
 display_name = "Beginner"
 family = &"beginner"
-tint = Color(1.0, 1.0, 1.0, 1.0)
 mastery = 0.4
 description = "Everyone starts here. Train on the meadow, then take a Job Test in any job town."
 base_power = 12
