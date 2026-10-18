@@ -1,215 +1,475 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=47 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=92 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/forge.tres" id="2_forge"]
-[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="3_platform_def"]
-[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="7_portal_def"]
-[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="8_spawn_def"]
-[ext_resource type="Resource" path="res://data/monsters/forge_golem.tres" id="9_forge_golem"]
-[ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="12_prop_placement"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/steam_vent.png" id="14_steam_vent"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/tree_large.png" id="15_tree_large"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/crystals.png" id="16_crystals"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/ember/rock_large.png" id="17_rock_large"]
-[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
-[ext_resource type="Resource" path="res://data/monsters/ash_wraith.tres" id="m_ash_wraith"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="3_biome_variant_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberreach_fields/overhang_left.png" id="4_overhang_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberreach_fields/overhang_right.png" id="5_overhang_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/emberreach_fields/cap_left.png" id="6_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/emberreach_fields/middle_a.png" id="7_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/emberreach_fields/middle_b.png" id="8_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/emberreach_fields/cap_right.png" id="9_cap_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/emberreach_fields_side.png" id="10_emberreach_fields_side"]
+[ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="11_backdrop_layer_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberreach_fields/molten_throne.png" id="12_molten_throne"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="13_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="14_portal_def"]
+[ext_resource type="Resource" path="res://data/monsters/forge_golem.tres" id="15_forge_golem"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="16_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/ash_wraith.tres" id="17_ash_wraith"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="18_dawnshard"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="19_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/use/orange_potion.tres" id="20_orange_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="21_blue_potion"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach_fields/chest.png" id="22_chest"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach_fields/chest_open.png" id="23_chest_open"]
+[ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="24_breakable_def"]
+[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="25_white_potion"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach_fields/cracked_floor.png" id="26_cracked_floor"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach_fields/cracked_floor_broken.png" id="27_cracked_floor_broken"]
 
-[sub_resource type="Resource" id="Resource_28"]
-script = ExtResource("12_prop_placement")
-texture = ExtResource("17_rock_large")
-x = 834.0
-y = -1.0
-depth = -5.8
-scale = 1.01
-flip = false
+[sub_resource type="Resource" id="Backdrop_picture"]
+script = ExtResource("11_backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("12_molten_throne")])
+mode = 2
+depth = 300.0
+screen_top = Vector2(-0.2, -0.2)
 
-[sub_resource type="Resource" id="Resource_27"]
-script = ExtResource("12_prop_placement")
-texture = ExtResource("16_crystals")
-x = 829.0
-y = -1.0
-depth = -6.1
-scale = 1.04
-flip = true
-
-[sub_resource type="Resource" id="Resource_26"]
-script = ExtResource("12_prop_placement")
-texture = ExtResource("15_tree_large")
-x = 302.0
-y = -1.0
-depth = -3.2
-scale = 1.04
-flip = true
-
-[sub_resource type="Resource" id="Resource_25"]
-script = ExtResource("12_prop_placement")
-texture = ExtResource("14_steam_vent")
-x = 1584.0
-y = -1.0
-depth = -7.6
-scale = 0.97
-flip = false
-
-[sub_resource type="Resource" id="Resource_24"]
-script = ExtResource("12_prop_placement")
-texture = ExtResource("14_steam_vent")
-x = 1307.0
-y = -1.0
-depth = -3.0
-scale = 1.04
-flip = true
-
-[sub_resource type="Resource" id="Resource_21"]
-script = ExtResource("8_spawn_def")
-monster = ExtResource("9_forge_golem")
-platform = 6
-count = 2
-
-[sub_resource type="Resource" id="Resource_20"]
-script = ExtResource("8_spawn_def")
-monster = ExtResource("m_ash_wraith")
-platform = 5
-count = 3
-
-[sub_resource type="Resource" id="Resource_19"]
-script = ExtResource("8_spawn_def")
-monster = ExtResource("9_forge_golem")
-platform = 4
-count = 2
-
-[sub_resource type="Resource" id="Resource_18"]
-script = ExtResource("8_spawn_def")
-monster = ExtResource("m_ash_wraith")
-platform = 3
-count = 2
-
-[sub_resource type="Resource" id="Resource_17"]
-script = ExtResource("8_spawn_def")
-monster = ExtResource("m_ash_wraith")
-platform = 2
-count = 2
-
-[sub_resource type="Resource" id="Resource_16"]
-script = ExtResource("8_spawn_def")
-monster = ExtResource("9_forge_golem")
-platform = 1
-count = 2
-
-[sub_resource type="Resource" id="Resource_15"]
-script = ExtResource("8_spawn_def")
-monster = ExtResource("m_ash_wraith")
-platform = 0
-count = 3
-
-[sub_resource type="Resource" id="Resource_14"]
-script = ExtResource("8_spawn_def")
-monster = ExtResource("9_forge_golem")
-platform = 0
-count = 3
-
-[sub_resource type="Resource" id="Resource_13"]
-script = ExtResource("7_portal_def")
-x = 60.0
-platform = 0
-target_map = &"ironworks_depths"
-target_x = 2960.0
-
-[sub_resource type="Resource" id="Resource_6"]
-script = ExtResource("3_platform_def")
-x = 1580.0
-y = 370.0
-width = 320.0
-
-[sub_resource type="Resource" id="Resource_5"]
-script = ExtResource("3_platform_def")
-x = 1340.0
-y = 500.0
-width = 400.0
-
-[sub_resource type="Resource" id="Resource_4"]
-script = ExtResource("3_platform_def")
-x = 900.0
-y = 370.0
-width = 260.0
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("3_platform_def")
-x = 780.0
-y = 500.0
-width = 320.0
-
-[sub_resource type="Resource" id="Resource_2"]
-script = ExtResource("3_platform_def")
-x = 420.0
-y = 360.0
-width = 320.0
-
-[sub_resource type="Resource" id="Resource_1"]
-script = ExtResource("3_platform_def")
-x = 300.0
-y = 480.0
-width = 300.0
-
-[sub_resource type="Resource" id="Land_1"]
-script = ExtResource("3_platform_def")
-x = 1140.0
-y = 540.0
-width = 140.0
-
-[sub_resource type="Resource" id="Variant"]
-script = ExtResource("variant_def")
+[sub_resource type="Resource" id="Copied_Variant"]
+script = ExtResource("3_biome_variant_def")
 sky_top = Color(0.102, 0.01569, 0.01569, 1)
 sky_mid = Color(0.2902, 0.03922, 0.02353, 1)
 light_energy = 1.5
 fog_color = Color(0.5412, 0.102, 0.03922, 1)
 grade_lift = Color(0.3137, 0.03922, 0.03922, 1)
 grade_lift_amount = 0.4
+frame_scale = 0.5
+frame_fade = 0.35
+hide_edge_grass = true
+hide_platform_decor = true
+frame_left = ExtResource("4_overhang_left")
+frame_right = ExtResource("5_overhang_right")
+platform_left = ExtResource("6_cap_left")
+platform_middle = ExtResource("7_middle_a")
+platform_middle_alt = ExtResource("8_middle_b")
+platform_right = ExtResource("9_cap_right")
+ground_side = ExtResource("10_emberreach_fields_side")
+hide_layers = PackedInt32Array(0, 1, 2, 3, 4, 5, 6)
+more_backdrop = Array[ExtResource("11_backdrop_layer_def")]([SubResource("Backdrop_picture")])
 
-[sub_resource type="Resource" id="Portal_arena"]
-script = ExtResource("7_portal_def")
-x = 1940.0
-platform = 0
+[sub_resource type="Resource" id="Platform_1"]
+script = ExtResource("13_platform_def")
+x = 900.0
+y = 245.0
+width = 700.0
+
+[sub_resource type="Resource" id="Platform_2"]
+script = ExtResource("13_platform_def")
+x = 300.0
+y = 2845.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_3"]
+script = ExtResource("13_platform_def")
+x = 700.0
+y = 2770.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_4"]
+script = ExtResource("13_platform_def")
+x = 300.0
+y = 2695.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_5"]
+script = ExtResource("13_platform_def")
+x = 700.0
+y = 2620.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_6"]
+script = ExtResource("13_platform_def")
+x = 300.0
+y = 2545.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_7"]
+script = ExtResource("13_platform_def")
+x = 700.0
+y = 2470.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_8"]
+script = ExtResource("13_platform_def")
+x = 300.0
+y = 2395.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_9"]
+script = ExtResource("13_platform_def")
+x = 700.0
+y = 2320.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_10"]
+script = ExtResource("13_platform_def")
+x = 300.0
+y = 2245.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_11"]
+script = ExtResource("13_platform_def")
+x = 700.0
+y = 2170.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_12"]
+script = ExtResource("13_platform_def")
+x = 300.0
+y = 2095.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_13"]
+script = ExtResource("13_platform_def")
+x = 100.0
+y = 2000.0
+width = 2200.0
+
+[sub_resource type="Resource" id="Platform_14"]
+script = ExtResource("13_platform_def")
+x = 1100.0
+y = 1925.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_15"]
+script = ExtResource("13_platform_def")
+x = 1500.0
+y = 1850.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_16"]
+script = ExtResource("13_platform_def")
+x = 1100.0
+y = 1775.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_17"]
+script = ExtResource("13_platform_def")
+x = 1500.0
+y = 1700.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_18"]
+script = ExtResource("13_platform_def")
+x = 1100.0
+y = 1625.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_19"]
+script = ExtResource("13_platform_def")
+x = 1500.0
+y = 1550.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_20"]
+script = ExtResource("13_platform_def")
+x = 1100.0
+y = 1475.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_21"]
+script = ExtResource("13_platform_def")
+x = 1500.0
+y = 1400.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_22"]
+script = ExtResource("13_platform_def")
+x = 1100.0
+y = 1325.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_23"]
+script = ExtResource("13_platform_def")
+x = 1500.0
+y = 1250.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_24"]
+script = ExtResource("13_platform_def")
+x = 1100.0
+y = 1175.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_25"]
+script = ExtResource("13_platform_def")
+x = 100.0
+y = 1100.0
+width = 2200.0
+
+[sub_resource type="Resource" id="Platform_26"]
+script = ExtResource("13_platform_def")
+x = 300.0
+y = 1025.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_27"]
+script = ExtResource("13_platform_def")
+x = 700.0
+y = 950.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_28"]
+script = ExtResource("13_platform_def")
+x = 300.0
+y = 875.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_29"]
+script = ExtResource("13_platform_def")
+x = 700.0
+y = 800.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_30"]
+script = ExtResource("13_platform_def")
+x = 300.0
+y = 725.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_31"]
+script = ExtResource("13_platform_def")
+x = 700.0
+y = 650.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_32"]
+script = ExtResource("13_platform_def")
+x = 300.0
+y = 575.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_33"]
+script = ExtResource("13_platform_def")
+x = 700.0
+y = 500.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_34"]
+script = ExtResource("13_platform_def")
+x = 300.0
+y = 425.0
+width = 600.0
+
+[sub_resource type="Resource" id="Platform_35"]
+script = ExtResource("13_platform_def")
+x = 600.0
+y = 80.0
+width = 150.0
+secret = true
+
+[sub_resource type="Resource" id="Platform_36"]
+script = ExtResource("13_platform_def")
+x = 1830.0
+y = 245.0
+width = 150.0
+secret = true
+
+[sub_resource type="Resource" id="Portal_0"]
+script = ExtResource("14_portal_def")
+x = 1200.0
+platform = 1
+target_map = &"ironworks_depths"
+target_x = 2500.0
+
+[sub_resource type="Resource" id="Portal_1"]
+script = ExtResource("14_portal_def")
+x = 2340.0
 target_map = &"kings_caldera"
 target_x = 140.0
 
-[sub_resource type="Resource" id="Step_1"]
-script = ExtResource("3_platform_def")
-x = 313.0
-y = 550.0
-width = 110.0
+[sub_resource type="Resource" id="Spawn_0"]
+script = ExtResource("16_spawn_def")
+monster = ExtResource("15_forge_golem")
+platform = 0
+count = 3
+patrol_from = 300.0
+patrol_to = 2100.0
 
-[sub_resource type="Resource" id="Step_2"]
-script = ExtResource("3_platform_def")
-x = 913.0
-y = 435.0
-width = 110.0
+[sub_resource type="Resource" id="Spawn_1"]
+script = ExtResource("16_spawn_def")
+monster = ExtResource("17_ash_wraith")
+platform = 0
+count = 3
+patrol_from = 300.0
+patrol_to = 2100.0
 
-[sub_resource type="Resource" id="Step_3"]
-script = ExtResource("3_platform_def")
-x = 1593.0
-y = 435.0
-width = 110.0
+[sub_resource type="Resource" id="Spawn_2"]
+script = ExtResource("16_spawn_def")
+monster = ExtResource("15_forge_golem")
+platform = 4
+count = 2
 
-[sub_resource type="Resource" id="Step_4"]
-script = ExtResource("3_platform_def")
-x = 433.0
-y = 420.0
-width = 110.0
+[sub_resource type="Resource" id="Spawn_3"]
+script = ExtResource("16_spawn_def")
+monster = ExtResource("17_ash_wraith")
+platform = 8
+count = 2
+
+[sub_resource type="Resource" id="Spawn_4"]
+script = ExtResource("16_spawn_def")
+monster = ExtResource("15_forge_golem")
+platform = 12
+count = 2
+
+[sub_resource type="Resource" id="Spawn_5"]
+script = ExtResource("16_spawn_def")
+monster = ExtResource("17_ash_wraith")
+platform = 16
+count = 2
+
+[sub_resource type="Resource" id="Spawn_6"]
+script = ExtResource("16_spawn_def")
+monster = ExtResource("15_forge_golem")
+platform = 20
+count = 2
+
+[sub_resource type="Resource" id="Spawn_7"]
+script = ExtResource("16_spawn_def")
+monster = ExtResource("17_ash_wraith")
+platform = 24
+count = 2
+
+[sub_resource type="Resource" id="Spawn_8"]
+script = ExtResource("16_spawn_def")
+monster = ExtResource("15_forge_golem")
+platform = 28
+count = 2
+
+[sub_resource type="Resource" id="Spawn_9"]
+script = ExtResource("16_spawn_def")
+monster = ExtResource("17_ash_wraith")
+platform = 32
+count = 2
+
+[sub_resource type="Resource" id="Spawn_10"]
+script = ExtResource("16_spawn_def")
+monster = ExtResource("15_forge_golem")
+platform = 13
+count = 3
+
+[sub_resource type="Resource" id="Spawn_11"]
+script = ExtResource("16_spawn_def")
+monster = ExtResource("15_forge_golem")
+platform = 25
+count = 3
+
+[sub_resource type="Resource" id="Loot_0_0"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("18_dawnshard")
+min_amount = 100
+max_amount = 160
+
+[sub_resource type="Resource" id="Loot_0_1"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("20_orange_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Loot_0_2"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("21_blue_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Breakable_0"]
+script = ExtResource("24_breakable_def")
+id = &"molten_throne_high_chest"
+x = 675.0
+platform = 35
+hits = 1
+whole = ExtResource("22_chest")
+broken = ExtResource("23_chest_open")
+height = 48.0
+loot = Array[ExtResource("19_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1"), SubResource("Loot_0_2")])
+card = ExtResource("17_ash_wraith")
+
+[sub_resource type="Resource" id="Loot_1_0"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("18_dawnshard")
+min_amount = 100
+max_amount = 160
+
+[sub_resource type="Resource" id="Loot_1_1"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("20_orange_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Loot_1_2"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("21_blue_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Breakable_1"]
+script = ExtResource("24_breakable_def")
+id = &"molten_throne_far_chest"
+x = 1905.0
+platform = 36
+hits = 1
+whole = ExtResource("22_chest")
+broken = ExtResource("23_chest_open")
+height = 48.0
+loot = Array[ExtResource("19_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
+card = ExtResource("15_forge_golem")
+
+[sub_resource type="Resource" id="Loot_2_0"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("18_dawnshard")
+min_amount = 160
+max_amount = 240
+
+[sub_resource type="Resource" id="Loot_2_1"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("25_white_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Loot_2_2"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("21_blue_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Breakable_2"]
+script = ExtResource("24_breakable_def")
+id = &"molten_throne_crack"
+x = 1900.0
+platform = 13
+hits = 1
+slam_only = true
+whole = ExtResource("26_cracked_floor")
+broken = ExtResource("27_cracked_floor_broken")
+height = 40.0
+loot = Array[ExtResource("19_drop_entry")]([SubResource("Loot_2_0"), SubResource("Loot_2_1"), SubResource("Loot_2_2")])
+card = ExtResource("17_ash_wraith")
 
 [resource]
 script = ExtResource("1_map_def")
 id = &"molten_throne"
 display_name = "Molten Throne"
 biome = ExtResource("2_forge")
-variant = SubResource("Variant")
-width = 2000
-height = 700
-ground_y = 620
+variant = SubResource("Copied_Variant")
+width = 2400
+height = 3000
+ground_y = 2920
 start_x = 120.0
-platforms = Array[ExtResource("3_platform_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Land_1"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3"), SubResource("Step_4")])
-portals = Array[ExtResource("7_portal_def")]([SubResource("Resource_13"), SubResource("Portal_arena")])
-spawns = Array[ExtResource("8_spawn_def")]([SubResource("Resource_14"), SubResource("Resource_15"), SubResource("Resource_16"), SubResource("Resource_17"), SubResource("Resource_18"), SubResource("Resource_19"), SubResource("Resource_20"), SubResource("Resource_21")])
-props = Array[ExtResource("12_prop_placement")]([SubResource("Resource_24"), SubResource("Resource_25"), SubResource("Resource_26"), SubResource("Resource_27"), SubResource("Resource_28")])
+platforms = Array[ExtResource("13_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9"), SubResource("Platform_10"), SubResource("Platform_11"), SubResource("Platform_12"), SubResource("Platform_13"), SubResource("Platform_14"), SubResource("Platform_15"), SubResource("Platform_16"), SubResource("Platform_17"), SubResource("Platform_18"), SubResource("Platform_19"), SubResource("Platform_20"), SubResource("Platform_21"), SubResource("Platform_22"), SubResource("Platform_23"), SubResource("Platform_24"), SubResource("Platform_25"), SubResource("Platform_26"), SubResource("Platform_27"), SubResource("Platform_28"), SubResource("Platform_29"), SubResource("Platform_30"), SubResource("Platform_31"), SubResource("Platform_32"), SubResource("Platform_33"), SubResource("Platform_34"), SubResource("Platform_35"), SubResource("Platform_36")])
+portals = Array[ExtResource("14_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1")])
+breakables = Array[ExtResource("24_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1"), SubResource("Breakable_2")])
+spawns = Array[ExtResource("16_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11")])
 region = &"emberreach"
 world_pos = Vector2(800.0, 335.0)
+zone_pos = Vector2(3000.0, 7500.0)
 return_map = &"emberforge"

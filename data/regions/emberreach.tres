@@ -24,6 +24,7 @@ color = Color(1.0, 0.478431, 0.239216, 1.0)
 capital = &"emberforge"
 label_pos = Vector2(872.0, 392.0)
 zone_rect = Rect2(650.0, 170.0, 280.0, 184.0)
+shaped_zone = true
 town_music = &"town_emberreach"
 field_music = &"field_emberreach"
 drops = Array[ExtResource("2_drop_entry")]([SubResource("Drop_ember_rune"), SubResource("Drop_forge_rune")])
