@@ -225,7 +225,6 @@ static func building_sprite(b: BuildingPlacement, surface: float) -> Sprite3D:
 	var s := TDStage.sprite(d.texture, d.texel() * b.scale * (dist - z) / dist)
 	TDStage.stand_on_land(s, Vector2(b.center_x(), surface), b.depth, false)
 	s.flip_h = b.flip
-	s.modulate = b.tint
 	return s
 
 ## A door: the portal standing in the doorway, so players see they can go in, and a warm

@@ -12,8 +12,8 @@ on Windows).
 **What's in it:** play solo, or co-op with up to four players (one hosts, friends join
 bringing their own characters), with up to six characters saved on each player's computer; a world of regions, towns, fields and boss hunting grounds joined by portals, ships and
 coaches; a Beginner and five jobs (Warrior, Archer, Magician, Thief, Pirate) with skill books,
-quickslots, melee, ranged and magic combat; MapleStory-style stats, gear slots and starter gear sets, upgrade scrolls
-and drops; NPCs, shops, storage and quests; chat, parties, buddies, guilds, trades and fame;
+quickslots, melee, ranged and magic combat; levels with Dawn Essence for skill levels, gear slots and gear sets,
+runes and drops; NPCs, shops, storage and quests; chat, parties, buddies, guilds, trades and fame;
 sitting, pets, the Monster Book and Steam achievements.
 
 All content is data in `data/`, and all art is painted sheets in `art/source/` cut into
@@ -45,9 +45,10 @@ Defaults; every key can be changed under **Settings > Controls**, with two keys 
 | Drop through a platform | Down + Jump | Down + A |
 | Sit on the ground (doubles regen) | C | |
 | Attack (hold Up to hit overhead, Down in the air to hit below and bounce) | X or Ctrl | X |
-| Quickslots (skills incl. the job's movement skill, potions) | A (or Shift), D, F, G, V, B, N, M | Y, RB, LB |
+| Quickslots (skills, potions) | A (or Shift), D, F, G, V, B, N, M | Y, RB, LB |
 | Pick up items (hold to keep looting) | Z | B |
-| Inventory / Equipment / Character | I / E / S | Back (inventory) |
+| Dash (after the Grotto Tusker) | R | RT |
+| Inventory / Equipment / Character | I / E / S | Back (window menu) |
 | Quests / Skills / World map | Q / K / W | |
 | Community / Monster Book and achievements | O / L | |
 | Chat | Enter | |

@@ -7,7 +7,6 @@ script = ExtResource("1_job_def")
 id = &"hexcaster"
 display_name = "Hexcaster"
 family = &"hexcaster"
-tint = Color(0.78, 0.68, 0.98, 1.0)
 mastery = 0.65
 description = "Magicians and Thieves who curse monsters so every blow lands harder, then rain dark stars on them. They learn every Magician and Thief skill and wield both jobs' weapons."
 base_power = 8

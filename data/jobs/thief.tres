@@ -19,7 +19,6 @@ script = ExtResource("1_job_def")
 id = &"thief"
 display_name = "Thief"
 family = &"thief"
-tint = Color(0.815686, 0.713725, 0.909804, 1.0)
 mastery = 0.6
 description = "Quick and quiet, striking with a dagger and throwing stars."
 base_power = 4
