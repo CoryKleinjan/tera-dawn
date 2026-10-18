@@ -393,3 +393,8 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 - Each zone also has 2-3 secret areas that need its own boss's move, so a new move has a use right
   after the fight.
 - The second-job tutors are not in these tears.
+- Greenbough's tear (the pilot) is a stone forest of four maps behind a Dash ledge on Oak Crown:
+  Stilled Grove, Ivory Hollow, Silent Stair and the Petrified Warden's ring. Old Fenwick gives
+  its three quests. Its Hollow Stags and the Warden's charge and slam cost 2 segments a hit;
+  everything else there costs 1. Its guardian isn't one of the bosses of Tera (the "every boss"
+  achievement).
