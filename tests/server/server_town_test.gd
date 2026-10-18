@@ -16,6 +16,7 @@ var p: SimPlayer
 var c: Character
 var red: UseDef
 var leaf: ItemDef
+var wares: ShopDef
 
 func before_each() -> void:
 	h = ServerHarness.new()
@@ -24,6 +25,7 @@ func before_each() -> void:
 	var town := ServerHarness.town_def()
 	var merchant := ServerHarness.npc(town, &"test_merchant", MERCHANT_X)
 	merchant.shop = ServerHarness.shop([[red, 50], [leaf, 0]])
+	wares = merchant.shop
 	ServerHarness.npc(town, &"test_keeper", KEEPER_X).storage = true
 	var route := TravelRoute.new()
 	route.target_map = ServerHarness.FIELD
@@ -90,6 +92,26 @@ func test_bad_shop_lines_are_ignored() -> void:
 	h.ask(2, &"req_buy", [&"test_merchant", 2, 1])
 	h.ask(2, &"req_buy", [&"test_merchant", -1, 1])
 	check_eq(c.shards, 200, "nothing bought")
+
+func test_a_locked_line_is_hidden_and_cant_be_bought_until_unlocked() -> void:
+	var boss := ServerHarness.monster()
+	boss.boss = true
+	var line := wares.items[1]
+	for unlock in [["after_quest", &"test_story_step"], ["after_boss", boss], ["after_secret", &"test_hidden_chest"]]:
+		line.set(unlock[0], unlock[1])
+		c.shards = 1000
+		check_eq(wares.open_to(c), [0] as Array[int], "%s: only the open line shows" % unlock[0])
+		h.ask(2, &"req_buy", [&"test_merchant", 1, 1])
+		check_eq(c.inventory.count_of(leaf), 0, "%s: can't buy it yet" % unlock[0])
+		match unlock[0]:
+			"after_quest": c.quests.done[&"test_story_step"] = 1
+			"after_boss": c.book.record_kill(boss)
+			"after_secret": c.find_secret(&"test_hidden_chest")
+		check_eq(wares.open_to(c), [0, 1] as Array[int], "%s: shows once unlocked" % unlock[0])
+		h.ask(2, &"req_buy", [&"test_merchant", 1, 1])
+		check_eq(c.inventory.count_of(leaf), 1, "%s: bought once unlocked" % unlock[0])
+		c.inventory.clear()
+		line.set(unlock[0], null if unlock[0] == "after_boss" else &"")
 
 func test_buying_is_limited_to_one_stack() -> void:
 	c.shards = 1000000

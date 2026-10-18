@@ -2,7 +2,7 @@ class_name Gear
 extends CharacterPart
 ## The rules for a character's gear (Character.gear): who can wear what, putting gear on
 ## and taking it off between the bag's Equip tab and what's worn (Character.equipment), and
-## setting runes in gear at an enchanter.
+## setting runes in gear and raising its tier at an enchanter.
 
 ## The weapon worn, or null.
 func weapon() -> EquipDef:
@@ -90,4 +90,30 @@ func enchant(gear_slot: int, rune_slot: int, socket: int) -> String:
 	var rune := bag.take(ItemDef.Tab.ETC, rune_slot, 1).item as RuneDef
 	character.shards -= rune.fee
 	bag.at(ItemDef.Tab.EQUIP, gear_slot).runes[socket] = rune
+	return ""
+
+
+# ---------- tiers ----------
+
+## Why the gear in Equip slot `gear_slot` can't go up a tier, or "".
+func upgrade_problem(gear_slot: int) -> String:
+	var gear := character.inventory.at(ItemDef.Tab.EQUIP, gear_slot) if Inventory.valid_slot(ItemDef.Tab.EQUIP, gear_slot) else null
+	if gear == null:
+		return "Pick a piece of gear in your bag."
+	var next := gear.next_tier()
+	if next == null:
+		return "The %s can't go any higher." % gear.display_name()
+	if character.shards < next.fee:
+		return "You don't have enough Dawnshards."
+	return ""
+
+## Raises the gear in Equip slot `gear_slot` one tier for that tier's fee. It always works and
+## keeps its runes and look. Returns why it couldn't, or "".
+func upgrade(gear_slot: int) -> String:
+	var problem := upgrade_problem(gear_slot)
+	if problem != "":
+		return problem
+	var gear := character.inventory.at(ItemDef.Tab.EQUIP, gear_slot)
+	character.shards -= gear.next_tier().fee
+	gear.tier += 1
 	return ""
