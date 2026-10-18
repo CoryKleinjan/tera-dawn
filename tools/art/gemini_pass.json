@@ -30143,6 +30143,1248 @@
    "refs": [],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: walking; cell 2: walking; cell 3: walking; cell 4: walking; cell 5: walking; cell 6: walking; cell 7: standing still; cell 8: standing still. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing, the same in all 8 cells: put a sword in his near hand (the hand nearest the viewer). It is a plain steel longsword: a straight double-edged steel blade about as long as his legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. His near fist grips it, drawn over the grip, and the blade points down and forward past his legs, the way a knight carries a sword while walking. His far hand stays an empty fist. No shield, no armour, no gloves: he keeps his cream shirt, belt, brown trousers and boots, and his friendly face. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
   }
+ },
+ {
+  "id": "warrior_vanguard_boy_jump_land_hurt_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_boy_jump_land_hurt_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/boy_jump_land_hurt.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy with brown hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: crouching to jump, knees bent; cell 2: springing up, sword raised high; cell 3: in the air, knees tucked up; cell 4: in the air, sword raised, legs kicked out; cell 5: just landed, standing; cell 6: standing; cell 7: hurt, wincing; cell 8: hurt, wincing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever his near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered his body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on his far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_boy_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_boy_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/boy_jump_land_hurt.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy with brown hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: crouching a little with knees bent, about to jump; cell 2: springing up off the ground, both arms raised; cell 3: high in the air with both knees tucked up; cell 4: in the air with legs kicked out and arms spread; cell 5: just landed, standing; cell 6: standing; cell 7: hurt: flinching back with both arms flung out, wincing; cell 8: hurt: wincing, leaning back a little. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give him ONE sword, held in his NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as his legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. His near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside him; when lying down, it lies on the ground beside him. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. His far hand stays an empty fist. No shield, no armour, no helmet, no gloves: he keeps his plain clothes and his own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_boy_idle_faint_sit_crouch_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_boy_idle_faint_sit_crouch_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/boy_idle_faint_sit_crouch.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy with brown hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing idle; cell 2: standing idle; cell 3: dazed and swaying, eyes closed; cell 4: down on one knee, dazed; cell 5: falling forward; cell 6: lying flat on his front, fainted; cell 7: sitting on the ground, legs crossed, sword lying in front of him; cell 8: crouching low, knees bent. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever his near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered his body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on his far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_boy_idle_faint_sit_crouch",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_boy_idle_faint_sit_crouch.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/boy_idle_faint_sit_crouch.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy with brown hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing idle; cell 2: standing idle; cell 3: dazed and swaying on his feet, eyes closed; cell 4: down on one knee, dazed, eyes closed; cell 5: falling forward toward the ground; cell 6: lying flat on his front on the ground, eyes closed, fainted; cell 7: SITTING on the ground with his legs crossed in front of him; cell 8: CROUCHING low, knees bent, body lowered. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give him ONE sword, held in his NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as his legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. His near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside him; when lying down, it lies on the ground beside him. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. His far hand stays an empty fist. No shield, no armour, no helmet, no gloves: he keeps his plain clothes and his own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_boy_dash_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_boy_dash_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/boy_dash.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy with brown hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: stepping forward, about to dash; cell 2: diving forward, body stretched out flat; cell 3: curled into a ball, rolling; cell 4: upside down mid-roll; cell 5: curled into a ball, rolling; cell 6: standing; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever his near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered his body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on his far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_boy_dash",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_boy_dash.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/boy_dash.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy with brown hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: stepping forward, about to dash; cell 2: diving forward, body stretched out flat; cell 3: curled into a ball, rolling; cell 4: UPSIDE DOWN mid-roll, feet up; cell 5: curled into a ball, rolling; cell 6: standing; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give him ONE sword, held in his NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as his legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. His near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside him; when lying down, it lies on the ground beside him. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. His far hand stays an empty fist. No shield, no armour, no helmet, no gloves: he keeps his plain clothes and his own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_boy_surge_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_boy_surge_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/boy_surge.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy with brown hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing in a wide braced stance; cell 2: stepping forward; cell 3: leaning forward, pushing off; cell 4: flying forward, far fist thrust forward; cell 5: flying forward, far fist thrust forward; cell 6: flying forward, far fist thrust forward; cell 7: landing from the charge, knees bent; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever his near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered his body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on his far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_boy_surge",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_boy_surge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/boy_surge.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy with brown hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing in a wide braced stance, ready; cell 2: stepping forward, leaning into a charge; cell 3: leaning far forward, pushing off to charge; cell 4: FLYING forward through the air, body stretched out horizontally, near arm thrust straight forward; cell 5: FLYING forward through the air, body stretched out horizontally, near arm thrust straight forward; cell 6: FLYING forward through the air, body stretched out, near arm thrust straight forward; cell 7: landing from the charge, knees bent; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give him ONE sword, held in his NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as his legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. His near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside him; when lying down, it lies on the ground beside him. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. His far hand stays an empty fist. No shield, no armour, no helmet, no gloves: he keeps his plain clothes and his own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_boy_slam_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_boy_slam_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/boy_slam.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy with brown hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: jumping up, sword raised high; cell 2: curled into a tight ball in mid air; cell 3: curled into a tight ball, sword across his body; cell 4: curled into a tight ball in mid air; cell 5: curled into a ball dropping, sword raised; cell 6: landed in a low crouch; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever his near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered his body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on his far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_boy_slam",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_boy_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/boy_slam.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy with brown hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: JUMPING up off the ground with both arms raised high; cell 2: curled into a tight ball in mid air, knees hugged to the chest; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch, knees bent; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give him ONE sword, held in his NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as his legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. His near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside him; when lying down, it lies on the ground beside him. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. His far hand stays an empty fist. No shield, no armour, no helmet, no gloves: he keeps his plain clothes and his own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_boy_double_jump_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_boy_double_jump_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/boy_double_jump.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy with brown hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: in the air, leaning back with legs forward; cell 2: tucked into a ball in mid air; cell 3: rising, both arms raised, one knee up; cell 4: stretched upward, both arms raised high; cell 5: tipping over sideways in the flip; cell 6: upside down in the flip; cell 7: coming upright out of the flip; cell 8: upright in the air, sword raised. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever his near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered his body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on his far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_boy_double_jump",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_boy_double_jump.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/boy_double_jump.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy with brown hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: in the air, leaning back with legs forward; cell 2: tucked into a ball in mid air; cell 3: rising, both arms raised, one knee up; cell 4: stretched upward, both arms raised high; cell 5: tipping over sideways in the flip, body nearly flat; cell 6: UPSIDE DOWN in the flip, feet up; cell 7: coming upright out of the flip; cell 8: upright in the air, arms spread out. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give him ONE sword, held in his NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as his legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. His near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside him; when lying down, it lies on the ground beside him. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. His far hand stays an empty fist. No shield, no armour, no helmet, no gloves: he keeps his plain clothes and his own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_walk_idle_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_walk_idle_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/girl_walk_idle.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: walking; cell 2: walking; cell 3: walking; cell 4: walking; cell 5: walking; cell 6: walking; cell 7: standing still; cell 8: standing still. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever her near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered her body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on her far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_girl_walk_idle",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_girl_walk_idle.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/girl_walk_idle.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: walking; cell 2: walking; cell 3: walking; cell 4: walking; cell 5: walking; cell 6: walking; cell 7: standing still; cell 8: standing still. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give her ONE sword, held in her NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as her legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. Her near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside her; when lying down, it lies on the ground beside her. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. Her far hand stays an empty fist. No shield, no armour, no helmet, no gloves: she keeps her plain clothes and her own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_jump_land_hurt_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_jump_land_hurt_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/girl_jump_land_hurt.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: crouching to jump, knees bent; cell 2: rising off the ground, legs together; cell 3: in the air, sword raised, knees tucked; cell 4: dropping, legs forward; cell 5: landed, standing; cell 6: standing; cell 7: hurt, wincing, mouth open; cell 8: hurt, wincing, mouth open. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever her near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered her body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on her far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_girl_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_girl_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/girl_jump_land_hurt.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: crouching a little with knees bent, about to jump; cell 2: springing up off the ground, both arms raised; cell 3: high in the air with both knees tucked up; cell 4: in the air with legs kicked out and arms spread; cell 5: just landed, standing; cell 6: standing; cell 7: hurt: flinching back with both arms flung out, wincing; cell 8: hurt: wincing, leaning back a little. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give her ONE sword, held in her NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as her legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. Her near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside her; when lying down, it lies on the ground beside her. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. Her far hand stays an empty fist. No shield, no armour, no helmet, no gloves: she keeps her plain clothes and her own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_idle_faint_sit_crouch_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_idle_faint_sit_crouch_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/girl_idle_faint_sit_crouch.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing idle; cell 2: standing idle; cell 3: dazed and swaying, eyes closed; cell 4: down on one knee, dazed; cell 5: falling forward; cell 6: lying flat on her front, fainted; cell 7: sitting on the ground, legs in front, sword lying in front of her; cell 8: crouching low, knees bent. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever her near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered her body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on her far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_girl_idle_faint_sit_crouch",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_girl_idle_faint_sit_crouch.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/girl_idle_faint_sit_crouch.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing idle; cell 2: standing idle; cell 3: dazed and swaying on her feet, eyes closed; cell 4: down on one knee, dazed, eyes closed; cell 5: falling forward toward the ground; cell 6: lying flat on her front on the ground, eyes closed, fainted; cell 7: SITTING on the ground with her knees up in front of her; cell 8: CROUCHING low, knees deeply bent, body lowered. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give her ONE sword, held in her NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as her legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. Her near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside her; when lying down, it lies on the ground beside her. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. Her far hand stays an empty fist. No shield, no armour, no helmet, no gloves: she keeps her plain clothes and her own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_dash_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_dash_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/girl_dash.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: stepping forward, about to dash; cell 2: diving forward, body stretched out flat; cell 3: curled into a ball, rolling; cell 4: upside down mid-roll; cell 5: curled into a ball, rolling; cell 6: standing; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever her near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered her body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on her far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_girl_dash",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_girl_dash.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/girl_dash.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: stepping forward, about to dash; cell 2: diving forward, body stretched out flat; cell 3: curled into a ball, rolling; cell 4: UPSIDE DOWN mid-roll, feet up; cell 5: curled into a ball, rolling; cell 6: coming out of the roll in a low crouch; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give her ONE sword, held in her NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as her legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. Her near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside her; when lying down, it lies on the ground beside her. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. Her far hand stays an empty fist. No shield, no armour, no helmet, no gloves: she keeps her plain clothes and her own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_surge_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_surge_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/girl_surge.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing in a wide braced stance; cell 2: stepping forward; cell 3: lunging forward, sword thrust forward; cell 4: flying forward, far fist thrust forward; cell 5: braced stance; cell 6: striding forward, legs apart; cell 7: landing from the charge, knees bent; cell 8: landing from the charge, knees bent. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever her near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered her body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on her far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_girl_surge",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_girl_surge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/girl_surge.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing in a wide braced stance, ready; cell 2: stepping forward, leaning into a charge; cell 3: leaning far forward, pushing off to charge; cell 4: FLYING forward through the air, body stretched out horizontally, near arm thrust straight forward; cell 5: FLYING forward through the air, body stretched out horizontally, near arm thrust straight forward; cell 6: FLYING forward through the air, body stretched out, near arm thrust straight forward; cell 7: landing from the charge, knees bent; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give her ONE sword, held in her NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as her legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. Her near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside her; when lying down, it lies on the ground beside her. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. Her far hand stays an empty fist. No shield, no armour, no helmet, no gloves: she keeps her plain clothes and her own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_slam_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_slam_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/girl_slam.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: in the air after a jump, sword raised high; cell 2: curled into a tight ball in mid air; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: tucked low as she drops, sword raised; cell 6: landed in a low crouch, knees bent; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever her near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered her body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on her far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_girl_slam",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_girl_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/girl_slam.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: JUMPING up off the ground with both arms raised high; cell 2: curled into a tight ball in mid air, knees hugged to the chest; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch, knees bent; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give her ONE sword, held in her NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as her legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. Her near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside her; when lying down, it lies on the ground beside her. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. Her far hand stays an empty fist. No shield, no armour, no helmet, no gloves: she keeps her plain clothes and her own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_girl_double_jump_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_girl_double_jump_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/girl_double_jump.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: in the air, leaning back with legs forward; cell 2: tucked into a ball in mid air; cell 3: stretched upward, both arms raised high; cell 4: stretched upward, both arms raised high; cell 5: tipping forward into the flip; cell 6: upside down in the flip; cell 7: coming upright out of the flip; cell 8: upright in the air, sword raised. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever her near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered her body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on her far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_girl_double_jump",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_girl_double_jump.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/girl_double_jump.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: in the air, leaning back with legs forward; cell 2: tucked into a ball in mid air; cell 3: rising, both arms raised, one knee up; cell 4: stretched upward, both arms raised high; cell 5: tipping over sideways in the flip, body nearly flat; cell 6: UPSIDE DOWN in the flip, feet up; cell 7: coming upright out of the flip; cell 8: upright in the air, arms spread out. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give her ONE sword, held in her NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as her legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. Her near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside her; when lying down, it lies on the ground beside her. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. Her far hand stays an empty fist. No shield, no armour, no helmet, no gloves: she keeps her plain clothes and her own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_man_walk_idle_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_man_walk_idle_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/man_walk_idle.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with short dark brown hair and light stubble in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: walking; cell 2: walking; cell 3: walking; cell 4: walking; cell 5: walking; cell 6: walking; cell 7: standing still; cell 8: standing still. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever his near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered his body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on his far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_man_walk_idle",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_man_walk_idle.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/man_walk_idle.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with short dark brown hair and light stubble in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: walking; cell 2: walking; cell 3: walking; cell 4: walking; cell 5: walking; cell 6: walking; cell 7: standing still; cell 8: standing still. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give him ONE sword, held in his NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as his legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. His near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside him; when lying down, it lies on the ground beside him. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. His far hand stays an empty fist. No shield, no armour, no helmet, no gloves: he keeps his plain clothes and his own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_man_jump_land_hurt_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_man_jump_land_hurt_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/man_jump_land_hurt.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with short dark brown hair and light stubble in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: crouching to jump, knees bent; cell 2: springing up, sword raised high; cell 3: in the air, knees tucked up; cell 4: in the air, legs kicked out, arms spread; cell 5: just landed, standing; cell 6: standing; cell 7: hurt, wincing; cell 8: hurt, wincing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever his near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered his body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on his far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_man_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_man_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/man_jump_land_hurt.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with short dark brown hair and light stubble in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: crouching a little with knees bent, about to jump; cell 2: springing up off the ground, both arms raised; cell 3: high in the air with both knees tucked up; cell 4: in the air with legs kicked out and arms spread; cell 5: just landed, standing; cell 6: standing; cell 7: hurt: flinching back with both arms flung out, wincing; cell 8: hurt: wincing, leaning back a little. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give him ONE sword, held in his NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as his legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. His near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside him; when lying down, it lies on the ground beside him. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. His far hand stays an empty fist. No shield, no armour, no helmet, no gloves: he keeps his plain clothes and his own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_man_idle_faint_sit_crouch_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_man_idle_faint_sit_crouch_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/man_idle_faint_sit_crouch.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with short dark brown hair and light stubble in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing idle; cell 2: standing idle; cell 3: dazed and swaying, eyes closed; cell 4: down on one knee, dazed; cell 5: falling forward; cell 6: lying flat on his front, fainted; cell 7: sitting on the ground, legs crossed, shield lying on the ground beside him; cell 8: crouching low, knees bent. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever his near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered his body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on his far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_man_idle_faint_sit_crouch",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_man_idle_faint_sit_crouch.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/man_idle_faint_sit_crouch.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with short dark brown hair and light stubble in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing idle; cell 2: standing idle; cell 3: dazed and swaying on his feet, eyes closed; cell 4: down on one knee, dazed, eyes closed; cell 5: falling forward toward the ground; cell 6: lying flat on his front on the ground, eyes closed, fainted; cell 7: SITTING on the ground with his legs crossed in front of him; cell 8: CROUCHING low, knees deeply bent, body lowered. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give him ONE sword, held in his NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as his legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. His near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside him; when lying down, it lies on the ground beside him. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. His far hand stays an empty fist. No shield, no armour, no helmet, no gloves: he keeps his plain clothes and his own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_man_dash_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_man_dash_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/man_dash.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with short dark brown hair and light stubble in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: stepping forward, about to dash; cell 2: diving forward, body stretched out flat; cell 3: curled up low, rolling; cell 4: upside down mid-roll; cell 5: tilted sideways, rolling; cell 6: standing; cell 7: stepping; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever his near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered his body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on his far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_man_dash",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_man_dash.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/man_dash.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with short dark brown hair and light stubble in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: stepping forward, about to dash; cell 2: diving forward, body stretched out flat; cell 3: curled into a ball, rolling; cell 4: UPSIDE DOWN mid-roll, feet up; cell 5: tilted sideways, rolling; cell 6: standing; cell 7: stepping; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give him ONE sword, held in his NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as his legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. His near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside him; when lying down, it lies on the ground beside him. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. His far hand stays an empty fist. No shield, no armour, no helmet, no gloves: he keeps his plain clothes and his own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_man_surge_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_man_surge_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/man_surge.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with short dark brown hair and light stubble in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing in a wide braced stance; cell 2: stepping forward; cell 3: leaning forward, pushing off; cell 4: flying forward, sword thrust forward; cell 5: flying forward, sword thrust forward; cell 6: lunging, sword thrust forward; cell 7: landing, leaning forward, sword thrust forward; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever his near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered his body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on his far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_man_surge",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_man_surge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/man_surge.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with short dark brown hair and light stubble in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing in a wide braced stance, ready; cell 2: stepping forward, leaning into a charge; cell 3: leaning far forward, pushing off to charge; cell 4: FLYING forward through the air, body stretched out horizontally, near arm thrust straight forward; cell 5: FLYING forward through the air, body stretched out horizontally, near arm thrust straight forward; cell 6: FLYING forward through the air, body stretched out, near arm thrust straight forward; cell 7: landing from the charge, knees bent; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give him ONE sword, held in his NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as his legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. His near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside him; when lying down, it lies on the ground beside him. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. His far hand stays an empty fist. No shield, no armour, no helmet, no gloves: he keeps his plain clothes and his own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_man_slam_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_man_slam_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/man_slam.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with short dark brown hair and light stubble in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: jumping up, sword raised high; cell 2: curled into a tight ball in mid air; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch, sword raised; cell 7: standing, sword across his body; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever his near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered his body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on his far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_man_slam",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_man_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/man_slam.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with short dark brown hair and light stubble in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: JUMPING up off the ground with both arms raised high; cell 2: curled into a tight ball in mid air, knees hugged to the chest; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch, knees bent; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give him ONE sword, held in his NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as his legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. His near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside him; when lying down, it lies on the ground beside him. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. His far hand stays an empty fist. No shield, no armour, no helmet, no gloves: he keeps his plain clothes and his own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_man_double_jump_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_man_double_jump_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/man_double_jump.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with short dark brown hair and light stubble in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: in the air, leaning back with legs forward; cell 2: tucked into a ball in mid air; cell 3: rising, both arms raised, one knee up; cell 4: stretched upward, both arms raised high; cell 5: tipping over sideways in the flip; cell 6: upside down in the flip; cell 7: coming upright out of the flip; cell 8: upright in the air, sword raised. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever his near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered his body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on his far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_man_double_jump",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_man_double_jump.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/man_double_jump.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown man with short dark brown hair and light stubble in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: in the air, leaning back with legs forward; cell 2: tucked into a ball in mid air; cell 3: rising, both arms raised, one knee up; cell 4: stretched upward, both arms raised high; cell 5: tipping over sideways in the flip, body nearly flat; cell 6: UPSIDE DOWN in the flip, feet up; cell 7: coming upright out of the flip; cell 8: upright in the air, arms spread out. Keep EVERYTHING exactly as it is in every cell: his pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give him ONE sword, held in his NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as his legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. His near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside him; when lying down, it lies on the ground beside him. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. His far hand stays an empty fist. No shield, no armour, no helmet, no gloves: he keeps his plain clothes and his own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_woman_walk_idle_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_woman_walk_idle_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/woman_walk_idle.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: walking; cell 2: walking; cell 3: walking; cell 4: walking; cell 5: walking; cell 6: walking; cell 7: standing still; cell 8: standing still. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever her near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered her body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on her far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_woman_walk_idle",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_woman_walk_idle.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/woman_walk_idle.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: walking; cell 2: walking; cell 3: walking; cell 4: walking; cell 5: walking; cell 6: walking; cell 7: standing still; cell 8: standing still. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give her ONE sword, held in her NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as her legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. Her near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside her; when lying down, it lies on the ground beside her. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. Her far hand stays an empty fist. No shield, no armour, no helmet, no gloves: she keeps her plain clothes and her own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_woman_jump_land_hurt_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_woman_jump_land_hurt_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/woman_jump_land_hurt.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: crouching to jump, knees bent; cell 2: springing up, sword raised; cell 3: in the air, knees tucked up; cell 4: in the air, legs kicked forward; cell 5: just landed, standing; cell 6: standing; cell 7: hurt, flinching with eyes shut, sword arm raised; cell 8: hurt, wincing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever her near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered her body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on her far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_woman_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_woman_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/woman_jump_land_hurt.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: crouching a little with knees bent, about to jump; cell 2: springing up off the ground, both arms raised; cell 3: high in the air with both knees tucked up; cell 4: in the air with legs kicked out and arms spread; cell 5: just landed, standing; cell 6: standing; cell 7: hurt: flinching back with both arms flung out, wincing; cell 8: hurt: wincing, leaning back a little. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give her ONE sword, held in her NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as her legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. Her near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside her; when lying down, it lies on the ground beside her. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. Her far hand stays an empty fist. No shield, no armour, no helmet, no gloves: she keeps her plain clothes and her own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_woman_idle_faint_sit_crouch_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_woman_idle_faint_sit_crouch_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/woman_idle_faint_sit_crouch.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing idle; cell 2: standing idle; cell 3: standing idle; cell 4: down on her knees, dazed, eyes closed; cell 5: falling forward; cell 6: lying flat on her front, fainted; cell 7: sitting on the ground, sword and shield lying on the ground beside her; cell 8: crouching low, knees bent. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever her near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered her body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on her far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_woman_idle_faint_sit_crouch",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_woman_idle_faint_sit_crouch.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/woman_idle_faint_sit_crouch.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing idle, one foot stepping; cell 2: standing idle; cell 3: dazed and swaying on her feet, eyes closed; cell 4: down on her knees, dazed, eyes closed; cell 5: falling forward toward the ground; cell 6: lying flat on her front on the ground, eyes closed, fainted; cell 7: SITTING on the ground with her legs crossed in front of her; cell 8: CROUCHING low, knees deeply bent, body lowered. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give her ONE sword, held in her NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as her legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. Her near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside her; when lying down, it lies on the ground beside her. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. Her far hand stays an empty fist. No shield, no armour, no helmet, no gloves: she keeps her plain clothes and her own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_woman_dash_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_woman_dash_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/woman_dash.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: stepping forward, about to dash; cell 2: diving forward, body stretched out flat; cell 3: curled into a ball, rolling; cell 4: upside down mid-roll; cell 5: coming out of the roll, low; cell 6: standing; cell 7: stepping; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever her near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered her body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on her far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_woman_dash",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_woman_dash.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/woman_dash.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: stepping forward, about to dash; cell 2: diving forward, body stretched out flat; cell 3: curled into a ball, rolling; cell 4: UPSIDE DOWN mid-roll, feet up; cell 5: curled into a ball, rolling; cell 6: standing; cell 7: stepping; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give her ONE sword, held in her NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as her legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. Her near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside her; when lying down, it lies on the ground beside her. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. Her far hand stays an empty fist. No shield, no armour, no helmet, no gloves: she keeps her plain clothes and her own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_woman_surge_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_woman_surge_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/woman_surge.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing in a wide braced stance; cell 2: stepping forward; cell 3: leaning forward, pushing off; cell 4: flying forward, far fist thrust forward; cell 5: flying forward, far fist thrust forward; cell 6: flying forward, far fist thrust forward; cell 7: landing, sword thrust forward; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever her near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered her body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on her far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_woman_surge",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_woman_surge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/woman_surge.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: standing in a wide braced stance, ready; cell 2: stepping forward, leaning into a charge; cell 3: leaning far forward, pushing off to charge; cell 4: FLYING forward through the air, body stretched out horizontally, near arm thrust straight forward; cell 5: FLYING forward through the air, body stretched out horizontally, near arm thrust straight forward; cell 6: FLYING forward through the air, body stretched out, near arm thrust straight forward; cell 7: landing from the charge, knees bent; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give her ONE sword, held in her NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as her legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. Her near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside her; when lying down, it lies on the ground beside her. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. Her far hand stays an empty fist. No shield, no armour, no helmet, no gloves: she keeps her plain clothes and her own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_woman_slam_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_woman_slam_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/woman_slam.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: jumping up, arms down; cell 2: curled into a tight ball in mid air; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball in mid air; cell 6: landed in a low crouch; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever her near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered her body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on her far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_woman_slam",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_woman_slam.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/woman_slam.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: JUMPING up off the ground with both arms raised high; cell 2: curled into a tight ball in mid air, knees hugged to the chest; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch, knees bent; cell 7: standing; cell 8: standing. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give her ONE sword, held in her NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as her legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. Her near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside her; when lying down, it lies on the ground beside her. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. Her far hand stays an empty fist. No shield, no armour, no helmet, no gloves: she keeps her plain clothes and her own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_woman_double_jump_noweapon",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_woman_double_jump_noweapon.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard armor with no weapon: edits the final Vanguard frames (vanguard-final, the picks put together cell for cell). No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/vanguard-final/woman_double_jump.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: in the air, leaning back with legs forward; cell 2: tucked into a ball in mid air; cell 3: rising, one knee up; cell 4: rising, one knee up; cell 5: tipping into the flip; cell 6: upside down in the flip; cell 7: coming upright out of the flip; cell 8: coming upright out of the flip. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, helm, armour, tabard, shield, size and place in the cell; never change a pose. Change only one thing: take the sword away in every cell where it shows. Wherever her near hand held the sword, it stays exactly where it is, now an empty closed fist in its steel gauntlet, like a fist ready to punch; where the sword lies on the ground, it is simply gone. Where the sword covered her body, legs, boots, tabard or the background, paint what is behind it. Keep the plain deep blue heater shield exactly as it is in every cell, on her far forearm or wherever it is now. Never add any other weapon. Cells where no sword shows stay exactly as they are. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_sword_woman_double_jump",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_woman_double_jump.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': armor and weapon painted apart (Cory 13:27-13:29Z: armor shows whenever worn, the weapon shows with any armor, the shield is part of the armor, no weapon = an empty fist); follows the boy walk test (wave 342). Vanguard sword in plain clothes: edits the approved plain sheet. No refs: an edit that keeps every pose, each cell's pose named as painted. Priced line: \"Should I paint the rest of the armor-only and sword-only frames (every move for all four looks, 54 sheets), for about $3.67?\"",
+  "edit": {
+   "base": "art/source/hero/looks/woman_double_jump.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: in the air, leaning back with legs forward; cell 2: tucked into a ball in mid air; cell 3: rising, both arms raised, one knee up; cell 4: stretched upward, both arms raised high; cell 5: tipping over sideways in the flip, body nearly flat; cell 6: UPSIDE DOWN in the flip, feet up; cell 7: coming upright out of the flip; cell 8: upright in the air, arms spread out. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only one thing: give her ONE sword, held in her NEAR hand (the hand nearest the viewer) in every cell. It is a plain steel longsword: a straight double-edged steel blade about as long as her legs, a short straight steel crossguard, a brown leather-wrapped grip and a round steel pommel. Her near fist grips it, drawn over the grip, and the sword follows that hand in the pose: carried low, pointing down and forward, when walking or standing; raised with the hand when the arm is raised; thrust straight forward, point first, where the base shows the near arm thrust forward; held close to the body in rolls, tucks and flips. When sitting, the sword lies on the ground beside her; when lying down, it lies on the ground beside her. The sword is always flat to the viewer, never edge-on, never covers the face, and there is never a second sword. Her far hand stays an empty fist. No shield, no armour, no helmet, no gloves: she keeps her plain clothes and her own face and expression in every cell, as in the base. Change nothing else in any cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
  }
 ]
 }
