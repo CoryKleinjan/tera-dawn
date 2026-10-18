@@ -27674,6 +27674,29 @@
    "refs": [],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy warrior in 8 animation frames: cells 1 to 6 a walk, cells 7 and 8 standing idle. Keep EVERYTHING exactly as it is in every cell: his pose, body, head, face, helm, size, place in the cell, the sword, the gauntlets, the shoulder guards, the belt and pouch, the knee guards and boots. Change only two things. First, the TOP ROW cells 1, 2 and 3 show a bare steel breastplate on his chest: cover it with the same deep blue tabard he wears in cells 4 to 8, painted exactly like cell 7: the blue tabard covers his chest and belly over the breastplate, with one white stripe down the middle, the steel collar of the breastplate showing only at the neck, and it hangs below the belt to his thighs. After this all 8 cells wear the identical blue tabard. Leave cells 4 to 8 unchanged here. Second, in EVERY cell paint one straight white band down the middle of his deep blue heater shield, top to bottom point, between the steel rim; keep the shield's shape, size, place and steel rim. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere in every cell and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures. Every figure stays fully inside its own cell."
   }
+ },
+ {
+  "id": "warrior_vanguard_boy_walk_idle_test_v3",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_boy_walk_idle_test_v3.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': second fix of the Vanguard test (wave 327 fixed the tabard but cells 1-2 kept a plain shield; the v2 prompt only said 'in EVERY cell', so this one names cells 1 and 2 and points at cell 3's band). Edits the v2 result. Priced line and Cory's reply to be added before it runs.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/gemini-pass-1/warrior_vanguard_boy_walk_idle_test_v2.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi boy warrior in 8 animation frames. Keep EVERYTHING exactly as it is in every cell. Change only one thing, in the TOP ROW cells 1 and 2 (the two leftmost cells of the top row): his deep blue heater shield there is plain blue. Paint on it the same white band that his shield has in cells 3 to 8, placed exactly as in cell 3: one straight white band running from the top edge of the shield down to its point, inside the steel rim, toward the shield's far edge as the shield is turned. Keep the shield's shape, size, place, colour and steel rim, and keep everything else in cells 1 and 2 unchanged. Leave cells 3 to 8 exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures."
+  }
  }
 ]
 }
