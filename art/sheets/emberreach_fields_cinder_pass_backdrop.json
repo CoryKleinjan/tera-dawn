@@ -1,0 +1,28 @@
+{
+  "source": "art/source/emberreach_fields_cinder_pass.png",
+  "detail": 1,
+  "scale": 0.75,
+  "out_dir": "assets/sprites/backgrounds/emberreach_fields",
+  "background": [
+    255,
+    0,
+    255
+  ],
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      0,
+      2304
+    ],
+    "cols": [
+      0,
+      4096
+    ]
+  },
+  "cells": [
+    [
+      "cinder_pass"
+    ]
+  ]
+}

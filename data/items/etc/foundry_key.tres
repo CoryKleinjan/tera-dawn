@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ItemDef" load_steps=4 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/item_def.gd" id="1_item_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/items/spire_key.png" id="2_key_icon"]
+[ext_resource type="Texture2D" path="res://assets/sprites/items/foundry_key.png" id="2_key_icon"]
 [ext_resource type="Resource" path="res://data/effects/shard_pickup.tres" id="3_shard_pickup"]
 
 [resource]
