@@ -5,14 +5,13 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 ## How to add a job
 
 Create `data/jobs/<id>.tres` as a **JobDef**: its `base_power` (what damage grows from at level 1),
-mastery, HP, MP and Avoidability growth a level (`hp_growth`, `mp_growth`, `avoid_growth`), its `family` (the job line gear names in `EquipDef.jobs`),
-and a `tint` (the job's colour, where jobs are shown).
+mastery, extra health segments, MP and Avoidability growth (`bonus_hearts`, `base_mp`, `mp_growth`, `avoid_growth`), its `family` (the job line gear names in `EquipDef.jobs`),
+and its `description`.
 
 Everyone starts as `Character.START_JOB` (the Beginner, which lists starting gear,
 items and the potions put on the last quickslots, `starting_quickslots`). A job that others
-reach sets `advances_from` and `advance_gifts`: potions for now;
-once gear returns, also the job's basic shop weapon and off-hand (the first of each is worn at
-once in place of a Beginner's; one of the job's own line stays on). Better weapons only drop. To let an NPC hand it out, add its id to that
+reach sets `advances_from` and `advance_gifts`: potions (gear comes from vendors and secrets,
+never drops). To let an NPC hand it out, add its id to that
 NPC's `instructs`: their dialogue then offers "Choose a job", and the server
 (`ServerJobs.on_advance` → `Character.advance`) checks again before changing it
 (`Character.can_become`: a first job to anyone past the Beginner, a blend to its parents, any

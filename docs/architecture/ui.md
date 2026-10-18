@@ -61,7 +61,7 @@ buttons (`ui_accept`).
   ornate panels (`ARCH_PANEL`, `draw_panel`, `use_panel`) and list-row art.
 - **`UiStyle`**: styles Godot controls with that art: `style_button`, `style_tab`, keycaps,
   fields, sliders, check boxes, dropdowns, scroll bars, `menu_button` and the button motion.
-- **`WorldSkin`**: what's drawn over the world every frame: HP/MP/EXP bars, party, monster
+- **`WorldSkin`**: what's drawn over the world every frame: the segmented health bar, MP and EXP bars, party, monster
   and boss bars, name and guild tags, quest markers, speech bubbles, hints and
   the map-name banner.
 - **`UiBuild`**: makes the menus' controls: `label`, `heading`, `small_title`, `button` (a

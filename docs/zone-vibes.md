@@ -13,8 +13,8 @@ a map look (`MapDef.variant`) for it, and update the entry when the zone changes
   light, fog, colour grade, setting). It keeps the zone's palette family, brushwork and materials.
 - **Music**: each zone has one town track and one field track in the town's tone; the field
   track plays in every field of the zone, dark caves and woods included. Each zone's boss map
-  has its own `boss_<zone>` track: the town's tone, but cinematic and dangerous. Bosses that
-  live in a training map (Dawnrise) play the field track.
+  has its own `boss_<zone>` track: the town's tone, but cinematic and dangerous. Every boss
+  fights alone in its own arena map; Dawnrise Isle's arenas play `boss_dawnharbor`.
 - **Music feel** (Cory, 2026-10-16): grown-up, never childish, in the spirit of Hollow Knight.
   Towns and fields are ambient: slow, spacious and wistful, cello and felt piano under the zone's
   own instruments, no music box. Bosses are cinematic: full orchestral weight, low strings, choir
@@ -45,24 +45,24 @@ a map look (`MapDef.variant`) for it, and update the entry when the zone changes
   palette alone.
 - **Monsters**: each kind of monster belongs to one zone; zones don't share kinds unless Cory
   says so. A map has at most three kinds (a boss counts as one).
-- **Levels**: border fields are the walk between towns and stay at Lv 10 or below; a zone's
-  training branch climbs from about Lv 10 to its boss map. `tests/content/content_zones_test.gd`
+- **Levels**: border fields are the walk between towns and stay at tuning tier 10 or below; a zone's
+  training branch climbs from about tier 10 to its boss map. `tests/content/content_zones_test.gd`
   checks these monster and level rules.
 - Roles below: **border** fields cross to a neighbouring zone, **training** fields lead deeper,
   the **boss** map ends the branch.
-- Each job town also has a **Trial Ground** (Lv 10-11) for its job test, where a tear opens and
+- Each job town also has a **Trial Ground** (tier 10-11) for its job test, where a tear opens and
   the tear boss waits; it keeps its zone's look.
 
 ---
 
 ## Dawnrise Isle (start island)
 
-Lv 1-12 · town Dawnrise Village · `meadow` biome · ship to Dawnharbor. The sunny, gentle island
+Tier 1-12 · town Dawnrise Village · `meadow` biome · ship to Dawnharbor. The sunny, gentle island
 where every adventurer wakes; the softest, most innocent zone.
 
 **Keep (art):** sunrise palette: plum sky top `#2b2152`, peach horizon `#ffd3a0`, warm gold light
 `#ffe2b0`, rose-pink haze `#e8a49a`; golden motes, light shafts. Rolling grass, wildflowers,
-ropes, small rocks and trees. Round, soft, friendly shapes; small cute monsters.
+rope props (never climbable), small rocks and trees. Round, soft, friendly shapes; small cute monsters.
 
 **Keep (music):** gentle and hopeful. Town: ocarina, felt piano, acoustic guitar, soft strings,
 cello, slow and tender. Field: ocarina, flute, guitar, strings, light percussion, a gentle
@@ -74,18 +74,18 @@ golden thatch, rose and peach heart shutters, flower boxes, climbing roses; no b
 plaster. Buildings: Elder Rowan's house, Mira's shop (striped awning), a family cottage, the
 windmill. Rose-wound lamp posts. One 4K sunrise meadow panorama (hills, village, windmill, sea).
 
-| Sub-zone | Role | Lv | What changes | Monsters |
+| Sub-zone | Role | Tier | What changes | Monsters |
 | --- | --- | --- | --- | --- |
 | Daybreak Shore | Tutorial | 1-2 | The zone look on a sunrise beach *(inferred)* | Dewling |
 | Dawnrise Meadow | First field | 1-3 | Nothing: the zone look as painted, open sunrise meadow | Dewling, Mossling, Petal Bat |
 | Sunny Slope | Easy field | 2-6 | Brighter: clear blue sky, golden horizon, more saturated | Tide Dewling, Mossling, Petal Bat |
 | Mushroom Dell | Training | 4-8 | Cooler shade under giant mushrooms, lilac sky, misty, green spores | Sporecap, Sproutcap, Sea Gull |
-| Tidal Flats | Training, boss | 7-12 | Island shore: sea-blue sky, peach low sky, pale washed backdrop | Shell Crab, Sea Gull; boss Old Clawbeard |
-| Fern Hollow | Training, boss | 6-12 | Shaded mossy hollow, deep green light, light shafts, green motes | Fern Boar, Boulderkin; boss Fern Boar Chief |
+| Tidal Flats | Training | 7-12 | Island shore: sea-blue sky, peach low sky, pale washed backdrop | Shell Crab, Sea Gull; boss Old Clawbeard (arena Clawbeard's Cove) |
+| Fern Hollow | Training | 6-12 | Shaded mossy hollow, deep green light, light shafts, green motes | Fern Boar, Boulderkin; boss Fern Boar Chief (arena Chief's Burrow) |
 
 ## Dawnharbor Coast
 
-Lv 3-22 · town Dawnharbor · `harbor` biome · neighbours Driftcove and
+Tier 3-22 · town Dawnharbor · `harbor` biome · neighbours Driftcove and
 Greenbough. The busy port at the heart of the mainland; open, breezy and prosperous.
 
 **Keep (art):** warm early morning over the sea: navy sky top `#1c2e5c`, peach-cream horizon
@@ -105,13 +105,13 @@ lighthouse, chapel). One 4K warm-morning harbour panorama fills the background; 
 Layout: `/mnt/project-files/plans/done/dawnharbor-city-layout.md`.
 
 
-| Sub-zone | Role | Lv | What changes | Monsters |
+| Sub-zone | Role | Tier | What changes | Monsters |
 | --- | --- | --- | --- | --- |
 | Harbor Beach | Border to Driftcove | 3-9 | Sunrise beach: peach low sky, warmer golden light | Sand Crab, Sea Gull, Tide Dewling (borrowed until Dawnharbor has its own) |
 | Harbor Road | Border to Greenbough | 6-9 | Bright, airy coast road, pale blue sky, light haze; first green from Greenbough | Thornling, Sea Gull (borrowed until Dawnharbor has its own) |
-| Windmill Downs | Training | 10-17 | Grassy downs with windmills, sunny and breezy *(inferred; plain harbour look today)* | Bramble Boar, Reef Gull, Tide Slime (borrowed until Dawnharbor has its own) |
-| Gull Bluffs | Training | 15-20 | Windy sea cliffs crowded with gulls *(inferred; plain harbour look today)* | Reef Gull, Coral Turret, Kelp Lurker (borrowed until Dawnharbor has its own) |
-| Smugglers' Grotto | Boss | 20-22 | Dim sea cave lit by smugglers' lanterns, a long way down from the top of Gull Bluffs to Tusker's Den *(inferred; plain harbour look today)* | Kelp Lurker, Barnacle Boar (borrowed until Dawnharbor has its own); boss Grotto Tusker |
+| Windmill Downs | Training | 10-17 | Grassy downs with windmills, sunny and breezy | Bramble Boar, Reef Gull, Tide Slime (borrowed until Dawnharbor has its own) |
+| Gull Bluffs | Training | 15-20 | Windy sea cliffs crowded with gulls | Reef Gull, Coral Turret, Kelp Lurker (borrowed until Dawnharbor has its own) |
+| Smugglers' Grotto | Boss | 20-22 | Dim sea cave lit by smugglers' lanterns, a long way down from the top of Gull Bluffs to Tusker's Den | Kelp Lurker, Barnacle Boar (borrowed until Dawnharbor has its own); boss Grotto Tusker (arena Tusker's Den) |
 | Driftwood Hollow | Secret | – | Harbor Beach's look: a driftwood cave under the beach, through a fake wall in the nook under the cliff | Sand Crab, Tide Dewling |
 | Tide Tunnel | Secret | – | Smugglers' Grotto's look: a sea tunnel from Driftwood Hollow to the bottom of the grotto, gated until its lever by the grotto's gate is pulled | Kelp Lurker, Barnacle Boar |
 | Smugglers' Stash | Secret | – | Smugglers' Grotto's look: the smugglers' hoard behind a locked gate halfway down the grotto (its key is in Gull Roost) | Barnacle Boar, Kelp Lurker |
@@ -121,12 +121,12 @@ Layout: `/mnt/project-files/plans/done/dawnharbor-city-layout.md`.
 
 ## Greenbough Wilds
 
-Lv 9-28 · town Greenbough Village (Archers) · `greenwood` biome · neighbours Dawnharbor and
+Tier 9-28 · town Greenbough Village (Archers) · `greenwood` biome · neighbours Dawnharbor and
 Lumewood. Towering trees and rope bridges; lively, airy, hunter's forest.
 
 **Keep (art):** fresh daylight through leaves: deep green sky top `#173a29`, pale yellow horizon
 `#fff1b0`, yellow-green light `#f4ffd0`, leaf-green mist `#a7d499`; light shafts, green motes.
-Giant oak trunks, broad leaf canopies, planks, rope bridges and ladders, moss and bark. Monsters
+Giant oak trunks, broad leaf canopies, planks, rope bridges (walkable, never climbed), moss and bark. Monsters
 are plant and woodland creatures. Fields: one painted backdrop picture each, in its own colours
 below; earth ledges with one grassy edge over plain dark earth; dark oak leaves framing the top
 corners; a hollow trunk at the trunk gate, a painted chest on each secret ledge and a wall of
@@ -140,11 +140,11 @@ below, Elder's Root down the far west side to the boss.
 birdsong-like woodwinds, airy and calm. Field: wooden flutes, strings, hand drums, a quiet
 swinging hunting rhythm.
 
-**Town: Greenbough Village.** Treehouses built into giant oaks, reached by ladders and linked by
+**Town: Greenbough Village.** Treehouses built into giant oaks, reached by steps and platforms and linked by
 rope bridges; life happens up in the branches. Honey oak planks, log posts, straw-and-leaf
 thatch and antler trim.
 
-| Sub-zone | Role | Lv | What changes | Monsters |
+| Sub-zone | Role | Tier | What changes | Monsters |
 | --- | --- | --- | --- | --- |
 | Bough Trail | Border to Dawnharbor | 9-10 | Forest edge, warm golden daylight | Thornling, Seedwing |
 | Whispering Grove | Border to Lumewood | 9-10 | Cool mint-teal mist, rising motes; quiet, a little magical, hinting at Lumewood | Thornling, Seedwing |
@@ -152,7 +152,7 @@ thatch and antler trim.
 | Thornwood | Training | 14-16 | Dim and tangled: olive fog, muted colour, darker shadows, thorns | Bramble Boar, Acorn Sentry |
 | Deep Canopy | Training | 16-18 | Dark green under a closed canopy, warm shafts piercing through | Acorn Sentry, Barkcap |
 | Old Oak Heights | Training | 18-23 | High in the old oaks: warm afternoon light through the leaves, golden shafts, soft green haze | Barkcap, Grove Wisp |
-| Elder's Root | Boss | 23-28 | Golden late-afternoon glow around an ancient tree, gold motes; reverent | Grove Wisp; boss Elder Treant |
+| Elder's Root | Boss | 23-28 | Golden late-afternoon glow around an ancient tree, gold motes; reverent | Grove Wisp; boss Elder Treant (arena Heart of the Root) |
 | Dappled Nook | Secret | – | Mossy Glade's look: a small sunlit glade behind a root wall | Bramble Boar, Seedwing |
 | Canopy Walk | Secret | – | Deep Canopy's look: a long hidden path along the treetops | Seedwing, Barkcap |
 | Thorn Thicket | Secret | – | Thornwood's look: a tangled pocket behind a bramble wall | Bramble Boar, Acorn Sentry |
@@ -176,7 +176,7 @@ tear music yet (the fields are silent; the arena plays Greenbough's boss track).
 
 ## Lumewood
 
-Lv 9-30 · town Lumewood Sanctum (Magicians) · `lumewood` biome · neighbours Greenbough and
+Tier 9-30 · town Lumewood Sanctum (Magicians) · `lumewood` biome · neighbours Greenbough and
 Emberreach. A glowing, dreaming forest; mystical, serene, wondrous.
 
 **Keep (art):** twilight glow: indigo sky top `#120e33`, lavender horizon `#c8a7ff`, soft violet
@@ -193,7 +193,7 @@ violet twilight. A street and two stone terraces (the Magicians' Library and sto
 dormitory and observatory above); crystal fountain, book cart, star globe and glowing-mushroom
 planters.
 
-| Sub-zone | Role | Lv | What changes | Monsters |
+| Sub-zone | Role | Tier | What changes | Monsters |
 | --- | --- | --- | --- | --- |
 | Glimmer Path | Border to Greenbough | 9-10 | Brightest Lumewood map: strong light, pale lilac horizon, rich colour | Glowcap, Lume Wisp |
 | Starfall Ridge | Border to Emberreach | 9-10 | Night ridge under a starry navy sky, starlight motes | Glowcap, Lume Wisp |
@@ -201,7 +201,7 @@ planters.
 | Crystal Caves | Training | 15-17 | Deep indigo cave lit by violet crystals | Star Bat, Prism Slime |
 | Prism Lake | Training | 17-20 | Pink-violet sky over a lake, most saturated map in the zone | Prism Slime, Crystal Golem |
 | Glass Dome Ruins | Training | 20-27 | Ruined glass domes under a cool blue-violet sky, pale blue motes | Crystal Golem, Spell Imp, Starfall Golem |
-| Arcane Spire | Boss | 22-30 | Purple magic fog, magenta motes, heavy violet grade; the long climb UP from Glass Dome Ruins to Spire Summit | Spell Imp, Starfall Golem; boss Arcane Sentinel |
+| Arcane Spire | Boss | 22-30 | Purple magic fog, magenta motes, heavy violet grade; the long climb UP from Glass Dome Ruins to Spire Summit | Spell Imp, Starfall Golem; boss Arcane Sentinel (arena Spire Summit) |
 | Mosslight Grotto | Secret | – | Glowcap Hollow's look: a glowing moss cave west of the hollow, through a fake wall | Lume Wisp, Star Bat |
 | Geode Hollow | Secret | – | Crystal Caves' look: a geode above the caves, behind a breakable crystal wall; holds the Spire Key | Prism Slime, Star Bat |
 | Lakebed Passage | Secret | – | Prism Lake's look: a passage from the lake down and back to Glowcap Hollow, gated until its lever is pulled | Prism Slime, Crystal Golem |
@@ -211,7 +211,7 @@ planters.
 
 ## Emberreach
 
-Lv 7-31 · town Emberforge (Warriors) · `forge` biome · neighbours Lumewood and Lanternfall.
+Tier 7-31 · town Emberforge (Warriors) · `forge` biome · neighbours Lumewood and Lanternfall.
 Cinder hills and forges; proud, hot, hardworking, heroic.
 
 **Keep (art):** ember glow: dark ember-brown sky top `#24120c`, orange horizon `#ffb060`, amber
@@ -226,7 +226,7 @@ dark.
 **Town: Emberforge.** Stone forge halls with terracotta roofs and tall chimneys, glowing windows
 and iron-bound doors; smoke and forge glow. Grey forge stone, iron straps and rivets.
 
-| Sub-zone | Role | Lv | What changes | Monsters |
+| Sub-zone | Role | Tier | What changes | Monsters |
 | --- | --- | --- | --- | --- |
 | Cinder Pass | Border to Lumewood | 7-8 | Dusty mountain pass, brown-orange haze, muted colour | Cinder Imp, Ember Boar |
 | Ashen Wastes | Border to Lanternfall | 8-9 | Grey ash plain, washed-out colour, white ash drifting | Ember Boar, Ashshell |
@@ -238,7 +238,7 @@ and iron-bound doors; smoke and forge glow. Grey forge stone, iron straps and ri
 
 ## Lanternfall
 
-Lv 9-30 · town Lanternfall (Thieves) · `lantern` biome · neighbours Emberreach and Driftcove.
+Tier 9-30 · town Lanternfall (Thieves) · `lantern` biome · neighbours Emberreach and Driftcove.
 A city of lanterns at dusk; sly, playful, mysterious but charming, never horror.
 
 **Keep (art):** dusk: near-black navy sky top `#090e24`, amber horizon `#dfa060`, cool lavender
@@ -254,10 +254,10 @@ Boss: a fast heist-gone-wrong chase.
 **Town: Lanternfall.** Always at dusk, the one dusk town (Cory). Tall narrow half-timbered houses of
 smoky ochre plaster and dark soot-stained beams over dark brick, slate-blue roofs, crooked chimneys,
 iron wall lanterns, hanging signs on brackets, plum and teal awnings; no cream plaster (Dawnharbor's).
-A cobbled street with a brick-pillared balcony walkway and a rooftop lane joined by ladders; a dusk
+A cobbled street with a brick-pillared balcony walkway and a rooftop lane joined by steps; a dusk
 rooftop panorama behind.
 
-| Sub-zone | Role | Lv | What changes | Monsters |
+| Sub-zone | Role | Tier | What changes | Monsters |
 | --- | --- | --- | --- | --- |
 | Dusk Bridge | Border to Emberreach | 9-10 | Long bridge in an orange sunset, warm strong light | Shade Imp, Lantern Wisp |
 | Shadow Marsh | Border to Driftcove | 9-10 | Murky green marsh fog, green will-o'-wisp motes | Shade Imp, Lantern Wisp |
@@ -265,11 +265,11 @@ rooftop panorama behind.
 | Gloom Woods | Training | 15-17 | Dark teal woods, dim and muted | Dusk Moth, Night Boar |
 | Wraith Moor | Training | 17-19 | Cold blue-grey moor fog, pale blue motes, low colour | Night Boar, Gloomcap |
 | Sunken Graveyard | Training | 19-24 | Sunken graves under a dark slate sky, grey-blue fog, pale green motes | Gloomcap, Crypt Shell, Marsh Horror |
-| Forgotten Crypt | Boss | 24-30 | Near-black purple crypt, darkest map in the game | Marsh Horror, Dusk Stalker; boss Lantern Wraith |
+| Forgotten Crypt | Boss | 24-30 | Near-black purple crypt, darkest map in the game | Marsh Horror, Dusk Stalker; boss Lantern Wraith (arena Wraith's Vault) |
 
 ## Driftcove
 
-Lv 9-30 · town Driftcove (Pirates) · `coast` biome · neighbours Dawnharbor and Lanternfall.
+Tier 9-30 · town Driftcove (Pirates) · `coast` biome · neighbours Dawnharbor and Lanternfall.
 Sea caves, wrecks and beaches; swashbuckling, jolly, watery.
 
 **Keep (art):** tropical sea light: deep teal sky top `#132f4a`, cream horizon `#ffe2a7`, warm
@@ -285,11 +285,11 @@ light island percussion.
 big sea cave, lit turquoise from the cave mouth with warm lantern glow. Dark and sun-bleached wreck
 timber, patched canvas, rope, portholes, brass, barnacles and kelp, red-and-cream striped awnings
 and anchor flags (no skulls, no plaster or blue tiles). Two levels: a sandy floor plus a beached
-hull deck and a jetty reached by rope ladders. Every building its own picture (boat store, grog
+hull deck and a jetty reached by plank steps. Every building its own picture (boat store, grog
 shack, Pirates' Quarters, mast lookout, captain's cabin, net loft); one 4K sea-cave panorama looks
 out on a sunrise cove with wrecks and a moored pirate ship.
 
-| Sub-zone | Role | Lv | What changes | Monsters |
+| Sub-zone | Role | Tier | What changes | Monsters |
 | --- | --- | --- | --- | --- |
 | Sandy Shoals | Border to Dawnharbor | 9-10 | Bright tropical shallows, strong sun, saturated colour | Sand Crab, Tide Slime |
 | Saltwind Cliffs | Border to Lanternfall | 9-10 | Windy grey-blue overcast cliffs, pale and muted | Sand Crab, Tide Slime |
@@ -297,14 +297,11 @@ out on a sunrise cove with wrecks and a moored pirate ship.
 | Coral Reef | Training | 15-17 | Teal underwater-style light, cyan motes | Reef Gull, Coral Turret |
 | Wreck Cove | Training | 17-20 | Stormy dark blue cove full of wrecks, muted | Coral Turret, Kelp Lurker |
 | Drowned Docks | Training | 20-22 | Half-sunk old docks, grey-teal sky and sea mist | Kelp Lurker, Barnacle Boar |
-| Titan Grotto | Boss | 22-30 | Deep blue sea cave, dim and cold | Barnacle Boar, Cliff Harpy; boss Reef Titan |
+| Titan Grotto | Boss | 22-30 | Deep blue sea cave, dim and cold | Barnacle Boar, Cliff Harpy; boss Reef Titan (arena Titan's Pool) |
 
 ---
 
 ## Open questions
 
-- Windmill Downs, Gull Bluffs and Smugglers' Grotto still use the plain harbour look; confirm
-  their vibes before they get their own light settings.
-- Dawnrise Isle has two boss maps (Fern Hollow and Tidal Flats); keep both?
 - Dawnharbor's fields borrow neighbouring zones' monsters until it gets its own harbour monsters
   (agreed; their look is still to be asked).

@@ -30,8 +30,8 @@ func _draw_body() -> void:
 		["Fame", str(me.fame), Palette.GOOD if me.fame > 0 else (Palette.WARN if me.fame < 0 else Palette.MIST)])
 	# the long numbers get a row each, so they line up with the values above
 	y = _row(y, "EXP", TDStatusBar.MAX_LEVEL_TEXT if me.at_max_level() else "%d / %d" % [me.xp, me.xp_need()])
-	y = _row(y, "Health", "%d / %d" % [me.health.hp, me.max_hearts()])
-	# MP is a number only behind the scenes: players see how full it is
+	# health and MP are numbers only behind the scenes: players see how full they are
+	y = _row(y, "Health", "%d%%" % roundi(100.0 * me.health.hp / me.max_hearts()))
 	y = _row(y, "MP", "%d%%" % roundi(100.0 * me.mp / me.max_mp()))
 	y = _divider(y)
 	y = _pair(y, ["Dawn Essence", str(me.essence), Palette.SUN if me.essence > 0 else Palette.MIST], ["Power", str(me.power()), Palette.SUN])

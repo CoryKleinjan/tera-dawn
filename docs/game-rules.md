@@ -126,7 +126,7 @@ update this page when one changes. Each zone's own look and music are in
   by passing its Job Test once, and switching back to a job already
   passed is free (its gifts come only the first time). Switching jobs at any tutor
   that offers one drops the old job's skills and refunds the essence spent on them.
-- Second tier: every first job picks one of two blends of itself and another first job:
+- Second tier (parked): every first job picks one of two blends of itself and another first job:
   Spellblade (Warrior + Magician), Hexcaster (Magician + Thief), Swashbuckler (Thief + Pirate),
   Sharpshooter (Pirate + Archer), Wildhunter (Archer + Warrior). A blend is the same job from
   either side. It keeps its own first-job skills and opens all of the other job's first-job
@@ -309,8 +309,8 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   other monsters. Beating it opens a one-way portal there home to the zone's town.
 - Monsters target a player who comes in sight (the first fields' monsters only up close) or hits them, and
   give up a few seconds after losing sight. Every monster has one or two moves and every boss
-  three different ones; each move winds up with a glow first so it can be dodged. Moves reuse
-  the monster's own frames (the attack pose plus motion).
+  three different ones; each move winds up with a glow first so it can be dodged. Every move
+  has two painted frames of the monster's own.
 - Bosses are about 1.5x a normal monster of their kind, not bigger. They fight smarter: the move
   that fits the distance, in a set order players can learn, aim where the player is heading,
   leap to the player's platform, chain a charge or pounce into a slam, and get a second wind at
@@ -353,9 +353,9 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 - Music feels grown-up, never childish (Hollow Knight's spirit): towns, fields and the title are
   ambient; bosses are cinematic. Each zone keeps its own tone (`docs/zone-vibes.md`).
 - Kenney CC0 sound effects; the jingles stay.
-- Captain Marlo's ship carries players from the start island to Dawnharbor. He waits with his ship on
+- Captain Marlo's ship, the Dawnbreaker, carries players from the start island to Dawnharbor. He waits with his ship on
   a small dock map beside each end (Dawnrise Dock, Dawnharbor Docks), reached by a portal from the
-  town; a dock map belongs to its town (`return_map`). Coachman Rook takes them
+  town; a dock map belongs to its town (`return_map`). Each town's coachman (Rook in Dawnharbor) takes them
   to the job towns (400-500 Dawnshards, the same for everyone), but coaches only go to towns the
   player has already been to; the towns are also joined by a ring
   of portals. Developer test characters start in their job's town.

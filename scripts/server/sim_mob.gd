@@ -376,7 +376,7 @@ func _try_leap(p: SimPlayer) -> bool:
 	moves.leap(pl, x)
 	return true
 
-## The platform `p` stands on, or null in the air or on a rope.
+## The platform `p` stands on, or null in the air.
 func _platform_of(p: SimPlayer) -> Platform:
 	for pl in map.layout.platforms:
 		if pl.contains_x(p.position.x) and absf(pl.y - p.position.y) < 6.0:

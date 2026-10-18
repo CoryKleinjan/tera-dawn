@@ -7,7 +7,6 @@ script = ExtResource("1_job_def")
 id = &"spellblade"
 display_name = "Spellblade"
 family = &"spellblade"
-tint = Color(0.95, 0.75, 0.95, 1.0)
 mastery = 0.65
 description = "Warriors and Magicians who charge their blades with fire, ice and lightning. They learn every Warrior and Magician skill and wield both jobs' weapons."
 base_power = 16

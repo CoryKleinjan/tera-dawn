@@ -85,7 +85,6 @@ x = 720.0
 platform = 0
 flip = false
 scale = 1.0
-tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Npc_shop"]
 script = ExtResource("6_npc_placement")
@@ -101,7 +100,6 @@ x = 1250.0
 platform = 0
 flip = false
 scale = 1.15
-tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Door_tavern"]
 script = ExtResource("5_portal_def")
@@ -133,7 +131,6 @@ x = 1695.0
 platform = 0
 flip = false
 scale = 1.25
-tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Door_hall"]
 script = ExtResource("5_portal_def")
@@ -150,7 +147,6 @@ x = 4735.0
 platform = 0
 flip = false
 scale = 0.92
-tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Building_4"]
 script = ExtResource("7_building_placement")
@@ -159,7 +155,6 @@ x = 5210.0
 platform = 0
 flip = false
 scale = 1.1
-tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Portal_east"]
 script = ExtResource("5_portal_def")
@@ -175,7 +170,6 @@ x = 2330.0
 platform = 1
 flip = false
 scale = 1.0
-tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Npc_extra_0"]
 script = ExtResource("6_npc_placement")
@@ -191,7 +185,6 @@ x = 3990.0
 platform = 1
 flip = false
 scale = 1.0
-tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Building_8"]
 script = ExtResource("7_building_placement")
@@ -200,7 +193,6 @@ x = 3000.0
 platform = 2
 flip = false
 scale = 1.3
-tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Building_9"]
 script = ExtResource("7_building_placement")
@@ -209,7 +201,6 @@ x = 3430.0
 platform = 2
 flip = false
 scale = 1.15
-tint = Color(1.0, 1.0, 1.0, 1.0)
 
 [sub_resource type="Resource" id="Backdrop_picture"]
 script = ExtResource("backdrop_layer_def")
