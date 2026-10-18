@@ -58,8 +58,8 @@ update this page when one changes. Each zone's own look and music are in
   ground, let go to fly straight ahead, fist first). Elder Treant Wall Jump and Lantern
   Wraith Glide wait for their moves (their poses are painted). The main way never needs a move; secret rooms can. Dash,
   Double Jump and Surge play the painted effects made for the old job moves (rolling dash
-  spray, flash jump burst, charge trail); Slam has none yet, and the relic icons are stand-ins
-  until painted.
+  spray, flash jump burst, charge trail); Slam bursts a molten impact where the hero lands. Each relic
+  has its own painted icon.
 - Attacks and most attack skills aim: up hits overhead, down (in the air only) hits below. Buffs
   don't aim. A downward melee blow that meets a monster bounces him off it (pogo).
 - He can move while swinging and keeps facing the swing until it ends. Buffs and spells make no
@@ -161,8 +161,9 @@ update this page when one changes. Each zone's own look and music are in
   Attack and Melee Damage, Lanternfall Critical Rate and Ranged Damage, Driftcove Avoidability
   and Attack Speed. Each zone boss also drops a stronger rune of its own (two bonuses, 30% a
   kill) that no shop sells. Dawnrise Isle has none, so the starter island stays simple.
-- Enchanters: Juno in Dawnharbor, and in the other main towns the equipment seller. Runes and
-  boss runes have no icons yet (a slot shows the name); their art is priced before any run.
+- Enchanters: Juno in Dawnharbor, and in the other main towns the equipment seller.
+  Rune icons are carved river stones in their zone's colours with one glowing sigil; a boss
+  rune's stone sits in a gold rim.
 - Boss relics unlock moves (see "Movement and combat feel").
 
 ## Weapons

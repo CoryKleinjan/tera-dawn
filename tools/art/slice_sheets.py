@@ -383,16 +383,20 @@ def fix_glow_backdrop(rgb, alpha, source=None):
     return rgb, np.where(outside, 0.0, alpha)
 
 
-def fix_glow_backdrop_holes(rgb, alpha, source=None):
+def fix_glow_backdrop_holes(rgb, alpha, source=None, pink=False):
     """glow_backdrop, and the glow seen through holes in the item (a ring, a pendant's cord,
-    knuckle dusters) goes too: any enclosed patch of glow colours bigger than a highlight."""
+    knuckle dusters) goes too: any enclosed patch of glow colours bigger than a highlight.
+    `pink`: only a pink patch counts as a hole, for a cream or ivory item that the cream test
+    would take; the hole's cream rim goes with it, up to the outline."""
     rgb, alpha = fix_glow_backdrop(rgb, alpha, source)
     r, g, b = source[..., 0], source[..., 1], source[..., 2]
     glow = (alpha > 0) & (r > 0.85) & (b > g * 0.52)
-    lab, n = label(glow)
+    lab, n = label(glow & (b > g) if pink else glow)
     for i in range(1, n + 1):
         m = lab == i
         if m.sum() > 300:
+            if pink:
+                m = flood((alpha < 0.5) | glow, zip(*np.nonzero(m))).astype(bool)
             alpha = np.where(m, 0.0, alpha)
     return rgb, alpha
 
@@ -488,6 +492,7 @@ def fix_sky_body(rgb, alpha, source=None):
 # Per-cell clean-ups a manifest can ask for with "fix": "<name>".
 FIXES = {"glow_backdrop": fix_glow_backdrop,
          "glow_backdrop_holes": fix_glow_backdrop_holes,
+         "glow_backdrop_pink_holes": lambda rgb, alpha, source=None: fix_glow_backdrop_holes(rgb, alpha, source, True),
          "painted_sky": fix_painted_sky, "sky_body": fix_sky_body}
 def fix_round_top(rgb, alpha, source=None, band=28):
     """A round button whose rim runs under the cell's label box (blanked with `blank`): the

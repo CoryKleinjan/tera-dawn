@@ -30,7 +30,9 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    of the player, a hit on every monster struck, a buff's burst as it's cast, then its aura
    looping round each player it landed on for as long as the buff lasts (`Net.ev_aura`,
    `TDWorldFx.add_aura`; casting again replaces it). The paintings fade themselves out, so
-   their defs set `fade_out` false.
+   their defs set `fade_out` false. A painting whose light runs off its frame's edge (the Slam
+   impact) sets `edge_fade`: the game fades each frame's edges in as it plays (`TDEffect.faded`)
+   and the picture itself stays as painted.
    Effects the game fires on its own rather than through a skill or item (celebrate, monster
    poof, critical) are named as constants on `EffectDef`; code uses those, never
    the id as a string.

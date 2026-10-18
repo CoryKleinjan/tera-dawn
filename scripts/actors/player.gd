@@ -680,12 +680,16 @@ func _air_jump() -> void:
 	world.fx.dust(position, 0, 4)
 	_trail(RelicDef.Move.DOUBLE_JUMP, DOUBLE_JUMP_POSE_TICKS)
 
-## A Slam hit the ground: the screen jolts and the server breaks what it landed on.
+## A Slam hit the ground: the screen jolts, its painted impact bursts where he landed and the
+## server breaks what it landed on.
 func _slam_landed() -> void:
 	_slamming = false
 	_pose(&"slam_land", SLAM_LAND_TICKS)
 	world.shake(SLAM_SHAKE)
 	world.fx.dust(position, 0, 10)
+	var relic := Game.me.relic_for(RelicDef.Move.SLAM)
+	if relic and relic.effect:
+		world.fx.add_effect(relic.effect, position, face)
 	Net.ask(&"req_slam", [position])
 
 ## Relic move `m`'s painted effect round him, or its code-drawn trail for `ticks`.

@@ -26380,6 +26380,231 @@
   }
  },
  {
+  "id": "rune_icons_test",
+  "prompts": null,
+  "batch": "Rune and relic icons",
+  "with": null,
+  "refs": [],
+  "save": "rune_icons_test.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   2,
+   2
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 Job system thread (enchantments #301, relics #298/#305): small test of the rune and relic icons: one zone rune each from Dawnharbor and Greenbough, one boss rune, one relic.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/rune-icons/item_style_ref.png"
+   ],
+   "text": "The first image is an empty magenta canvas. On it, paint FOUR separate item icons for my 2D side-scrolling game, laid out in 2 rows of 2, each centred in its own quarter of the canvas and fully inside it (no icon touches or runs off any canvas edge), all about the same size, filling about two thirds of their quarter, with a wide band of plain magenta around and between them, not touching. The second image is four finished item icons from my game, drawn in exactly the art style these must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. Match their painting style, outline thickness, shading, light from the upper left and level of detail exactly. Each icon is ONE loose object with no frame, badge, card or background behind it, lit brightly enough to read clearly even when the icon is shown very small. A RUNE is a small, smooth, palm-sized river stone, rounded and slightly flattened, worn soft at the edges, in the zone's colour, with ONE bold simple sigil carved deep into its face and glowing softly from inside the carving, a faint glow around the sigil only. A BOSS RUNE is the same kind of carved rune stone but bigger, darker and richer, set in a thick worn gold rim with four small claw prongs holding it, its carved sigil blazing bright, with a few tiny sparkles around it. Top left, Tide Rune: a sea-blue and sand-cream stone with a curling wave sigil glowing pale aqua. Top right, Thorn Rune: a mossy deep green stone with a sharp thorny bramble sigil glowing fresh leaf green. Bottom left, Tusker Rune (boss rune): a dark slate stone in the gold rim with a curved boar tusk sigil blazing warm gold. Bottom right, Tusk Charm (a relic, not a rune): a single polished ivory boar tusk with a carved speed swoosh along it, hung on a short braided brown leather cord with two small wooden beads, a soft pale golden glow around the tusk. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each object, the same thickness on all. 3) No letters, words or numbers anywhere, and no people, faces, hands or creatures. 4) Flat pure magenta #FF00FF background everywhere outside the objects, with no shadow under them; no magenta or pink inside the art."
+  }
+ },
+ {
+  "id": "skillfx_slam_impact",
+  "prompts": null,
+  "batch": "Rune and relic icons",
+  "with": null,
+  "refs": [],
+  "save": "skillfx_slam_impact.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 Job system thread (enchantments #301, relics #298/#305): Slam (Magma Heart relic) landing effect, same look as the approved skill effects (#303) and the other relic moves.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/skill-anims/bases/blank_2x4_169.png",
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint ONE frame of a single skill effect animation in each cell, so that cells 1 to 8 played in order make one smooth, exciting animation. This is a flashy movement skill in a hand-painted 2D fantasy side-scroller, grand and spectacular like the skill effects of MapleStory, but painted: luminous hand-painted light with visible, fairly chunky brush strokes and painted texture, rich saturated colour, a white-hot core fading through bright colour to soft glowing edges, strong contrast between the bright core and the deeper colour around it. Never pixel art, never a photo, never a 3D render, never flat vector shapes. The skill is SLAM, a straight drop from the air that smashes down onto the floor, in molten light: white-hot yellow, blazing orange and deep ember red. This sheet is its IMPACT where he lands: the effect sits on an invisible floor line across the lower third of each cell, centred, spreading sideways along it, about three quarters of the cell's width at its biggest. Cell 1: a short bright downward streak of light hitting the floor line. Cell 2: a white-hot flash bursting at the point of impact. Cell 3: a low dome of blazing orange light pushing up and out, with sharp molten rays. Cell 4: the peak, a wide flat shockwave racing out left and right along the floor line, a fountain of glowing ember sparks flying up and out. Cell 5: the shockwave widening and thinning, sparks arcing down. Cell 6: two thin fading glowing arcs at the far left and right, embers falling. Cell 7: scattered dim embers. Cell 8: a few last tiny embers. Every frame is the SAME effect at the same scale and in the same colours, anchored at the same place in its cell; only its animation stage changes, so the frames flow smoothly from one to the next. It is light and magic, so it has NO outline at all: no dark line or border around any arc, flame, spark or glow; its edges are light fading softly into the background. Draw ONLY the effect: no character, hero, foot, hand, weapon, monster, creature, face, ground, floor, rocks, rubble, grass, scenery, shadow on the ground, text, title, letters or numbers anywhere. No smoke clouds. Each frame fits fully inside its own cell with a wide clear magenta margin on every side, never touching or crossing a cell border; never merge, split or add cells. Keep only the base picture's grid lines: never add extra grid lines, guide lines, boxes, squares or subdivisions inside any cell, and never fill a cell with grey or any colour. REPAINT: the background stays exactly the base picture's bright pure flat magenta #FF00FF (RGB 255, 0, 255) in every cell, never a darker plum or wine colour, never white, grey, black, pink or mauve, with no gradient or glow haze spreading into it beyond the effect's own soft edge. The effect itself uses NO pink, magenta, purple or violet anywhere."
+  }
+ },
+ {
+  "id": "rune_icons_1",
+  "prompts": null,
+  "batch": "Rune and relic icons",
+  "with": null,
+  "refs": [],
+  "save": "rune_icons_1.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   2,
+   2
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 Job system thread (enchantments #301, relics #298/#305): the rest of the rune and relic icons after rune_icons_test, same look; Shell, Leaf, Moss and Glow runes.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/rune-icons/item_style_ref.png",
+    "/mnt/project-files/art-sheets/rune-icons/rune_test_ref.png"
+   ],
+   "text": "The first image is an empty magenta canvas. On it, paint FOUR separate item icons for my 2D side-scrolling game, laid out in 2 rows of 2, each centred in its own quarter of the canvas and fully inside it (no icon touches or runs off any canvas edge), all about the same size, filling about two thirds of their quarter, with a wide band of plain magenta around and between them, not touching. The second image is four finished item icons from my game, drawn in exactly the art style these must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is three finished icons from this same set (two runes and a relic): match their stone shapes, carved glowing sigils, painting style, outline thickness, light from the upper left and level of detail exactly. Each icon is ONE loose object with no frame, badge, card or background behind it, lit brightly enough to read clearly even when the icon is shown very small. A RUNE is a smooth, rounded, palm-sized river stone, slightly flattened and worn soft at the edges, in its zone's colours, with ONE bold simple sigil carved deep into its face and glowing softly from inside the carving. Top left, Shell Rune (Dawnharbor, like the Tide Rune): a sea-blue and sand-cream stone with a fan-shaped scallop shell sigil glowing pale aqua. Top right, Leaf Rune (Greenbough, like the Thorn Rune): a mossy deep-green stone with a single pointed leaf sigil, its veins showing, glowing fresh leaf green. Bottom left, Moss Rune (Greenbough): a mossy deep-green stone with a sigil of three small round moss tufts side by side, glowing soft yellow-green. Bottom right, Glow Rune (Lumewood): a deep indigo-blue stone with a small four-pointed radiant star sigil glowing pale silver-blue and white. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each object, the same thickness on all. 3) Any glow stays on the object itself: no halo, aura or glow spreading out around an object into the background. 4) No letters, words or numbers anywhere, and no people, faces, hands or creatures. 5) Flat pure magenta #FF00FF background everywhere outside the objects, with no shadow under them; no magenta or pink inside the art."
+  }
+ },
+ {
+  "id": "rune_icons_2",
+  "prompts": null,
+  "batch": "Rune and relic icons",
+  "with": null,
+  "refs": [],
+  "save": "rune_icons_2.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   2,
+   2
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 Job system thread (enchantments #301, relics #298/#305): the rest of the rune and relic icons after rune_icons_test, same look; Moon, Prism, Ember and Forge runes.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/rune-icons/item_style_ref.png",
+    "/mnt/project-files/art-sheets/rune-icons/rune_test_ref.png"
+   ],
+   "text": "The first image is an empty magenta canvas. On it, paint FOUR separate item icons for my 2D side-scrolling game, laid out in 2 rows of 2, each centred in its own quarter of the canvas and fully inside it (no icon touches or runs off any canvas edge), all about the same size, filling about two thirds of their quarter, with a wide band of plain magenta around and between them, not touching. The second image is four finished item icons from my game, drawn in exactly the art style these must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is three finished icons from this same set (two runes and a relic): match their stone shapes, carved glowing sigils, painting style, outline thickness, light from the upper left and level of detail exactly. Each icon is ONE loose object with no frame, badge, card or background behind it, lit brightly enough to read clearly even when the icon is shown very small. A RUNE is a smooth, rounded, palm-sized river stone, slightly flattened and worn soft at the edges, in its zone's colours, with ONE bold simple sigil carved deep into its face and glowing softly from inside the carving. Top left, Moon Rune (Lumewood): a deep indigo-blue stone with a crescent moon sigil glowing pale silver-blue and white. Top right, Prism Rune (Lumewood): a deep indigo-blue stone with a faceted crystal diamond sigil with three short light rays, glowing pale silver-blue and white. Bottom left, Ember Rune (Emberreach): a dark charcoal-brown stone with a single flame sigil glowing bright orange. Bottom right, Forge Rune (Emberreach): a dark charcoal-brown stone with a sigil of a hammer over an anvil, glowing bright orange. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each object, the same thickness on all. 3) Any glow stays on the object itself: no halo, aura or glow spreading out around an object into the background. 4) No letters, words or numbers anywhere, and no people, faces, hands or creatures. 5) Flat pure magenta #FF00FF background everywhere outside the objects, with no shadow under them; no magenta or pink inside the art."
+  }
+ },
+ {
+  "id": "rune_icons_3",
+  "prompts": null,
+  "batch": "Rune and relic icons",
+  "with": null,
+  "refs": [],
+  "save": "rune_icons_3.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   2,
+   2
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 Job system thread (enchantments #301, relics #298/#305): the rest of the rune and relic icons after rune_icons_test, same look; Lantern, Wisp, Wave and Gale runes.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/rune-icons/item_style_ref.png",
+    "/mnt/project-files/art-sheets/rune-icons/rune_test_ref.png"
+   ],
+   "text": "The first image is an empty magenta canvas. On it, paint FOUR separate item icons for my 2D side-scrolling game, laid out in 2 rows of 2, each centred in its own quarter of the canvas and fully inside it (no icon touches or runs off any canvas edge), all about the same size, filling about two thirds of their quarter, with a wide band of plain magenta around and between them, not touching. The second image is four finished item icons from my game, drawn in exactly the art style these must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is three finished icons from this same set (two runes and a relic): match their stone shapes, carved glowing sigils, painting style, outline thickness, light from the upper left and level of detail exactly. Each icon is ONE loose object with no frame, badge, card or background behind it, lit brightly enough to read clearly even when the icon is shown very small. A RUNE is a smooth, rounded, palm-sized river stone, slightly flattened and worn soft at the edges, in its zone's colours, with ONE bold simple sigil carved deep into its face and glowing softly from inside the carving. Top left, Lantern Rune (Lanternfall): a near-black navy stone with a small hanging lantern sigil glowing warm amber. Top right, Wisp Rune (Lanternfall): a near-black navy stone with a sigil of a floating teardrop flame with a curling tail, glowing warm amber. Bottom left, Wave Rune (Driftcove): a sea-teal stone with cream streaks and a sigil of one tall cresting wave breaking to the right, glowing bright cream-white. Bottom right, Gale Rune (Driftcove): a sea-teal stone with cream streaks and a sigil of three swept wind lines curling at their ends, glowing bright cream-white. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each object, the same thickness on all. 3) Any glow stays on the object itself: no halo, aura or glow spreading out around an object into the background. 4) No letters, words or numbers anywhere, and no people, faces, hands or creatures. 5) Flat pure magenta #FF00FF background everywhere outside the objects, with no shadow under them; no magenta or pink inside the art."
+  }
+ },
+ {
+  "id": "rune_icons_4",
+  "prompts": null,
+  "batch": "Rune and relic icons",
+  "with": null,
+  "refs": [],
+  "save": "rune_icons_4.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   2,
+   2
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 Job system thread (enchantments #301, relics #298/#305): the rest of the rune and relic icons after rune_icons_test, same look; boss runes: Tusker (redo of rune_icons_test's crescent-looking sigil as a clear tusk), Heartwood, Sentinel, Molten.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/rune-icons/item_style_ref.png",
+    "/mnt/project-files/art-sheets/rune-icons/rune_test_ref.png"
+   ],
+   "text": "The first image is an empty magenta canvas. On it, paint FOUR separate item icons for my 2D side-scrolling game, laid out in 2 rows of 2, each centred in its own quarter of the canvas and fully inside it (no icon touches or runs off any canvas edge), all about the same size, filling about two thirds of their quarter, with a wide band of plain magenta around and between them, not touching. The second image is four finished item icons from my game, drawn in exactly the art style these must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is three finished icons from this same set (two runes and a relic): match their stone shapes, carved glowing sigils, painting style, outline thickness, light from the upper left and level of detail exactly. Each icon is ONE loose object with no frame, badge, card or background behind it, lit brightly enough to read clearly even when the icon is shown very small. A BOSS RUNE is the same kind of carved stone but darker and richer, set in a thick worn gold rim with four small gold claw prongs holding it, its carved sigil blazing bright, with a few tiny gold sparkles on the stone. Top left, Tusker Rune: a dark slate stone with a sigil of ONE curved boar tusk, thick at its root at the bottom and tapering to a sharp point at the top, blazing warm gold. It must read clearly as an animal tusk, never a crescent moon: draw the thick root end flat and blunt. Top right, Heartwood Rune: a dark bark-brown stone with a sigil of an oak tree with a round crown and spreading roots, blazing green-gold. Bottom left, Sentinel Rune: a dark blue-grey stone with a sigil of a single open watching eye inside a diamond shape, blazing ice blue and white. Bottom right, Molten Rune: a black volcanic stone with a sigil of a three-pointed crown with flames rising from it, blazing orange. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each object, the same thickness on all. 3) Any glow stays on the object itself: no halo, aura or glow spreading out around an object into the background. 4) No letters, words or numbers anywhere, and no people, faces, hands or creatures. 5) Flat pure magenta #FF00FF background everywhere outside the objects, with no shadow under them; no magenta or pink inside the art."
+  }
+ },
+ {
+  "id": "rune_icons_5",
+  "prompts": null,
+  "batch": "Rune and relic icons",
+  "with": null,
+  "refs": [],
+  "save": "rune_icons_5.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   2,
+   2
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 Job system thread (enchantments #301, relics #298/#305): the rest of the rune and relic icons after rune_icons_test, same look; boss runes Wraith and Titan, relics Wingstone and Magma Heart.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/rune-icons/item_style_ref.png",
+    "/mnt/project-files/art-sheets/rune-icons/rune_test_ref.png"
+   ],
+   "text": "The first image is an empty magenta canvas. On it, paint FOUR separate item icons for my 2D side-scrolling game, laid out in 2 rows of 2, each centred in its own quarter of the canvas and fully inside it (no icon touches or runs off any canvas edge), all about the same size, filling about two thirds of their quarter, with a wide band of plain magenta around and between them, not touching. The second image is four finished item icons from my game, drawn in exactly the art style these must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is three finished icons from this same set (two runes and a relic): match their stone shapes, carved glowing sigils, painting style, outline thickness, light from the upper left and level of detail exactly. Each icon is ONE loose object with no frame, badge, card or background behind it, lit brightly enough to read clearly even when the icon is shown very small. A BOSS RUNE is the same kind of carved stone but darker and richer, set in a thick worn gold rim with four small gold claw prongs holding it, its carved sigil blazing bright, with a few tiny gold sparkles on the stone. A RELIC is not a rune: a single precious object with no stone and no rim, its own soft glow kept on the object. Top left, Wraith Rune (boss rune): a near-black navy stone with a sigil of a hooded ghostly flame, blazing pale cyan and white. Top right, Titan Rune (boss rune): a deep sea-teal stone with a three-pronged trident sigil, blazing bright sea-green and white. Bottom left, Wingstone (relic): a smooth pale grey-white stone carved in the shape of a pair of folded bird wings, faintly glowing silver-white. Bottom right, Magma Heart (relic): a heart-shaped lump of black cooling lava with bright glowing orange cracks running across it and a molten glow from inside. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each object, the same thickness on all. 3) Any glow stays on the object itself: no halo, aura or glow spreading out around an object into the background. 4) No letters, words or numbers anywhere, and no people, faces, hands or creatures. 5) Flat pure magenta #FF00FF background everywhere outside the objects, with no shadow under them; no magenta or pink inside the art."
+  }
+ },
+ {
+  "id": "rune_icons_6",
+  "prompts": null,
+  "batch": "Rune and relic icons",
+  "with": null,
+  "refs": [],
+  "save": "rune_icons_6.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 Job system thread (enchantments #301, relics #298/#305): the rest of the rune and relic icons after rune_icons_test, same look; relic Titan's Pearl.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/skill-icons/blank_1x1.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/rune-icons/item_style_ref.png",
+    "/mnt/project-files/art-sheets/rune-icons/rune_test_ref.png"
+   ],
+   "text": "The first image is an empty magenta canvas. On it, paint ONE item icon for my 2D side-scrolling game, centred on the canvas and filling about two thirds of it, with a wide band of plain magenta all round it. The second image is four finished item icons from my game, drawn in exactly the art style these must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. The third image is three finished icons from this same set (two runes and a relic): match their stone shapes, carved glowing sigils, painting style, outline thickness, light from the upper left and level of detail exactly. Each icon is ONE loose object with no frame, badge, card or background behind it, lit brightly enough to read clearly even when the icon is shown very small. A RELIC is a single precious object, its own soft glow kept on the object. The icon is Titan's Pearl: a large, luminous, creamy white pearl with a soft sea-teal sheen, cradled in a small branch of red coral. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each object, the same thickness on all. 3) Any glow stays on the object itself: no halo, aura or glow spreading out around an object into the background. 4) No letters, words or numbers anywhere, and no people, faces, hands or creatures. 5) Flat pure magenta #FF00FF background everywhere outside the objects, with no shadow under them; no magenta or pink inside the art."
+  }
+ },
+ {
+  "id": "skillfx_slam_impact_b",
+  "prompts": null,
+  "batch": "Rune and relic icons",
+  "with": null,
+  "refs": [],
+  "save": "skillfx_slam_impact_b.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-17 Job system thread: redo of skillfx_slam_impact, which came back with a dark plum background, an added bright floor guide line drawn through the effect in every cell, and its shockwave running off the cell edges in cells 4 and 5.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/skill-anims/bases/blank_2x4_169.png",
+   "text": "The base picture is an EMPTY sheet of 8 cells (2 rows of 4, numbered left to right, then top to bottom) on a flat magenta background. Paint ONE frame of a single skill effect animation in each cell, so that cells 1 to 8 played in order make one smooth, exciting animation. This is a flashy movement skill in a hand-painted 2D fantasy side-scroller, grand and spectacular like the skill effects of MapleStory, but painted: luminous hand-painted light with visible, fairly chunky brush strokes and painted texture, rich saturated colour, a white-hot core fading through bright colour to soft glowing edges, strong contrast between the bright core and the deeper colour around it. Never pixel art, never a photo, never a 3D render, never flat vector shapes. The skill is SLAM, a straight drop from the air that smashes down onto the floor, in molten light: white-hot yellow, blazing orange and deep ember red. This sheet is its IMPACT where he lands: the effect sits on an imaginary floor across the lower third of each cell, centred, spreading sideways along it, about two thirds of the cell's width at its very biggest, so even the widest frame keeps a wide clear magenta margin on its left and right and never reaches the cell's edges. The floor is imaginary: NEVER draw a floor line, horizon line, guide line or any straight line across a cell. Cell 1: a short bright downward streak of light hitting the floor. Cell 2: a white-hot flash bursting at the point of impact. Cell 3: a low dome of blazing orange light pushing up and out, with sharp molten rays. Cell 4: the peak, a flat shockwave racing out left and right along the floor, a fountain of glowing ember sparks flying up and out. Cell 5: the shockwave widening and thinning, sparks arcing down. Cell 6: two thin fading glowing arcs at the far left and right, embers falling. Cell 7: scattered dim embers. Cell 8: a few last tiny embers. Every frame is the SAME effect at the same scale and in the same colours, anchored at the same place in its cell; only its animation stage changes, so the frames flow smoothly from one to the next. It is light and magic, so it has NO outline at all: no dark line or border around any arc, flame, spark or glow; its edges are light fading softly into the background. Draw ONLY the effect: no character, hero, foot, hand, weapon, monster, creature, face, ground, floor, rocks, rubble, grass, scenery, shadow on the ground, text, title, letters or numbers anywhere. No smoke clouds. Each frame fits fully inside its own cell with a wide clear magenta margin on every side, never touching or crossing a cell border; never merge, split or add cells. Keep only the base picture's grid lines: never add extra grid lines, guide lines, boxes, squares or subdivisions inside any cell, and never fill a cell with grey or any colour. REPAINT: the background stays exactly the base picture's bright pure flat magenta #FF00FF (RGB 255, 0, 255) in every cell, never a darker plum or wine colour, never white, grey, black, pink or mauve, with no gradient or glow haze spreading into it beyond the effect's own soft edge. The effect itself uses NO pink, magenta, purple or violet anywhere."
+  }
+ },
+ {
   "id": "newhero_boy_test_walk_idle",
   "prompts": null,
   "batch": "maple hero layers (edit)",

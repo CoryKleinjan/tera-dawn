@@ -30,6 +30,9 @@ const NAMED: Array[StringName] = [CELEBRATE, MONSTER_POOF, CRITICAL, LEVEL_UP]
 ## Keeps following the player (level up).
 @export var follow_player := false
 @export var fade_out := true
+## Fades every frame's edges in over this share of its width and height as it plays, for
+## painted frames whose light runs off the frame's edge (the picture itself stays as painted).
+@export_range(0.0, 0.5) var edge_fade := 0.0
 
 @export_group("Light")
 @export var light_color := Color(0, 0, 0, 0)
