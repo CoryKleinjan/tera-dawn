@@ -152,11 +152,13 @@ update this page when one changes. Each zone's own look and music are in
   top, bottom, shoes, gloves, cape and off-hand in one; earrings, pendants and rings only give
   stats. A job set is one Armor piece and one weapon (that job and its blends only), each with
   its own painted icon matching what the hero wears, and its own effect while both are worn.
-  Each job gets two sets. The Warrior's Vanguard set (helm, navy tabard, blue shield; a steel
-  longsword) is sold at the Emberforge Armory from the start; its Battle Fury makes each kill
-  swing 6% faster, up to 5 stacks, until 8 seconds pass with no kill, and ends when a piece
-  comes off. Other jobs keep only their starter weapons and wear plain clothes until their sets
-  are painted. Tests bring their own plain gear (`tests/fixtures/gear`).
+  Each job gets two sets. The Warrior's Vanguard set is sold at the Emberforge Armory from the
+  start. Its look, the same on every frame of every look: a steel helm with a raised ridge over
+  the middle of the dome, a riveted brow band, a pointed nose strip and cheek guards; a deep navy
+  tabard with one narrow white stripe; a plain blue heater shield; a steel longsword. Its Battle
+  Fury makes each kill swing 6% faster, up to 5 stacks, until 8 seconds pass with no kill, and
+  ends when a piece comes off. Other jobs keep only their starter weapons and wear plain clothes
+  until their sets are painted. Tests bring their own plain gear (`tests/fixtures/gear`).
 - No upgrade scrolls (Cory Oct 17): gear gets better through enchantments. Every piece has 3
   rune slots. An enchanter sets a rune from the bag in a slot of a piece in the bag for the
   rune's Dawnshard fee; it always works, and a rune set over another loses the old one. A worn
