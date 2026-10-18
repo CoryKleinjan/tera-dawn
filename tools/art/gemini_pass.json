@@ -31826,6 +31826,31 @@
    "refs": [],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi grown woman with long auburn hair in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: in the air, leaning back with legs forward; cell 2: tucked into a ball in mid air; cell 3: rising, both arms raised, one knee up; cell 4: stretched upward, both arms raised high; cell 5: tipping over sideways in the flip, body nearly flat; cell 6: UPSIDE DOWN in the flip, feet up; cell 7: coming upright out of the flip; cell 8: upright in the air, arms spread out. Keep EVERYTHING exactly as it is in every cell: her pose, arms, legs, body, head size, face, hair, clothes, size and place in the cell; never change a pose. Change only the sword, and only in the cells named here. In cell 7, there are two swords; remove the sword held in the fist on the RIGHT side of the picture (her far hand), so that fist is empty; keep the one sword in the fist on the LEFT side of the picture exactly as it is. The sword is the same plain steel longsword everywhere, flat to the viewer, never edge-on, never covering the face; there is only ever ONE sword in each cell. Cells 1, 2, 3, 4, 5, 6, 8 stay exactly as they are. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
   }
+ },
+ {
+  "id": "warrior_sword_girl_slam_leap",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_sword_girl_slam_leap.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': a new way for the one frame two edits could not fix (waves 343 and 346 both put the sword in her far fist in slam cell 1). Edits the approved PLAIN sheet, which has no sword yet, and adds the sword to cell 1 only, with her approved armored leap frame (vanguard-final girl_slam cell 1, whole cell) as the guide for the hold; only cell 1 is used. Priced line: \"Should I try a new way to fix the girl's slam leap frame, painting the sword in her raised near hand as in her approved armored leap, for about $0.07?\"",
+  "edit": {
+   "base": "art/source/hero/looks/girl_slam.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/new-hero/refs/vanguard_girl_slam_leap.png"
+   ],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing the same chibi girl with a long brown ponytail in 8 animation frames. The poses in this sheet are right and stay exactly as they are: cell 1: JUMPING up off the ground with both arms raised high; cell 2: curled into a tight ball in mid air, knees hugged to the chest; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: landed in a low crouch, knees bent; cell 7: standing; cell 8: standing. Only cell 1 matters in this picture. In cell 1 she is leaping up with both fists raised and holds NO sword yet. Give her ONE sword, held up in the raised fist on the LEFT side of the picture (her near hand), exactly the way the warrior in the attached picture holds it: the fist on the LEFT side of the picture grips the brown leather-wrapped grip, the round steel pommel just below that fist, and the straight steel blade points up and a little back, toward the upper left. Copy ONLY how the sword is held and its look from the attached picture: do not copy the helm, armour, tabard, shield, face or pose; she keeps her plain clothes, her ponytail, her own friendly face and her own pose exactly as in cell 1 now. The fist on the RIGHT side of the picture stays an empty raised fist with nothing in it. There is only ONE sword in cell 1. The sword is a plain steel longsword: straight double-edged steel blade about as long as her legs, short straight steel crossguard, brown leather-wrapped grip, round steel pommel; flat to the viewer, never edge-on, never covering the face. Keep EVERYTHING else in cell 1 exactly as it is. Leave cells 2 to 8 exactly as they are, with no sword. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere and keep the grid lines. No ground, shadow, glow, effects, text, labels or numbers, and no extra figures; every figure stays fully inside its own cell."
+  }
  }
 ]
 }
