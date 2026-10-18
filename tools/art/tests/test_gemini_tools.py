@@ -111,6 +111,36 @@ class OutPath(unittest.TestCase):
             self.assertEqual(os.path.basename(gemini_sheet.out_path(None, "W1", 8)), "part8_w1_gemini.png")
 
 
+class DryRunState(unittest.TestCase):
+    """A dry run (even with --redo) must never rewrite state.json: an old copy written back
+    over a newer one loses the runner's records."""
+
+    def run_main(self, d, *argv):
+        state = os.path.join(d, "state.json")
+        with mock.patch.object(gemini_pass, "OUT", d), mock.patch.object(gemini_pass, "STATE", state), \
+                mock.patch.object(gemini_pass, "load_list", return_value={"sheets": []}), \
+                mock.patch("sys.argv", ["gemini_pass.py", *argv]):
+            gemini_pass.main()
+        with open(state, encoding="utf-8") as f:
+            return f.read()
+
+    def test_dry_run_redo_leaves_state_alone(self):
+        with tempfile.TemporaryDirectory() as d:
+            before = json.dumps({"a": {"path": "a.png", "cost": 0.07}})
+            with open(os.path.join(d, "state.json"), "w", encoding="utf-8") as f:
+                f.write(before)
+            self.assertEqual(self.run_main(d, "--dry-run", "--redo", "a"), before)
+
+    def test_real_redo_forgets_the_result(self):
+        with tempfile.TemporaryDirectory() as d:
+            with open(os.path.join(d, "state.json"), "w", encoding="utf-8") as f:
+                json.dump({"a": {"path": "a.png", "cost": 0.07}}, f)
+            with mock.patch.object(gemini_pass.Pass, "run_batch"):
+                after = json.loads(self.run_main(d, "--redo", "a"))
+            self.assertNotIn("a", after)
+            self.assertEqual(after["_redone"]["cost"], 0.07)
+
+
 class FindKey(unittest.TestCase):
     def test_finds_the_first_value_anywhere(self):
         resp = {"response": {"candidates": [{"content": {"parts": [{"text": "hi"}, {"inlineData": {"data": "abc"}}]}}]}}
