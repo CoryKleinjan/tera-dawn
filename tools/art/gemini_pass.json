@@ -27847,6 +27847,98 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a cute chibi boy in plain clothes in 8 animation frames: a second jump in mid air with a forward flip (some cells upside down). The attached picture shows the SAME boy standing, dressed as a warrior. Keep EVERYTHING about the base exactly as it is in every cell: his pose, arms, legs, body, head size, proportions, size, place in the cell, which way he faces and turns, and his hair where it shows. Only dress him, in every cell, in exactly the warrior outfit of the attached picture, painted the same in every cell: the steel open-face helm with the riveted brow band, nose strip and cheek guards, covering only his head; the steel breastplate collar at his neck; the deep blue tabard with one white stripe down the middle covering his chest and belly and hanging below the belt to his thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; the brown belt with a pouch; steel knee guards; brown boots. He holds the steel longsword (crossguard, brown leather grip) in his NEAR hand, the hand toward the viewer, and carries the PLAIN deep blue heater shield with a steel rim, no band or emblem, on his FAR forearm. His hands and arms keep exactly the base's pose and the sword and shield simply follow them: the sword's grip in the near fist, the shield strapped to the far forearm. In rolls, flips and curls he keeps both tucked close to his body. The sword is always shown flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers his face. His face is ready for battle like the attached picture: focused and determined, eyebrows a little lowered, not smiling, not angry, not shouting. Style: exactly like the base and the attached picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF everywhere in every cell and keep the grid lines. Paint only the boy: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure stays fully inside its own cell."
   }
+ },
+ {
+  "id": "warrior_vanguard_boy_jump_land_hurt_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_boy_jump_land_hurt_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': redo of warrior_vanguard_boy_jump_land_hurt (wave 330), where Gemini copied the standing guide picture's pose into several in-air, sit and crouch cells. Cause: the standing ref; this edit has NO ref, spells out the Vanguard outfit in words (as in the approved walk test) and names every cell's pose. Priced line: \"Should I repaint these 4 Vanguard sheets of the boy (jumps, faint/sit/crouch, Surge, Slam) without the guide picture, for about $0.27?\"; Cory's OK in the thread.",
+  "edit": {
+   "base": "art/source/hero/looks/boy_jump_land_hurt.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a cute chibi boy in plain clothes in 8 animation frames. Each cell keeps EXACTLY the pose of the base, which is: cell 1: crouching a little with knees bent, about to jump; cell 2: springing up off the ground, both arms raised; cell 3: high in the air with both knees tucked up; cell 4: in the air with his legs kicked out and arms spread; cell 5: just landed, standing; cell 6: standing; cell 7: hurt: flinching back with both arms flung out, wincing; cell 8: hurt: wincing, leaning back a little. Keep his pose, arms, legs, body, head size, proportions, size, place in the cell and which way he faces exactly as in the base in every cell; never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows him standing there. Only dress him, in every cell, in one full suit of WARRIOR armour, painted the same in every cell: a steel open-face helm with a riveted brow band, a short nose strip and cheek guards, covering only his head (his face fully visible, a little brown hair at the front; nothing on his neck or shoulders attached to the helm); the steel collar of a breastplate at his neck; a deep blue tabard with ONE white stripe down the middle that COVERS HIS CHEST AND BELLY over the breastplate and hangs below the belt to his thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. He holds a steel longsword with a crossguard and a brown leather grip in his NEAR hand (the hand toward the viewer) and carries a PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on his FAR forearm. The sword and shield follow his hands and arms in the base pose; in curls and tucks he keeps them close to his body. The sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers his face. In the hurt cells 7 and 8 he may wince as in the base. His face is ready for battle: focused and determined, eyebrows a little lowered, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF everywhere in every cell and keep the grid lines. Paint only the boy: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_boy_idle_faint_sit_crouch_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_boy_idle_faint_sit_crouch_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': redo of warrior_vanguard_boy_idle_faint_sit_crouch (wave 330), where Gemini copied the standing guide picture's pose into several in-air, sit and crouch cells. Cause: the standing ref; this edit has NO ref, spells out the Vanguard outfit in words (as in the approved walk test) and names every cell's pose. Priced line: \"Should I repaint these 4 Vanguard sheets of the boy (jumps, faint/sit/crouch, Surge, Slam) without the guide picture, for about $0.27?\"; Cory's OK in the thread.",
+  "edit": {
+   "base": "art/source/hero/looks/boy_idle_faint_sit_crouch.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a cute chibi boy in plain clothes in 8 animation frames. Each cell keeps EXACTLY the pose of the base, which is: cell 1: standing idle; cell 2: standing idle; cell 3: dazed and swaying on his feet, eyes closed; cell 4: down on one knee, dazed, eyes closed; cell 5: falling forward toward the ground; cell 6: lying flat on his front on the ground, eyes closed, fainted; cell 7: SITTING on the ground with his legs crossed in front of him; cell 8: CROUCHING low, knees deeply bent, body lowered. Keep his pose, arms, legs, body, head size, proportions, size, place in the cell and which way he faces exactly as in the base in every cell; never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows him standing there. Only dress him, in every cell, in one full suit of WARRIOR armour, painted the same in every cell: a steel open-face helm with a riveted brow band, a short nose strip and cheek guards, covering only his head (his face fully visible, a little brown hair at the front; nothing on his neck or shoulders attached to the helm); the steel collar of a breastplate at his neck; a deep blue tabard with ONE white stripe down the middle that COVERS HIS CHEST AND BELLY over the breastplate and hangs below the belt to his thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. He holds a steel longsword with a crossguard and a brown leather grip in his NEAR hand (the hand toward the viewer) and carries a PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on his FAR forearm. The sword and shield follow his hands and arms in the base pose; in curls and tucks he keeps them close to his body. The sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers his face. In cells 3 to 6 he may look dazed or have his eyes closed as in the base. When sitting, the sword lies across his lap in his near hand; when lying down, the sword and shield lie close beside him. His face is ready for battle: focused and determined, eyebrows a little lowered, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF everywhere in every cell and keep the grid lines. Paint only the boy: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_boy_surge_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_boy_surge_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': redo of warrior_vanguard_boy_surge (wave 330), where Gemini copied the standing guide picture's pose into several in-air, sit and crouch cells. Cause: the standing ref; this edit has NO ref, spells out the Vanguard outfit in words (as in the approved walk test) and names every cell's pose. Priced line: \"Should I repaint these 4 Vanguard sheets of the boy (jumps, faint/sit/crouch, Surge, Slam) without the guide picture, for about $0.27?\"; Cory's OK in the thread.",
+  "edit": {
+   "base": "art/source/hero/looks/boy_surge.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a cute chibi boy in plain clothes in 8 animation frames. Each cell keeps EXACTLY the pose of the base, which is: cell 1: standing in a wide braced stance, ready; cell 2: stepping forward, leaning into a charge; cell 3: leaning far forward, pushing off to charge; cell 4: FLYING forward through the air, body stretched out horizontally, near arm thrust straight forward; cell 5: FLYING forward through the air, body stretched out horizontally, near arm thrust straight forward; cell 6: FLYING forward through the air, body stretched out horizontally, near arm thrust straight forward; cell 7: landing from the charge, knees bent, leaning forward; cell 8: standing. Keep his pose, arms, legs, body, head size, proportions, size, place in the cell and which way he faces exactly as in the base in every cell; never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows him standing there. Only dress him, in every cell, in one full suit of WARRIOR armour, painted the same in every cell: a steel open-face helm with a riveted brow band, a short nose strip and cheek guards, covering only his head (his face fully visible, a little brown hair at the front; nothing on his neck or shoulders attached to the helm); the steel collar of a breastplate at his neck; a deep blue tabard with ONE white stripe down the middle that COVERS HIS CHEST AND BELLY over the breastplate and hangs below the belt to his thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. He holds a steel longsword with a crossguard and a brown leather grip in his NEAR hand (the hand toward the viewer) and carries a PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on his FAR forearm. The sword and shield follow his hands and arms in the base pose; in curls and tucks he keeps them close to his body. The sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers his face. In cells 4, 5 and 6, where the base shows him punching forward with his near fist, his near hand instead thrusts the sword straight forward, point first, the blade flat to the viewer; the shield stays on the far arm close to his body. His face is ready for battle: focused and determined, eyebrows a little lowered, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF everywhere in every cell and keep the grid lines. Paint only the boy: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "warrior_vanguard_boy_slam_v2",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "warrior_vanguard_boy_slam_v2.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Hero pose review': redo of warrior_vanguard_boy_slam (wave 330), where Gemini copied the standing guide picture's pose into several in-air, sit and crouch cells. Cause: the standing ref; this edit has NO ref, spells out the Vanguard outfit in words (as in the approved walk test) and names every cell's pose. Priced line: \"Should I repaint these 4 Vanguard sheets of the boy (jumps, faint/sit/crouch, Surge, Slam) without the guide picture, for about $0.27?\"; Cory's OK in the thread.",
+  "edit": {
+   "base": "art/source/hero/looks/boy_slam.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a cute chibi boy in plain clothes in 8 animation frames. Each cell keeps EXACTLY the pose of the base, which is: cell 1: JUMPING up off the ground with both arms raised high; cell 2: curled into a tight ball in mid air, knees hugged to his chest; cell 3: curled into a tight ball in mid air; cell 4: curled into a tight ball in mid air; cell 5: curled into a tight ball, dropping; cell 6: standing; cell 7: standing; cell 8: standing. Keep his pose, arms, legs, body, head size, proportions, size, place in the cell and which way he faces exactly as in the base in every cell; never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows him standing there. Only dress him, in every cell, in one full suit of WARRIOR armour, painted the same in every cell: a steel open-face helm with a riveted brow band, a short nose strip and cheek guards, covering only his head (his face fully visible, a little brown hair at the front; nothing on his neck or shoulders attached to the helm); the steel collar of a breastplate at his neck; a deep blue tabard with ONE white stripe down the middle that COVERS HIS CHEST AND BELLY over the breastplate and hangs below the belt to his thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. He holds a steel longsword with a crossguard and a brown leather grip in his NEAR hand (the hand toward the viewer) and carries a PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on his FAR forearm. The sword and shield follow his hands and arms in the base pose; in curls and tucks he keeps them close to his body. The sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers his face. His face is ready for battle: focused and determined, eyebrows a little lowered, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF everywhere in every cell and keep the grid lines. Paint only the boy: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure stays fully inside its own cell."
+  }
  }
 ]
 }
