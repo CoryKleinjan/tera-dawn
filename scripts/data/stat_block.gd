@@ -87,6 +87,13 @@ func rolled(spread: int) -> StatBlock:
 		out.set(f, maxi(0, value(f) + randi_range(-spread, spread)))
 	return out
 
+## A copy with every stat `factor` times as big, rounded (a higher gear tier).
+func scaled(factor: float) -> StatBlock:
+	var out := StatBlock.new()
+	for f in FIELDS:
+		out.set(f, roundi(value(f) * factor))
+	return out
+
 ## Only the nonzero stats, for the save file.
 func to_dict() -> Dictionary:
 	var d := {}

@@ -117,3 +117,32 @@ func test_monsters_drop_their_zones_runes() -> void:
 	h.ask(2, &"req_skill", [&"basic_attack", p.position, 1])
 	h.step(60)
 	check(map.drops.values().any(func(d: SimDrop) -> bool: return d.item == rune), "a rune dropped")
+
+# ---------- tiers ----------
+
+func test_upgrading_raises_a_tier_for_its_fee_and_keeps_runes() -> void:
+	h.ask(2, &"req_enchant", [&"test_enchanter", 0, 0, 0])
+	c.shards = 5000
+	var fee := Content.gear_tier(2).fee
+	h.ask(2, &"req_upgrade", [&"test_enchanter", 0])
+	check_eq(_gear().tier, 2, "one tier up")
+	check_eq(c.shards, 5000 - fee, "fee paid")
+	check(_gear().runes[0] == rune, "its rune stays")
+	check_eq(_gear().total().attack, roundi(cap.stats.attack * Content.gear_tier(2).stat_scale) + 3,
+		"its own stats grow, its rune's don't")
+	check(h.told(2, "The Test Cap is now %s." % Content.gear_tier(2).display_name), "told")
+	check_eq(h.saved("Ann").inventory.at(ItemDef.Tab.EQUIP, 0).tier, 2, "saved at once")
+
+func test_upgrading_takes_the_fee_an_enchanter_and_stops_at_the_top() -> void:
+	c.shards = Content.gear_tier(2).fee - 1
+	h.ask(2, &"req_upgrade", [&"test_enchanter", 0])
+	check_eq(_gear().tier, 1, "not enough Dawnshards")
+	check(h.told(2, "You don't have enough Dawnshards."), "told why")
+	c.shards = 999999
+	h.ask(2, &"req_upgrade", [&"test_merchant", 0])
+	h.ask(2, &"req_upgrade", [&"test_enchanter", 5])
+	check_eq(_gear().tier, 1, "a shopkeeper doesn't, and an empty slot can't")
+	for i in Content.top_gear_tier() + 2:
+		h.ask(2, &"req_upgrade", [&"test_enchanter", 0])
+	check_eq(_gear().tier, Content.top_gear_tier(), "stops at the top tier")
+	check(h.told(2, "The Test Cap can't go any higher."), "told why")

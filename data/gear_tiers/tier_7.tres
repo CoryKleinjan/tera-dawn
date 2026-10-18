@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="GearTierDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/gear_tier_def.gd" id="script"]
+
+[resource]
+script = ExtResource("script")
+id = &"tier_7"
+rank = 7
+display_name = "Tier VII"
+stat_scale = 2.3
+fee = 12000

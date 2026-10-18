@@ -3,7 +3,8 @@ extends TDWindow
 ## A shop: what the shopkeeper sells on the left, your bag on the right. Double-click a
 ## line to buy, or one of your items to sell it, in the amount picked at the bottom (1, 10
 ## or 100). Items also sell when dragged here or double-clicked in the Inventory window while
-## the shop is open; gear asks first. Buying and selling are requests the server answers.
+## the shop is open; gear asks first. Only the lines you've unlocked show (ShopEntry.open_to).
+## Buying and selling are requests the server answers.
 ## Closes when you walk away.
 
 const ROW_H := 44.0
@@ -51,6 +52,10 @@ func _process(delta: float) -> void:
 		visible = false
 		hud.tooltip.clear(self)
 
+## The places in shop.items of the lines shown, in order.
+func shown() -> Array[int]:
+	return shop.open_to(Game.me) if shop else []
+
 # ---------- layout ----------
 
 func row_rect(i: int) -> Rect2:
@@ -68,8 +73,9 @@ func _draw_body() -> void:
 	if shop == null:
 		return
 	var shards := Game.me.shards
-	for i in list.shown(shop.items.size()):
-		var e := shop.items[i]
+	var lines := shown()
+	for i in list.shown(lines.size()):
+		var e := shop.items[lines[i]]
 		var r := row_rect(i)
 		UiSkin.draw_box(self, UiSkin.shop_row(r.has_point(_hover)), r, ROW_SCALE)
 		if e.item.icon:
@@ -78,7 +84,7 @@ func _draw_body() -> void:
 		var afford := shards >= e.cost()
 		DrawUtil.text(self, Game.num_font, Vector2(r.position.x + SLOT + 8, r.position.y + 35), "%d" % e.cost(), 13,
 			Palette.SUN if afford else Palette.BAD, 1, 3, Palette.NIGHT)
-	list.draw_more(self, shop.items.size())
+	list.draw_more(self, lines.size())
 	draw_tabs(ItemDef.TAB_NAMES, tab, TAB_Y, GRID_X)
 	for i in Inventory.SLOTS:
 		draw_slot(grid.rect(i), Game.me.inventory.at(tab, i))
@@ -100,7 +106,8 @@ func _draw_body() -> void:
 # ---------- input ----------
 
 func _click(at: Vector2, button: int, double: bool) -> void:
-	if list.wheel(button, shop.items.size()) or button != MOUSE_BUTTON_LEFT:
+	var lines := shown()
+	if list.wheel(button, lines.size()) or button != MOUSE_BUTTON_LEFT:
 		return
 	for i in AMOUNTS.size():
 		if _amount_rect(i).has_point(at):
@@ -111,9 +118,9 @@ func _click(at: Vector2, button: int, double: bool) -> void:
 		return
 	if not double:
 		return
-	var row := list.row_at(at, shop.items.size())
+	var row := list.row_at(at, lines.size())
 	if row >= 0:
-		buy(row)
+		buy(lines[row])
 		return
 	var slot := grid.at(at)
 	if slot >= 0:
@@ -122,7 +129,7 @@ func _click(at: Vector2, button: int, double: bool) -> void:
 func _tab_clicked(i: int) -> void:
 	tab = i as ItemDef.Tab
 
-## Asks to buy the current amount of line `i`.
+## Asks to buy the current amount of shop.items[`i`].
 func buy(i: int) -> void:
 	Net.ask(&"req_buy", [npc.def.id, i, amount])
 
@@ -155,9 +162,10 @@ func _drop_data(_at: Vector2, data: Variant) -> void:
 	sell_from(d.tab, d.index)
 
 func _tooltip_at(at: Vector2) -> Tip:
-	var row := list.row_at(at, shop.items.size())
+	var lines := shown()
+	var row := list.row_at(at, lines.size())
 	if row >= 0:
-		var e := shop.items[row]
+		var e := shop.items[lines[row]]
 		return Tip.new(ItemStack.unrolled(e.item), "Double-click to buy (%d Dawnshards each)" % e.cost(), true)
 	var slot := grid.at(at)
 	var stack := Game.me.inventory.at(tab, slot) if slot >= 0 else null

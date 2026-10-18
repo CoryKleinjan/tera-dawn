@@ -6,3 +6,11 @@ extends Resource
 @export var id: StringName
 @export var display_name := ""
 @export var items: Array[ShopEntry] = []
+
+## The places in `items` of the lines `c` has unlocked (ShopEntry.open_to), in order.
+func open_to(c: Character) -> Array[int]:
+	var out: Array[int] = []
+	for i in items.size():
+		if items[i].open_to(c):
+			out.append(i)
+	return out
