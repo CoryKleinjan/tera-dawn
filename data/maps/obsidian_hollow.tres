@@ -1,0 +1,210 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=48 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/forge.tres" id="2_forge"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="3_biome_variant_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberreach_fields/overhang_left.png" id="4_overhang_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberreach_fields/overhang_right.png" id="5_overhang_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/emberreach_fields/cap_left.png" id="6_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/emberreach_fields/middle_a.png" id="7_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/emberreach_fields/middle_b.png" id="8_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/emberreach_fields/cap_right.png" id="9_cap_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/emberreach_fields_side.png" id="10_emberreach_fields_side"]
+[ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="11_backdrop_layer_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberreach_fields/magma_falls.png" id="12_magma_falls"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="13_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="14_portal_def"]
+[ext_resource type="Resource" path="res://data/monsters/magma_shell.tres" id="15_magma_shell"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="16_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/fire_imp_archer.tres" id="17_fire_imp_archer"]
+[ext_resource type="Resource" path="res://data/items/etc/foundry_key.tres" id="18_foundry_key"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="19_drop_entry"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach_fields/chest.png" id="20_chest"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach_fields/chest_open.png" id="21_chest_open"]
+[ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="22_breakable_def"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="23_dawnshard"]
+[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="24_white_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="25_blue_potion"]
+
+[sub_resource type="Resource" id="Backdrop_picture"]
+script = ExtResource("11_backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("12_magma_falls")])
+mode = 2
+depth = 300.0
+screen_top = Vector2(-0.2, -0.2)
+
+[sub_resource type="Resource" id="Copied_Variant"]
+script = ExtResource("3_biome_variant_def")
+sky_low = Color(1, 0.2902, 0.1255, 1)
+fog_color = Color(0.7529, 0.251, 0.09412, 1)
+mote_color = Color(3.4, 1, 0.3, 1)
+grade_tint = Color(1, 0.92, 0.86, 1)
+frame_scale = 0.5
+frame_fade = 0.35
+hide_edge_grass = true
+hide_platform_decor = true
+frame_left = ExtResource("4_overhang_left")
+frame_right = ExtResource("5_overhang_right")
+platform_left = ExtResource("6_cap_left")
+platform_middle = ExtResource("7_middle_a")
+platform_middle_alt = ExtResource("8_middle_b")
+platform_right = ExtResource("9_cap_right")
+ground_side = ExtResource("10_emberreach_fields_side")
+hide_layers = PackedInt32Array(0, 1, 2, 3, 4, 5, 6)
+more_backdrop = Array[ExtResource("11_backdrop_layer_def")]([SubResource("Backdrop_picture")])
+
+[sub_resource type="Resource" id="Platform_1"]
+script = ExtResource("13_platform_def")
+x = 400.0
+y = 845.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_2"]
+script = ExtResource("13_platform_def")
+x = 800.0
+y = 770.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_3"]
+script = ExtResource("13_platform_def")
+x = 1200.0
+y = 695.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_4"]
+script = ExtResource("13_platform_def")
+x = 900.0
+y = 545.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_5"]
+script = ExtResource("13_platform_def")
+x = 1100.0
+y = 395.0
+width = 350.0
+
+[sub_resource type="Resource" id="Platform_6"]
+script = ExtResource("13_platform_def")
+x = 950.0
+y = 245.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_7"]
+script = ExtResource("13_platform_def")
+x = 1700.0
+y = 845.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_8"]
+script = ExtResource("13_platform_def")
+x = 2000.0
+y = 770.0
+width = 300.0
+
+[sub_resource type="Resource" id="Platform_9"]
+script = ExtResource("13_platform_def")
+x = 650.0
+y = 100.0
+width = 150.0
+secret = true
+
+[sub_resource type="Resource" id="Portal_0"]
+script = ExtResource("14_portal_def")
+x = 60.0
+target_map = &"magma_falls"
+target_x = 2800.0
+target_platform = 46
+
+[sub_resource type="Resource" id="Portal_1"]
+script = ExtResource("14_portal_def")
+x = 1100.0
+platform = 6
+target_map = &"smoke_pits"
+target_x = 1100.0
+shortcut = &"smoke_pits_crack"
+
+[sub_resource type="Resource" id="Spawn_0"]
+script = ExtResource("16_spawn_def")
+monster = ExtResource("15_magma_shell")
+platform = 0
+count = 4
+patrol_from = 300.0
+patrol_to = 2200.0
+
+[sub_resource type="Resource" id="Spawn_1"]
+script = ExtResource("16_spawn_def")
+monster = ExtResource("17_fire_imp_archer")
+platform = 2
+count = 2
+
+[sub_resource type="Resource" id="Spawn_2"]
+script = ExtResource("16_spawn_def")
+monster = ExtResource("15_magma_shell")
+platform = 7
+count = 2
+
+[sub_resource type="Resource" id="Loot_0_0"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("18_foundry_key")
+min_amount = 1
+max_amount = 1
+
+[sub_resource type="Resource" id="Breakable_0"]
+script = ExtResource("22_breakable_def")
+id = &"foundry_key_chest"
+x = 1400.0
+platform = 3
+hits = 1
+whole = ExtResource("20_chest")
+broken = ExtResource("21_chest_open")
+height = 48.0
+loot = Array[ExtResource("19_drop_entry")]([SubResource("Loot_0_0")])
+
+[sub_resource type="Resource" id="Loot_1_0"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("23_dawnshard")
+min_amount = 160
+max_amount = 240
+
+[sub_resource type="Resource" id="Loot_1_1"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("24_white_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Loot_1_2"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("25_blue_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Breakable_1"]
+script = ExtResource("22_breakable_def")
+id = &"obsidian_hollow_high_chest"
+x = 725.0
+platform = 9
+hits = 1
+whole = ExtResource("20_chest")
+broken = ExtResource("21_chest_open")
+height = 48.0
+loot = Array[ExtResource("19_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
+card = ExtResource("15_magma_shell")
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"obsidian_hollow"
+display_name = "Obsidian Hollow"
+biome = ExtResource("2_forge")
+variant = SubResource("Copied_Variant")
+width = 2400
+height = 1000
+ground_y = 920
+start_x = 200.0
+platforms = Array[ExtResource("13_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9")])
+portals = Array[ExtResource("14_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1")])
+breakables = Array[ExtResource("22_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1")])
+spawns = Array[ExtResource("16_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2")])
+region = &"emberreach"
+world_pos = Vector2(885.0, 300.0)
+zone_pos = Vector2(5600.0, 4300.0)
+return_map = &"emberforge"

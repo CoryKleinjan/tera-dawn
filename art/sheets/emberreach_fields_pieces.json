@@ -1,0 +1,45 @@
+{
+  "source": "art/source/emberreach_fields_pieces.png",
+  "art_px": 5.4,
+  "out_dir": "assets/sprites/tiles/emberreach_fields",
+  "label_band": 0,
+  "inset": 0,
+  "keep": "largest",
+  "flat_bottom": true,
+  "region": [
+    820,
+    0,
+    2400,
+    1600
+  ],
+  "grid": {
+    "rows": [
+      0,
+      800,
+      1600
+    ],
+    "cols": [
+      0,
+      780,
+      1580
+    ]
+  },
+  "cells": [
+    [
+      "slag_wall",
+      "chest"
+    ],
+    [
+      "slag_wall_broken",
+      "chest_open"
+    ]
+  ],
+  "overrides": {
+    "chest": {
+      "art_px": 8.5
+    },
+    "chest_open": {
+      "art_px": 8.5
+    }
+  }
+}

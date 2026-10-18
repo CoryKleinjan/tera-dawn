@@ -234,7 +234,12 @@ and iron-bound doors; smoke and forge glow. Grey forge stone, iron straps and ri
 | Smoke Pits | Training | 13-17 | Smoky grey-brown pits, dim and choking | Cinder Pup, Ash Bat, Fire Imp Archer |
 | Magma Falls | Training | 17-20 | Red-orange glow of falling lava, bright ember motes | Fire Imp Archer, Magma Shell |
 | Ironworks Depths | Training | 20-29 | Dark old ironworks, near-black sky with a low forge-red glow, muted colour | Magma Shell, Forge Golem, Cinder Hog |
-| Molten Throne | Boss | 23-31 | Near-black red sky, deep red lift; hottest, darkest map | Forge Golem, Ash Wraith; boss Molten King |
+| Molten Throne | Boss | 23-31 | Near-black red sky, deep red lift; hottest, darkest map; the long way DOWN from Ironworks Depths to King's Caldera | Forge Golem, Ash Wraith; boss Molten King |
+| Ash Burrow | Secret | – | Ashen Wastes' look: a burrow under the wastes, down through a fake wall on the floor | Ashshell, Ember Boar |
+| Vent Chimney | Secret | – | Smoke Pits' look: a vent above the pits, up tucked-away ledges at their east end | Ash Bat, Fire Imp Archer |
+| Obsidian Hollow | Secret | – | Magma Falls' look: a hollow behind a breakable slag wall in the falls, and under a cracked floor in Smoke Pits only a Slam breaks; holds the Foundry Key | Magma Shell, Fire Imp Archer |
+| Slagway | Secret | – | Slag Fields' look: a tall shaft from Ironworks Depths back up to Slag Fields, gated until its lever is pulled | Slag Slime, Cinder Pup |
+| Old Foundry | Secret | – | Ironworks Depths' look: a foundry east of the ironworks behind a locked gate (its key is in Obsidian Hollow) | Forge Golem, Cinder Hog |
 
 ## Lanternfall
 

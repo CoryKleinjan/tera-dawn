@@ -1,0 +1,26 @@
+{
+  "source": "art/source/emberreach_fields_seals.png",
+  "art_px": 5.4,
+  "out_dir": "assets/sprites/tiles/emberreach_fields",
+  "label_band": 0,
+  "inset": 0,
+  "min_area": 400,
+  "flat_bottom": true,
+  "grid": {
+    "rows": [
+      960,
+      1300
+    ],
+    "cols": [
+      0,
+      1200,
+      2400
+    ]
+  },
+  "cells": [
+    [
+      "cracked_floor",
+      "cracked_floor_broken"
+    ]
+  ]
+}
