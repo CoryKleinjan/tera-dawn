@@ -1,0 +1,56 @@
+{
+  "source": "art/source/lumewood_fields_locks.png",
+  "region": [
+    0,
+    180,
+    2400,
+    1560
+  ],
+  "art_px": 8.8,
+  "out_dir": "assets/sprites/tiles/lumewood_fields",
+  "label_band": 0,
+  "inset": 0,
+  "keep": "largest",
+  "flat_bottom": true,
+  "grid": {
+    "rows": [
+      0,
+      1380
+    ],
+    "cols": [
+      0,
+      690,
+      1350,
+      1870,
+      2400
+    ]
+  },
+  "cells": [
+    [
+      "gate",
+      "gate_locked",
+      "lever",
+      "lever_pulled"
+    ]
+  ],
+  "overrides": {
+    "lever": {
+      "crop": [
+        0,
+        0,
+        520,
+        640
+      ],
+      "art_px": 8.2
+    },
+    "lever_pulled": {
+      "crop": [
+        0,
+        0,
+        530,
+        640
+      ],
+      "art_px": 8.2
+    }
+  }
+}

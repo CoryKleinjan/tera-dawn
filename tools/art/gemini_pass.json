@@ -29257,6 +29257,288 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background with thin grid lines, showing a chibi grown woman with long auburn hair in plain clothes in 8 animation frames of a second jump in mid air with a forward flip. Each cell keeps EXACTLY the pose of the base, which is: cell 1: in the air, leaning back with legs forward; cell 2: tucked into a ball in mid air; cell 3: rising, both arms raised, one knee up; cell 4: stretched upward, both arms raised high; cell 5: tipping over sideways in the flip, body nearly flat; cell 6: UPSIDE DOWN in the flip, feet up; cell 7: coming upright out of the flip; cell 8: upright in the air, arms spread out. Keep her pose, arms, legs, body, head size, proportions, size, place in the cell, which way she faces and turns, and her eyes exactly as in the base in every cell (only her expression changes, to the battle-ready face described below); never turn a cell into a different pose and never make a cell look like a plain standing pose unless the base shows her standing there. Only dress her, the same in every cell, in the warrior armour shown in the two attached close-ups: the first shows only the top of the helm, the second only the chest armour, tabard, belt, shoulder guards and shield. Copy exactly their design, colours and details; they show no face and no pose, so keep the face, head size and pose of the base. The armour: a smooth rounded steel open-face helm with NO raised ridge or crest over the top, its dome painted exactly as in the first close-up, a riveted steel brow band, a short nose strip and cheek guards, covering only the head (her face fully visible; nothing on the neck or shoulders attached to the helm). Her hair lies as it would in real life under a helmet: a little auburn fringe at the forehead inside the face opening, and her long auburn hair hangs from under the helm rim past her cheeks to her shoulders, moving with the pose the way it moves in the base. The steel collar of a breastplate at the neck; a dark deep navy blue tabard with ONE NARROW white stripe down the middle that COVERS THE CHEST AND BELLY over the breastplate and hangs below the belt to the thighs; brown leather shoulder guards; chainmail sleeves to the elbows; steel gauntlets; a brown leather belt with a small pouch; brown trousers with steel knee guards; brown leather boots. She holds ONE steel longsword with a crossguard and a brown leather grip in her NEAR hand (the hand toward the viewer) and carries ONE PLAIN deep blue heater shield with a steel rim, with no band, stripe or emblem, on her FAR forearm. Every cell has exactly one sword and one shield, never two swords and never a missing shield. The sword and shield follow her hands and arms in the base pose; the sword is always flat to the viewer, never edge-on. No arm, hand, sword or shield ever covers the face. In flips and tucks she keeps the sword and shield close to her body. Her face is ready for battle: focused and determined, eyebrows a little lowered, mouth closed, not smiling, not angry, not shouting. Style: exactly like the base picture: hand painted, warm rich colours, light from the upper left, soft painted shading with visible brush texture, big glossy eyes with white highlights, a thin dark plum-brown outline; never pixel art. Keep the background flat pure magenta #FF00FF (not pink) everywhere in every cell and keep the grid lines. Paint only the one character: no ground, shadow, dust, glow, motion lines, effects, text, labels or numbers, and no extra figures. Every figure, sword and shield stays fully inside its own cell."
   }
+ },
+ {
+  "id": "lumewood_fields_land",
+  "prompts": null,
+  "batch": "Lumewood fields test: stone ledges, raised ground and its wall (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lumewood_fields_land.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Zone rework' (Lumewood rooms, PR #311; Cory OK'd the look picks 23:17Z Oct 17: pale lilac-grey stone ledges with glowing moss and blue crystal tufts, a silver-blue reliquary chest, a breakable crystal-cluster wall, a pale stone fake wall, a brass and crystal lever, a silver-ribbed glass gate and its locked version, the Spire Key, glowing hanging vines as the corner frame, a cracked wall and floor, one picture backdrop per field): small test before the full kit. Guide: Greenbough's land guide, unchanged (a floating ledge cut into cap_left, middle_a, middle_b, cap_right, and a raised block whose wall becomes ground_side). Base 2400x1600, exactly 3:2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lumewood-fields/bases/land_base.png",
+   "refs": [],
+   "text": "The first image is a guide for a sheet of ground pieces for my 2D side-scrolling game, on a flat magenta #FF00FF background. Flat colours show where each piece goes: green is the top edge, dark brown is the body, the darker brown below is a wall, and the dark line is the outline. Paint over the guide as finished ground for Lumewood, a glowing, dreaming forest of pale stone, glowing mushrooms and blue crystals under soft violet twilight, keeping every shape's position, size and outline EXACTLY, so the pieces still line up and join seamlessly when the sheet is cut apart. TOP: one long floating ledge of Lumewood ground (it will be cut into a left end, two middle pieces and a right end that join side by side). Its top is ONE clean edge of soft glowing moss, blue-teal with a faint glow, with a few tiny glowing mushroom caps and small pale blue crystal tufts poking up along it, the moss curling a little over the edge. Under the moss is a body of smooth pale lilac-grey stone with a few faint cracks and one or two tiny blue crystal flecks, kept simple with little detail inside so it reads at a glance as solid ground. A crisp dark outline runs all round it, a few short glowing moss strands hang under its bottom edge, and its two ends are rounded. BOTTOM: a raised block of the same ground: the very same mossy edge and stone band along its top, with SQUARE ends, then below the band's lower edge a wall of slightly darker plain lilac-grey stone with faint cracks, running straight down off the bottom of the image between straight vertical outlined sides. Keep the wall's texture even across its whole area, with no big features, bright spots or shading toward its edges, so a square of it can repeat as a tile. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own warm painted style: soft cel-painted shading with clear light and shadow shapes, bright highlights on the lit edges from the upper left, rich saturated colours, a bold dark outline, and hand-painted texture at a fairly chunky brush scale. Palette: blue-teal glowing moss (#5fd6d0) with soft violet light (#d8c7ff) on its tips, pale lilac-grey stone (#b9aed6) with lavender highlights (#e6dcff), deeper violet-grey (#6f6596) in its shadows, small blue crystals (#8fc8ff). Seen exactly from the side: the moss is a band along the top edge, never a lawn seen from above, and nothing runs back into the picture. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the pieces the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "lumewood_fields_glimmer_path_backdrop",
+  "prompts": null,
+  "batch": "Lumewood fields test: Glimmer Path backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lumewood_fields_glimmer_path_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Lumewood rooms, PR #311; Cory OK'd the look picks 23:17Z Oct 17: pale lilac-grey stone ledges with glowing moss and blue crystal tufts, a silver-blue reliquary chest, a breakable crystal-cluster wall, a pale stone fake wall, a brass and crystal lever, a silver-ribbed glass gate and its locked version, the Spire Key, glowing hanging vines as the corner frame, a cracked wall and floor, one picture backdrop per field): small test before the full kit. Guide: one picture behind the whole map (BackdropLayerDef PICTURE, depth 300), written like dawnharbor_fields_harbor_beach_backdrop, in Glimmer Path's colours (zone-vibes.md: brightest Lumewood map, strong light, pale lilac horizon, rich colour). Base 4096x2304, exactly 16:9: covers Glimmer Path (4400x1400).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lumewood-fields/bases/glimmer_path_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Glimmer Path, the brightest, gentlest edge of Lumewood, a glowing, dreaming forest, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture (bark, stone, moss, crystal). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: a wondrous twilight forest seen from the side, tall slender pale-barked trees with soft violet canopies standing in layers that fade back into lavender haze. Giant glowing mushrooms, blue-teal and soft violet, grow between the trunks in the middle distance, and clusters of pale blue crystals glint among them. Soft shafts of light slant down through the canopy, and tiny blue-white motes drift upward through the air. Far away in the haze, the pale stone towers and blue glass domes of a scholarly town sit small on a hill. The sky above shows through the canopy as indigo at the top fading to a bright pale lilac glow near the horizon. Colours: indigo sky at the very top (#120e33), lavender horizon (#c8a7ff), soft violet light (#d8c7ff), violet fog (#7961c7), blue-teal mushroom glow (#5fd6d0), pale blue crystals (#8fc8ff); this is the brightest, most colourful Lumewood picture, serene and magical. Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft hazy forest floor far away, with nothing close to the viewer (no grass, rocks, roots, mushrooms or posts up front); the closest trees and mushrooms are in the middle distance. No level rocks, ledges, branches or mushroom caps that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "lumewood_fields_pieces",
+  "prompts": null,
+  "batch": "Lumewood fields: stone fake wall, crystal wall, reliquary chest (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lumewood_fields_pieces.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": true,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Zone rework' (Lumewood rooms, PR #311; look picks OK'd by Cory 23:17Z Oct 17; test kept 00:49Z Oct 18 'Yes'): full kit after the land and Glimmer Path test. Guide: the Dawnharbor pieces guide unchanged: the fake wall (fake_wall), the crystal wall whole/broken (BreakableDef whole/broken) and the secret chest closed/open. Base 2400x1600, exactly 3:2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lumewood-fields/bases/pieces_base.png",
+   "refs": [],
+   "text": "The first image is a guide on a flat magenta #FF00FF background showing five objects for my 2D side-scrolling game as flat colour shapes. Paint each one over its shape as a finished object for Lumewood, a glowing, dreaming forest of pale lilac-grey stone, glowing mushrooms, blue crystals and old glass domes under soft violet twilight, keeping each shape's position, size and outline EXACTLY: each painted object fills its whole shape and nothing goes outside it. 1) LEFT, a wall of plain pale stone that fills a low passage: smooth pale lilac-grey stone in a few big simple rounded blocks fitted together, with a few faint cracks and a little soft teal moss in one crack. It must look like ordinary solid stone, nothing special about it, and keep the guide's wide block shape. 2) MIDDLE TOP, a wall of crystal that blocks a low passage: a tight cluster of big pale blue and lilac crystals, their points rising to the shape's rounded top, set in a little pale stone at the base. 3) MIDDLE BOTTOM, the SAME crystal wall shattered open: the identical outside shape, size and colours, but its middle broken through, with snapped crystal stumps and a few sharp shards round a dark hole where the dark arch is. 4) RIGHT TOP, a small reliquary chest of silver-blue metal panels with pale silver corners and ribs, a domed lid, a round blue crystal set in the lid's front and a small silver lock below it. 5) RIGHT BOTTOM, the SAME chest opened: its box exactly as in the closed chest, and its lid swung open upward so it stands up behind the box, seen from the front, showing the lid's inner side. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own painted style: soft cel-painted shading with clear light and shadow shapes, bright highlights on the lit edges from the upper left, rich saturated colours, a bold dark outline, and hand-painted texture at a fairly chunky brush scale. Palette: pale lilac-grey stone (#b9aed6) with lavender highlights (#e6dcff), pale blue crystals (#8fc8ff) and lilac crystals (#c8a7ff), silver-blue metal (#8a9cc8), teal moss (#5fd6d0). Every object is a flat front view at eye level: no top surface shows (no lid top, no stone top face, nothing seen from above), and each stands on ONE flat straight bottom edge with no ground, moss or shadow under it. The crystals may shine with bright highlights but nothing gives off a glow or halo. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the objects the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "lumewood_fields_locks",
+  "prompts": null,
+  "batch": "Lumewood fields: lever, glass gate, locked gate, Spire Key (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lumewood_fields_locks.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": true,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Zone rework' (Lumewood rooms, PR #311; look picks OK'd by Cory 23:17Z Oct 17; test kept 00:49Z Oct 18 'Yes'): full kit after the land and Glimmer Path test. Guide: the Dawnharbor locks guide with the anchor key redrawn as a ring bow with a crystal: the shut gate, the key gate, the lever up and swung over, and the Spire Key (its item icon and drop picture, one painting). Base 2400x1600, exactly 3:2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lumewood-fields/bases/locks_base.png",
+   "refs": [],
+   "text": "The first image is a guide on a flat magenta #FF00FF background showing five objects for my 2D side-scrolling game as flat colour shapes. Paint each one over its shape as a finished object for Lumewood, a glowing, dreaming forest of pale lilac-grey stone, glowing mushrooms, blue crystals and old glass domes under soft violet twilight, keeping each shape's position, size and outline EXACTLY. 1) LEFT, a shut gate that blocks a doorway: two posts of pale lilac-grey stone at the sides and, between them, five upright bars of silver-blue metal with pointed tops, held by two cross rails. Where the rails meet the posts are round pale blue crystal studs. Every gap between the bars stays open, showing flat magenta. 2) MIDDLE, the SAME gate, identical in every way, with a silver lock plate fixed across its middle: a keyhole in it, a small blue crystal above the keyhole and a ring of rivets round its edge. 3) TOP RIGHT, LEFT ONE, a lever: a squat block of pale carved stone with two thin silver bands, and a brass handle with a round pale blue crystal for a knob, turning on a round brass pivot at the top of the block. The handle leans up to the LEFT. 4) TOP RIGHT, RIGHT ONE, the SAME lever, identical in every way, with its handle swung over so it leans up to the RIGHT. 5) BOTTOM RIGHT, a silver key: a long shaft with a toothed bit at the right end and, at the left end, a round ring bow with a pale blue crystal set in its middle where the diamond is. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own painted style: soft cel-painted shading with clear light and shadow shapes, bright highlights on the lit edges from the upper left, rich saturated colours, a bold dark outline, and hand-painted texture at a fairly chunky brush scale. Palette: pale lilac-grey stone (#b9aed6), silver-blue metal (#8a9cc8) with bright silver highlights, warm brass (#c89a4a), pale blue crystals (#8fc8ff). Every object is a flat front view at eye level: no top surface shows, and the gates and levers each stand on ONE flat straight bottom edge with no ground, moss or shadow under it. The crystals may shine with bright highlights but nothing gives off a glow or halo. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the objects and in every gap between the gate bars the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "lumewood_fields_vines",
+  "prompts": null,
+  "batch": "Lumewood fields: glowing hanging vines for the top corners (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lumewood_fields_vines.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Zone rework' (Lumewood rooms, PR #311; look picks OK'd by Cory 23:17Z Oct 17; test kept 00:49Z Oct 18 'Yes'): full kit after the land and Glimmer Path test. Guide: the Dawnharbor netting guide unchanged (top-left and top-right pieces drawn over the view; shown at frame_scale like Dawnharbor's nets). Base 2400x1350, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lumewood-fields/bases/vines_base.png",
+   "refs": [],
+   "text": "The first image is a guide for a frame of foreground plants for my 2D side-scrolling game, on a flat magenta #FF00FF background. The dark shapes in the two top corners hang into the top corners of the screen very close to the camera, the way Hollow Knight frames its screen with dark foreground shapes. Paint over the shapes as two heavy masses of dark leafy forest vines and moss hanging from above, keeping their positions, sizes and overall shapes; the dark lines hanging down are long trailing vines, each ending in a small softly glowing pale blue-teal bud. They are dark near-silhouettes: deep blackish indigo (#0e0b22 to #241d44), with only a faint violet rim where twilight catches their edges and the small glowing buds as the only bright touches; simple clean shapes with crisp edges and almost no inner detail, so they frame the picture without drawing the eye. Both masses run off the top edge, the left one also off the left edge and the right one off the right edge. The rest of the image stays flat pure magenta #FF00FF, with no glow, haze or shadow spreading onto it. No magenta or pink inside the vines. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "lumewood_fields_seals",
+  "prompts": null,
+  "batch": "Lumewood fields: cracked wall and cracked floor, whole and broken (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lumewood_fields_seals.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": true,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Zone rework' (Lumewood rooms, PR #311; look picks OK'd by Cory 23:17Z Oct 17; test kept 00:49Z Oct 18 'Yes'): full kit after the land and Glimmer Path test. Sealed areas (plans/zone-rework.md 'Sealed areas', Cory 19:19-19:26Z Oct 17): the cracked wall and floor that open after the zone's tear, painted now with the kit (not used in game until the sealed areas are built). Guide: the Dawnharbor fake-wall block whole and with the arch, and a floor slab whole and with a zigzag gap. Base 2400x1600, exactly 3:2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lumewood-fields/bases/seals_base.png",
+   "refs": [],
+   "text": "The first image is a guide on a flat magenta #FF00FF background showing four objects for my 2D side-scrolling game as flat colour shapes. Paint each one over its shape as a finished object for Lumewood, a glowing, dreaming forest of pale lilac-grey stone, glowing mushrooms, blue crystals and old glass domes under soft violet twilight, keeping each shape's position, size and outline EXACTLY: each painted object fills its whole shape and nothing goes outside it. 1) TOP LEFT, an old wall of pale lilac-grey stone blocks that seals a passage, badly cracked: deep dark cracks run through it from top to bottom, a few chips have fallen out, and a faint violet light shows deep inside the widest crack. It still stands whole. 2) TOP RIGHT, the SAME wall broken open: the identical outside shape, size and colours, but its middle has crumbled away into a dark hole where the dark arch is, with broken block edges round it. 3) BOTTOM LEFT, a long flat slab of the same pale lilac-grey stone set into the ground, badly cracked across with deep dark cracks and a few chips missing. Thin soft teal moss runs along its top edge. 4) BOTTOM RIGHT, the SAME slab broken open: the identical shape, size and colours, but broken through where the dark zigzag is, a dark gap with jagged broken edges and a few small loose chips at its rim. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own painted style: soft cel-painted shading with clear light and shadow shapes, bright highlights on the lit edges from the upper left, rich saturated colours, a bold dark outline, and hand-painted texture at a fairly chunky brush scale. Palette: pale lilac-grey stone (#b9aed6) with lavender highlights (#e6dcff), deeper violet-grey (#6f6596) in the cracks and shadows, teal moss (#5fd6d0), faint violet light (#c8a7ff). Every object is a flat front view at eye level: no top surface shows (nothing seen from above), and each stands on ONE flat straight bottom edge with no ground, rubble or shadow under or beside it. Nothing gives off a glow or halo. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the objects the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "lumewood_fields_glowcap_hollow_backdrop",
+  "prompts": null,
+  "batch": "Lumewood fields: Glowcap Hollow backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lumewood_fields_glowcap_hollow_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Lumewood rooms, PR #311; look picks OK'd by Cory 23:17Z Oct 17; test kept 00:49Z Oct 18 'Yes'): full kit after the land and Glimmer Path test. Guide: one picture behind the whole map (BackdropLayerDef PICTURE, depth 300), written like lumewood_fields_glimmer_path_backdrop (kept), in Glowcap Hollow's colours (zone-vibes.md). Base 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lumewood-fields/bases/glowcap_hollow_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Glowcap Hollow in Lumewood, a glowing, dreaming forest, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture (bark, stone, moss, crystal). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: a deep hollow in the glowing forest seen from the side, its sides rising high: towering clusters of giant glowing mushrooms in blue-teal and cyan stand in layers between mossy pale stone, their caps glowing softly in the gloom, fading back into teal haze; cyan motes drift upward; the canopy closes high overhead with a little soft light coming through. Keep the trees, mushrooms and pillars at the far left and right edges as soft and hazy as the rest, never crisp up front. Colours: deep teal shadow at the very top (#102a3a), blue-teal mushroom glow (#5fd6d0), cyan motes (#9ff4ff), pale aqua haze near the bottom (#7fd8d0), soft violet accents (#d8c7ff). Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft hazy forest floor far away, with nothing close to the viewer (no grass, rocks, roots, mushrooms or posts up front); the closest trees and mushrooms are in the middle distance. No level rocks, ledges, galleries, branches or mushroom caps close enough to look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "lumewood_fields_crystal_caves_backdrop",
+  "prompts": null,
+  "batch": "Lumewood fields: Crystal Caves backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lumewood_fields_crystal_caves_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Lumewood rooms, PR #311; look picks OK'd by Cory 23:17Z Oct 17; test kept 00:49Z Oct 18 'Yes'): full kit after the land and Glimmer Path test. Guide: one picture behind the whole map (BackdropLayerDef PICTURE, depth 300), written like lumewood_fields_glimmer_path_backdrop (kept), in Crystal Caves's colours (zone-vibes.md). Base 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lumewood-fields/bases/crystal_caves_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Crystal Caves in Lumewood, a glowing, dreaming forest, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture (bark, stone, moss, crystal). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: a deep cave seen from the side, its far walls and pillars of dark stone lit from within by big clusters of violet and pale blue crystals growing in layers that fade back into indigo darkness; soft beams of crystal light cross the cave, and tiny violet motes hang in the air; the cave roof is lost in darkness above. Keep the trees, mushrooms and pillars at the far left and right edges as soft and hazy as the rest, never crisp up front. Colours: deep indigo at the very top (#0e0b2a), violet crystal light (#a98bff), pale blue crystals (#8fc8ff), indigo haze (#5a46a8), very little light overall. Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft haze far away, with nothing close to the viewer (no grass, rocks, roots, mushrooms or posts up front); the closest trees and mushrooms are in the middle distance. No level rocks, ledges, galleries, branches or mushroom caps close enough to look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "lumewood_fields_prism_lake_backdrop",
+  "prompts": null,
+  "batch": "Lumewood fields: Prism Lake backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lumewood_fields_prism_lake_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Lumewood rooms, PR #311; look picks OK'd by Cory 23:17Z Oct 17; test kept 00:49Z Oct 18 'Yes'): full kit after the land and Glimmer Path test. Guide: one picture behind the whole map (BackdropLayerDef PICTURE, depth 300), written like lumewood_fields_glimmer_path_backdrop (kept), in Prism Lake's colours (zone-vibes.md). Base 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lumewood-fields/bases/prism_lake_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Prism Lake in Lumewood, a glowing, dreaming forest, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture (bark, stone, moss, crystal). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: a wide still lake under a pink-violet twilight sky seen from the side; low far shores with pale-barked trees and violet canopies, glowing mushrooms along the far shore, and small crystal islands rising from the water; the whole sky and its clouds are mirrored in the calm water, and soft rainbow glints dance across it from the crystals; this is the most colourful Lumewood picture. Keep the trees, mushrooms and pillars at the far left and right edges as soft and hazy as the rest, never crisp up front. Colours: deep violet sky at the very top (#3a1e5e), pink-violet clouds (#f2a8d8), lavender (#c8a7ff), pale blue crystals (#8fc8ff), rose light on the water (#ffd0ec). Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft haze far away, with nothing close to the viewer (no grass, rocks, roots, mushrooms or posts up front); the closest trees and mushrooms are in the middle distance. No level rocks, ledges, branches or mushroom caps that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "lumewood_fields_glass_dome_ruins_backdrop",
+  "prompts": null,
+  "batch": "Lumewood fields: Glass Dome Ruins backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lumewood_fields_glass_dome_ruins_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Lumewood rooms, PR #311; look picks OK'd by Cory 23:17Z Oct 17; test kept 00:49Z Oct 18 'Yes'): full kit after the land and Glimmer Path test. Guide: one picture behind the whole map (BackdropLayerDef PICTURE, depth 300), written like lumewood_fields_glimmer_path_backdrop (kept), in Glass Dome Ruins's colours (zone-vibes.md). Base 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lumewood-fields/bases/glass_dome_ruins_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Glass Dome Ruins in Lumewood, a glowing, dreaming forest, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture (bark, stone, moss, crystal). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: old ruined buildings of pale stone with great broken glass domes, seen from the side, standing in layers among pale trees and fading back into cool blue haze; ribs of silver-blue metal arch where the glass has fallen, some panes still whole and catching the light; pale blue motes drift in the air under a cool blue-violet sky. Keep the trees, mushrooms and pillars at the far left and right edges as soft and hazy as the rest, never crisp up front. Colours: deep blue-violet sky at the very top (#1e224e), cool blue haze (#b8c8f0), pale stone (#d8d0ea), silver-blue metal ribs (#8a9cc8), pale blue motes (#cfe6ff). Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft haze far away, with nothing close to the viewer (no grass, rocks, roots, mushrooms or posts up front); the closest trees and mushrooms are in the middle distance. No level rocks, ledges, branches or mushroom caps that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "lumewood_fields_starfall_ridge_backdrop",
+  "prompts": null,
+  "batch": "Lumewood fields: Starfall Ridge backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lumewood_fields_starfall_ridge_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Lumewood rooms, PR #311; look picks OK'd by Cory 23:17Z Oct 17; test kept 00:49Z Oct 18 'Yes'): full kit after the land and Glimmer Path test. Guide: one picture behind the whole map (BackdropLayerDef PICTURE, depth 300), written like lumewood_fields_glimmer_path_backdrop (kept), in Starfall Ridge's colours (zone-vibes.md). Base 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lumewood-fields/bases/starfall_ridge_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Starfall Ridge in Lumewood, a glowing, dreaming forest, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture (bark, stone, moss, crystal). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: a long high ridge at night seen from the side, its far slopes dark with pale-barked trees and violet canopies against a deep starry navy sky full of stars and a soft band of starlight; a few small shooting stars streak across the upper sky, and starlight motes drift up from the far forest; far off, the dark mountains of a volcanic land glow faintly orange on the horizon at the right. No single bright white light or glowing orb low over the ridge (the game draws its own light there). Keep the trees, mushrooms and pillars at the far left and right edges as soft and hazy as the rest, never crisp up front. Colours: deep navy sky at the very top (#080c26), star white (#f4f0ff), starlight blue (#9db4ff), dark violet trees (#3a4a86), a faint warm orange glow only at the far right horizon (#e08a4a). Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft hazy forest floor far away, with nothing close to the viewer (no grass, rocks, roots, mushrooms or posts up front); the closest trees and mushrooms are in the middle distance. No level rocks, ledges, branches or mushroom caps that look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "lumewood_fields_arcane_spire_backdrop",
+  "prompts": null,
+  "batch": "Lumewood fields: Arcane Spire backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lumewood_fields_arcane_spire_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Lumewood rooms, PR #311; look picks OK'd by Cory 23:17Z Oct 17; test kept 00:49Z Oct 18 'Yes'): full kit after the land and Glimmer Path test. Guide: one picture behind the whole map (BackdropLayerDef PICTURE, depth 300), written like lumewood_fields_glimmer_path_backdrop (kept), in Arcane Spire's colours (zone-vibes.md). Base 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lumewood-fields/bases/arcane_spire_backdrop_base.png",
+   "refs": [],
+   "text": "The first image is a blank canvas showing only a soft colour gradient. Repaint the whole canvas as ONE complete, seamless, highly detailed background painting for Arcane Spire in Lumewood, a glowing, dreaming forest, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture (bark, stone, moss, crystal). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: the inside of a vast tall tower of pale carved stone seen from the side: great arched windows, stone galleries and huge floating rune circles of magenta light hang in purple magic fog; tall stone pillars rise in layers fading back into the fog, and magenta motes swirl upward; heavy violet light, mysterious and powerful. Keep the trees, mushrooms and pillars at the far left and right edges as soft and hazy as the rest, never crisp up front. Colours: deep purple at the very top (#260c3a), magenta rune light (#ff6ad5), violet fog (#b04ab8), pale carved stone (#c8b8e0), magenta motes (#ff9ae8). Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) Nothing in the near foreground: the bottom quarter of the picture is soft haze far away, with nothing close to the viewer (no grass, rocks, roots, mushrooms or posts up front); the closest trees and mushrooms are in the middle distance. No level rocks, ledges, galleries, branches or mushroom caps close enough to look like places to stand. 4) The left and right edges continue naturally, nothing is cut in half at the edges. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
  }
 ]
 }

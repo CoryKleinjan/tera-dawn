@@ -1,0 +1,29 @@
+{
+  "source": "art/source/lumewood_fields_locks.png",
+  "region": [
+    1450,
+    1000,
+    2400,
+    1400
+  ],
+  "out_dir": "assets/sprites/items",
+  "scale": 0.08,
+  "label_band": 0,
+  "inset": 0,
+  "keep": "largest",
+  "grid": {
+    "rows": [
+      0,
+      400
+    ],
+    "cols": [
+      0,
+      950
+    ]
+  },
+  "cells": [
+    [
+      "spire_key"
+    ]
+  ]
+}

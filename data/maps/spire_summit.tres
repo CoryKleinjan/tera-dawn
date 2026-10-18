@@ -31,7 +31,8 @@ script = ExtResource("4_portal_def")
 x = 60.0
 platform = 0
 target_map = &"arcane_spire"
-target_x = 1760.0
+target_x = 1700.0
+target_platform = 55
 
 [sub_resource type="Resource" id="Portal_home"]
 script = ExtResource("4_portal_def")
@@ -74,5 +75,6 @@ portals = Array[ExtResource("4_portal_def")]([SubResource("Portal_back"), SubRes
 spawns = Array[ExtResource("5_spawn_def")]([SubResource("Boss")])
 region = &"lumewood"
 world_pos = Vector2(800.0, 140.0)
+zone_pos = Vector2(16400, -5600)
 return_map = &"lumewood"
 music = &"boss_lumewood"

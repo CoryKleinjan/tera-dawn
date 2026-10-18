@@ -1,0 +1,215 @@
+[gd_resource type="Resource" script_class="MapDef" load_steps=47 format=3]
+
+[ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
+[ext_resource type="Resource" path="res://data/biomes/lumewood.tres" id="2_lumewood"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="3_biome_variant_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/lumewood_fields/vines_left.png" id="4_vines_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/lumewood_fields/vines_right.png" id="5_vines_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_fields/cap_left.png" id="6_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_fields/middle_a.png" id="7_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_fields/middle_b.png" id="8_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_fields/cap_right.png" id="9_cap_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/lumewood_fields_side.png" id="10_lumewood_fields_side"]
+[ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="11_backdrop_layer_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/lumewood_fields/arcane_spire.png" id="12_arcane_spire"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="13_platform_def"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="14_portal_def"]
+[ext_resource type="Resource" path="res://data/monsters/starfall_golem.tres" id="15_starfall_golem"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="16_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/spell_imp.tres" id="17_spell_imp"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="18_dawnshard"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="19_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="20_white_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="21_blue_potion"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/chest.png" id="22_chest"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/chest_open.png" id="23_chest_open"]
+[ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="24_breakable_def"]
+
+[sub_resource type="Resource" id="Backdrop_picture"]
+script = ExtResource("11_backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("12_arcane_spire")])
+mode = 2
+depth = 300.0
+screen_top = Vector2(-0.2, -0.2)
+
+[sub_resource type="Resource" id="Copied_Variant"]
+script = ExtResource("3_biome_variant_def")
+fog_color = Color(0.4157, 0.1647, 0.5412, 1)
+ambient_color = Color(0.4784, 0.2275, 0.6902, 1)
+mote_color = Color(2.6, 1, 2.6, 1)
+grade_lift = Color(0.2902, 0.102, 0.3529, 1)
+grade_lift_amount = 0.45
+frame_scale = 0.5
+frame_fade = 0.35
+hide_edge_grass = true
+hide_platform_decor = true
+frame_left = ExtResource("4_vines_left")
+frame_right = ExtResource("5_vines_right")
+platform_left = ExtResource("6_cap_left")
+platform_middle = ExtResource("7_middle_a")
+platform_middle_alt = ExtResource("8_middle_b")
+platform_right = ExtResource("9_cap_right")
+ground_side = ExtResource("10_lumewood_fields_side")
+hide_layers = PackedInt32Array(0, 1, 2, 3, 4, 5, 6)
+more_backdrop = Array[ExtResource("11_backdrop_layer_def")]([SubResource("Backdrop_picture")])
+
+[sub_resource type="Resource" id="Platform_1"]
+script = ExtResource("13_platform_def")
+x = 300.0
+y = 545.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_2"]
+script = ExtResource("13_platform_def")
+x = 600.0
+y = 470.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_3"]
+script = ExtResource("13_platform_def")
+x = 1400.0
+y = 545.0
+width = 400.0
+
+[sub_resource type="Resource" id="Platform_4"]
+script = ExtResource("13_platform_def")
+x = 1700.0
+y = 470.0
+width = 300.0
+
+[sub_resource type="Resource" id="Platform_5"]
+script = ExtResource("13_platform_def")
+x = 300.0
+y = 290.0
+width = 150.0
+secret = true
+
+[sub_resource type="Resource" id="Portal_0"]
+script = ExtResource("14_portal_def")
+x = 2340.0
+target_map = &"arcane_spire"
+target_x = 250.0
+target_platform = 56
+
+[sub_resource type="Resource" id="Spawn_0"]
+script = ExtResource("16_spawn_def")
+monster = ExtResource("15_starfall_golem")
+platform = 0
+count = 3
+patrol_from = 300.0
+patrol_to = 2000.0
+
+[sub_resource type="Resource" id="Spawn_1"]
+script = ExtResource("16_spawn_def")
+monster = ExtResource("17_spell_imp")
+platform = 2
+count = 2
+
+[sub_resource type="Resource" id="Loot_0_0"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("18_dawnshard")
+min_amount = 160
+max_amount = 240
+
+[sub_resource type="Resource" id="Loot_0_1"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("20_white_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Loot_0_2"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("21_blue_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Breakable_0"]
+script = ExtResource("24_breakable_def")
+id = &"spire_vault_hoard_chest"
+x = 1000.0
+platform = 0
+hits = 1
+whole = ExtResource("22_chest")
+broken = ExtResource("23_chest_open")
+height = 48.0
+loot = Array[ExtResource("19_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1"), SubResource("Loot_0_2")])
+card = ExtResource("15_starfall_golem")
+
+[sub_resource type="Resource" id="Loot_1_0"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("18_dawnshard")
+min_amount = 160
+max_amount = 240
+
+[sub_resource type="Resource" id="Loot_1_1"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("20_white_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Loot_1_2"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("21_blue_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Breakable_1"]
+script = ExtResource("24_breakable_def")
+id = &"spire_vault_shelf_chest"
+x = 750.0
+platform = 2
+hits = 1
+whole = ExtResource("22_chest")
+broken = ExtResource("23_chest_open")
+height = 48.0
+loot = Array[ExtResource("19_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
+card = ExtResource("17_spell_imp")
+
+[sub_resource type="Resource" id="Loot_2_0"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("18_dawnshard")
+min_amount = 160
+max_amount = 240
+
+[sub_resource type="Resource" id="Loot_2_1"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("20_white_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Loot_2_2"]
+script = ExtResource("19_drop_entry")
+item = ExtResource("21_blue_potion")
+min_amount = 3
+max_amount = 3
+
+[sub_resource type="Resource" id="Breakable_2"]
+script = ExtResource("24_breakable_def")
+id = &"spire_vault_high_chest"
+x = 375.0
+platform = 5
+hits = 1
+whole = ExtResource("22_chest")
+broken = ExtResource("23_chest_open")
+height = 48.0
+loot = Array[ExtResource("19_drop_entry")]([SubResource("Loot_2_0"), SubResource("Loot_2_1"), SubResource("Loot_2_2")])
+card = ExtResource("17_spell_imp")
+
+[resource]
+script = ExtResource("1_map_def")
+id = &"spire_vault"
+display_name = "Spire Vault"
+biome = ExtResource("2_lumewood")
+variant = SubResource("Copied_Variant")
+width = 2400
+height = 700
+ground_y = 620
+start_x = 2100.0
+platforms = Array[ExtResource("13_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5")])
+portals = Array[ExtResource("14_portal_def")]([SubResource("Portal_0")])
+breakables = Array[ExtResource("24_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1"), SubResource("Breakable_2")])
+spawns = Array[ExtResource("16_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1")])
+region = &"lumewood"
+world_pos = Vector2(760.0, 95.0)
+zone_pos = Vector2(12000.0, -4300.0)
+return_map = &"lumewood"

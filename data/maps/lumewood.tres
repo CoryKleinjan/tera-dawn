@@ -59,7 +59,7 @@ script = ExtResource("portal_def")
 x = 165.0
 platform = 0
 target_map = &"glimmer_path"
-target_x = 2360.0
+target_x = 4150.0
 
 [sub_resource type="Resource" id="Npc_taxi"]
 script = ExtResource("npc_placement")
@@ -157,7 +157,7 @@ script = ExtResource("portal_def")
 x = 1730.0
 platform = 0
 target_map = &"glowcap_hollow"
-target_x = 120.0
+target_x = 1670.0
 
 [sub_resource type="Resource" id="Wall_barrel"]
 script = ExtResource("prop_placement")
@@ -231,7 +231,7 @@ script = ExtResource("portal_def")
 x = 3860.0
 platform = 0
 target_map = &"starfall_ridge"
-target_x = 120.0
+target_x = 200.0
 
 [sub_resource type="Resource" id="Building_dormitory"]
 script = ExtResource("building_placement")
