@@ -1,0 +1,34 @@
+{
+  "source": "art/source/monanim_pale_moth.png",
+  "save": false,
+  "out_dir": "art/build/monanim_pale_moth",
+  "cells": [
+    [
+      "swoop_windup",
+      "",
+      "swoop",
+      "",
+      "knock_down"
+    ]
+  ],
+  "inset": 3,
+  "label_band": 0,
+  "scale": 0.117,
+  "detail": 2.56,
+  "grid": {
+    "rows": [
+      0,
+      493
+    ],
+    "cols": [
+      [
+        0,
+        390,
+        393,
+        826,
+        828,
+        1260
+      ]
+    ]
+  }
+}

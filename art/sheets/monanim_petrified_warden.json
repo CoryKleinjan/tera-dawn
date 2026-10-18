@@ -1,0 +1,66 @@
+{
+  "source": "art/source/monanim_petrified_warden.png",
+  "save": false,
+  "out_dir": "art/build/monanim_petrified_warden",
+  "cells": [
+    [
+      "jump1",
+      "",
+      "jump2",
+      "",
+      "charge_windup",
+      "",
+      "charge"
+    ],
+    [
+      ""
+    ],
+    [
+      "slam_windup",
+      "",
+      "slam",
+      "",
+      "shot_windup",
+      "",
+      "shot"
+    ]
+  ],
+  "inset": 3,
+  "label_band": 0,
+  "scale": 0.188,
+  "detail": 3.2,
+  "grid": {
+    "rows": [
+      0,
+      670,
+      680,
+      1350
+    ],
+    "cols": [
+      [
+        0,
+        595,
+        605,
+        1195,
+        1205,
+        1795,
+        1805,
+        2400
+      ],
+      [
+        0,
+        2400
+      ],
+      [
+        0,
+        595,
+        605,
+        1195,
+        1205,
+        1795,
+        1805,
+        2400
+      ]
+    ]
+  }
+}

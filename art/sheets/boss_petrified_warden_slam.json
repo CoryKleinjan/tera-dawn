@@ -1,0 +1,35 @@
+{
+  "source": "art/source/boss_petrified_warden_slam.png",
+  "save": false,
+  "out_dir": "art/build/boss_petrified_warden_slam",
+  "cells": [
+    [
+      "slam_windup2",
+      "",
+      "slam2",
+      "",
+      "slam_recover"
+    ]
+  ],
+  "inset": 3,
+  "label_band": 0,
+  "scale": 0.26,
+  "detail": 3.2,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        405,
+        408,
+        819,
+        822,
+        1260
+      ]
+    ]
+  },
+  "overrides": {}
+}

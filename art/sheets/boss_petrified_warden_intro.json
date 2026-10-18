@@ -1,0 +1,42 @@
+{
+  "source": "art/source/boss_petrified_warden_intro.png",
+  "save": false,
+  "out_dir": "art/build/boss_petrified_warden_intro",
+  "cells": [
+    [
+      "intro1",
+      "",
+      "",
+      "",
+      "intro3"
+    ]
+  ],
+  "inset": 3,
+  "label_band": 0,
+  "scale": 0.23,
+  "detail": 3.2,
+  "grid": {
+    "rows": [
+      0,
+      540
+    ],
+    "cols": [
+      [
+        0,
+        419,
+        422,
+        839,
+        842,
+        1260
+      ]
+    ]
+  },
+  "overrides": {
+    "intro1": {
+      "drop_edge": true
+    },
+    "intro3": {
+      "drop_edge": true
+    }
+  }
+}

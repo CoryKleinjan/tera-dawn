@@ -1,0 +1,27 @@
+{
+  "source": "art/source/monanim_hollow_stag.png",
+  "save": false,
+  "out_dir": "art/build/monanim_hollow_stag_b",
+  "cells": [
+    [
+      "knock_up"
+    ]
+  ],
+  "inset": 0,
+  "label_band": 0,
+  "scale": 0.21,
+  "detail": 2.56,
+  "grid": {
+    "rows": [
+      0,
+      560
+    ],
+    "cols": [
+      [
+        840,
+        1322
+      ]
+    ]
+  },
+  "drop_edge": true
+}
