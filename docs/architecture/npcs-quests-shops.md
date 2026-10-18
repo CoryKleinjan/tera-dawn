@@ -56,4 +56,7 @@ seller do it.
 Create `data/shops/<id>.tres` as a **ShopDef**: a name and a list of **ShopEntry**s (an item
 and its price; 0 means four times what a shop pays for it). Set it as an NpcDef's `shop` and
 they offer "Open shop". Every shop also buys anything for the item's `sell_price`. The server
-checks the player is standing by that NPC before buying or selling (`ServerNpcShop.on_buy`).
+checks the player is standing by that NPC before buying or selling (`ServerNpcShop.on_buy`). A line
+can wait to be unlocked: `after_quest` (handed in), `after_boss` (beaten) or `after_secret`
+(found, `Character.found_secret`); until all its unlocks are done it's hidden from the list
+(`ShopDef.open_to`) and the server won't sell it.

@@ -31,6 +31,7 @@ const EXPECTED := {
 	"cutscenes": ["CutsceneDef"],
 	"tears": ["TearDef"],
 	"declines": ["DeclineDef"],
+	"gear_tiers": ["GearTierDef"],
 	"hero": ["HeroLookDef", "HeldDef", "HeroStyleDef", "MuzzleSetDef"],
 }
 

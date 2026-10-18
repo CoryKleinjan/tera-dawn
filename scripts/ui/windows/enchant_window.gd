@@ -4,7 +4,8 @@ extends TDWindow
 ## that isn't a rune dimmed) on the right, and the picked gear's rune slots underneath. Click
 ## a piece of gear, then a rune, then the rune slot to set it in; it asks first, with the fee
 ## (RuneDef.fee) and the rune it would replace. Setting a rune is a request the server answers
-## (Gear.enchant). Closes when you walk away.
+## (Gear.enchant). The button along the bottom raises the picked gear a tier for the next
+## tier's fee (Gear.upgrade), asking first. Closes when you walk away.
 
 const COLS := 4
 const GAP := 4.0
@@ -14,6 +15,10 @@ const RUNES_X := PAD + GRID_W + 24
 ## The picked gear's rune slots: bigger than item slots, side by side under the grids.
 const SOCKET := 48.0
 const SOCKET_GAP := 18.0
+## The upgrade button along the bottom.
+const UPGRADE_W := 280.0
+## Room under the hint for the upgrade button.
+const UPGRADE_ROOM := 36.0
 
 var npc: TDNpc
 ## The gear (Equip slot) and the rune (Etc slot) picked, or -1.
@@ -26,7 +31,7 @@ var _shown := {}
 
 func _init() -> void:
 	var rows := ceili(Inventory.SLOTS / float(COLS))
-	super("Enchanting", Vector2(RUNES_X + GRID_W + PAD, GRID_Y + rows * (SLOT + GAP) + SOCKET + 96))
+	super("Enchanting", Vector2(RUNES_X + GRID_W + PAD, GRID_Y + rows * (SLOT + GAP) + SOCKET + 96 + UPGRADE_ROOM))
 
 func open(who: TDNpc) -> void:
 	npc = who
@@ -107,7 +112,20 @@ func _draw_body() -> void:
 	var line := hint()
 	DrawUtil.text(self, Game.ui_font, Vector2(size.x / 2.0, top + SOCKET + 22), line,
 		DrawUtil.fit_size(Game.ui_font, line, 12, size.x - PAD * 2), Palette.MIST, 0)
+	_draw_upgrade(g)
 	draw_shards(Vector2(size.x - PAD - 92, size.y - 22), Game.me.shards)
+
+## The button that raises the picked gear a tier: its next tier and fee, dim when there's
+## nothing to raise, it's at the top or the fee is more than you have.
+func _draw_upgrade(g: ItemStack) -> void:
+	var r := bottom_button_rect(PAD, UPGRADE_W)
+	var next := g.next_tier() if g else null
+	if g == null:
+		draw_button(r, "Upgrade", false, true)
+	elif next == null:
+		draw_button(r, "Highest tier", false, true)
+	else:
+		add_button(r, "Upgrade to %s (%d Dawnshards)" % [next.display_name, next.fee], upgrade, Game.me.shards >= next.fee, true)
 
 func _stack_of(rune: RuneDef) -> ItemStack:
 	if rune == null:
@@ -152,6 +170,20 @@ func enchant(socket: int) -> void:
 		var held := bag.at(ItemDef.Tab.ETC, from[1])
 		if visible and bag.at(ItemDef.Tab.EQUIP, from[0]) == g and held and held.item == r:
 			Net.ask(&"req_enchant", [npc.def.id, from[0], from[1], socket]))
+
+## Asks to raise the picked gear a tier, after saying what it costs.
+func upgrade() -> void:
+	var g := picked_gear()
+	var next := g.next_tier() if g else null
+	if next == null:
+		return
+	var question := "Upgrade the %s to %s for %d Dawnshards? It keeps its runes and look." % [g.display_name(), next.display_name, next.fee]
+	var from := gear_slot
+	var to := g.tier
+	hud.confirm.open(question, "Upgrade", func() -> void:
+		# only if the same gear, still at that tier, is there and the enchanter still open
+		if visible and Game.me.inventory.at(ItemDef.Tab.EQUIP, from) == g and g.tier == to:
+			Net.ask(&"req_upgrade", [npc.def.id, from]))
 
 func _tooltip_at(at: Vector2) -> Tip:
 	var bag := Game.me.inventory

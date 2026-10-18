@@ -59,6 +59,15 @@ that is what worn gear adds (`Equipment.bonus`). An enchanter (`NpcDef.enchants`
 player stands by them, and the rule is `Gear.enchant`: a rune from the Etc tab into a slot of a
 piece in the Equip tab for the rune's `fee`, always working, replacing what was there.
 
+Gear tiers: `ItemStack.tier` (1 to `Content.top_gear_tier()`, saved as "tier"; saves from
+before tiers load at 1) scales the piece's own stats by its **GearTierDef**'s `stat_scale`
+(`ItemStack.own_stats`; runes don't scale). The tiers are `data/gear_tiers/tier_<n>.tres`
+(`rank`, `display_name`, `stat_scale`, `fee`); `Content.gear_tier(rank)` finds one. The
+enchant window's Upgrade button sends `Net.req_upgrade` to `ServerEnchanting.on_upgrade`, and
+the rule is `Gear.upgrade`: one tier up for the next tier's `fee`, always working. A tier never
+changes the look. Gear never drops (the content checks fail on a gear DropEntry in a monster,
+region or chest); shops sell it, each line hidden until its `ShopEntry` unlock is done.
+
 Zone runes drop from every monster on a region's maps (`RegionDef.drops`, rolled in
 `MapInstance.kill_mob` after the monster's own `drops`); a boss's own rune is a line on its
 `drops`. To add a rune, save a RuneDef in `data/items/runes/` and add a DropEntry for it to its

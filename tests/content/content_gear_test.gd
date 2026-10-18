@@ -24,3 +24,30 @@ func test_every_weapon_skill_has_a_real_weapon_its_job_can_hold() -> void:
 		var fits := weapons.filter(func(e: EquipDef) -> bool:
 			return e.weapon_kind in s.weapons and (job == null or e.jobs.is_empty() or job.wear_families().any(func(f: StringName) -> bool: return f in e.jobs)))
 		check(not fits.is_empty(), "%s: needs a %s, but no real weapon of that kind fits %s" % [Scan.where(s), " or ".join(s.weapons), job.display_name if job else "anyone"])
+
+## Gear never drops (Cory, Oct 18): shops sell it, unlocked by progress or secrets.
+func test_no_monster_zone_or_chest_drops_gear() -> void:
+	for m: MonsterDef in Content.monsters.values():
+		for d in m.drops:
+			check(not (d and d.item is EquipDef), "%s: drops gear %s" % [Scan.where(m), d.item.id if d and d.item else &""])
+	for r: RegionDef in Content.regions.values():
+		for d in r.drops:
+			check(not (d and d.item is EquipDef), "%s: its monsters drop gear %s" % [Scan.where(r), d.item.id if d and d.item else &""])
+	for map: MapDef in Content.maps.values():
+		for b in map.breakables:
+			for d in (b.loot if b else []):
+				check(not (d and d.item is EquipDef), "%s: a chest holds gear %s" % [Scan.where(map), d.item.id if d and d.item else &""])
+
+func test_gear_tiers_run_from_one_without_gaps() -> void:
+	check(Content.top_gear_tier() >= 2, "there are tiers to climb")
+	var last := 0.0
+	for rank in range(1, Content.top_gear_tier() + 1):
+		var t := Content.gear_tier(rank)
+		check(t != null, "tier %d exists" % rank)
+		if t == null:
+			continue
+		check(t.display_name != "", "tier %d has a name" % rank)
+		check(t.stat_scale > last, "tier %d is stronger than the one below" % rank)
+		check(rank == 1 or t.fee > 0, "tier %d has a fee" % rank)
+		last = t.stat_scale
+	check_eq(Content.gear_tier(1).stat_scale, 1.0, "tier 1 is gear as listed")
