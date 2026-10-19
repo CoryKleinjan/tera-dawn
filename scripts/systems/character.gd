@@ -1,6 +1,6 @@
 class_name Character
 extends RefCounted
-## One character: name, level, EXP, Dawn Essence, job, stats, quickslots, inventory, storage, quests,
+## One character: name, job, stats, quickslots, inventory, storage, quests,
 ## Dawnshards, hearts, Mana, the map they're on and what they've done. Formulas live in
 ## CharacterStats; this only holds and changes state. Two parts keep their own state and
 ## rules: `skills` (SkillBook: skills bought and buffs) and `gear` (Gear: wearing gear; what's
@@ -9,7 +9,7 @@ extends RefCounted
 ## The server owns the real Character of every player. Each client keeps a copy of its own
 ## (Game.me) that the server refreshes, so the UI can read it but never changes it directly.
 
-## Level, gear or skills changed: anything showing stats should refresh.
+## Gear or buffs changed: anything showing stats should refresh.
 signal stats_changed
 
 ## The first town: where the way out of the tutorial leads, and where you wake after fainting
@@ -24,16 +24,8 @@ const QUICKSLOTS := 8
 const BASIC_ATTACK := &"basic_attack"
 ## What a storage keeper charges to store one stack.
 const STORE_FEE := 10
-## The level cap: EXP stops here.
-const MAX_LEVEL := 100
 
 var name := ""
-## Levels come from EXP (monsters and quests give it); each one raises power, Max HP and MP by
-## the job's growth (CharacterStats).
-var level := 1
-var xp := 0
-## Unspent Dawn Essence: monsters and quests give it, skill levels cost it.
-var essence := 0
 var shards := 0
 ## Mana: fills as they hit monsters, heals hearts and pays for skills (CharacterStats).
 var mp := 0
@@ -57,7 +49,7 @@ var equipment := Equipment.new()
 ## Putting gear on and off.
 var gear := Gear.new(self)
 var quests := QuestLog.new()
-## Skills learned and buffs running.
+## The attacks known and buffs running.
 var skills := SkillBook.new(self)
 ## One per quickslot: [] (empty), ["skill", id] or ["item", id].
 var quickslots: Array = []
@@ -119,7 +111,7 @@ static func create(char_name: String, job_id := START_JOB, made: NewCharacter = 
 	c.map_id = NEW_MAP if Content.maps.has(NEW_MAP) else START_MAP
 	return c
 
-## Works out the total stats again after the level, gear or skills change.
+## Works out the total stats again after the gear or buffs change.
 func recalc() -> void:
 	if job == null:
 		return
@@ -140,52 +132,10 @@ func max_hp() -> int:
 func max_mp() -> int:
 	return CharacterStats.max_mp(mana_shards)
 
-## What damage grows from: the job's power at this level plus the Monster Book's rank.
-func power() -> int:
-	return CharacterStats.power(job, level) + book.power_bonus()
-
+## Lowest and highest hit of an attack before its own multiplier: set by the weapon and its
+## tier (CharacterStats.damage_range).
 func damage_range() -> Vector2i:
-	return CharacterStats.damage_range(job, power(), stats)
-
-func magic_range() -> Vector2i:
-	return CharacterStats.magic_range(job, power(), stats)
-
-func magic_attack() -> int:
-	return CharacterStats.magic_attack(stats, power())
-
-func avoid() -> int:
-	return CharacterStats.avoid(job, level, stats)
-
-## EXP needed to go from level `lvl` (this character's own by default) to the next.
-func xp_need(lvl := -1) -> int:
-	return CharacterStats.xp_need(level if lvl < 0 else lvl)
-
-## Whether the character is at MAX_LEVEL, where EXP stops.
-func at_max_level() -> bool:
-	return level >= MAX_LEVEL
-
-## Adds EXP and returns how many levels were gained; each level up refills the hearts. At
-## MAX_LEVEL EXP stops (kept at 0).
-func gain_xp(n: int) -> int:
-	if at_max_level():
-		xp = 0
-		return 0
-	xp += maxi(0, n)
-	var gained := 0
-	while not at_max_level() and xp >= xp_need():
-		xp -= xp_need()
-		level += 1
-		gained += 1
-	if at_max_level():
-		xp = 0
-	if gained > 0:
-		recalc()
-		refill()
-	return gained
-
-## Adds Dawn Essence (from a monster or a quest).
-func gain_essence(n: int) -> void:
-	essence += maxi(0, n)
+	return CharacterStats.damage_range(stats)
 
 func spend_mp(n: int) -> bool:
 	if mp < n:
@@ -337,19 +287,6 @@ func job_path() -> Array[StringName]:
 		j = Content.jobs.get(back)
 	return out
 
-## The jobs whose skills this character may learn: every job on their path, plus for a blend
-## the other parent job (a Warrior who becomes a Spellblade learns Magician skills too).
-func job_line() -> Array[StringName]:
-	var out := job_path()
-	for id in out.duplicate():
-		var j: JobDef = Content.jobs.get(id)
-		if j == null:
-			continue
-		for parent in j.parents():
-			if not parent in out:
-				out.append(parent)
-	return out
-
 ## Whether this character has passed `j` before (see jobs_passed).
 func has_passed(j: JobDef) -> bool:
 	return jobs_passed.has(String(j.id))
@@ -361,10 +298,6 @@ func can_become(next: JobDef) -> bool:
 	if next == job or next.is_starting_job():
 		return false
 	return next.tier() == 1 or next.opens_from(job.id) or has_passed(next)
-
-## The skills this character would lose by becoming `next` (those outside its JobDef.line).
-func skills_lost_by(next: JobDef) -> Array[SkillDef]:
-	return skills.outside(next.line())
 
 ## Why the character can't become `next`, or "" if they can.
 func advance_problem(next: JobDef) -> String:
@@ -382,9 +315,8 @@ func advance_problem(next: JobDef) -> String:
 		return "Make room in your %s inventory first." % ItemDef.TAB_NAMES[full]
 	return ""
 
-## Becomes `next` (see advance_problem). The skills of the old job that `next` can't use go,
-## and the Dawn Essence paid for them comes back; stats stay. The first time, it receives the
-## job's gifts. Returns why not, or "".
+## Becomes `next` (see advance_problem). The first time, it receives the job's gifts.
+## Returns why not, or "".
 func advance(next: JobDef) -> String:
 	var problem := advance_problem(next)
 	if problem != "":
@@ -392,7 +324,6 @@ func advance(next: JobDef) -> String:
 	var first_time := not has_passed(next)
 	came_from = job.id if next.partner != &"" and next.opens_from(job.id) else &""
 	job = next
-	skills.forget_outside(next.line())
 	if first_time:
 		jobs_passed.append(String(next.id))
 		for g in next.advance_gifts:

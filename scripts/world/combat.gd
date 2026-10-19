@@ -1,7 +1,7 @@
 class_name Combat
 extends RefCounted
 ## Damage rules in one place, so balance changes don't mean hunting through actors.
-## The character's side of the numbers (damage range, accuracy, avoid) comes from
+## The character's side of the numbers (damage range, crit) comes from
 ## CharacterStats.
 
 const CRIT_MULTIPLIER := 1.6
@@ -10,7 +10,7 @@ const CRIT_MULTIPLIER := 1.6
 static func player_hit(skill: SkillDef, _target: MonsterDef, ch: Character) -> Dictionary:
 	var multiplier := skill.damage_at(ch.skills.level(skill))
 	var crit := randf() < CharacterStats.crit_rate(ch.stats)
-	var spread := ch.magic_range() if skill.magic else ch.damage_range()
+	var spread := ch.damage_range()
 	var dmg := maxi(1, roundi(randi_range(spread.x, spread.y) * multiplier
 		* CharacterStats.damage_bonus(ch.stats, skill.is_ranged())
 		* (CRIT_MULTIPLIER if crit else 1.0)))
@@ -24,7 +24,3 @@ const BIG_HIT_POWER := 1.2
 ## lands, so fights are about not being touched.
 static func monster_hit(monster: MonsterDef, _ch: Character, power := 1.0) -> int:
 	return 2 if monster.boss and power >= BIG_HIT_POWER else 1
-
-## EXP (of what's toward the next level) lost when the player faints.
-static func faint_penalty(xp: int) -> int:
-	return int(xp * 0.1)

@@ -1,6 +1,6 @@
 extends TestCase
 ## Numbers in content make sense: chances are 0 to 1, amount ranges run low to high,
-## HP, Dawn Essence and prices are positive, shops never pay more than they charge, and
+## HP and prices are positive, shops never pay more than they charge, and
 ## skills, jobs and items have usable values.
 
 const Scan := preload("res://tests/content/content_scan.gd")
@@ -42,7 +42,6 @@ func test_monsters_have_positive_stats() -> void:
 		check(m.level >= 1, "%s: level is %d" % [w, m.level])
 		check(m.max_hp >= 1, "%s: max_hp is %d" % [w, m.max_hp])
 		check(m.attack >= 0, "%s: attack is %d" % [w, m.attack])
-		check(m.essence >= 1, "%s: essence is %d" % [w, m.essence])
 		check(m.speed >= 0.0, "%s: speed is %s" % [w, m.speed])
 		check(m.size.x > 0 and m.size.y > 0, "%s: size is %s" % [w, m.size])
 		check(m.sprite_scale > 0, "%s: sprite_scale is %s" % [w, m.sprite_scale])
@@ -129,8 +128,7 @@ func test_travel_fares_are_affordable() -> void:
 func test_quests_have_sane_counts_and_rewards() -> void:
 	for q: QuestDef in Content.quests.values():
 		var w := Scan.where(q)
-		check(q.reward_essence >= 0 and q.reward_shards >= 0, "%s: reward_essence %d / reward_shards %d is negative" % [w, q.reward_essence, q.reward_shards])
-		check(q.reward_essence > 0 or q.reward_shards > 0 or not q.reward_items.is_empty(), "%s: rewards nothing" % w)
+		check(q.reward_shards >= 0, "%s: reward_shards %d is negative" % [w, q.reward_shards])
 		check(q.offer_text != "" and q.progress_text != "" and q.complete_text != "", "%s: offer_text, progress_text or complete_text is empty" % w)
 		for i in q.objectives.size():
 			var o := q.objectives[i]
@@ -173,13 +171,9 @@ func test_skills_have_usable_numbers() -> void:
 		if s.is_active():
 			check(s.describe_level(1).size() > 0, "%s: describe_level(1) says nothing" % w)
 
-func test_jobs_have_usable_growth() -> void:
+func test_job_advances_climb_a_tier() -> void:
 	for j: JobDef in Content.jobs.values():
 		var w := Scan.where(j)
-		check_between(j.mastery, 0.1, 0.95, "%s: mastery" % w)
-		check(j.base_hp > 0 and j.base_mp >= 0 and j.hp_growth > 0 and j.mp_growth >= 0, "%s: HP / MP growth must be positive" % w)
-		check(j.base_power > 0, "%s: base_power %d must be positive" % [w, j.base_power])
-		check(j.avoid_growth >= 0.0, "%s: avoid_growth %s is negative" % [w, j.avoid_growth])
 		if j.advances_from != &"":
 			var from: JobDef = Content.jobs.get(j.advances_from)
 			if from:
@@ -218,9 +212,7 @@ func test_use_items_have_sane_numbers() -> void:
 		var u := i as UseDef
 		if u:
 			var w := Scan.where(u)
-			check(u.heal_hp >= 0 and u.heal_mp >= 0 and u.pet_food >= 0 and u.cooldown >= 0, "%s: a heal, pet_food or cooldown is negative" % w)
-			check_between(u.heal_hp_percent, 0, 100, "%s: heal_hp_percent" % w)
-			check_between(u.heal_mp_percent, 0, 100, "%s: heal_mp_percent" % w)
+			check(u.pet_food >= 0 and u.cooldown >= 0, "%s: pet_food or cooldown is negative" % w)
 
 func test_towns_are_safe() -> void:
 	# towns are where you wake up: nothing hostile spawns there (the starting meadow excepted)

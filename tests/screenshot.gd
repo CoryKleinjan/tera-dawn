@@ -103,7 +103,6 @@ func _run() -> void:
 	Net.play("Dawnling")
 	await _physics(2)
 	var ch := _me().character
-	ch.essence = 9
 	ch.recalc()
 	ch.refill()
 	_me().dirty_character = true
@@ -132,15 +131,14 @@ func _run() -> void:
 		await _physics(40)
 		await _shot("meadow")
 	if only == "" or only == "action":
-		# Dawn Slash into a pack of Dewlings on the second platform.
+		# A Warrior's swing into a pack of Dewlings on the second platform.
 		_teleport(world, Vector2(230, 500))
 		p.face = 1
 		for m in Net.server.maps[&"meadow"].mobs:
 			if m.plat == world.platforms[1]:
 				_place_mob(m, randf_range(300, 380))
 		_me().character.job = Content.job(&"warrior")
-		_me().character.skills.learned[&"dawn_slash"] = 1
-		_me().character.set_quickslot(0, &"skill", &"dawn_slash")
+		_me().character.set_quickslot(0, &"skill", Character.BASIC_ATTACK)
 		_me().dirty_character = true
 		await _physics(40)
 		Input.action_press("quick_1")
@@ -171,12 +169,12 @@ func _run() -> void:
 		await _physics(5)
 		world.show_chat("all", ch.name, "Hi!", 1)
 		world.hud.chat.add("all", "Mossy", "Anyone heading to Fern Hollow?")
-		world.hud.chat.add("party", "Kestrel", "On my way! Wait for me by the big tree near the docks, I'll bring potions.")
+		world.hud.chat.add("party", "Kestrel", "On my way! Wait for me by the big tree near the docks, I'll bring snacks.")
 		world.hud.chat.add("system", "", "Mossy joined the party.")
 		world.hud.chat.open("hello there")
 		await _frames(3)
 		await _shot("chat_short")
-		world.show_chat("all", ch.name, "Anyone want to hunt in the Crystal Caves? I can tank, bring potions!", 1)
+		world.show_chat("all", ch.name, "Anyone want to hunt in the Crystal Caves? I can tank, bring snacks!", 1)
 		await _frames(3)
 		await _shot("chat_long")
 		world.hud.chat.close()
@@ -237,38 +235,13 @@ func _run() -> void:
 		await _shot("jobs")
 		talk.visible = false
 		ch.job = Content.job(&"beginner")
-	if only == "" or only == "skills":
-		await _go(&"meadow", 1120)
-		# A Warrior's skill book, quickslots and a running buff.
-		ch.job = Content.job(&"warrior")
-		ch.essence = maxi(ch.essence, 400)
-		for pair in [[&"power_strike", 6], [&"dawn_slash", 3], [&"iron_body", 2], [&"blade_mastery", 1], [&"quick_step", 2], [&"first_aid", 1]]:
-			ch.skills.learned[pair[0]] = pair[1]
-		ch.set_quickslot(0, &"skill", &"power_strike")
-		ch.set_quickslot(1, &"skill", &"dawn_slash")
-		ch.set_quickslot(2, &"skill", &"iron_body")
-		ch.set_quickslot(3, &"skill", &"quick_step")
-		ch.skills.add_buff(Content.skill(&"iron_body"))
-		ch.skills.add_buff(Content.skill(&"quick_step"))
-		ch.recalc()
-		_me().dirty_character = true
-		await _physics(5)
-		world.hud.toggle_window("skills")
-		var book: TDSkillWindow = world.hud.windows["skills"]
-		book.tab = 1
-		book.selected = &"dawn_slash"
-		await _frames(3)
-		await _shot("skills")
-		world.hud.toggle_window("skills")
 	if only == "" or only == "ranged":
 		await _go(&"meadow", 1300)
-		# An Archer's Heartseeker in flight, and a Magician's spell from a second player.
+		# An Archer's arrow in flight.
 		ch.job = Content.job(&"archer")
 		ch.equipment.take(&"weapon")
-		ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"willow_bow")))
-		ch.skills.learned[&"heartseeker"] = 5
-		ch.set_quickslot(0, &"skill", &"heartseeker")
-		ch.mp = 200
+		ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"hunters_bow")))
+		ch.set_quickslot(0, &"skill", &"bow_shot")
 		ch.recalc()
 		_me().dirty_character = true
 		_teleport(world, Vector2(1300, 620))
@@ -285,12 +258,10 @@ func _run() -> void:
 		await _physics(5)
 		await _shot("ranged")
 	if only == "muzzles":
-		# Each ranged job's shot held still where it leaves, on the frame it leaves on (not in
-		# the full run): `_old` from the chest as it used to, `_new` from the bow, the pistol's
-		# barrel, the star in his hand or the wand's tip (HeroBody.muzzle).
+		# The bow's shot held still where it leaves, on the frame it leaves on (not in the full
+		# run): `_old` from the chest as it used to, `_new` from the bow (HeroBody.muzzle).
 		await _go(&"greenbough", 900)  # a town: nothing to hit
-		for job: Array in [[&"archer", &"hunters_bow", &"", &"bow_shot"], [&"pirate", &"deckhand_scimitar", &"deckhand_pistol", &"broadside"],
-				[&"thief", &"footpad_dagger", &"footpad_star", &"star_scatter"], [&"mage", &"novice_wand", &"novice_tome", &"fire_burst"]]:
+		for job: Array in [[&"archer", &"hunters_bow", &"", &"bow_shot"]]:
 			for c: Character in [ch, Game.me]:
 				c.job = Content.job(job[0])
 				c.equipment.take(&"weapon")
@@ -329,78 +300,6 @@ func _run() -> void:
 				var img := Image.load_from_file("%s/muzzle_%s_%s.png" % [out, job[0], way])
 				var k := img.get_width() / TDWorld.VIEW.x
 				img.get_region(Rect2i(Vector2i((at + Vector2(-90, -150)) * k), Vector2i(Vector2(220, 170) * k))).save_png("%s/muzzle_%s_%s.png" % [out, job[0], way])
-	if only == "" or only == "control":
-		# Each job's monster-control skill in action, on a few monsters of a field's widest
-		# platform with monsters on it.
-		Net.server.enter_map(_me(), &"sandy_shoals", 300.0)
-		await _physics(60)
-		var field: MapInstance = _me().map
-		var plat: Platform = null
-		for m in field.mobs:
-			if not m.def.flying and not m.def.boss and (plat == null or m.plat.w > plat.w):
-				plat = m.plat
-		var ground: Array = field.mobs.filter(func(m: SimMob) -> bool: return m.plat == plat and not m.def.flying)
-		var left := plat.x + 60.0
-		var pack := func(xs: Array) -> void:
-			for i in mini(xs.size(), ground.size()):
-				var m: SimMob = ground[i]
-				_place_mob(m, left + xs[i])
-				m.hop = 0.0
-				m.hop_v = 0.0
-				m.tossed = false
-				m.stun_t = 0
-				m.hang_t = 0
-				m.root_t = 0
-				m.health.reset(1000000) # so no blow finishes it before the shot
-			for i in range(xs.size(), ground.size()):
-				_place_mob(ground[i], plat.x + plat.w - 20.0)
-		var cast := func(job: StringName, id: StringName, after: int) -> void:
-			ch.job = Content.job(job)
-			ch.skills.learned[id] = 10
-			ch.set_quickslot(0, &"skill", id)
-			ch.mp = 500
-			ch.recalc()
-			_me().dirty_character = true
-			await _physics(20)
-			_me().cooldown = 0
-			_me().recharge.clear()
-			p.cooldown = 0
-			p.recharge.clear()
-			world.hud.banners.clear()
-			Input.action_press("quick_1")
-			await _physics(2)
-			Input.action_release("quick_1")
-			await _physics(after)
-			world.hud.banners.clear()
-			await _shot("control_" + String(id))
-		var stand := func(x: float) -> void:
-			_teleport(world, Vector2(left + x, plat.y))
-			p.face = 1
-		stand.call(0.0)
-		pack.call([60, 90, 120])
-		await cast.call(&"warrior", &"skyward_cleave", 16)
-		await _physics(80)
-		stand.call(100.0)
-		pack.call([40, 100, 180])
-		for i in 2:
-			ground[i].launch(9.0)
-		await _physics(12)
-		await cast.call(&"mage", &"gravity_well", 14)
-		await _physics(80)
-		stand.call(0.0)
-		pack.call([220, 250, 280])
-		await cast.call(&"thief", &"shadow_ambush", 40)
-		await _physics(80)
-		stand.call(0.0)
-		pack.call([220])
-		ground[0].launch(6.0)
-		ch.equipment.take(&"weapon")
-		ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"willow_bow")))
-		await cast.call(&"archer", &"pinning_shot", 20)
-		await _physics(80)
-		stand.call(0.0)
-		pack.call([180, 230, 260])
-		await cast.call(&"pirate", &"anchor_haul", 14)
 	if only == "" or only == "worldmap":
 		world.hud.toggle_window("worldmap")
 		var wm: TDWorldMapWindow = world.hud.windows["worldmap"]
@@ -584,7 +483,7 @@ func _run() -> void:
 		for id in [&"dewling", &"mossling", &"petal_bat", &"sproutcap", &"spore_puff", &"sporecap", &"tide_dewling", &"fern_boar", &"shell_crab"]:
 			ch.book.pages[id] = [40 + id.length() * 7, mini(5, id.length() % 6)]
 		ch.book.pages[dew.id] = [212, 5]
-		ch.achievements.append_array(["first_hunt", "level_10", "first_job", "take_a_seat", "best_friend", "collector"])
+		ch.achievements.append_array(["first_hunt", "hunter", "first_job", "take_a_seat", "best_friend", "collector"])
 		_me().dirty_character = true
 		await _physics(240)
 		world.log_lines.clear()
@@ -624,9 +523,8 @@ func _run() -> void:
 			ch.inventory.add(Content.item(id))
 		for id in [&"boar_tusk", &"petal_wing", &"dewling_droplet"]:
 			ch.inventory.add(Content.item(id), randi_range(3, 40))
-		ch.inventory.add(Content.item(&"blue_potion"), 12)
+		ch.inventory.add(Content.item(&"return_scroll"), 12)
 		ch.gear.equip(0)
-		ch.essence += 300
 		ch.inventory.add(Content.item(&"leaf_cap"))
 		ch.gear.equip(_slot_of(&"leaf_cap"))
 		ch.inventory.add(Content.item(&"ember_helm"))
@@ -634,7 +532,7 @@ func _run() -> void:
 		_teleport(world, Vector2(1120, 620))
 		await _physics(5)
 		# the everyday windows (the world map, community and collection have their own shots)
-		var everyday := TDHud.WINDOW_ACTIONS.slice(0, 5)
+		var everyday := TDHud.WINDOW_ACTIONS.slice(0, 4)
 		for action in everyday:
 			world.hud.toggle_window(action)
 		var inv: TDInventoryWindow = world.hud.windows["inventory"]
@@ -645,10 +543,10 @@ func _run() -> void:
 		for action in everyday:
 			world.hud.toggle_window(action)
 	if only == "" or only == "drops":
-		# A spread of loot on the ground: Dawnshards, a potion, an Etc item and gear.
+		# A spread of loot on the ground: Dawnshards, a scroll, an Etc item and gear.
 		_teleport(world, Vector2(1000, 620))
 		p.face = 1
-		var loot := [&"dawnshard", &"red_potion", &"petal_wing", &"dawn_blade", &"elixir", &"leather_boots", &"dawnshard"]
+		var loot := [&"dawnshard", &"return_scroll", &"petal_wing", &"dawn_blade", &"pet_snack", &"leather_boots", &"dawnshard"]
 		for i in loot.size():
 			var x := 1100 + (i - (loot.size() - 1) / 2.0) * MapInstance.DROP_SPACING
 			Net.server.maps[&"meadow"].spawn_drop(Content.item(loot[i]), 3, null, DropFlight.create(Vector2(1100, 600), 620, x), 0)

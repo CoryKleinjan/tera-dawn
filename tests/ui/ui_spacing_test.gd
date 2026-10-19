@@ -39,17 +39,16 @@ func _check_layout(w: TDWindow, what: String) -> void:
 		var width := DrawUtil.text_width(Game.ui_font, label, TDWindow.tab_font_size(r, label))
 		check(width <= TDWindow.tab_text_width(r), "%s: the %s tab's label (%d px) fits its tab (%d px)" % [what, label, width, TDWindow.tab_text_width(r)])
 
-## Makes the player a `job` with Dawn Essence for skill levels.
-func _spender(job: StringName) -> void:
+## Makes the player a `job` with a guild and some fame, so every row has a value.
+func _player(job: StringName) -> void:
 	await ui.edit(func(c: Character) -> void:
 		c.job = Content.job(job)
-		c.essence = 100000
 		c.guild = "Dawnbreakers"
 		c.fame = 12)
 
 func test_character_window_fits_with_no_stat_buttons() -> void:
 	for job: StringName in [&"warrior", &"beginner"]:
-		await _spender(job)
+		await _player(job)
 		var stats: TDStatsWindow = await _open("stats")
 		_check_layout(stats, "Character window, %s" % job)
 		var plus := stats._buttons.filter(func(b: Array) -> bool: return (b[0] as Rect2).size.x == (b[0] as Rect2).size.y)
@@ -58,20 +57,20 @@ func test_character_window_fits_with_no_stat_buttons() -> void:
 		check(stats.content_end <= stats.size.y - 16, "%s: the rows fit" % job)
 
 func test_every_window_opens_above_the_status_bar() -> void:
-	await _spender(&"beginner")  # a Beginner's Character window is its tallest
+	await _player(&"beginner")  # a Beginner's Character window is its tallest
 	for key in TDHud.WINDOW_ACTIONS:
 		var w := await _open(key)
 		check(TDWindow.room().encloses(w.get_rect()), "%s: the window (%s) stays on screen and above the status bar" % [key, w.get_rect()])
 		w.visible = false
 
 func test_every_window_keeps_its_buttons_apart() -> void:
-	await _spender(&"warrior")
+	await _player(&"warrior")
 	Game.social = {
 		"buddies": [["Mossy", true, "Dawnrise Meadow"], ["Kestrel", false, ""]],
 		"party": {"leader": Game.me.name, "members": [[Game.me.name, 1, "warrior", 1.0, "meadow"], ["Kestrelwings", 7, "archer", 0.4, "hollow"]]},
 		"guild": {"name": "Dawnbreakers", "master": Game.me.name, "members": [[Game.me.name, true], ["Mossy", true]]},
 	}
-	for key in ["inventory", "equipment", "stats", "skills", "quests", "worldmap", "community", "collection"]:
+	for key in ["inventory", "equipment", "stats", "quests", "worldmap", "community", "collection"]:
 		var w := await _open(key)
 		var tabs := maxi(1, w._tab_rects.size())
 		for t in tabs:
@@ -104,13 +103,13 @@ func test_shop_tabs_and_amount_chips_fit() -> void:
 	check(chips[-1].end.x + GAP <= shop._sell_etc_rect().position.x, "the chips end before Sell all Etc")
 	check(TDWindow.PAD + DrawUtil.text_width(Game.ui_font, "Amount", 12) + GAP <= chips[0].position.x, "the Amount label ends before the chips")
 
-func test_status_bar_exp_and_window_buttons_keep_apart() -> void:
+func test_status_bar_window_buttons_fit() -> void:
 	var bar := ui.hud.status
-	check(bar.exp_bar_rect().end.x + GAP <= bar._window_button_rect(0).position.x,
-		"the EXP bar (ends %d) stops before the first window button (%d)" % [bar.exp_bar_rect().end.x, bar._window_button_rect(0).position.x])
+	var first := bar._window_button_rect(0)
+	check(first.position.x >= TDStatusBar.BAR_CAP, "the first window button (%d) starts past the bar's end cap" % first.position.x)
 	var last := bar._window_button_rect(TDHud.WINDOW_ACTIONS.size() - 1)
 	check(last.end.x + GAP <= bar.size.x - 140, "the window buttons stop before the Dawnshards")
-	check(bar.exp_bar_rect().position.y >= 0 and bar.exp_bar_rect().end.y <= TDStatusBar.HEIGHT, "the EXP bar sits inside the bar")
+	check(first.position.y >= 0 and first.end.y <= TDStatusBar.HEIGHT, "the window buttons sit inside the bar")
 
 func test_equipment_slot_labels_fit() -> void:
 	for p in TDEquipmentWindow.LAYOUT:
@@ -144,7 +143,8 @@ func test_quest_details_end_above_give_up() -> void:
 		for l in lines:
 			h += l[0]
 		check(h <= room, "%s: the details (%d px) fit above Give up (%d px)" % [q.id, h, room])
-		check(lines.any(func(l: Array) -> bool: return (l[1] as String).begins_with("Reward:")), "%s: the reward is always shown" % q.id)
+		if q.reward_line() != "":
+			check(lines.any(func(l: Array) -> bool: return (l[1] as String).begins_with("Reward:")), "%s: the reward is always shown" % q.id)
 		if lines.any(func(l: Array) -> bool: return (l[1] as String).ends_with("…")):
 			cut += 1
 	check(cut < Content.quests.size() / 4, "most quests show their whole story (%d cut)" % cut)

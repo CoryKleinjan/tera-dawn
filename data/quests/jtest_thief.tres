@@ -19,6 +19,5 @@ offer_text = "So you want in. Fine. Get across my trial ground without dawdling,
 progress_text = "The trial ground is through the light by the wall."
 complete_text = "Quicker than you look. Thief, then. Welcome. That rip in the air, though... I don't steal what I don't understand. Take it to Archmage Celest in Lumewood."
 hint = "Step into the light by the wall and press {move_up}"
-reward_essence = 1000
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Boss")])
 reward_items = Array[ExtResource("4_drop_entry")]([])

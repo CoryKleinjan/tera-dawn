@@ -1,7 +1,7 @@
 extends TestCase
 ## The item tooltip for every item in the game: it starts with the item's name, says what
 ## kind of item it is, shows what that kind needs (the jobs that can wear it, red when yours
-## can't, what a potion restores, a card's count...), compares gear with what's
+## can't, what a pet eats, a card's count...), compares gear with what's
 ## worn, ends with the hint, and draws over its window.
 
 const RED := Color("ff6b7d")
@@ -116,16 +116,13 @@ func test_gear_compares_with_what_is_worn() -> void:
 	check(_texts(_lines_for(ItemStack.exact(hat), "", true)).has("Nothing worn in this slot"), "a hat with no hat worn")
 	check(not _texts(_lines_for(ItemStack.exact(hat), "", false)).has("Nothing worn in this slot"), "no comparison unless asked")
 
-func test_use_tooltips_say_what_they_restore() -> void:
+func test_use_tooltips_say_what_pets_eat() -> void:
 	for item: ItemDef in Content.items.values():
 		var u := item as UseDef
 		if u == null:
 			continue
 		var texts := _texts(_lines_for(ItemStack.create(u)))
-		var hp := u.hp_for(Game.me.max_hp())
-		var mp := u.mp_for(Game.me.max_mp())
-		check_eq(texts.has("Restores %d HP" % hp), hp > 0, "%s: Restores %d HP" % [u.id, hp])
-		check_eq(texts.has("Restores %d MP" % mp), mp > 0, "%s: Restores %d MP" % [u.id, mp])
+		check(texts.has("Use"), "%s: says it's a Use item" % u.id)
 		if u.pet_food > 0:
 			check(texts.has("Pet food: +%d fullness" % u.pet_food), "%s: says it's pet food" % u.id)
 
@@ -149,7 +146,7 @@ func test_card_tooltip_counts_cards_found() -> void:
 	check_eq(lines[1], "Monster Book card · 3/%d found" % CardDef.SET, "the card line")
 
 func test_tooltip_follows_its_owner() -> void:
-	var stack := ItemStack.create(Content.item(&"red_potion"))
+	var stack := ItemStack.create(Content.item(&"return_scroll"))
 	tip.show_item(inv, stack, Vector2(100, 100))
 	tip.clear(ui.hud.windows["equipment"])
 	check(tip.stack == stack, "another window can't clear it")
@@ -160,7 +157,7 @@ func test_tooltip_follows_its_owner() -> void:
 	check(tip.stack == null, "closing the window clears it")
 
 func test_tooltip_skips_drawing_for_a_closed_window() -> void:
-	tip.show_item(inv, ItemStack.create(Content.item(&"red_potion")), Vector2(100, 100))
+	tip.show_item(inv, ItemStack.create(Content.item(&"return_scroll")), Vector2(100, 100))
 	inv.visible = false
 	check(await ui.redraw(tip), "the tooltip layer still redraws")
 	check(tip.stack != null, "and keeps its item until cleared")

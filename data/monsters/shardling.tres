@@ -1,12 +1,9 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=15 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/shardling.tres" id="2_frames"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
-[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="5_white_potion"]
-[ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="6_mana_tea"]
-[ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="7_elixir"]
 [ext_resource type="Resource" path="res://data/monster_moves/pounce.tres" id="mv_pounce"]
 [ext_resource type="Resource" path="res://data/monster_moves/lunge.tres" id="mv_lunge"]
 [ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
@@ -18,35 +15,13 @@ chance = 1.0
 min_amount = 18
 max_amount = 36
 
-[sub_resource type="Resource" id="Drop_2"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("5_white_potion")
-chance = 0.08
-min_amount = 1
-max_amount = 2
-
-[sub_resource type="Resource" id="Drop_3"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("6_mana_tea")
-chance = 0.05
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop_4"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("7_elixir")
-chance = 0.01
-min_amount = 1
-max_amount = 1
-
 [resource]
 script = ExtResource("1_monster_def")
 id = &"shardling"
 display_name = "Shardling"
 level = 20
-max_hp = 1352
+max_hp = 156
 attack = 78
-essence = 336
 speed = 0.9
 size = Vector2(40.0, 42.0)
 boss = false
@@ -55,4 +30,4 @@ jumps = true
 moves = Array[ExtResource("mv_script")]([ExtResource("mv_pounce"), ExtResource("mv_lunge")])
 sprite_frames = ExtResource("2_frames")
 sprite_scale = 1.0
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Drop_1"), SubResource("Drop_2"), SubResource("Drop_3"), SubResource("Drop_4")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Drop_1")])

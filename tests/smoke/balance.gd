@@ -1,14 +1,13 @@
 extends SmokeArea
-## Balance: every job against monsters of its tier, kills per tier, the Dawn Essence prices
-## and the achievements' Steam ids.
+## Balance: every job against monsters of its tier, and the achievements' Steam ids.
 
-## Every job can fight monsters of its tier, and tiers take a sensible number of kills
-## (see Balance and tests/balance_report.tscn).
+## Every job's main attack beats regular monsters of its tier (from Balance.JOB_TIER on) in a
+## sensible number of hits (see Balance and tests/balance_report.tscn). Bosses take many more
+## by design, so they're left out.
 func check() -> void:
 	var worst := ""
-	var slow := ""
 	for m: MonsterDef in Content.monsters.values():
-		if m.boss:
+		if m.boss or m.level < Balance.JOB_TIER:
 			continue
 		# a slime's bits are meant to pop in one hit, so only the high end applies to them
 		var low := 0.0 if _only_split_from(m) else Balance.BAND.x - 0.2
@@ -16,17 +15,7 @@ func check() -> void:
 			var hits := Balance.hits_to_kill(Balance.typical(j, m.level), m)
 			if hits < low or hits > Balance.BAND.y:
 				worst += " %s/%s %.1f" % [j, m.id, hits]
-		var kills := Balance.kills_per_tier(m.level, m)
-		# a slime's bits only come with the slime (it pays for both), so nobody grows on bits
-		if kills > 1000.0 and not _only_split_from(m):
-			slow += " %s %.0f" % [m.id, kills]
 	_check(worst == "", "every job beats monsters of its tier in a few hits%s" % worst)
-	_check(slow == "", "no monster takes too many kills a tier%s" % slow)
-	# power grows every level; skill levels start cheap and get dear
-	var at_20 := Balance.typical(&"warrior", 20)
-	var at_30 := Balance.typical(&"warrior", 30)
-	_check(at_30.power() == at_20.power() + 10 * CharacterStats.POWER_PER_LEVEL, "power grows with every level")
-	_check(CharacterStats.skill_price(0) < 100 and CharacterStats.skill_price(30) > CharacterStats.skill_price(0) * 2, "the first skill levels are cheap and later ones cost more")
 	var steam_ids := {}
 	var achievements := Achievements.all()
 	for a in achievements:

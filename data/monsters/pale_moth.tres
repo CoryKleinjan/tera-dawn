@@ -1,12 +1,9 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=14 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/pale_moth.tres" id="2_frames"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
-[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="5_white_potion"]
-[ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="6_mana_tea"]
-[ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="7_elixir"]
 [ext_resource type="Resource" path="res://data/monster_moves/swoop.tres" id="mv_swoop"]
 [ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
 
@@ -17,35 +14,13 @@ chance = 1.0
 min_amount = 19
 max_amount = 38
 
-[sub_resource type="Resource" id="Drop_2"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("5_white_potion")
-chance = 0.08
-min_amount = 1
-max_amount = 2
-
-[sub_resource type="Resource" id="Drop_3"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("6_mana_tea")
-chance = 0.05
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop_4"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("7_elixir")
-chance = 0.01
-min_amount = 1
-max_amount = 1
-
 [resource]
 script = ExtResource("1_monster_def")
 id = &"pale_moth"
 display_name = "Pale Moth"
 level = 21
-max_hp = 1520
+max_hp = 185
 attack = 81
-essence = 377
 speed = 1.1
 size = Vector2(44.0, 34.0)
 boss = false
@@ -54,4 +29,4 @@ hover_height = 60.0
 moves = Array[ExtResource("mv_script")]([ExtResource("mv_swoop")])
 sprite_frames = ExtResource("2_frames")
 sprite_scale = 1.0
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Drop_1"), SubResource("Drop_2"), SubResource("Drop_3"), SubResource("Drop_4")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Drop_1")])

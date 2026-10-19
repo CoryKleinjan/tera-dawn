@@ -53,7 +53,7 @@ func test_listed_in_the_order_they_were_made() -> void:
 	var slot: Dictionary = store.slots()[0]
 	check_eq(slot["name"], "Zed", "slot name")
 	check(slot.has("job"), "slot job")
-	check_eq(slot["level"], 1, "slot level")
+	check(not slot.has("level"), "no level to show")
 
 func test_a_new_character_is_a_beginner_with_the_outfit_picked() -> void:
 	var made := NewCharacter.new()
@@ -91,17 +91,17 @@ func test_saves_without_an_order_are_listed_by_name() -> void:
 func test_a_save_keeps_the_last_good_one_as_a_backup() -> void:
 	store.create("Ann", NewCharacter.new())
 	var c := store.load_character("Ann")
-	c.essence = 7
+	c.shards = 7
 	store.save(c)
 	var path := dir.path_join("ann.json")
 	check(FileAccess.file_exists(path + SafeFile.BACKUP), "the save before it is kept")
 	check(not FileAccess.file_exists(path + SafeFile.TEMP), "no half-written file left")
-	check_eq(store.load_character("Ann").essence, 7, "the new save loads")
+	check_eq(store.load_character("Ann").shards, 7, "the new save loads")
 
 func test_a_broken_save_loads_from_its_backup() -> void:
 	store.create("Ann", NewCharacter.new())
 	var c := store.load_character("Ann")
-	c.essence = 7
+	c.shards = 7
 	store.save(c)
 	var f := FileAccess.open(dir.path_join("ann.json"), FileAccess.WRITE)
 	f.store_string("{\"name\": \"Ann\", \"lev") # cut off mid-write
@@ -109,7 +109,7 @@ func test_a_broken_save_loads_from_its_backup() -> void:
 	var back := store.load_character("Ann")
 	check(back != null, "still loads")
 	if back:
-		check_eq(back.essence, 0, "from the save before")
+		check_eq(back.shards, 0, "from the save before")
 	check_eq(store.names(), ["Ann"] as Array[String], "still listed")
 
 func test_a_lost_save_is_found_from_its_backup() -> void:

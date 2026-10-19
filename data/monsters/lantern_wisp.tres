@@ -1,29 +1,13 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=15 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/lantern_wisp.tres" id="3_lantern_wisp"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="5_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/wick_ember.tres" id="6_wick_ember"]
-[ext_resource type="Resource" path="res://data/items/use/orange_potion.tres" id="7_orange_potion"]
-[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="8_blue_potion"]
 [ext_resource type="Resource" path="res://data/monster_moves/shot_wisp.tres" id="mv_shot_wisp"]
 [ext_resource type="Resource" path="res://data/monster_moves/swoop.tres" id="mv_swoop"]
 [ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
-
-[sub_resource type="Resource" id="Resource_4"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("8_blue_potion")
-chance = 0.05
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("7_orange_potion")
-chance = 0.08
-min_amount = 1
-max_amount = 2
 
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("4_drop_entry")
@@ -44,9 +28,8 @@ script = ExtResource("1_monster_def")
 id = &"lantern_wisp"
 display_name = "Lantern Wisp"
 level = 10
-max_hp = 270
+max_hp = 79
 attack = 29
-essence = 68
 speed = 0.8
 size = Vector2(36.0, 30.0)
 boss = false
@@ -57,4 +40,4 @@ moves = Array[ExtResource("mv_script")]([ExtResource("mv_shot_wisp"), ExtResourc
 sprite_frames = ExtResource("3_lantern_wisp")
 sprite_scale = 1.0
 light_color = Color(1.0, 0.815686, 0.439216, 1.0)
-drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2")])

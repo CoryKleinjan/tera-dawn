@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=113 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=109 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -25,8 +25,6 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/greenbough_fields/elder_root.png" id="33_elder_root"]
 [ext_resource type="Resource" path="res://data/monsters/barkcap.tres" id="34_barkcap"]
 [ext_resource type="Resource" path="res://data/monsters/acorn_sentry.tres" id="35_acorn_sentry"]
-[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="36_white_potion"]
-[ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="38_mana_tea"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/gate.png" id="40_gate"]
 
 [sub_resource type="Resource" id="Prop_0"]
@@ -546,12 +544,6 @@ item = ExtResource("13_dawnshard")
 min_amount = 150
 max_amount = 220
 
-[sub_resource type="Resource" id="Loot_0_1"]
-script = ExtResource("12_drop_entry")
-item = ExtResource("36_white_potion")
-min_amount = 4
-max_amount = 4
-
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("9_breakable_def")
 id = &"rootway_high_chest"
@@ -561,7 +553,7 @@ hits = 1
 whole = ExtResource("23_chest")
 broken = ExtResource("24_chest_open")
 height = 48.0
-loot = Array[ExtResource("12_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1")])
+loot = Array[ExtResource("12_drop_entry")]([SubResource("Loot_0_0")])
 card = ExtResource("34_barkcap")
 
 [sub_resource type="Resource" id="Loot_1_0"]
@@ -569,12 +561,6 @@ script = ExtResource("12_drop_entry")
 item = ExtResource("13_dawnshard")
 min_amount = 150
 max_amount = 220
-
-[sub_resource type="Resource" id="Loot_1_1"]
-script = ExtResource("12_drop_entry")
-item = ExtResource("38_mana_tea")
-min_amount = 3
-max_amount = 3
 
 [sub_resource type="Resource" id="Breakable_1"]
 script = ExtResource("9_breakable_def")
@@ -585,7 +571,7 @@ hits = 1
 whole = ExtResource("23_chest")
 broken = ExtResource("24_chest_open")
 height = 48.0
-loot = Array[ExtResource("12_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1")])
+loot = Array[ExtResource("12_drop_entry")]([SubResource("Loot_1_0")])
 card = ExtResource("34_barkcap")
 
 [resource]

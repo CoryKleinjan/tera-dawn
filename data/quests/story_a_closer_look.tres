@@ -21,6 +21,5 @@ offer_text = "A white light, hanging still in the air. Like the one at your Job 
 progress_text = "Get close to the light over Starfall Ridge."
 complete_text = "You went through it? And came back? A whole world on the other side, grey and empty... Then a tear doesn't only let things out. It goes somewhere. My scholars will want every word of this. So do I."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Visit")])
-reward_essence = 60000
 reward_shards = 3000
 reward_items = Array[ExtResource("4_drop_entry")]([])

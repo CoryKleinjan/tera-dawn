@@ -109,10 +109,6 @@ func test_a_warrior_can_take_it_and_switch() -> void:
 	c.job = Content.job(&"warrior")
 	c.jobs_passed.assign(["warrior"])
 	c.recalc()
-	var strike := Content.skill(&"power_strike")
-	c.essence = c.skills.price()
-	check_eq(c.skills.learn(strike), "", "Power Strike bought")
-	var paid := int(c.skills.paid[strike.id])
 	_into_trial()
 	_reach_the_end()
 	h.ask(2, &"req_scene_done", [p.scene])
@@ -121,8 +117,6 @@ func test_a_warrior_can_take_it_and_switch() -> void:
 	_put(p, 330.0)
 	h.ask(2, &"req_quest_complete", [TUTOR, TEST])
 	check_eq(c.job, archer, "an Archer now")
-	check_eq(c.skills.level(strike), 0, "Power Strike forgotten")
-	check(h.told(2, "You forget Power Strike, and %d Dawn Essence comes back to you." % paid), "its essence back")
 	check(c.has_passed(archer) and c.has_passed(Content.job(&"warrior")), "both passed")
 
 func test_leaving_starts_it_fresh_and_fainting_sends_you_to_town() -> void:
@@ -143,10 +137,8 @@ func test_leaving_starts_it_fresh_and_fainting_sends_you_to_town() -> void:
 	check(not _boss(p.map).dead, "so it steps out at once")
 
 func test_a_fresh_beginner_can_beat_it() -> void:
-	# a Beginner ready for their job (level 10, Balance tier 10)'s basic attack
+	# a new Beginner's basic attack, with the gear they start in
 	var hero := Character.create("Tester", Character.START_JOB)
-	hero.level = 10
-	hero.recalc()
 	var boss: MonsterDef = Content.monster(&"tear_boss")
 	var skill: SkillDef = Content.skills[Character.BASIC_ATTACK]
 	var dealt := 0

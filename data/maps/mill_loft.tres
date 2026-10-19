@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=45 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=41 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/harbor.tres" id="2_harbor"]
@@ -20,8 +20,6 @@
 [ext_resource type="Resource" path="res://data/monsters/reef_gull.tres" id="18_reef_gull"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="19_dawnshard"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="20_drop_entry"]
-[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="21_white_potion"]
-[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="22_blue_potion"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor_fields/chest.png" id="23_chest"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor_fields/chest_open.png" id="24_chest_open"]
 [ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="25_breakable_def"]
@@ -156,18 +154,6 @@ item = ExtResource("19_dawnshard")
 min_amount = 160
 max_amount = 240
 
-[sub_resource type="Resource" id="Loot_0_1"]
-script = ExtResource("20_drop_entry")
-item = ExtResource("21_white_potion")
-min_amount = 3
-max_amount = 3
-
-[sub_resource type="Resource" id="Loot_0_2"]
-script = ExtResource("20_drop_entry")
-item = ExtResource("22_blue_potion")
-min_amount = 3
-max_amount = 3
-
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("25_breakable_def")
 id = &"mill_loft_high_chest"
@@ -177,7 +163,7 @@ hits = 1
 whole = ExtResource("23_chest")
 broken = ExtResource("24_chest_open")
 height = 48.0
-loot = Array[ExtResource("20_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1"), SubResource("Loot_0_2")])
+loot = Array[ExtResource("20_drop_entry")]([SubResource("Loot_0_0")])
 card = ExtResource("16_bramble_boar")
 
 [resource]

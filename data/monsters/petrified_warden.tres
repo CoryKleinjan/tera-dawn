@@ -1,13 +1,9 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=18 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/petrified_warden.tres" id="2_frames"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
-[ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="5_power_elixir"]
-[ext_resource type="Resource" path="res://data/items/use/starlight_draught.tres" id="6_starlight_draught"]
-[ext_resource type="Resource" path="res://data/items/use/sunrise_cake.tres" id="7_sunrise_cake"]
-[ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="8_elixir"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_charge.tres" id="mv_boss_charge"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_slam.tres" id="mv_boss_slam"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_shot_bolt.tres" id="mv_boss_shot_bolt"]
@@ -20,42 +16,13 @@ chance = 1.0
 min_amount = 160
 max_amount = 320
 
-[sub_resource type="Resource" id="Drop_2"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("5_power_elixir")
-chance = 0.5
-min_amount = 1
-max_amount = 3
-
-[sub_resource type="Resource" id="Drop_3"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("6_starlight_draught")
-chance = 0.05
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Drop_4"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("7_sunrise_cake")
-chance = 0.08
-min_amount = 1
-max_amount = 2
-
-[sub_resource type="Resource" id="Drop_5"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("8_elixir")
-chance = 0.01
-min_amount = 1
-max_amount = 1
-
 [resource]
 script = ExtResource("1_monster_def")
 id = &"petrified_warden"
 display_name = "Petrified Warden"
 level = 24
-max_hp = 21000
+max_hp = 2310
 attack = 92
-essence = 4300
 speed = 0.5
 size = Vector2(72.0, 118.0)
 boss = true
@@ -67,4 +34,4 @@ intro_ticks = 100
 rage_ticks = 100
 sprite_scale = 1.25
 respawn_ticks = Vector2i(1800, 2400)
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Drop_1"), SubResource("Drop_2"), SubResource("Drop_3"), SubResource("Drop_4"), SubResource("Drop_5")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Drop_1")])

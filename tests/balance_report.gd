@@ -1,34 +1,20 @@
 extends Node
 ## Prints how many hits each job's main attack takes against monsters of its tier (see
-## Balance), and how many kills pay for a tier. Run: godot --headless --path . res://tests/balance_report.tscn
+## Balance). Run: godot --headless --path . res://tests/balance_report.tscn
 
 func _ready() -> void:
-	var by_tier := {}
-	for m: MonsterDef in Content.monsters.values():
-		if not m.boss and m.splits_into == null or not m.boss:
-			by_tier[m.level] = by_tier.get(m.level, []) + [m]
-	var tiers := by_tier.keys()
-	tiers.sort()
-	print("tier monster              hp   ess  kills/tier " + "  ".join(Balance.lines().map(func(j: StringName) -> String: return String(j).substr(0, 7).rpad(7))))
-	for lvl: int in tiers:
-		for m: MonsterDef in by_tier[lvl]:
-			var row := "%3d  %-18s %6d %5d %8.1f   " % [lvl, m.id, m.max_hp, m.essence, Balance.kills_per_tier(lvl, m)]
-			for j in Balance.lines():
-				row += "%7.1f  " % Balance.hits_to_kill(Balance.typical(j, maxi(1, lvl)), m)
-			print(row)
-	# damage a tier-T character's main attack does per cast, averaged over the jobs
-	var dmg := []
-	for lvl in range(1, 41):
-		var total := 0.0
+	var monsters: Array = Content.monsters.values()
+	monsters.sort_custom(func(a: MonsterDef, b: MonsterDef) -> bool: return [a.level, a.id] < [b.level, b.id])
+	print("tier monster              hp  boss  " + "  ".join(Balance.lines().map(func(j: StringName) -> String: return String(j).substr(0, 7).rpad(7))))
+	for m: MonsterDef in monsters:
+		var row := "%3d  %-18s %6d  %-4s  " % [m.level, m.id, m.max_hp, "yes" if m.boss else ""]
 		for j in Balance.lines():
-			var c := Balance.typical(j, lvl)
-			var a: Array = Balance.main_attack(c)
-			total += Balance._average(c, a[0], a[1]) * a[0].hits
-		dmg.append(roundi(total / Balance.lines().size()))
-	print("DAMAGE ", dmg)
+			row += "%7.1f  " % Balance.hits_to_kill(Balance.typical(j, maxi(1, m.level)), m)
+		print(row)
 	for j in Balance.lines():
-		for lvl in [10, 20, 30]:
-			var c := Balance.typical(j, lvl)
-			var a: Array = Balance.main_attack(c)
-			print("%s %d: %s Lv.%d, weapon %s, damage %s, magic %s" % [j, lvl, a[0].id, a[1], c.gear.weapon().id if c.gear.weapon() else "-", c.damage_range(), c.magic_range()])
+		for tier in [1, Balance.JOB_TIER, 20, Balance.TOP_TIER]:
+			var c := Balance.typical(j, tier)
+			var w := c.gear.weapon()
+			print("%s %d: weapon %s tier %d, damage %s, swing %.1f" % [j, tier, w.id if w else "-",
+				c.equipment.at(&"weapon").tier if w else 0, c.damage_range(), Balance.swing_damage(c)])
 	get_tree().quit()

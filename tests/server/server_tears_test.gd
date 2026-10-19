@@ -19,10 +19,10 @@ var step2: DeclineDef
 
 func before_each() -> void:
 	h = ServerHarness.new()
-	boar = ServerHarness.monster(&"test_boar", 10, 10)
-	wisp = ServerHarness.monster(&"test_wisp", 10, 10)
-	fierce_boar = ServerHarness.monster(&"test_fierce_boar", 10, 10)
-	dread_boar = ServerHarness.monster(&"test_dread_boar", 10, 10)
+	boar = ServerHarness.monster(&"test_boar", 10)
+	wisp = ServerHarness.monster(&"test_wisp", 10)
+	fierce_boar = ServerHarness.monster(&"test_fierce_boar", 10)
+	dread_boar = ServerHarness.monster(&"test_dread_boar", 10)
 	var field := Content.map(ServerHarness.FIELD)
 	field.region = &"test_zone"
 	field.spawns.append(ServerHarness.spawn(boar))
@@ -88,7 +88,6 @@ func test_the_first_finished_tear_turns_the_world() -> void:
 	check_eq(map.mobs[0].max_hp(), 15, "and is stronger")
 	check_eq(map.mobs[1].def, wisp, "a kind with no dangerous version stays")
 	check_eq(map.mobs[1].max_hp(), 15, "but is stronger too")
-	check_eq(map.mobs[1].essence(), 15, "and gives more essence to match")
 	check_eq(map.full_state()["decline"], 1, "the client is told")
 
 func test_each_tear_after_takes_it_further() -> void:

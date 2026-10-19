@@ -17,7 +17,7 @@ TDWorld  ───────────────────────�
 - **Server** (`scripts/server/`): `TDServer` holds every connected player as a `SimPlayer`
   (their `Character`, position and timers) and runs one `MapInstance` per visited map: its
   `SimMob`s, the `SimDrop`s on the ground and the players on it. It decides everything that
-  matters: hits, damage, kills, Dawn Essence, drops, who picks what up, hearts and Mana, potions,
+  matters: hits, damage, kills, drops, who picks what up, hearts and Mana,
   gear, portals, fainting. It never keeps characters itself: it sends them back to their
   players' games to save (`TDServer.save`, `ev_save`). `TDServer` itself keeps the players, maps, saving and the requests about moving and
   fighting; the other requests are handled by its parts in `scripts/server/services/`
@@ -103,8 +103,8 @@ monsters it splits into (those sleep, dead, until their parent is defeated).
 
 `TDSocial` (`scripts/server/social.gd`, owned by the server) runs everything players do with
 each other: chat and its slash commands, invitations (`ev_invite` / `req_invite_answer`),
-buddies (kept on the Character), parties (server memory only; `party_shares` hands out kill
-essence), trades (offers are held by the server until both press Trade, then swapped, or handed
+buddies (kept on the Character), parties (server memory only; a kill counts for the quests of party members on the map,
+`Party.here`), trades (offers are held by the server until both press Trade, then swapped, or handed
 back on cancel), guilds (saved in `guilds.data` next to the character saves) and fame. Each player gets a summary of their buddies, party and
 guild through `ev_social` whenever it changes (`Game.social`); the community window, the
 player menu, the party health list and the trade window (`scripts/ui/windows/`) read it.

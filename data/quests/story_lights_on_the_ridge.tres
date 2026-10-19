@@ -25,6 +25,5 @@ offer_text = "I chart every light in the night sky, and last night there was one
 progress_text = "The light hangs over Starfall Ridge."
 complete_text = "It's still there? Then it isn't a star at all. Archmage Celest must hear of this. Go to her, quickly."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Reach")])
-reward_essence = 23500
 reward_shards = 1500
 reward_items = Array[ExtResource("4_drop_entry")]([])

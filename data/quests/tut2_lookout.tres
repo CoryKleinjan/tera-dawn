@@ -27,4 +27,3 @@ offer_hint = "Walk to her and press {move_up} to talk"
 hint = "Press {jump} to hop from ledge to ledge"
 auto_start = true
 objectives = Array[ExtResource("1_5x84g")]([SubResource("Resource_udl0v")])
-reward_essence = 5

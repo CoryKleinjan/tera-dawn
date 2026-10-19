@@ -95,14 +95,14 @@ func names() -> Array[String]:
 func _save_order(list: Array[String]) -> void:
 	SafeFile.write_text(folder.path_join(ORDER_FILE), JSON.stringify(list))
 
-## The characters as character select shows them ({name, level, job}), at most
+## The characters as character select shows them ({name, job}), at most
 ## MAX_CHARACTERS, in the order they were made.
 func slots() -> Array:
 	var out := []
 	for n in names():
 		var c := load_character(n)
 		if c:
-			out.append({"name": c.name, "level": c.level, "job": c.job.display_name})
+			out.append({"name": c.name, "job": c.job.display_name})
 		if out.size() >= MAX_CHARACTERS:
 			break
 	return out

@@ -1,37 +1,13 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=17 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/crystal_golem.tres" id="anim"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/crystal_chunk.tres" id="5_crystal_chunk"]
-[ext_resource type="Resource" path="res://data/items/use/honey_bun.tres" id="6_honey_bun"]
-[ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="7_mana_tea"]
-[ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="8_elixir"]
 [ext_resource type="Resource" path="res://data/monster_moves/slam.tres" id="mv_slam"]
 [ext_resource type="Resource" path="res://data/monster_moves/lunge.tres" id="mv_lunge"]
 [ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
-
-[sub_resource type="Resource" id="Resource_5"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("8_elixir")
-chance = 0.01
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_4"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("7_mana_tea")
-chance = 0.05
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("6_honey_bun")
-chance = 0.08
-min_amount = 1
-max_amount = 2
 
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("3_drop_entry")
@@ -52,9 +28,8 @@ script = ExtResource("1_monster_def")
 id = &"crystal_golem"
 display_name = "Crystal Golem"
 level = 20
-max_hp = 1352
+max_hp = 156
 attack = 78
-essence = 336
 speed = 0.5
 size = Vector2(64.0, 100.0)
 boss = false
@@ -63,4 +38,4 @@ moves = Array[ExtResource("mv_script")]([ExtResource("mv_slam"), ExtResource("mv
 sprite_frames = ExtResource("anim")
 sprite_scale = 1.19
 light_color = Color(0.627451, 0.752941, 1.0, 1.0)
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2")])

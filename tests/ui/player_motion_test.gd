@@ -7,9 +7,11 @@ extends TestCase
 const FLOOR := Vector2(1305, 620)
 
 var ui: UiHelpers
+var fx: UnitHelpers
 var me: TDPlayer
 
 func before_each() -> void:
+	fx = UnitHelpers.new()
 	ui = UiHelpers.new(self)
 	await ui.start()
 	me = ui.world.player
@@ -17,6 +19,7 @@ func before_each() -> void:
 func after_each() -> void:
 	Input.action_release("move_right")
 	ui.stop()
+	fx.cleanup()
 
 func test_an_attack_makes_the_skills_motion_then_a_ready_stance() -> void:
 	ui.teleport(FLOOR)
@@ -73,7 +76,9 @@ func test_a_buff_makes_no_motion() -> void:
 	ui.teleport(FLOOR)
 	me.on_ground = true
 	await ui.ticks(2)
-	var buff: SkillDef = Content.skills[&"iron_body"]
+	var buff := fx.skill(&"t_buff", SkillDef.Kind.BUFF)
+	buff.duration = 60.0
+	buff.animation = SkillDef.SPELL
 	await ui.edit(func(c: Character) -> void:
 		c.skills.learned[buff.id] = 1
 		c.mp = 999)

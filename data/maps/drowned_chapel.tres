@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=45 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=41 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/lantern.tres" id="2_lantern"]
@@ -24,8 +24,6 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall_fields/chest_open.png" id="22_chest_open"]
 [ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="23_breakable_def"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="24_dawnshard"]
-[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="25_white_potion"]
-[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="26_blue_potion"]
 
 [sub_resource type="Resource" id="Backdrop_picture"]
 script = ExtResource("11_backdrop_layer_def")
@@ -144,18 +142,6 @@ item = ExtResource("24_dawnshard")
 min_amount = 160
 max_amount = 240
 
-[sub_resource type="Resource" id="Loot_1_1"]
-script = ExtResource("20_drop_entry")
-item = ExtResource("25_white_potion")
-min_amount = 3
-max_amount = 3
-
-[sub_resource type="Resource" id="Loot_1_2"]
-script = ExtResource("20_drop_entry")
-item = ExtResource("26_blue_potion")
-min_amount = 3
-max_amount = 3
-
 [sub_resource type="Resource" id="Breakable_1"]
 script = ExtResource("23_breakable_def")
 id = &"drowned_chapel_high_chest"
@@ -165,7 +151,7 @@ hits = 1
 whole = ExtResource("21_chest")
 broken = ExtResource("22_chest_open")
 height = 48.0
-loot = Array[ExtResource("20_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
+loot = Array[ExtResource("20_drop_entry")]([SubResource("Loot_1_0")])
 card = ExtResource("15_crypt_shell")
 
 [resource]

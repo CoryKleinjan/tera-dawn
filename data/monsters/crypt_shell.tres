@@ -1,37 +1,13 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=17 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/crypt_shell.tres" id="2_crypt_shell"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/crypt_shard.tres" id="5_crypt_shard"]
-[ext_resource type="Resource" path="res://data/items/use/honey_bun.tres" id="6_honey_bun"]
-[ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="7_mana_tea"]
-[ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="8_elixir"]
 [ext_resource type="Resource" path="res://data/monster_moves/lunge.tres" id="mv_lunge"]
 [ext_resource type="Resource" path="res://data/monster_moves/charge.tres" id="mv_charge"]
 [ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
-
-[sub_resource type="Resource" id="Resource_5"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("8_elixir")
-chance = 0.01
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_4"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("7_mana_tea")
-chance = 0.05
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("6_honey_bun")
-chance = 0.08
-min_amount = 1
-max_amount = 2
 
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("3_drop_entry")
@@ -52,9 +28,8 @@ script = ExtResource("1_monster_def")
 id = &"crypt_shell"
 display_name = "Crypt Shell"
 level = 22
-max_hp = 1703
+max_hp = 191
 attack = 84
-essence = 420
 speed = 0.4
 size = Vector2(64.0, 48.0)
 boss = false
@@ -62,4 +37,4 @@ flying = false
 moves = Array[ExtResource("mv_script")]([ExtResource("mv_lunge"), ExtResource("mv_charge")])
 sprite_frames = ExtResource("2_crypt_shell")
 sprite_scale = 1.0
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2")])

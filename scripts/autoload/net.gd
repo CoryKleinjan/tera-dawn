@@ -418,17 +418,12 @@ func req_scene_done(scene_id: StringName) -> void:
 	if server:
 		server.scenes.on_scene_done(_sender(), scene_id)
 
-# --- jobs, stats and skills (ServerJobs) ---
+# --- jobs (ServerJobs) ---
 
 @rpc("any_peer", "call_local", "reliable")
 func req_advance(npc_id: StringName, job_id: StringName) -> void:
 	if server:
 		server.jobs.on_advance(_sender(), npc_id, job_id)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_learn_skill(skill_id: StringName) -> void:
-	if server:
-		server.jobs.on_learn_skill(_sender(), skill_id)
 
 # --- players together (TDSocial) ---
 
@@ -521,8 +516,8 @@ func ev_character(character: Dictionary) -> void:
 	Game.apply_character(character)
 
 @rpc("authority", "call_local", "reliable")
-func ev_vitals(hp: int, mp: int, xp: int, level: int, essence: int, shards: int) -> void:
-	Game.apply_vitals(hp, mp, xp, level, essence, shards)
+func ev_vitals(hp: int, mp: int, shards: int) -> void:
+	Game.apply_vitals(hp, mp, shards)
 
 @rpc("authority", "call_local", "reliable")
 func ev_enter_map(map_id: StringName, x: float, state: Dictionary, platform: int, arrive: int) -> void:
@@ -617,19 +612,7 @@ func ev_scene(scene_id: StringName) -> void:
 	if world:
 		world.play_scene(scene_id)
 
-## A player on your map levelled up (you, or someone near).
-@rpc("authority", "call_local", "reliable")
-func ev_level_up(peer: int, level: int) -> void:
-	if world:
-		world.show_level_up(peer, level)
-
-## Dawn Essence from a monster that fell at (x, y), flying to you.
-@rpc("authority", "call_local", "reliable")
-func ev_essence(x: float, y: float, amount: int) -> void:
-	if world:
-		world.fly_essence(Vector2(x, y), amount)
-
-## Dawn Essence or Dawnshards you just gained, shown rising over you.
+## Dawnshards you just gained, shown rising over you.
 @rpc("authority", "call_local", "reliable")
 func ev_gain(kind: StringName, amount: int) -> void:
 	if world:

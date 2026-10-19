@@ -1,37 +1,13 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=17 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/gloomcap.tres" id="2_gloomcap"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/gloom_spore.tres" id="5_gloom_spore"]
-[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="6_white_potion"]
-[ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="7_mana_tea"]
-[ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="8_elixir"]
 [ext_resource type="Resource" path="res://data/monster_moves/pounce.tres" id="mv_pounce"]
 [ext_resource type="Resource" path="res://data/monster_moves/slam.tres" id="mv_slam"]
 [ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
-
-[sub_resource type="Resource" id="Resource_5"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("8_elixir")
-chance = 0.01
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_4"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("7_mana_tea")
-chance = 0.05
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("6_white_potion")
-chance = 0.08
-min_amount = 1
-max_amount = 2
 
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("3_drop_entry")
@@ -52,9 +28,8 @@ script = ExtResource("1_monster_def")
 id = &"gloomcap"
 display_name = "Gloomcap"
 level = 19
-max_hp = 1195
+max_hp = 151
 attack = 74
-essence = 299
 speed = 0.9
 size = Vector2(40.0, 44.0)
 boss = false
@@ -63,4 +38,4 @@ jumps = true
 moves = Array[ExtResource("mv_script")]([ExtResource("mv_pounce"), ExtResource("mv_slam")])
 sprite_frames = ExtResource("2_gloomcap")
 sprite_scale = 1.0
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2")])

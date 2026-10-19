@@ -2,6 +2,10 @@
 
 Part of the [architecture docs](../../ARCHITECTURE.md).
 
+Job skills, the skill window and buying skill levels are gone (Cory Oct 19). The skills left
+are the weapons' own attacks: the plain swing (`Character.BASIC_ATTACK`) and a weapon's
+`basic_attack` (a bow's shot). The machinery below stays for the found spells to come.
+
 ## How to add a skill
 
 1. Create `data/skills/<id>.tres` as a **SkillDef**: its `kind` (attack, buff or passive),
@@ -25,12 +29,11 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
      (`effect` on the player, `hit_effect` on each target, and for a buff its `aura`).
 2. Effects are **EffectDef**s in `data/effects/`: a flipbook of frames from
    `assets/sprites/effects/`, its speed and size, an optional light and particle burst.
-   Each job skill's are painted 8-frame sheets (`art/sheets/skillfx_<name>.json`, cut with
-   `"glow": true` into `assets/sprites/effects/skills/`, played at 14 fps): a swing in front
-   of the player, a hit on every monster struck, a buff's burst as it's cast, then its aura
-   looping round each player it landed on for as long as the buff lasts (`Net.ev_aura`,
-   `TDWorldFx.add_aura`; casting again replaces it). The paintings fade themselves out, so
-   their defs set `fade_out` false. A painting whose light runs off its frame's edge (the Slam
+   Painted 8-frame effects (`art/sheets/skillfx_<name>.json`, cut with `"glow": true` into
+   `assets/sprites/effects/skills/`, played at 14 fps; the boss moves' are the ones left) fade
+   themselves out, so their defs set `fade_out` false. A buff's aura loops round each player it
+   landed on for as long as the buff lasts (`Net.ev_aura`, `TDWorldFx.add_aura`; casting again
+   replaces it). A painting whose light runs off its frame's edge (the Slam
    impact) sets `edge_fade`: the game fades each frame's edges in as it plays (`TDEffect.faded`)
    and the picture itself stays as painted.
    Effects the game fires on its own rather than through a skill or item (celebrate, monster
@@ -40,10 +43,7 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
    matching `skill_icons_test`), cut by an `art/sheets/skill_icons_<sheet>.json` manifest into
    `assets/sprites/skills/<skill id>.png`.
 
-It then appears in its job's tab of the skill window (K). Players buy its levels with Dawn
-Essence (`SkillBook.learn`, checked by `ServerJobs.on_learn_skill`; `SkillBook.paid` keeps
-what each skill cost), and a newly learned attack or buff goes on the first free quickslot.
-Quickslots (`Character.quickslots`, eight keys in
+A skill is known when it's `innate` or listed in `SkillBook.learned`. Quickslots (`Character.quickslots`, eight keys in
 `Game.QUICKSLOT_ACTIONS`) hold skills or items and are saved with the character. The
 server checks the skill is known and pays its MP (`TDServer.on_skill`), then works out what
 it hits (`MapInstance.use_skill`) or starts the buff (`SkillBook.add_buff`, counted down
@@ -59,8 +59,8 @@ Ranged and magic skills:
   and an optional `basic_attack` skill that replaces the plain swing (a bow's Shoot). Ranged
   weapons need no ammo.
 - `weapons` limits a skill to weapon kinds and `offhand` to what's worn in the off-hand slot
-  (a Thief's stars, a Pirate's pistol); `magic` uses Magic Attack (Power included) through
-  `CharacterStats.magic_range` instead of the weapon.
+  (a Thief's stars, a Pirate's pistol). Damage always comes from the weapon
+  (`CharacterStats.damage_range`).
 
 Jobs have no movement skills: the hero's moves come from boss relics (`RelicDef`, see
 `characters.md`).
@@ -81,7 +81,7 @@ Area and hold rules (all in `MapInstance.use_skill`):
 - `root` stops a monster moving (`SimMob.root`), shown to clients as a tint
   (`SnapshotFlags.MOB_ROOTED`).
 
-Monster-control skills (one per first job, all in `MapInstance.use_skill` and `SimMob`):
+Monster control (no skill uses it now; all in `MapInstance.use_skill` and `SimMob`):
 - `launch` throws what it hits up (`SimMob.launch`, `tossed`); `slam` first yanks airborne
   monsters within reach down and grounds fliers (`SimMob.slam_down`, `downed_t`,
   `SnapshotFlags.MOB_DOWNED`), then hits only grounded ones; `stun` holds a monster out of

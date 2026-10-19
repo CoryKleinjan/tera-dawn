@@ -54,11 +54,11 @@ func test_window_keys_do_nothing_on_the_title_screen() -> void:
 	check(not ui.hud.title.visible, "Resume closes the pause menu")
 
 func test_escape_closes_the_top_window_then_pauses() -> void:
-	for action in ["inventory", "stats", "skills"]:
+	for action in ["inventory", "stats", "quests"]:
 		await ui.press(action)
 	check_eq(_open_count(), 3, "three windows open")
 	await ui.press("pause")
-	check(not _win("skills").visible and _win("inventory").visible and _win("stats").visible, "Esc closes the last one opened")
+	check(not _win("quests").visible and _win("inventory").visible and _win("stats").visible, "Esc closes the last one opened")
 	await ui.press("pause")
 	await ui.press("pause")
 	check_eq(_open_count(), 0, "Esc closes them one at a time")

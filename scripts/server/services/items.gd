@@ -1,13 +1,12 @@
 class_name ServerItems
 extends ServerPart
-## The player's own things: using items (potions, pet food, return scrolls), the Setup tab
+## The player's own things: using items (pet food, return scrolls), the Setup tab
 ## (pets), wearing gear, and moving or dropping bag items.
 
 # ---------- Use tab ----------
 
-## Uses the item in Use slot `slot`. Each kind of effect is its own step below; one item
-## can do several (a potion that heals and shows a sparkle, a scroll that heals and
-## teleports).
+## Uses the item in Use slot `slot`. Each kind of effect is its own step below. There are
+## no potions (Cory Oct 19): hearts come back with Mana or at a rest spot.
 func on_use_item(peer: int, slot: int) -> void:
 	var p := player_of(peer)
 	if p == null:
@@ -30,7 +29,6 @@ func on_use_item(peer: int, slot: int) -> void:
 		dest = _teleport_target(p, u)
 		if dest == &"":
 			return
-	_restore(p, u)
 	_used(p, u, slot)
 	if u.use_effect:
 		p.map.broadcast(&"ev_effect", [u.use_effect.id, p.position.x, p.position.y - 40, p.face, peer])
@@ -61,12 +59,6 @@ func _teleport_target(p: SimPlayer, u: UseDef) -> StringName:
 		tell(p, "You're already in town.")
 		return &""
 	return dest
-
-## Potions: HP and MP back.
-func _restore(p: SimPlayer, u: UseDef) -> void:
-	var c := p.character
-	c.health.heal(u.hp_for(c.max_hp()))
-	c.restore_mp(u.mp_for(c.max_mp()))
 
 ## Takes one of the item from its slot and starts the item cooldown.
 func _used(p: SimPlayer, u: UseDef, slot: int) -> void:

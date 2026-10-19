@@ -24,7 +24,6 @@ static func measure(c: Character, kind: String) -> int:
 		"kills": return c.book.total_kills()
 		"cards": return c.book.total_cards()
 		"pages": return c.book.completed()
-		"level": return c.level
 		"job": return 0 if c.job.advances_from == &"" else 1
 		"quests": return c.quests.done.size()
 		"maps": return c.visited.size()
