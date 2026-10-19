@@ -7,6 +7,10 @@
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="5_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/old_clawbeard.tres" id="6_boss"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="7_variant_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnrise_ledge/cap_left.png" id="ledge_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnrise_ledge/middle_a.png" id="ledge_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnrise_ledge/middle_b.png" id="ledge_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnrise_ledge/cap_right.png" id="ledge_cap_right"]
 
 [sub_resource type="Resource" id="Ledge_left"]
 script = ExtResource("3_platform_def")
@@ -60,6 +64,12 @@ fog_begin = 0.0
 fog_end = 130.0
 fog_density = 0.46
 hide_layers = PackedInt32Array(3)
+platform_left = ExtResource("ledge_cap_left")
+platform_middle = ExtResource("ledge_middle_a")
+platform_middle_alt = ExtResource("ledge_middle_b")
+platform_right = ExtResource("ledge_cap_right")
+hide_edge_grass = true
+hide_platform_decor = true
 
 [resource]
 script = ExtResource("1_map_def")

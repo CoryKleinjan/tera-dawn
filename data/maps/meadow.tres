@@ -10,6 +10,11 @@
 [ext_resource type="Resource" path="res://data/monsters/petal_bat.tres" id="14_petal_bat"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="18_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_ledge.png" id="20_tall_ledge"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnrise_ledge/cap_left.png" id="ledge_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnrise_ledge/middle_a.png" id="ledge_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnrise_ledge/middle_b.png" id="ledge_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnrise_ledge/cap_right.png" id="ledge_cap_right"]
+[ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="ledge_variant_def"]
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("3_platform_def")
@@ -280,8 +285,18 @@ x = 2353.0
 y = 310.0
 width = 110.0
 
+[sub_resource type="Resource" id="LedgeVariant"]
+script = ExtResource("ledge_variant_def")
+platform_left = ExtResource("ledge_cap_left")
+platform_middle = ExtResource("ledge_middle_a")
+platform_middle_alt = ExtResource("ledge_middle_b")
+platform_right = ExtResource("ledge_cap_right")
+hide_edge_grass = true
+hide_platform_decor = true
+
 [resource]
 script = ExtResource("1_map_def")
+variant = SubResource("LedgeVariant")
 id = &"meadow"
 display_name = "Dawnrise Meadow"
 biome = ExtResource("2_meadow")

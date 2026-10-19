@@ -13,6 +13,10 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tall_grass.png" id="16_tall_grass"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/tree_large.png" id="17_tree_large"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/driftcove_ledge/cap_left.png" id="ledge_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/driftcove_ledge/middle_a.png" id="ledge_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/driftcove_ledge/middle_b.png" id="ledge_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/driftcove_ledge/cap_right.png" id="ledge_cap_right"]
 [sub_resource type="Resource" id="Resource_47"]
 script = ExtResource("12_prop_placement")
 texture = ExtResource("17_tree_large")
@@ -244,6 +248,12 @@ width = 140.0
 script = ExtResource("variant_def")
 light_energy = 2.1
 grade_saturation = 1.14
+platform_left = ExtResource("ledge_cap_left")
+platform_middle = ExtResource("ledge_middle_a")
+platform_middle_alt = ExtResource("ledge_middle_b")
+platform_right = ExtResource("ledge_cap_right")
+hide_edge_grass = true
+hide_platform_decor = true
 
 [sub_resource type="Resource" id="Step_1"]
 script = ExtResource("3_platform_def")
