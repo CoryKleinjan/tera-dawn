@@ -227,7 +227,6 @@ x = 4250.0
 platform = 19
 target_map = &"glowcap_hollow"
 target_x = 200.0
-target_platform = 1
 
 [sub_resource type="Resource" id="Spawn_0"]
 script = ExtResource("16_spawn_def")

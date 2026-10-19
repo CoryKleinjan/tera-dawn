@@ -75,6 +75,6 @@ portals = Array[ExtResource("4_portal_def")]([SubResource("Portal_back"), SubRes
 spawns = Array[ExtResource("5_spawn_def")]([SubResource("Boss")])
 region = &"lumewood"
 world_pos = Vector2(800.0, 140.0)
-zone_pos = Vector2(16400, -5600)
+zone_pos = Vector2(16400, -5920.0)
 return_map = &"lumewood"
 music = &"boss_lumewood"

@@ -188,6 +188,11 @@ func _portal_hint(portal: PortalDef, target: MapDef) -> String:
 	var name := target.display_name if target else "?"
 	if portal.door:
 		return ("↑ Out to %s" if world.map.interior else "↑ Enter %s") % name
+	match world.layout.side_of(portal):
+		RoomExits.Side.TOP:
+			return "Jump up to %s" % name
+		RoomExits.Side.BOTTOM:
+			return "↓ + Jump to %s" % name
 	return "↑ to %s" % name
 
 ## A building's door on the minimap: a little lit doorway.
@@ -281,6 +286,9 @@ func _draw_world_text() -> void:
 		elif f is TDEffect:
 			(f as TDEffect).draw_caption(self, st.screen(f.position, 0.2))
 	for portal in world.map.portals:
+		var side := world.layout.side_of(portal)
+		if side == RoomExits.Side.LEFT or side == RoomExits.Side.RIGHT:
+			continue # an opening in the room's side: you just walk through
 		var base := Vector2(portal.x, world.platforms[portal.platform].y)
 		if world.started and portal.open_to(Game.me) and absf(p.position.x - base.x) < 60 and absf(p.position.y - base.y) < 8:
 			var target := Content.map(portal.target_map)

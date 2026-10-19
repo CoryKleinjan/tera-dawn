@@ -184,5 +184,5 @@ breakables = Array[ExtResource("23_breakable_def")]([SubResource("Breakable_0"),
 spawns = Array[ExtResource("16_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2")])
 region = &"lanternfall"
 world_pos = Vector2(770.0, 500.0)
-zone_pos = Vector2(-1820.0, 4000.0)
+zone_pos = Vector2(-1820.0, 3900.0)
 return_map = &"lanternfall"

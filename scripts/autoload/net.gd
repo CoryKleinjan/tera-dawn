@@ -299,6 +299,12 @@ func req_portal() -> void:
 	if server:
 		server.travel.on_portal(_sender())
 
+## Going out of the room through a way at its edge (RoomExits), from where you stand.
+@rpc("any_peer", "call_local", "reliable")
+func req_way() -> void:
+	if server:
+		server.travel.on_way(_sender())
+
 @rpc("any_peer", "call_local", "reliable")
 func req_travel(npc_id: StringName, index: int) -> void:
 	if server:
@@ -513,9 +519,9 @@ func ev_vitals(hp: int, mp: int, xp: int, level: int, essence: int, shards: int)
 	Game.apply_vitals(hp, mp, xp, level, essence, shards)
 
 @rpc("authority", "call_local", "reliable")
-func ev_enter_map(map_id: StringName, x: float, state: Dictionary, platform: int) -> void:
+func ev_enter_map(map_id: StringName, x: float, state: Dictionary, platform: int, arrive: int) -> void:
 	if world:
-		world.enter_map(map_id, x, state, platform)
+		world.enter_map(map_id, x, state, platform, arrive)
 
 @rpc("authority", "call_local", "unreliable_ordered")
 func ev_snapshot(data: PackedByteArray) -> void:

@@ -59,7 +59,7 @@ func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) 
 		if p.door:
 			_door(p, platforms[p.platform], biome)
 		else:
-			_portal(p, platforms[p.platform], biome)
+			_portal(p, platforms[p.platform], biome, not _side_way(map, p))
 	for i in map.breakables.size():
 		_breakable(i, map.breakables[i], platforms[map.breakables[i].platform])
 	_lanterns(map, biome, rng)
@@ -248,7 +248,14 @@ func _door(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 ## sparkles rising through it. Doors get one too (see _door). A locked portal only shows once
 ## it opens, and a gated one stands behind its gate until that opens
 ## (TDStage.show_open_portals).
-func _portal(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
+## Whether portal `p` is a way out through the room's side (RoomExits): an opening you walk
+## through, with no light pillar (a gate in it still stands).
+static func _side_way(map: MapDef, p: PortalDef) -> bool:
+	var side := RoomExits.side_of(map, p)
+	return side == RoomExits.Side.LEFT or side == RoomExits.Side.RIGHT
+
+## A portal's light pillar (`pillar`), and its gate if it has one.
+func _portal(p: PortalDef, pl: Platform, biome: BiomeDef, pillar := true) -> void:
 	# one node per portal, so a locked one (PortalDef.locked) can be hidden while it's shut
 	var holder := Node3D.new()
 	root.add_child(holder)
@@ -260,6 +267,8 @@ func _portal(p: PortalDef, pl: Platform, biome: BiomeDef) -> void:
 		g.position = TDStage.to3d(Vector2(p.x, pl.y + 3.0), TDStage.Z_GATE)
 		holder.add_child(g)
 		stage.gates[g] = p
+	if not pillar:
+		return
 	var base := Vector2(p.x, pl.y + 3.0)
 	if not biome.portal_frames.is_empty():
 		# the glowing patch, not the soft halo under it, stands on the land

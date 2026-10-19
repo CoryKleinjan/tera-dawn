@@ -155,8 +155,10 @@ func leave(peer: int) -> void:
 
 ## Moves the player to map `id` at `x` (through a portal, a trip, a return scroll or
 ## reviving), standing on platform `platform` (the floor unless a portal says otherwise),
-## and tells them what's there.
-func enter_map(p: SimPlayer, id: StringName, x: float, platform := 0) -> void:
+## and tells them what's there. `arrive` is the side of the room they come in through when
+## they come through a way out of the last one (RoomExits): through a top way they drop in
+## from above.
+func enter_map(p: SimPlayer, id: StringName, x: float, platform := 0, arrive := RoomExits.Side.NONE) -> void:
 	if p.map:
 		social.changed_map(p)
 		_off_map(p)
@@ -167,7 +169,9 @@ func enter_map(p: SimPlayer, id: StringName, x: float, platform := 0) -> void:
 	p.sitting = false
 	p.character.visit(id)
 	m.add_player(p, x, platform)
-	Net.send(p.peer, &"ev_enter_map", [id, x, m.full_state(), platform])
+	if arrive == RoomExits.Side.TOP:
+		p.position.y -= RoomExits.DROP_IN
+	Net.send(p.peer, &"ev_enter_map", [id, x, m.full_state(), platform, arrive])
 	quests.progress(p, p.character.quests.record_visit(id))
 	save(p)
 	scenes.play(p, m.def.intro_scene)
