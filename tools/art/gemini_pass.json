@@ -28193,6 +28193,26 @@
    "refs": [],
    "text": "The first image is a guide for a sheet of cave rock pieces for my 2D side-scrolling game, on a flat magenta #FF00FF background. Flat slate colour shows where the rock goes and the dark line is its outline. Paint over the guide as finished rock for the inside of a dim sea cave, keeping every shape's position, size and outline EXACTLY, so the pieces line up when the sheet is cut apart. LEFT: one tall block of solid cave rock, the wall of the cave. Its inside is wet blue-grey slate rock with a few soft cracks and faint upright streaks, kept even across the whole block with no big features, bright spots or shading toward its edges, so a square of it can repeat as a tile. Its right side is ONE straight vertical outlined face of the same rock. RIGHT: one slab of the same cave rock, the roof of the cave, with a straight top and straight ends. Its underside hangs down in the five tapering stone points the guide shows, four short and one long, each with the guide's sharp tip, solid and painted in the same rock. The slab's underside and the points' lower edges stay in soft shadow, with no light along their lower edges. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own painted style: soft cel-painted shading with clear light and shadow shapes, bright highlights on the lit edges from the upper left, a bold dark brown outline, and hand-painted texture at a fairly chunky brush scale. Palette: cool wet blue-grey rock (#3e5562), deeper blue-green shadow (#1f3a4a), pale cool highlights (#9fb8c4) on the lit edges, and a faint warm orange glint (#f0a050) here and there on the upper lit edges only. Seen exactly from the side, flat, nothing running back into the picture. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the pieces the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
   }
+ },
+ {
+  "id": "solid_rooms_cave_ledge",
+  "prompts": null,
+  "batch": "Solid rooms test: cave rock ledges (edit)",
+  "with": null,
+  "refs": [],
+  "save": "solid_rooms_cave_ledge.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-19 thread 'Hollow Knight maps'. Cory 11:26Z: the grassy ledges 'just seem like they are floating... attached to nothing'; 11:27Z 'yes' to a ~$0.07 one-sheet test of a cave rock ledge set (thick rock shelf, thin moss on the walking top, plus ends that join a wall). Guide 2400x1600, exactly 3:2: top a floating shelf with tapering ends (cut into left end, two middles, right end), bottom the same shelf with straight upright ends for ledges that meet a wall.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/solid-rooms/bases/cave_ledge_base.png",
+   "refs": [],
+   "text": "The first image is a guide for a sheet of cave rock pieces for my 2D side-scrolling game, on a flat magenta #FF00FF background. Flat dark slate colour shows where the rock goes and the dark line is its outline. Paint over the guide as finished rock for the inside of a dim sea cave, keeping every shape's position, size and outline EXACTLY, so the pieces line up when the sheet is cut apart. TOP: one long, thick shelf of solid cave rock that the player walks along. Its top is one straight flat line. Toward each end it tapers to a thin rounded tip, and its underside hangs in the broad, uneven rounded swells the guide shows. BOTTOM: the same thick rock shelf with the same flat top and the same underside, but both of its ends are straight upright cut faces, as the guide shows. Both shelves: heavy, solid wet rock with a few soft cracks, kept even along the whole length with no big features, so they can be cut apart and joined end to end. A thin band of dark green moss lies along the flat top of each shelf, painted inside the outline, so the flat top line stays exactly where the guide has it; there is no moss anywhere else. The rock is deep, dark blue-grey, as dark as the guide's own fill colour or darker, like cave rock seen in dim light, and never paler than the guide. Light comes softly from above: a soft cool highlight just under the moss along the top edge only. The underside and every lower edge stay in soft dark shadow, with no light along them. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own painted style: soft cel-painted shading with clear light and shadow shapes, a bold dark brown outline, and hand-painted texture at a fairly chunky brush scale. Seen exactly from the side, flat, nothing running back into the picture. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the pieces the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
  }
 ]
 }
