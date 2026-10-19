@@ -28173,6 +28173,26 @@
   "town_check": {
    "kind": "backdrop"
   }
+ },
+ {
+  "id": "solid_rooms_cave_rock",
+  "prompts": null,
+  "batch": "Solid rooms test: cave rock wall and ceiling (edit)",
+  "with": null,
+  "refs": [],
+  "save": "solid_rooms_cave_rock.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-19 thread 'Hollow Knight maps' (solid rooms: rock walls and a ceiling round a room, open at its ways out). Cory 03:24Z 'Let's do all of these'; free test with the zone's sand land art failed (09:05Z picture); Cory 09:10Z 'Yes' to matching the walls to the cave rock painted in Smugglers' Grotto's backdrop. One-sheet test before any kit. Guide 2400x1600, exactly 3:2: left a tall wall block (its inside becomes a repeating wall tile, its right side the wall face), right a ceiling slab whose underside hangs in broad stone points.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/solid-rooms/bases/cave_rock_base.png",
+   "refs": [],
+   "text": "The first image is a guide for a sheet of cave rock pieces for my 2D side-scrolling game, on a flat magenta #FF00FF background. Flat slate colour shows where the rock goes and the dark line is its outline. Paint over the guide as finished rock for the inside of a dim sea cave, keeping every shape's position, size and outline EXACTLY, so the pieces line up when the sheet is cut apart. LEFT: one tall block of solid cave rock, the wall of the cave. Its inside is wet blue-grey slate rock with a few soft cracks and faint layers, kept even across the whole block with no big features, bright spots or shading toward its edges, so a square of it can repeat as a tile. Its right side is ONE straight vertical outlined face of the same rock, its edge stones a little lighter where the light catches them. RIGHT: one slab of the same cave rock, the roof of the cave, with a straight top and straight ends. Its underside hangs down in the broad tapering stone points the guide shows, each one rounded and solid like the hanging stone points of a cave, painted in the same rock. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own painted style: soft cel-painted shading with clear light and shadow shapes, bright highlights on the lit edges from the upper left, a bold dark brown outline, and hand-painted texture at a fairly chunky brush scale. Palette: cool wet blue-grey rock (#3e5562), deeper blue-green shadow (#1f3a4a), pale cool highlights (#9fb8c4) on the lit edges, and a faint warm orange glint (#f0a050) here and there on the upper lit edges only. Seen exactly from the side, flat, nothing running back into the picture. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the pieces the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
  }
 ]
 }
