@@ -6,7 +6,7 @@ extends TestCase
 ## the few listed below where the room's top ledge has no other way up to it.
 ## Zones join this list as their rooms are laid out again.
 const Scan := preload("res://tests/content/content_scan.gd")
-const LAID_OUT: Array[StringName] = [&"lumewood"]
+const LAID_OUT: Array[StringName] = [&"lumewood", &"emberreach"]
 const TUCK := 20.0
 const SLACK := 30.0
 ## map id -> the steps (x, y) allowed under a wider ledge's shelf
@@ -14,6 +14,7 @@ const TUCKED := {
 	&"arcane_spire": [Vector2(1240, 416), Vector2(1520, 384)],
 	&"crystal_caves": [Vector2(250, 441), Vector2(530, 357)],
 	&"glowcap_hollow": [Vector2(1530, 775)],
+	&"molten_throne": [Vector2(1640, 2152), Vector2(1910, 2084)],
 }
 
 func test_ledges_never_pile_up() -> void:

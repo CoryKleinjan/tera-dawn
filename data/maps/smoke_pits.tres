@@ -68,34 +68,10 @@ x = 150.0
 y = 1745.0
 width = 550.0
 
-[sub_resource type="Resource" id="Platform_3"]
-script = ExtResource("13_platform_def")
-x = 550.0
-y = 1670.0
-width = 550.0
-
-[sub_resource type="Resource" id="Platform_4"]
-script = ExtResource("13_platform_def")
-x = 150.0
-y = 1595.0
-width = 550.0
-
 [sub_resource type="Resource" id="Platform_5"]
 script = ExtResource("13_platform_def")
 x = 550.0
 y = 1520.0
-width = 550.0
-
-[sub_resource type="Resource" id="Platform_6"]
-script = ExtResource("13_platform_def")
-x = 150.0
-y = 1445.0
-width = 550.0
-
-[sub_resource type="Resource" id="Platform_7"]
-script = ExtResource("13_platform_def")
-x = 550.0
-y = 1370.0
 width = 550.0
 
 [sub_resource type="Resource" id="Platform_8"]
@@ -104,34 +80,10 @@ x = 150.0
 y = 1295.0
 width = 550.0
 
-[sub_resource type="Resource" id="Platform_9"]
-script = ExtResource("13_platform_def")
-x = 550.0
-y = 1220.0
-width = 550.0
-
-[sub_resource type="Resource" id="Platform_10"]
-script = ExtResource("13_platform_def")
-x = 150.0
-y = 1145.0
-width = 550.0
-
 [sub_resource type="Resource" id="Platform_11"]
 script = ExtResource("13_platform_def")
 x = 550.0
 y = 1070.0
-width = 550.0
-
-[sub_resource type="Resource" id="Platform_12"]
-script = ExtResource("13_platform_def")
-x = 150.0
-y = 995.0
-width = 550.0
-
-[sub_resource type="Resource" id="Platform_13"]
-script = ExtResource("13_platform_def")
-x = 550.0
-y = 920.0
 width = 550.0
 
 [sub_resource type="Resource" id="Platform_14"]
@@ -140,28 +92,10 @@ x = 150.0
 y = 845.0
 width = 550.0
 
-[sub_resource type="Resource" id="Platform_15"]
-script = ExtResource("13_platform_def")
-x = 550.0
-y = 770.0
-width = 550.0
-
-[sub_resource type="Resource" id="Platform_16"]
-script = ExtResource("13_platform_def")
-x = 150.0
-y = 695.0
-width = 550.0
-
 [sub_resource type="Resource" id="Platform_17"]
 script = ExtResource("13_platform_def")
 x = 550.0
 y = 620.0
-width = 550.0
-
-[sub_resource type="Resource" id="Platform_18"]
-script = ExtResource("13_platform_def")
-x = 150.0
-y = 545.0
 width = 550.0
 
 [sub_resource type="Resource" id="Platform_19"]
@@ -170,52 +104,10 @@ x = 2250.0
 y = 1745.0
 width = 500.0
 
-[sub_resource type="Resource" id="Platform_20"]
-script = ExtResource("13_platform_def")
-x = 2600.0
-y = 1670.0
-width = 500.0
-
-[sub_resource type="Resource" id="Platform_21"]
-script = ExtResource("13_platform_def")
-x = 2250.0
-y = 1595.0
-width = 500.0
-
-[sub_resource type="Resource" id="Platform_22"]
-script = ExtResource("13_platform_def")
-x = 2600.0
-y = 1520.0
-width = 500.0
-
-[sub_resource type="Resource" id="Platform_23"]
-script = ExtResource("13_platform_def")
-x = 2250.0
-y = 1445.0
-width = 500.0
-
-[sub_resource type="Resource" id="Platform_24"]
-script = ExtResource("13_platform_def")
-x = 2600.0
-y = 1370.0
-width = 500.0
-
 [sub_resource type="Resource" id="Platform_25"]
 script = ExtResource("13_platform_def")
 x = 2250.0
 y = 1295.0
-width = 500.0
-
-[sub_resource type="Resource" id="Platform_26"]
-script = ExtResource("13_platform_def")
-x = 2600.0
-y = 1220.0
-width = 500.0
-
-[sub_resource type="Resource" id="Platform_27"]
-script = ExtResource("13_platform_def")
-x = 2250.0
-y = 1145.0
 width = 500.0
 
 [sub_resource type="Resource" id="Platform_28"]
@@ -224,58 +116,10 @@ x = 2600.0
 y = 1070.0
 width = 500.0
 
-[sub_resource type="Resource" id="Platform_29"]
-script = ExtResource("13_platform_def")
-x = 2250.0
-y = 995.0
-width = 500.0
-
-[sub_resource type="Resource" id="Platform_30"]
-script = ExtResource("13_platform_def")
-x = 2600.0
-y = 920.0
-width = 500.0
-
-[sub_resource type="Resource" id="Platform_31"]
-script = ExtResource("13_platform_def")
-x = 2250.0
-y = 845.0
-width = 500.0
-
 [sub_resource type="Resource" id="Platform_32"]
 script = ExtResource("13_platform_def")
 x = 2600.0
 y = 770.0
-width = 500.0
-
-[sub_resource type="Resource" id="Platform_33"]
-script = ExtResource("13_platform_def")
-x = 2250.0
-y = 695.0
-width = 500.0
-
-[sub_resource type="Resource" id="Platform_34"]
-script = ExtResource("13_platform_def")
-x = 2600.0
-y = 620.0
-width = 500.0
-
-[sub_resource type="Resource" id="Platform_35"]
-script = ExtResource("13_platform_def")
-x = 2250.0
-y = 545.0
-width = 500.0
-
-[sub_resource type="Resource" id="Platform_36"]
-script = ExtResource("13_platform_def")
-x = 2600.0
-y = 470.0
-width = 500.0
-
-[sub_resource type="Resource" id="Platform_37"]
-script = ExtResource("13_platform_def")
-x = 2250.0
-y = 395.0
 width = 500.0
 
 [sub_resource type="Resource" id="Platform_38"]
@@ -317,10 +161,184 @@ secret = true
 
 [sub_resource type="Resource" id="Platform_44"]
 script = ExtResource("13_platform_def")
-x = 1305.0
+x = 1190.0
 y = 270.0
 width = 150.0
 secret = true
+
+[sub_resource type="Resource" id="Step_1"]
+script = ExtResource("13_platform_def")
+x = 840.0
+y = 1736.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_2"]
+script = ExtResource("13_platform_def")
+x = 1110.0
+y = 1652.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_3"]
+script = ExtResource("13_platform_def")
+x = 1340.0
+y = 1511.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_4"]
+script = ExtResource("13_platform_def")
+x = 1070.0
+y = 1427.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_5"]
+script = ExtResource("13_platform_def")
+x = 1530.0
+y = 1529.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_6"]
+script = ExtResource("13_platform_def")
+x = 800.0
+y = 1343.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_7"]
+script = ExtResource("13_platform_def")
+x = 530.0
+y = 1259.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_8"]
+script = ExtResource("13_platform_def")
+x = 2080.0
+y = 1361.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_9"]
+script = ExtResource("13_platform_def")
+x = 2390.0
+y = 1211.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_10"]
+script = ExtResource("13_platform_def")
+x = 2220.0
+y = 1127.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_11"]
+script = ExtResource("13_platform_def")
+x = 2050.0
+y = 1043.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_12"]
+script = ExtResource("13_platform_def")
+x = 1780.0
+y = 959.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_13"]
+script = ExtResource("13_platform_def")
+x = 1190.0
+y = 1061.0
+width = 440.0
+
+[sub_resource type="Resource" id="Step_14"]
+script = ExtResource("13_platform_def")
+x = 1370.0
+y = 875.0
+width = 440.0
+
+[sub_resource type="Resource" id="Step_15"]
+script = ExtResource("13_platform_def")
+x = 1510.0
+y = 791.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_16"]
+script = ExtResource("13_platform_def")
+x = 1780.0
+y = 707.0
+width = 440.0
+
+[sub_resource type="Resource" id="Step_17"]
+script = ExtResource("13_platform_def")
+x = 2190.0
+y = 623.0
+width = 440.0
+
+[sub_resource type="Resource" id="Step_18"]
+script = ExtResource("13_platform_def")
+x = 920.0
+y = 977.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_19"]
+script = ExtResource("13_platform_def")
+x = 670.0
+y = 893.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_20"]
+script = ExtResource("13_platform_def")
+x = 1240.0
+y = 707.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_21"]
+script = ExtResource("13_platform_def")
+x = 1070.0
+y = 623.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_22"]
+script = ExtResource("13_platform_def")
+x = 790.0
+y = 536.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_23"]
+script = ExtResource("13_platform_def")
+x = 530.0
+y = 452.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_24"]
+script = ExtResource("13_platform_def")
+x = 2700.0
+y = 539.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_25"]
+script = ExtResource("13_platform_def")
+x = 2530.0
+y = 455.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_26"]
+script = ExtResource("13_platform_def")
+x = 2360.0
+y = 371.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_27"]
+script = ExtResource("13_platform_def")
+x = 2120.0
+y = 287.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_28"]
+script = ExtResource("13_platform_def")
+x = 280.0
+y = 336.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_29"]
+script = ExtResource("13_platform_def")
+x = 550.0
+y = 252.0
+width = 440.0
 
 [sub_resource type="Resource" id="Portal_0"]
 script = ExtResource("14_portal_def")
@@ -334,12 +352,12 @@ script = ExtResource("14_portal_def")
 x = 60.0
 target_map = &"magma_falls"
 target_x = 2960.0
-target_platform = 56
+target_platform = 18
 
 [sub_resource type="Resource" id="Portal_2"]
 script = ExtResource("14_portal_def")
 x = 1900.0
-platform = 38
+platform = 12
 target_map = &"vent_chimney"
 target_x = 1300.0
 
@@ -348,7 +366,7 @@ script = ExtResource("14_portal_def")
 x = 1000.0
 target_map = &"obsidian_hollow"
 target_x = 1250.0
-target_platform = 6
+target_platform = 4
 shortcut = &"smoke_pits_crack"
 
 [sub_resource type="Resource" id="Spawn_0"]
@@ -376,73 +394,73 @@ count = 2
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("18_ash_bat")
-platform = 4
+platform = 1
 count = 2
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_cinder_pup")
-platform = 7
+platform = 2
 count = 2
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_fire_imp_archer")
-platform = 10
+platform = 3
 count = 2
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("18_ash_bat")
-platform = 13
+platform = 4
 count = 2
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_cinder_pup")
-platform = 16
+platform = 5
 count = 2
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_fire_imp_archer")
-platform = 21
+platform = 6
 count = 2
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("18_ash_bat")
-platform = 25
+platform = 9
 count = 2
 
 [sub_resource type="Resource" id="Spawn_10"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_fire_imp_archer")
-platform = 29
+platform = 7
 count = 2
 
 [sub_resource type="Resource" id="Spawn_11"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("18_ash_bat")
-platform = 33
+platform = 8
 count = 2
 
 [sub_resource type="Resource" id="Spawn_12"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_fire_imp_archer")
-platform = 37
+platform = 9
 count = 2
 
 [sub_resource type="Resource" id="Spawn_13"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("18_ash_bat")
-platform = 39
+platform = 13
 count = 2
 
 [sub_resource type="Resource" id="Spawn_14"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_cinder_pup")
-platform = 41
+platform = 15
 count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
@@ -455,7 +473,7 @@ max_amount = 160
 script = ExtResource("25_breakable_def")
 id = &"smoke_pits_high_chest"
 x = 1475.0
-platform = 43
+platform = 17
 hits = 1
 whole = ExtResource("23_chest")
 broken = ExtResource("24_chest_open")
@@ -472,8 +490,8 @@ max_amount = 160
 [sub_resource type="Resource" id="Breakable_1"]
 script = ExtResource("25_breakable_def")
 id = &"smoke_pits_far_chest"
-x = 1380.0
-platform = 44
+x = 1265.0
+platform = 18
 hits = 1
 whole = ExtResource("23_chest")
 broken = ExtResource("24_chest_open")
@@ -502,7 +520,7 @@ width = 3200
 height = 1900
 ground_y = 1820
 start_x = 120.0
-platforms = Array[ExtResource("13_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9"), SubResource("Platform_10"), SubResource("Platform_11"), SubResource("Platform_12"), SubResource("Platform_13"), SubResource("Platform_14"), SubResource("Platform_15"), SubResource("Platform_16"), SubResource("Platform_17"), SubResource("Platform_18"), SubResource("Platform_19"), SubResource("Platform_20"), SubResource("Platform_21"), SubResource("Platform_22"), SubResource("Platform_23"), SubResource("Platform_24"), SubResource("Platform_25"), SubResource("Platform_26"), SubResource("Platform_27"), SubResource("Platform_28"), SubResource("Platform_29"), SubResource("Platform_30"), SubResource("Platform_31"), SubResource("Platform_32"), SubResource("Platform_33"), SubResource("Platform_34"), SubResource("Platform_35"), SubResource("Platform_36"), SubResource("Platform_37"), SubResource("Platform_38"), SubResource("Platform_39"), SubResource("Platform_40"), SubResource("Platform_41"), SubResource("Platform_42"), SubResource("Platform_43"), SubResource("Platform_44")])
+platforms = Array[ExtResource("13_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_5"), SubResource("Platform_8"), SubResource("Platform_11"), SubResource("Platform_14"), SubResource("Platform_17"), SubResource("Platform_19"), SubResource("Platform_25"), SubResource("Platform_28"), SubResource("Platform_32"), SubResource("Platform_38"), SubResource("Platform_39"), SubResource("Platform_40"), SubResource("Platform_41"), SubResource("Platform_42"), SubResource("Platform_43"), SubResource("Platform_44"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3"), SubResource("Step_4"), SubResource("Step_5"), SubResource("Step_6"), SubResource("Step_7"), SubResource("Step_8"), SubResource("Step_9"), SubResource("Step_10"), SubResource("Step_11"), SubResource("Step_12"), SubResource("Step_13"), SubResource("Step_14"), SubResource("Step_15"), SubResource("Step_16"), SubResource("Step_17"), SubResource("Step_18"), SubResource("Step_19"), SubResource("Step_20"), SubResource("Step_21"), SubResource("Step_22"), SubResource("Step_23"), SubResource("Step_24"), SubResource("Step_25"), SubResource("Step_26"), SubResource("Step_27"), SubResource("Step_28"), SubResource("Step_29")])
 portals = Array[ExtResource("14_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1"), SubResource("Portal_2"), SubResource("Portal_3")])
 breakables = Array[ExtResource("25_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1"), SubResource("Breakable_2")])
 spawns = Array[ExtResource("16_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13"), SubResource("Spawn_14")])
@@ -510,4 +528,4 @@ region = &"emberreach"
 world_pos = Vector2(885.0, 265.0)
 zone_pos = Vector2(5600.0, 2400.0)
 return_map = &"emberforge"
-rest_spots = Array[Vector2i]([Vector2i(1890, 40)])
+rest_spots = Array[Vector2i]([Vector2i(1890, 14)])

@@ -94,7 +94,7 @@ x = 3780.0
 platform = 0
 target_map = &"slag_fields"
 target_x = 1850.0
-target_platform = 19
+target_platform = 6
 
 [sub_resource type="Resource" id="Portal_east"]
 script = ExtResource("portal_def")
