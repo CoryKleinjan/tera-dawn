@@ -158,7 +158,8 @@
         226
       ],
       "grow": 1.04,
-      "flat_bottom": true
+      "flat_bottom": true,
+      "save": false
     },
     "tree_small": {
       "crop": [
@@ -286,7 +287,8 @@
         227
       ],
       "grow": 1.25,
-      "flat_bottom": true
+      "flat_bottom": true,
+      "save": false
     }
   }
 }

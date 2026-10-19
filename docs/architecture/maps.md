@@ -232,7 +232,7 @@ example: a quay street, a terrace 150 px up and a cliff top 320 px up.
 The biome's `town_decor` (its signature prop far behind the street) doesn't scatter randomly in a
 town with buildings: `SceneryBuilder.back_house_slots` stands them in one row,
 `BACK_HOUSE_GAP` apart and never straight behind a building. The rest of a town's scattered
-scenery (`DecorPlacement`) comes at half a field's density (`TOWN_DENSITY`) and, trees and
+scenery (`DecorPlacement`) comes at `TOWN_DENSITY` (as sparse as a field's) and, trees and
 far props included, keeps clear of exits, props, townsfolk and every other scattered piece.
 Houses stand only as placed buildings at full size, and only in towns: scattered scenery
 never uses a building picture (far back at a random size it looks like a tiny house), and a

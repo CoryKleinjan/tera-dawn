@@ -20,8 +20,6 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/greenbough/motes.png" id="18_motes"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/greenbough/near.png" id="19_near"]
 [ext_resource type="Script" path="res://scripts/data/decor_def.gd" id="20_decor_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough/tree_large.png" id="21_tree_large"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough/tree_small.png" id="22_tree_small"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough/bush_large.png" id="23_bush_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough/bush_small.png" id="24_bush_small"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough/rock_large.png" id="25_rock_large"]
@@ -124,16 +122,6 @@ chance = 0.2
 texel = 1.25
 shaded = true
 
-[sub_resource type="Resource" id="Resource_9"]
-script = ExtResource("20_decor_def")
-textures = Array[Texture2D]([ExtResource("21_tree_large"), ExtResource("22_tree_small")])
-spacing = Vector2(170.0, 320.0)
-depth = Vector2(-8.5, -5.5)
-scale = Vector2(1.17, 1.17)
-chance = 1.0
-texel = 1.25
-shaded = true
-
 [sub_resource type="Resource" id="Resource_10"]
 script = ExtResource("20_decor_def")
 textures = Array[Texture2D]([ExtResource("23_bush_large"), ExtResource("24_bush_small")])
@@ -215,7 +203,7 @@ platform_middle_alt = ExtResource("7b_platform_middle_alt")
 platform_right = ExtResource("7_platform_right")
 edge_grass = Array[Texture2D]([ExtResource("8_tall_grass")])
 backdrop = Array[ExtResource("9_backdrop_layer_def")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7")])
-ground_decor = Array[ExtResource("20_decor_def")]([SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12")])
+ground_decor = Array[ExtResource("20_decor_def")]([SubResource("Resource_8"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12")])
 platform_decor = Array[ExtResource("20_decor_def")]([SubResource("Resource_13")])
 town_decor = Array[ExtResource("20_decor_def")]([SubResource("Resource_town")])
 chimney_smoke = true

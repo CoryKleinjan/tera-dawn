@@ -16,9 +16,10 @@ extends RefCounted
 ## - stands `density` as often as its DecorDef asks (wider gaps between slots).
 
 ## How often the biome's scenery stands, as a share of what its DecorDefs ask for, when a
-## map leaves `MapDef.decor_density` at -1. Every biome's rules are spaced for 1.0.
-const DENSITY := 0.7
-## The same for a town: half as often, since its own props already fill the street.
+## map leaves `MapDef.decor_density` at -1. Every biome's rules are spaced for 1.0. Kept
+## sparse (Cory, Oct 19: too many props on many maps).
+const DENSITY := 0.35
+## The same for a town, whose own props already fill the street.
 const TOWN_DENSITY := 0.35
 ## Open ground kept between a piece and anything it keeps clear of, in game pixels.
 const GAP := 8.0

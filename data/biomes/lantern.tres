@@ -20,13 +20,11 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/lanternfall/motes.png" id="18_motes"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/lanternfall/near.png" id="19_near"]
 [ext_resource type="Script" path="res://scripts/data/decor_def.gd" id="20_decor_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/tree_large.png" id="21_tree_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/tree_small.png" id="22_tree_small"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/bush_large.png" id="23_bush_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/bush_small.png" id="24_bush_small"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/rock_large.png" id="25_rock_large"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/rock_small.png" id="26_rock_small"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/stump.png" id="27_stump"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/fence.png" id="28_fence"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/flowers.png" id="29_flowers"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/signature_plant.png" id="30_signature_plant"]
@@ -126,7 +124,7 @@ shaded = true
 
 [sub_resource type="Resource" id="Resource_9"]
 script = ExtResource("20_decor_def")
-textures = Array[Texture2D]([ExtResource("21_tree_large"), ExtResource("22_tree_small")])
+textures = Array[Texture2D]([ExtResource("22_tree_small")])
 spacing = Vector2(170.0, 320.0)
 depth = Vector2(-8.5, -5.5)
 scale = Vector2(1.3, 1.3)
@@ -146,7 +144,7 @@ shaded = true
 
 [sub_resource type="Resource" id="Resource_11"]
 script = ExtResource("20_decor_def")
-textures = Array[Texture2D]([ExtResource("25_rock_large"), ExtResource("26_rock_small"), ExtResource("27_stump"), ExtResource("28_fence")])
+textures = Array[Texture2D]([ExtResource("25_rock_large"), ExtResource("26_rock_small"), ExtResource("28_fence")])
 spacing = Vector2(240.0, 440.0)
 depth = Vector2(-4.0, -1.8)
 scale = Vector2(0.94, 1.1)
