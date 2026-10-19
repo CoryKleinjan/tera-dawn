@@ -304,7 +304,7 @@ width = 600.0
 script = ExtResource("13_platform_def")
 x = 2400.0
 y = 2320.0
-width = 600.0
+width = 760.0
 
 [sub_resource type="Resource" id="Platform_43"]
 script = ExtResource("13_platform_def")
@@ -328,7 +328,7 @@ width = 600.0
 script = ExtResource("13_platform_def")
 x = 2400.0
 y = 2020.0
-width = 760.0
+width = 600.0
 
 [sub_resource type="Resource" id="Platform_47"]
 script = ExtResource("13_platform_def")
@@ -492,7 +492,7 @@ target_x = 200.0
 [sub_resource type="Resource" id="Portal_1"]
 script = ExtResource("14_portal_def")
 x = 3100.0
-platform = 46
+platform = 42
 target_map = &"obsidian_hollow"
 target_x = 200.0
 shortcut = &"magma_falls_slag_wall"
@@ -686,7 +686,7 @@ card = ExtResource("17_fire_imp_archer")
 script = ExtResource("24_breakable_def")
 id = &"magma_falls_slag_wall"
 x = 2960.0
-platform = 46
+platform = 42
 hits = 3
 whole = ExtResource("25_slag_wall")
 broken = ExtResource("26_slag_wall_broken")

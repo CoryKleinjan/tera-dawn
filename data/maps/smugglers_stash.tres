@@ -235,5 +235,5 @@ breakables = Array[ExtResource("25_breakable_def")]([SubResource("Breakable_0"),
 spawns = Array[ExtResource("17_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1")])
 region = &"dawnharbor"
 world_pos = Vector2(320.0, 370.0)
-zone_pos = Vector2(-9200.0, 0.0)
+zone_pos = Vector2(-9200.0, -450.0)
 return_map = &"dawnharbor"

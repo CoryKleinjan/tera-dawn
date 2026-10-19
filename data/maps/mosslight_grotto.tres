@@ -173,5 +173,5 @@ breakables = Array[ExtResource("24_breakable_def")]([SubResource("Breakable_0")]
 spawns = Array[ExtResource("16_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3")])
 region = &"lumewood"
 world_pos = Vector2(580.0, 90.0)
-zone_pos = Vector2(-2400.0, -1400.0)
+zone_pos = Vector2(-2400.0, -2125.0)
 return_map = &"lumewood"

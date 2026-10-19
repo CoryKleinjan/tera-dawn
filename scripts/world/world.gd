@@ -136,13 +136,17 @@ func stop(stay_connected := false) -> void:
 	Sound.music(TITLE_MUSIC)
 
 ## The server put the player on a map, at `x` on platform `platform`: build it and show
-## what's on it.
-func enter_map(id: StringName, x: float, state: Dictionary, platform := 0) -> void:
+## what's on it. `arrive`: the side they came in through from a way out of the last room
+## (RoomExits), so they keep moving.
+func enter_map(id: StringName, x: float, state: Dictionary, platform := 0, arrive := RoomExits.Side.NONE) -> void:
 	# a cutscene belongs to the map it started on (the server stops it too)
 	scenes.stop()
 	hud.windows["player"].visible = false
 	load_map(id, state.get("decline", 0))
-	player.place(x, platforms[platform].y)
+	# through a top way out of the last room you drop in from above (the server agrees)
+	var drop := RoomExits.DROP_IN if arrive == RoomExits.Side.TOP else 0.0
+	player.place(x, platforms[platform].y - drop)
+	player.arrive(arrive)
 	var mob_states: Array = state.get("mobs", [])
 	var views := mobs()
 	for i in mini(mob_states.size(), views.size()):

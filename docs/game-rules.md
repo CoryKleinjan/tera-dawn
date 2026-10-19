@@ -196,10 +196,17 @@ update this page when one changes. Each zone's own look and music are in
   platforms, each at most a comfortable jump above the last (Cory, Oct 17). No two exits of a map lead to the same map. Maps can be wide and multi-level.
 - A zone's maps fit together like Hollow Knight's rooms on one zone map (Greenbough first, then Dawnharbor Coast, Lumewood, Emberreach and Lanternfall): each
   room its own size, canopy above and roots below, neighbours touching where their doors join
-  them, with MapleStory portals at the room edges they lead through. Fields are a web you can
+  them. Fields are a web you can
   loop through, each with 2 to 4 exits, and more rooms hide behind secrets: fake walls you walk
   through, breakable walls and shortcuts. Shortcuts open one way until you find them, then work
   both ways.
+- Getting from room to room is Hollow Knight style (Cory, Oct 19): in those zones you walk or
+  jump off a room's side where a way is and come out at the same height at the facing side of
+  the next room, still walking in, after a quick fade; no portal pillar stands there. A way in
+  the floor is a lit spot where Down + Jump drops you into the room below; a way in the top is a
+  lit spot where jumping up takes you into the room above. Ways into towns work the same.
+  Building doors, docks, quest portals and a boss arena's way home stay portals you press Up at;
+  Driftcove and Dawnrise Isle keep portals until their zone rebuild.
 - Locked doors are puzzles (Cory picked levers and keys): a gated door shows behind its shut gate
   from the start; a lever somewhere opens it for good (often from the far side, Hollow Knight
   style), or a key from a chest elsewhere in the zone unlocks it and is used up. Keys can't be
@@ -212,7 +219,7 @@ update this page when one changes. Each zone's own look and music are in
   (no terrace walls).
 - Characters and NPCs draw in front of land; characters cast no shadows. Portals draw in front of land and
   scenery, behind NPCs, monsters and players; no NPC stands on a portal.
-- Portals are a blue-white light pillar on the ground, at exits and doorways, 70% opaque.
+- Portals are a blue-white light pillar on the ground, at exits, floor and top ways and doorways, 70% opaque.
 - Platforms and land cast no shadows. Platform end caps line up with the platform. Terrace walls stop
   straight down from the bottom of the path's end stone, with the path's thin outline, standing
   straight up and down. Wall ivy hangs flush with the platform's bottom edge.

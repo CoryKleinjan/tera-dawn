@@ -5,9 +5,19 @@ extends ServerPart
 
 func on_portal(peer: int) -> void:
 	var p := player_of(peer)
-	if p == null or p.fainted():
-		return
-	var portal := p.map.layout.portal_at(p.position)
+	if p and not p.fainted():
+		_through(p, p.map.layout.portal_at(p.position))
+
+## `p`'s client says they're going out of the room through a way at its edge (RoomExits):
+## off a side, up through a top way or down through a bottom one, from where they stand.
+func on_way(peer: int) -> void:
+	var p := player_of(peer)
+	if p and not p.fainted():
+		_through(p, p.map.layout.way_at(p.position))
+
+## Takes `p` through `portal` if it's open to them (a shut gate opens with its key, or says
+## it's shut). A way out of the room comes out at the facing side of the next room.
+func _through(p: SimPlayer, portal: PortalDef) -> void:
 	if portal == null or not Content.maps.has(portal.target_map):
 		return
 	if portal.shows_to(p.character) and portal.gated_for(p.character):
@@ -19,7 +29,14 @@ func on_portal(peer: int) -> void:
 	var found := portal.opens_shortcut != &"" and p.character.find_secret(portal.opens_shortcut)
 	if found:
 		p.dirty_character = true
-	server.enter_map(p, portal.target_map, portal.target_x, portal.target_platform)
+	var side := p.map.layout.side_of(portal)
+	var back := RoomExits.way_back(p.map.def, portal) if side != RoomExits.Side.NONE else null
+	if back:
+		var to := Content.map(portal.target_map)
+		var arrive := RoomExits.facing(side)
+		server.enter_map(p, to.id, RoomExits.arrival_x(to, back, arrive), back.platform, arrive)
+	else:
+		server.enter_map(p, portal.target_map, portal.target_x, portal.target_platform)
 	if found:
 		tell(p, "You found a shortcut.", Palette.SUN)
 

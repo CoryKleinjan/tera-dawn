@@ -284,7 +284,7 @@ width = 1200.0
 script = ExtResource("20_platform_def")
 x = 1100.0
 y = 3820.0
-width = 1290.0
+width = 1200.0
 
 [sub_resource type="Resource" id="Platform_25"]
 script = ExtResource("20_platform_def")
@@ -296,7 +296,7 @@ width = 1200.0
 script = ExtResource("20_platform_def")
 x = 2000.0
 y = 4120.0
-width = 300.0
+width = 390.0
 
 [sub_resource type="Resource" id="Platform_27"]
 script = ExtResource("20_platform_def")
@@ -351,7 +351,7 @@ key = ExtResource("23_smugglers_key")
 [sub_resource type="Resource" id="Portal_2"]
 script = ExtResource("21_portal_def")
 x = 2320.0
-platform = 24
+platform = 26
 target_map = &"tide_tunnel"
 target_x = 200.0
 gate = &"tide_tunnel_gate"

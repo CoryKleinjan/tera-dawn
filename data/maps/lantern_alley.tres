@@ -367,7 +367,7 @@ gate_picture = ExtResource("15_gate")
 [sub_resource type="Resource" id="Portal_3"]
 script = ExtResource("14_portal_def")
 x = 100.0
-platform = 36
+platform = 29
 target_map = &"lantern_loft"
 target_x = 2150.0
 
