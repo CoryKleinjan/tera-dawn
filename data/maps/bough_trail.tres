@@ -19,6 +19,11 @@
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="20_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="21_blue_potion"]
 [ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="23_white_potion"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/greenbough_ledge/cap_left.png" id="ledge_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/greenbough_ledge/middle_a.png" id="ledge_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/greenbough_ledge/middle_b.png" id="ledge_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/greenbough_ledge/cap_right.png" id="ledge_cap_right"]
+
 [sub_resource type="Resource" id="Resource_35"]
 script = ExtResource("12_prop_placement")
 texture = ExtResource("15_tree_large")
@@ -50,6 +55,12 @@ flip = true
 script = ExtResource("variant_def")
 light_color = Color(1, 0.9412, 0.7529, 1)
 grade_tint = Color(1, 0.98, 0.9, 1)
+platform_left = ExtResource("ledge_cap_left")
+platform_middle = ExtResource("ledge_middle_a")
+platform_middle_alt = ExtResource("ledge_middle_b")
+platform_right = ExtResource("ledge_cap_right")
+hide_edge_grass = true
+hide_platform_decor = true
 
 [sub_resource type="Resource" id="Platform_1"]
 script = ExtResource("3_platform_def")

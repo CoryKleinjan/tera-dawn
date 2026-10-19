@@ -20,6 +20,11 @@
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="22_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="23_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="26_white_potion"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/greenbough_ledge/cap_left.png" id="ledge_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/greenbough_ledge/middle_a.png" id="ledge_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/greenbough_ledge/middle_b.png" id="ledge_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/greenbough_ledge/cap_right.png" id="ledge_cap_right"]
+
 [sub_resource type="Resource" id="Resource_41"]
 script = ExtResource("12_prop_placement")
 texture = ExtResource("18_flowers_yellow")
@@ -83,6 +88,12 @@ mote_color = Color(1.2, 2.2, 2, 1)
 fog_begin = 0.0
 fog_end = 130.0
 fog_density = 0.5
+platform_left = ExtResource("ledge_cap_left")
+platform_middle = ExtResource("ledge_middle_a")
+platform_middle_alt = ExtResource("ledge_middle_b")
+platform_right = ExtResource("ledge_cap_right")
+hide_edge_grass = true
+hide_platform_decor = true
 
 [sub_resource type="Resource" id="Platform_1"]
 script = ExtResource("3_platform_def")
