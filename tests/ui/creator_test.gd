@@ -105,17 +105,15 @@ func test_create_starts_the_game_with_the_choices() -> void:
 	check_eq(Game.me.equipment.at(&"armor").item, shoes, "the shoes picked")
 	check_eq(Game.me.job.id, Character.START_JOB, "a Beginner")
 
-func test_the_look_row_shows_and_makes_the_look_picked() -> void:
+func test_the_one_look_shows_standing_with_no_row_to_pick_it() -> void:
 	await _play("Fresh")
 	var c := ui.hud.title.creator
 	var looks := HeroLookDef.all()
-	check_eq(c.value_text("look"), looks[0].display_name, "the first look to start")
+	check_eq(looks.size(), 1, "the boy only")
+	check(not c.values.has("look"), "no look row")
 	check(c.preview.texture == looks[0].frames.get_frame_texture(&"idle", 0), "shown standing")
-	c.step("look", 1)
-	check_eq(c.value_text("look"), looks[1].display_name, "the next look")
-	check(c.preview.texture == looks[1].frames.get_frame_texture(&"idle", 0), "and its picture")
 	await _create_and_play()
-	check_eq(Game.me.look, looks[1].id, "the new character has it")
+	check_eq(Game.me.look, looks[0].id, "the new character has it")
 
 func test_the_equipment_window_shows_what_is_worn() -> void:
 	await _play("Fresh")

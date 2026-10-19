@@ -8,7 +8,7 @@ Drop the sheet in `art/source/`, write a manifest in `art/sheets/`, and run
 `python3 tools/art/slice_sheets.py <name>`. `art/sheets/README.md` explains the manifest. The
 cut sprites land in `assets/sprites/`, ready to be referenced from data.
 
-The hero is painted whole per look (boy, girl, man, woman), each move a sheet with the worn
+The hero (the boy, the one look) is painted whole, each move a sheet with the worn
 armor and weapon painted on (see [characters](characters.md)).
 
 ## Making art with Gemini

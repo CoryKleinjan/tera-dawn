@@ -81,7 +81,8 @@ func _init() -> void:
 	preview.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	preview.custom_minimum_size = Vector2(150, 136)
 	right.add_child(preview)
-	right.add_child(_row("look", "Look", func(step: int) -> void: made.cycle_look(step)))
+	if HeroLookDef.all().size() > 1: # one look needs no choosing
+		right.add_child(_row("look", "Look", func(step: int) -> void: made.cycle_look(step)))
 	if not NewCharacter.outfit_kinds(job).is_empty():
 		right.add_child(UiBuild.label("Outfit", 15, Palette.EMBER))
 	for kind in NewCharacter.outfit_kinds(job):
@@ -169,7 +170,8 @@ func step(key: String, by: int) -> void:
 
 func _refresh() -> void:
 	var look := HeroLookDef.of(made.look)
-	(values["look"] as Label).text = look.display_name
+	if values.has("look"):
+		(values["look"] as Label).text = look.display_name
 	preview.texture = look.frames.get_frame_texture(&"idle", 0)
 	for kind in NewCharacter.outfit_kinds(job):
 		var e: EquipDef = made.outfit.get(kind)

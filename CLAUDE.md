@@ -68,9 +68,8 @@ python3 tools/art/gemini_pass.py --dry-run                           # Gemini ba
 
 ### Game rules
 The full list is `docs/game-rules.md`. The ones most often broken:
-- The hero is painted whole, never in layers: four looks (boy, girl, man, woman), and armor and
-  weapons are each one set item painted onto the whole character for every look; each job only
-  gets its own sets. See `docs/architecture/characters.md`.
+- The hero is the boy only, painted whole, never in layers; armor and weapons are each one set
+  item painted onto the whole character; each job only gets its own sets. See `docs/architecture/characters.md`.
 - No ammo for any weapon.
 - No ropes, ladders or climbing: everything is reached by platforming.
 - Characters and NPCs draw in front of land; no character or land shadows.

@@ -171,10 +171,10 @@ func test_an_older_clients_look_choices_are_left_out() -> void:
 
 func test_the_look_picked_is_the_characters_and_others_see_it() -> void:
 	var made := NewCharacter.new()
-	made.look = &"girl"
+	made.look = &"boy"
 	h.play(2, "Ann", made.to_dict())
-	check_eq(h.server.sessions[2].character.look, &"girl", "the look picked")
-	check_eq(h.server.sessions[2].info()[4], &"girl", "in what other players get")
+	check_eq(h.server.sessions[2].character.look, &"boy", "the look picked")
+	check_eq(h.server.sessions[2].info()[4], &"boy", "in what other players get")
 
 func test_player_info_is_sent_only_when_it_changes() -> void:
 	var a := h.join(2, "Ann")

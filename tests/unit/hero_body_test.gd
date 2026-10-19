@@ -8,7 +8,7 @@ const MOVES := [&"idle", &"walk", &"jump", &"jump_apex", &"fall", &"land", &"hur
 	&"double_jump", &"attack"]
 
 func test_every_look_has_every_move() -> void:
-	check(HeroLookDef.all().size() >= 4, "the four looks")
+	check(not HeroLookDef.all().is_empty(), "there is a look")
 	for look in HeroLookDef.all():
 		for m in MOVES:
 			check(look.frames.has_animation(m), "%s has %s" % [look.id, m])
@@ -47,7 +47,7 @@ func test_looks_come_in_order_and_an_unknown_one_is_the_first() -> void:
 	for i in looks.size() - 1:
 		check(looks[i].order <= looks[i + 1].order, "in order")
 	check(HeroLookDef.of(&"no_such_look") == looks[0], "the first look")
-	check(HeroLookDef.of(looks[1].id) == looks[1], "a look by its id")
+	check(HeroLookDef.of(looks[-1].id) == looks[-1], "a look by its id")
 
 func test_skill_motions_play_the_attack_and_poses_stand() -> void:
 	var frames := HeroLookDef.all()[0].frames

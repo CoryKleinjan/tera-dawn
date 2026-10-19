@@ -16,7 +16,7 @@ func after_each() -> void:
 func _rich() -> Character:
 	var c := fx.character()
 	c.name = "Saver"
-	c.look = &"woman"
+	c.look = &"boy"
 	c.level = 12
 	c.xp = 40
 	c.essence = 345
@@ -78,7 +78,7 @@ func test_round_trip_basics() -> void:
 	var c := _rich()
 	var b := _round_trip(c)
 	check_eq(b.name, "Saver", "name")
-	check_eq(b.look, &"woman", "look")
+	check_eq(b.look, &"boy", "look")
 	check_eq(b.essence, 345, "essence")
 	check_eq(b.shards, 9876, "shards")
 	check_eq(Array(b.jobs_passed), ["t_next", "t_other"], "jobs passed")

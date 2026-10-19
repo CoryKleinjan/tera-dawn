@@ -22,13 +22,13 @@ update this page when one changes. Each zone's own look and music are in
 
 ## Hero
 
-- The hero has four looks, picked in the character creator: a boy, a girl, a man and a woman,
-  all chibi and kid-sized as painted, turned three-quarters and facing right. Each look is
-  painted whole on every frame (no layers), one sheet per move. Older saves get the boy.
+- The hero is the chibi boy only (Cory, Oct 19), turned three-quarters and facing right; the
+  creator has no look to pick. He is painted whole on every frame (no layers), one sheet per
+  move. Saves made with a dropped look load as the boy.
 - Every move has its full animation, matching the 8-frame skill effects: the relic moves (Dash,
   Double Jump, Surge, Slam) are 8 painted frames each.
 - Armor is one set item and a weapon is one set item. Each set is painted onto the whole
-  character, for every look and frame; each job only gets the sets and weapons it can use. The
+  character, for every frame; each job only gets the sets and weapons it can use. The
   armor shows whenever it's worn: armor and weapon together, armor with an empty fist, plain
   clothes with the weapon, or plain clothes. Until a job's sets are painted, its gear doesn't
   show on him, every attack and skill plays the Surge's punch, and shots leave from that fist.
@@ -40,7 +40,7 @@ update this page when one changes. Each zone's own look and music are in
 - Head gear doesn't hide all hair: hair lies under it as it would in real life (long hair hangs
   below a helmet, a ponytail hangs from under the back rim), never poking out through it.
 - In armor his face is ready for battle: focused and determined, not over the top, never
-  smiling and happy. In plain clothes he keeps the friendly face his looks were painted with.
+  smiling and happy. In plain clothes he keeps the friendly face he was painted with.
 - His arms, fists and held weapons never cover his face, in any pose; both fists show. Blink
   has no pose of its own: he just vanishes and reappears.
 - Animations are shared across similar actions (one swing for all melee, one cast for all
@@ -153,7 +153,7 @@ update this page when one changes. Each zone's own look and music are in
   stats. A job set is one Armor piece and one weapon (that job and its blends only), each with
   its own painted icon matching what the hero wears, and its own effect while both are worn.
   Each job gets two sets. The Warrior's Vanguard set is sold at the Emberforge Armory from the
-  start. Its look, the same on every frame of every look: a steel helm with a raised ridge over
+  start. Its look, the same on every frame: a steel helm with a raised ridge over
   the middle of the dome, a riveted brow band, a pointed nose strip and cheek guards; a deep navy
   tabard with one narrow white stripe; a plain blue heater shield; a steel longsword. Its Battle
   Fury makes each kill swing 6% faster, up to 5 stacks, until 8 seconds pass with no kill, and
