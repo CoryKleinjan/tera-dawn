@@ -3,15 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://blii2d2lxp8ck"
-path="res://.godot/imported/gate.png-3630731580af5268eeae32a2231ff222.ctex"
+path.bptc="res://.godot/imported/gate.png-3630731580af5268eeae32a2231ff222.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/tiles/lanternfall_fields/gate.png"
-dest_files=["res://.godot/imported/gate.png-3630731580af5268eeae32a2231ff222.ctex"]
+dest_files=["res://.godot/imported/gate.png-3630731580af5268eeae32a2231ff222.bptc.ctex"]
 
 [params]
 

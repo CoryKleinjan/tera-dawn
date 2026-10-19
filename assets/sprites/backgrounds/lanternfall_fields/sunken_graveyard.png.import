@@ -3,15 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cjhwg2wooshyf"
-path="res://.godot/imported/sunken_graveyard.png-77fdc19e4d634f1a38da622d376d8f6c.ctex"
+path.bptc="res://.godot/imported/sunken_graveyard.png-77fdc19e4d634f1a38da622d376d8f6c.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/backgrounds/lanternfall_fields/sunken_graveyard.png"
-dest_files=["res://.godot/imported/sunken_graveyard.png-77fdc19e4d634f1a38da622d376d8f6c.ctex"]
+dest_files=["res://.godot/imported/sunken_graveyard.png-77fdc19e4d634f1a38da622d376d8f6c.bptc.ctex"]
 
 [params]
 

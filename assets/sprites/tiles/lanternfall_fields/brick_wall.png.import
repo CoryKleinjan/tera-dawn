@@ -3,15 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://qy2naeww4jh2"
-path="res://.godot/imported/brick_wall.png-e7ef1d43287227546b356d1f9dec8d88.ctex"
+path.bptc="res://.godot/imported/brick_wall.png-e7ef1d43287227546b356d1f9dec8d88.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/tiles/lanternfall_fields/brick_wall.png"
-dest_files=["res://.godot/imported/brick_wall.png-e7ef1d43287227546b356d1f9dec8d88.ctex"]
+dest_files=["res://.godot/imported/brick_wall.png-e7ef1d43287227546b356d1f9dec8d88.bptc.ctex"]
 
 [params]
 

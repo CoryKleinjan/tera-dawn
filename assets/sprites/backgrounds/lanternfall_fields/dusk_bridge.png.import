@@ -3,15 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bnfijhxml7q7l"
-path="res://.godot/imported/dusk_bridge.png-8852efd8109e5ca9dc1dbf4a99d5037d.ctex"
+path.bptc="res://.godot/imported/dusk_bridge.png-8852efd8109e5ca9dc1dbf4a99d5037d.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/backgrounds/lanternfall_fields/dusk_bridge.png"
-dest_files=["res://.godot/imported/dusk_bridge.png-8852efd8109e5ca9dc1dbf4a99d5037d.ctex"]
+dest_files=["res://.godot/imported/dusk_bridge.png-8852efd8109e5ca9dc1dbf4a99d5037d.bptc.ctex"]
 
 [params]
 

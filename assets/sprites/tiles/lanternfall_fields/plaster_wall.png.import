@@ -3,15 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c3asjk31duhpl"
-path="res://.godot/imported/plaster_wall.png-47218868c5948f751c716046407e09a0.ctex"
+path.bptc="res://.godot/imported/plaster_wall.png-47218868c5948f751c716046407e09a0.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/tiles/lanternfall_fields/plaster_wall.png"
-dest_files=["res://.godot/imported/plaster_wall.png-47218868c5948f751c716046407e09a0.ctex"]
+dest_files=["res://.godot/imported/plaster_wall.png-47218868c5948f751c716046407e09a0.bptc.ctex"]
 
 [params]
 

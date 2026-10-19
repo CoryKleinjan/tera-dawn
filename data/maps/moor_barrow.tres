@@ -1,34 +1,36 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=51 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=53 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/lantern.tres" id="2_lantern"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="3_biome_variant_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lanternfall_fields/cap_left.png" id="4_cap_left"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lanternfall_fields/middle_a.png" id="5_middle_a"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lanternfall_fields/middle_b.png" id="6_middle_b"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lanternfall_fields/cap_right.png" id="7_cap_right"]
-[ext_resource type="Texture2D" path="res://assets/sprites/ground/lanternfall_fields_side.png" id="8_lanternfall_fields_side"]
-[ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="9_backdrop_layer_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/lanternfall_fields/wraith_moor.png" id="10_wraith_moor"]
-[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="11_platform_def"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall_fields/gate.png" id="12_gate"]
-[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="13_portal_def"]
-[ext_resource type="Resource" path="res://data/monsters/gloomcap.tres" id="14_gloomcap"]
-[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="15_spawn_def"]
-[ext_resource type="Resource" path="res://data/monsters/night_boar.tres" id="16_night_boar"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall_fields/lever.png" id="17_lever"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall_fields/lever_pulled.png" id="18_lever_pulled"]
-[ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="19_breakable_def"]
-[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="20_dawnshard"]
-[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="21_drop_entry"]
-[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="22_white_potion"]
-[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="23_blue_potion"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall_fields/chest.png" id="24_chest"]
-[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall_fields/chest_open.png" id="25_chest_open"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/lanternfall_fields/overhang_left.png" id="4_overhang_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/lanternfall_fields/overhang_right.png" id="5_overhang_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lanternfall_fields/cap_left.png" id="6_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lanternfall_fields/middle_a.png" id="7_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lanternfall_fields/middle_b.png" id="8_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lanternfall_fields/cap_right.png" id="9_cap_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/lanternfall_fields_side.png" id="10_lanternfall_fields_side"]
+[ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="11_backdrop_layer_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/lanternfall_fields/wraith_moor.png" id="12_wraith_moor"]
+[ext_resource type="Script" path="res://scripts/data/platform_def.gd" id="13_platform_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall_fields/gate.png" id="14_gate"]
+[ext_resource type="Script" path="res://scripts/data/portal_def.gd" id="15_portal_def"]
+[ext_resource type="Resource" path="res://data/monsters/gloomcap.tres" id="16_gloomcap"]
+[ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="17_spawn_def"]
+[ext_resource type="Resource" path="res://data/monsters/night_boar.tres" id="18_night_boar"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall_fields/lever.png" id="19_lever"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall_fields/lever_pulled.png" id="20_lever_pulled"]
+[ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="21_breakable_def"]
+[ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="22_dawnshard"]
+[ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="23_drop_entry"]
+[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="24_white_potion"]
+[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="25_blue_potion"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall_fields/chest.png" id="26_chest"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall_fields/chest_open.png" id="27_chest_open"]
 
 [sub_resource type="Resource" id="Backdrop_picture"]
-script = ExtResource("9_backdrop_layer_def")
-textures = Array[Texture2D]([ExtResource("10_wraith_moor")])
+script = ExtResource("11_backdrop_layer_def")
+textures = Array[Texture2D]([ExtResource("12_wraith_moor")])
 mode = 2
 depth = 300.0
 screen_top = Vector2(-0.2, -0.2)
@@ -39,175 +41,179 @@ fog_color = Color(0.4157, 0.4784, 0.6039, 1)
 mote_color = Color(1.6, 2.2, 2.6, 1)
 grade_saturation = 0.8
 sky_horizon = Color(0.6275, 0.6902, 0.8157, 1)
+frame_scale = 0.5
+frame_fade = 0.35
 hide_edge_grass = true
 hide_platform_decor = true
-platform_left = ExtResource("4_cap_left")
-platform_middle = ExtResource("5_middle_a")
-platform_middle_alt = ExtResource("6_middle_b")
-platform_right = ExtResource("7_cap_right")
-ground_side = ExtResource("8_lanternfall_fields_side")
+frame_left = ExtResource("4_overhang_left")
+frame_right = ExtResource("5_overhang_right")
+platform_left = ExtResource("6_cap_left")
+platform_middle = ExtResource("7_middle_a")
+platform_middle_alt = ExtResource("8_middle_b")
+platform_right = ExtResource("9_cap_right")
+ground_side = ExtResource("10_lanternfall_fields_side")
 hide_layers = PackedInt32Array(0, 1, 2, 3, 4, 5, 6)
-more_backdrop = Array[ExtResource("9_backdrop_layer_def")]([SubResource("Backdrop_picture")])
+more_backdrop = Array[ExtResource("11_backdrop_layer_def")]([SubResource("Backdrop_picture")])
 
 [sub_resource type="Resource" id="Platform_1"]
-script = ExtResource("11_platform_def")
+script = ExtResource("13_platform_def")
 x = 300.0
 y = 845.0
 width = 400.0
 
 [sub_resource type="Resource" id="Platform_2"]
-script = ExtResource("11_platform_def")
+script = ExtResource("13_platform_def")
 x = 700.0
 y = 770.0
 width = 400.0
 
 [sub_resource type="Resource" id="Platform_3"]
-script = ExtResource("11_platform_def")
+script = ExtResource("13_platform_def")
 x = 1100.0
 y = 695.0
 width = 400.0
 
 [sub_resource type="Resource" id="Platform_4"]
-script = ExtResource("11_platform_def")
+script = ExtResource("13_platform_def")
 x = 800.0
 y = 545.0
 width = 400.0
 
 [sub_resource type="Resource" id="Platform_5"]
-script = ExtResource("11_platform_def")
+script = ExtResource("13_platform_def")
 x = 950.0
 y = 395.0
 width = 350.0
 
 [sub_resource type="Resource" id="Platform_6"]
-script = ExtResource("11_platform_def")
+script = ExtResource("13_platform_def")
 x = 950.0
 y = 245.0
 width = 450.0
 
 [sub_resource type="Resource" id="Platform_7"]
-script = ExtResource("11_platform_def")
+script = ExtResource("13_platform_def")
 x = 1600.0
 y = 845.0
 width = 400.0
 
 [sub_resource type="Resource" id="Platform_8"]
-script = ExtResource("11_platform_def")
+script = ExtResource("13_platform_def")
 x = 1900.0
 y = 770.0
 width = 300.0
 
 [sub_resource type="Resource" id="Platform_9"]
-script = ExtResource("11_platform_def")
+script = ExtResource("13_platform_def")
 x = 650.0
 y = 80.0
 width = 150.0
 secret = true
 
 [sub_resource type="Resource" id="Portal_0"]
-script = ExtResource("13_portal_def")
+script = ExtResource("15_portal_def")
 x = 1150.0
 platform = 6
 target_map = &"wraith_moor"
 target_x = 1700.0
 gate = &"moor_barrow_gate"
-gate_picture = ExtResource("12_gate")
+gate_picture = ExtResource("14_gate")
 
 [sub_resource type="Resource" id="Portal_1"]
-script = ExtResource("13_portal_def")
+script = ExtResource("15_portal_def")
 x = 60.0
 target_map = &"sunken_graveyard"
 target_x = 2950.0
 
 [sub_resource type="Resource" id="Spawn_0"]
-script = ExtResource("15_spawn_def")
-monster = ExtResource("14_gloomcap")
+script = ExtResource("17_spawn_def")
+monster = ExtResource("16_gloomcap")
 platform = 0
 count = 4
 patrol_from = 300.0
 patrol_to = 2200.0
 
 [sub_resource type="Resource" id="Spawn_1"]
-script = ExtResource("15_spawn_def")
-monster = ExtResource("16_night_boar")
+script = ExtResource("17_spawn_def")
+monster = ExtResource("18_night_boar")
 platform = 2
 count = 2
 
 [sub_resource type="Resource" id="Spawn_2"]
-script = ExtResource("15_spawn_def")
-monster = ExtResource("14_gloomcap")
+script = ExtResource("17_spawn_def")
+monster = ExtResource("16_gloomcap")
 platform = 7
 count = 2
 
 [sub_resource type="Resource" id="Breakable_0"]
-script = ExtResource("19_breakable_def")
+script = ExtResource("21_breakable_def")
 id = &"barrow_gate"
 x = 1800.0
 platform = 7
 hits = 1
-whole = ExtResource("17_lever")
-broken = ExtResource("18_lever_pulled")
+whole = ExtResource("19_lever")
+broken = ExtResource("20_lever_pulled")
 height = 80.0
 
 [sub_resource type="Resource" id="Loot_1_0"]
-script = ExtResource("21_drop_entry")
-item = ExtResource("20_dawnshard")
+script = ExtResource("23_drop_entry")
+item = ExtResource("22_dawnshard")
 min_amount = 160
 max_amount = 240
 
 [sub_resource type="Resource" id="Loot_1_1"]
-script = ExtResource("21_drop_entry")
-item = ExtResource("22_white_potion")
+script = ExtResource("23_drop_entry")
+item = ExtResource("24_white_potion")
 min_amount = 3
 max_amount = 3
 
 [sub_resource type="Resource" id="Loot_1_2"]
-script = ExtResource("21_drop_entry")
-item = ExtResource("23_blue_potion")
+script = ExtResource("23_drop_entry")
+item = ExtResource("25_blue_potion")
 min_amount = 3
 max_amount = 3
 
 [sub_resource type="Resource" id="Breakable_1"]
-script = ExtResource("19_breakable_def")
+script = ExtResource("21_breakable_def")
 id = &"moor_barrow_hoard_chest"
 x = 1200.0
 platform = 0
 hits = 1
-whole = ExtResource("24_chest")
-broken = ExtResource("25_chest_open")
+whole = ExtResource("26_chest")
+broken = ExtResource("27_chest_open")
 height = 48.0
-loot = Array[ExtResource("21_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
-card = ExtResource("14_gloomcap")
+loot = Array[ExtResource("23_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
+card = ExtResource("16_gloomcap")
 
 [sub_resource type="Resource" id="Loot_2_0"]
-script = ExtResource("21_drop_entry")
-item = ExtResource("20_dawnshard")
+script = ExtResource("23_drop_entry")
+item = ExtResource("22_dawnshard")
 min_amount = 160
 max_amount = 240
 
 [sub_resource type="Resource" id="Loot_2_1"]
-script = ExtResource("21_drop_entry")
-item = ExtResource("22_white_potion")
+script = ExtResource("23_drop_entry")
+item = ExtResource("24_white_potion")
 min_amount = 3
 max_amount = 3
 
 [sub_resource type="Resource" id="Loot_2_2"]
-script = ExtResource("21_drop_entry")
-item = ExtResource("23_blue_potion")
+script = ExtResource("23_drop_entry")
+item = ExtResource("25_blue_potion")
 min_amount = 3
 max_amount = 3
 
 [sub_resource type="Resource" id="Breakable_2"]
-script = ExtResource("19_breakable_def")
+script = ExtResource("21_breakable_def")
 id = &"moor_barrow_high_chest"
 x = 725.0
 platform = 9
 hits = 1
-whole = ExtResource("24_chest")
-broken = ExtResource("25_chest_open")
+whole = ExtResource("26_chest")
+broken = ExtResource("27_chest_open")
 height = 48.0
-loot = Array[ExtResource("21_drop_entry")]([SubResource("Loot_2_0"), SubResource("Loot_2_1"), SubResource("Loot_2_2")])
-card = ExtResource("16_night_boar")
+loot = Array[ExtResource("23_drop_entry")]([SubResource("Loot_2_0"), SubResource("Loot_2_1"), SubResource("Loot_2_2")])
+card = ExtResource("18_night_boar")
 
 [resource]
 script = ExtResource("1_map_def")
@@ -219,10 +225,10 @@ width = 2400
 height = 1000
 ground_y = 920
 start_x = 1150.0
-platforms = Array[ExtResource("11_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9")])
-portals = Array[ExtResource("13_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1")])
-breakables = Array[ExtResource("19_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1"), SubResource("Breakable_2")])
-spawns = Array[ExtResource("15_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2")])
+platforms = Array[ExtResource("13_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9")])
+portals = Array[ExtResource("15_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1")])
+breakables = Array[ExtResource("21_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1"), SubResource("Breakable_2")])
+spawns = Array[ExtResource("17_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2")])
 region = &"lanternfall"
 world_pos = Vector2(750.0, 470.0)
 zone_pos = Vector2(3780.0, 4720.0)

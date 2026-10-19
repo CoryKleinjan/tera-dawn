@@ -3,15 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://chikbwkwuph56"
-path="res://.godot/imported/gloom_woods.png-babbdd127970a97a01d955b4087e712f.ctex"
+path.bptc="res://.godot/imported/gloom_woods.png-babbdd127970a97a01d955b4087e712f.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/backgrounds/lanternfall_fields/gloom_woods.png"
-dest_files=["res://.godot/imported/gloom_woods.png-babbdd127970a97a01d955b4087e712f.ctex"]
+dest_files=["res://.godot/imported/gloom_woods.png-babbdd127970a97a01d955b4087e712f.bptc.ctex"]
 
 [params]
 

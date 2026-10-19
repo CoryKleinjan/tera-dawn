@@ -3,15 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://epuf2k4iua5h"
-path="res://.godot/imported/chest_open.png-7d8ef74c3b2c995cbb2b1c8424c5ef6f.ctex"
+path.bptc="res://.godot/imported/chest_open.png-7d8ef74c3b2c995cbb2b1c8424c5ef6f.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/tiles/lanternfall_fields/chest_open.png"
-dest_files=["res://.godot/imported/chest_open.png-7d8ef74c3b2c995cbb2b1c8424c5ef6f.ctex"]
+dest_files=["res://.godot/imported/chest_open.png-7d8ef74c3b2c995cbb2b1c8424c5ef6f.bptc.ctex"]
 
 [params]
 

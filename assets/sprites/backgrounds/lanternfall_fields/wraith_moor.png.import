@@ -3,15 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://4pd5fc451fjv"
-path="res://.godot/imported/wraith_moor.png-52dbe9c93d57908d10d6924ac7bbb77b.ctex"
+path.bptc="res://.godot/imported/wraith_moor.png-52dbe9c93d57908d10d6924ac7bbb77b.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/backgrounds/lanternfall_fields/wraith_moor.png"
-dest_files=["res://.godot/imported/wraith_moor.png-52dbe9c93d57908d10d6924ac7bbb77b.ctex"]
+dest_files=["res://.godot/imported/wraith_moor.png-52dbe9c93d57908d10d6924ac7bbb77b.bptc.ctex"]
 
 [params]
 
