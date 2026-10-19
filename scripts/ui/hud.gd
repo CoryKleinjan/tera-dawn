@@ -1,6 +1,6 @@
 class_name TDHud
 extends CanvasLayer
-## The screen UI: the status bar (HP, MP, Dawn Essence, skills, Dawnshards), the in-game
+## The screen UI: hearts and Mana (top left), the status bar (EXP, windows, Dawnshards), the in-game
 ## overlay, the game windows (inventory, equipment, character), the game menu (Esc) and the
 ## settings screen. It shows and hides the title screen (TDTitleScreen) and handles Esc.
 ## Art comes from UiSkin.
@@ -10,6 +10,7 @@ const WINDOW_ACTIONS: Array[String] = ["inventory", "equipment", "stats", "skill
 
 var world: TDWorld
 var overlay: TDOverlay
+var vitals: TDVitals
 var status: TDStatusBar
 var quickslots: TDQuickslots
 var tracker: TDQuestTracker
@@ -67,6 +68,11 @@ func _ready() -> void:
 	overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
 	overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	add_child(overlay)
+	vitals = TDVitals.new()
+	vitals.world = world
+	vitals.set_anchors_preset(Control.PRESET_FULL_RECT)
+	vitals.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	add_child(vitals)
 	tracker = TDQuestTracker.new()
 	tracker.world = world
 	add_child(tracker)

@@ -49,6 +49,7 @@ func test_up_misses_a_monster_ahead() -> void:
 func test_a_buff_never_aims() -> void:
 	var skill := Content.skill(&"quick_step")
 	p.character.skills.learned[skill.id] = 1
+	p.character.mp = p.character.max_mp()
 	check_eq(_attack(Hitbox.Aim.UP, skill.id)[6], Hitbox.Aim.AHEAD, "shown ahead")
 
 func test_a_nonsense_aim_counts_as_ahead() -> void:

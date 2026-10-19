@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdqptjiabdan0"
-path="res://.godot/imported/mp_frame.png-62faf027e232a7f3465609f12ed0a047.ctex"
+uid="uid://dxbyi01032n22"
+path="res://.godot/imported/mana_full.png-f8719cefcd6c566d6fc1ca2f038df95a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/ui/mp_frame.png"
-dest_files=["res://.godot/imported/mp_frame.png-62faf027e232a7f3465609f12ed0a047.ctex"]
+source_file="res://assets/sprites/ui/mana_full.png"
+dest_files=["res://.godot/imported/mana_full.png-f8719cefcd6c566d6fc1ca2f038df95a.ctex"]
 
 [params]
 

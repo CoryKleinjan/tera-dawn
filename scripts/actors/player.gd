@@ -135,6 +135,8 @@ var ready_t := 0      # ticks of the combat-ready stance left after an attack
 var turn_t := 0       # ticks of the turn pose
 var run_t := 0        # ticks spent at top speed (faster after RUN_AFTER, see _top_speed)
 var loot_cd := 0      # ticks before the loot key asks for the next item
+## Ticks the heal key has been held standing still: at SimPlayer.HEAL_TICKS Mana heals a heart.
+var heal_t := 0
 ## A cutscene walking you: -1 left, 1 right, 0 not (your keys don't work meanwhile).
 var auto_walk := 0
 ## A cutscene holding you in a pose (CutsceneStep.Kind.POSE), or empty.
@@ -334,6 +336,8 @@ func step() -> void:
 	elif _tapped("sit") and _can_sit():
 		_report()
 		Net.ask(&"req_sit", [true])
+	if _healing():
+		return
 	_attacks()
 	# hold the loot key to pick up everything in reach, one item after another
 	if _held("loot") and loot_cd == 0:
@@ -344,6 +348,22 @@ func step() -> void:
 		_move()
 	if world.tick % REPORT_EVERY == 0 or _animation() != _reported:
 		_report()
+
+## Holding the heal key keeps him standing still while Mana gathers; held long enough, it
+## heals a heart (the server checks the Mana and the time), and holding on heals the next.
+## True while he's healing, so he does nothing else this tick.
+func _healing() -> bool:
+	if not (_held("heal") and _can_sit() and Game.me.can_heal()):
+		heal_t = 0
+		return false
+	vel.x = 0.0
+	heal_t += 1
+	if heal_t >= SimPlayer.HEAL_TICKS:
+		heal_t = 0
+		Net.ask(&"req_heal")
+	if world.tick % REPORT_EVERY == 0:
+		_report()
+	return true
 
 ## Standing still on the ground with nothing else going on (the server checks too).
 func _can_sit() -> bool:

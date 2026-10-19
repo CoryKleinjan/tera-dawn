@@ -1,6 +1,6 @@
 extends TestCase
-## Fainting: a monster's blow that takes the last HP, the EXP it costs, lying still, and
-## waking up in town with half HP and MP and a moment of invincibility.
+## Fainting: a monster's blow that takes the last heart, the EXP it costs, lying still, and
+## waking up in town with every heart, no Mana and a moment of invincibility.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
@@ -17,7 +17,7 @@ func before_each() -> void:
 	map.mobs[0].position.x = 300.0
 	p = h.join(2, "Ann", ServerHarness.FIELD, 300.0)
 	c = p.character
-	ServerHarness.no_dodge(c) # the blow can't be dodged
+	c.health.set_hp(1) # one blow takes the last heart
 	c.essence = 15
 	c.xp = 15
 
@@ -27,7 +27,7 @@ func after_each() -> void:
 func test_losing_all_hp_faints_and_costs_a_tenth_of_your_exp() -> void:
 	h.step(1)
 	check(p.fainted(), "fainted")
-	check_eq(c.health.hp, 0, "no HP")
+	check_eq(c.health.hp, 0, "no hearts")
 	check_eq(c.xp, 14, "lost 10% of the EXP (rounded down)")
 	check_eq(c.essence, 15, "the essence is safe")
 	check_eq(h.count(2, &"ev_fainted"), 1, "told the client")
@@ -49,10 +49,11 @@ func test_you_wake_up_in_the_maps_town_after_lying_still() -> void:
 	check_eq(p.map.def.id, ServerHarness.TOWN, "in the field's town")
 	check_eq(h.last(2, &"ev_enter_map").slice(0, 2), [ServerHarness.TOWN, 500.0], "at the town's start")
 
-func test_waking_up_gives_half_hp_and_mp_and_invincibility() -> void:
+func test_waking_up_gives_every_heart_no_mana_and_invincibility() -> void:
+	c.mp = 50
 	h.step(SimPlayer.FAINT_TICKS + 1)
-	check_eq(c.health.hp, ceili(c.max_hp() / 2.0), "half HP, rounded up")
-	check_eq(c.mp, ceili(c.max_mp() / 2.0), "half MP, rounded up")
+	check_eq(c.health.hp, c.max_hp(), "every heart")
+	check_eq(c.mp, 0, "an empty orb")
 	check_eq(p.inv, 120, "a moment of invincibility")
 
 func test_fainting_in_a_town_wakes_you_in_that_town() -> void:
@@ -79,7 +80,7 @@ func test_leaving_while_fainted_wakes_you_in_town() -> void:
 	h.ask(2, &"req_leave_character")
 	var saved := h.saved("Ann")
 	check_eq(saved.map_id, ServerHarness.TOWN, "saved in the field's town")
-	check_eq(saved.health.hp, ceili(saved.max_hp() / 2.0), "with half HP")
+	check_eq(saved.health.hp, saved.max_hp(), "with every heart")
 	h.play(2, "Ann")
 	check_eq(h.server.player_of(2).map.def.id, ServerHarness.TOWN, "and comes back there")
 	check(not h.server.player_of(2).fainted(), "awake")

@@ -12,11 +12,9 @@ func before_each() -> void:
 func after_each() -> void:
 	h.close()
 
-## Puts `char_name` on the test field at `x` with no avoid: nothing they're hit by can be
-## dodged.
+## Puts `char_name` on the test field at `x` with every heart.
 func _join(peer: int, char_name: String, x: float) -> SimPlayer:
 	var p := h.join(peer, char_name, ServerHarness.FIELD, x)
-	ServerHarness.no_dodge(p.character)
 	p.character.refill()
 	return p
 
@@ -98,9 +96,8 @@ func test_touching_a_monster_hurts_then_gives_invincibility() -> void:
 	var p := _join(2, "Ann", 300.0)
 	var full := p.character.health.hp
 	h.step(1)
-	check_eq(p.character.health.hp, full - 1, "one damage on touch")
+	check_eq(p.character.health.hp, full - 1, "a heart lost on touch")
 	check_eq(h.last(2, &"ev_hurt"), [300.0], "knocked back from the monster")
-	check_eq(h.last(2, &"ev_number").slice(2), [1, "taken"], "damage number")
 	check_eq(p.inv, SimPlayer.HURT_INV, "invincible for a while")
 	h.step(SimPlayer.HURT_INV - 1)
 	check_eq(p.character.health.hp, full - 1, "no more damage while invincible")
@@ -267,7 +264,7 @@ func test_a_lunge_hurts_and_each_player_once() -> void:
 		if p.character.health.hp < p.character.max_hp():
 			hurt_by = p.character.max_hp() - p.character.health.hp
 			break
-	check_between(hurt_by, 20, 36, "the lunge hits for its power (3x an attack of 10)")
+	check_eq(hurt_by, 1, "the lunge takes one heart")
 	check(m.position.x < 600.0, "it lunged forward")
 
 func test_a_charge_dashes_along_the_platform() -> void:
@@ -310,7 +307,7 @@ func test_a_slam_hurts_a_player_on_the_ground_nearby() -> void:
 	_ready_now(m)
 	var p := _join(2, "Ann", 690.0)
 	h.step(21)
-	check_between(p.character.max_hp() - p.character.health.hp, 13, 24, "hit for its power (2x an attack of 10)")
+	check_eq(p.character.max_hp() - p.character.health.hp, 1, "one heart: only a boss's big hit takes two")
 
 func test_a_swoop_dives_down_to_the_player() -> void:
 	var mv := _move(MonsterMove.Kind.SWOOP, 250.0)

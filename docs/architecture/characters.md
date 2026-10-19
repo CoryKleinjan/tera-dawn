@@ -51,8 +51,14 @@ then character select shows the list (name and job) with the new character picke
 
 ### Sitting, pets, the Monster Book and achievements
 
+- **Hearts and Mana**: `Character.health` counts hearts (`CharacterStats.max_hp`: BASE_HEARTS
+  plus one per HEART_SHARDS_PER_HEART `heart_shards`) and `Character.mp` is Mana
+  (`max_mp` from `mana_shards`). `Combat.monster_hit` takes one heart, two for a boss's big move.
+  `MapInstance.use_skill` adds MANA_PER_HIT for each monster a no-cost attack strikes; holding
+  Heal (`TDPlayer._healing`, SimPlayer.HEAL_TICKS) asks `req_heal`, and `TDServer.on_heal`
+  spends HEAL_COST on a heart (`Character.heal_heart`). Nothing regenerates over time.
 - **Sitting** is on the ground (there are no chairs): the Sit key asks `req_sit`, the server
-  keeps it in `SimPlayer.sitting` and doubles the base regen while it's on. Moving
+  keeps it in `SimPlayer.sitting` (it heals nothing; a rest spot's bench does). Moving
   (`SimPlayer.report_move`) or a monster hit (`MapInstance.hurt_player`) clears it; others see
   the "sit" animation in the snapshot.
 - **Pets** (`PetDef`) live in the Setup tab and are brought out with `req_setup`. The pet
