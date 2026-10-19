@@ -34489,6 +34489,190 @@
   "town_check": {
    "kind": "backdrop"
   }
+ },
+ {
+  "id": "vanguard_steel_boy_set_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_steel_boy_set_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-19 thread 'Hero pose review' (Cory 03:57Z \"Fix it all\"): wave 366 test, the boy's full-set jump: crossguard and pommel bronze in every cell; the approved sword (refs/vanguard_boy_final_stand.png) is all steel with a brown grip. Text only: no prompt named the hilt colours before, and the bronze slams used a bronze ref. Cells named by row and place, never numbers. Priced line: \"Should I paint 8 test sheets first, for $0.56?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/boy_vanguard_jump_land_hurt_w366.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background, with a thin border between the cells, showing the same chibi boy with short brown hair, wearing a steel helm, a chainmail shirt, brown leather shoulder guards and a deep navy tabard with one narrow white stripe, in 8 animation frames. The poses in this sheet are right and stay exactly as they are: top row, 1st cell: standing with the knees a little bent, about to jump, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; top row, 2nd cell: springing up, his sword raised high in the fist on the LEFT side of the picture, the raised fist on the RIGHT side of the picture gripping the shield; top row, 3rd cell: high in the air with the knees tucked up, his sword in the fist on the LEFT side of the picture pointing down, the shield on the arm on the RIGHT side of the picture; top row, 4th cell: falling with the legs kicked out, his sword raised high in the fist on the LEFT side of the picture, the raised fist on the RIGHT side of the picture gripping the shield; bottom row, 1st cell: landing, standing with the knees bent, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; bottom row, 2nd cell: standing, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; bottom row, 3rd cell: flinching back, hurt, eyes squeezed shut, mouth open, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; bottom row, 4th cell: flinching back, hurt, eyes squeezed shut, mouth open, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture. This edit changes only the sword's crossguard and pommel, in every cell. His sword is a steel blade, a steel crossguard, a brown leather grip and a round steel pommel: its crossguard and its round pommel are polished steel, the same steel grey as its blade, with the same light and shading as the blade; the grip stays brown leather. Each sword keeps its own shape, size, angle and place in its cell, and each fist keeps its own grip on it. Keep EVERYTHING else exactly as it is in every cell, at the same size and place in the cell; never change a pose, and each face keeps its exact expression. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere, with only the thin borders between the cells, exactly as in the base. Nothing else is added; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_gloves_boy_set_idle_faint_sit_crouch",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_gloves_boy_set_idle_faint_sit_crouch.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-19 thread 'Hero pose review' (Cory 03:57Z \"Fix it all\"): wave 366 test, the boy's full-set idle: steel plate hands where every other move has brown leather gloves (refs/vanguard_boy_final_stand.png), and a riveted helm ridge in the bottom row 1st, 3rd and 4th cells. Cells named by row and place, never numbers. Priced line: \"Should I paint 8 test sheets first, for $0.56?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/boy_vanguard_idle_faint_sit_crouch_w366.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background, with a thin border between the cells, showing the same chibi boy with short brown hair, wearing a steel helm, a chainmail shirt, brown leather shoulder guards and a deep navy tabard with one narrow white stripe, in 8 animation frames. The poses in this sheet are right and stay exactly as they are: top row, 1st cell: standing at rest, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; top row, 2nd cell: standing at rest, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; top row, 3rd cell: swaying, eyes closed, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; top row, 4th cell: down on one knee, eyes closed, head bowed, his sword held low across his knees in the fist on the LEFT side of the picture, pointing to the right, the shield on the arm on the RIGHT side of the picture; bottom row, 1st cell: toppling forward through the air, eyes closed, his sword in the fist on the LEFT side of the picture pointing down, the shield on the arm on the RIGHT side of the picture; bottom row, 2nd cell: lying on the ground on his front, head on its side, eyes closed, his shield behind his back, his sword on the ground under him; bottom row, 3rd cell: sitting cross-legged on the ground, eyes closed, his sword on the ground in front of him, his shield on the ground at the lower right; bottom row, 4th cell: standing with the knees bent, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture. This edit changes two things only. First, in every cell, both of his hands wear brown leather gloves, the same warm brown as his belt, with the fingers soft leather; the steel guard on the forearm of his sword arm stays exactly as it is. Each hand keeps its own place, size and grip. Second, in the bottom row, 1st cell, the bottom row, 3rd cell and the bottom row, 4th cell, the raised ridge over the middle of his helm is smooth plain steel, exactly like the ridge in the top row, 1st cell. Keep EVERYTHING else exactly as it is in every cell, at the same size and place in the cell; never change a pose, and each face keeps its exact expression. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere, with only the thin borders between the cells, exactly as in the base. Nothing else is added; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_face_woman_set_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_face_woman_set_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-19 thread 'Hero pose review' (Cory 03:57Z \"Fix it all\"): wave 366 test, the woman's full-set jump: smiling in the top row 3rd and 4th cells and the bottom row 2nd cell, where the armor has a battle-ready face. Cells named by row and place, never numbers. Priced line: \"Should I paint 8 test sheets first, for $0.56?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/woman_vanguard_jump_land_hurt_w366.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background, with a thin border between the cells, showing the same chibi grown woman with long auburn hair, wearing a steel helm, a chainmail shirt, brown leather shoulder guards and a blue tabard edged in white, in 8 animation frames. The poses in this sheet are right and stay exactly as they are: top row, 1st cell: standing with the knees a little bent, about to jump, her sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; top row, 2nd cell: springing up, her sword raised high in the fist on the LEFT side of the picture, the raised fist on the RIGHT side of the picture gripping the shield; top row, 3rd cell: high in the air with the knees tucked up, her sword in the fist on the LEFT side of the picture pointing down, the shield on the arm on the RIGHT side of the picture; top row, 4th cell: falling with the legs kicked out, her sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; bottom row, 1st cell: landing, standing with the knees bent, her sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; bottom row, 2nd cell: standing, her sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; bottom row, 3rd cell: flinching back, hurt, eyes squeezed shut, her sword raised in the fist on the LEFT side of the picture, the shield on the arm on the RIGHT side of the picture; bottom row, 4th cell: flinching back, hurt, eyes squeezed shut, mouth open, her sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture. This edit changes 3 faces only: in the top row, 3rd cell, the top row, 4th cell and the bottom row, 2nd cell, her face is serious and battle-ready, exactly like her face in the top row, 1st cell: brows drawn down, eyes steady, mouth a small straight line. Everything else in those cells stays exactly as it is. Keep EVERYTHING else exactly as it is in every cell, at the same size and place in the cell; never change a pose, and each face keeps its exact expression. These cells stay exactly as they are, everything in them included: the top row, 1st cell; the top row, 2nd cell; the bottom row, 1st cell; the bottom row, 3rd cell; the bottom row, 4th cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere, with only the thin borders between the cells, exactly as in the base. Nothing else is added; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_unsword3_boy_armor_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_unsword3_boy_armor_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-19 thread 'Hero pose review' (Cory 03:57Z \"Fix it all\"): wave 366 test, the boy's armor-only jump, top row 2nd cell (wave 363 put the shield on the other arm; wave 365 lost the shield): redo with the method from wave 364/365 (woman kneel, the one that came back right): the base is the armor-only sheet with that cell taken from the approved full-set sheet, so the shield is already right, and the edit only takes the sword out, naming it once, as leaving. No fist close-up: in wave 365 the man's close-up (fist and forearm) was painted at fist size and the boy's (from a cell with both fists empty) gave two empty fists and no shield. Cells named by row and place, never numbers. Priced line: \"Should I paint 8 test sheets first, for $0.56?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/boy_vanguard_armor_jump_land_hurt_from_set.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background, with a thin border between the cells, showing the same chibi boy with short brown hair, wearing a steel helm, a chainmail shirt, brown leather shoulder guards and a deep navy tabard with one narrow white stripe, in 8 animation frames. The poses in this sheet are right and stay exactly as they are: top row, 1st cell: standing with the knees a little bent, about to jump, the fist on the LEFT side of the picture an empty fist, the shield on the arm on the RIGHT side of the picture; top row, 2nd cell: springing up, the fist on the LEFT side of the picture raised high beside the helm, the raised fist on the RIGHT side of the picture gripping the shield; top row, 3rd cell: high in the air with the knees tucked up, the fist on the LEFT side of the picture an empty fist, the shield on the arm on the RIGHT side of the picture; top row, 4th cell: falling with the legs kicked out, both fists raised, the shield on the arm on the RIGHT side of the picture; bottom row, 1st cell: landing, standing with the knees bent, the fist on the LEFT side of the picture an empty fist, the shield on the arm on the RIGHT side of the picture; bottom row, 2nd cell: standing, the fist on the LEFT side of the picture an empty fist, the shield on the arm on the RIGHT side of the picture; bottom row, 3rd cell: flinching back, hurt, eyes squeezed shut, mouth open, the fist on the LEFT side of the picture an empty fist, the shield on the arm on the RIGHT side of the picture; bottom row, 4th cell: flinching back, hurt, eyes squeezed shut, mouth open, the fist on the LEFT side of the picture an empty fist, the shield on the arm on the RIGHT side of the picture. This edit changes 1 cell only: the top row, 2nd cell. In that cell, the raised fist on the LEFT side of the picture lets go of its sword, which leaves the picture; the flat magenta background shows where it was, and where it touched the helm, the helm shows whole, as in the top row, 1st cell. That fist stays raised exactly where it is, at the same size and angle, and becomes an empty closed fist in its brown leather glove, exactly the same size as the fist on the LEFT side of the picture in the top row, 1st cell. In the top row, 2nd cell, the raised fist on the RIGHT side of the picture keeps gripping his shield exactly as it is, shield included, and his face stays fully in view. There is one shield in that cell, on the RIGHT side of the picture, exactly as in the base. Keep EVERYTHING else exactly as it is in every cell, at the same size and place in the cell; never change a pose, and each face keeps its exact expression. These cells stay exactly as they are, everything in them included: the top row, 1st cell; the top row, 3rd cell; the top row, 4th cell; the bottom row, 1st cell; the bottom row, 2nd cell; the bottom row, 3rd cell; the bottom row, 4th cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere, with only the thin borders between the cells, exactly as in the base. Nothing else is added; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_unsword3_man_armor_double_jump",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_unsword3_man_armor_double_jump.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-19 thread 'Hero pose review' (Cory 03:57Z \"Fix it all\"): wave 366 test, the man's armor-only double jump, bottom row 4th cell (wave 363 gave two shields; wave 365's fist came out half again too big): redo with the method from wave 364/365 (woman kneel, the one that came back right): the base is the armor-only sheet with that cell taken from the approved full-set sheet, so the shield is already right, and the edit only takes the sword out, naming it once, as leaving. No fist close-up: in wave 365 the man's close-up (fist and forearm) was painted at fist size and the boy's (from a cell with both fists empty) gave two empty fists and no shield. Cells named by row and place, never numbers. Priced line: \"Should I paint 8 test sheets first, for $0.56?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/man_vanguard_armor_double_jump_from_set.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background, with a thin border between the cells, showing the same chibi grown man with light stubble, wearing a steel helm, a chainmail shirt, brown leather shoulder guards and a deep navy tabard with one narrow white stripe, in 8 animation frames. The poses in this sheet are right and stay exactly as they are: top row, 1st cell: in the air with the knees bent, the fist on the LEFT side of the picture an empty fist, the shield on the arm on the RIGHT side of the picture; top row, 2nd cell: curled up in mid air, knees to his chest, both fists together in front of his chest, the shield on the arm on the RIGHT side of the picture; top row, 3rd cell: springing up, one knee raised, both fists raised, the shield on the raised arm on the RIGHT side of the picture; top row, 4th cell: springing up, legs straight, both fists raised, the shield on the raised arm on the RIGHT side of the picture; bottom row, 1st cell: tumbling sideways in mid air, head to the right, the shield behind him; bottom row, 2nd cell: upside down in the middle of the flip, the shield showing; bottom row, 3rd cell: coming out of the flip, in the air with the knees bent, the fist on the LEFT side of the picture an empty fist, the shield on the arm on the RIGHT side of the picture; bottom row, 4th cell: in the air with the legs hanging, the fist on the LEFT side of the picture raised high beside the helm, the fist on the RIGHT side of the picture at his chest, gripping the shield on that arm. This edit changes 1 cell only: the bottom row, 4th cell. In that cell, the raised fist on the LEFT side of the picture lets go of its sword, which leaves the picture; the flat magenta background shows where it was. That fist stays raised exactly where it is, at the same size and angle, and becomes an empty closed fist in its brown leather glove, exactly the same size as the fist on the LEFT side of the picture in the top row, 1st cell. In the bottom row, 4th cell, the fist on the RIGHT side of the picture keeps gripping his shield at his chest exactly as it is, shield included, and his face stays fully in view. There is one shield in that cell, on the RIGHT side of the picture, exactly as in the base. Keep EVERYTHING else exactly as it is in every cell, at the same size and place in the cell; never change a pose, and each face keeps its exact expression. These cells stay exactly as they are, everything in them included: the top row, 1st cell; the top row, 2nd cell; the top row, 3rd cell; the top row, 4th cell; the bottom row, 1st cell; the bottom row, 2nd cell; the bottom row, 3rd cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere, with only the thin borders between the cells, exactly as in the base. Nothing else is added; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_unsword3_man_armor_jump_land_hurt",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_unsword3_man_armor_jump_land_hurt.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-19 thread 'Hero pose review' (Cory 03:57Z \"Fix it all\"): wave 366 test, the man's armor-only jump, top row 2nd cell (no shield): redo with the method from wave 364/365 (woman kneel, the one that came back right): the base is the armor-only sheet with that cell taken from the approved full-set sheet, so the shield is already right, and the edit only takes the sword out, naming it once, as leaving. No fist close-up: in wave 365 the man's close-up (fist and forearm) was painted at fist size and the boy's (from a cell with both fists empty) gave two empty fists and no shield. The full-set cell is the one wave 365 gave its shield (in game at 3a651ad7). Cells named by row and place, never numbers. Priced line: \"Should I paint 8 test sheets first, for $0.56?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/man_vanguard_armor_jump_land_hurt_from_set.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background, with a thin border between the cells, showing the same chibi grown man with light stubble, wearing a steel helm, a chainmail shirt, brown leather shoulder guards and a deep navy tabard with one narrow white stripe, in 8 animation frames. The poses in this sheet are right and stay exactly as they are: top row, 1st cell: standing with the knees a little bent, about to jump, the fist on the LEFT side of the picture an empty fist, the shield on the arm on the RIGHT side of the picture; top row, 2nd cell: springing up, the fist on the LEFT side of the picture raised high beside the helm, the raised fist on the RIGHT side of the picture gripping the shield; top row, 3rd cell: high in the air with the knees tucked up, the fist on the LEFT side of the picture an empty fist, the shield on the arm on the RIGHT side of the picture; top row, 4th cell: falling with the legs kicked out, the open hand on the LEFT side of the picture raised, the shield on the raised arm on the RIGHT side of the picture; bottom row, 1st cell: landing, standing with the knees bent, the fist on the LEFT side of the picture an empty fist, the shield on the arm on the RIGHT side of the picture; bottom row, 2nd cell: standing, the fist on the LEFT side of the picture an empty fist, the shield on the arm on the RIGHT side of the picture; bottom row, 3rd cell: flinching back, hurt, eyes squeezed shut, mouth open, the fist on the LEFT side of the picture an empty fist, the shield on the arm on the RIGHT side of the picture; bottom row, 4th cell: flinching back, hurt, eyes squeezed shut, mouth open, the fist on the LEFT side of the picture an empty fist, the shield on the arm on the RIGHT side of the picture. This edit changes 1 cell only: the top row, 2nd cell. In that cell, the raised fist on the LEFT side of the picture lets go of its sword, which leaves the picture; the flat magenta background shows where it was. That fist stays raised exactly where it is, at the same size and angle, and becomes an empty closed fist in its brown leather glove, exactly the same size as the fist on the LEFT side of the picture in the top row, 1st cell. In the top row, 2nd cell, the raised fist on the RIGHT side of the picture keeps gripping his shield exactly as it is, shield included, and his face stays fully in view. There is one shield in that cell, on the RIGHT side of the picture, exactly as in the base. Keep EVERYTHING else exactly as it is in every cell, at the same size and place in the cell; never change a pose, and each face keeps its exact expression. These cells stay exactly as they are, everything in them included: the top row, 1st cell; the top row, 3rd cell; the top row, 4th cell; the bottom row, 1st cell; the bottom row, 2nd cell; the bottom row, 3rd cell; the bottom row, 4th cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere, with only the thin borders between the cells, exactly as in the base. Nothing else is added; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_sword2_boy_set_surge",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_sword2_boy_set_surge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-19 thread 'Hero pose review' (Cory 03:57Z \"Fix it all\"): wave 366 test, the boy's full-set surge, top row 2nd cell: both fists empty, the sword missing. Text only; the sword is pinned to the top row 3rd cell of the same sheet. Cells named by row and place, never numbers. Priced line: \"Should I paint 8 test sheets first, for $0.56?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/boy_vanguard_surge_w366.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background, with a thin border between the cells, showing the same chibi boy with short brown hair, wearing a steel helm, a chainmail shirt, brown leather shoulder guards and a deep navy tabard with one narrow white stripe, in 8 animation frames. The poses in this sheet are right and stay exactly as they are: top row, 1st cell: standing, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; top row, 2nd cell: crouching in a wide stance, ready to spring, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; top row, 3rd cell: lunging forward, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; top row, 4th cell: flying forward, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the raised fist on the RIGHT side of the picture gripping the shield; bottom row, 1st cell: flying forward, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the raised fist on the RIGHT side of the picture gripping the shield; bottom row, 2nd cell: flying forward, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the raised fist on the RIGHT side of the picture gripping the shield; bottom row, 3rd cell: landing with the knees bent, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; bottom row, 4th cell: standing, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture. This edit adds what is missing in 1 cell only, and nothing else. Top row, 2nd cell: the fist on the LEFT side of the picture holds his sword, a steel blade, a steel crossguard, a brown leather grip and a round steel pommel, pointing down toward the lower right, the way he holds it in the top row, 3rd cell. It is the same sword at the same size as in the top row, 3rd cell, and that cell keeps its own sword exactly as it is. In the top row, 2nd cell, the added sword stays inside its own cell, clear of the cell's edges, and the shield on the arm on the RIGHT side of the picture stays exactly as it is. Keep EVERYTHING else exactly as it is in every cell, at the same size and place in the cell; never change a pose, and each face keeps its exact expression. These cells stay exactly as they are, everything in them included: the top row, 1st cell; the top row, 3rd cell; the top row, 4th cell; the bottom row, 1st cell; the bottom row, 2nd cell; the bottom row, 3rd cell; the bottom row, 4th cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere, with only the thin borders between the cells, exactly as in the base. Nothing else is added; every figure stays fully inside its own cell."
+  }
+ },
+ {
+  "id": "vanguard_sword2_woman_sword_surge",
+  "prompts": null,
+  "batch": "maple hero layers (edit)",
+  "with": null,
+  "refs": [],
+  "save": "vanguard_sword2_woman_sword_surge.png",
+  "replaces": null,
+  "kind": "anim",
+  "stands": false,
+  "cells": [
+   2,
+   4
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-19 thread 'Hero pose review' (Cory 03:57Z \"Fix it all\"): wave 366 test, the woman's plain-clothes sword surge, top row 2nd and 4th cells: both fists empty, the sword missing. Text only; the swords are pinned to the top row 3rd cell and bottom row 1st cell of the same sheet. Cells named by row and place, never numbers. Priced line: \"Should I paint 8 test sheets first, for $0.56?\"",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/new-hero/bases/woman_vanguard_sword_surge_w366.png",
+   "refs": [],
+   "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background, with a thin border between the cells, showing the same chibi grown woman with long auburn hair, in a cream linen shirt with the sleeves rolled up, a brown leather belt, dark brown trousers and brown boots, in 8 animation frames. The poses in this sheet are right and stay exactly as they are: top row, 1st cell: standing, her sword in the fist on the LEFT side of the picture pointing down toward the lower right, the fist on the RIGHT side of the picture at her side; top row, 2nd cell: crouching low, ready to spring, her sword in the fist on the LEFT side of the picture pointing down toward the lower right, the fist on the RIGHT side of the picture up in front of her chest; top row, 3rd cell: lunging forward, her sword in the fist on the LEFT side of the picture pointing down toward the lower right; top row, 4th cell: flying forward, the fist on the RIGHT side of the picture punching forward, her sword in the fist on the LEFT side of the picture pointing down toward the lower right; bottom row, 1st cell: flying forward, the fist on the RIGHT side of the picture punching forward, her sword in the fist on the LEFT side of the picture pointing down toward the lower right; bottom row, 2nd cell: stepping forward, her sword in the fist on the LEFT side of the picture pointing down toward the lower right; bottom row, 3rd cell: sitting back on the ground, her sword in the fist on the LEFT side of the picture lying along the ground, pointing to the right; bottom row, 4th cell: standing, mouth open, her sword in the fist on the LEFT side of the picture pointing down toward the lower right. This edit adds what is missing in 2 cells only, and nothing else. Top row, 2nd cell: the fist on the LEFT side of the picture holds her sword, a steel blade, a steel crossguard, a brown leather grip and a round steel pommel, pointing down toward the lower right, the way she holds it in the top row, 3rd cell. Top row, 4th cell: the fist on the LEFT side of the picture, at her chest, holds her sword pointing down toward the lower right, the way she holds it in the bottom row, 1st cell. Each added sword is the same sword at the same size as in the top row, 3rd cell, and stays inside its own cell, clear of the cell's edges. The top row, 3rd cell and the bottom row, 1st cell keep their own swords exactly as they are. Keep EVERYTHING else exactly as it is in every cell, at the same size and place in the cell; never change a pose, and each face keeps its exact expression. These cells stay exactly as they are, everything in them included: the top row, 1st cell; the top row, 3rd cell; the bottom row, 1st cell; the bottom row, 2nd cell; the bottom row, 3rd cell; the bottom row, 4th cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere, with only the thin borders between the cells, exactly as in the base. Nothing else is added; every figure stays fully inside its own cell."
+  }
  }
 ]
 }
