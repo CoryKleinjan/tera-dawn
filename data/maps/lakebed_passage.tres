@@ -97,7 +97,7 @@ script = ExtResource("15_portal_def")
 x = 60.0
 target_map = &"glowcap_hollow"
 target_x = 2560.0
-target_platform = 9
+target_platform = 5
 gate = &"lakebed_passage_gate"
 gate_picture = ExtResource("14_gate")
 

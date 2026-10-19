@@ -92,7 +92,7 @@ script = ExtResource("14_portal_def")
 x = 2340.0
 target_map = &"lantern_alley"
 target_x = 200.0
-target_platform = 36
+target_platform = 29
 
 [sub_resource type="Resource" id="Spawn_0"]
 script = ExtResource("16_spawn_def")

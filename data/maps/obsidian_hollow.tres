@@ -113,7 +113,7 @@ script = ExtResource("14_portal_def")
 x = 60.0
 target_map = &"magma_falls"
 target_x = 2800.0
-target_platform = 46
+target_platform = 42
 
 [sub_resource type="Resource" id="Portal_1"]
 script = ExtResource("14_portal_def")

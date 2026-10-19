@@ -202,9 +202,9 @@ width = 600.0
 
 [sub_resource type="Resource" id="Platform_25"]
 script = ExtResource("13_platform_def")
-x = 100.0
+x = 40.0
 y = 1100.0
-width = 2200.0
+width = 2260.0
 
 [sub_resource type="Resource" id="Platform_26"]
 script = ExtResource("13_platform_def")

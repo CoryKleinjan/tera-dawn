@@ -87,6 +87,10 @@ const LOOT_EVERY := 4
 const ATTACK_BUFFER_TICKS := 8
 ## Ticks between portal press and the map change, so the screen fades out first.
 const PORTAL_FADE_TICKS := 12
+## Ticks he keeps walking in after coming through a side way out of the last room.
+const ARRIVE_TICKS := 14
+## How hard he hops up out of a bottom way into the room above, as a share of a jump.
+const ARRIVE_HOP := 0.8
 ## Ticks of the combat-ready stance after an attack, before he relaxes into idle.
 const READY_TICKS := 120
 ## Ticks a double jump's pose shows.
@@ -143,6 +147,14 @@ var speech_t := 0
 var _freeze_t := 0    # ticks held still after being hit (see knock_back)
 var _stop_t := 0      # hit-stop: ticks held mid-swing after your melee blow lands (see hit_stop)
 var _portal_t := 0    # ticks until the portal you stepped into takes you (see _interact)
+var _portal_ask := &"req_portal" # what to ask the server when it does: a portal, or a way out (req_way)
+## A bottom way out of the room (RoomExits) you're dropping through, or null.
+var _drop_way: PortalDef = null
+## The way out whose shut gate you last came up against, so it's tried once each time.
+var _tried_gate: PortalDef = null
+## Ticks left walking in after coming through a side way, and which way (see arrive).
+var _arrive_t := 0
+var _arrive_dir := 0
 ## A skill pressed too early, and for how many more ticks it's kept (ATTACK_BUFFER_TICKS).
 var _queued: SkillDef
 var _queued_t := 0
@@ -182,12 +194,34 @@ func place(x: float, y: float) -> void:
 	_end_relic_moves()
 	_stop_t = 0
 	_portal_t = 0
+	_drop_way = null
+	_tried_gate = null
+	_arrive_t = 0
 	_queued = null
 	_queued_t = 0
 	_report()
 
 func fainted() -> bool:
 	return down
+
+## You came into this map through a way out of the last room (RoomExits), on side `side` of
+## this one: walk in a step from a side edge, keep falling in through a top way (placed above
+## its ledge), or hop up out of a bottom one, so you keep moving the Hollow Knight way.
+func arrive(side: RoomExits.Side) -> void:
+	match side:
+		RoomExits.Side.LEFT, RoomExits.Side.RIGHT:
+			_arrive_dir = 1 if side == RoomExits.Side.LEFT else -1
+			_arrive_t = ARRIVE_TICKS
+			face = _arrive_dir
+			vel.x = _arrive_dir * RUN_SPEED * CharacterStats.speed_multiplier(Game.me.stats)
+		RoomExits.Side.TOP:
+			vel.y = 2.0
+			on_ground = false
+			platform = null
+		RoomExits.Side.BOTTOM:
+			vel.y = JUMP_SPEED * ARRIVE_HOP
+			on_ground = false
+			platform = null
 
 ## The server says you fainted. You lie there until it sends you back to town.
 func faint() -> void:
@@ -252,7 +286,7 @@ func step() -> void:
 		# stepping through a portal: the screen fades out, then the server moves you
 		_portal_t -= 1
 		if _portal_t == 0:
-			Net.ask(&"req_portal")
+			Net.ask(_portal_ask)
 		return
 	if _stop_t > 0:
 		# hit-stop: held mid-swing for a beat so the blow lands; presses are still kept
@@ -463,12 +497,7 @@ func _interact() -> bool:
 		Net.ask(&"req_portal")
 		return true
 	if portal and portal.open_to(Game.me):
-		_report()
-		# fade out before asking: a local server answers at once, and the next map's
-		# fade-in (TDWorld.enter_map) must come after this
-		world.stage.fade_to(1.0)
-		Sound.play(PORTAL_SOUND)
-		_portal_t = PORTAL_FADE_TICKS
+		_go_through(&"req_portal")
 		return true
 	var npc := world.npc_near(position)
 	if npc:
@@ -476,6 +505,63 @@ func _interact() -> bool:
 		face = 1 if npc.position.x > position.x else -1
 		return true
 	return false
+
+## Fades the screen out, then asks the server (`ask`: req_portal or req_way) to take you on.
+func _go_through(ask: StringName) -> void:
+	_report()
+	# fade out before asking: a local server answers at once, and the next map's
+	# fade-in (TDWorld.enter_map) must come after this
+	world.stage.fade_to(1.0)
+	Sound.play(PORTAL_SOUND)
+	_portal_ask = ask
+	_portal_t = PORTAL_FADE_TICKS
+
+## Going out of the room the Hollow Knight way (RoomExits): pressing on against a side edge
+## where a way is, jumping up past a top way's ledge, or dropping far enough through a bottom
+## one. The screen fades and the server takes you on. A shut gate in the way is tried (its
+## key, if you carry it) once each time you come up against it.
+func _ways(left: bool, right: bool) -> void:
+	var lay := world.layout
+	var way: PortalDef = null
+	if position.x <= EDGE + 0.5 and left and not right:
+		way = lay.side_way(position, RoomExits.Side.LEFT)
+	elif position.x >= float(world.map.width) - EDGE - 0.5 and right and not left:
+		way = lay.side_way(position, RoomExits.Side.RIGHT)
+	elif _drop_way:
+		if position.y >= lay.platforms[_drop_way.platform].y + RoomExits.SINK:
+			way = _drop_way
+	elif vel.y < 0.0:
+		var up := lay.spot_way(position, RoomExits.Side.TOP)
+		if up:
+			var ledge := lay.platforms[up.platform].y
+			if position.y <= ledge - RoomExits.RISE and position.y >= ledge - RoomExits.OPENING:
+				way = up
+	if way == null or not way.shows_to(Game.me):
+		_tried_gate = null
+		return
+	if way.gated_for(Game.me):
+		_try_gate(way)
+		return
+	_drop_way = null
+	_go_through(&"req_way")
+
+## Asks the server to open way `way`'s shut gate (with its key), once until you come away.
+func _try_gate(way: PortalDef) -> void:
+	if way == _tried_gate:
+		return
+	_tried_gate = way
+	_report()
+	Net.ask(&"req_way")
+
+## The bottom way out of the room (RoomExits) on the ledge you stand on, under your feet,
+## that you can see, or null.
+func _bottom_way() -> PortalDef:
+	if not on_ground or platform == null:
+		return null
+	var way := world.layout.spot_way(position, RoomExits.Side.BOTTOM)
+	if way and world.layout.platforms[way.platform] == platform and way.shows_to(Game.me):
+		return way
+	return null
 
 ## The pull of gravity on someone moving up or down at `vy`: stronger once falling, so a
 ## jump drops back faster than it rose (MapReach runs the same rule).
@@ -489,8 +575,10 @@ func _top_speed(base: float) -> float:
 	return base * (1.0 + PACE_BONUS * built)
 
 func _move() -> void:
-	var left := _held("move_left") or auto_walk < 0
-	var right := _held("move_right") or auto_walk > 0
+	if _arrive_t > 0:
+		_arrive_t -= 1
+	var left := _held("move_left") or auto_walk < 0 or (_arrive_t > 0 and _arrive_dir < 0)
+	var right := _held("move_right") or auto_walk > 0 or (_arrive_t > 0 and _arrive_dir > 0)
 	_relic_moves()
 	# knocked back (or recoiling from your own blow, or carried by a relic's move): along
 	# without steering
@@ -532,9 +620,14 @@ func _move() -> void:
 		pass # a jump pressed meanwhile is kept for a few ticks (JumpGrace)
 	elif jump_grace.can_jump(on_ground):
 		jump_grace.cancel()
-		if on_ground and _held("move_down") and platform != null and not platform.solid:
+		# Down + Jump drops through a ledge, or through the ground at a bottom way out
+		var down_way := _bottom_way() if _held("move_down") else null
+		if down_way and down_way.gated_for(Game.me):
+			_try_gate(down_way)
+		elif on_ground and _held("move_down") and platform != null and (not platform.solid or down_way):
 			drop_from = platform
 			drop_t = DROP_TICKS
+			_drop_way = down_way
 			vel.y = 1
 		else:
 			vel.y = JUMP_SPEED * CharacterStats.jump_multiplier(Game.me.stats)
@@ -586,11 +679,16 @@ func _move() -> void:
 				if was_falling:
 					world.fx.dust(position, 0, 6 if hard_landing else 3)
 				break
+	_ways(left, right)
+	if _portal_t > 0:
+		return
 	if position.y > float(world.map.height):
 		position.y = float(world.map.ground_y)
 		vel.y = 0
+		_drop_way = null
 	jump_grace.step(on_ground)
 	if on_ground:
+		_drop_way = null
 		_air_dashed = false
 		_air_jumped = false
 		if _slamming:
