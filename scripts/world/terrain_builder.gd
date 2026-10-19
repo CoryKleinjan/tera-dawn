@@ -19,10 +19,11 @@ func build(map: MapDef, platforms: Array[Platform]) -> void:
 		var d := map.platforms[i - 1]
 		if d.in_scenery:
 			continue  # the scenery behind it is its painting
+		var z := _ledge_z(platforms[i], platforms[0])
 		if d.look:
-			_platform_look(platforms[i], d)
+			_platform_look(platforms[i], d, z)
 		else:
-			_platform_front(platforms[i], biome, d.solid)
+			_platform_front(platforms[i], biome, d.solid, z)
 		if d.solid:
 			_solid_wall(map, i, biome)
 	_edge_grass(map, platforms, biome)
@@ -140,16 +141,25 @@ func _strip(name_: String, texture: Texture2D, rect: Rect2, tile: Vector2, z: fl
 
 # ---------- painted platform fronts ----------
 
+## How much nearer the camera the lowest platform's skin sits than the highest one's, so a
+## deep ledge's underside tucks behind the ledge below it (Cory 2026-10-19). Kept smaller than
+## the room walls' gap behind LAND_FRONT, so every ledge stays in front of a wall.
+const LEDGE_SPREAD := 0.004
+
+## The depth of a platform's skin: lower platforms a little nearer, the floor at LAND_FRONT.
+func _ledge_z(pl: Platform, ground: Platform) -> float:
+	return TDStage.LAND_FRONT - LEDGE_SPREAD * (1.0 - clampf(pl.y / ground.y, 0.0, 1.0))
+
 ## A floating platform's painted front: one picture built from the biome's platform pieces
 ## for this platform's width (PlatformSkin), hung so its walking surface is the top edge.
-func _platform_front(pl: Platform, biome: BiomeDef, square := false) -> void:
+func _platform_front(pl: Platform, biome: BiomeDef, square := false, z := TDStage.LAND_FRONT) -> void:
 	if biome.platform_middle == null:
 		return
 	var tex := PlatformSkin.texture(biome, pl.w, square)
 	var s := TDStage.sprite(tex)
 	s.offset = Vector2(0, -tex.get_height() / 2.0)  # origin at the top centre
 	var top := PlatformSkin.span(biome, pl.y).x
-	s.position = TDStage.to3d(Vector2(pl.x + pl.w / 2.0, top), TDStage.LAND_FRONT)
+	s.position = TDStage.to3d(Vector2(pl.x + pl.w / 2.0, top), z)
 	_add(s)
 
 ## A solid platform's wall: the floor's rock texture from just under its painted top edge
@@ -252,11 +262,11 @@ static func skin_span(d: PlatformDef, biome: BiomeDef) -> Vector2:
 	return PlatformSkin.span(biome, d.y)
 
 ## A platform drawn as one painted piece of land, hung so its grass rises above the top edge.
-func _platform_look(pl: Platform, d: PlatformDef) -> void:
+func _platform_look(pl: Platform, d: PlatformDef, z := TDStage.LAND_FRONT) -> void:
 	var texel := d.look_texel()
 	var s := TDStage.sprite(d.look, texel * TDStage.art_density(d.look))
 	s.offset = Vector2(0, -d.look.get_height() / 2.0)  # origin at the top centre
-	s.position = TDStage.to3d(Vector2(pl.x + pl.w / 2.0, pl.y - d.look_grass()), TDStage.LAND_FRONT)
+	s.position = TDStage.to3d(Vector2(pl.x + pl.w / 2.0, pl.y - d.look_grass()), z)
 	_add(s)
 
 # ---------- grass along the edges ----------

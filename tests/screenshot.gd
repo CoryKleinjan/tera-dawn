@@ -487,6 +487,25 @@ func _run() -> void:
 		_me().inv = 0
 		Net.server.enter_map(_me(), &"meadow", 300)
 		await _physics(10)
+	if only == "ledges":
+		# Ledges stacked close above one another on the map named after the mode (not in the full run).
+		_me().inv = 100000
+		var m: MapDef = Content.maps[StringName(args[2])]
+		var shots := 0
+		for i in m.platforms.size():
+			var a := m.platforms[i]
+			for b: PlatformDef in m.platforms:
+				var overlap := minf(a.x + a.width, b.x + b.width) - maxf(a.x, b.x)
+				if shots < 4 and b.y > a.y and b.y - a.y <= 80.0 and overlap > 0.0:
+					Net.server.enter_map(_me(), m.id, a.x + a.width / 2.0, i + 1)
+					await _physics(40)
+					await _frames(3)
+					await _shot("ledges_%s_%d" % [m.id, i + 1])
+					shots += 1
+					break
+		_me().inv = 0
+		Net.server.enter_map(_me(), &"meadow", 300)
+		await _physics(10)
 	if only == "rests":
 		# Every rest spot's bench, the hero standing beside it (not in the full run).
 		_me().inv = 100000
