@@ -5,7 +5,7 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 ## How to add a job
 
 Create `data/jobs/<id>.tres` as a **JobDef**: its `base_power` (what damage grows from at level 1),
-mastery, extra health segments, MP and Avoidability growth (`bonus_hearts`, `base_mp`, `mp_growth`, `avoid_growth`), its `family` (the job line gear names in `EquipDef.jobs`),
+mastery, HP, MP and Avoidability growth (`base_hp`, `hp_growth`, `base_mp`, `mp_growth`, `avoid_growth`), its `family` (the job line gear names in `EquipDef.jobs`),
 and its `description`.
 
 Everyone starts as `Character.START_JOB` (the Beginner, which lists starting gear,

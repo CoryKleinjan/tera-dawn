@@ -177,7 +177,7 @@ func test_jobs_have_usable_growth() -> void:
 	for j: JobDef in Content.jobs.values():
 		var w := Scan.where(j)
 		check_between(j.mastery, 0.1, 0.95, "%s: mastery" % w)
-		check(j.bonus_hearts >= 0 and j.base_mp >= 0 and j.mp_growth >= 0, "%s: bonus hearts and MP growth can't be negative" % w)
+		check(j.base_hp > 0 and j.base_mp >= 0 and j.hp_growth > 0 and j.mp_growth >= 0, "%s: HP / MP growth must be positive" % w)
 		check(j.base_power > 0, "%s: base_power %d must be positive" % [w, j.base_power])
 		check(j.avoid_growth >= 0.0, "%s: avoid_growth %s is negative" % [w, j.avoid_growth])
 		if j.advances_from != &"":
@@ -218,8 +218,8 @@ func test_use_items_have_sane_numbers() -> void:
 		var u := i as UseDef
 		if u:
 			var w := Scan.where(u)
-			check(u.heal_hearts >= 0 and u.heal_mp >= 0 and u.pet_food >= 0 and u.cooldown >= 0, "%s: a heal, pet_food or cooldown is negative" % w)
-			check_between(u.heal_hearts_percent, 0, 100, "%s: heal_hearts_percent" % w)
+			check(u.heal_hp >= 0 and u.heal_mp >= 0 and u.pet_food >= 0 and u.cooldown >= 0, "%s: a heal, pet_food or cooldown is negative" % w)
+			check_between(u.heal_hp_percent, 0, 100, "%s: heal_hp_percent" % w)
 			check_between(u.heal_mp_percent, 0, 100, "%s: heal_mp_percent" % w)
 
 func test_towns_are_safe() -> void:

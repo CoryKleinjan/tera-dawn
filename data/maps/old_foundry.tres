@@ -214,5 +214,5 @@ breakables = Array[ExtResource("24_breakable_def")]([SubResource("Breakable_0"),
 spawns = Array[ExtResource("16_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1")])
 region = &"emberreach"
 world_pos = Vector2(840.0, 310.0)
-zone_pos = Vector2(5800.0, 6400.0)
+zone_pos = Vector2(5800.0, 6350.0)
 return_map = &"emberforge"

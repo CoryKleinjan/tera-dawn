@@ -449,20 +449,20 @@ func touch_player(p: SimPlayer, m: SimMob) -> void:
 func hurt_player(p: SimPlayer, def: MonsterDef, from_x: float, power := 1.0) -> void:
 	if p.inv > 0 or p.fainted() or p.in_scene() or p.hidden():
 		return
-	var hearts := Combat.monster_hit(def, p.character, power)
-	p.inv = 40 if hearts == 0 else SimPlayer.HURT_INV
+	var dmg := Combat.monster_hit(def, p.character, power)
+	p.inv = 40 if dmg == 0 else SimPlayer.HURT_INV
 	if p.sitting: # any hit, even a miss, gets you up
 		p.sitting = false
 		Net.send(p.peer, &"ev_sit", [false])
-	if hearts == 0:
-		broadcast(&"ev_number", [p.position.x, p.position.y - 70, 0, "miss"])
+	broadcast(&"ev_number", [p.position.x, p.position.y - 70, dmg, "miss" if dmg == 0 else "taken"])
+	if dmg == 0:
 		return
-	# a guard (Magic Guard) may soak a heart with MP while there's MP to pay for it
-	var guard_mp := Combat.guard_mp(p.character)
-	if randf() < p.character.skills.mp_guard() and p.character.mp >= guard_mp:
-		p.character.spend_mp(guard_mp)
-		hearts -= 1
-	p.character.health.damage(hearts)
+	# a guard (Magic Guard) takes its share out of MP while there's MP to take
+	var guarded := mini(p.character.mp, roundi(dmg * p.character.skills.mp_guard()))
+	if guarded > 0:
+		p.character.spend_mp(guarded)
+		dmg -= guarded
+	p.character.health.damage(dmg)
 	p.dirty_vitals = true
 	p.hurt_here = true
 	Net.send(p.peer, &"ev_hurt", [from_x])

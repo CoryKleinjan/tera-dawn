@@ -155,8 +155,10 @@ func leave(peer: int) -> void:
 
 ## Moves the player to map `id` at `x` (through a portal, a trip, a return scroll or
 ## reviving), standing on platform `platform` (the floor unless a portal says otherwise),
-## and tells them what's there.
-func enter_map(p: SimPlayer, id: StringName, x: float, platform := 0) -> void:
+## and tells them what's there. `arrive` is the side of the room they come in through when
+## they come through a way out of the last one (RoomExits): through a top way they drop in
+## from above.
+func enter_map(p: SimPlayer, id: StringName, x: float, platform := 0, arrive := RoomExits.Side.NONE) -> void:
 	if p.map:
 		social.changed_map(p)
 		_off_map(p)
@@ -167,22 +169,24 @@ func enter_map(p: SimPlayer, id: StringName, x: float, platform := 0) -> void:
 	p.sitting = false
 	p.character.visit(id)
 	m.add_player(p, x, platform)
-	Net.send(p.peer, &"ev_enter_map", [id, x, m.full_state(), platform])
+	if arrive == RoomExits.Side.TOP:
+		p.position.y -= RoomExits.DROP_IN
+	Net.send(p.peer, &"ev_enter_map", [id, x, m.full_state(), platform, arrive])
 	quests.progress(p, p.character.quests.record_visit(id))
 	save(p)
 	scenes.play(p, m.def.intro_scene)
 
-## Sends a fainted player back to town with half their hearts and MP.
+## Sends a fainted player back to town with half their HP and MP.
 func revive(p: SimPlayer) -> void:
 	_wake(p)
 	var town := _town_for(p)
 	enter_map(p, town, Content.map(town).start_x)
 
-## Gets a fainted player up with half their hearts and MP and a moment of invincibility.
+## Gets a fainted player up with half their HP and MP and a moment of invincibility.
 func _wake(p: SimPlayer) -> void:
 	var c := p.character
-	c.health.reset(c.max_hearts())
-	c.health.set_hp(ceili(c.max_hearts() / 2.0))
+	c.health.reset(c.max_hp())
+	c.health.set_hp(ceili(c.max_hp() / 2.0))
 	c.mp = ceili(c.max_mp() / 2.0)
 	p.faint_t = 0
 	p.inv = 120
@@ -311,8 +315,8 @@ func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int, aim := 0)
 ## the buff itself.
 func _cast_buff(p: SimPlayer, skill: SkillDef, lvl: int) -> void:
 	var c := p.character
-	if skill.heal_at(lvl) > 0:
-		c.health.heal(skill.heal_at(lvl))
+	if skill.heal_at(lvl) > 0.0:
+		c.health.heal(roundi(c.max_hp() * skill.heal_at(lvl)))
 		p.dirty_vitals = true
 	c.skills.add_buff(skill, lvl)
 	p.dirty_character = true

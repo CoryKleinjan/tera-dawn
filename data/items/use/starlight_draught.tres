@@ -9,7 +9,7 @@
 script = ExtResource("1_use_def")
 id = &"starlight_draught"
 display_name = "Starlight Draught"
-description = "Bottled from the Lumewood lake at midnight. Restores a great deal of MP."
+description = "Bottled from the Lumewood lake at midnight. Restores 600 MP."
 icon = ExtResource("2_starlight_draught")
 sprite_scale = 0.36
 glow_color = Color(0.788235, 0.654902, 1.0, 1.0)

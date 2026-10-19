@@ -78,7 +78,8 @@
         251
       ],
       "grow": 0.8,
-      "flat_bottom": true
+      "flat_bottom": true,
+      "save": false
     },
     "tree_small": {
       "keep": "largest",
@@ -242,7 +243,8 @@
         247,
         252
       ],
-      "flat_bottom": true
+      "flat_bottom": true,
+      "save": false
     },
     "lantern_unlit": {
       "crop": [

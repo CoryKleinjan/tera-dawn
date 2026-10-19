@@ -143,7 +143,7 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 	if c.at_max_level():
 		c.xp = 0
 	c.recalc()
-	c.health.set_hp(maxi(1, int(data.get("hp", c.max_hearts()))))
+	c.health.set_hp(maxi(1, int(data.get("hp", c.max_hp()))))
 	c.mp = clampi(int(data.get("mp", c.max_mp())), 0, c.max_mp())
 
 ## Points an older save bought in each base stat ({stat: points}), above OLD_START.

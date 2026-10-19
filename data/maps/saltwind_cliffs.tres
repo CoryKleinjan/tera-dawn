@@ -160,7 +160,7 @@ script = ExtResource("7_portal_def")
 x = 60.0
 platform = 0
 target_map = &"shadow_marsh"
-target_x = 2760.0
+target_x = 4160.0
 
 [sub_resource type="Resource" id="Resource_10"]
 script = ExtResource("3_platform_def")

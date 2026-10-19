@@ -120,18 +120,17 @@ func recalc() -> void:
 		return
 	stats = equipment.bonus()
 	stats.add(skills.bonus())
-	health.set_max(max_hearts())
+	health.set_max(max_hp())
 	mp = mini(mp, max_mp())
 	stats_changed.emit()
 
-## Full hearts and MP.
+## Full HP and MP.
 func refill() -> void:
-	health.reset(max_hearts())
+	health.reset(max_hp())
 	mp = max_mp()
 
-## How many hearts this character has (their health counts hearts, see CharacterStats).
-func max_hearts() -> int:
-	return CharacterStats.max_hearts(job, level, stats)
+func max_hp() -> int:
+	return CharacterStats.max_hp(job, level, stats)
 
 func max_mp() -> int:
 	return CharacterStats.max_mp(job, level, stats)

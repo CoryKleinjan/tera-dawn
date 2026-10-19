@@ -65,7 +65,7 @@ func _rich() -> Character:
 	c.quests.accept(fx.quest(&"t_quest", [q]))
 	c.quests.record_kill(mob)
 	c.recalc()
-	c.health.set_hp(2)
+	c.health.set_hp(50)
 	c.mp = 17
 	return c
 
@@ -86,7 +86,7 @@ func test_round_trip_basics() -> void:
 	check(b.job == c.job, "job")
 	check_eq([b.level, b.xp], [12, 40], "level and EXP")
 	check_eq(b.power(), c.power(), "power")
-	check_eq(b.health.hp, 2, "hearts")
+	check_eq(b.health.hp, 50, "HP")
 	check_eq(b.mp, 17, "MP")
 
 func test_round_trip_gear_keeps_rolled_stats() -> void:
@@ -207,9 +207,9 @@ func test_unknown_job_keeps_current_job() -> void:
 func test_missing_hp_and_mp_load_full() -> void:
 	var c := fx.character()
 	c.load_dict({"job": "t_job", "essence": 0, "level": 2})
-	check_eq(c.health.hp, c.max_hearts(), "full HP")
+	check_eq(c.health.hp, c.max_hp(), "full HP")
 	check_eq(c.mp, c.max_mp(), "full MP")
-	check_eq(c.max_hearts(), 5, "level 2: five segments")
+	check_eq(c.max_hp(), 70, "level 2: 50 + 2 × 10")
 
 func test_save_with_an_old_appearance_loads_without_it() -> void:
 	var c := fx.character()
@@ -338,7 +338,7 @@ func test_oldest_save_with_only_name_and_level() -> void:
 	check_eq(c.job.id, Character.START_JOB, "beginner")
 	check_eq([c.level, c.xp, c.essence], [3, 5, 0], "level and EXP kept")
 	check_eq(c.map_id, Character.START_MAP, "start map")
-	check_eq(c.health.hp, c.max_hearts(), "full HP")
+	check_eq(c.health.hp, c.max_hp(), "full HP")
 	check_eq(c.quickslots.size(), Character.QUICKSLOTS, "quickslots")
 
 func test_short_or_bad_quickslots_are_padded() -> void:
@@ -353,7 +353,7 @@ func test_short_or_bad_quickslots_are_padded() -> void:
 func test_hp_over_max_is_clamped() -> void:
 	var c := fx.character()
 	c.load_dict({"job": "t_job", "essence": 0, "base": {}, "hp": 100000})
-	check_eq(c.health.hp, c.max_hearts(), "clamped")
+	check_eq(c.health.hp, c.max_hp(), "clamped")
 
 func test_real_new_character_round_trip() -> void:
 	var c := Character.create("Fresh")

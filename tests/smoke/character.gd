@@ -99,9 +99,9 @@ func _check_jobs() -> void:
 		_check(Content.jobs.has(id) and Content.job(id).advances_from == &"beginner", "%s is a first job" % id)
 	_check(c.advance(warrior) == "Pass the %s first." % warrior.advance_quest.title, "advancing to Warrior needs the Job Test, and no stats")
 	c.quests.done[warrior.advance_quest.id] = true
-	var hp := c.max_hearts()
+	var hp := c.max_hp()
 	_check(c.advance(warrior) == "" and c.job == warrior and c.has_passed(warrior), "a Beginner who passed the Job Test becomes a Warrior")
-	_check(c.gear.weapon() == Content.item(&"bronze_sword") and c.max_hearts() >= hp, "the Warrior gets a Bronze Sword and wears it")
+	_check(c.gear.weapon() == Content.item(&"bronze_sword") and c.max_hp() >= hp, "the Warrior gets a Bronze Sword and wears it")
 	_check(c.advance(warrior) != "", "a Warrior can't become a Warrior again")
 	_check(c.can_become(mage) and c.advance(mage) == "Pass the %s first." % mage.advance_quest.title, "a Warrior may switch to Magician, after its Job Test")
 	var wand: EquipDef = Content.item(&"apprentice_wand")

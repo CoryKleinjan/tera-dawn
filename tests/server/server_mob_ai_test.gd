@@ -98,9 +98,9 @@ func test_touching_a_monster_hurts_then_gives_invincibility() -> void:
 	var p := _join(2, "Ann", 300.0)
 	var full := p.character.health.hp
 	h.step(1)
-	check_eq(p.character.health.hp, full - 1, "a heart lost on touch")
+	check_eq(p.character.health.hp, full - 1, "one damage on touch")
 	check_eq(h.last(2, &"ev_hurt"), [300.0], "knocked back from the monster")
-	check(h.last(2, &"ev_number").is_empty(), "no damage number")
+	check_eq(h.last(2, &"ev_number").slice(2), [1, "taken"], "damage number")
 	check_eq(p.inv, SimPlayer.HURT_INV, "invincible for a while")
 	h.step(SimPlayer.HURT_INV - 1)
 	check_eq(p.character.health.hp, full - 1, "no more damage while invincible")
@@ -113,7 +113,7 @@ func test_a_monster_far_away_doesnt_hurt() -> void:
 	map.mobs[0].position.x = 600.0
 	var p := _join(2, "Ann", 300.0)
 	h.step(60)
-	check_eq(p.character.health.hp, p.character.max_hearts(), "untouched")
+	check_eq(p.character.health.hp, p.character.max_hp(), "untouched")
 
 ## A move of `kind` for a test monster, ready the moment it fits.
 static func _move(kind: MonsterMove.Kind, reach := 320.0) -> MonsterMove:
@@ -178,7 +178,7 @@ func test_stepping_out_of_the_way_dodges_a_shot() -> void:
 	h.place(p, 240.0)
 	h.step(int(m.shots[0][1]))
 	check(m.shots.is_empty(), "the shot landed")
-	check_eq(p.character.health.hp, p.character.max_hearts(), "missed her")
+	check_eq(p.character.health.hp, p.character.max_hp(), "missed her")
 
 func test_monsters_ignore_players_out_of_sight() -> void:
 	var map := h.field_with([ServerHarness.spawn(_shooter())])
@@ -264,10 +264,10 @@ func test_a_lunge_hurts_and_each_player_once() -> void:
 	for i in 30:
 		h.place(p, 520.0)
 		h.step(1)
-		if p.character.health.hp < p.character.max_hearts():
-			hurt_by = p.character.max_hearts() - p.character.health.hp
+		if p.character.health.hp < p.character.max_hp():
+			hurt_by = p.character.max_hp() - p.character.health.hp
 			break
-	check_eq(hurt_by, 1, "the lunge costs a heart")
+	check_between(hurt_by, 20, 36, "the lunge hits for its power (3x an attack of 10)")
 	check(m.position.x < 600.0, "it lunged forward")
 
 func test_a_charge_dashes_along_the_platform() -> void:
@@ -298,7 +298,7 @@ func test_a_slam_misses_a_player_in_the_air() -> void:
 	h.place(p, 690.0, ServerHarness.GROUND - 40.0) # jumps
 	h.step(20)
 	check_eq(h.last(2, &"ev_mob_move").slice(1, 2), [&"slam"], "slams")
-	check_eq(p.character.health.hp, p.character.max_hearts(), "jumping over it dodges it")
+	check_eq(p.character.health.hp, p.character.max_hp(), "jumping over it dodges it")
 
 func test_a_slam_hurts_a_player_on_the_ground_nearby() -> void:
 	var mv := _move(MonsterMove.Kind.SLAM, 100.0)
@@ -310,7 +310,7 @@ func test_a_slam_hurts_a_player_on_the_ground_nearby() -> void:
 	_ready_now(m)
 	var p := _join(2, "Ann", 690.0)
 	h.step(21)
-	check_eq(p.character.max_hearts() - p.character.health.hp, 1, "the slam costs a heart")
+	check_between(p.character.max_hp() - p.character.health.hp, 13, 24, "hit for its power (2x an attack of 10)")
 
 func test_a_swoop_dives_down_to_the_player() -> void:
 	var mv := _move(MonsterMove.Kind.SWOOP, 250.0)
@@ -330,7 +330,7 @@ func test_a_swoop_dives_down_to_the_player() -> void:
 		h.place(p, 450.0)
 		h.step(1)
 		lowest = maxf(lowest, m.body_position().y)
-		hurt = hurt or p.character.health.hp < p.character.max_hearts()
+		hurt = hurt or p.character.health.hp < p.character.max_hp()
 	check(lowest > ServerHarness.GROUND - 20.0, "dived down to her feet (lowest body %s)" % lowest)
 	check(hurt, "and hit her")
 	check(not m.moves.busy(), "then climbed back up and rested")

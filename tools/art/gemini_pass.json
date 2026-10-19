@@ -34227,6 +34227,268 @@
    ],
    "text": "The base picture is a sheet of 8 cells (2 rows of 4) on a flat magenta background, with a thin dark border between the cells, showing the same chibi grown man with light stubble, wearing a steel helm, a chainmail shirt, brown leather shoulder guards and a deep navy tabard with one narrow white stripe, in 8 animation frames. The poses in this sheet are right and stay exactly as they are: top row, 1st cell: standing with the knees a little bent, about to jump, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; top row, 2nd cell: springing up, his sword raised high in the fist on the LEFT side of the picture, the fist on the RIGHT side of the picture raised high; top row, 3rd cell: high in the air with the knees tucked up, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; top row, 4th cell: falling with the legs kicked out, his sword raised in the fist on the LEFT side of the picture, the shield on the raised arm on the RIGHT side of the picture; bottom row, 1st cell: landing, standing with the knees bent, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; bottom row, 2nd cell: standing, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; bottom row, 3rd cell: flinching back, hurt, eyes squeezed shut, mouth open, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture; bottom row, 4th cell: flinching back, hurt, eyes squeezed shut, mouth open, his sword in the fist on the LEFT side of the picture pointing down toward the lower right, the shield on the arm on the RIGHT side of the picture. His shield is his own heater shield, flat along the top with its sides curving down to a point, with a slate-blue face, a steel rim and a dark outline, the one in the top row, 4th cell. The attached close-up is cut from the top row, 4th cell of this sheet and shows only his shield gripped by a gloved fist by its strap, on a magenta background; its left side ends in a straight edge where the rest of the figure was in front of it. Copy only that shield; the top row, 4th cell keeps its own shield and fist exactly as they are. This edit adds what is missing in 1 cell only, and nothing else. Top row, 2nd cell: keeping his sword raised high in the fist on the LEFT side of the picture exactly as it is, add his shield on the raised arm on the RIGHT side of the picture, where the raised fist grips it by its strap and the shield stands behind that fist and his shoulder, its slate-blue face toward the viewer and its point down, exactly the way he holds it in the top row, 4th cell. The added shield is exactly the same shield, at exactly the same size, as the shield in the top row, 4th cell. It stays inside its own cell, clear of the cell's edges, and his face stays fully in view. Keep EVERYTHING else exactly as it is in every cell, at the same size and place in the cell; never change a pose, and each face keeps its exact expression. These cells stay exactly as they are, everything in them included: the top row, 1st cell; the top row, 3rd cell; the top row, 4th cell; the bottom row, 1st cell; the bottom row, 2nd cell; the bottom row, 3rd cell; the bottom row, 4th cell. Style: exactly like the base picture. Keep the background flat pure magenta #FF00FF everywhere, with only the thin borders between the cells, exactly as in the base. Nothing else is added; every figure stays fully inside its own cell."
   }
+ },
+ {
+  "id": "lanternfall_fields_land",
+  "prompts": null,
+  "batch": "Lanternfall fields test: cobblestone ledges, raised ground and its wall (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lanternfall_fields_land.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Zone rework' (Lanternfall rooms; Cory OK'd the room plan and look picks 19:11Z Oct 18 'Sounds good': worn cobblestone ledges with a dark timber edge, a chest, a breakable crumbling brick wall, a plaster fake wall, an iron lever, an iron gate and its locked version, the Chapel Key icon, dark slate-roof eaves as the corner frame (nothing hanging), a cracked wall and a cracked floor for sealed spots, one picture backdrop per field): small test before the full kit. Colours and materials from docs/zone-vibes.md Lanternfall (dusk, lavender light against warm lantern glow, smoky ochre plaster, dark soot-stained beams, dark brick, slate-blue, cobbles). Guide: Greenbough's land guide, unchanged, the same one Lumewood's and Emberreach's kept land used. Base 2400x1600, exactly 3:2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lanternfall-fields/bases/land_base.png",
+   "refs": [],
+   "text": "The first image is a guide for a sheet of ground pieces for my 2D side-scrolling game, on a flat magenta #FF00FF background. Flat colours show where each piece goes: green is the top edge, dark brown is the body, the darker brown below is a wall, and the dark line is the outline. Paint over the guide as finished ground for Lanternfall, a city of lanterns always at dusk, sly and charming, keeping every shape's position, size and outline EXACTLY, so the pieces still line up and join seamlessly when the sheet is cut apart. TOP: one long floating ledge of Lanternfall ground (it will be cut into a left end, two middle pieces and a right end that join side by side), with both ends rounded exactly as the guide's outline. Its green top band becomes ONE thin single row of worn rounded cobblestones seen exactly side-on, with a soft cool lavender rim light on them. Directly under the cobbles runs a thin dark soot-stained timber beam. The whole brown body below the beam, filling the outline right down to its rounded bottom edge, is solid dark old brick, kept simple with little detail inside so it reads at a glance as solid ground. A crisp dark outline runs all round it. Each of the guide's small dark points under the bottom edge becomes a small pointed tip of the brick body itself, joined to it as one piece, the same size and in the same place as the guide's point. BOTTOM: a raised block of the same ground: the very same single cobble row, thin timber beam and brick band along its top, with SQUARE ends where the cobbles, beam and brick run straight to the block's outlined sides. Below the band's lower edge is a wall of slightly darker plain old brick, running straight down off the bottom of the image between straight vertical outlined sides. The wall is one even dark plum-brown from top to bottom and side to side, with every brick the same size and tone, so a square of it can repeat as a tile. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own warm painted style: soft cel-painted shading with clear light and shadow shapes, bright highlights on the lit edges from the upper left, rich saturated colours, a bold dark outline, and hand-painted texture at a fairly chunky brush scale. Palette: grey-blue cobbles (#6f7088) with cool lavender highlights (#c7bfff), dark plum-brown brick (#4a3540) with deep shadow (#2a1e28), dark soot-stained timber (#3a2a22). Seen exactly from the side: the cobbles are a band along the top edge, and every piece is flat side-on. The colours and light are exactly the same along the whole length of the ledge and of the block, from the left end to the right end, so any two pieces cut from them match where they join; the light falls from the upper left on every cobble alike. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the pieces the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "lanternfall_fields_lantern_alley_backdrop",
+  "prompts": null,
+  "batch": "Lanternfall fields test: Lantern Alley backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lanternfall_fields_lantern_alley_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Lanternfall rooms; Cory OK'd the room plan and look picks 19:11Z Oct 18 'Sounds good': worn cobblestone ledges with a dark timber edge, a chest, a breakable crumbling brick wall, a plaster fake wall, an iron lever, an iron gate and its locked version, the Chapel Key icon, dark slate-roof eaves as the corner frame (nothing hanging), a cracked wall and a cracked floor for sealed spots, one picture backdrop per field): small test before the full kit. Colours and materials from docs/zone-vibes.md Lanternfall (dusk, lavender light against warm lantern glow, smoky ochre plaster, dark soot-stained beams, dark brick, slate-blue, cobbles). Guide: one picture behind the whole map (BackdropLayerDef PICTURE), written like emberreach_fields_slag_fields_backdrop, in Lantern Alley's colours (zone-vibes.md: back alleys in warm lantern light, closest to the town look). Base 4096x2304, exactly 16:9, a dusk gradient (#090e24 top, #3a3a6f, #dfa060 horizon): covers Lantern Alley (4400x1800).",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lanternfall-fields/bases/lantern_alley_backdrop_guide.png",
+   "refs": [],
+   "text": "The first image is a flat-colour guide for the layout: a dusk sky, a row of small far-away house fronts standing on a dark street band, and two hazier rows behind it standing on the same street. Keep every house's position, width, height and roof shape EXACTLY as the guide shows, and repaint the whole canvas as ONE complete, seamless, highly detailed background painting for a lantern-lit quarter of Lanternfall, a city of lanterns always at dusk, sly, playful and charming, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture (plaster, timber, brick, slate). Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The scene: paint each flat block of the guide as a half-timbered house seen straight from the front. Ochre blocks are smoky ochre plaster walls crossed by dark soot-stained beams, the dark lower part of each house is dark brick with a plain wooden door, blue triangles are slate-blue roofs, the small dark shapes on the roofs are crooked chimneys, and the small light rectangles are warmly lit windows. Every house is different from its neighbours in its beams, windows and roof, just as the guide gives each a different size. Each house front is the single flat rectangle the guide shows, with straight vertical sides from the eaves down to the ground. The dark band along the bottom is a quiet cobbled street in soft blue shadow. The two back rows are softer, hazier and bluer in the dusk fog. Warm iron wall lanterns glow on some house fronts. Tiny golden motes drift upward through the air. The sky is near-black navy at the top fading to a warm amber glow at the horizon, with cool lavender light on the roofs. Colours: near-black navy sky at the very top (#090e24), deep blue fog (#3a3a6f), amber horizon (#dfa060), cool lavender light (#c7bfff), smoky ochre plaster (#b08a50), dark beams (#2e2420), slate-blue roofs (#4a5878), warm lantern glow (#ffc070). Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) Everything is far away: the houses are small in the picture, softly outlined and hazy, standing in the far distance behind the playing area, with whole houses and wide open sky above them, exactly as laid out in the guide. 4) Every house stands whole inside the picture, with a little sky at the left and right edges, exactly as the guide shows. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "lanternfall_fields_pieces",
+  "prompts": null,
+  "batch": "Lanternfall fields kit: plaster fake wall, breakable brick wall, chest (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lanternfall_fields_pieces.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": true,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Zone rework' (Lanternfall rooms; Cory OK'd the room plan and look picks 19:11Z Oct 18 'Sounds good', and the look test 22:05Z Oct 18 'Looks good': lanternfall_fields_land_3 and lanternfall_fields_lantern_alley_backdrop_3 are the approved look). The rest of the kit, written from the approved test; colours from it and docs/zone-vibes.md Lanternfall. Guide: Emberreach's pieces guide, unchanged (fake wall LEFT cut by region [0,0,820,1600], breakable wall and chest cut by region [820,0,2400,1600]). Base 2400x1600, exactly 3:2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lanternfall-fields/bases/pieces_base.png",
+   "refs": [],
+   "text": "The first image is a guide on a flat magenta #FF00FF background showing five objects for my 2D side-scrolling game as flat colour shapes. Paint each one over its shape as a finished object for Lanternfall, a city of lanterns always at dusk, of smoky ochre plaster, dark soot-stained beams and dark old brick, keeping each shape's position, size and outline EXACTLY: each painted object fills its whole shape and nothing goes outside it. 1) LEFT, a wall of plain smoky ochre plaster that fills a low passage: plaster crossed by two dark soot-stained timber beams, over a band of dark old brick along its base, with a few hairline cracks and worn patches in the plaster. It looks like ordinary solid wall, and keeps the guide's wide block shape. 2) MIDDLE TOP, a crumbling wall of dark old brick that blocks a low passage: worn uneven bricks with cracked mortar and a few chipped corners, filling the shape up to its rounded top. 3) MIDDLE BOTTOM, the SAME brick wall smashed open: the identical outside shape, size and colours, with its middle broken through into a dark hole where the dark arch is, ringed by jagged broken brick edges. 4) RIGHT TOP, a small sturdy chest of dark plum-stained wood planks bound with dark iron bands and round rivets, a domed lid, and a small brass lock plate on the front. 5) RIGHT BOTTOM, the SAME chest opened: its box exactly as in the closed chest, and its lid swung open upward so it stands up behind the box, seen from the front, showing the lid's inner side. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own painted style: soft cel-painted shading with clear light and shadow shapes, bright highlights on the lit edges from the upper left, rich saturated colours, a bold dark outline, and hand-painted texture at a fairly chunky brush scale. Palette: smoky ochre plaster (#b08a50), dark soot-stained timber (#3a2a22), dark plum-brown brick (#4a3540) with deep shadow (#2a1e28), dark plum-stained wood (#4a2a34), dark iron (#2e2a30) with cool lavender highlights (#c7bfff), warm brass (#c89a4a). Every object is a flat front view at eye level: no top surface shows (nothing seen from above), and each stands on ONE flat straight bottom edge with no ground or shadow under it. Nothing gives off a glow or halo. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the objects the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "lanternfall_fields_locks",
+  "prompts": null,
+  "batch": "Lanternfall fields kit: iron gate, locked gate, lever, Chapel Key (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lanternfall_fields_locks.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": true,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Zone rework' (Lanternfall rooms; Cory OK'd the room plan and look picks 19:11Z Oct 18 'Sounds good', and the look test 22:05Z Oct 18 'Looks good': lanternfall_fields_land_3 and lanternfall_fields_lantern_alley_backdrop_3 are the approved look). The rest of the kit, written from the approved test; colours from it and docs/zone-vibes.md Lanternfall. Guide: Emberreach's locks guide, unchanged (gate, gate_locked, lever, lever_pulled; the key is the Chapel Key icon). Base 2400x1600, exactly 3:2.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lanternfall-fields/bases/locks_base.png",
+   "refs": [],
+   "text": "The first image is a guide on a flat magenta #FF00FF background showing five objects for my 2D side-scrolling game as flat colour shapes. Paint each one over its shape as a finished object for Lanternfall, a city of lanterns always at dusk, of dark old brick and dark wrought iron, keeping each shape's position, size and outline EXACTLY. 1) LEFT, a shut iron gate that blocks a doorway: two posts of dark old brick at the sides and, between them, five upright bars of dark wrought iron with pointed tops, held by two iron cross rails with round rivets where they meet the posts. Every gap between the bars stays open, showing flat magenta. 2) MIDDLE, the SAME gate, identical in every way, with a heavy dark iron lock plate fixed across its middle: a keyhole in it, a small lavender stone above the keyhole and a ring of rivets round its edge. 3) TOP RIGHT, LEFT ONE, a lever: a squat block of dark old brick with two dark iron bands, and a dark iron handle with a round brass knob, turning on a round iron pivot at the top of the block. The handle leans up to the LEFT. 4) TOP RIGHT, RIGHT ONE, the SAME lever, identical in every way, with its handle swung over so it leans up to the RIGHT. 5) BOTTOM RIGHT, a cold old iron key, its dark iron touched with soft green patches from river damp: a long shaft with a toothed bit at the right end and, at the left end, a round ring bow with a small pale lavender stone set in its middle where the diamond is. Style: clean, simple and strongly readable shapes with little clutter, like the hand-made world of Hollow Knight, but in my game's own painted style: soft cel-painted shading with clear light and shadow shapes, bright highlights on the lit edges from the upper left, rich saturated colours, a bold dark outline, and hand-painted texture at a fairly chunky brush scale. Palette: dark plum-brown brick (#4a3540) with deep shadow (#2a1e28), dark wrought iron (#2e2a30) with cool lavender highlights (#c7bfff), warm brass (#c89a4a), damp green on the key's iron (#5a7a62), pale lavender stone (#c7bfff). Every object is a flat front view at eye level: no top surface shows, and the gates and levers each stand on ONE flat straight bottom edge with no ground or shadow under it. The stones may shine with bright highlights but nothing gives off a glow or halo. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. No magenta or pink inside the art; outside the objects and in every gap between the gate bars the background stays flat pure magenta #FF00FF. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "lanternfall_fields_eaves",
+  "prompts": null,
+  "batch": "Lanternfall fields kit: slate-roof eaves corner frame (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lanternfall_fields_eaves.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": null,
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-18 thread 'Zone rework' (Lanternfall rooms; Cory OK'd the room plan and look picks 19:11Z Oct 18 'Sounds good', and the look test 22:05Z Oct 18 'Looks good': lanternfall_fields_land_3 and lanternfall_fields_lantern_alley_backdrop_3 are the approved look). The rest of the kit, written from the approved test; colours from it and docs/zone-vibes.md Lanternfall. Guide: a new flat guide (two straight-edged roof wedges in the top corners, a timber board along each lower edge), same 2400x1350 canvas and cut as Emberreach's overhangs. Repaint (Cory 'Yea' 23:25Z Oct 18): the first paint gave two stacked roofs per corner; 'very close to the camera' and the Hollow Knight framing line are gone, each shape is named as exactly one roof slope.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lanternfall-fields/bases/frame_guide.png",
+   "refs": [],
+   "text": "The first image is a guide for a frame of two roof slopes for my 2D side-scrolling game, on a flat magenta #FF00FF background. The two dark shapes in the top corners frame the top corners of the screen. Each dark shape becomes exactly ONE roof slope, a single flat plane that fills that shape and only that shape, so the picture holds just these two roof slopes. Paint over the shapes as two flat dark slate roof slopes of Lanternfall, a city of lanterns always at dusk, seen straight from the front with only their outer tiled face showing, keeping their positions, sizes and shapes exactly: faint rows of slate tiles inside each shape, every tile inside the shape's outline, and along each lower edge a flat dark timber strip that is exactly the guide's dark brown band, seen straight-on as one flat strip. Each roof ends at its brown strip, whose lower edge is one clean straight line; everything below and between the two shapes, the whole middle and lower part of the image, stays flat pure magenta, clear and empty. They are dark near-silhouettes: deep navy-slate (#141824 to #2a3044) and dark timber (#22181a), with a faint cool lavender sheen (#c7bfff) on the tile faces as the only bright touch; simple clean shapes with crisp edges and almost no inner detail, so they frame the picture without drawing the eye. Both roofs run off the top edge, the left one also off the left edge and the right one off the right edge, and each lower edge is one clean straight line. The rest of the image stays flat pure magenta #FF00FF, clear and empty. No magenta or pink inside the roofs. Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere. Do not draw any characters, animals or birds."
+  }
+ },
+ {
+  "id": "lanternfall_fields_dusk_bridge_backdrop",
+  "prompts": null,
+  "batch": "Lanternfall fields kit: dusk bridge backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lanternfall_fields_dusk_bridge_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Lanternfall rooms; Cory OK'd the room plan and look picks 19:11Z Oct 18 'Sounds good', and the look test 22:05Z Oct 18 'Looks good': lanternfall_fields_land_3 and lanternfall_fields_lantern_alley_backdrop_3 are the approved look). The rest of the kit, written from the approved test; colours from it and docs/zone-vibes.md Lanternfall. Guide: a flat layout guide drawn the same way as the approved Lantern Alley one, 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lanternfall-fields/bases/dusk_bridge_backdrop_guide.png",
+   "refs": [],
+   "text": "The first image is a flat-colour guide for the layout: a sunset sky, two far hills, a river along the bottom, a long low stone bridge of five round arches with a thin parapet along its top in the middle distance, the far riverbank and the sunlit river showing through each arch, and a cluster of narrow town houses on each bank. Keep every shape's position, size and outline EXACTLY as the guide shows, and repaint the whole canvas as ONE complete, seamless, highly detailed background painting of a long old stone bridge over a river below a city of lanterns, in an orange sunset with warm strong light, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture. Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The mood is mysterious but charming and gentle, sly and playful, like the rest of Lanternfall. The scene: The sky is a warm orange sunset, deep plum at the top fading to bright amber and gold at the horizon. The hills are soft hazy sunset-lit slopes. The bridge is old warm stone with five round arches and a thin stone parapet edge along its top, lit warm orange; through each arch shows the hazy far bank and the river shining with sunset light. The river along the bottom is calm water reflecting the sunset. The two clusters are narrow half-timbered town houses in near-silhouette with a few warm lit windows and slate roofs. Warm golden light glows along every lit edge. Colours: deep plum sky top (#2a1a3a), sunset orange (#e0784a), gold horizon (#ffb45a), warm stone (#8a6070), plum-blue water (#544068), lit windows (#ffc070). Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) The bridge, houses and hills are small in the picture, hazy and in the far distance behind the playing area, with wide open sunset sky above them, exactly as laid out in the guide. 4) Keep every shape where the guide puts it, with the edges of the picture exactly as the guide shows. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "lanternfall_fields_shadow_marsh_backdrop",
+  "prompts": null,
+  "batch": "Lanternfall fields kit: shadow marsh backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lanternfall_fields_shadow_marsh_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Lanternfall rooms; Cory OK'd the room plan and look picks 19:11Z Oct 18 'Sounds good', and the look test 22:05Z Oct 18 'Looks good': lanternfall_fields_land_3 and lanternfall_fields_lantern_alley_backdrop_3 are the approved look). The rest of the kit, written from the approved test; colours from it and docs/zone-vibes.md Lanternfall. Guide: a flat layout guide drawn the same way as the approved Lantern Alley one, 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lanternfall-fields/bases/shadow_marsh_backdrop_guide.png",
+   "refs": [],
+   "text": "The first image is a flat-colour guide for the layout: a murky sky, two rows of low marsh hills, a dark water band along the bottom with reed hummocks in it, and a few bare trees standing apart on the hills. Keep every shape's position, size and outline EXACTLY as the guide shows, and repaint the whole canvas as ONE complete, seamless, highly detailed background painting of a misty marsh at dusk, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture. Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The mood is mysterious but charming and gentle, sly and playful, like the rest of Lanternfall. The scene: The sky is murky dark teal fading to a soft green fog, with a warm amber glow low along the horizon. The low hills are soft marsh banks in green fog, and the dark water is still marsh water with faint green and amber reflections. The thin dark shapes are a few bare crooked trees standing apart on the banks, each with a few short twisting branches. The small green shapes in the water are reed hummocks with tufts of tall reeds. Tiny green will-o'-wisp motes float in the fog. Colours: dark teal sky top (#0e181e), murky green fog (#5a8a70), warm amber horizon glow (#dfa060), dark marsh water (#1e2e2e), reed green (#4a6a40), wisp green (#b8ffb0). Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) The hills, trees and reeds are small in the picture, hazy and in the far distance behind the playing area, with wide open misty sky above them, exactly as laid out in the guide. 4) Keep every shape where the guide puts it, with the edges of the picture exactly as the guide shows. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "lanternfall_fields_gloom_woods_backdrop",
+  "prompts": null,
+  "batch": "Lanternfall fields kit: gloom woods backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lanternfall_fields_gloom_woods_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Lanternfall rooms; Cory OK'd the room plan and look picks 19:11Z Oct 18 'Sounds good', and the look test 22:05Z Oct 18 'Looks good': lanternfall_fields_land_3 and lanternfall_fields_lantern_alley_backdrop_3 are the approved look). The rest of the kit, written from the approved test; colours from it and docs/zone-vibes.md Lanternfall. Guide: a flat layout guide drawn the same way as the approved Lantern Alley one, 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lanternfall-fields/bases/gloom_woods_backdrop_guide.png",
+   "refs": [],
+   "text": "The first image is a flat-colour guide for the layout: three rows of tall straight tree trunks rising out of the top of the picture, each row darker and nearer, standing on a dark forest floor. Keep every shape's position, size and outline EXACTLY as the guide shows, and repaint the whole canvas as ONE complete, seamless, highly detailed background painting of dim dark teal woods at dusk, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture. Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The mood is mysterious but charming and gentle, sly and playful, like the rest of Lanternfall. The scene: Each tall upright shape is a tall straight tree trunk with dark bark, flaring a little at its roots where it meets the ground, rising out of the top of the picture. The back row is pale teal in the fog, the middle row darker, and the front row darkest. Between the trunks is soft teal fog with a dim cool light from above and a soft warm amber glow far off low between the back trunks. The bottom band is a dark forest floor of moss and fallen leaves. Colours: near-black teal at the top (#081418), dark teal fog (#1e3c44), pale teal haze (#3c6468), warm amber glow (#dfa060), dark bark (#122628), muted moss (#1e3430). Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) The trunks are soft and hazy, standing in the far distance behind the playing area, running up out of the top of the picture exactly as the guide shows, with soft fog between them. 4) Keep every shape where the guide puts it, with the edges of the picture exactly as the guide shows. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "lanternfall_fields_wraith_moor_backdrop",
+  "prompts": null,
+  "batch": "Lanternfall fields kit: wraith moor backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lanternfall_fields_wraith_moor_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Lanternfall rooms; Cory OK'd the room plan and look picks 19:11Z Oct 18 'Sounds good', and the look test 22:05Z Oct 18 'Looks good': lanternfall_fields_land_3 and lanternfall_fields_lantern_alley_backdrop_3 are the approved look). The rest of the kit, written from the approved test; colours from it and docs/zone-vibes.md Lanternfall. Guide: a flat layout guide drawn the same way as the approved Lantern Alley one, 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lanternfall-fields/bases/wraith_moor_backdrop_guide.png",
+   "refs": [],
+   "text": "The first image is a flat-colour guide for the layout: a cold sky, three rows of low rolling moor hills, a dark ground band along the bottom, and a small ring of standing stones on the farthest rise, with one flat stone resting across the tops of the two tallest. Keep every shape's position, size and outline EXACTLY as the guide shows, and repaint the whole canvas as ONE complete, seamless, highly detailed background painting of a cold misty moor at dusk, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture. Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The mood is mysterious but charming and gentle, sly and playful, like the rest of Lanternfall. The scene: The sky is cold grey-blue, darker at the top and pale at the horizon, with a warm amber glow low along the horizon. The hills are low rolling moorland of heather and grass in cold blue-grey fog, the farthest palest. The small grey upright shapes on the far rise are a ring of old standing stones, and one flat stone lies across the tops of the two tallest, small and far away. Tiny pale blue motes drift in the fog. Colours: dark slate-blue sky top (#14182a), cold grey-blue fog (#6a7890), pale horizon (#a8b4c4), warm amber horizon glow (#dfa060), moor heather (#4e566a), old stone (#7a8494), pale blue motes (#c8dcff). Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) The hills and stones are small in the picture, hazy and in the far distance behind the playing area, with wide open sky above them, exactly as laid out in the guide. 4) Keep every shape where the guide puts it, with the edges of the picture exactly as the guide shows. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "lanternfall_fields_sunken_graveyard_backdrop",
+  "prompts": null,
+  "batch": "Lanternfall fields kit: sunken graveyard backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lanternfall_fields_sunken_graveyard_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Lanternfall rooms; Cory OK'd the room plan and look picks 19:11Z Oct 18 'Sounds good', and the look test 22:05Z Oct 18 'Looks good': lanternfall_fields_land_3 and lanternfall_fields_lantern_alley_backdrop_3 are the approved look). The rest of the kit, written from the approved test; colours from it and docs/zone-vibes.md Lanternfall. Guide: a flat layout guide drawn the same way as the approved Lantern Alley one, 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lanternfall-fields/bases/sunken_graveyard_backdrop_guide.png",
+   "refs": [],
+   "text": "The first image is a flat-colour guide for the layout: a dark slate sky, low hills, a dark ground band along the bottom, rows of small round-topped headstones on the slopes, a far chapel with a pointed tower, and a few bare trees standing apart. Keep every shape's position, size and outline EXACTLY as the guide shows, and repaint the whole canvas as ONE complete, seamless, highly detailed background painting of an old sunken graveyard at dusk, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture. Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The mood is mysterious but charming and gentle, sly and playful, like the rest of Lanternfall. The scene: The sky is dark slate grey with grey-blue fog toward the horizon and a warm amber glow low along it. The low hills are grassy slopes in grey-blue fog. The small round-topped shapes are old weathered headstones standing in rows on the slopes, the farther rows smaller and paler. The large dark shape on the right is a small old stone chapel with a pointed tower. The thin dark shapes are a few bare crooked trees standing apart, each with a few short twisting branches. Tiny pale green motes drift in the fog. Colours: dark slate sky top (#161a22), grey-blue fog (#5a6676), warm amber glow (#dfa060), weathered stone (#7a8490), dark grass (#30383e), pale green motes (#c8f0c0). Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) The headstones, chapel, trees and hills are small in the picture, hazy and in the far distance behind the playing area, with wide open sky above them, exactly as laid out in the guide. 4) Keep every shape where the guide puts it, with the edges of the picture exactly as the guide shows. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
+ },
+ {
+  "id": "lanternfall_fields_forgotten_crypt_backdrop",
+  "prompts": null,
+  "batch": "Lanternfall fields kit: forgotten crypt backdrop (edit)",
+  "with": null,
+  "refs": [],
+  "save": "lanternfall_fields_forgotten_crypt_backdrop.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   1,
+   1
+  ],
+  "anchor": null,
+  "size": "4K",
+  "note": "2026-10-18 thread 'Zone rework' (Lanternfall rooms; Cory OK'd the room plan and look picks 19:11Z Oct 18 'Sounds good', and the look test 22:05Z Oct 18 'Looks good': lanternfall_fields_land_3 and lanternfall_fields_lantern_alley_backdrop_3 are the approved look). The rest of the kit, written from the approved test; colours from it and docs/zone-vibes.md Lanternfall. Guide: a flat layout guide drawn the same way as the approved Lantern Alley one, 4096x2304, exactly 16:9.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/lanternfall-fields/bases/forgotten_crypt_backdrop_guide.png",
+   "refs": [],
+   "text": "The first image is a flat-colour guide for the layout: a vast vault wall with five tall round arches between thick pillars, and through them a deeper hall whose own tall arches run down to the floor, with a dark stone floor along the bottom. Keep every shape's position, size and outline EXACTLY as the guide shows, and repaint the whole canvas as ONE complete, seamless, highly detailed background painting of a vast old crypt deep under a city of lanterns, the darkest place in the game, in my 2D side-scrolling game. The whole game uses one art style: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich saturated colours, bold dark outlines, and hand-painted texture. Paint the background in that style but softer, hazier and lower in contrast than the playing area, with simple clean shapes, so the ground and characters in front of it stand out clearly, like the far backgrounds of Hollow Knight. The mood is mysterious but charming and gentle, sly and playful, like the rest of Lanternfall. The scene: The lighter shapes are a great wall and thick square pillars of old dark purple stone blocks. Through each tall round arch is a deeper hall of the vault, darker and hazier, whose own tall round arches run down to its floor, with a faint warm amber glow deep inside them. The bottom band is a dark worn flagstone floor. A faint cold violet light falls from above and dark purple haze fills the arches. Colours: near-black purple (#100a18), dark purple stone (#2e2040), deep violet haze (#1c1228), faint violet light (#8a70c0), faint warm amber glow (#e0a060). Strict rules: 1) Side-on view at eye level, the horizon dead level. 2) No people, characters, animals or birds. 3) The vault is soft, hazy and dim, a far background behind the playing area, filling the picture exactly as the guide shows. 4) Keep every shape where the guide puts it, with the edges of the picture exactly as the guide shows. 5) Fill the whole canvas edge to edge with painting; no border, no frame, no magenta. 6) Painted, not pixel art: smooth painted shading with visible soft brush texture, no visible pixels. No letters, numbers or words anywhere."
+  },
+  "town_check": {
+   "kind": "backdrop"
+  }
  }
 ]
 }

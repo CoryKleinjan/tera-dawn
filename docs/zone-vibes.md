@@ -270,7 +270,13 @@ rooftop panorama behind.
 | Gloom Woods | Training | 15-17 | Dark teal woods, dim and muted | Dusk Moth, Night Boar |
 | Wraith Moor | Training | 17-19 | Cold blue-grey moor fog, pale blue motes, low colour | Night Boar, Gloomcap |
 | Sunken Graveyard | Training | 19-24 | Sunken graves under a dark slate sky, grey-blue fog, pale green motes | Gloomcap, Crypt Shell, Marsh Horror |
-| Forgotten Crypt | Boss | 24-30 | Near-black purple crypt, darkest map in the game | Marsh Horror, Dusk Stalker; boss Lantern Wraith (arena Wraith's Vault) |
+| Forgotten Crypt | Boss | 24-30 | Near-black purple crypt, darkest map in the game; the long way DOWN from Sunken Graveyard to Wraith's Vault | Marsh Horror, Dusk Stalker; boss Lantern Wraith (arena Wraith's Vault) |
+| Under the Bridge | Secret | – | Dusk Bridge's look: a hollow under the bridge, down through a fake wall on the bank | Shade Imp, Lantern Wisp |
+| Lantern Loft | Secret | – | Lantern Alley's look: a loft west of the alley, up its west climb | Lantern Wisp, Dusk Moth |
+| Hollow Stump | Secret | – | Gloom Woods' look: inside a huge stump behind a breakable wall on the woods' east bough | Night Boar, Dusk Moth |
+| Moor Barrow | Secret | – | Wraith Moor's look: a barrow under the moor; a lever on the moor's stone ring opens its door, its own lever opens the way west into Sunken Graveyard | Gloomcap, Night Boar |
+| Drowned Chapel | Secret | – | Sunken Graveyard's look: a chapel behind a breakable wall on the graveyard's west terrace; holds the Chapel Key | Crypt Shell, Gloomcap, Marsh Horror |
+| Ossuary | Secret | – | Forgotten Crypt's look: a bone hall west of the crypt behind a locked gate (its key is in the Drowned Chapel) | Dusk Stalker, Marsh Horror |
 
 ## Driftcove
 

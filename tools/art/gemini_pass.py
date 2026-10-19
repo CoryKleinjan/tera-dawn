@@ -130,6 +130,8 @@ class Pass:
                 for j in jobs if not j.get("collected") for i in j["ids"])
 
     def save(self):
+        if self.dry_run:
+            return  # a dry run never writes the shared state: only a real run may (it holds the spend ledger)
         os.makedirs(OUT, exist_ok=True)
         tmp = STATE + ".tmp"
         with open(tmp, "w", encoding="utf-8") as f:

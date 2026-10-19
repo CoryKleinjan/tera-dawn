@@ -87,22 +87,18 @@ update this page when one changes. Each zone's own look and music are in
 
 - The hero has a level (1 to 100, Cory Oct 17). Monsters give EXP equal to the Dawn Essence they
   drop, and quests give EXP equal to their essence reward, on the old MapleStory-style EXP curve.
-  Each level raises power and MP by the job's growth and refills them, with a burst, a
-  "LEVEL UP!" ribbon and a jingle. The HUD shows a level badge, the health bar, an MP bar and the EXP
-  bar. Fainting loses 10% of the EXP toward the next level (never a level); essence is safe.
-- Health is a segmented bar (Cory Oct 17): the hero starts with 5 segments, gains one every 20
-  levels (10 at level 100), Warrior and Pirate lines one more, and 4 heart pieces from runes
-  make another. A monster's hit costs 1 segment, or 2 from the hardest hitters and bosses' big
-  moves (attack x power 100 or more); monster HP and the hero's damage are unchanged. Defense
-  gives a chance to block a hit; Magic Guard may pay MP instead of health. Potions and First
-  Aid heal whole segments; one comes back on its own every 10 seconds (5 sitting). Fainting
-  at 0; waking with half. Party frames show the segmented bar too. No heart icons.
-- No numbers for health or mana: MP is a number only behind the scenes, and the HUD shows a
-  plain bar. No damage numbers on screen, on monsters or the hero; a hit reads by its flash,
-  effect and sound, and a dodge or miss still says "Miss".
+  Each level raises power, Max HP and MP by the job's growth and refills them, with a burst, a
+  "LEVEL UP!" ribbon and a jingle. The HUD shows a level badge and HP, MP and EXP bars. Fainting loses 10% of
+  the EXP toward the next level (never a level); essence is safe.
+- Health and mana are numbers (Cory Oct 19): the HP and MP bars show "current / max". A monster's
+  hit does damage from its attack (times its move's power), less some for Weapon Defense; Magic
+  Guard takes a share of it out of MP. Potions, First Aid and resting heal HP.
+- Damage numbers (Cory Oct 19): every hit on a monster shows its damage over it (crits stand out),
+  for every player's hits in co-op, and damage the hero takes shows as a red number over them. A
+  dodge or miss says "Miss".
 - No base stats (no STR, DEX, INT, LUK or CHA, Cory Oct 17): the job and the level set them.
   Damage grows from power (the job's own at level 1, plus the same every level, plus the Monster
-  Book's rank); MP and Avoidability grow by the job. Nothing is bought with points and
+  Book's rank); Max HP, MP and Avoidability grow by the job. Nothing is bought with points and
   nothing asks for a stat.
 - Monsters also drop Dawn Essence when they die and it flies to the hero (quests pay it too). It
   buys skill levels only, anywhere, in the skill window; each skill level costs more than the
@@ -172,7 +168,7 @@ update this page when one changes. Each zone's own look and music are in
   ones included, and better gear joins a vendor's list as the story goes on or a secret is
   found (a quest handed in, a boss beaten, a secret found); until then the line is hidden.
 - Runes: every monster in a zone's fields can drop that zone's runes (2-3 kinds, about 1% each),
-  each zone with its own flavour: Dawnharbor Coast heart pieces and Weapon Defense, Greenbough
+  each zone with its own flavour: Dawnharbor Coast Max HP and Weapon Defense, Greenbough
   Accuracy, Speed and Jump, Lumewood Magic Attack, Max MP and Magic Defense, Emberreach Weapon
   Attack and Melee Damage, Lanternfall Critical Rate and Ranged Damage, Driftcove Avoidability
   and Attack Speed. Each zone boss also drops a stronger rune of its own (two bonuses, 30% a
@@ -197,12 +193,19 @@ update this page when one changes. Each zone's own look and music are in
 - No ropes, ladders, vines or climbing anywhere: every place is reached by platforming (jumps,
   and a boss relic's move for secrets). A climb that used to be there is a run of plain
   platforms, each at most a comfortable jump above the last (Cory, Oct 17). No two exits of a map lead to the same map. Maps can be wide and multi-level.
-- A zone's maps fit together like Hollow Knight's rooms on one zone map (Greenbough first, then Dawnharbor Coast, Lumewood and Emberreach): each
+- A zone's maps fit together like Hollow Knight's rooms on one zone map (Greenbough first, then Dawnharbor Coast, Lumewood, Emberreach and Lanternfall): each
   room its own size, canopy above and roots below, neighbours touching where their doors join
-  them, with MapleStory portals at the room edges they lead through. Fields are a web you can
+  them. Fields are a web you can
   loop through, each with 2 to 4 exits, and more rooms hide behind secrets: fake walls you walk
   through, breakable walls and shortcuts. Shortcuts open one way until you find them, then work
   both ways.
+- Getting from room to room is Hollow Knight style (Cory, Oct 19): in those zones you walk or
+  jump off a room's side where a way is and come out at the same height at the facing side of
+  the next room, still walking in, after a quick fade; no portal pillar stands there. A way in
+  the floor is a lit spot where Down + Jump drops you into the room below; a way in the top is a
+  lit spot where jumping up takes you into the room above. Ways into towns work the same.
+  Building doors, docks, quest portals and a boss arena's way home stay portals you press Up at;
+  Driftcove and Dawnrise Isle keep portals until their zone rebuild.
 - Locked doors are puzzles (Cory picked levers and keys): a gated door shows behind its shut gate
   from the start; a lever somewhere opens it for good (often from the far side, Hollow Knight
   style), or a key from a chest elsewhere in the zone unlocks it and is used up. Keys can't be
@@ -211,11 +214,11 @@ update this page when one changes. Each zone's own look and music are in
 - Every field has two secret ledges only a boss relic's move reaches (a small room has one):
   a high one (Double Jump) and a far one across a gap (Dash or Surge).
   Each holds a chest a character opens once (shards, potions, a local Monster Book card). Secret ledges and shortcuts stay off the minimap; the zone map shows them once found.
-- Greenbough's, Dawnharbor Coast's, Lumewood's and Emberreach's fields have no raised land: every ledge is a plain platform with nothing under it
+- Greenbough's, Dawnharbor Coast's, Lumewood's, Emberreach's and Lanternfall's fields have no raised land: every ledge is a plain platform with nothing under it
   (no terrace walls).
 - Characters and NPCs draw in front of land; characters cast no shadows. Portals draw in front of land and
   scenery, behind NPCs, monsters and players; no NPC stands on a portal.
-- Portals are a blue-white light pillar on the ground, at exits and doorways, 70% opaque.
+- Portals are a blue-white light pillar on the ground, at exits, floor and top ways and doorways, 70% opaque.
 - Platforms and land cast no shadows. Platform end caps line up with the platform. Terrace walls stop
   straight down from the bottom of the path's end stone, with the path's thin outline, standing
   straight up and down. Wall ivy hangs flush with the platform's bottom edge.
@@ -333,7 +336,7 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   middle with the weapon beside it, rings at the bottom), with what the gear adds beside them.
 - No clouds on the title screen.
 - The world map shows towns always and a field only once visited (as "???" before). A zone drawn
-  to shape (Greenbough, Dawnharbor Coast, Lumewood, Emberreach) shows a room only once visited, like Hollow Knight: its ledges and
+  to shape (Greenbough, Dawnharbor Coast, Lumewood, Emberreach, Lanternfall) shows a room only once visited, like Hollow Knight: its ledges and
   doors, secret ledges and ways once found, and where you stand.
 - Playing solo, the chat box shows only the last few lines, briefly; achievements are solo goals.
 - No controls box on screen, in towns or fields: the tutorial teaches the keys (its step hints
@@ -402,6 +405,6 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 - The second-job tutors are not in these tears.
 - Greenbough's tear (the pilot) is a stone forest of four maps behind a ledge on Oak Crown that only Dash reaches:
   Stilled Grove, Ivory Hollow, Silent Stair and the Petrified Warden's ring. Old Fenwick gives
-  its three quests. Its Hollow Stags and the Warden's charge and slam cost 2 segments a hit;
-  everything else there costs 1. Its guardian isn't one of the bosses of Tera (the "every boss"
+  its three quests. Its Hollow Stags and the Warden's charge and slam
+  hit hardest there. Its guardian isn't one of the bosses of Tera (the "every boss"
   achievement).

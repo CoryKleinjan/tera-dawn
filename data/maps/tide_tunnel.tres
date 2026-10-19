@@ -114,7 +114,7 @@ script = ExtResource("16_portal_def")
 x = 80.0
 target_map = &"smugglers_grotto"
 target_x = 2140.0
-target_platform = 24
+target_platform = 26
 gate = &"tide_tunnel_gate"
 gate_picture = ExtResource("15_gate")
 

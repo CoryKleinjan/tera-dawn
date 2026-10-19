@@ -9,13 +9,13 @@
 script = ExtResource("script")
 id = &"elixir"
 display_name = "Elixir"
-description = "A golden draught of morning light. Heals half your health and MP."
+description = "A golden draught of morning light. Restores half of your HP and MP."
 icon = ExtResource("icon")
 sprite_scale = 0.36
 glow_color = Color(1.0, 0.85, 0.4, 1.0)
 pickup_effect = ExtResource("pickup")
 sell_price = 60
 max_stack = 100
-heal_hearts_percent = 50
+heal_hp_percent = 50
 heal_mp_percent = 50
 use_effect = ExtResource("heal")

@@ -81,7 +81,7 @@ width = 1200.0
 script = ExtResource("13_platform_def")
 x = 1300.0
 y = 2020.0
-width = 1200.0
+width = 1460.0
 
 [sub_resource type="Resource" id="Platform_6"]
 script = ExtResource("13_platform_def")
@@ -105,7 +105,7 @@ width = 1200.0
 script = ExtResource("13_platform_def")
 x = 1300.0
 y = 1720.0
-width = 1460.0
+width = 1200.0
 
 [sub_resource type="Resource" id="Platform_10"]
 script = ExtResource("13_platform_def")
@@ -238,7 +238,6 @@ target_x = 1670.0
 [sub_resource type="Resource" id="Portal_1"]
 script = ExtResource("14_portal_def")
 x = 100.0
-platform = 1
 target_map = &"glimmer_path"
 target_x = 4150.0
 target_platform = 19
@@ -254,7 +253,7 @@ target_platform = 1
 [sub_resource type="Resource" id="Portal_3"]
 script = ExtResource("14_portal_def")
 x = 2740.0
-platform = 9
+platform = 5
 target_map = &"lakebed_passage"
 target_x = 200.0
 gate = &"lakebed_passage_gate"

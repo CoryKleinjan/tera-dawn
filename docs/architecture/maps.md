@@ -124,12 +124,26 @@ city inside its region. The world map (W) draws the major routes city to city; c
 region opens its zone view (its `zone_rect` of the painting, zoomed in) with every map and path,
 and where each exit leads. A new region needs a `capital`, `label_pos` and `zone_rect`.
 
-A region with `shaped_zone` (Greenbough first, then Dawnharbor Coast, Lumewood and Emberreach) is drawn the Hollow Knight way instead: every map
+A region with `shaped_zone` (Greenbough first, then Dawnharbor Coast, Lumewood, Emberreach and Lanternfall) is drawn the Hollow Knight way instead: every map
 is a room of its own width and height placed at its `zone_pos` (game pixels on one zone map), so
 the canopy sits above the town and the roots below. Rooms never overlap; two rooms a portal joins
 touch, and the portal stands by the edge they share: within 300 px of a side edge, or along a top
-or bottom edge over the stretch they share (`content_routes_test`). MapleStory portals still do
-the travelling; the zone map draws each as a gap in the shared edge. A boss arena's way home
+or bottom edge over the stretch they share (`content_routes_test`). The zone map draws each as a
+gap in the shared edge.
+
+In those zones a field's portals are **ways** out of the room, Hollow Knight style
+(`RoomExits`, worked out once per map in `MapLayout.ways`): no data marks them. A portal
+leads through the side its two rooms touch along (a town's, or a path into the next zone's, by
+the side edge it stands within `SIDE_REACH` of). Through a side way you walk or jump off the
+edge, within `OPENING` above the portal's platform, and come out `ARRIVE_IN` in from the facing
+edge of the next room on its way back's platform, walking in (`TDPlayer.arrive`); no pillar
+stands there. A bottom way is a spot where Down + Jump drops you through the ground (or ledge)
+into the room below, dropping in over its top way; at a top way you jump up from its ledge and
+hop up out of the room above's bottom way. The client says when (`TDPlayer._ways`, `req_way`)
+and the server checks where they stand (`MapLayout.way_at`, `ServerTravel.on_way`). Building
+doors, docks, `opens_after`/`while_on` portals and a boss arena's way home stay portals you press
+Up at. Every way needs a way back through the facing side, a side way's platform runs to the
+room's edge, and its two ends stand at the same height on the zone map (`content_ways_test`). A boss arena's way home
 isn't a door. `TDWorldMapWindow` shows rooms once visited, secret ledges and the doors behind
 shortcuts and fake or breakable walls once found, and the player where they stand.
 
@@ -218,7 +232,7 @@ example: a quay street, a terrace 150 px up and a cliff top 320 px up.
 The biome's `town_decor` (its signature prop far behind the street) doesn't scatter randomly in a
 town with buildings: `SceneryBuilder.back_house_slots` stands them in one row,
 `BACK_HOUSE_GAP` apart and never straight behind a building. The rest of a town's scattered
-scenery (`DecorPlacement`) comes at half a field's density (`TOWN_DENSITY`) and, trees and
+scenery (`DecorPlacement`) comes at `TOWN_DENSITY` (as sparse as a field's) and, trees and
 far props included, keeps clear of exits, props, townsfolk and every other scattered piece.
 Houses stand only as placed buildings at full size, and only in towns: scattered scenery
 never uses a building picture (far back at a random size it looks like a tiny house), and a
