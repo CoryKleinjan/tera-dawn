@@ -28173,6 +28173,31 @@
   "town_check": {
    "kind": "backdrop"
   }
+ },
+ {
+  "id": "hearts_mana_test",
+  "prompts": null,
+  "batch": "Hearts and Mana",
+  "with": null,
+  "refs": [],
+  "save": "hearts_mana_test.png",
+  "replaces": null,
+  "kind": "still",
+  "stands": false,
+  "cells": [
+   2,
+   2
+  ],
+  "anchor": null,
+  "size": "2K",
+  "note": "2026-10-19 Progression thread (#320): small test of the heart and Mana orb look Cory picked at 15:22Z (painted warm-red heart with thin gold rim, empty = dark hollow; round glass orb in a gold rim with glowing blue liquid). Full and empty of each, so the game swaps hearts and shows the full orb's lower part over the empty orb.",
+  "edit": {
+   "base": "/mnt/project-files/art-sheets/skill-icons/blank_2x2.png",
+   "refs": [
+    "/mnt/project-files/art-sheets/rune-icons/item_style_ref.png"
+   ],
+   "text": "The first image is an empty magenta canvas. On it, paint FOUR separate icons for the health display of my 2D side-scrolling game, laid out in 2 rows of 2, each centred in its own quarter of the canvas and fully inside it, each filling about two thirds of its quarter, with a wide band of plain magenta around and between them. The second image is four finished item icons from my game, drawn in exactly the art style these must have: soft cel-painted shading with clear light and shadow shapes and bright highlights on the lit edges, rich warm saturated colours, bold dark brown outlines, and plenty of hand-painted texture at a fairly chunky brush scale. Match their painting style, outline thickness, shading, light from the upper left and level of detail exactly. Each icon is ONE loose object, lit brightly enough to read clearly even when shown very small. Top left, full heart: a painted warm-red heart, plump and rounded, with a thin gold rim all the way round its edge. Top right, lost heart: the exact same heart shape, size and thin gold rim as the top left heart, but its inside is dark and hollow, an empty deep shadow inside the gold rim. Bottom left, full Mana orb: a round glass orb in a gold rim, filled to the top with glowing blue liquid, its glow kept inside the glass. Bottom right, empty Mana orb: the exact same round glass orb, size and gold rim as the bottom left orb, with nothing inside, showing only the dark empty glass. The two hearts match each other exactly in outline and rim, and so do the two orbs, so the game can swap one for the other. Strict rules: 1) Painted, not pixel art and not glossy vector clip art: smooth painted shading with visible soft brush texture, no visible pixels. 2) Bold dark brown outline around each object, the same thickness on all. 3) Flat pure magenta #FF00FF background everywhere outside the objects; no magenta or pink inside the art."
+  }
  }
 ]
 }
