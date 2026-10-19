@@ -26,6 +26,8 @@ func build(map: MapDef, platforms: Array[Platform]) -> void:
 		if d.solid:
 			_solid_wall(map, i, biome)
 	_edge_grass(map, platforms, biome)
+	if map.solid_room:
+		_room_shell(map, platforms, biome)
 
 ## Adds a piece of land to the map. Land casts no shadows: platforms and the floor would
 ## otherwise throw the sun's shadow onto the scenery standing behind them.
@@ -178,6 +180,55 @@ func _solid_wall(map: MapDef, platform: int, biome: BiomeDef) -> void:
 		var x := x1 - tile.x + out if right else x0 - out
 		var r := Rect2(x, top, tile.x, rect.size.y)
 		_add(_strip("TerraceCorner", corner, r, tile, TDStage.LAND_FRONT - 0.005, false, true))
+
+# ---------- a solid room's walls and ceiling ----------
+
+## How thick a solid room's side walls and ceiling stand inside its edges (game pixels).
+const WALL := 64.0
+const CEILING := 96.0
+## How far a top way's opening in the ceiling reaches either side of its spot (game pixels).
+const SHAFT := 110.0
+
+## A solid room's shell (MapDef.solid_room): the floor's rock down both sides and along the
+## top, with the square end stones' outline on the wall faces, left open at each way out
+## (a side way's opening above its ledge, a top way's shaft).
+func _room_shell(map: MapDef, platforms: Array[Platform], biome: BiomeDef) -> void:
+	if biome.ground_side == null:
+		return
+	var tile := TDStage.art_size(biome.ground_side)
+	var z := TDStage.LAND_FRONT - 0.01
+	var layout := MapLayout.new(map)
+	var shafts: Array[Vector2] = []
+	for p: PortalDef in layout.ways:
+		if layout.ways[p] == RoomExits.Side.TOP:
+			shafts.append(Vector2(p.x - SHAFT, p.x + SHAFT))
+	shafts.sort()
+	var x := 0.0
+	for s in shafts + [Vector2(map.width, map.width)]:
+		if s.x > x:
+			_add(_strip("Ceiling", biome.ground_side, Rect2(x, 0.0, s.x - x, CEILING), tile, z))
+		x = maxf(x, s.y)
+	for right in [false, true]:
+		var side := RoomExits.Side.RIGHT if right else RoomExits.Side.LEFT
+		var gaps: Array[Vector2] = []
+		for p: PortalDef in layout.ways:
+			if layout.ways[p] == side:
+				var y := platforms[p.platform].y
+				gaps.append(Vector2(y - RoomExits.OPENING, y + FLOOR_FILL_TOP))
+		gaps.sort()
+		var x0 := map.width - WALL if right else 0.0
+		var edge: Texture2D = PlatformSkin.square_edge(biome, not right) if biome.terrace_left and biome.terrace_right else null
+		var top := CEILING
+		for g in gaps + [Vector2(platforms[0].y, platforms[0].y)]:
+			if g.x > top:
+				var r := Rect2(x0, top, WALL, g.x - top)
+				_add(_strip("Wall", biome.ground_side, r, tile, z, true, true))
+				if edge:
+					var et := TDStage.art_size(edge)
+					var out := PlatformSkin.EDGE_OUT * PlatformSkin.texel(biome)
+					var ex := x0 - out if right else x0 + WALL - et.x + out
+					_add(_strip("WallFace", edge, Rect2(ex, top, et.x, r.size.y), et, TDStage.LAND_FRONT - 0.005, false, true))
+			top = maxf(top, g.y)
 
 ## The game-y span a platform's painted skin covers: x is the top of its grass, y the bottom.
 static func skin_span(d: PlatformDef, biome: BiomeDef) -> Vector2:

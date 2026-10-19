@@ -471,6 +471,22 @@ func _run() -> void:
 		_me().inv = 0
 		Net.server.enter_map(_me(), &"meadow", 300)
 		await _physics(10)
+	if only == "shell":
+		# A solid room's walls and ceiling (MapDef.solid_room), from a few spots (not in the full run).
+		_me().inv = 100000
+		for m: MapDef in Content.maps.values():
+			if not m.solid_room:
+				continue
+			for at in [Vector2i(300, 0), Vector2i(200, 15), Vector2i(2200, 26), Vector2i(2100, 1), Vector2i(600, 3)]:
+				if at.y > m.platforms.size():
+					continue
+				Net.server.enter_map(_me(), m.id, at.x, at.y)
+				await _physics(40)
+				await _frames(3)
+				await _shot("shell_%s_%d_%d" % [m.id, at.x, at.y])
+		_me().inv = 0
+		Net.server.enter_map(_me(), &"meadow", 300)
+		await _physics(10)
 	if only == "rests":
 		# Every rest spot's bench, the hero standing beside it (not in the full run).
 		_me().inv = 100000
