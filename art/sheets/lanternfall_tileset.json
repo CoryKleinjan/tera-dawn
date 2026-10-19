@@ -154,7 +154,8 @@
       ],
       "fix": "glow_backdrop_holes",
       "grow": 0.92,
-      "flat_bottom": true
+      "flat_bottom": true,
+      "save": false
     },
     "tree_small": {
       "crop": [
@@ -213,7 +214,8 @@
         252,
         227
       ],
-      "flat_bottom": true
+      "flat_bottom": true,
+      "save": false
     },
     "flowers": {
       "crop": [
