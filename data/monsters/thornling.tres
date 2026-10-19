@@ -1,28 +1,12 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=14 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/thornling.tres" id="2_thornling"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/thorn_tuft.tres" id="5_thorn_tuft"]
-[ext_resource type="Resource" path="res://data/items/use/orange_potion.tres" id="6_orange_potion"]
-[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="7_blue_potion"]
 [ext_resource type="Resource" path="res://data/monster_moves/pounce.tres" id="mv_pounce"]
 [ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
-
-[sub_resource type="Resource" id="Resource_4"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("7_blue_potion")
-chance = 0.05
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("6_orange_potion")
-chance = 0.08
-min_amount = 1
-max_amount = 2
 
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("3_drop_entry")
@@ -45,7 +29,6 @@ display_name = "Thornling"
 level = 9
 max_hp = 180
 attack = 24
-essence = 55
 speed = 0.7
 size = Vector2(34.0, 40.0)
 boss = false
@@ -53,4 +36,4 @@ flying = false
 moves = Array[ExtResource("mv_script")]([ExtResource("mv_pounce")])
 sprite_frames = ExtResource("2_thornling")
 sprite_scale = 1.0
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2")])

@@ -68,8 +68,6 @@ func check() -> void:
 		var job: JobDef = Content.jobs[id]
 		if job.advances_from == &"" and job.starting_gear.has(null):
 			problems.append("job %s is missing starting gear" % id)
-		if job.base_power <= 0:
-			problems.append("job %s has no base power" % id)
 		if job.advances_from != &"" and not Content.jobs.has(job.advances_from):
 			problems.append("job %s advances from unknown job %s" % [id, job.advances_from])
 		for g in job.advance_gifts:

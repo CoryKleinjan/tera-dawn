@@ -88,9 +88,9 @@ then character select shows the list (name and job) with the new character picke
 
 ### Balance
 
-`Balance` builds a typical character for any job and tier of progress (that level, the best
-gear made for that tier) and works out how many hits of their main
-attack a monster takes and how many kills pay for a tier. The smoke test keeps every job inside
+`Balance` builds a typical character for any job and tier of progress (the best gear made for
+their job, at the gear tier players have by then, `Balance.gear_rank`) and works out how many
+hits of their main attack a monster takes. The smoke test keeps every job inside
 `Balance.BAND` against every monster of its tier; `tests/balance_report.tscn` prints the full table when tuning.
 
 ### How to add something the player does

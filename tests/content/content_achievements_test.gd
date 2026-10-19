@@ -1,6 +1,6 @@
 extends TestCase
 ## Achievements (data/achievements/, through Content): every file loads as a complete
-## AchievementDef, ids and Steam ids are unique, they're the 23 the game shipped with and kept (saves
+## AchievementDef, ids and Steam ids are unique, they're the 20 the game shipped with and kept (saves
 ## and Steamworks know them by id and Steam name), every kind is something
 ## Achievements.measure or a Counters tally actually tracks, goals are reachable numbers, and
 ## find() returns each one.
@@ -11,16 +11,14 @@ const Scan := preload("res://tests/content/content_scan.gd")
 ## these ids and Steamworks these Steam names, so none may change. Three were made solo goals
 ## when the game became single player first (Cory, 2026-10-16): level_50 (now every boss),
 ## well_liked (a boss untouched) and dealmaker (every map of a zone). lucky_scroll went with
-## the upgrade scrolls (Cory, 2026-10-17).
+## the upgrade scrolls (Cory, 2026-10-17), and level_5, level_10 and level_30 with player
+## levels (Cory, 2026-10-19).
 const SHIPPED := [
 	{"id": "first_hunt", "steam": "ACH_FIRST_HUNT", "title": "First Hunt", "text": "Defeat a monster.", "kind": "kills", "goal": 1},
 	{"id": "hunter", "steam": "ACH_HUNTER", "title": "Hunter", "text": "Defeat 500 monsters.", "kind": "kills", "goal": 500},
 	{"id": "slayer", "steam": "ACH_SLAYER", "title": "Slayer", "text": "Defeat 5,000 monsters.", "kind": "kills", "goal": 5000},
 	{"id": "boss_breaker", "steam": "ACH_BOSS_BREAKER", "title": "Boss Breaker", "text": "Defeat a boss.", "kind": "bosses", "goal": 1},
 	{"id": "boss_hunter", "steam": "ACH_BOSS_HUNTER", "title": "Boss Hunter", "text": "Defeat 25 bosses.", "kind": "bosses", "goal": 25},
-	{"id": "level_5", "steam": "REACH_LEVEL_5", "title": "Growing Up", "text": "Reach level 5.", "kind": "level", "goal": 5},
-	{"id": "level_10", "steam": "ACH_LEVEL_10", "title": "Finding Your Feet", "text": "Reach level 10.", "kind": "level", "goal": 10},
-	{"id": "level_30", "steam": "ACH_LEVEL_30", "title": "Seasoned", "text": "Reach level 30.", "kind": "level", "goal": 30},
 	{"id": "level_50", "steam": "ACH_LEVEL_50", "title": "Hero of Tera", "text": "Defeat every boss in Tera.", "kind": "boss_kinds", "goal": 8},
 	{"id": "first_job", "steam": "ACH_FIRST_JOB", "title": "A Calling", "text": "Take up a job.", "kind": "job", "goal": 1},
 	{"id": "helper", "steam": "ACH_HELPER", "title": "Helping Hand", "text": "Finish 10 quests.", "kind": "quests", "goal": 10},
@@ -142,8 +140,6 @@ func test_goals_of_one_kind_climb() -> void:
 
 func test_goals_are_reachable() -> void:
 	for a in Achievements.all():
-		if a.kind == "level":
-			check(a.goal <= Character.MAX_LEVEL, "achievement %s: level %d, but the cap is %d" % [a.id, a.goal, Character.MAX_LEVEL])
 		if a.kind == "maps":
 			check(a.goal <= Content.maps.size(), "achievement %s: visit %d maps, but there are %d" % [a.id, a.goal, Content.maps.size()])
 		if a.kind == "pages":

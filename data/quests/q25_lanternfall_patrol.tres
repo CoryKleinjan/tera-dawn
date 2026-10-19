@@ -20,6 +20,5 @@ offer_text = "The Shade Imps in Lantern Alley are getting bold. Would you thin t
 progress_text = "15 Shade Imps in Lantern Alley. The portal by the storage keeper leads there."
 complete_text = "That'll keep the road safe for a while. Thank you, truly."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
-reward_essence = 12900
 reward_shards = 800
 reward_items = Array[ExtResource("4_drop_entry")]([])

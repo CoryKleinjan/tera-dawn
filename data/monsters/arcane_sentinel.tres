@@ -1,14 +1,10 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=23 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/arcane_sentinel.tres" id="anim"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="5_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/arcane_core.tres" id="6_arcane_core"]
-[ext_resource type="Resource" path="res://data/items/use/sunrise_cake.tres" id="7_sunrise_cake"]
-[ext_resource type="Resource" path="res://data/items/use/starlight_draught.tres" id="8_starlight_draught"]
-[ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="9_elixir"]
-[ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="22_power_elixir"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_shot_bolt.tres" id="mv_boss_shot_bolt"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_slam.tres" id="mv_boss_slam"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_charge.tres" id="mv_boss_charge"]
@@ -20,34 +16,6 @@
 script = ExtResource("4_drop_entry")
 item = ExtResource("rune_sentinel_rune")
 chance = 0.3
-
-[sub_resource type="Resource" id="Resource_18"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("22_power_elixir")
-chance = 0.5
-min_amount = 1
-max_amount = 3
-
-[sub_resource type="Resource" id="Resource_5"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("9_elixir")
-chance = 0.01
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_4"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("8_starlight_draught")
-chance = 0.05
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("7_sunrise_cake")
-chance = 0.08
-min_amount = 1
-max_amount = 2
 
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("4_drop_entry")
@@ -68,9 +36,8 @@ script = ExtResource("1_monster_def")
 id = &"arcane_sentinel"
 display_name = "Arcane Sentinel"
 level = 30
-max_hp = 50424
+max_hp = 5010
 attack = 114
-essence = 10384
 speed = 0.5
 size = Vector2(61.0, 96.0)
 boss = true
@@ -83,6 +50,6 @@ rage_ticks = 100
 sprite_frames = ExtResource("anim")
 sprite_scale = 1.5
 light_color = Color(0.690196, 0.564706, 1.0, 1.0)
-drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_18"), SubResource("Drop_sentinel_rune")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Drop_sentinel_rune")])
 relic = ExtResource("relic_wingstone")
 respawn_ticks = Vector2i(1800, 2400)

@@ -26,4 +26,3 @@ hint = "{loot} to pick up, {inventory} to open your bag"
 gift_on_accept = ExtResource("1_ax7p0")
 auto_start = true
 objectives = Array[ExtResource("2_aq0bm")]([SubResource("Resource_ksdva")])
-reward_essence = 5

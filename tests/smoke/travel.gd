@@ -40,17 +40,18 @@ func check() -> void:
 	# A Return Scroll brings you back to town.
 	var scroll: ItemDef = Content.item(&"return_scroll")
 	ch.inventory.add(scroll, 2)
+	var scrolls := ch.inventory.count_of(scroll)
 	_me().dirty_character = true
 	_me().item_cd = 0
 	await _ticks(2)
 	world.hud.windows["inventory"].tab = ItemDef.Tab.USE
 	world.hud.windows["inventory"].use_slot(Game.me.inventory.find(scroll))
 	await _ticks(3)
-	_check(world.map.id == Character.START_MAP and Game.me.inventory.count_of(scroll) == 1, "a Return Scroll takes you back to town")
+	_check(world.map.id == Character.START_MAP and Game.me.inventory.count_of(scroll) == scrolls - 1, "a Return Scroll takes you back to town")
 	_me().item_cd = 0
 	world.hud.windows["inventory"].use_slot(Game.me.inventory.find(scroll))
 	await _ticks(2)
-	_check(Game.me.inventory.count_of(scroll) == 1, "it isn't used up when you're already in town")
+	_check(Game.me.inventory.count_of(scroll) == scrolls - 1, "it isn't used up when you're already in town")
 	_check(Content.map(&"hollow").return_town() == Character.START_MAP and Content.map(&"meadow").return_town() == Character.START_MAP, "maps know their town")
 	# Captain Marlo's ship from the village dock to Dawnharbor's docks, then Brin's storage,
 	# then Rook's coach.

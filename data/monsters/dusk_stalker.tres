@@ -1,37 +1,13 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=17 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/dusk_stalker.tres" id="2_dusk_stalker"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/stalker_fang.tres" id="5_stalker_fang"]
-[ext_resource type="Resource" path="res://data/items/use/sunrise_cake.tres" id="6_sunrise_cake"]
-[ext_resource type="Resource" path="res://data/items/use/starlight_draught.tres" id="7_starlight_draught"]
-[ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="8_elixir"]
 [ext_resource type="Resource" path="res://data/monster_moves/charge.tres" id="mv_charge"]
 [ext_resource type="Resource" path="res://data/monster_moves/lunge.tres" id="mv_lunge"]
 [ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
-
-[sub_resource type="Resource" id="Resource_5"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("8_elixir")
-chance = 0.01
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_4"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("7_starlight_draught")
-chance = 0.05
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("6_sunrise_cake")
-chance = 0.08
-min_amount = 1
-max_amount = 2
 
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("3_drop_entry")
@@ -52,9 +28,8 @@ script = ExtResource("1_monster_def")
 id = &"dusk_stalker"
 display_name = "Dusk Stalker"
 level = 28
-max_hp = 3044
+max_hp = 325
 attack = 107
-essence = 735
 speed = 1.25
 size = Vector2(72.0, 50.0)
 boss = false
@@ -62,4 +37,4 @@ flying = false
 moves = Array[ExtResource("mv_script")]([ExtResource("mv_charge"), ExtResource("mv_lunge")])
 sprite_frames = ExtResource("2_dusk_stalker")
 sprite_scale = 1.0
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2")])

@@ -104,7 +104,7 @@ func detail_lines(q: QuestDef, w: float, room: float) -> Array:
 		var col := Palette.GOOD if have >= o.count else Palette.MIST
 		tail.append([24.0 if i == 0 else 18.0, "• %s  %d/%d" % [o.describe(), have, o.count], 12, col, 3])
 	var gap := 30.0 if tail.is_empty() else 24.0
-	for l in DrawUtil.wrap_text(Game.ui_font, "Reward: %s" % q.describe_rewards(), 11, w):
+	for l in DrawUtil.wrap_text(Game.ui_font, q.reward_line(), 11, w) if q.reward_line() != "" else []:
 		tail.append([gap, l, 11, Palette.SUN, 0])
 		gap = 15.0
 	var used := 0.0

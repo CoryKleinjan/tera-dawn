@@ -29,6 +29,5 @@ offer_text = "Deer made of white stone, walking about as if they still had somew
 progress_text = "Did the stags look at you? I keep wondering if they know what they've become."
 complete_text = "A ring of stone trees at the very top, and something standing in the middle, taller than the rest. And it moved? (He sets his basket down.) Then that's where all this is coming from. It's spreading out from there, a little more each night."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Stags"), SubResource("Top")])
-reward_essence = 23500
 reward_shards = 1500
 reward_items = Array[ExtResource("5_drop_entry")]([])

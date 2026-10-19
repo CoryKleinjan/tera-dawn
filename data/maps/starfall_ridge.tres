@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=95 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=89 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/lumewood.tres" id="2_lumewood"]
@@ -25,8 +25,6 @@
 [ext_resource type="Resource" path="res://data/monsters/lume_wisp.tres" id="23_lume_wisp"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="24_dawnshard"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="25_drop_entry"]
-[ext_resource type="Resource" path="res://data/items/use/orange_potion.tres" id="26_orange_potion"]
-[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="27_blue_potion"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/chest.png" id="28_chest"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood_fields/chest_open.png" id="29_chest_open"]
 [ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="30_breakable_def"]
@@ -399,18 +397,6 @@ item = ExtResource("24_dawnshard")
 min_amount = 100
 max_amount = 160
 
-[sub_resource type="Resource" id="Loot_0_1"]
-script = ExtResource("25_drop_entry")
-item = ExtResource("26_orange_potion")
-min_amount = 3
-max_amount = 3
-
-[sub_resource type="Resource" id="Loot_0_2"]
-script = ExtResource("25_drop_entry")
-item = ExtResource("27_blue_potion")
-min_amount = 3
-max_amount = 3
-
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("30_breakable_def")
 id = &"starfall_ridge_high_chest"
@@ -420,7 +406,7 @@ hits = 1
 whole = ExtResource("28_chest")
 broken = ExtResource("29_chest_open")
 height = 48.0
-loot = Array[ExtResource("25_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1"), SubResource("Loot_0_2")])
+loot = Array[ExtResource("25_drop_entry")]([SubResource("Loot_0_0")])
 card = ExtResource("23_lume_wisp")
 
 [sub_resource type="Resource" id="Loot_1_0"]
@@ -428,18 +414,6 @@ script = ExtResource("25_drop_entry")
 item = ExtResource("24_dawnshard")
 min_amount = 100
 max_amount = 160
-
-[sub_resource type="Resource" id="Loot_1_1"]
-script = ExtResource("25_drop_entry")
-item = ExtResource("26_orange_potion")
-min_amount = 3
-max_amount = 3
-
-[sub_resource type="Resource" id="Loot_1_2"]
-script = ExtResource("25_drop_entry")
-item = ExtResource("27_blue_potion")
-min_amount = 3
-max_amount = 3
 
 [sub_resource type="Resource" id="Breakable_1"]
 script = ExtResource("30_breakable_def")
@@ -450,7 +424,7 @@ hits = 1
 whole = ExtResource("28_chest")
 broken = ExtResource("29_chest_open")
 height = 48.0
-loot = Array[ExtResource("25_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
+loot = Array[ExtResource("25_drop_entry")]([SubResource("Loot_1_0")])
 card = ExtResource("21_glowcap")
 
 [resource]

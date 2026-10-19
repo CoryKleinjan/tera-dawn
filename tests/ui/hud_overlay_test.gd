@@ -7,36 +7,25 @@ extends TestCase
 ## shows the fighting keys on the first field, never in town and never over a window.
 
 var ui: UiHelpers
+var fx: UnitHelpers
 
 func before_each() -> void:
+	fx = UnitHelpers.new()
 	ui = UiHelpers.new(self)
 	await ui.start()
 
 func after_each() -> void:
 	ui.stop()
+	fx.cleanup()
 
 func test_status_bar_draws_any_state() -> void:
 	var bar := ui.hud.status
 	check(bar.visible and bar.size.y == TDStatusBar.HEIGHT, "the status bar runs along the bottom")
-	for state in [[1, 0], [30, 1], [99, 5]]:
+	for state in [[0, 0], [1, 9999999]]:
 		await ui.edit(func(c: Character) -> void:
-			c.level = state[0]
-			c.xp = c.xp_need() / 2
-			c.mp = state[1]
-			c.shards = 9999999)
-		check(await ui.redraw(bar), "the status bar draws at level %d" % state[0])
-
-func test_status_bar_says_max_level_at_the_cap() -> void:
-	var bar := ui.hud.status
-	await ui.edit(func(c: Character) -> void:
-		c.level = 20
-		c.xp = c.xp_need() / 4)
-	check_eq(bar.exp_text(), "%.1f%%" % (100.0 * Game.me.xp / Game.me.xp_need()), "how far to the next level")
-	await ui.edit(func(c: Character) -> void:
-		c.level = Character.MAX_LEVEL
-		c.xp = 0)
-	check_eq(bar.exp_text(), "Max level", "at the cap")
-	check(await ui.redraw(bar), "the status bar draws at the cap")
+			c.mp = state[0]
+			c.shards = state[1])
+		check(await ui.redraw(bar), "the status bar draws with %d Dawnshards" % state[1])
 
 func test_quickslots_hold_skills_and_items() -> void:
 	var slots := ui.hud.quickslots
@@ -46,11 +35,11 @@ func test_quickslots_hold_skills_and_items() -> void:
 		check_eq(slots.slot_at(slots.slot_rect(i).get_center()), i, "slot_at the middle of quickslot %d" % i)
 	check_eq(slots.slot_at(Vector2(-5, -5)), -1, "slot_at outside")
 	slots.assign(0, &"skill", Character.BASIC_ATTACK)
-	slots.assign(1, &"item", &"red_potion")
-	slots.assign(2, &"item", &"elixir")
+	slots.assign(1, &"item", &"return_scroll")
+	slots.assign(2, &"item", &"pet_snack")
 	await ui.ticks(2)
 	check(TDQuickslots.content(0) == Content.skill(Character.BASIC_ATTACK), "slot 1 holds the basic attack")
-	check(TDQuickslots.content(1) == Content.item(&"red_potion"), "slot 2 holds Red Potions")
+	check(TDQuickslots.content(1) == Content.item(&"return_scroll"), "slot 2 holds Return Scrolls")
 	check(TDQuickslots.content(3) == null, "slot 4 is empty")
 	check(await ui.redraw(slots), "the quickslots draw")
 	await ui.click(slots, slots.slot_rect(2).get_center(), MOUSE_BUTTON_RIGHT)
@@ -66,10 +55,10 @@ func test_quickslot_skill_hover_clears_the_tooltip() -> void:
 
 func test_quickslot_item_hover_shows_the_item() -> void:
 	var slots := ui.hud.quickslots
-	slots.assign(1, &"item", &"red_potion")
+	slots.assign(1, &"item", &"return_scroll")
 	await ui.ticks(2)
 	await ui.hover(slots, slots.slot_rect(1).get_center())
-	check(ui.hud.tooltip.stack != null and ui.hud.tooltip.stack.item.id == &"red_potion", "hovering a potion shows it")
+	check(ui.hud.tooltip.stack != null and ui.hud.tooltip.stack.item.id == &"return_scroll", "hovering a scroll shows it")
 
 func test_chat_shows_every_channel() -> void:
 	var chat := ui.hud.chat
@@ -121,14 +110,15 @@ func test_prompt_answers_with_what_was_typed() -> void:
 	check_eq(got.size(), 1, "Cancel sends nothing")
 
 func test_overlay_draws_everything_it_can_show() -> void:
+	var buff := fx.skill(&"t_buff", SkillDef.Kind.BUFF)
+	buff.icon = Content.skill(Character.BASIC_ATTACK).icon
+	buff.duration = 60.0
 	await ui.edit(func(c: Character) -> void:
 		c.job = Content.job(&"warrior")
 		for q: QuestDef in Content.quests.values().slice(0, 5):
 			c.quests.accept(q)
-		for s: SkillDef in Content.skills.values():
-			if s.kind == SkillDef.Kind.BUFF:
-				c.skills.learned[s.id] = 1
-				c.skills.buffs[s.id] = [1, 600]
+		c.skills.learned[buff.id] = 1
+		c.skills.buffs[buff.id] = [1, 600]
 		c.guild = "Dawnbreakers")
 	Game.social = {"party": {"leader": "Mossy", "members": [["Mossy", 7, "warrior", 0.5, "meadow"], [Game.me.name, 1, "warrior", 1.0, "meadow"], ["Kestrel", 8, "archer", 0.1, "hollow"]]}}
 	for i in 8:
@@ -317,26 +307,17 @@ func test_pickups_of_the_same_item_merge() -> void:
 	ui.world.show_pickup(tuft, 1)
 	check_eq(ui.world.log_lines[-1]["text"], "Picked up %s" % tuft.display_name, "later pickups start a new line")
 
-func test_essence_and_dawnshards_float_over_you() -> void:
+func test_dawnshards_float_over_you() -> void:
 	ui.world.log_lines.clear()
-	ui.world.show_gain(&"essence", 9)
+	ui.world.show_gain(&"shards", 9)
 	ui.world.show_gain(&"shards", 8)
 	var gains: Array = ui.world.fx_layer.get_children().filter(func(f: Node) -> bool: return f is TDFloatText and f.is_gain())
 	check_eq(gains.size(), 2, "two rising numbers")
 	check(ui.world.log_lines.is_empty(), "nothing in the log")
-	check_eq((gains[0] as TDFloatText).gain_text(), "+9 Dawn Essence", "Dawn Essence")
-	check_eq((gains[1] as TDFloatText).gain_text(), "+8 Dawnshards", "Dawnshards")
+	check_eq((gains[0] as TDFloatText).gain_text(), "+9 Dawnshards", "the first gain")
+	check_eq((gains[1] as TDFloatText).gain_text(), "+8 Dawnshards", "the second gain")
 	check(gains[1].position.y < gains[0].position.y, "the second stacks above the first")
 	check(await ui.redraw(ui.hud.overlay), "the overlay draws them")
-
-func test_gaining_essence_shows_over_you_not_in_the_log() -> void:
-	ui.world.log_lines.clear()
-	var before := Game.me.essence
-	ui.player().map.server.give_essence(ui.player(), 3)
-	await ui.ticks(2)
-	check(ui.world.log_lines.all(func(l: Dictionary) -> bool: return not l["text"].contains("Dawn Essence")), "no Dawn Essence line in the log")
-	check(ui.world.fx_layer.get_children().any(func(f: Node) -> bool: return f is TDFloatText and f.is_gain()), "a rising +3 Dawn Essence")
-	check_eq(Game.me.essence, before + 3, "the essence reached the client")
 
 # ---------- title screen ----------
 

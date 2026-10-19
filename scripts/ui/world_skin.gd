@@ -1,17 +1,12 @@
 class_name WorldSkin
 extends RefCounted
 ## Drawing helpers for what the overlay and the HUD draw every frame over the world, from
-## the UI art (UiSkin): the EXP bar, party, monster and boss HP bars, the plaques
+## the UI art (UiSkin): party, monster and boss HP bars, the plaques
 ## under name tags and hints, guild tags, quest markers, speech bubbles and the
 ## map-name banner. All sizes are in the 960x540 canvas.
 
-## The smallest text draw_bar writes on a bar.
-const BAR_TEXT_MIN := 9
-## How many art pixels of plain groove draw_bar_frame stretches when a bar is drawn wider.
-const BAR_STRETCH := 8.0
 ## Where each bar frame's empty groove is, in art pixels: Rect2(x, y, w, h).
 const GROOVES := {
-	"exp_frame": Rect2(28, 9, 124, 12),
 	"social/party_hp_frame": Rect2(10, 8, 164, 11),
 }
 ## The monster HP bar's frame without the emblem painted at its left end, in art pixels of
@@ -50,48 +45,6 @@ const BANNER_TEXT := 26
 ## Panels with an ornament in the middle of an edge, drawn with UiSkin.draw_panel:
 ## [texture, margins (left, top, right, bottom), middle kept (across, down)], in art pixels.
 const GUILD_TAG := ["social/guild_tag", Vector4(46, 28, 46, 18), Vector2(56, 0)]
-
-## A bar: the frame texture with its fill drawn into the groove. `pos` is the frame's top left.
-## `trail` (above `fraction`) shows a pale chunk of what was just lost, and `flash` (0-1)
-## lights the fill up, for bars that animate (TDStatusBar).
-static func draw_bar(ci: CanvasItem, frame: String, fill: String, pos: Vector2, fraction: float, scale := 1.0, text := "", trail := 0.0, flash := 0.0, extra := 0.0) -> void:
-	var g: Rect2 = GROOVES[frame]
-	draw_bar_frame(ci, frame, pos, scale, extra)
-	var groove := Rect2(pos + g.position * scale, g.size * scale + Vector2(extra, 0))
-	if trail > fraction:
-		var from := groove.size.x * clampf(fraction, 0.0, 1.0)
-		var to := groove.size.x * clampf(trail, 0.0, 1.0)
-		DrawUtil.round_rect(ci, Rect2(groove.position.x + maxf(0.0, from - 4.0), groove.position.y + 1.0, to - from + 4.0, groove.size.y - 2.0),
-			groove.size.y / 2.0 - 1.0, Color(Palette.MUTED, 0.85))
-	draw_bar_fill(ci, fill, groove, fraction, scale)
-	if flash > 0.0 and fraction > 0.0:
-		DrawUtil.round_rect(ci, Rect2(groove.position, Vector2(groove.size.x * clampf(fraction, 0.0, 1.0), groove.size.y)),
-			groove.size.y / 2.0, Color(1.0, 0.95, 0.75, 0.6 * flash))
-	if text != "":
-		# never smaller than BAR_TEXT_MIN, so a bar drawn small stays readable
-		var ts := maxi(int(12 * scale), BAR_TEXT_MIN)
-		DrawUtil.text(ci, Game.ui_font, Vector2(groove.get_center().x, groove.get_center().y + ts * 0.36),
-			text, ts, Palette.MIST, 0, 4, Color(0.1, 0.05, 0.15, 0.9))
-
-## A bar frame drawn `extra` pixels wider than its art: a plain strip from the middle of its
-## groove stretches, so the painted end caps keep their shape.
-static func draw_bar_frame(ci: CanvasItem, frame: String, pos: Vector2, scale: float, extra := 0.0) -> void:
-	var ft := UiSkin.tex(frame)
-	var art := UiSkin.size_of(frame)
-	if extra <= 0.0:
-		ci.draw_texture_rect(ft, Rect2(pos, art * scale), false)
-		return
-	var g: Rect2 = GROOVES[frame]
-	var h := art.y
-	var strip := Rect2(g.get_center().x - BAR_STRETCH / 2.0, 0, BAR_STRETCH, h)
-	var left := Rect2(0, 0, strip.position.x, h)
-	var right := Rect2(strip.end.x, 0, art.x - strip.end.x, h)
-	var x := pos.x
-	ci.draw_texture_rect_region(ft, Rect2(x, pos.y, left.size.x * scale, h * scale), UiSkin.region(frame, left))
-	x += left.size.x * scale
-	ci.draw_texture_rect_region(ft, Rect2(x, pos.y, strip.size.x * scale + extra, h * scale), UiSkin.region(frame, strip))
-	x += strip.size.x * scale + extra
-	ci.draw_texture_rect_region(ft, Rect2(x, pos.y, right.size.x * scale, h * scale), UiSkin.region(frame, right))
 
 ## A bar's fill pill across the left `fraction` of `groove`.
 static func draw_bar_fill(ci: CanvasItem, fill: String, groove: Rect2, fraction: float, scale := 1.0) -> void:

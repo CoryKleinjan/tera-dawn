@@ -6,7 +6,7 @@ extends RefCounted
 ##
 ##   var ui := UiHelpers.new(self)
 ##   await ui.start()
-##   await ui.edit(func(c: Character) -> void: c.inventory.add(Content.item(&"red_potion"), 5))
+##   await ui.edit(func(c: Character) -> void: c.inventory.add(Content.item(&"return_scroll"), 5))
 ##   await ui.click(ui.hud.windows["inventory"], Vector2(40, 50))
 ##   ui.stop()
 

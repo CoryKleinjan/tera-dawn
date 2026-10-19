@@ -23,18 +23,18 @@ const TOWN_GATE_X := 1000.0
 var h: ServerHarness
 var p: SimPlayer
 var c: Character
-var potion: ItemDef
+var scroll: ItemDef
 var key: ItemDef
 
 func before_each() -> void:
 	h = ServerHarness.new()
-	potion = Content.item(&"red_potion")
+	scroll = Content.item(&"return_scroll")
 	# the field: a ledge up high, a chest and a wall on the floor, and the near end of a
 	# shortcut that drops you into the town
 	var field := ServerHarness.field_def()
 	field.platforms.append(ServerHarness.platform(1500.0, LEDGE_Y, 400.0))
 	field.portals.append(_portal(NEAR_X, ServerHarness.TOWN, 600.0, 0, &"", &"test_drop"))
-	field.breakables.append(_breakable(&"test_chest", CHEST_X, 2, [ServerHarness.drop(potion, 3)]))
+	field.breakables.append(_breakable(&"test_chest", CHEST_X, 2, [ServerHarness.drop(scroll, 3)]))
 	field.breakables.append(_breakable(&"test_wall", WALL_X, 3, []))
 	field.portals.append(_portal(WALL_X, ServerHarness.TOWN, 900.0, 0, &"test_wall"))
 	# a fake wall with a way behind it, and a secret ledge
@@ -158,7 +158,7 @@ func test_a_broken_chest_spills_its_loot_for_whoever_broke_it() -> void:
 	_hit(p)
 	var drops: Array = p.map.drops.values()
 	check_eq(drops.size(), 1, "one drop")
-	check_eq([drops[0].item, drops[0].amount, drops[0].owner], [potion, 3, 2], "three potions, Ann's")
+	check_eq([drops[0].item, drops[0].amount, drops[0].owner], [scroll, 3, 2], "three scrolls, Ann's")
 
 func test_a_broken_chest_takes_no_more_blows() -> void:
 	c.find_secret(&"test_chest")

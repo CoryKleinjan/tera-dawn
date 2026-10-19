@@ -17,7 +17,7 @@ but the tears' own, and each one after takes it further.
   Every step up to the character's applies, in order.
 - `TearState` (`scripts/systems/tear_state.gd`) holds every rule: `open`, `finished`,
   `decline` (tears finished), `decline_of` (0 inside a tear), `kind`, `strength`
-  (`STRENGTH_PER_STEP`, +50% HP, attack and essence a step) and `look`.
+  (`STRENGTH_PER_STEP`, +50% HP and attack a step) and `look`.
 - What a character has finished comes from their quests done, so saves need nothing new.
 - The way in is a `SceneSpot` with `tear` set, on a secret ledge (`PlatformDef.secret`) of
   the zone: it is shut and its glow hidden until `TearState.open`, then it sends the player to

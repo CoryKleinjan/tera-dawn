@@ -1,9 +1,8 @@
 class_name MonsterStrength
 extends RefCounted
-## How strong a monster is on a map. Each kind's own numbers (MonsterDef max_hp, attack,
-## essence) are what it is on the map nearest a town that it lives on; on every map farther
-## from the nearest town than that it is PER_MAP stronger (HP, attack and Dawn Essence
-## alike). Bosses keep their own numbers wherever they are.
+## How strong a monster is on a map. Each kind's own numbers (MonsterDef max_hp, attack) are
+## what it is on the map nearest a town that it lives on; on every map farther from the
+## nearest town than that it is PER_MAP stronger (HP and attack alike). Bosses keep their own numbers wherever they are.
 
 const PER_MAP := 0.15
 
@@ -33,6 +32,6 @@ static func home_steps(m: MonsterDef, steps: Dictionary) -> int:
 					best = d
 	return maxi(0, best)
 
-## `amount` (HP, attack or essence) made `strength` times as strong, at least 1.
+## `amount` (HP or attack) made `strength` times as strong, at least 1.
 static func scaled(amount: int, strength: float) -> int:
 	return maxi(1, roundi(amount * strength))

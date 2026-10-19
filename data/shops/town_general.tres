@@ -1,15 +1,7 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=39 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=19 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
-[ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="3_red_potion"]
-[ext_resource type="Resource" path="res://data/items/use/orange_potion.tres" id="4_orange_potion"]
-[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="5_white_potion"]
-[ext_resource type="Resource" path="res://data/items/use/honey_bun.tres" id="6_honey_bun"]
-[ext_resource type="Resource" path="res://data/items/use/sunrise_cake.tres" id="7_sunrise_cake"]
-[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="8_blue_potion"]
-[ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="9_mana_tea"]
-[ext_resource type="Resource" path="res://data/items/use/mana_elixir.tres" id="10_mana_elixir"]
 [ext_resource type="Resource" path="res://data/items/use/return_scroll.tres" id="11_return_scroll"]
 [ext_resource type="Resource" path="res://data/items/use/dawnharbor_scroll.tres" id="12_dawnharbor_scroll"]
 [ext_resource type="Resource" path="res://data/items/use/greenbough_scroll.tres" id="13_greenbough_scroll"]
@@ -54,46 +46,6 @@ script = ExtResource("2_shop_entry")
 item = ExtResource("11_return_scroll")
 price = 0
 
-[sub_resource type="Resource" id="Resource_8"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("10_mana_elixir")
-price = 0
-
-[sub_resource type="Resource" id="Resource_7"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("9_mana_tea")
-price = 0
-
-[sub_resource type="Resource" id="Resource_6"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("8_blue_potion")
-price = 0
-
-[sub_resource type="Resource" id="Resource_5"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("7_sunrise_cake")
-price = 0
-
-[sub_resource type="Resource" id="Resource_4"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("6_honey_bun")
-price = 0
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("5_white_potion")
-price = 0
-
-[sub_resource type="Resource" id="Resource_2"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("4_orange_potion")
-price = 0
-
-[sub_resource type="Resource" id="Resource_1"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("3_red_potion")
-price = 0
-
 [sub_resource type="Resource" id="P11_pet_snack"]
 script = ExtResource("2_shop_entry")
 item = ExtResource("p11_pet_snack")
@@ -103,4 +55,4 @@ price = 0
 script = ExtResource("1_shop_def")
 id = &"town_general"
 display_name = "General Store"
-items = Array[ExtResource("2_shop_entry")]([SubResource("P11_pet_snack"), SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6"), SubResource("Resource_7"), SubResource("Resource_8"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("P11_pet_snack"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15")])

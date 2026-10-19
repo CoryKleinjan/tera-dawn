@@ -53,14 +53,12 @@ func check() -> void:
 	ch.book.pages[&"mossling"] = [1, CardDef.SET]
 	ch.book.pages[&"petal_bat"] = [1, CardDef.SET]
 	ch.book.pages[dew.id] = [ch.book.kills(dew), CardDef.SET - 1]
-	ch.recalc()
-	var power := ch.power()
 	map.spawn_drop(Content.card(dew), 1, null, DropFlight.create(me.position + Vector2(0, -20), 620.0, me.position.x), me.peer)
 	await _ticks(SimDrop.SETTLE_TICKS + 3)
 	await _tap("loot")
 	await _ticks(3)
 	_check(ch.book.cards(dew) == CardDef.SET and Game.me.book.complete(dew), "picking up a card fills in the book")
-	_check(ch.book.rank() == 2 and ch.power() == power + 1, "completed pages raise the book's rank and your power")
+	_check(ch.book.rank() == 2, "completed pages raise the book's rank")
 	_check(ch.achievements.has("first_hunt") and ch.achievements.has("first_page") and Game.me.achievements.has("first_page"), "kills and pages earn achievements")
 	await _press("collection")
 	var book: TDCollectionWindow = world.hud.windows["collection"]

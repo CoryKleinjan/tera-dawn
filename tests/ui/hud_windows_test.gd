@@ -5,7 +5,7 @@ extends TestCase
 ## tried with every NPC, shop and storage; trade and the player menu with
 ## the server's kind of state. (tests/run_all.sh fails on any script error they print.)
 
-const KNOWN := ["inventory", "equipment", "stats", "quests", "skills", "worldmap", "community", "collection",
+const KNOWN := ["inventory", "equipment", "stats", "quests", "worldmap", "community", "collection",
 	"dialogue", "shop", "storage", "enchant", "player", "trade"]
 
 var ui: UiHelpers
@@ -200,10 +200,8 @@ func _plus_rects(win: TDWindow) -> Array[Rect2]:
 # ---------- character stats ----------
 
 func test_stats_window_has_nothing_to_buy() -> void:
-	# Dawn Essence buys skill levels only: the Character window just shows it
-	await ui.edit(func(c: Character) -> void: c.essence = 100000)
 	var stats: TDStatsWindow = _open("stats")
-	await _redrawn(stats, "stats with essence in hand")
+	await _redrawn(stats, "stats")
 	check(_plus_rects(stats).is_empty(), "no + buttons")
 	check(stats.content_end <= stats.size.y - 16, "the rows fit")
 
@@ -213,8 +211,7 @@ func test_stats_window_leaves_the_status_bar_visible() -> void:
 
 func test_stats_window_for_a_beginner() -> void:
 	await ui.edit(func(c: Character) -> void:
-		c.job = Content.job(Character.START_JOB)
-		c.essence = 1000000)
+		c.job = Content.job(Character.START_JOB))
 	var stats: TDStatsWindow = _open("stats")
 	await _redrawn(stats, "stats for a Beginner")
 	check_eq(stats.size.y, TDStatsWindow.BASE_H, "no job paths, no extra room")
@@ -229,69 +226,6 @@ func test_stats_window_for_a_warrior() -> void:
 	await _redrawn(stats, "stats for a Warrior")
 	check_eq(stats.size.y, TDStatsWindow.BASE_H, "the same height as a Beginner's")
 	check(stats.content_end <= stats.size.y - 16, "the rows fit")
-
-func test_status_bar_glows_while_essence_waits() -> void:
-	await ui.edit(func(c: Character) -> void:
-		c.job = Content.job(&"warrior")
-		c.essence = 0)
-	check(not TDStatusBar.has_points_waiting("stats") and not TDStatusBar.has_points_waiting("skills"), "nothing to spend, no glow")
-	await ui.edit(func(c: Character) -> void: c.essence = 100000)
-	check(not TDStatusBar.has_points_waiting("stats"), "the Character button never glows: it has nothing to buy")
-	check(TDStatusBar.has_points_waiting("skills"), "the Skills button glows when it buys a skill level")
-	check(not TDStatusBar.has_points_waiting("inventory"), "other buttons don't")
-	check(await ui.redraw(ui.hud.status), "the status bar draws the glow")
-
-# ---------- skills ----------
-
-func test_skill_window_lists_every_skill_of_every_job() -> void:
-	var stats := {}
-	for j: JobDef in Content.jobs.values():
-		if j.advances_from == &"":
-			continue
-		await ui.edit(func(c: Character) -> void:
-			c.job = j
-			c.essence = 100000)
-		var book: TDSkillWindow = _open("skills")
-		var line := book.jobs()
-		if j.partner == &"":
-			check_eq(line.size(), 2, "%s: tabs (Beginner and the job)" % j.id)
-		else:
-			check_eq(line, [Character.START_JOB, j.advances_from, j.partner, j.id] as Array[StringName], "%s: tabs (Beginner, both parents, the blend)" % j.id)
-		for t in line.size():
-			await _click_tab(book, t)
-			check_eq(book.tab, t, "%s: clicking tab %d" % [j.id, t])
-			var listed := book.listed()
-			var want := Content.skills.values().filter(func(s: SkillDef) -> bool: return s.job == line[t] and not s.innate)
-			check_eq(listed.size(), want.size(), "%s: skills listed in the %s tab" % [j.id, line[t]])
-			check(listed.size() <= TDSkillWindow.ROWS, "%s: the %s tab has %d skills, more than the %d rows shown" % [j.id, line[t], listed.size(), TDSkillWindow.ROWS])
-			for i in mini(listed.size(), TDSkillWindow.ROWS):
-				await ui.click(book, book.row_rect(i).get_center() + Vector2(-60, 0))
-				check_eq(book.selected, listed[i].id, "%s: clicking row %d" % [j.id, i])
-				await _redrawn(book, "skills, %s tab, %s selected" % [line[t], listed[i].id])
-		book.visible = false
-		stats[j.id] = true
-	check(stats.size() >= 5, "tried every advanced job")
-
-func test_skill_plus_learns_through_the_server() -> void:
-	await ui.edit(func(c: Character) -> void:
-		c.job = Content.job(&"warrior")
-		c.essence = c.skills.price())
-	var book: TDSkillWindow = _open("skills")
-	book.tab = 1
-	await _redrawn(book, "warrior skills")
-	var plus := _plus_rects(book)
-	check(not plus.is_empty(), "skills the essence pays for show a +")
-	var row := -1
-	for i in TDSkillWindow.ROWS:
-		if book.row_rect(i).encloses(plus[0]):
-			row = i
-	check(row >= 0, "the first + sits on a skill's row")
-	var id: StringName = book.listed()[maxi(row, 0)].id
-	await ui.click(book, plus[0].get_center())
-	await ui.ticks(3)
-	check_eq(Game.me.skills.level(Content.skill(id)), 1, "%s after clicking its +" % id)
-	check_eq(Game.me.essence, 0, "the level's price was paid")
-	check_eq(Game.me.skills.price(), CharacterStats.skill_price(1), "the next skill level costs more")
 
 # ---------- quests ----------
 
@@ -358,7 +292,7 @@ func test_every_quest_draws_in_the_log() -> void:
 			log.draw.connect(details)
 			await _redrawn(log, "quest %s on the %s page" % [q.id, TDQuestWindow.PAGE_NAMES[page]])
 			log.draw.disconnect(details)
-		check(not q.describe_rewards().is_empty(), "%s: describe_rewards() is empty" % q.id)
+		check(q.describe_rewards().is_empty() == (q.reward_line() == ""), "%s: a Reward line only with a reward" % q.id)
 		for o in q.objectives:
 			check(not o.describe().contains("?"), "%s: objective reads %s" % [q.id, o.describe()])
 
@@ -575,7 +509,7 @@ func test_collection_book_pages_and_every_monster() -> void:
 			if i % 3 != 2:
 				c.book.pages[id] = [i * 3, i % 6]
 			i += 1
-		c.achievements.append_array(["first_hunt", "level_5"]))
+		c.achievements.append_array(["first_hunt", "first_job"]))
 	var book: TDCollectionWindow = _open("collection")
 	check_eq(book._monsters.size(), Content.monsters.size(), "the book has a page per monster")
 	await _click_tab(book, 0)
@@ -689,17 +623,14 @@ func _job_page(tutor: StringName, job_name: String) -> TDNpc:
 	talk.choose(labels.find(job_name))
 	return npc
 
-func test_a_job_page_shows_what_switching_costs() -> void:
+func test_a_job_page_asks_for_the_job_test() -> void:
 	await ui.edit(func(c: Character) -> void:
 		c.job = Content.job(&"warrior")
 		c.jobs_passed.assign(["warrior"])
-		c.quests.done.erase(&"jtest_mage")
-		c.skills.learned[&"power_strike"] = 2
-		c.skills.paid[&"power_strike"] = 48)
+		c.quests.done.erase(&"jtest_mage"))
 	var npc := _job_page(&"lumewood_instructor", "Magician")
 	var talk: TDDialogueWindow = _win("dialogue")
-	check(talk.text.contains("You would forget Power Strike, and get back 48 Dawn Essence."), "what would go and what comes back: %s" % talk.text)
-	check(talk.text.contains("Pass the Job Test first."), "the Job Test first")
+	check(talk.text.contains("Pass the Job Test first."), "the Job Test first: %s" % talk.text)
 	check(not talk.text.contains("You passed this path before"), "not passed yet")
 	var labels: Array = talk.options.map(func(o: Array) -> String: return o[0])
 	check_eq(labels, ["Back"], "no Become button yet")
@@ -715,7 +646,6 @@ func test_a_job_page_for_a_job_passed_before() -> void:
 	var npc := _job_page(&"lumewood_instructor", "Magician")
 	var talk: TDDialogueWindow = _win("dialogue")
 	check(talk.text.contains("You passed this path before, so it's yours again for the asking."), "passed before")
-	check(not talk.text.contains("You would forget"), "no skills to lose")
 	check(not talk.text.contains("Pass the Job Test"), "no Job Test again")
 	check_eq(talk.options[0][0], "Become a Magician", "free to switch back")
 	talk.visible = false

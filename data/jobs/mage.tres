@@ -2,31 +2,16 @@
 
 [ext_resource type="Script" path="res://scripts/data/job_def.gd" id="1_job_def"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
-[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="5_blue_potion"]
-[ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="q_red_potion"]
 [ext_resource type="Script" path="res://scripts/data/item_def.gd" id="q_item_def"]
 [ext_resource type="Resource" path="res://data/quests/jtest_mage.tres" id="20_test"]
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("5_blue_potion")
-chance = 1.0
-min_amount = 30
-max_amount = 30
 
 [resource]
 script = ExtResource("1_job_def")
 id = &"mage"
 display_name = "Magician"
 family = &"mage"
-mastery = 0.65
 description = "Scholars of dawnlight who hurl spells with wands and staves."
-base_power = 4
-base_hp = 52
-hp_growth = 8
-base_mp = 39
-mp_growth = 21
 advances_from = &"beginner"
-advance_gifts = Array[ExtResource("3_drop_entry")]([SubResource("Resource_3")])
-starting_quickslots = Array[ExtResource("q_item_def")]([ExtResource("q_red_potion"), ExtResource("5_blue_potion")])
+advance_gifts = Array[ExtResource("3_drop_entry")]([])
+starting_quickslots = Array[ExtResource("q_item_def")]([])
 advance_quest = ExtResource("20_test")

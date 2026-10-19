@@ -151,7 +151,7 @@ func _run() -> void:
 	await play.go_to_meadow()
 	await play.first_kill()
 	await play.loot()
-	await play.potion_and_gear()
+	await play.heal_and_gear()
 	await play.windows()
 
 	await quests.check()
@@ -164,7 +164,6 @@ func _run() -> void:
 	await social.check()
 	await keepsakes.check()
 
-	await play.dawn_slash()
 	await play.portal()
 	await play.faint()
 	await play.leave()

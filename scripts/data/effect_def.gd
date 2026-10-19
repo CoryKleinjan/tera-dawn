@@ -1,7 +1,7 @@
 class_name EffectDef
 extends Resource
 ## A short visual effect: a flipbook of glowing frames, optionally with a flash of light,
-## a burst of particles and a caption. Used for slashes, hits, level ups and pickups.
+## a burst of particles and a caption. Used for slashes, hits and pickups.
 
 # Effects the game fires by id rather than through a skill or item (data/effects/<id>.tres).
 ## A sparkle around a player who did something worth cheering: an achievement, a job
@@ -11,12 +11,10 @@ const CELEBRATE := &"celebrate"
 const MONSTER_POOF := &"monster_poof"
 ## The flash on a critical hit.
 const CRITICAL := &"critical"
-## The burst around a player who levels up.
-const LEVEL_UP := &"level_up"
 ## The glow round a player whose Mana healed a heart.
 const HEAL := &"heal"
 ## Every effect named above.
-const NAMED: Array[StringName] = [CELEBRATE, MONSTER_POOF, CRITICAL, LEVEL_UP, HEAL]
+const NAMED: Array[StringName] = [CELEBRATE, MONSTER_POOF, CRITICAL, HEAL]
 
 @export var id: StringName
 @export var frames: Array[Texture2D] = []
@@ -29,7 +27,7 @@ const NAMED: Array[StringName] = [CELEBRATE, MONSTER_POOF, CRITICAL, LEVEL_UP, H
 @export var offset := Vector2.ZERO
 ## Brightness: values above 1 bloom.
 @export var energy := 1.6
-## Keeps following the player (level up).
+## Keeps following the player.
 @export var follow_player := false
 @export var fade_out := true
 ## Fades every frame's edges in over this share of its width and height as it plays, for

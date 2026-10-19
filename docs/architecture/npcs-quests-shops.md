@@ -22,7 +22,7 @@ plays).
 Create `data/quests/<id>.tres` as a **QuestDef**: a title, the `giver` NPC id (and a
 `turn_in` NPC if someone else takes it back), who can take it (`jobs`, quests it
 `requires`, `requires_any` for one of several, bosses it `requires_beaten`; never a level), what the NPC says when offering it, while it's in progress and when it's handed
-in, its **QuestObjective**s, and its rewards (Dawn Essence and as much EXP, Dawnshards, items). Objectives are:
+in, its **QuestObjective**s, and its rewards (Dawnshards, items). Objectives are:
 
 - **KILL** `count` of a `monster`;
 - **COLLECT** `count` of an `item` (taken when handed in). Give it a `drop_from` monster and a

@@ -1,14 +1,12 @@
 class_name TDFloatText
 extends Node2D
 ## A floating line, drawn by the overlay at its projected screen position: something you
-## gained (exp, essence, shards), such as "+9 EXP". Hits show no numbers (Cory Oct 19).
+## gained, such as "+8 Dawnshards". Hits show no numbers (Cory Oct 19).
 
 ## Gains younger than this stack above each other (see TDWorldFx.show_gain).
 const GAIN_STACK_TICKS := 30
 ## What each kind of gain says after its amount, and its colour.
 const GAINS := {
-	"exp": ["EXP", Color("fff0c2")],
-	"essence": ["Dawn Essence", Color("ffe39a")],
 	"shards": ["Dawnshards", Color("ffd36b")],
 }
 
@@ -20,7 +18,7 @@ var t := 0
 func is_gain() -> bool:
 	return GAINS.has(kind)
 
-## What a gain reads ("+9 EXP").
+## What a gain reads ("+8 Dawnshards").
 func gain_text() -> String:
 	return "+%d %s" % [value, GAINS[kind][0]]
 

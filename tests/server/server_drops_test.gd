@@ -13,7 +13,7 @@ var leaf: ItemDef
 func before_each() -> void:
 	h = ServerHarness.new()
 	leaf = Content.item(&"green_leaf")
-	var d := ServerHarness.monster(&"dropper", 1, 1)
+	var d := ServerHarness.monster(&"dropper", 1)
 	d.drops.append(ServerHarness.drop(leaf, 3))
 	map = h.field_with([ServerHarness.spawn(d)])
 	map.mobs[0].position.x = 340.0
@@ -116,7 +116,7 @@ func test_dawnshards_go_to_the_wallet_by_walking_over_them() -> void:
 	h.step(SimDrop.SETTLE_TICKS + 1)
 	check_eq(ann.character.shards, 40, "picked up without the loot key")
 	check(not map.drops.has(d.id), "gone")
-	check_eq(h.last(2, &"ev_vitals")[5], 40, "wallet sent")
+	check_eq(h.last(2, &"ev_vitals")[2], 40, "wallet sent")
 	check_eq(h.last(2, &"ev_gain"), [&"shards", 40], "shown rising over Ann")
 	check(h.events(2, &"ev_pickup").is_empty() and not h.told(2, "Picked up"), "not in the message log")
 

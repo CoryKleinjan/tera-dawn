@@ -21,7 +21,6 @@ display_name = "Spore Puff"
 level = 4
 max_hp = 33
 attack = 13
-essence = 10
 speed = 0.8
 size = Vector2(25.0, 21.0)
 boss = false

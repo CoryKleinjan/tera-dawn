@@ -31,7 +31,6 @@ func _raise(c: Character, kind: String, n: int) -> void:
 					c.book.add_card(m)
 				left -= mini(left, CardDef.SET)
 				k += 1
-		"level": c.level = maxi(1, n)
 		"job": c.job.advances_from = &"beginner" if n > 0 else &""
 		"quests":
 			c.quests.done.clear()
@@ -70,13 +69,13 @@ func test_every_achievement_reached_exactly_at_goal() -> void:
 
 func test_check_awards_only_once() -> void:
 	var c := fx.character()
-	c.level = Achievements.find("level_10").goal
+	_raise(c, "kills", Achievements.find("hunter").goal)
 	var first := _ids(Achievements.check(c))
-	check_has(first, "level_5", "the first level goal")
-	check_has(first, "level_10", "the second")
-	check(not first.has("level_30"), "not the third")
+	check_has(first, "first_hunt", "the first kill goal")
+	check_has(first, "hunter", "the second")
+	check(not first.has("slayer"), "not the third")
 	check_eq(Achievements.check(c).size(), 0, "nothing new the second time")
-	check_eq(c.achievements.count("level_5"), 1, "listed once")
+	check_eq(c.achievements.count("first_hunt"), 1, "listed once")
 
 func test_fresh_character_reaches_nothing() -> void:
 	var c := fx.character()

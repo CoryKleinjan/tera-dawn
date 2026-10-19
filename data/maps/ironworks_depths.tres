@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=96 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=87 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/forge.tres" id="2_forge"]
@@ -22,12 +22,9 @@
 [ext_resource type="Resource" path="res://data/monsters/cinder_hog.tres" id="20_cinder_hog"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="21_dawnshard"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="22_drop_entry"]
-[ext_resource type="Resource" path="res://data/items/use/orange_potion.tres" id="23_orange_potion"]
-[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="24_blue_potion"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach_fields/chest.png" id="25_chest"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach_fields/chest_open.png" id="26_chest_open"]
 [ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="27_breakable_def"]
-[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="28_white_potion"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach_fields/cracked_floor.png" id="29_cracked_floor"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberreach_fields/cracked_floor_broken.png" id="30_cracked_floor_broken"]
 
@@ -387,18 +384,6 @@ item = ExtResource("21_dawnshard")
 min_amount = 100
 max_amount = 160
 
-[sub_resource type="Resource" id="Loot_0_1"]
-script = ExtResource("22_drop_entry")
-item = ExtResource("23_orange_potion")
-min_amount = 3
-max_amount = 3
-
-[sub_resource type="Resource" id="Loot_0_2"]
-script = ExtResource("22_drop_entry")
-item = ExtResource("24_blue_potion")
-min_amount = 3
-max_amount = 3
-
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("27_breakable_def")
 id = &"ironworks_depths_high_chest"
@@ -408,7 +393,7 @@ hits = 1
 whole = ExtResource("25_chest")
 broken = ExtResource("26_chest_open")
 height = 48.0
-loot = Array[ExtResource("22_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1"), SubResource("Loot_0_2")])
+loot = Array[ExtResource("22_drop_entry")]([SubResource("Loot_0_0")])
 card = ExtResource("19_forge_golem")
 
 [sub_resource type="Resource" id="Loot_1_0"]
@@ -416,18 +401,6 @@ script = ExtResource("22_drop_entry")
 item = ExtResource("21_dawnshard")
 min_amount = 100
 max_amount = 160
-
-[sub_resource type="Resource" id="Loot_1_1"]
-script = ExtResource("22_drop_entry")
-item = ExtResource("23_orange_potion")
-min_amount = 3
-max_amount = 3
-
-[sub_resource type="Resource" id="Loot_1_2"]
-script = ExtResource("22_drop_entry")
-item = ExtResource("24_blue_potion")
-min_amount = 3
-max_amount = 3
 
 [sub_resource type="Resource" id="Breakable_1"]
 script = ExtResource("27_breakable_def")
@@ -438,7 +411,7 @@ hits = 1
 whole = ExtResource("25_chest")
 broken = ExtResource("26_chest_open")
 height = 48.0
-loot = Array[ExtResource("22_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1"), SubResource("Loot_1_2")])
+loot = Array[ExtResource("22_drop_entry")]([SubResource("Loot_1_0")])
 card = ExtResource("20_cinder_hog")
 
 [sub_resource type="Resource" id="Loot_2_0"]
@@ -446,18 +419,6 @@ script = ExtResource("22_drop_entry")
 item = ExtResource("21_dawnshard")
 min_amount = 160
 max_amount = 240
-
-[sub_resource type="Resource" id="Loot_2_1"]
-script = ExtResource("22_drop_entry")
-item = ExtResource("28_white_potion")
-min_amount = 3
-max_amount = 3
-
-[sub_resource type="Resource" id="Loot_2_2"]
-script = ExtResource("22_drop_entry")
-item = ExtResource("24_blue_potion")
-min_amount = 3
-max_amount = 3
 
 [sub_resource type="Resource" id="Breakable_2"]
 script = ExtResource("27_breakable_def")
@@ -469,7 +430,7 @@ slam_only = true
 whole = ExtResource("29_cracked_floor")
 broken = ExtResource("30_cracked_floor_broken")
 height = 40.0
-loot = Array[ExtResource("22_drop_entry")]([SubResource("Loot_2_0"), SubResource("Loot_2_1"), SubResource("Loot_2_2")])
+loot = Array[ExtResource("22_drop_entry")]([SubResource("Loot_2_0")])
 card = ExtResource("17_magma_shell")
 
 [resource]

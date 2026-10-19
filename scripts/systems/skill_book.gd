@@ -1,12 +1,11 @@
 class_name SkillBook
 extends CharacterPart
-## A character's skills: the levels learned (each bought with Dawn Essence), the buffs
-## running, and the rules for learning and using skills (Character.skills).
+## A character's attacks (Character.skills): the weapon's own attack, the skills they have and
+## the buffs running. Job skills and buying skill levels are gone (Cory Oct 19); the innate
+## attacks are always known.
 
-## Skill id -> level learned.
+## Skill id -> level known.
 var learned := {}
-## Skill id -> the Dawn Essence paid for its levels, handed back if the skill is ever dropped.
-var paid := {}
 ## Buffs running: skill id -> [level, ticks left].
 var buffs := {}
 
@@ -24,82 +23,6 @@ func basic_attack() -> SkillDef:
 		return w.basic_attack
 	return Content.skill(Character.BASIC_ATTACK)
 
-## Why one more level of `skill` can't be learned now, or "".
-func learn_problem(skill: SkillDef) -> String:
-	if skill.innate or not skill.job in character.job_line():
-		return "You can't learn %s." % skill.display_name
-	if level(skill) >= skill.max_level:
-		return "%s is already at its highest level." % skill.display_name
-	if skill.requires != &"":
-		var need: SkillDef = Content.skills.get(skill.requires)
-		if need and level(need) < skill.requires_level:
-			return "Learn %s to level %d first." % [need.display_name, skill.requires_level]
-	if character.essence < price():
-		return "You need %d Dawn Essence for that." % price()
-	return ""
-
-## Buys one more level of `skill` with Dawn Essence. A newly learned skill goes on the first
-## free quickslot. Returns why not, or "".
-func learn(skill: SkillDef) -> String:
-	var problem := learn_problem(skill)
-	if problem != "":
-		return problem
-	var c := character
-	var cost := price()
-	c.essence -= cost
-	paid[skill.id] = int(paid.get(skill.id, 0)) + cost
-	learned[skill.id] = level(skill) + 1
-	if learned[skill.id] == 1 and skill.is_active() and c.quickslot_of(&"skill", skill.id) < 0:
-		var free := c.quickslots.find([])
-		if free >= 0:
-			c.set_quickslot(free, &"skill", skill.id)
-	c.recalc()
-	return ""
-
-## Whether the essence pays for one more level of any skill the character may learn.
-func can_learn_any() -> bool:
-	if character.essence < price():
-		return false
-	return Content.skills.values().any(func(skill: SkillDef) -> bool: return learn_problem(skill) == "")
-
-## The skills learned that a job of `line` (JobDef.line) can't use.
-func outside(line: Array[StringName]) -> Array[SkillDef]:
-	var out: Array[SkillDef] = []
-	for id in learned:
-		var s: SkillDef = Content.skills.get(id)
-		if s and not s.innate and not s.job in line and learned[id] > 0:
-			out.append(s)
-	return out
-
-## Forgets every skill a job of `line` can't use (see outside): the Dawn Essence paid for each
-## comes back and its quickslot empties. Returns the essence handed back.
-func forget_outside(line: Array[StringName]) -> int:
-	var back := 0
-	for s in outside(line):
-		back += int(paid.get(s.id, 0))
-		learned.erase(s.id)
-		paid.erase(s.id)
-		buffs.erase(s.id)
-		var slot := character.quickslot_of(&"skill", s.id)
-		if slot >= 0:
-			character.set_quickslot(slot, &"", &"")
-	character.essence += back
-	return back
-
-## Dawn Essence for the next skill level: each level bought (of any skill) makes the next
-## one cost more (CharacterStats.skill_price).
-func price() -> int:
-	return CharacterStats.skill_price(spent())
-
-## Skill levels bought.
-func spent() -> int:
-	var out := 0
-	for id in learned:
-		var s: SkillDef = Content.skills.get(id)
-		if s and not s.innate:
-			out += learned[id]
-	return out
-
 ## Why `skill` can't be used right now, or "".
 func use_problem(skill: SkillDef) -> String:
 	var c := character
@@ -114,7 +37,7 @@ func use_problem(skill: SkillDef) -> String:
 	if not skill.offhand.is_empty() and (o == null or not o.offhand_kind in skill.offhand):
 		return "%s needs %s in your off-hand slot." % [skill.display_name, " or ".join(skill.offhand.map(EquipDef.offhand_name))]
 	if c.mp < skill.mp_at(level(skill)):
-		return "Not enough MP for %s." % skill.display_name
+		return "Not enough Mana for %s." % skill.display_name
 	return ""
 
 ## Starts (or refreshes) a buff from `skill`, at the character's own level of it or, for a

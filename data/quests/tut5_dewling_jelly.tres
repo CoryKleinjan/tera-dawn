@@ -24,4 +24,3 @@ finish_scene = ExtResource("1_ks33i")
 offer_hint = "A \"!\" means someone has a quest. Press {move_up} to talk"
 hint = "{attack} to attack, {loot} to pick up what they drop"
 objectives = Array[ExtResource("2_aardj")]([SubResource("Resource_02qj4")])
-reward_essence = 15

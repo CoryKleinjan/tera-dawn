@@ -1,17 +1,9 @@
-[gd_resource type="Resource" script_class="QuestDef" load_steps=8 format=3]
+[gd_resource type="Resource" script_class="QuestDef" load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
 [ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
 [ext_resource type="Resource" path="res://data/monsters/dewling.tres" id="3_dewling"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
-[ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="5_red_potion"]
-
-[sub_resource type="Resource" id="Resource_2"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("5_red_potion")
-chance = 1.0
-min_amount = 5
-max_amount = 5
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("2_quest_objective")
@@ -30,6 +22,5 @@ offer_text = "The Dewlings have been splashing through the village gardens all w
 progress_text = "Eight Dewlings, young one. They bounce about near the village."
 complete_text = "Ha! The gardens are dry at last. You have a good arm. Take these; you'll need them."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
-reward_essence = 230
 reward_shards = 80
-reward_items = Array[ExtResource("4_drop_entry")]([SubResource("Resource_2")])
+reward_items = Array[ExtResource("4_drop_entry")]([])

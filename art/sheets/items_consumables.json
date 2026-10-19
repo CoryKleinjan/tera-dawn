@@ -5,11 +5,11 @@
   "keep": "largest",
   "cells": [
     [
-      "red_potion",
-      "orange_potion",
-      "white_potion",
-      "blue_potion",
-      "elixir"
+      "",
+      "",
+      "",
+      "",
+      ""
     ],
     [
       "dewling_droplet",
@@ -23,7 +23,7 @@
       "boar_tusk",
       "ashshell_fragment",
       "chief_mane",
-      "mana_elixir"
+      ""
     ]
   ],
   "strip_labels": true,
@@ -44,13 +44,5 @@
       1536
     ]
   },
-  "overrides": {
-    "white_potion": {
-      "key": [
-        0.1,
-        0.3
-      ],
-      "fix": "glow_backdrop"
-    }
-  }
+  "overrides": {}
 }

@@ -284,15 +284,14 @@ static func platform(x: float, y: float, width: float) -> PlatformDef:
 	d.width = width
 	return d
 
-## A monster that never walks or misses its touch: level 1, 1 HP, `essence` Dawn Essence, no drops.
-static func monster(id := &"test_mob", hp := 1, essence := 10) -> MonsterDef:
+## A monster that never walks or misses its touch: tuning tier 1, 1 HP, no drops.
+static func monster(id := &"test_mob", hp := 1) -> MonsterDef:
 	var d := MonsterDef.new()
 	d.id = id
 	d.display_name = String(id).capitalize()
 	d.level = 1
 	d.max_hp = hp
 	d.attack = 1
-	d.essence = essence
 	d.speed = 0.0
 	d.size = Vector2(36, 30)
 	d.respawn_ticks = Vector2i(100, 100)
