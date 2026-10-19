@@ -24,6 +24,7 @@ color = Color(0.878431, 0.713725, 0.290196, 1.0)
 capital = &"lanternfall"
 label_pos = Vector2(680.0, 578.0)
 zone_rect = Rect2(480.0, 340.0, 320.0, 210.0)
+shaped_zone = true
 town_music = &"town_lanternfall"
 field_music = &"field_lanternfall"
 drops = Array[ExtResource("2_drop_entry")]([SubResource("Drop_lantern_rune"), SubResource("Drop_wisp_rune")])
