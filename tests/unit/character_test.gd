@@ -89,21 +89,19 @@ func test_many_levels_at_once_stop_at_the_cap() -> void:
 
 func test_level_up_raises_max_and_refills() -> void:
 	var c := fx.character()
-	c.level = 19
-	c.recalc()
-	c.health.damage(2)
+	c.health.damage(30)
 	c.spend_mp(10)
-	c.gain_xp(c.xp_need())
-	check_eq(c.max_hearts(), 6, "a segment more at level 20")
-	check_eq(c.health.max_hp, 6, "health max follows")
-	check_eq(c.health.hp, 6, "refilled")
-	check_eq(c.mp, c.max_mp(), "MP refilled")
+	c.gain_xp(27)
+	check_eq(c.max_hp(), 70, "50 + 2 × 10")
+	check_eq(c.health.max_hp, 70, "health max follows")
+	check_eq(c.health.hp, 70, "refilled")
+	check_eq(c.mp, 30, "MP refilled to 20 + 2 × 5")
 
 func test_no_level_means_no_refill() -> void:
 	var c := fx.character()
-	c.health.damage(1)
+	c.health.damage(30)
 	c.gain_xp(5)
-	check_eq(c.health.hp, 4, "still hurt")
+	check_eq(c.health.hp, 30, "still hurt")
 
 # ---------- HP, MP and recalc ----------
 
@@ -119,14 +117,14 @@ func test_spend_and_restore_mp() -> void:
 	c.restore_mp(-100)
 	check_eq(c.mp, 0, "never negative")
 
-func test_recalc_clamps_hearts_and_mp_when_gear_comes_off() -> void:
+func test_recalc_clamps_hp_and_mp_when_gear_comes_off() -> void:
 	var c := fx.character()
-	c.equipment.put(&"hat", ItemStack.exact(fx.equip(&"t_hat", EquipDef.Slot.HAT, {"heart_pieces": 8, "max_mp": 50})))
+	c.equipment.put(&"hat", ItemStack.exact(fx.equip(&"t_hat", EquipDef.Slot.HAT, {"max_hp": 100, "max_mp": 50})))
 	c.refill()
-	check_eq(c.health.hp, 7, "full with gear")
+	check_eq(c.health.hp, 160, "full with gear")
 	check_eq(c.mp, 75, "full MP with gear")
 	c.equipment.take(&"hat")
-	check_eq(c.health.hp, 5, "health clamped")
+	check_eq(c.health.hp, 60, "HP clamped")
 	check_eq(c.mp, 25, "MP clamped")
 
 func test_recalc_emits_stats_changed() -> void:
@@ -536,7 +534,7 @@ func test_retrieve_needs_room() -> void:
 func _advance_setup() -> Array:
 	var first := fx.job(&"t_job")
 	var next := fx.job(&"t_next", &"t_warrior", &"t_job")
-	next.bonus_hearts = 1
+	next.hp_growth = 20
 	var c := fx.character(first)
 	return [c, next]
 
@@ -573,14 +571,14 @@ func test_advance_changes_job_gives_gifts_and_refills() -> void:
 	var sword := fx.equip(&"t_gift_sword", EquipDef.Slot.WEAPON, {"attack": 17}, 5)
 	var potion := fx.use(&"t_potion")
 	next.advance_gifts = [UnitHelpers.drop(sword), UnitHelpers.drop(potion, 20)]
-	c.health.damage(2)
+	c.health.damage(50)
 	c.essence = 40
 	c.level = 8
 	check_eq(c.advance(next), "", "advanced")
 	check_eq(c.job.id, &"t_next", "new job")
-	check_eq(c.max_hearts(), 6, "the new job's bonus segment")
+	check_eq(c.max_hp(), 50 + 8 * 20, "new job's HP growth at level 8")
 	check_eq(c.essence, 40, "advancing costs and gives no essence")
-	check_eq(c.health.hp, c.max_hearts(), "refilled")
+	check_eq(c.health.hp, c.max_hp(), "refilled")
 	check_eq(c.gear.weapon(), sword, "the gift weapon is worn")
 	check_eq(c.equipment.at(&"weapon").stats.attack, 17, "gift gear unrolled")
 	check_eq(c.inventory.count_of(potion), 20, "potions")
@@ -794,13 +792,10 @@ func test_pet_def_lookup() -> void:
 
 func test_use_defs() -> void:
 	var u := fx.use()
-	u.heal_hearts = 1
-	u.heal_hearts_percent = 50
+	u.heal_hp = 50
+	u.heal_hp_percent = 10
 	u.heal_mp_percent = 25
-	check_eq(u.hearts_for(5), 4, "1 + half of 5, rounded")
-	check_eq(u.hearts_for(1), 2, "the share is at least a heart")
-	u.heal_hearts_percent = 0
-	check_eq(u.hearts_for(5), 1, "just its own")
+	check_eq(u.hp_for(300), 80, "50 + 10% of 300")
 	check_eq(u.mp_for(30), 8, "25% of 30 rounded")
 
 # ---------- real content ----------
@@ -825,7 +820,7 @@ func test_create_beginner_from_content() -> void:
 	check_eq(c.inventory.count_of(Content.item(&"red_potion")), 5, "starting potions")
 	check_eq(c.quickslots[Character.QUICKSLOTS - 2], [&"item", &"red_potion"], "red potion key")
 	check_eq(c.quickslots[Character.QUICKSLOTS - 1], [&"item", &"blue_potion"], "blue potion key")
-	check_eq(c.health.hp, c.max_hearts(), "full HP")
+	check_eq(c.health.hp, c.max_hp(), "full HP")
 	check_eq(c.mp, c.max_mp(), "full MP")
 	check_eq(c.map_id, Character.NEW_MAP, "starts on the tutorial beach")
 

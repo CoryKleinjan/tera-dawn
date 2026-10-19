@@ -9,7 +9,7 @@
 script = ExtResource("1_use_def")
 id = &"power_elixir"
 display_name = "Power Elixir"
-description = "Brewed from a whole sunrise. Heals all your health and MP."
+description = "Brewed from a whole sunrise. Restores all HP and MP."
 icon = ExtResource("2_power_elixir")
 sprite_scale = 0.36
 glow_color = Color(1.0, 0.878431, 0.501961, 1.0)
@@ -17,5 +17,5 @@ pickup_effect = ExtResource("3_shard_pickup")
 sell_price = 250
 max_stack = 100
 use_effect = ExtResource("4_heal")
-heal_hearts_percent = 100
+heal_hp_percent = 100
 heal_mp_percent = 100

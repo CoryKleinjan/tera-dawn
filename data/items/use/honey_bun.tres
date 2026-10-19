@@ -9,7 +9,7 @@
 script = ExtResource("1_use_def")
 id = &"honey_bun"
 display_name = "Honey Bun"
-description = "A sticky Greenbough bun. Heals 3 health."
+description = "A sticky Greenbough bun. Restores 300 HP."
 icon = ExtResource("2_honey_bun")
 sprite_scale = 0.36
 glow_color = Color(0.878431, 0.627451, 0.313725, 1.0)
@@ -17,4 +17,4 @@ pickup_effect = ExtResource("3_shard_pickup")
 sell_price = 40
 max_stack = 100
 use_effect = ExtResource("4_heal")
-heal_hearts = 3
+heal_hp = 300
