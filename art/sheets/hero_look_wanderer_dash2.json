@@ -1,0 +1,40 @@
+{
+  "source": "art/source/hero/looks/wanderer_dash.png",
+  "out_dir": "art/build/hero/looks/wanderer",
+  "region": [
+    600,
+    0,
+    1300,
+    675
+  ],
+  "cells": [
+    [
+      "dash2"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      675
+    ],
+    "cols": [
+      0,
+      700
+    ]
+  },
+  "inset": 6,
+  "label_band": 0,
+  "keep": "largest",
+  "scale": 0.102,
+  "save": false,
+  "drop_edge": true,
+  "patch": [
+    [
+      592,
+      0,
+      598,
+      663,
+      -6
+    ]
+  ]
+}
