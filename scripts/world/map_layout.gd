@@ -73,6 +73,17 @@ func way_at(feet: Vector2) -> PortalDef:
 			return p
 	return null
 
+## How far from a rest spot's bench (MapDef.rest_spots) feet may be and still rest there.
+const REST_REACH := 90.0
+
+## The rest spot (its index in MapDef.rest_spots) that feet at `feet` stand by, or -1.
+func rest_at(feet: Vector2) -> int:
+	for i in map.rest_spots.size():
+		var r := map.rest_spots[i]
+		if r.y < platforms.size() and absf(feet.x - r.x) <= REST_REACH and absf(platforms[r.y].y - feet.y) < 1.0:
+			return i
+	return -1
+
 ## The platform whose top is at the feet, or null when in the air.
 func platform_under(feet: Vector2) -> Platform:
 	for pl in platforms:

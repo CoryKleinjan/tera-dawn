@@ -654,6 +654,7 @@ script = ExtResource("9_spawn_def")
 monster = ExtResource("10_barkcap")
 platform = 1
 count = 2
+patrol_from = 340.0
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("9_spawn_def")
@@ -962,3 +963,4 @@ region = &"greenbough"
 world_pos = Vector2(354.0, 103.0)
 zone_pos = Vector2(-1800.0, -5000.0)
 return_map = &"greenbough"
+rest_spots = Array[Vector2i]([Vector2i(240, 1)])

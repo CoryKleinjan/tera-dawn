@@ -471,6 +471,18 @@ func _run() -> void:
 		_me().inv = 0
 		Net.server.enter_map(_me(), &"meadow", 300)
 		await _physics(10)
+	if only == "rests":
+		# Every rest spot's bench, the hero standing beside it (not in the full run).
+		_me().inv = 100000
+		for m: MapDef in Content.maps.values():
+			for r in m.rest_spots:
+				Net.server.enter_map(_me(), m.id, r.x + 80.0, r.y)
+				await _physics(40)
+				await _frames(3)
+				await _shot("rest_%s_%s" % [m.region, m.id])
+		_me().inv = 0
+		Net.server.enter_map(_me(), &"meadow", 300)
+		await _physics(10)
 	if only == "" or only == "social":
 		# Dawnharbor with friends: a party, chat and the community window.
 		var social := Net.server.social

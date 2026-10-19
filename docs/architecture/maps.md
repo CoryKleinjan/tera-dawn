@@ -147,6 +147,15 @@ room's edge, and its two ends stand at the same height on the zone map (`content
 isn't a door. `TDWorldMapWindow` shows rooms once visited, secret ledges and the doors behind
 shortcuts and fake or breakable walls once found, and the player where they stand.
 
+**Rest spots** (`MapDef.rest_spots`, an x and platform each) show their region's bench
+(`RegionDef.bench`, its town's own bench picture; `SceneryBuilder._bench`) and keep the
+biome's decoration off it. Sitting within `MapLayout.REST_REACH` of one rests there
+(`TDServer._rest`): HP and MP fill and the character remembers it (`Character.rest_map` /
+`rest_spot`, saved). Fainting later in the same region, outside a town, wakes them at it
+(`TDServer._wake_spot`). Each shaped zone has two, standing on their ledge, clear of portals,
+with the platform's monsters' `patrol_from` / `patrol_to` keeping off it
+(`content_rest_spots_test`).
+
 An NpcDef with `storage = true` keeps the player's storage (`Character.storage`, an
 Inventory saved with the character; `ServerStorage.on_store` / `on_retrieve`, `TDStorageWindow`).
 The same NpcDef can stand in several maps.

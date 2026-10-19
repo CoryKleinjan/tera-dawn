@@ -538,3 +538,4 @@ region = &"dawnharbor"
 world_pos = Vector2(530.0, 395.0)
 zone_pos = Vector2(-6800.0, -2300.0)
 return_map = &"dawnharbor"
+rest_spots = Array[Vector2i]([Vector2i(700, 29)])

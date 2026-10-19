@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="RegionDef" load_steps=7 format=3]
+[gd_resource type="Resource" script_class="RegionDef" load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/region_def.gd" id="1_region_def"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="2_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/runes/ember_rune.tres" id="rune_ember_rune"]
 [ext_resource type="Resource" path="res://data/items/runes/forge_rune.tres" id="rune_forge_rune"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/emberforge/prop_bench.png" id="t_bench"]
 
 [sub_resource type="Resource" id="Drop_ember_rune"]
 script = ExtResource("2_drop_entry")
@@ -25,6 +26,7 @@ capital = &"emberforge"
 label_pos = Vector2(872.0, 392.0)
 zone_rect = Rect2(650.0, 170.0, 280.0, 184.0)
 shaped_zone = true
+bench = ExtResource("t_bench")
 town_music = &"town_emberreach"
 field_music = &"field_emberreach"
 drops = Array[ExtResource("2_drop_entry")]([SubResource("Drop_ember_rune"), SubResource("Drop_forge_rune")])

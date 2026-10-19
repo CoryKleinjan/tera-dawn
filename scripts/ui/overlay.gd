@@ -285,6 +285,10 @@ func _draw_world_text() -> void:
 			(f as TDFloatText).draw_at(self, st.screen(world.drawn(f), 0.6))
 		elif f is TDEffect:
 			(f as TDEffect).draw_caption(self, st.screen(f.position, 0.2))
+	var rest := world.layout.rest_at(p.position) if world.started and not p.sitting else -1
+	if rest >= 0:
+		var spot: Vector2i = world.map.rest_spots[rest]
+		WorldSkin.draw_hint(self, st.screen(Vector2(spot.x, world.platforms[spot.y].y - 128), -0.3), "Sit to rest")
 	for portal in world.map.portals:
 		var side := world.layout.side_of(portal)
 		if side == RoomExits.Side.LEFT or side == RoomExits.Side.RIGHT:

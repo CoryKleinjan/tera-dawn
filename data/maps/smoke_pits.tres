@@ -536,3 +536,4 @@ region = &"emberreach"
 world_pos = Vector2(885.0, 265.0)
 zone_pos = Vector2(5600.0, 2400.0)
 return_map = &"emberforge"
+rest_spots = Array[Vector2i]([Vector2i(1890, 40)])
