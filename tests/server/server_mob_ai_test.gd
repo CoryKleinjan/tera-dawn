@@ -20,7 +20,7 @@ func _join(peer: int, char_name: String, x: float) -> SimPlayer:
 
 ## A monster that walks at `speed`.
 func _walker(id := &"walker", speed := 1.0) -> MonsterDef:
-	var d := ServerHarness.monster(id, 100000, 1)
+	var d := ServerHarness.monster(id, 100000)
 	d.speed = speed
 	return d
 
@@ -90,7 +90,7 @@ func test_stationary_monsters_never_move_even_when_hit() -> void:
 	check_eq(m.position.x, 340.0, "never knocked back or walked")
 
 func test_touching_a_monster_hurts_then_gives_invincibility() -> void:
-	var d := ServerHarness.monster(&"toucher", 100000, 1)
+	var d := ServerHarness.monster(&"toucher", 100000)
 	var map := h.field_with([ServerHarness.spawn(d)])
 	map.mobs[0].position.x = 300.0
 	var p := _join(2, "Ann", 300.0)
@@ -105,7 +105,7 @@ func test_touching_a_monster_hurts_then_gives_invincibility() -> void:
 	check_eq(p.character.health.hp, full - 2, "hurt again once it wears off")
 
 func test_a_monster_far_away_doesnt_hurt() -> void:
-	var d := ServerHarness.monster(&"toucher", 100000, 1)
+	var d := ServerHarness.monster(&"toucher", 100000)
 	var map := h.field_with([ServerHarness.spawn(d)])
 	map.mobs[0].position.x = 600.0
 	var p := _join(2, "Ann", 300.0)
@@ -127,7 +127,7 @@ static func _move(kind: MonsterMove.Kind, reach := 320.0) -> MonsterMove:
 
 ## A monster with `mv`, ready to use it straight away.
 func _with_move(mv: MonsterMove, id := &"mover") -> MonsterDef:
-	var d := ServerHarness.monster(id, 100000, 1)
+	var d := ServerHarness.monster(id, 100000)
 	d.attack = 10
 	d.sight = 320.0
 	d.moves = [mv]
@@ -349,7 +349,7 @@ func test_a_hit_doesnt_knock_a_monster_out_of_its_move() -> void:
 	check(m.moves.busy() and not m.moves.winding(), "charging anyway")
 
 func _boss(moves: Array[MonsterMove]) -> MonsterDef:
-	var d := ServerHarness.monster(&"test_boss", 100000, 1)
+	var d := ServerHarness.monster(&"test_boss", 100000)
 	d.boss = true
 	d.sight = 700.0
 	d.moves = moves
@@ -539,8 +539,8 @@ func test_a_blink_reappears_behind_the_player() -> void:
 	check(m.position.x < 700.0, "came back behind her (at %s)" % m.position.x)
 
 func _slime() -> MonsterDef:
-	var small := ServerHarness.monster(&"small_slime", 1, 2)
-	var big := ServerHarness.monster(&"big_slime", 1, 10)
+	var small := ServerHarness.monster(&"small_slime", 1)
+	var big := ServerHarness.monster(&"big_slime", 1)
 	big.splits_into = small
 	big.split_count = 2
 	return big

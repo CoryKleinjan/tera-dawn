@@ -1,9 +1,20 @@
 extends TestCase
 ## Painted skill effects: a buff's aura loops round the player for as long as the buff
-## lasts, and shots loop their painted frames in flight.
+## lasts, and shots loop their painted frames in flight. The game has no buffs or spell shots
+## yet, so these use test-made frames.
+
+## `n` plain frames, each its own texture.
+func _frames(n: int) -> Array[Texture2D]:
+	var out: Array[Texture2D] = []
+	for i in n:
+		out.append(ImageTexture.create_from_image(Image.create(4, 4, false, Image.FORMAT_RGBA8)))
+	return out
 
 func _aura(lasts: int) -> TDEffect:
-	var def: EffectDef = (load("res://data/skills/war_cry.tres") as SkillDef).aura
+	var def := EffectDef.new()
+	def.id = &"t_aura"
+	def.frames = _frames(4)
+	def.follow_player = true
 	var e := TDEffect.create(null, def, Vector2(100, 200), 1)
 	e.lasts = lasts
 	e._ready()
@@ -40,8 +51,8 @@ func test_casting_again_fades_the_old_aura() -> void:
 	e.free()
 
 func test_a_shot_loops_its_painted_frames() -> void:
-	var def: ProjectileDef = (load("res://data/skills/fire_burst.tres") as SkillDef).projectile
-	check(def.frames.size() > 1, "the fireball is painted as frames")
+	var def := ProjectileDef.new()
+	def.frames = _frames(4)
 	var p := TDProjectile.create(null, def, Vector2.ZERO, Vector2(100000, 0), 0, null, Callable())
 	p._ready()
 	var seen := {}

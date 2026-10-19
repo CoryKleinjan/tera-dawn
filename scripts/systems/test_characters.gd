@@ -1,10 +1,9 @@
 class_name TestCharacters
 extends RefCounted
-## Developer-only test characters: one per job at Character.MAX_LEVEL, wearing the
-## best gear that job can wear up to GEAR_TIER, with every skill learned to its highest level
-## and plenty of Dawnshards and Dawn Essence.
-## Everything is read from the data, so a new job, skill or piece of gear shows up here with
-## no code change.
+## Developer-only test characters: one per job, wearing the best gear that job can wear up to
+## GEAR_TIER, raised to the top gear tier, with plenty of Dawnshards.
+## Everything is read from the data, so a new job or piece of gear shows up here with no code
+## change.
 ##
 ## Each starts in its job's town (home_town), every time character select lists them.
 ##
@@ -22,10 +21,8 @@ const FOLDER := "dev"
 ## A test character is called this plus its job's name (cut to CharacterStore.MAX_NAME).
 const NAME_PREFIX := "Dev "
 const SHARDS := 50000
-## Dawn Essence left over to try buying with.
-const ESSENCE := 5000
-## The gear tier test characters wear up to (EquipDef.required_level, until gear tiers come
-## from the maps): the top of the game's content so far.
+## The tuning tier of the gear test characters wear up to (EquipDef.required_level): the top
+## of the game's content so far.
 const GEAR_TIER := 35
 
 ## Whether this build may make and use test characters: never in a release export.
@@ -53,8 +50,7 @@ static func path_to(job: JobDef) -> Array[JobDef]:
 	return out
 
 ## Makes sure `store` has one test character of every job, making the ones missing, or
-## every one again when `rebuild`. Each one kept is put back in its job's town, at the top
-## level.
+## every one again when `rebuild`. Each one kept is put back in its job's town.
 static func prepare(store: CharacterStore, rebuild: bool) -> void:
 	var have := {}
 	for n in store.names():
@@ -65,7 +61,6 @@ static func prepare(store: CharacterStore, rebuild: bool) -> void:
 		var kept: Character = have.get(job)
 		if kept and not rebuild:
 			kept.map_id = home_town(job)
-			_max_level(kept)
 			kept.recalc()
 			kept.refill()
 			store.save(kept)
@@ -114,11 +109,8 @@ static func build(char_name: String, job: JobDef) -> Character:
 		if problem != "":
 			push_warning("Test character %s couldn't become a %s: %s" % [char_name, next.display_name, problem])
 			break
-	_max_level(c)
 	_wear_best_gear(c)
-	_learn_every_skill(c)
 	c.shards = SHARDS
-	c.essence = ESSENCE
 	c.map_id = home_town(job)
 	c.recalc()
 	c.refill()
@@ -217,7 +209,8 @@ static func _stat_score(e: EquipDef) -> int:
 		out += e.stats.value(stat)
 	return out + 10 * (e.stats.attack + e.stats.magic_attack)
 
-## Swaps everything worn for the best gear, keeping the job's other best weapons in the bag.
+## Swaps everything worn for the best gear at the top gear tier, keeping the job's other best
+## weapons in the bag.
 static func _wear_best_gear(c: Character) -> void:
 	for place in c.equipment.worn.keys():
 		var old := c.equipment.take(place)
@@ -225,33 +218,11 @@ static func _wear_best_gear(c: Character) -> void:
 			c.inventory.add_stack(old)
 	var gear := best_gear(c)
 	for place: StringName in gear:
-		c.equipment.put(place, ItemStack.exact(gear[place]))
+		c.equipment.put(place, _top_tier(gear[place]))
 	for e in best_weapons(c.job, GEAR_TIER).slice(1):
-		c.inventory.add_stack(ItemStack.exact(e))
+		c.inventory.add_stack(_top_tier(e))
 
-# ---------- level and skills ----------
-
-## Puts `c` at Character.MAX_LEVEL.
-static func _max_level(c: Character) -> void:
-	c.level = Character.MAX_LEVEL
-	c.xp = 0
-
-## Every skill of the job line at its highest level, learned in an order its requirements
-## allow, so new skills go on the quickslots as they would for a player.
-static func _learn_every_skill(c: Character) -> void:
-	var line := c.job_line()
-	var todo: Array[SkillDef] = []
-	for s: SkillDef in Content.skills.values():
-		if not s.innate and s.job in line:
-			todo.append(s)
-	todo.sort_custom(func(a: SkillDef, b: SkillDef) -> bool: return String(a.id) < String(b.id))
-	var learned := true
-	while learned:
-		learned = false
-		for s in todo:
-			c.essence += c.skills.price()
-			while c.skills.learn_problem(s) == "":
-				c.skills.learn(s)
-				c.essence += c.skills.price()
-				learned = true
-	c.essence = 0
+static func _top_tier(e: EquipDef) -> ItemStack:
+	var stack := ItemStack.exact(e)
+	stack.tier = Content.top_gear_tier()
+	return stack

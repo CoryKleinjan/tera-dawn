@@ -1,17 +1,9 @@
-[gd_resource type="Resource" script_class="QuestDef" load_steps=8 format=3]
+[gd_resource type="Resource" script_class="QuestDef" load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
 [ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
 [ext_resource type="Resource" path="res://data/items/etc/molten_crown.tres" id="3_molten_crown"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
-[ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="6_power_elixir"]
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("6_power_elixir")
-chance = 1.0
-min_amount = 5
-max_amount = 5
 
 [sub_resource type="Resource" id="Resource_1"]
 script = ExtResource("2_quest_objective")
@@ -29,6 +21,5 @@ offer_text = "At the end of our hunting grounds lives the Molten King. Only the 
 progress_text = "Defeat the Molten King at the far end of the hunting grounds and bring back the Molten Crown Shard."
 complete_text = "You did it. The whole town will hear of this. Take this, and my respect."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
-reward_essence = 188400
 reward_shards = 6000
-reward_items = Array[ExtResource("4_drop_entry")]([SubResource("Resource_3")])
+reward_items = Array[ExtResource("4_drop_entry")]([])

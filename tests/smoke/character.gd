@@ -1,19 +1,18 @@
 extends SmokeArea
-## A character without the world: inventory, equipment, levels and power, saving, jobs and skills.
+## A character without the world: inventory, equipment, damage, saving, jobs and skills.
 
 ## Inventory, equipment, stats and saving, without the world.
 func check() -> void:
 	var c := Character.create("Tester")
 	var sword: EquipDef = Content.item(&"training_sword")
 	_check(c.equipment.at(&"weapon") != null and c.equipment.at(&"weapon").item == sword, "a new character wears the starting sword")
-	_check(c.inventory.count_of(Content.item(&"red_potion")) == 5, "a new character carries 5 Red Potions")
 	var dmg := c.damage_range()
-	_check(dmg.x > 0 and dmg.y >= dmg.x, "the damage range comes from power and the weapon (%d ~ %d)" % [dmg.x, dmg.y])
+	_check(dmg.x > 0 and dmg.y >= dmg.x and dmg.y == roundi(sword.stats.attack * CharacterStats.DAMAGE_PER_ATTACK), "the damage range comes from the weapon's attack (%d ~ %d)" % [dmg.x, dmg.y])
 
 	# stacking and a full tab
-	var red: ItemDef = Content.item(&"red_potion")
-	c.inventory.add(red, 150)
-	_check(c.inventory.count_of(red) == 155 and c.inventory.at(ItemDef.Tab.USE, 0).count == 100 and c.inventory.at(ItemDef.Tab.USE, 1).count == 55, "potions stack up to 100 a slot")
+	var scroll: ItemDef = Content.item(&"return_scroll")
+	c.inventory.add(scroll, 150)
+	_check(c.inventory.count_of(scroll) == 150 and c.inventory.at(ItemDef.Tab.USE, 0).count == 100 and c.inventory.at(ItemDef.Tab.USE, 1).count == 50, "scrolls stack up to 100 a slot")
 	var tusk: ItemDef = Content.item(&"boar_tusk")
 	var left := c.inventory.add(tusk, 200 * Inventory.SLOTS + 7)
 	_check(left == 7 and not c.inventory.has_room(tusk), "a full Etc tab hands back what doesn't fit")
@@ -29,13 +28,12 @@ func check() -> void:
 	var defense := c.stats.defense
 	c.gear.equip(_first_filled(c, ItemDef.Tab.EQUIP))
 	_check(c.stats.defense > defense, "wearing a hat raises Weapon Defense")
+
+	# a stronger weapon, and with it more damage
+	var top := c.damage_range().y
 	c.inventory.add(Content.item(&"dawn_blade"))
 	_check(c.gear.equip(_first_filled(c, ItemDef.Tab.EQUIP)) == "", "a new Beginner can wear the Dawn Blade: gear asks for no stats")
-
-	# a level raises power, and with it damage
-	var top := c.damage_range().y
-	var power := c.power()
-	_check(c.gain_xp(c.xp_need()) == 1 and c.power() == power + CharacterStats.POWER_PER_LEVEL and c.damage_range().y > top, "a level raises power and damage")
+	_check(c.damage_range().y > top, "a stronger weapon hits harder")
 
 	# saving and loading keeps the bag and the gear
 	c.inventory.add(tusk, 3)
@@ -44,49 +42,54 @@ func check() -> void:
 	var back := store.load_character("Tester")
 	_check(back != null and JSON.stringify(back.inventory.to_dict()) == JSON.stringify(c.inventory.to_dict())
 		and JSON.stringify(back.equipment.to_dict()) == JSON.stringify(c.equipment.to_dict())
-		and back.level == c.level and back.power() == c.power() and back.essence == c.essence, "saving and loading keeps inventory, equipment and level")
+		and back.damage_range() == c.damage_range() and back.max_hp() == c.max_hp(), "saving and loading keeps inventory, equipment and damage")
 	_check(CharacterStore.clean_name("  Dawn<ling>!  ") == "Dawnling", "character names are cleaned up")
 	_check_jobs()
 	_check_skill_rules()
 
-## Buying skills with Dawn Essence, Beginner skills, buffs and save files, without the world.
+## The innate attack, buffs, quickslots and older save files, without the world.
 func _check_skill_rules() -> void:
 	var c := Character.create("Skiller")
-	_check(c.skills.spent() == 0 and c.skills.level(Content.skill(Character.BASIC_ATTACK)) == 1, "a new character knows only the basic attack")
-	var step: SkillDef = Content.skill(&"quick_step")
-	_check(c.skills.learn(step).contains("Dawn Essence"), "learning a skill costs Dawn Essence")
-	c.gain_essence(c.skills.price())
-	_check(c.skills.learn(step) == "" and c.skills.level(step) == 1 and c.essence == 0, "a Beginner learns Quick Step")
-	_check(c.skills.learn(step) != "", "no Dawn Essence, no more levels")
-	_check(c.skills.learn(Content.skill(&"power_strike")) != "", "a Beginner can't learn Warrior skills")
+	_check(c.skills.learned.is_empty() and c.skills.level(Content.skill(Character.BASIC_ATTACK)) == 1, "a new character knows only the basic attack")
+	# a buff made for the test (the game has no buff skills yet), in Content until it ends
+	var step := SkillDef.new()
+	step.id = &"t_quick_step"
+	step.display_name = "Quick Step"
+	step.kind = SkillDef.Kind.BUFF
+	step.duration = 3.0
+	step.stats = StatBlock.new()
+	step.stats.speed = 10
+	Content.skills[step.id] = step
+	c.skills.learned[step.id] = 1
 	var speed := c.stats.speed
-	c.mp = 100
 	c.skills.add_buff(step)
-	_check(c.stats.speed > speed, "Quick Step makes you faster")
+	c.recalc()
+	_check(c.stats.speed > speed, "a speed buff makes you faster")
 	c.skills.tick_buffs(step.duration_ticks(1))
+	c.recalc()
 	_check(c.skills.buffs.is_empty() and c.stats.speed == speed, "and wears off after its time")
-	c.gain_essence(c.skills.price())
-	var aid: SkillDef = Content.skill(&"first_aid")
-	c.skills.learn(aid)
-	_check(c.skills.level(aid) == 1 and aid.heal_at(1) > 0.0 and aid.recharge_ticks(1) > 0, "First Aid heals, then takes a while to use again")
+	c.skills.learned.erase(step.id)
+	Content.skills.erase(step.id)
+	c.set_quickslot(0, &"item", &"return_scroll")
 	var back := Character.new()
 	back.load_dict(c.to_dict())
-	_check(back.skills.learned == c.skills.learned and back.skills.paid == c.skills.paid and back.quickslots == c.quickslots, "skills, what was paid for them and quickslots save")
-	# a save from before Dawn Essence: its level and EXP stay, unspent Skill Points become essence
+	_check(back.quickslots == c.quickslots and back.quickslots[0] == [&"item", &"return_scroll"], "quickslots save")
+	# a save from before hearts: its level, EXP, Dawn Essence, job skills and potions are dropped
 	var old := c.to_dict()
-	old.erase("essence")
-	old.erase("skills")
-	old.erase("skills_paid")
-	old.erase("quickslots")
-	old.erase("jobs_passed")
+	for key in ["jobs_passed", "heart_shards", "mana_shards"]:
+		old.erase(key)
 	old["level"] = 12
 	old["xp"] = 40
-	old["sp"] = 3
+	old["essence"] = 300
+	old["skills"] = {"power_strike": 3}
+	old["quickslots"] = [["skill", "power_strike"], [], [], [], [], [], ["item", "red_potion"], ["item", "return_scroll"]]
+	old["hp"] = 480
 	old["job"] = "warrior"
 	var legacy := Character.new()
 	legacy.load_dict(old)
-	var sp_worth := CharacterStats.skill_price(0) + CharacterStats.skill_price(1) + CharacterStats.skill_price(2)
-	_check(legacy.level == 12 and legacy.xp == 40 and legacy.essence == sp_worth and legacy.quickslots[Character.QUICKSLOTS - 2] == [&"item", &"red_potion"], "older saves keep their level and turn Skill Points into Dawn Essence")
+	_check(legacy.skills.learned.is_empty() and legacy.quickslots[0] == [] and legacy.quickslots[6] == []
+		and legacy.quickslots[7] == [&"item", &"return_scroll"], "older saves drop the job skills and potions that are gone")
+	_check(legacy.health.hp == legacy.max_hp(), "older saves wake with full hearts")
 	_check(legacy.jobs_passed.size() == 1 and legacy.has_passed(Content.job(&"warrior")), "older saves count the jobs they advanced through as passed")
 
 ## Starting as a Beginner, advancing, and gear only some jobs can use.

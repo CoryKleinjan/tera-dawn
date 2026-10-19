@@ -14,17 +14,17 @@ const INSTRUCTOR_X := 1550.0
 var h: ServerHarness
 var p: SimPlayer
 var c: Character
-var red: UseDef
+var scroll: UseDef
 var leaf: ItemDef
 var wares: ShopDef
 
 func before_each() -> void:
 	h = ServerHarness.new()
-	red = Content.item(&"red_potion")
+	scroll = Content.item(&"return_scroll")
 	leaf = Content.item(&"green_leaf")
 	var town := ServerHarness.town_def()
 	var merchant := ServerHarness.npc(town, &"test_merchant", MERCHANT_X)
-	merchant.shop = ServerHarness.shop([[red, 50], [leaf, 0]])
+	merchant.shop = ServerHarness.shop([[scroll, 50], [leaf, 0]])
 	wares = merchant.shop
 	ServerHarness.npc(town, &"test_keeper", KEEPER_X).storage = true
 	var route := TravelRoute.new()
@@ -50,11 +50,11 @@ func after_each() -> void:
 
 func test_buying_takes_the_price_and_gives_the_items() -> void:
 	c.shards = 200
-	var before := c.inventory.count_of(red)
+	var before := c.inventory.count_of(scroll)
 	h.ask(2, &"req_buy", [&"test_merchant", 0, 3])
 	check_eq(c.shards, 50, "paid 3 x 50")
-	check_eq(c.inventory.count_of(red), before + 3, "got 3")
-	check(h.told(2, "Bought 3 Red Potion for 150 Dawnshards."), "told")
+	check_eq(c.inventory.count_of(scroll), before + 3, "got 3")
+	check(h.told(2, "Bought 3 Return Scroll for 150 Dawnshards."), "told")
 
 func test_a_price_of_zero_means_four_times_the_sell_price() -> void:
 	c.shards = 1000
@@ -64,10 +64,10 @@ func test_a_price_of_zero_means_four_times_the_sell_price() -> void:
 
 func test_not_enough_dawnshards_buys_nothing() -> void:
 	c.shards = 149
-	var before := c.inventory.count_of(red)
+	var before := c.inventory.count_of(scroll)
 	h.ask(2, &"req_buy", [&"test_merchant", 0, 3])
 	check_eq(c.shards, 149, "kept the Dawnshards")
-	check_eq(c.inventory.count_of(red), before, "no potions")
+	check_eq(c.inventory.count_of(scroll), before, "no scrolls")
 	check(h.told(2, "You don't have enough Dawnshards."), "told why")
 
 func test_buying_into_a_full_tab_is_refused() -> void:
@@ -116,7 +116,7 @@ func test_a_locked_line_is_hidden_and_cant_be_bought_until_unlocked() -> void:
 func test_buying_is_limited_to_one_stack() -> void:
 	c.shards = 1000000
 	h.ask(2, &"req_buy", [&"test_merchant", 0, 5000])
-	check_eq(c.shards, 1000000 - red.stack_size() * 50, "paid for one stack")
+	check_eq(c.shards, 1000000 - scroll.stack_size() * 50, "paid for one stack")
 
 func test_selling_pays_the_sell_price_per_item() -> void:
 	c.inventory.put(ItemDef.Tab.ETC, 0, ItemStack.create(leaf, 5))
@@ -255,23 +255,19 @@ func test_a_coach_only_goes_where_you_have_been() -> void:
 
 # ---------- job instructors ----------
 
-## A level 20 Warrior (passed) with no Dawn Essence who has passed the Magician's Job Test.
+## A Warrior (passed) who has passed the Magician's Job Test.
 func _warrior_ready_to_switch() -> void:
 	c.job = Content.job(&"warrior")
 	c.jobs_passed.assign(["warrior"])
 	c.quests.done[Content.job(&"mage").advance_quest.id] = true
-	c.level = 20
-	c.essence = 0
 	c.recalc()
 
-func test_an_instructor_switches_a_warrior_and_the_level_stays() -> void:
+func test_an_instructor_switches_a_warrior() -> void:
 	_warrior_ready_to_switch()
 	h.place(p, INSTRUCTOR_X)
 	h.ask(2, &"req_advance", [&"test_instructor", &"mage"])
 	check_eq(c.job.id, &"mage", "a Magician now")
-	check_eq(c.level, 20, "the level stays")
-	check_eq(c.power(), CharacterStats.power(c.job, 20), "power is the new job's at that level")
-	check_eq(c.essence, 0, "and no essence comes back for it")
+	check(h.told(2, "You are now a Magician!"), "told")
 
 func test_switching_needs_you_by_an_instructor_of_that_job() -> void:
 	_warrior_ready_to_switch()

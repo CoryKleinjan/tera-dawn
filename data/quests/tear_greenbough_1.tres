@@ -24,6 +24,5 @@ offer_text = "Sixty years I've picked these woods, and I know every sound in the
 progress_text = "Look behind the old roots. That wall isn't as solid as it looks, if you come at it fast enough."
 complete_text = "Petals. Stone, every one of them, and still soft at the edges, like they only just turned. A whole grove of this? (He is quiet for a moment.) It's beautiful. I don't like it one bit."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Petals")])
-reward_essence = 23500
 reward_shards = 1500
 reward_items = Array[ExtResource("5_drop_entry")]([])

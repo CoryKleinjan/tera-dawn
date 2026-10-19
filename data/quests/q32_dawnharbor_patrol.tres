@@ -20,6 +20,5 @@ offer_text = "Tide Slimes keep oozing up out of the ditches on Windmill Downs an
 progress_text = "15 Tide Slimes on Windmill Downs, past Harbor Road east of town."
 complete_text = "Ha! My carts can roll again. Thank you, truly."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1")])
-reward_essence = 12900
 reward_shards = 800
 reward_items = Array[ExtResource("4_drop_entry")]([])

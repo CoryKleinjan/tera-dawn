@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=65 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=63 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -19,7 +19,6 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/greenbough_fields/chest_open.png" id="21_chest_open"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="22_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="23_dawnshard"]
-[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="26_white_potion"]
 [sub_resource type="Resource" id="Resource_41"]
 script = ExtResource("12_prop_placement")
 texture = ExtResource("18_flowers_yellow")
@@ -301,12 +300,6 @@ item = ExtResource("23_dawnshard")
 min_amount = 120
 max_amount = 180
 
-[sub_resource type="Resource" id="Loot_0_1"]
-script = ExtResource("22_drop_entry")
-item = ExtResource("26_white_potion")
-min_amount = 3
-max_amount = 3
-
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("18_breakable_def")
 id = &"whisper_pool_high_chest"
@@ -316,7 +309,7 @@ hits = 1
 whole = ExtResource("20_chest")
 broken = ExtResource("21_chest_open")
 height = 48.0
-loot = Array[ExtResource("22_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1")])
+loot = Array[ExtResource("22_drop_entry")]([SubResource("Loot_0_0")])
 card = ExtResource("10_seedwing")
 
 [resource]

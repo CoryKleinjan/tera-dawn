@@ -241,50 +241,7 @@ func flash(at: Vector2, col: Color, energy: float) -> void:
 	tw.tween_property(l, "light_energy", 0.0, 0.35)
 	tw.tween_callback(l.queue_free)
 
-## Dawn Essence: a warm mote that rises off a fallen monster and homes in on your hero over
-## ESSENCE_FLIGHT seconds, then shows the gain with a small glow.
-const ESSENCE_GLOW := Color(1.0, 0.85, 0.55)
-const ESSENCE_FLIGHT := 0.6
-## How high the mote arcs on its way (game pixels).
-const ESSENCE_ARC := 60.0
-
-## Essence from a monster that fell at `from` flying to your hero, then "+12 Dawn Essence".
-func fly_essence(from: Vector2, amount: int) -> void:
-	var hero := world.player
-	if hero == null:
-		return
-	var mote := Node3D.new()
-	mote.add_child(TDStage.glow_sprite(load("res://assets/sprites/fx/soft_dot.png"), ESSENCE_GLOW * 2.0))
-	mote.add_child(TDStage.light(ESSENCE_GLOW, 1.5, 3.0))
-	world.stage.map_root.add_child(mote)
-	var path := func(t: float) -> void:
-		if not is_instance_valid(hero):
-			return
-		var to := hero.position + Vector2(0, -TDPlayer.HEIGHT / 2.0)
-		var at := from.lerp(to, t * t) + Vector2(0, -ESSENCE_ARC * sin(t * PI))
-		mote.position = TDStage.to3d(at, TDStage.Z_EFFECT + 0.6)
-	path.call(0.0)
-	var tw := mote.create_tween()
-	tw.tween_method(path, 0.0, 1.0, ESSENCE_FLIGHT)
-	tw.tween_callback(func() -> void:
-		if is_instance_valid(hero):
-			flash(hero.position + Vector2(0, -TDPlayer.HEIGHT / 2.0), ESSENCE_GLOW, 1.2)
-			show_gain(&"essence", amount)
-		mote.queue_free())
-
-## Plays over the music when you level up (Sound.jingle id).
-const LEVEL_UP_JINGLE := &"jingle_levelup"
-
-## The level-up burst around whoever levelled up, and the jingle when it's you.
-func show_level_up(peer: int, _level: int) -> void:
-	var who := world.actor(peer)
-	if who == null:
-		return
-	add_effect(Content.effect(EffectDef.LEVEL_UP), who.position, 1, who)
-	if who == world.player:
-		Sound.jingle(LEVEL_UP_JINGLE)
-
-## A small "+9 Dawn Essence" or "+8 Dawnshards" rising over your hero; gains that arrive
+## A small "+8 Dawnshards" rising over your hero; gains that arrive
 ## together stack upwards instead of covering each other.
 func show_gain(kind: StringName, amount: int) -> void:
 	if world.player == null:

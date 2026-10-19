@@ -1,28 +1,12 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=14 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/coral_turret.tres" id="3_coral_turret"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="5_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/coral_branch.tres" id="6_coral_branch"]
-[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="7_white_potion"]
-[ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="8_mana_tea"]
 [ext_resource type="Resource" path="res://data/monster_moves/shot_bubble.tres" id="mv_shot_bubble"]
 [ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
-
-[sub_resource type="Resource" id="Resource_4"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("8_mana_tea")
-chance = 0.05
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("7_white_potion")
-chance = 0.08
-min_amount = 1
-max_amount = 2
 
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("4_drop_entry")
@@ -43,9 +27,8 @@ script = ExtResource("1_monster_def")
 id = &"coral_turret"
 display_name = "Coral Turret"
 level = 17
-max_hp = 913
+max_hp = 141
 attack = 62
-essence = 230
 speed = 0.0
 size = Vector2(35.0, 55.0)
 boss = false
@@ -55,4 +38,4 @@ sight = 340.0
 moves = Array[ExtResource("mv_script")]([ExtResource("mv_shot_bubble")])
 sprite_frames = ExtResource("3_coral_turret")
 sprite_scale = 1.0
-drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2")])

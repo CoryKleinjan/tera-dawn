@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=70 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=68 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -10,7 +10,6 @@
 [ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="12_breakable_def"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="14_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="15_dawnshard"]
-[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="16_white_potion"]
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="20_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/flowers_yellow.png" id="21_flowers_yellow"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/rock_large.png" id="22_rock_large"]
@@ -306,12 +305,6 @@ item = ExtResource("15_dawnshard")
 min_amount = 150
 max_amount = 220
 
-[sub_resource type="Resource" id="Loot_0_1"]
-script = ExtResource("14_drop_entry")
-item = ExtResource("16_white_potion")
-min_amount = 4
-max_amount = 4
-
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("12_breakable_def")
 id = &"thorn_thicket_crown_chest"
@@ -321,7 +314,7 @@ hits = 1
 whole = ExtResource("24_chest")
 broken = ExtResource("25_chest_open")
 height = 48.0
-loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1")])
+loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_0_0")])
 card = ExtResource("11_acorn_sentry")
 
 [resource]

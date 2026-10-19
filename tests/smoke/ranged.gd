@@ -1,8 +1,9 @@
 extends SmokeArea
-## Ranged and magic attacks: arrows, spells and throwing stars.
+## Ranged and magic attacks: arrows, wands and throwing stars.
 
 ## An Archer's bow shoots arrows that fly to the monster (no ammo needed), a Magician's
-## Ice Spike uses magic, and a Thief's stars in the off-hand slot throw with nothing in the bag.
+## wand hits by its Magic Attack, and a Thief's stars in the off-hand slot throw with nothing
+## in the bag.
 func check() -> void:
 	var ch := _me().character
 	var meadow: MapInstance = Net.server.maps[&"meadow"]
@@ -41,25 +42,30 @@ func check() -> void:
 	_check(m.health.hp < hp or m.dead, "it hits a monster 200 pixels away")
 	_release_mobs(others)
 	_check(Game.me.skills.use_problem(Game.me.skills.basic_attack()) == "", "and can shoot again with no arrows in the bag")
-	# a Magician's spell uses Magic Attack
+	# a Magician's wand hits by its Magic Attack
 	ch.job = Content.job(&"mage")
 	ch.equipment.take(&"weapon")
 	ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"apprentice_wand")))
-	ch.skills.learned[&"ice_spike"] = 1
 	ch.recalc()
-	var bolt: SkillDef = Content.skill(&"ice_spike")
-	var magic := ch.magic_range()
-	_check(magic.y > ch.damage_range().y, "a Magician's spells hit harder than their wand")
-	var hit := Combat.player_hit(bolt, m.def, ch)
-	_check(hit["miss"] or (hit["damage"] >= 1 and hit["damage"] <= roundi(magic.y * bolt.damage_at(1) * Combat.CRIT_MULTIPLIER) + 1), "Ice Spike's damage comes from Magic Attack")
-	# a thief throws with nothing in the bag
+	var spread := ch.damage_range()
+	_check(ch.stats.magic_attack > ch.stats.attack and spread.y == roundi(ch.stats.magic_attack * CharacterStats.DAMAGE_PER_ATTACK), "a wand's damage comes from its Magic Attack")
+	var swing := ch.skills.basic_attack()
+	var hit := Combat.player_hit(swing, m.def, ch)
+	var most := roundi(spread.y * swing.damage_at(1) * CharacterStats.damage_bonus(ch.stats, swing.is_ranged()) * Combat.CRIT_MULTIPLIER)
+	_check(hit["damage"] >= 1 and hit["damage"] <= most + 1, "and so does its hit")
+	# a thief throws with nothing in the bag (skills made for the test: the game has no job skills yet)
 	ch.job = Content.job(&"thief")
 	ch.equipment.take(&"weapon")
 	ch.equipment.put(&"weapon", ItemStack.exact(Content.item(&"rusty_dagger")))
-	ch.skills.learned[&"star_scatter"] = 1
-	_check(ch.skills.use_problem(Content.skill(&"star_scatter")) == "", "Star Scatter needs no off-hand and no ammo")
-	ch.skills.learned[&"riptide_combo"] = 1
-	_check(ch.skills.use_problem(Content.skill(&"riptide_combo")).contains("needs a sword"), "Riptide Combo needs a scimitar (a sword)")
+	var throw := _skill(&"t_star_throw")
+	ch.skills.learned[throw.id] = 1
+	_check(ch.skills.use_problem(throw) == "", "a star throw needs no off-hand and no ammo")
+	var combo := _skill(&"t_sword_combo")
+	combo.weapons.assign([&"sword"])
+	ch.skills.learned[combo.id] = 1
+	_check(ch.skills.use_problem(combo).contains("needs a sword"), "a sword skill needs a sword")
+	ch.skills.learned.erase(throw.id)
+	ch.skills.learned.erase(combo.id)
 	# back to a Warrior with a sword for the rest of the test
 	ch.job = Content.job(&"warrior")
 	ch.equipment.take(&"weapon")
@@ -67,3 +73,11 @@ func check() -> void:
 	ch.recalc()
 	_me().dirty_character = true
 	await _ticks(2)
+
+## An attack skill made for the test, with no Mana cost.
+func _skill(id: StringName) -> SkillDef:
+	var s := SkillDef.new()
+	s.id = id
+	s.display_name = String(id)
+	s.kind = SkillDef.Kind.ATTACK
+	return s

@@ -136,7 +136,7 @@ func quest_drops(monster: MonsterDef, c: Character) -> Array:
 	return out
 
 ## Hands the quest in: takes the collected items, pays the Dawnshard and item rewards and
-## marks it done (Dawn Essence goes through TDServer.give_essence so the gain is shown).
+## marks it done.
 ## Returns why it couldn't, or "".
 func complete(q: QuestDef, c: Character) -> String:
 	if not is_ready(q, c):

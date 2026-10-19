@@ -62,7 +62,7 @@ buttons (`ui_accept`).
   ornate panels (`ARCH_PANEL`, `draw_panel`, `use_panel`) and list-row art.
 - **`UiStyle`**: styles Godot controls with that art: `style_button`, `style_tab`, keycaps,
   fields, sliders, check boxes, dropdowns, scroll bars, `menu_button` and the button motion.
-- **`WorldSkin`**: what's drawn over the world every frame: the EXP bar, party, monster
+- **`WorldSkin`**: what's drawn over the world every frame: party, monster
   and boss bars, name and guild tags, quest markers, speech bubbles, hints and
   the map-name banner.
 - **`UiBuild`**: makes the menus' controls: `label`, `heading`, `small_title`, `button` (a
@@ -95,8 +95,8 @@ keep the default, so an old or hand-edited file never breaks the game.
 - **DevSettings** holds developer-only switches, on a Developer tab that only debug builds
   (the editor, a debug export) show; a release build ignores them. `test_characters` makes
   character select (solo, host or join) list the test characters, saved in their own folder
-  (`TestCharacters.FOLDER`): a character of every job at `Character.MAX_LEVEL`, in the best gear
-  it can wear, every skill at its highest level and `TestCharacters.SHARDS` Dawnshards.
+  (`TestCharacters.FOLDER`): a character of every job in the best gear
+  it can wear at the top gear tier, with `TestCharacters.SHARDS` Dawnshards.
   They're made the first time (`TestCharacters.prepare`, from `Net.open_saves`), kept as
   played after that (but put back in their job's town), and made again after "Rebuild test
   characters". Everything is picked from the data (`TestCharacters.best_gear_for`), so new

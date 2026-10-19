@@ -11,13 +11,13 @@
       "",
       "",
       "",
-      "exp_frame"
+      ""
     ],
     [
       "fill_red",
       "",
-      "fill_gold",
-      "level_badge"
+      "",
+      ""
     ],
     [
       "menu_panel",
@@ -52,17 +52,6 @@
       "scale": 0.8504,
       "split_by": "y"
     },
-    "exp_frame": {
-      "blank": [
-        [
-          0,
-          0,
-          227,
-          29
-        ]
-      ],
-      "scale": 0.909
-    },
     "fill_red": {
       "blank": [
         [
@@ -73,28 +62,6 @@
         ]
       ],
       "scale": 0.7346
-    },
-    "fill_gold": {
-      "blank": [
-        [
-          0,
-          0,
-          216,
-          29
-        ]
-      ],
-      "scale": 0.768
-    },
-    "level_badge": {
-      "blank": [
-        [
-          0,
-          0,
-          199,
-          29
-        ]
-      ],
-      "scale": 0.918
     },
     "menu_panel": {
       "blank": [

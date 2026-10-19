@@ -23,7 +23,7 @@ func before_each() -> void:
 	ServerHarness.npc(town, &"test_giver", GIVER_X)
 	ServerHarness.npc(town, &"test_taker", TAKER_X)
 	h.add_map(town)
-	quarry = ServerHarness.monster(&"quarry", 1, 1)
+	quarry = ServerHarness.monster(&"quarry", 1)
 	field = h.field_with([ServerHarness.spawn(quarry, 2)])
 	for m in field.mobs:
 		m.position.x = 340.0
@@ -35,9 +35,8 @@ func before_each() -> void:
 
 	q_kill = _quest(&"test_q_kill")
 	q_kill.objectives.append(_objective(QuestObjective.Kind.KILL, 2))
-	q_kill.reward_essence = 5
 	q_kill.reward_shards = 50
-	q_kill.reward_items.append(ServerHarness.drop(Content.item(&"red_potion"), 3))
+	q_kill.reward_items.append(ServerHarness.drop(Content.item(&"return_scroll"), 3))
 
 	q_collect = _quest(&"test_q_collect")
 	q_collect.turn_in = &"test_taker"
@@ -111,16 +110,12 @@ func test_handing_in_pays_every_reward() -> void:
 	h.ask(2, &"req_quest_accept", [&"test_giver", q_kill.id])
 	_hunt()
 	check(h.told(2, "Test Q Kill is ready to hand in."), "told it's ready")
-	var essence := c.essence
-	var reds := c.inventory.count_of(Content.item(&"red_potion"))
+	var scrolls := c.inventory.count_of(Content.item(&"return_scroll"))
 	h.ask(2, &"req_quest_complete", [&"test_giver", q_kill.id])
 	check(not c.quests.active.has(q_kill.id), "no longer active")
 	check_eq(c.quests.done.get(q_kill.id), 1, "done once")
-	check_eq(c.essence, essence + 5, "Dawn Essence reward")
-	check_has(h.events(2, &"ev_gain"), [&"essence", 5], "essence shown rising over the player")
-	check_has(h.events(2, &"ev_gain"), [&"exp", 5], "and as much EXP")
 	check_eq(c.shards, 50, "Dawnshard reward")
-	check_eq(c.inventory.count_of(Content.item(&"red_potion")), reds + 3, "item reward")
+	check_eq(c.inventory.count_of(Content.item(&"return_scroll")), scrolls + 3, "item reward")
 	check(h.told(2, "Quest complete: Test Q Kill"), "told")
 
 func test_unfinished_quests_cant_be_handed_in() -> void:

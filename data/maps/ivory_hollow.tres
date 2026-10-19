@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=60 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=58 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/tear_greenbough/chest_open.png" id="12_chest_open"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="13_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="14_dawnshard"]
-[ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="15_power_elixir"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/tear_greenbough/ivory_hollow.png" id="16_ivory_hollow"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/tear_greenbough/leaves_left.png" id="17_leaves_left"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/tear_greenbough/leaves_right.png" id="18_leaves_right"]
@@ -225,13 +224,6 @@ chance = 1.0
 min_amount = 300
 max_amount = 600
 
-[sub_resource type="Resource" id="Loot_0_1"]
-script = ExtResource("13_drop_entry")
-item = ExtResource("15_power_elixir")
-chance = 1.0
-min_amount = 2
-max_amount = 3
-
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("10_breakable_def")
 id = &"ivory_hollow_chest"
@@ -241,7 +233,7 @@ hits = 1
 whole = ExtResource("11_chest")
 broken = ExtResource("12_chest_open")
 height = 48.0
-loot = Array[ExtResource("13_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1")])
+loot = Array[ExtResource("13_drop_entry")]([SubResource("Loot_0_0")])
 card = ExtResource("8_hollow_stag")
 
 [sub_resource type="Resource" id="Backdrop_picture"]

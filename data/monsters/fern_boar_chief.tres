@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=18 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=14 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/fern_boar_chief.tres" id="2_fern_boar_chief"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/chief_mane.tres" id="loot_chief_mane"]
-[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="loot_white_potion"]
-[ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="loot_elixir"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_charge.tres" id="mv_boss_charge"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_slam.tres" id="mv_boss_slam"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_pounce.tres" id="mv_boss_pounce"]
@@ -40,28 +38,13 @@ chance = 1.0
 min_amount = 1
 max_amount = 1
 
-[sub_resource type="Resource" id="Resource_loot1"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("loot_white_potion")
-chance = 0.5
-min_amount = 1
-max_amount = 3
-
-[sub_resource type="Resource" id="Resource_loot6"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("loot_elixir")
-chance = 0.3
-min_amount = 1
-max_amount = 2
-
 [resource]
 script = ExtResource("1_monster_def")
 id = &"fern_boar_chief"
 display_name = "Fern Boar Chief"
 level = 12
-max_hp = 1351
+max_hp = 290
 attack = 43
-essence = 399
 speed = 1.0
 size = Vector2(103.0, 87.0)
 sight = 700.0
@@ -70,6 +53,6 @@ intro_ticks = 100
 rage_ticks = 100
 sprite_frames = ExtResource("2_fern_boar_chief")
 sprite_scale = 1.1
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot6")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_loot0")])
 boss = true
 respawn_ticks = Vector2i(1800, 2400)

@@ -433,12 +433,6 @@ func show_mob_shot(index: int, move_index: int, aim: Vector2) -> void:
 func show_mob_death(index: int) -> void:
 	fx.show_mob_death(index)
 
-func fly_essence(from: Vector2, amount: int) -> void:
-	fx.fly_essence(from, amount)
-
-func show_level_up(peer: int, level: int) -> void:
-	fx.show_level_up(peer, level)
-
 
 ## Plays sound effect `id` coming from `pos` in the world: quieter the further it is from
 ## your hero, and not at all beyond SOUND_FAR.

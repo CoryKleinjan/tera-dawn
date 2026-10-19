@@ -132,10 +132,6 @@ func _init(m: MapInstance, i: int, d: MonsterDef, p: Platform, patrol: Platform 
 func max_hp() -> int:
 	return MonsterStrength.scaled(def.max_hp, strength)
 
-## The Dawn Essence it gives on this map: its own, times its strength here.
-func essence() -> int:
-	return MonsterStrength.scaled(def.essence, strength)
-
 func _reset() -> void:
 	plat = _home_plat
 	area = _home_area

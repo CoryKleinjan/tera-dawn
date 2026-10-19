@@ -11,7 +11,7 @@ var c: Character
 
 func before_each() -> void:
 	h = ServerHarness.new()
-	var dummy := ServerHarness.monster(&"test_mob", 100000, 1)
+	var dummy := ServerHarness.monster(&"test_mob", 100000)
 	map = h.field_with([ServerHarness.spawn(dummy, 2)])
 	for m in map.mobs:
 		m.position.x = 340.0
@@ -72,7 +72,7 @@ func test_no_heal_without_the_mana_or_a_missing_heart() -> void:
 	check_eq(c.mp, c.max_mp(), "nothing to heal, nothing spent")
 
 func test_a_bosss_big_move_takes_two_hearts() -> void:
-	var boss := ServerHarness.monster(&"test_boss", 100000, 1)
+	var boss := ServerHarness.monster(&"test_boss", 100000)
 	boss.boss = true
 	map.hurt_player(p, boss, 400.0, Combat.BIG_HIT_POWER)
 	check_eq(c.health.hp, c.max_hp() - 2, "two hearts")

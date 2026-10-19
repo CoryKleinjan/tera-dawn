@@ -1,28 +1,12 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=14 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/acorn_sentry.tres" id="3_acorn_sentry"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="5_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/hard_acorn.tres" id="6_hard_acorn"]
-[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="7_white_potion"]
-[ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="8_mana_tea"]
 [ext_resource type="Resource" path="res://data/monster_moves/shot_seed.tres" id="mv_shot_seed"]
 [ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
-
-[sub_resource type="Resource" id="Resource_4"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("8_mana_tea")
-chance = 0.05
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("7_white_potion")
-chance = 0.08
-min_amount = 1
-max_amount = 2
 
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("4_drop_entry")
@@ -43,9 +27,8 @@ script = ExtResource("1_monster_def")
 id = &"acorn_sentry"
 display_name = "Acorn Sentry"
 level = 16
-max_hp = 789
+max_hp = 119
 attack = 58
-essence = 200
 speed = 0.0
 size = Vector2(38.0, 60.0)
 boss = false
@@ -55,4 +38,4 @@ sight = 340.0
 moves = Array[ExtResource("mv_script")]([ExtResource("mv_shot_seed")])
 sprite_frames = ExtResource("3_acorn_sentry")
 sprite_scale = 1.0
-drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2")])

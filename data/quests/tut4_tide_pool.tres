@@ -24,4 +24,3 @@ offer_hint = "Walk to her and press {move_up} to talk"
 hint = "{attack} to attack, {loot} to pick up what they drop"
 auto_start = true
 objectives = Array[ExtResource("1_15kef")]([SubResource("Resource_s0fll")])
-reward_essence = 10

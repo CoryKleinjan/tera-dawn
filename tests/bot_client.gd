@@ -57,7 +57,7 @@ func _run() -> void:
 	for i in TDServer.SAVE_EVERY + 60:
 		await _ticks(1)
 		var c := saves.load_character(CHARACTER)
-		if c and c.essence > 0:
+		if c and c.book.total_kills() > 0:
 			result["saved"] = true
 			break
 	var f := FileAccess.open(result_path, FileAccess.WRITE)

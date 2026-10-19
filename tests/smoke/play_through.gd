@@ -1,7 +1,7 @@
 extends SmokeArea
 ## The single-player play-through: a new character made on the title screen plays the
 ## village and the meadow. The smoke runner calls these steps in order, with the other areas
-## between `windows` and `dawn_slash`.
+## between `windows` and `portal`.
 
 ## The hero (set by start_game).
 var p: TDPlayer
@@ -88,7 +88,7 @@ func visit_shop() -> void:
 	await _ticks(TDPlayer.PORTAL_FADE_TICKS + 4)
 	_check(world.map.id == &"meadow_store" and world.map.interior, "pressing Up in the doorway walks into the shop")
 	_check(world.map.outside() == Character.START_MAP, "the shop is inside the village")
-	# Mira runs a shop: buy potions, sell monster parts.
+	# Mira runs a shop: buy scrolls, sell monster parts.
 	var mira: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.shop != null)[0]
 	_teleport(Vector2(mira.position.x - 30, 620))
 	await _ticks(2)
@@ -98,17 +98,17 @@ func visit_shop() -> void:
 	talk.choose(labels.find("Open shop"))
 	var shop: TDShopWindow = world.hud.windows["shop"]
 	_check(shop.visible and not talk.visible and shop.shop == mira.def.shop, "Open shop opens her shop window")
-	_me().character.shards = 1000
+	_me().character.shards = 3000
 	_me().character.inventory.add(Content.item(&"boar_tusk"), 5)
 	_me().character.inventory.add(Content.item(&"moss_tuft"), 3)
 	_me().dirty_character = true
 	await _ticks(1)
-	var red_potion: ItemDef = Content.item(&"red_potion")
-	var reds := Game.me.inventory.count_of(red_potion)
+	var scroll: ItemDef = mira.def.shop.items[0].item
+	var scrolls := Game.me.inventory.count_of(scroll)
 	shop.amount = 10
 	shop.buy(0)
 	await _ticks(1)
-	_check(Game.me.inventory.count_of(red_potion) == reds + 10 and Game.me.shards == 1000 - 10 * mira.def.shop.items[0].cost(), "buying 10 Red Potions takes their price")
+	_check(Game.me.inventory.count_of(scroll) == scrolls + 10 and Game.me.shards == 3000 - 10 * mira.def.shop.items[0].cost(), "buying 10 %s takes their price" % scroll.display_name)
 	var shards_now := Game.me.shards
 	var gear_line := -1
 	for i in mira.def.shop.items.size():
@@ -152,15 +152,16 @@ func visit_shop() -> void:
 	_me().character.shards = 0
 	_me().dirty_character = true
 	await _ticks(1)
-	shop.buy(4)
+	shop.amount = 1
+	shop.buy(0)
 	await _ticks(1)
-	_check(Game.me.shards == 0 and Game.me.inventory.count_of(Content.item(&"elixir")) == 0, "you can't buy what you can't afford")
+	_check(Game.me.shards == 0 and Game.me.inventory.count_of(scroll) == scrolls + 10, "you can't buy what you can't afford")
 	_teleport(Vector2(mira.position.x + 450, 620))
 	await _until(func() -> bool: return not shop.visible, 30)
 	_check(not shop.visible, "walking away closes the shop")
 	Net.ask(&"req_buy", [mira.def.id, 0, 1])
 	await _ticks(1)
-	_check(Game.me.inventory.count_of(red_potion) == reds + 10, "the server won't sell from across the room")
+	_check(Game.me.inventory.count_of(scroll) == scrolls + 10, "the server won't sell from across the room")
 	# and back out into the village, beside the door
 	var out: PortalDef = world.map.portals[0]
 	_teleport(Vector2(out.x, 620))
@@ -196,7 +197,7 @@ func go_to_meadow() -> void:
 	await _ticks(TDPlayer.PORTAL_FADE_TICKS + 4)
 	_check(world.map.id == &"meadow" and not world.map.town and not world.mobs().is_empty(), "the village's east exit leads to the meadow, where the monsters are")
 
-## Killing a Dewling, its Dawn Essence and Dawnshards.
+## Killing a Dewling, the Monster Book's count and its Dawnshards.
 func first_kill() -> void:
 	# Put a Dewling right in front of the player and hit it until it dies.
 	var meadow: MapInstance = Net.server.maps[&"meadow"]
@@ -208,7 +209,7 @@ func first_kill() -> void:
 	var others := _hold_mobs(meadow, [mob])
 	_teleport(Vector2(mob.position.x - 40, 620))
 	p.face = 1
-	var essence_before: int = Game.me.essence
+	var kills := Game.me.book.kills(mob.def)
 	var shards: int = Game.me.shards
 	for i in 12:
 		mob.position.x = p.position.x + 40
@@ -220,7 +221,7 @@ func first_kill() -> void:
 	_release_mobs(others)
 	await _ticks(4)
 	_check(world.mobs()[mob.index].dead, "the game shows the Dewling defeated")
-	_check(Game.me.essence > essence_before, "killing a monster gives Dawn Essence")
+	_check(Game.me.book.kills(mob.def) == kills + 1, "the Monster Book counts the kill")
 	# Drops land next to the player, so some may already be picked up by now.
 	_check(not meadow.drops.is_empty() or Game.me.shards > shards, "the monster drops Dawnshards")
 	_check(world.drops.size() == meadow.drops.size(), "the game shows the same drops as the server")
@@ -247,16 +248,19 @@ func loot() -> void:
 	await _hold("loot", 24)
 	_check(Game.me.inventory.count_of(tusk) == 1 and Game.me.inventory.count_of(boots) == 1 and world.drops.is_empty(), "the loot key picks up items and gear")
 
-## Drinking a potion, and taking gear off and on.
-func potion_and_gear() -> void:
-	# A Red Potion from the Use tab heals.
-	_me().character.health.set_hp(1)
-	var red: ItemDef = Content.item(&"red_potion")
-	var potions := Game.me.inventory.count_of(red)
-	world.hud.windows["inventory"].tab = ItemDef.Tab.USE
-	world.hud.windows["inventory"].use_slot(_first_filled(Game.me, ItemDef.Tab.USE))
+## Healing a heart with Mana, and taking gear off and on.
+func heal_and_gear() -> void:
+	# Holding the heal key spends Mana on a heart.
+	var ch := _me().character
+	ch.health.set_hp(1)
+	ch.mp = ch.max_mp()
+	_me().dirty_character = true
+	await _ticks(2)
+	Input.action_press("heal")
+	await _until(func() -> bool: return Game.me.health.hp > 1, SimPlayer.HEAL_TICKS + 30)
+	Input.action_release("heal")
 	await _ticks(1)
-	_check(Game.me.health.hp > 1 and Game.me.inventory.count_of(red) == potions - 1, "drinking a Red Potion heals and uses it up")
+	_check(Game.me.health.hp == 2 and ch.mp == ch.max_mp() - CharacterStats.HEAL_COST, "holding the heal key spends Mana on a heart")
 
 	# Gear changes go through the server too.
 	var attack := Game.me.stats.attack
@@ -313,21 +317,9 @@ func windows() -> void:
 	world.hud.game_menu.resume_button.pressed.emit()
 	_check(not world.hud.title.visible, "Resume closes it")
 
-## Dawn Slash.
-func dawn_slash() -> void:
-	_me().inv = 100000 # a monster's touch would knock the player off the portal
-
-	# Dawn Slash costs MP and hits several monsters.
-	var mp_before := Game.me.mp
-	p.cooldown = 0
-	_me().cooldown = 0
-	await _tap("quick_2")
-	_check(p.action_anim == Content.skill(&"dawn_slash").animation, "Dawn Slash makes its motion")
-	# MP regen may tick once during the key press.
-	_check(mp_before - Game.me.mp >= Content.skill(&"dawn_slash").mp_at(1) - 1, "Dawn Slash spends MP")
-
 ## A portal to Fern Hollow.
 func portal() -> void:
+	_me().inv = 100000 # a monster's touch would knock the player off the portal
 	await _ticks(40)
 	# Walk through the portal to Fern Hollow.
 	_teleport(Vector2(2530, 620))

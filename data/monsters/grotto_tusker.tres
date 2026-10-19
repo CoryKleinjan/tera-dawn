@@ -1,13 +1,10 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=20 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/grotto_tusker.tres" id="2_grotto_tusker"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/barnacle.tres" id="5_barnacle"]
-[ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="6_power_elixir"]
-[ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="7_mana_tea"]
-[ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="8_elixir"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_charge.tres" id="mv_boss_charge"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_slam.tres" id="mv_boss_slam"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_pounce.tres" id="mv_boss_pounce"]
@@ -19,27 +16,6 @@
 script = ExtResource("3_drop_entry")
 item = ExtResource("rune_tusker_rune")
 chance = 0.3
-
-[sub_resource type="Resource" id="Resource_5"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("8_elixir")
-chance = 0.01
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_4"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("7_mana_tea")
-chance = 0.05
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("6_power_elixir")
-chance = 0.5
-min_amount = 1
-max_amount = 3
 
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("3_drop_entry")
@@ -60,9 +36,8 @@ script = ExtResource("1_monster_def")
 id = &"grotto_tusker"
 display_name = "Grotto Tusker"
 level = 22
-max_hp = 12600
+max_hp = 1420
 attack = 82
-essence = 2600
 speed = 1.0
 size = Vector2(84.0, 62.0)
 boss = true
@@ -73,6 +48,6 @@ intro_ticks = 100
 rage_ticks = 100
 sprite_frames = ExtResource("2_grotto_tusker")
 sprite_scale = 0.73
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Drop_tusker_rune")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Drop_tusker_rune")])
 relic = ExtResource("relic_tusk_charm")
 respawn_ticks = Vector2i(1800, 2400)

@@ -73,7 +73,7 @@ func test_unrolled_gear_is_exact_and_others_keep_count() -> void:
 	var e := fx.equip(&"t_sword", EquipDef.Slot.WEAPON, {"attack": 20}, 9)
 	check_eq(ItemStack.unrolled(e, 4).stats.attack, 20, "gear exact")
 	check_eq(ItemStack.unrolled(e, 4).count, 1, "gear one")
-	check_eq(ItemStack.unrolled(fx.use(), 4).count, 4, "potions keep count")
+	check_eq(ItemStack.unrolled(fx.use(), 4).count, 4, "other items keep their count")
 
 func test_display_name_is_the_items_name() -> void:
 	check_eq(ItemStack.exact(fx.equip(&"t_sword")).display_name(), "T Sword", "gear")

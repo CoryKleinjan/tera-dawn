@@ -1,37 +1,13 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=17 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/ash_wraith.tres" id="3_ash_wraith"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="5_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/ash_veil.tres" id="6_ash_veil"]
-[ext_resource type="Resource" path="res://data/items/use/sunrise_cake.tres" id="7_sunrise_cake"]
-[ext_resource type="Resource" path="res://data/items/use/starlight_draught.tres" id="8_starlight_draught"]
-[ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="9_elixir"]
 [ext_resource type="Resource" path="res://data/monster_moves/shot_shadow.tres" id="mv_shot_shadow"]
 [ext_resource type="Resource" path="res://data/monster_moves/swoop.tres" id="mv_swoop"]
 [ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
-
-[sub_resource type="Resource" id="Resource_5"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("9_elixir")
-chance = 0.01
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_4"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("8_starlight_draught")
-chance = 0.05
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("7_sunrise_cake")
-chance = 0.08
-min_amount = 1
-max_amount = 2
 
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("4_drop_entry")
@@ -52,9 +28,8 @@ script = ExtResource("1_monster_def")
 id = &"ash_wraith"
 display_name = "Ash Wraith"
 level = 31
-max_hp = 3899
+max_hp = 427
 attack = 100
-essence = 935
 speed = 1.3
 size = Vector2(36.0, 56.0)
 boss = false
@@ -64,4 +39,4 @@ sight = 340.0
 moves = Array[ExtResource("mv_script")]([ExtResource("mv_shot_shadow"), ExtResource("mv_swoop")])
 sprite_frames = ExtResource("3_ash_wraith")
 sprite_scale = 1.0
-drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2")])

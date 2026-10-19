@@ -123,14 +123,14 @@ func _quest_options() -> Array:
 		var status := me.quests.status(q, me)
 		if status == QuestLog.Status.READY and q.turn_in_npc() == npc.def.id:
 			out.append(["Hand in: %s" % q.title, func() -> void:
-				_page("%s\n\nReward: %s" % [q.complete_text, q.describe_rewards()], [
+				_page("\n\n".join([q.complete_text, q.reward_line()]).strip_edges(), [
 					["Complete the quest", func() -> void:
 						Net.ask(&"req_quest_complete", [npc.def.id, q.id])
 						_main_page(greeting)],
 					["Not yet", func() -> void: _main_page(greeting)]]), ICON_QUEST_READY])
 		elif status == QuestLog.Status.AVAILABLE and q.giver == npc.def.id:
 			out.append(["New quest: %s" % q.title, func() -> void:
-				_page("%s%s\n\n%s\nReward: %s" % [q.offer_text, _job_paths(q), _objective_list(q), q.describe_rewards()], [
+				_page(("%s%s\n\n%s\n%s" % [q.offer_text, _job_paths(q), _objective_list(q), q.reward_line()]).strip_edges(), [
 					["Accept", func() -> void:
 						Net.ask(&"req_quest_accept", [npc.def.id, q.id])
 						_main_page(greeting)],
@@ -192,8 +192,7 @@ func _job_list() -> void:
 	opts.append(["Back", func() -> void: _main_page(greeting)])
 	_page("Which path calls to you?", opts)
 
-## One job: what it is, what switching to it costs (the skills that go and the essence that
-## comes back), why not yet, and the choice.
+## One job: what it is, why not yet, and the choice.
 func _job_page(j: JobDef) -> void:
 	var problem := Game.me.advance_problem(j)
 	var parts := PackedStringArray()
@@ -201,12 +200,6 @@ func _job_page(j: JobDef) -> void:
 		parts.append(j.description)
 	if Game.me.has_passed(j):
 		parts.append("You passed this path before, so it's yours again for the asking.")
-	var lost := Game.me.skills_lost_by(j)
-	if not lost.is_empty():
-		var back := 0
-		for s in lost:
-			back += int(Game.me.skills.paid.get(s.id, 0))
-		parts.append("You would forget %s, and get back %d Dawn Essence." % [ServerJobs.skill_names(lost), back])
 	if problem != "":
 		parts.append(problem)
 	var say := "\n\n".join(parts)

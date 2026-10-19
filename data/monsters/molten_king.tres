@@ -1,14 +1,10 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=23 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=15 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/molten_king.tres" id="3_molten_king"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="5_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/molten_crown.tres" id="6_molten_crown"]
-[ext_resource type="Resource" path="res://data/items/use/sunrise_cake.tres" id="7_sunrise_cake"]
-[ext_resource type="Resource" path="res://data/items/use/starlight_draught.tres" id="8_starlight_draught"]
-[ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="9_elixir"]
-[ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="22_power_elixir"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_shot_ember.tres" id="mv_boss_shot_ember"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_charge.tres" id="mv_boss_charge"]
 [ext_resource type="Resource" path="res://data/monster_moves/boss_slam.tres" id="mv_boss_slam"]
@@ -20,34 +16,6 @@
 script = ExtResource("4_drop_entry")
 item = ExtResource("rune_molten_rune")
 chance = 0.3
-
-[sub_resource type="Resource" id="Resource_18"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("22_power_elixir")
-chance = 0.5
-min_amount = 1
-max_amount = 3
-
-[sub_resource type="Resource" id="Resource_5"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("9_elixir")
-chance = 0.01
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_4"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("8_starlight_draught")
-chance = 0.05
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("7_sunrise_cake")
-chance = 0.08
-min_amount = 1
-max_amount = 2
 
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("4_drop_entry")
@@ -68,9 +36,8 @@ script = ExtResource("1_monster_def")
 id = &"molten_king"
 display_name = "Molten King"
 level = 30
-max_hp = 50424
+max_hp = 5010
 attack = 114
-essence = 10384
 speed = 1.0
 size = Vector2(100.0, 85.0)
 boss = true
@@ -83,6 +50,6 @@ sprite_frames = ExtResource("3_molten_king")
 sprite_scale = 1.35
 light_color = Color(1.0, 0.478431, 0.227451, 1.0)
 aura_color = Color(1.0, 0.478431, 0.227451, 1.0)
-drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_18"), SubResource("Drop_molten_rune")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Drop_molten_rune")])
 relic = ExtResource("relic_magma_heart")
 respawn_ticks = Vector2i(1800, 2400)

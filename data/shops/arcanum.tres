@@ -1,10 +1,7 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=11 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
-[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="13_blue_potion"]
-[ext_resource type="Resource" path="res://data/items/use/mana_tea.tres" id="14_mana_tea"]
-[ext_resource type="Resource" path="res://data/items/use/mana_elixir.tres" id="15_mana_elixir"]
 [ext_resource type="Resource" path="res://data/items/equips/novice_wand.tres" id="e_novice_wand"]
 
 [sub_resource type="Resource" id="Entry_novice_wand"]
@@ -12,23 +9,8 @@ script = ExtResource("2_shop_entry")
 item = ExtResource("e_novice_wand")
 price = 0
 
-[sub_resource type="Resource" id="Resource_13"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("15_mana_elixir")
-price = 0
-
-[sub_resource type="Resource" id="Resource_12"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("14_mana_tea")
-price = 0
-
-[sub_resource type="Resource" id="Resource_11"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("13_blue_potion")
-price = 0
-
 [resource]
 script = ExtResource("1_shop_def")
 id = &"arcanum"
 display_name = "Lumewood Arcanum"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Entry_novice_wand"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Entry_novice_wand")])

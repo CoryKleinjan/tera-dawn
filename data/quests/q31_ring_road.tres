@@ -50,6 +50,5 @@ offer_text = "Every town is joined by road, and the roads are dangerous. Walk th
 progress_text = "Visit Harbor Road, Glimmer Path, Cinder Pass, Dusk Bridge, Saltwind Cliffs and Harbor Beach."
 complete_text = "You walked the whole ring! Here, a sailor's cape for a true traveler."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5"), SubResource("Resource_6")])
-reward_essence = 194600
 reward_shards = 8000
 reward_items = Array[ExtResource("3_drop_entry")]([])

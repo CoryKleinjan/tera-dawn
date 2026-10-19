@@ -7,7 +7,7 @@ extends RefCounted
 ## the stage asks for the light. In co-op a map follows the host's character, so everyone on
 ## it sees and fights the same thing.
 
-## How much stronger (HP, attack and Dawn Essence) monsters get with each step of the decline.
+## How much stronger (HP and attack) monsters get with each step of the decline.
 const STRENGTH_PER_STEP := 0.5
 ## The only parts of a look a decline step may set: light and fog, never colours of the art.
 const LIGHT_AND_FOG := ["light_color", "light_energy", "ambient_color", "ambient_energy", "fog_color",

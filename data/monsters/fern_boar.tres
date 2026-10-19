@@ -1,12 +1,10 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=15 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/bramble_boar.tres" id="2_bramble_boar"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/boar_tusk.tres" id="loot_boar_tusk"]
-[ext_resource type="Resource" path="res://data/items/use/orange_potion.tres" id="loot_orange_potion"]
-[ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="loot_elixir"]
 [ext_resource type="Resource" path="res://data/monster_moves/charge.tres" id="mv_charge"]
 [ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
 
@@ -31,20 +29,6 @@ chance = 0.5
 min_amount = 1
 max_amount = 1
 
-[sub_resource type="Resource" id="Resource_loot1"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("loot_orange_potion")
-chance = 0.06
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_loot4"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("loot_elixir")
-chance = 0.01
-min_amount = 1
-max_amount = 1
-
 [resource]
 script = ExtResource("1_monster_def")
 id = &"fern_boar"
@@ -52,11 +36,10 @@ display_name = "Fern Boar"
 level = 8
 max_hp = 138
 attack = 22
-essence = 46
 speed = 1.25
 size = Vector2(60.0, 42.0)
 moves = Array[ExtResource("mv_script")]([ExtResource("mv_charge")])
 sprite_frames = ExtResource("2_bramble_boar")
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_loot0"), SubResource("Resource_loot1"), SubResource("Resource_loot4")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_loot0")])
 sprite_scale = 0.8
 tint = Color(0.86, 1.0, 0.8, 1)

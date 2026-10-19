@@ -32,29 +32,21 @@ static func stats(values := {}) -> StatBlock:
 		s.set(StringName(k), values[k])
 	return s
 
-## A job with round numbers: power 10, HP 50 + 10 and MP 20 + 5 a level, no avoid growth,
-## mastery 0.5.
+## A test job.
 func job(id := &"t_job", family := &"t_family", advances_from := &"") -> JobDef:
 	var j := JobDef.new()
 	j.id = id
 	j.display_name = String(id).capitalize()
 	j.family = family
-	j.base_power = 10
-	j.mastery = 0.5
-	j.base_hp = 50
-	j.hp_growth = 10
-	j.base_mp = 20
-	j.mp_growth = 5
 	j.advances_from = advances_from
 	register("jobs", j)
 	return j
 
-## A character of `j` (a fresh test job if null) at `level`, full HP and MP.
-func character(j: JobDef = null, level := 1) -> Character:
+## A character of `j` (a fresh test job if null), full hearts and Mana.
+func character(j: JobDef = null) -> Character:
 	var c := Character.new()
 	c.name = "Tester"
 	c.job = j if j else job()
-	c.level = level
 	c.recalc()
 	c.refill()
 	return c
@@ -103,14 +95,13 @@ func skill(id := &"t_skill", kind := SkillDef.Kind.ATTACK, job_id := &"t_job") -
 	register("skills", s)
 	return s
 
-func monster(id := &"t_mob", level := 1, max_hp := 100, essence := 10) -> MonsterDef:
+func monster(id := &"t_mob", level := 1, max_hp := 100) -> MonsterDef:
 	var m := MonsterDef.new()
 	m.id = id
 	m.display_name = String(id).capitalize()
 	m.level = level
 	m.max_hp = max_hp
 	m.attack = 20
-	m.essence = essence
 	register("monsters", m)
 	return m
 

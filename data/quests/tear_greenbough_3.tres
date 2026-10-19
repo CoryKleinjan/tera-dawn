@@ -1,17 +1,9 @@
-[gd_resource type="Resource" script_class="QuestDef" load_steps=7 format=3]
+[gd_resource type="Resource" script_class="QuestDef" load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/quest_def.gd" id="1_quest_def"]
 [ext_resource type="Script" path="res://scripts/data/quest_objective.gd" id="2_quest_objective"]
 [ext_resource type="Resource" path="res://data/monsters/petrified_warden.tres" id="3_petrified_warden"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="5_drop_entry"]
-[ext_resource type="Resource" path="res://data/items/use/power_elixir.tres" id="6_power_elixir"]
-
-[sub_resource type="Resource" id="Elixirs"]
-script = ExtResource("5_drop_entry")
-item = ExtResource("6_power_elixir")
-chance = 1.0
-min_amount = 5
-max_amount = 5
 
 [sub_resource type="Resource" id="Warden"]
 script = ExtResource("2_quest_objective")
@@ -29,6 +21,5 @@ offer_text = "Whatever that thing is, it's standing guard over the heart of it. 
 progress_text = "Mind the crack in its chest. If there's a light in there, that's where it's still alive."
 complete_text = "It's done, then. (He listens to the trees for a long moment.) So why does it feel worse? Listen. The birds haven't come back. Not in there. Out here. (He presses something into your hand.) Take this. And keep your eyes open on the road. Something changed today, and I don't think it's changing back."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Warden")])
-reward_essence = 120000
 reward_shards = 5000
-reward_items = Array[ExtResource("5_drop_entry")]([SubResource("Elixirs")])
+reward_items = Array[ExtResource("5_drop_entry")]([])
