@@ -99,7 +99,7 @@ script = ExtResource("14_portal_def")
 x = 2300.0
 target_map = &"glowcap_hollow"
 target_x = 400.0
-target_platform = 16
+target_platform = 13
 
 [sub_resource type="Resource" id="Spawn_0"]
 script = ExtResource("16_spawn_def")

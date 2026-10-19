@@ -506,6 +506,19 @@ func _run() -> void:
 		_me().inv = 0
 		Net.server.enter_map(_me(), &"meadow", 300)
 		await _physics(10)
+	if only == "room":
+		# The map named after the mode, standing on the floor and every fifth platform (not in the full run).
+		_me().inv = 100000
+		var m: MapDef = Content.maps[StringName(args[2])]
+		for i in range(0, m.platforms.size() + 1, 5):
+			var x := float(m.start_x) if i == 0 else m.platforms[i - 1].x + m.platforms[i - 1].width / 2.0
+			Net.server.enter_map(_me(), m.id, x, i)
+			await _physics(40)
+			await _frames(3)
+			await _shot("room_%s_%d" % [m.id, i])
+		_me().inv = 0
+		Net.server.enter_map(_me(), &"meadow", 300)
+		await _physics(10)
 	if only == "rests":
 		# Every rest spot's bench, the hero standing beside it (not in the full run).
 		_me().inv = 100000

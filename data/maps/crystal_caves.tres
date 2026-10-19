@@ -197,7 +197,7 @@ x = 100.0
 platform = 1
 target_map = &"glowcap_hollow"
 target_x = 2560.0
-target_platform = 27
+target_platform = 25
 
 [sub_resource type="Resource" id="Portal_1"]
 script = ExtResource("14_portal_def")
