@@ -219,6 +219,7 @@ func test_a_buff_raises_stats_until_it_wears_off() -> void:
 	var c := p.character
 	var skill := Content.skill(&"quick_step")
 	c.skills.learned[skill.id] = 1
+	c.mp = c.max_mp()
 	var speed := c.stats.speed
 	_attack(2, skill.id)
 	check_eq(c.stats.speed, speed + skill.stats_at(1).speed, "faster")

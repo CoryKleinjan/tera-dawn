@@ -329,6 +329,7 @@ func test_use_problem_rules() -> void:
 	check_ne(c.skills.use_problem(null), "", "null")
 	check_ne(c.skills.use_problem(s), "", "unlearned")
 	c.skills.learned[s.id] = 1
+	c.mp = 10
 	check_eq(c.skills.use_problem(s), "", "usable")
 	c.mp = 9
 	check_ne(c.skills.use_problem(s), "", "not enough MP")
