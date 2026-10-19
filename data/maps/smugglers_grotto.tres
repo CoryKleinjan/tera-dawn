@@ -28,6 +28,9 @@
 [ext_resource type="Script" path="res://scripts/data/spawn_def.gd" id="26_spawn_def"]
 [ext_resource type="Resource" path="res://data/monsters/barnacle_boar.tres" id="27_barnacle_boar"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor_fields/lever.png" id="28_lever"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/cave_rock_wall.png" id="90_cave_rock_wall"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/cave_rock_wall_face.png" id="91_cave_rock_wall_face"]
+[ext_resource type="Texture2D" path="res://assets/sprites/ground/cave_rock_ceiling_edge.png" id="92_cave_rock_ceiling_edge"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/dawnharbor_fields/lever_pulled.png" id="29_lever_pulled"]
 [ext_resource type="Script" path="res://scripts/data/breakable_def.gd" id="30_breakable_def"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="31_dawnshard"]
@@ -79,6 +82,9 @@ platform_middle = ExtResource("8_middle_a")
 platform_middle_alt = ExtResource("9_middle_b")
 platform_right = ExtResource("10_cap_right")
 ground_side = ExtResource("11_dawnharbor_fields_side")
+room_rock = ExtResource("90_cave_rock_wall")
+room_face = ExtResource("91_cave_rock_wall_face")
+room_ceiling = ExtResource("92_cave_rock_ceiling_edge")
 hide_layers = PackedInt32Array(0, 1, 2, 3, 4, 5, 6)
 more_backdrop = Array[ExtResource("12_backdrop_layer_def")]([SubResource("Backdrop_picture")])
 

@@ -185,17 +185,21 @@ func _solid_wall(map: MapDef, platform: int, biome: BiomeDef) -> void:
 
 ## How thick a solid room's side walls and ceiling stand inside its edges (game pixels).
 const WALL := 64.0
-const CEILING := 96.0
+const CEILING := 64.0
 ## How far a top way's opening in the ceiling reaches either side of its spot (game pixels).
 const SHAFT := 110.0
+## How far the ceiling's painted underside reaches up into its rock band (game pixels).
+const CEILING_OVERLAP := 40.0
 
-## A solid room's shell (MapDef.solid_room): the floor's rock down both sides and along the
-## top, with the square end stones' outline on the wall faces, left open at each way out
-## (a side way's opening above its ledge, a top way's shaft).
+## A solid room's shell (MapDef.solid_room): its biome's room rock (or the floor's rock) down
+## both sides and along the top, the painted wall face on each wall's inner side and the
+## ceiling's underside hanging below it, left open at each way out (a side way's opening
+## above its ledge, a top way's shaft).
 func _room_shell(map: MapDef, platforms: Array[Platform], biome: BiomeDef) -> void:
-	if biome.ground_side == null:
+	var rock: Texture2D = biome.room_rock if biome.room_rock else biome.ground_side
+	if rock == null:
 		return
-	var tile := TDStage.art_size(biome.ground_side)
+	var tile := TDStage.art_size(rock)
 	var z := TDStage.LAND_FRONT - 0.01
 	var layout := MapLayout.new(map)
 	var shafts: Array[Vector2] = []
@@ -206,7 +210,10 @@ func _room_shell(map: MapDef, platforms: Array[Platform], biome: BiomeDef) -> vo
 	var x := 0.0
 	for s in shafts + [Vector2(map.width, map.width)]:
 		if s.x > x:
-			_add(_strip("Ceiling", biome.ground_side, Rect2(x, 0.0, s.x - x, CEILING), tile, z))
+			_add(_strip("Ceiling", rock, Rect2(x, 0.0, s.x - x, CEILING), tile, z))
+			if biome.room_ceiling:
+				var et := TDStage.art_size(biome.room_ceiling)
+				_add(_strip("CeilingEdge", biome.room_ceiling, Rect2(x, CEILING - CEILING_OVERLAP, s.x - x, et.y), et, TDStage.LAND_FRONT - 0.005))
 		x = maxf(x, s.y)
 	for right in [false, true]:
 		var side := RoomExits.Side.RIGHT if right else RoomExits.Side.LEFT
@@ -217,17 +224,20 @@ func _room_shell(map: MapDef, platforms: Array[Platform], biome: BiomeDef) -> vo
 				gaps.append(Vector2(y - RoomExits.OPENING, y + FLOOR_FILL_TOP))
 		gaps.sort()
 		var x0 := map.width - WALL if right else 0.0
-		var edge: Texture2D = PlatformSkin.square_edge(biome, not right) if biome.terrace_left and biome.terrace_right else null
 		var top := CEILING
 		for g in gaps + [Vector2(platforms[0].y, platforms[0].y)]:
 			if g.x > top:
 				var r := Rect2(x0, top, WALL, g.x - top)
-				_add(_strip("Wall", biome.ground_side, r, tile, z, true, true))
-				if edge:
-					var et := TDStage.art_size(edge)
-					var out := PlatformSkin.EDGE_OUT * PlatformSkin.texel(biome)
-					var ex := x0 - out if right else x0 + WALL - et.x + out
-					_add(_strip("WallFace", edge, Rect2(ex, top, et.x, r.size.y), et, TDStage.LAND_FRONT - 0.005, false, true))
+				_add(_strip("Wall", rock, r, tile, z, true, true))
+				if biome.room_face:
+					var ft := TDStage.art_size(biome.room_face)
+					var fx := x0 - ft.x * 0.5 if right else x0 + WALL - ft.x * 0.5
+					var face := _strip("WallFace", biome.room_face, Rect2(fx, top, ft.x, r.size.y), ft, TDStage.LAND_FRONT - 0.005, false, true)
+					if right:  # the same face turned to look into the room
+						var m: ShaderMaterial = (face.mesh as QuadMesh).material
+						var us: Vector2 = m.get_shader_parameter(&"uv_scale")
+						m.set_shader_parameter(&"uv_scale", Vector2(-us.x, us.y))
+					_add(face)
 			top = maxf(top, g.y)
 
 ## The game-y span a platform's painted skin covers: x is the top of its grass, y the bottom.

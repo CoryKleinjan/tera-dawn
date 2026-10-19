@@ -1,0 +1,22 @@
+{
+  "source": "art/source/solid_rooms_cave_rock.png",
+  "art_px": 5.0,
+  "out_dir": "assets/sprites/ground",
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      300,
+      760
+    ],
+    "cols": [
+      1200,
+      2220
+    ]
+  },
+  "cells": [
+    [
+      "cave_rock_ceiling_edge"
+    ]
+  ]
+}

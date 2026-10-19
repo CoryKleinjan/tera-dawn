@@ -1,0 +1,27 @@
+{
+  "source": "art/source/solid_rooms_cave_rock.png",
+  "art_px": 5.0,
+  "out_dir": "assets/sprites/ground",
+  "label_band": 0,
+  "inset": 0,
+  "grid": {
+    "rows": [
+      380,
+      980
+    ],
+    "cols": [
+      220,
+      820
+    ]
+  },
+  "cells": [
+    [
+      "cave_rock_wall"
+    ]
+  ],
+  "overrides": {
+    "cave_rock_wall": {
+      "seamless": true
+    }
+  }
+}
