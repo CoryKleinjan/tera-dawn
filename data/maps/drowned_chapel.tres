@@ -61,12 +61,6 @@ x = 300.0
 y = 845.0
 width = 400.0
 
-[sub_resource type="Resource" id="Platform_2"]
-script = ExtResource("13_platform_def")
-x = 600.0
-y = 770.0
-width = 400.0
-
 [sub_resource type="Resource" id="Platform_3"]
 script = ExtResource("13_platform_def")
 x = 900.0
@@ -79,12 +73,6 @@ x = 1400.0
 y = 845.0
 width = 400.0
 
-[sub_resource type="Resource" id="Platform_5"]
-script = ExtResource("13_platform_def")
-x = 1700.0
-y = 770.0
-width = 300.0
-
 [sub_resource type="Resource" id="Platform_6"]
 script = ExtResource("13_platform_def")
 x = 600.0
@@ -92,12 +80,30 @@ y = 520.0
 width = 150.0
 secret = true
 
+[sub_resource type="Resource" id="Step_1"]
+script = ExtResource("13_platform_def")
+x = 730.0
+y = 761.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_2"]
+script = ExtResource("13_platform_def")
+x = 130.0
+y = 761.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_3"]
+script = ExtResource("13_platform_def")
+x = 400.0
+y = 677.0
+width = 200.0
+
 [sub_resource type="Resource" id="Portal_0"]
 script = ExtResource("14_portal_def")
 x = 2340.0
 target_map = &"sunken_graveyard"
 target_x = 200.0
-target_platform = 46
+target_platform = 13
 
 [sub_resource type="Resource" id="Spawn_0"]
 script = ExtResource("16_spawn_def")
@@ -110,13 +116,13 @@ patrol_to = 2000.0
 [sub_resource type="Resource" id="Spawn_1"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_gloomcap")
-platform = 2
+platform = 1
 count = 2
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("18_marsh_horror")
-platform = 4
+platform = 3
 count = 1
 
 [sub_resource type="Resource" id="Loot_0_0"]
@@ -129,7 +135,7 @@ max_amount = 1
 script = ExtResource("23_breakable_def")
 id = &"chapel_key_chest"
 x = 1050.0
-platform = 3
+platform = 2
 hits = 1
 whole = ExtResource("21_chest")
 broken = ExtResource("22_chest_open")
@@ -146,7 +152,7 @@ max_amount = 240
 script = ExtResource("23_breakable_def")
 id = &"drowned_chapel_high_chest"
 x = 675.0
-platform = 6
+platform = 4
 hits = 1
 whole = ExtResource("21_chest")
 broken = ExtResource("22_chest_open")
@@ -164,7 +170,7 @@ width = 2400
 height = 1000
 ground_y = 920
 start_x = 2150.0
-platforms = Array[ExtResource("13_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6")])
+platforms = Array[ExtResource("13_platform_def")]([SubResource("Platform_1"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_6"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3")])
 portals = Array[ExtResource("14_portal_def")]([SubResource("Portal_0")])
 breakables = Array[ExtResource("23_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1")])
 spawns = Array[ExtResource("16_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2")])

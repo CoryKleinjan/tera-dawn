@@ -84,7 +84,7 @@ x = 1980.0
 platform = 0
 target_map = &"lantern_alley"
 target_x = 800.0
-target_platform = 19
+target_platform = 7
 
 [sub_resource type="Resource" id="Portal_east"]
 script = ExtResource("portal_def")
