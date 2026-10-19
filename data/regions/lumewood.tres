@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="RegionDef" load_steps=9 format=3]
+[gd_resource type="Resource" script_class="RegionDef" load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/region_def.gd" id="1_region_def"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="2_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/runes/glow_rune.tres" id="rune_glow_rune"]
 [ext_resource type="Resource" path="res://data/items/runes/moon_rune.tres" id="rune_moon_rune"]
 [ext_resource type="Resource" path="res://data/items/runes/prism_rune.tres" id="rune_prism_rune"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lumewood/prop_bench.png" id="t_bench"]
 
 [sub_resource type="Resource" id="Drop_glow_rune"]
 script = ExtResource("2_drop_entry")
@@ -31,6 +32,7 @@ capital = &"lumewood"
 label_pos = Vector2(820.0, 52.0)
 zone_rect = Rect2(540.0, 30.0, 280.0, 184.0)
 shaped_zone = true
+bench = ExtResource("t_bench")
 town_music = &"town_lumewood"
 field_music = &"field_lumewood"
 drops = Array[ExtResource("2_drop_entry")]([SubResource("Drop_glow_rune"), SubResource("Drop_moon_rune"), SubResource("Drop_prism_rune")])

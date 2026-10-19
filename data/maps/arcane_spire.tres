@@ -655,3 +655,4 @@ region = &"lumewood"
 world_pos = Vector2(770.0, 110.0)
 zone_pos = Vector2(14400.0, -5600.0)
 return_map = &"lumewood"
+rest_spots = Array[Vector2i]([Vector2i(1280, 55)])

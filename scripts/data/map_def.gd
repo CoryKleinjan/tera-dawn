@@ -84,6 +84,10 @@ extends Resource
 ## Spots that play a cutscene for a player standing on them, and may send them on to another
 ## map (the home-world tear's light and way back, the hero's thoughts there). See SceneSpot.
 @export var scene_spots: Array[SceneSpot] = []
+## Rest spots, the Hollow Knight way: its region's bench (RegionDef.bench) stands at each, as
+## an x and the platform it stands on (0 is the floor). Sitting by one fills HP and MP, and
+## from then on fainting in this region wakes you there instead of in town.
+@export var rest_spots: Array[Vector2i] = []
 
 var _look: BiomeDef
 

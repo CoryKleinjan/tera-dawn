@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="RegionDef" load_steps=7 format=3]
+[gd_resource type="Resource" script_class="RegionDef" load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/region_def.gd" id="1_region_def"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="2_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/runes/lantern_rune.tres" id="rune_lantern_rune"]
 [ext_resource type="Resource" path="res://data/items/runes/wisp_rune.tres" id="rune_wisp_rune"]
+[ext_resource type="Texture2D" path="res://assets/sprites/tiles/lanternfall/prop_bench.png" id="t_bench"]
 
 [sub_resource type="Resource" id="Drop_lantern_rune"]
 script = ExtResource("2_drop_entry")
@@ -25,6 +26,7 @@ capital = &"lanternfall"
 label_pos = Vector2(680.0, 578.0)
 zone_rect = Rect2(480.0, 340.0, 320.0, 210.0)
 shaped_zone = true
+bench = ExtResource("t_bench")
 town_music = &"town_lanternfall"
 field_music = &"field_lanternfall"
 drops = Array[ExtResource("2_drop_entry")]([SubResource("Drop_lantern_rune"), SubResource("Drop_wisp_rune")])

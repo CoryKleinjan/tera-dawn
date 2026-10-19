@@ -85,6 +85,10 @@ var scenes_seen: Array[String] = []
 var secrets: Array[String] = []
 ## Boss relics picked up (RelicDef ids): each one's move is unlocked for good.
 var relics: Array[String] = []
+## The rest spot last rested at (a map and the index of one of its MapDef.rest_spots), where
+## fainting in that map's region wakes you. Empty map: none yet.
+var rest_map: StringName = &""
+var rest_spot := 0
 
 func _init() -> void:
 	equipment.changed.connect(recalc)
