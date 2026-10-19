@@ -32,7 +32,7 @@ x = 60.0
 platform = 0
 target_map = &"arcane_spire"
 target_x = 1700.0
-target_platform = 55
+target_platform = 17
 
 [sub_resource type="Resource" id="Portal_home"]
 script = ExtResource("4_portal_def")

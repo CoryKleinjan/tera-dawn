@@ -86,7 +86,7 @@ script = ExtResource("14_portal_def")
 x = 600.0
 target_map = &"starfall_ridge"
 target_x = 3700.0
-target_platform = 31
+target_platform = 13
 
 [sub_resource type="Resource" id="Spawn_0"]
 script = ExtResource("16_spawn_def")
