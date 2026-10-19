@@ -143,8 +143,11 @@ func _strip(name_: String, texture: Texture2D, rect: Rect2, tile: Vector2, z: fl
 
 ## How much nearer the camera the lowest platform's skin sits than the highest one's, so a
 ## deep ledge's underside tucks behind the ledge below it (Cory 2026-10-19). Kept smaller than
-## the room walls' gap behind LAND_FRONT, so every ledge stays in front of a wall.
-const LEDGE_SPREAD := 0.004
+## the trims' place behind LAND_FRONT (TRIM_Z), so every ledge stays in front of the walls.
+const LEDGE_SPREAD := 0.008
+## Where the walls' painted trims sit (a terrace's corner stones, a room's wall face and
+## ceiling edge): behind every platform skin, in front of the wall rock at LAND_FRONT - 0.01.
+const TRIM_Z := TDStage.LAND_FRONT - 0.009
 
 ## The depth of a platform's skin: lower platforms a little nearer, the floor at LAND_FRONT.
 func _ledge_z(pl: Platform, ground: Platform) -> float:
@@ -189,7 +192,7 @@ func _solid_wall(map: MapDef, platform: int, biome: BiomeDef) -> void:
 		var tile := TDStage.art_size(corner)
 		var x := x1 - tile.x + out if right else x0 - out
 		var r := Rect2(x, top, tile.x, rect.size.y)
-		_add(_strip("TerraceCorner", corner, r, tile, TDStage.LAND_FRONT - 0.005, false, true))
+		_add(_strip("TerraceCorner", corner, r, tile, TRIM_Z, false, true))
 
 # ---------- a solid room's walls and ceiling ----------
 
@@ -223,7 +226,7 @@ func _room_shell(map: MapDef, platforms: Array[Platform], biome: BiomeDef) -> vo
 			_add(_strip("Ceiling", rock, Rect2(x, 0.0, s.x - x, CEILING), tile, z))
 			if biome.room_ceiling:
 				var et := TDStage.art_size(biome.room_ceiling)
-				_add(_strip("CeilingEdge", biome.room_ceiling, Rect2(x, CEILING - CEILING_OVERLAP, s.x - x, et.y), et, TDStage.LAND_FRONT - 0.005))
+				_add(_strip("CeilingEdge", biome.room_ceiling, Rect2(x, CEILING - CEILING_OVERLAP, s.x - x, et.y), et, TRIM_Z))
 		x = maxf(x, s.y)
 	for right in [false, true]:
 		var side := RoomExits.Side.RIGHT if right else RoomExits.Side.LEFT
@@ -242,7 +245,7 @@ func _room_shell(map: MapDef, platforms: Array[Platform], biome: BiomeDef) -> vo
 				if biome.room_face:
 					var ft := TDStage.art_size(biome.room_face)
 					var fx := x0 - ft.x * 0.5 if right else x0 + WALL - ft.x * 0.5
-					var face := _strip("WallFace", biome.room_face, Rect2(fx, top, ft.x, r.size.y), ft, TDStage.LAND_FRONT - 0.005, false, true)
+					var face := _strip("WallFace", biome.room_face, Rect2(fx, top, ft.x, r.size.y), ft, TRIM_Z, false, true)
 					if right:  # the same face turned to look into the room
 						var m: ShaderMaterial = (face.mesh as QuadMesh).material
 						var us: Vector2 = m.get_shader_parameter(&"uv_scale")
