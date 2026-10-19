@@ -87,7 +87,6 @@ func test_quests_play_their_scenes_when_taken_and_handed_in() -> void:
 
 func test_monsters_leave_you_alone_while_a_scene_plays() -> void:
 	var brute := ServerHarness.monster(&"brute", 100000, 1)
-	ServerHarness.no_dodge(p.character) # every touch lands
 	var field := h.field_with([ServerHarness.spawn(brute)], &"test_brute_field")
 	field.mobs[0].position.x = 300.0
 	field.def.intro_scene = h.add_cutscene(_scene(&"test_brute_intro"))

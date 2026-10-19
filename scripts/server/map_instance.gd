@@ -219,6 +219,10 @@ func use_skill(p: SimPlayer, skill: SkillDef, aim := Hitbox.Aim.AHEAD) -> int:
 	var lines := []
 	for m in targets:
 		lines.append([m.index, _strike(p, skill, lvl, m)])
+	# attacks that cost no Mana fill it, a little for every monster struck
+	if not targets.is_empty() and skill.mp_at(lvl) == 0:
+		p.character.restore_mp(CharacterStats.MANA_PER_HIT * targets.size())
+		p.dirty_vitals = true
 	var killed: Array[SimMob] = []
 	for m in targets:
 		if m.health.is_dead():
@@ -449,20 +453,12 @@ func touch_player(p: SimPlayer, m: SimMob) -> void:
 func hurt_player(p: SimPlayer, def: MonsterDef, from_x: float, power := 1.0) -> void:
 	if p.inv > 0 or p.fainted() or p.in_scene() or p.hidden():
 		return
-	var dmg := Combat.monster_hit(def, p.character, power)
-	p.inv = 40 if dmg == 0 else SimPlayer.HURT_INV
-	if p.sitting: # any hit, even a miss, gets you up
+	var hearts := Combat.monster_hit(def, p.character, power)
+	p.inv = SimPlayer.HURT_INV
+	if p.sitting: # any hit gets you up
 		p.sitting = false
 		Net.send(p.peer, &"ev_sit", [false])
-	broadcast(&"ev_number", [p.position.x, p.position.y - 70, dmg, "miss" if dmg == 0 else "taken"])
-	if dmg == 0:
-		return
-	# a guard (Magic Guard) takes its share out of MP while there's MP to take
-	var guarded := mini(p.character.mp, roundi(dmg * p.character.skills.mp_guard()))
-	if guarded > 0:
-		p.character.spend_mp(guarded)
-		dmg -= guarded
-	p.character.health.damage(dmg)
+	p.character.health.damage(hearts)
 	p.dirty_vitals = true
 	p.hurt_here = true
 	Net.send(p.peer, &"ev_hurt", [from_x])

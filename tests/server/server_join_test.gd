@@ -32,8 +32,8 @@ func test_new_character_is_a_beginner_with_full_health_and_no_essence() -> void:
 	check_eq(c.essence, 0, "no Dawn Essence")
 	check_eq(c.level, 1, "level 1")
 	check_eq(c.job.id, Character.START_JOB, "job")
-	check_eq(c.health.hp, c.max_hp(), "full HP")
-	check_eq(c.mp, c.max_mp(), "full MP")
+	check_eq(c.health.hp, c.max_hp(), "every heart")
+	check_eq(c.mp, 0, "an empty Mana orb")
 	check_eq(c.shards, 0, "no Dawnshards")
 
 func test_a_name_already_playing_is_refused() -> void:

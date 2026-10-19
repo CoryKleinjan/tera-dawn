@@ -100,51 +100,20 @@ func test_player_hit_is_repeatable_with_same_seed() -> void:
 		b.append(Combat.player_hit(s, m, c))
 	check_eq(a, b, "same seed, same hits")
 
-func test_monster_hit_range_without_dodge() -> void:
-	var c := _fighter()
-	_wear(c, {"defense": 10, "avoid": -CharacterStats.BASE_AVOID})
-	var m := fx.monster(&"t_mob", 10)
-	m.attack = 100
-	# 100 × 0.85..1.15 - 10 × 0.3 = 82..112
-	for i in 300:
-		check_between(Combat.monster_hit(m, c), 82, 112, "touch damage")
-
-func test_monster_hit_never_below_one() -> void:
-	var c := _fighter()
-	_wear(c, {"defense": 1000, "avoid": -CharacterStats.BASE_AVOID})
-	var m := fx.monster(&"t_mob", 10)
-	m.attack = 5
-	for i in 50:
-		check_eq(Combat.monster_hit(m, c), 1, "at least 1")
-
-func test_monster_hit_dodge_capped_at_thirty_percent() -> void:
-	var c := _fighter({"avoid": 10000})
-	var m := fx.monster(&"t_mob", 1)
-	var dodged := 0
-	for i in 2000:
-		if Combat.monster_hit(m, c) == 0:
-			dodged += 1
-	check_between(dodged, 500, 700, "about 30% dodged")
-
-func test_dodge_comes_from_avoid_alone() -> void:
-	var c := _fighter({"avoid": 50 - CharacterStats.BASE_AVOID})  # 50 × 0.004 = 20%
+func test_a_monster_hit_takes_one_heart_whatever_its_strength() -> void:
+	var c := _fighter({"defense": 1000, "avoid": 10000})
 	var m := fx.monster(&"t_mob", 60)
-	var dodged := 0
-	for i in 2000:
-		if Combat.monster_hit(m, c) == 0:
-			dodged += 1
-	check_between(dodged, 300, 500, "about 20% dodged, however strong the monster")
+	m.attack = 5000
+	for i in 50:
+		check_eq(Combat.monster_hit(m, c, 1.3), 1, "one heart: no dodging, no armor, no scaling")
 
-func test_dodge_grows_with_the_jobs_avoid_growth() -> void:
-	var c := _fighter({"avoid": -CharacterStats.BASE_AVOID})
-	c.job.avoid_growth = 2.5
-	c.level = 21  # 2.5 × 20 = 50: 20%
-	var m := fx.monster(&"t_mob", 10)
-	var dodged := 0
-	for i in 2000:
-		if Combat.monster_hit(m, c) == 0:
-			dodged += 1
-	check_between(dodged, 300, 500, "about 20% dodged")
+func test_a_bosss_big_hit_takes_two_hearts() -> void:
+	var c := _fighter()
+	var m := fx.monster(&"t_boss", 10)
+	m.boss = true
+	check_eq(Combat.monster_hit(m, c), 1, "its touch takes one")
+	check_eq(Combat.monster_hit(m, c, Combat.BIG_HIT_POWER - 0.05), 1, "a lighter move takes one")
+	check_eq(Combat.monster_hit(m, c, Combat.BIG_HIT_POWER), 2, "a big move takes two")
 
 func test_faint_penalty_is_ten_percent_rounded_down() -> void:
 	check_eq(Combat.faint_penalty(0), 0, "zero")

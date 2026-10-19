@@ -17,7 +17,7 @@ TDWorld  ───────────────────────�
 - **Server** (`scripts/server/`): `TDServer` holds every connected player as a `SimPlayer`
   (their `Character`, position and timers) and runs one `MapInstance` per visited map: its
   `SimMob`s, the `SimDrop`s on the ground and the players on it. It decides everything that
-  matters: hits, damage, kills, Dawn Essence, drops, who picks what up, HP and MP, potions,
+  matters: hits, damage, kills, Dawn Essence, drops, who picks what up, hearts and Mana, potions,
   gear, portals, fainting. It never keeps characters itself: it sends them back to their
   players' games to save (`TDServer.save`, `ev_save`). `TDServer` itself keeps the players, maps, saving and the requests about moving and
   fighting; the other requests are handled by its parts in `scripts/server/services/`

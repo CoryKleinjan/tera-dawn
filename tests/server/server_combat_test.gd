@@ -190,6 +190,7 @@ func test_learned_skill_spends_its_mp_and_reaches_further() -> void:
 	check_eq(c.skills.learned.get(&"shoulder_bash"), 1, "learned")
 	check_eq(c.essence, 5, "its price in Dawn Essence spent")
 	check_eq(c.skills.paid.get(&"shoulder_bash"), CharacterStats.skill_price(0), "and kept as paid")
+	c.mp = c.max_mp()
 	var mp := c.mp
 	_attack(2, &"shoulder_bash")
 	check_eq(c.mp, mp - Content.skill(&"shoulder_bash").mp_at(1), "MP paid")
@@ -218,6 +219,7 @@ func test_a_buff_raises_stats_until_it_wears_off() -> void:
 	var c := p.character
 	var skill := Content.skill(&"quick_step")
 	c.skills.learned[skill.id] = 1
+	c.mp = c.max_mp()
 	var speed := c.stats.speed
 	_attack(2, skill.id)
 	check_eq(c.stats.speed, speed + skill.stats_at(1).speed, "faster")

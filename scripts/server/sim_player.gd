@@ -5,7 +5,7 @@ extends RefCounted
 ##
 ## Movement runs on the player's own machine, like MapleStory, so it feels instant. The
 ## client reports where it is a few times a second and the server checks the report is
-## possible. Everything else (hits, EXP, items, HP and MP) the server decides.
+## possible. Everything else (hits, EXP, items, hearts and Mana) the server decides.
 
 const FAINT_TICKS := 150
 ## Fastest a report may move the player per tick: well above running and falling speed.
@@ -16,12 +16,9 @@ const HURT_INV := 90
 const HURTBOX_SIZE := Vector2(19, 40)
 ## Their chest above their feet: where monsters aim their shots (and TDPlayer.CHEST).
 const CHEST := 34.0
-## Ticks between HP / MP regeneration, and what's regained each time: a base plus
-## level / divisor, plus the character's regen bonus. Sitting regains the base part twice.
-const REGEN_EVERY := 120
-const REGEN_BASE := 2
-const REGEN_HP_LEVELS := 3
-const REGEN_MP_LEVELS := 4
+## Ticks a heal takes: the heal key held this long, standing still (TDPlayer), before a
+## heart comes back. The server allows no two heals closer together.
+const HEAL_TICKS := 54
 
 var peer := 0
 var character: Character
@@ -40,6 +37,7 @@ var recharge := {}
 var inv := 0          # invincibility ticks after being hit
 var faint_t := 0      # ticks left lying fainted
 var item_cd := 0      # ticks before another potion can be used
+var heal_cd := 0      # ticks before another heal can land (HEAL_TICKS)
 var since_move := 0   # ticks since the last movement report
 var hurt_here := false # took damage since arriving on this map (a boss beaten untouched counts)
 ## The cutscene playing on their screen (a CutsceneDef id, see ServerScenes), or empty.
@@ -93,7 +91,7 @@ func report_move(at: Vector2, facing: int, anim: StringName) -> bool:
 	animation = anim
 	return true
 
-## Runs the player's timers and HP / MP regeneration. True when they've lain fainted long
+## Runs the player's timers (hearts and Mana never come back by themselves). True when they've lain fainted long
 ## enough to be sent back to town.
 func step() -> bool:
 	since_move += 1
@@ -105,6 +103,8 @@ func step() -> bool:
 		inv -= 1
 	if item_cd > 0:
 		item_cd -= 1
+	if heal_cd > 0:
+		heal_cd -= 1
 	if faint_t > 0:
 		faint_t -= 1
 		return faint_t == 0
@@ -112,12 +112,6 @@ func step() -> bool:
 		for s in character.skills.tick_buffs():
 			map.tell(self, "%s wore off." % s.display_name, Palette.MIST)
 			dirty_character = true
-	if map.tick % REGEN_EVERY == 0:
-		var bonus := character.skills.regen_bonus()
-		var times := 2 if sitting else 1
-		character.health.heal((REGEN_BASE + character.level / REGEN_HP_LEVELS) * times + bonus.x)
-		character.restore_mp((REGEN_BASE + character.level / REGEN_MP_LEVELS) * times + bonus.y)
-		dirty_vitals = true
 	return false
 
 ## Where this player is and what they're doing, sent many times a second:

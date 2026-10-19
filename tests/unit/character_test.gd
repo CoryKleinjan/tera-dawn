@@ -87,45 +87,62 @@ func test_many_levels_at_once_stop_at_the_cap() -> void:
 	check_eq(c.gain_xp(1 << 40), 3, "three levels and no further")
 	check_eq(c.level, Character.MAX_LEVEL, "capped")
 
-func test_level_up_raises_max_and_refills() -> void:
+func test_level_up_refills_hearts_but_adds_none() -> void:
 	var c := fx.character()
-	c.health.damage(30)
-	c.spend_mp(10)
+	c.health.damage(3)
+	c.mp = 10
 	c.gain_xp(27)
-	check_eq(c.max_hp(), 70, "50 + 2 × 10")
-	check_eq(c.health.max_hp, 70, "health max follows")
-	check_eq(c.health.hp, 70, "refilled")
-	check_eq(c.mp, 30, "MP refilled to 20 + 2 × 5")
+	check_eq(c.max_hp(), CharacterStats.BASE_HEARTS, "levels add no hearts")
+	check_eq(c.health.hp, c.max_hp(), "refilled")
+	check_eq(c.mp, 10, "Mana comes only from fighting")
 
 func test_no_level_means_no_refill() -> void:
 	var c := fx.character()
-	c.health.damage(30)
+	c.health.damage(3)
 	c.gain_xp(5)
-	check_eq(c.health.hp, 30, "still hurt")
+	check_eq(c.health.hp, CharacterStats.BASE_HEARTS - 3, "still hurt")
 
-# ---------- HP, MP and recalc ----------
+# ---------- hearts, Mana and recalc ----------
 
 func test_spend_and_restore_mp() -> void:
-	var c := fx.character()  # max MP 25
+	var c := fx.character()
+	check_eq(c.mp, 0, "a new character's orb is empty")
+	c.restore_mp(25)
 	check(c.spend_mp(10), "can spend")
 	check_eq(c.mp, 15, "spent")
 	check(not c.spend_mp(16), "can't overspend")
 	check_eq(c.mp, 15, "unchanged on failure")
 	check(c.spend_mp(15), "can spend to zero")
-	c.restore_mp(100)
-	check_eq(c.mp, 25, "restore capped")
-	c.restore_mp(-100)
+	c.restore_mp(1000)
+	check_eq(c.mp, c.max_mp(), "restore capped")
+	c.restore_mp(-1000)
 	check_eq(c.mp, 0, "never negative")
 
-func test_recalc_clamps_hp_and_mp_when_gear_comes_off() -> void:
+func test_gear_adds_no_hearts_or_mana() -> void:
 	var c := fx.character()
 	c.equipment.put(&"armor", ItemStack.exact(fx.equip(&"t_hat", EquipDef.Slot.ARMOR, {"max_hp": 100, "max_mp": 50})))
-	c.refill()
-	check_eq(c.health.hp, 160, "full with gear")
-	check_eq(c.mp, 75, "full MP with gear")
-	c.equipment.take(&"armor")
-	check_eq(c.health.hp, 60, "HP clamped")
-	check_eq(c.mp, 25, "MP clamped")
+	check_eq(c.max_hp(), CharacterStats.BASE_HEARTS, "hearts")
+	check_eq(c.max_mp(), CharacterStats.BASE_MANA, "Mana")
+
+func test_shards_add_hearts_and_mana() -> void:
+	var c := fx.character()
+	c.heart_shards = CharacterStats.HEART_SHARDS_PER_HEART
+	c.mana_shards = CharacterStats.MANA_SHARDS_PER_ORB
+	check_eq(c.max_hp(), CharacterStats.BASE_HEARTS + 1, "a heart more")
+	check_eq(c.max_mp(), CharacterStats.BASE_MANA + CharacterStats.MANA_PER_ORB, "a bigger orb")
+
+func test_healing_spends_mana_on_one_heart() -> void:
+	var c := fx.character()
+	c.health.damage(2)
+	c.mp = CharacterStats.HEAL_COST - 1
+	check(not c.heal_heart(), "not enough Mana")
+	c.mp = CharacterStats.HEAL_COST * 3
+	check(c.heal_heart(), "healed")
+	check_eq(c.health.hp, CharacterStats.BASE_HEARTS - 1, "one heart back")
+	check_eq(c.mp, CharacterStats.HEAL_COST * 2, "paid")
+	check(c.heal_heart(), "healed again")
+	check(not c.heal_heart(), "nothing missing to heal")
+	check_eq(c.mp, CharacterStats.HEAL_COST, "kept when there's nothing to heal")
 
 func test_recalc_emits_stats_changed() -> void:
 	var c := fx.character()
@@ -312,6 +329,7 @@ func test_use_problem_rules() -> void:
 	check_ne(c.skills.use_problem(null), "", "null")
 	check_ne(c.skills.use_problem(s), "", "unlearned")
 	c.skills.learned[s.id] = 1
+	c.mp = 10
 	check_eq(c.skills.use_problem(s), "", "usable")
 	c.mp = 9
 	check_ne(c.skills.use_problem(s), "", "not enough MP")
@@ -576,7 +594,6 @@ func test_advance_changes_job_gives_gifts_and_refills() -> void:
 	c.level = 8
 	check_eq(c.advance(next), "", "advanced")
 	check_eq(c.job.id, &"t_next", "new job")
-	check_eq(c.max_hp(), 50 + 8 * 20, "new job's HP growth at level 8")
 	check_eq(c.essence, 40, "advancing costs and gives no essence")
 	check_eq(c.health.hp, c.max_hp(), "refilled")
 	check_eq(c.gear.weapon(), sword, "the gift weapon is worn")
@@ -820,8 +837,8 @@ func test_create_beginner_from_content() -> void:
 	check_eq(c.inventory.count_of(Content.item(&"red_potion")), 5, "starting potions")
 	check_eq(c.quickslots[Character.QUICKSLOTS - 2], [&"item", &"red_potion"], "red potion key")
 	check_eq(c.quickslots[Character.QUICKSLOTS - 1], [&"item", &"blue_potion"], "blue potion key")
-	check_eq(c.health.hp, c.max_hp(), "full HP")
-	check_eq(c.mp, c.max_mp(), "full MP")
+	check_eq(c.health.hp, c.max_hp(), "every heart")
+	check_eq(c.mp, 0, "an empty orb")
 	check_eq(c.map_id, Character.NEW_MAP, "starts on the tutorial beach")
 
 func test_real_beginner_can_reach_warrior() -> void:

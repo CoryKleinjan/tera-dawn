@@ -9,16 +9,14 @@ func check() -> void:
 	me.inv = 100000
 	_teleport(Vector2(300, 620))
 	await _ticks(3)
-	# sitting: on the ground, heal faster, get up by moving
+	# sitting: on the ground, heals nothing by itself, get up by moving
 	await _tap("sit")
 	await _ticks(3)
 	_check(me.sitting and world.player.sitting and world.player._animation() == &"sit", "the sit key sits you down")
 	_check(ch.achievements.has("take_a_seat") and world.hud.banners.toasts.any(func(t: AchievementDef) -> bool: return t.title == "Take a Seat"), "sitting down earns an achievement")
-	ch.health.set_hp(10)
-	var hp := ch.health.hp
-	map.tick = (map.tick / 120 + 1) * 120 - 1
-	await _ticks(1)
-	_check(ch.health.hp - hp == (SimPlayer.REGEN_BASE + ch.level / SimPlayer.REGEN_HP_LEVELS) * 2 + ch.skills.regen_bonus().x, "sitting doubles HP recovery")
+	ch.health.set_hp(2)
+	await _ticks(130)
+	_check(ch.health.hp == 2, "sitting brings no hearts back by itself")
 	await _hold("move_right", 6)
 	await _ticks(4)
 	_check(not me.sitting and not world.player.sitting, "moving gets you up")

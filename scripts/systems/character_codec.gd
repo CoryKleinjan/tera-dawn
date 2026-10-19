@@ -17,7 +17,7 @@ static func to_dict(c: Character) -> Dictionary:
 	return {
 		"name": c.name, "look": String(c.look), "level": c.level, "xp": c.xp, "essence": c.essence, "shards": c.shards, "map_id": c.map_id,
 		"job": c.job.id, "came_from": String(c.came_from), "jobs_passed": c.jobs_passed.duplicate(),
-		"hp": c.health.hp, "mp": c.mp,
+		"hp": c.health.hp, "mp": c.mp, "heart_shards": c.heart_shards, "mana_shards": c.mana_shards,
 		"inventory": c.inventory.to_dict(), "equipment": c.equipment.to_dict(), "storage": c.storage.to_dict(),
 		"quests": c.quests.to_dict(),
 		"skills": _string_keys(c.skills.learned), "skills_paid": _string_keys(c.skills.paid), "buffs": _string_keys(c.skills.buffs),
@@ -145,9 +145,15 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 				c.jobs_passed.append(String(id))
 	if c.at_max_level():
 		c.xp = 0
+	c.heart_shards = maxi(0, int(data.get("heart_shards", 0)))
+	c.mana_shards = maxi(0, int(data.get("mana_shards", 0)))
 	c.recalc()
+	if not data.has("heart_shards"):
+		# a save from before hearts (Oct 19 2026) counted HP and MP in the hundreds: full hearts
+		c.refill()
+		return
 	c.health.set_hp(maxi(1, int(data.get("hp", c.max_hp()))))
-	c.mp = clampi(int(data.get("mp", c.max_mp())), 0, c.max_mp())
+	c.mp = clampi(int(data.get("mp", 0)), 0, c.max_mp())
 
 ## Points an older save bought in each base stat ({stat: points}), above OLD_START.
 static func old_points_bought(data: Dictionary) -> Dictionary:

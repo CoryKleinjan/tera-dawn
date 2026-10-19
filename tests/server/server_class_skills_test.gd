@@ -1,6 +1,6 @@
 extends TestCase
 ## The first jobs' skills through the server: party buffs, skills with their own recharge,
-## hiding (Dark Sight), MP shielding (Magic Guard), slowing (Ice Spike), bursts around a
+## hiding (Dark Sight), slowing (Ice Spike), bursts around a
 ## target (Fire Burst), attack speed (All Hands) and off-hand gear.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
@@ -103,34 +103,6 @@ func test_dark_sight_hides_you_until_you_attack() -> void:
 	_use(ann, &"basic_attack")
 	check(not ann.hidden(), "attacking gives her away")
 	check(mob.can_target(ann), "seen again")
-
-# ---------- Magic Guard ----------
-
-func test_magic_guard_takes_part_of_a_hit_out_of_mp() -> void:
-	_setup()
-	_use(ann, &"magic_guard")
-	var c := ann.character
-	var guard := c.skills.mp_guard()
-	check_near(guard, Content.skill(&"magic_guard").mp_guard_at(1), "guarding")
-	ServerHarness.no_dodge(c)
-	c.mp = c.max_mp()
-	var mp := c.mp
-	var hp := c.health.hp
-	map.hurt_player(ann, mob_def, 400.0)
-	var lost_hp := hp - c.health.hp
-	var lost_mp := mp - c.mp
-	check(lost_mp > 0, "MP took some")
-	check_eq(lost_mp, roundi((lost_hp + lost_mp) * guard), "its share")
-
-func test_magic_guard_lets_hp_take_the_rest_once_mp_runs_out() -> void:
-	_setup()
-	_use(ann, &"magic_guard", 8)
-	var c := ann.character
-	c.mp = 0
-	var hp := c.health.hp
-	ServerHarness.no_dodge(c)
-	map.hurt_player(ann, mob_def, 400.0)
-	check(c.health.hp < hp, "no MP, so HP takes it all")
 
 # ---------- attacks ----------
 

@@ -1,7 +1,7 @@
 class_name WorldSkin
 extends RefCounted
 ## Drawing helpers for what the overlay and the HUD draw every frame over the world, from
-## the UI art (UiSkin): HP, MP and EXP bars, party, monster and boss HP bars, the plaques
+## the UI art (UiSkin): the EXP bar, party, monster and boss HP bars, the plaques
 ## under name tags and hints, guild tags, quest markers, speech bubbles and the
 ## map-name banner. All sizes are in the 960x540 canvas.
 
@@ -11,8 +11,6 @@ const BAR_TEXT_MIN := 9
 const BAR_STRETCH := 8.0
 ## Where each bar frame's empty groove is, in art pixels: Rect2(x, y, w, h).
 const GROOVES := {
-	"hp_frame": Rect2(40, 10, 92, 21),
-	"mp_frame": Rect2(42, 12, 92, 21),
 	"exp_frame": Rect2(28, 9, 124, 12),
 	"social/party_hp_frame": Rect2(10, 8, 164, 11),
 }

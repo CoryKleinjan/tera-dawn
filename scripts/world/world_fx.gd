@@ -71,12 +71,6 @@ const KILL_KICK_TICKS := 30
 
 ## Monster index -> the world tick your last melee blow landed on it (see KILL_KICK).
 var _melee_hit := {}
-## Damage numbers on one monster closer together in time than this stack above each other,
-## NUMBER_STEP apart, so a flurry of hits never piles up in one spot.
-const NUMBER_STACK_TICKS := 24
-const NUMBER_STEP := 36.0
-## Monster index -> [world tick of its newest number, how many are stacked].
-var _numbers := {}
 
 ## Where a swing's effect is drawn for someone standing at `feet`: at their chest, or above
 ## their head or below their middle when aimed up or down.
@@ -89,15 +83,14 @@ static func swing_point(feet: Vector2, face: int, aim: Hitbox.Aim) -> Vector2:
 			return chest + Vector2(0, TDPlayer.CHEST)
 	return chest
 
-## Damage numbers and hit effects for `hits` on monster `m` (numbers stack, see
-## _number_slot). Your own hits also get hit-stop, and crits a little screen shake.
+## Hit effects for `hits` on monster `m` (no damage numbers). Your own hits also get
+## hit-stop, and crits a little screen shake.
 func _show_hits(skill: SkillDef, m: TDMob, hits: Array, face: int, mine: bool) -> void:
 	var mid := m.body_position() + Vector2(0, -m.def.size.y / 2.0)
 	var crit := false
 	var landed := false
 	for i in hits.size():
 		var kind: String = hits[i][1]
-		add_number(m.body_position() + Vector2(0, -m.def.size.y - 10 - _number_slot(m.index) * NUMBER_STEP), hits[i][0], kind)
 		crit = crit or kind == "crit"
 		landed = landed or kind != "miss"
 		if kind == "crit":
@@ -119,14 +112,6 @@ func _show_hits(skill: SkillDef, m: TDMob, hits: Array, face: int, mine: bool) -
 			world.shake(CRIT_SHAKE if skill.is_ranged() else MELEE_CRIT_SHAKE)
 	burst(mid, m.def.aura_color if m.def.aura_color.a > 0.0 else Color(1.9, 1.5, 0.9), 8 if crit else 4, 0.6)
 	add_effect(skill.hit_effect, mid, face)
-
-## Which step up the next damage number on monster `index` goes: one above the last while
-## they come quickly, back to the bottom after a pause.
-func _number_slot(index: int) -> int:
-	var last: Array = _numbers.get(index, [-NUMBER_STACK_TICKS - 1, -1])
-	var slot: int = last[1] + 1 if world.tick - int(last[0]) <= NUMBER_STACK_TICKS else 0
-	_numbers[index] = [world.tick, slot]
-	return slot
 
 ## A quick spray of glowing sparks at a spot (hits, deaths, pickups). Colours may be HDR.
 func burst(at: Vector2, col: Color, amount: int, speed := 1.0) -> void:
@@ -313,14 +298,6 @@ func show_gain(kind: StringName, amount: int) -> void:
 	n.position = world.player.position + Vector2(0, -TDPlayer.HEIGHT - 30 - young * 14)
 	n.value = amount
 	n.kind = String(kind)
-	world.fx_layer.add_child(n)
-
-func add_number(pos: Vector2, value: int, kind: String) -> void:
-	var n := TDFloatText.new()
-	n.world = world
-	n.position = pos
-	n.value = value
-	n.kind = kind
 	world.fx_layer.add_child(n)
 
 ## Plays an effect. Effects that follow someone (heal, level up) follow `follow`, or you.
