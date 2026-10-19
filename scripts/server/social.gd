@@ -150,7 +150,7 @@ func summary(p: SimPlayer) -> Dictionary:
 		for m in pt.members:
 			var o := player_named(m)
 			if o:
-				members.append([m, o.peer, String(o.character.job.id), o.character.health.fraction(), String(o.map.def.id) if o.map else "", o.character.max_hearts()])
+				members.append([m, o.peer, String(o.character.job.id), o.character.health.fraction(), String(o.map.def.id) if o.map else ""])
 		out["party"] = {"leader": pt.leader, "members": members}
 	var g := guild_of(c.name)
 	if not g.is_empty():

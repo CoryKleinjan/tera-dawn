@@ -1,6 +1,6 @@
 class_name JobDef
 extends Resource
-## A job (class): how its damage, hearts, MP and Avoidability grow with level, what a new character
+## A job (class): how its damage, HP, MP and Avoidability grow with level, what a new character
 ## of this job starts with, and how a character advances into it. Add a job by saving a
 ## JobDef in data/jobs/.
 ##
@@ -25,8 +25,9 @@ extends Resource
 @export var base_power := 4
 ## Avoidability gained every level (CharacterStats.avoid).
 @export var avoid_growth := 0.0
-## Hearts on top of everyone's (CharacterStats.max_hp): sturdier jobs get one more.
-@export_range(0, 3) var bonus_hearts := 0
+@export var base_hp := 50
+## Max HP gained every level.
+@export var hp_growth := 14
 @export var base_mp := 20
 ## Max MP gained every level.
 @export var mp_growth := 6

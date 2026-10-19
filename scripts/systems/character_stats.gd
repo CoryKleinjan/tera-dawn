@@ -12,10 +12,6 @@ const BASE_CRIT := 0.12
 const MAIN_STAT_WEIGHT := 3.6
 ## Power gained every level, on top of the job's `JobDef.base_power`.
 const POWER_PER_LEVEL := 5
-## Hearts (max_hearts).
-const START_HEARTS := 5
-const HEART_LEVELS := 20
-const HEART_PIECES := 4
 ## Avoidability everyone has before gear, and the job's `JobDef.avoid_growth` a level on top.
 const BASE_AVOID := 3
 
@@ -89,12 +85,8 @@ static func xp_need(level: int) -> int:
 		return int(floor(XP_SCALE * pow(lvl, XP_GROWTH)))
 	return int(floor(XP_SCALE * pow(JOB_LEVEL, XP_GROWTH) * pow(float(lvl) / JOB_LEVEL, XP_JOB_GROWTH)))
 
-## A hero's health is a segmented bar, counted in whole segments ("hearts" in code), not HP: they
-## start with START_HEARTS, gain one every HEART_LEVELS levels, plus the job's bonus_hearts and one
-## for every HEART_PIECES heart pieces (runes). A monster's hit costs whole segments
-## (Combat.monster_hit).
-static func max_hearts(job: JobDef, level: int, total: StatBlock) -> int:
-	return START_HEARTS + maxi(1, level) / HEART_LEVELS + job.bonus_hearts + total.heart_pieces / HEART_PIECES
+static func max_hp(job: JobDef, level: int, total: StatBlock) -> int:
+	return job.base_hp + maxi(1, level) * job.hp_growth + total.max_hp
 
 static func max_mp(job: JobDef, level: int, total: StatBlock) -> int:
 	return job.base_mp + maxi(1, level) * job.mp_growth + total.max_mp
