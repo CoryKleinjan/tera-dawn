@@ -108,7 +108,7 @@ update this page when one changes. Each zone's own look and music are in
 - Mana fills as he hits monsters, a little for each one an attack strikes. Holding the Heal key,
   standing still, spends a third of a full orb on one heart; Mana also pays for skills. Every 3
   Mana Shards found make the orb bigger. The Mana orb and a row of hearts sit in the top left
-  corner. In co-op each player has their own hearts and Mana and heals only themselves.
+  corner; their look is the painted sheet Cory approved (`art/source/hearts_mana.png`). In co-op each player has their own hearts and Mana and heals only themselves.
 - No damage numbers (Cory Oct 19): hits on monsters and on the hero show no numbers and no "Miss".
 - No base stats (no STR, DEX, INT, LUK or CHA, Cory Oct 17): the job and the level set them.
   Damage grows from power (the job's own at level 1, plus the same every level, plus the Monster
