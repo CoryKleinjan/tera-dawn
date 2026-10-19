@@ -80,11 +80,11 @@ update this page when one changes. Each zone's own look and music are in
   monster, a camera kick on crits and kills. Ranged hits (arrows, stars, bullets, spells) stay
   light.
 - Getting hit freezes him a beat, flashes the screen and knocks him away without steering.
-- No chairs: the Sit key sits him on the ground, where he regains HP and MP twice as fast (the
-  base part). Moving, the Sit key again or any monster hit gets him up.
+- No chairs: the Sit key sits him on the ground. Sitting heals nothing by itself (only a rest
+  spot's bench does). Moving, the Sit key again or any monster hit gets him up.
 - Rest spots, Hollow Knight style (Cory Oct 19): each rebuilt zone has two field rooms with its
   town's bench standing in them, one midway and one before the boss, with no monsters walking
-  over it. Sitting beside the bench fills HP and MP, and from then on fainting in that zone (not
+  over it. Sitting beside the bench brings every heart back, and from then on fainting in that zone (not
   in a town) wakes him at that bench instead of in town.
 - An aimed attack turns its swing effect up or down.
 - Job skills will be flashy and grand, like MapleStory. Their effects are painted (Gemini),
@@ -97,18 +97,22 @@ update this page when one changes. Each zone's own look and music are in
 
 - The hero has a level (1 to 100, Cory Oct 17). Monsters give EXP equal to the Dawn Essence they
   drop, and quests give EXP equal to their essence reward, on the old MapleStory-style EXP curve.
-  Each level raises power, Max HP and MP by the job's growth and refills them, with a burst, a
-  "LEVEL UP!" ribbon and a jingle. The HUD shows a level badge and HP, MP and EXP bars. Fainting loses 10% of
+  Each level raises power by the job's growth and refills the hearts, with a burst, a
+  "LEVEL UP!" ribbon and a jingle. The HUD shows a level badge and an EXP bar. Fainting loses 10% of
   the EXP toward the next level (never a level); essence is safe.
-- Health and mana are numbers (Cory Oct 19): the HP and MP bars show "current / max". A monster's
-  hit does damage from its attack (times its move's power), less some for Weapon Defense; Magic
-  Guard takes a share of it out of MP. Potions, First Aid and resting heal HP.
-- Damage numbers (Cory Oct 19): every hit on a monster shows its damage over it (crits stand out),
-  for every player's hits in co-op, and damage the hero takes shows as a red number over them. A
-  dodge or miss says "Miss".
+- Hearts and Mana, working like Hollow Knight but with the game's own names (Cory Oct 19). The
+  hero has 5 hearts; every 4 Heart Shards found add one. A monster's touch or move takes one
+  heart, a boss's big move two; nothing is dodged. Hearts and Mana never come back by
+  themselves: a rest spot brings every heart back, and waking from a faint brings every heart
+  and an empty Mana orb.
+- Mana fills as he hits monsters, a little for each one an attack strikes. Holding the Heal key,
+  standing still, spends a third of a full orb on one heart; Mana also pays for skills. Every 3
+  Mana Shards found make the orb bigger. The Mana orb and a row of hearts sit in the top left
+  corner. In co-op each player has their own hearts and Mana and heals only themselves.
+- No damage numbers (Cory Oct 19): hits on monsters and on the hero show no numbers and no "Miss".
 - No base stats (no STR, DEX, INT, LUK or CHA, Cory Oct 17): the job and the level set them.
   Damage grows from power (the job's own at level 1, plus the same every level, plus the Monster
-  Book's rank); Max HP, MP and Avoidability grow by the job. Nothing is bought with points and
+  Book's rank); Avoidability grows by the job. Nothing is bought with points and
   nothing asks for a stat.
 - Monsters also drop Dawn Essence when they die and it flies to the hero (quests pay it too). It
   buys skill levels only, anywhere, in the skill window; each skill level costs more than the

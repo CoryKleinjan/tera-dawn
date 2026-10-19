@@ -33,11 +33,11 @@ func _rest() -> void:
 
 func test_sitting_by_a_bench_rests_there() -> void:
 	c.health.set_hp(1)
-	c.mp = 0
+	c.mp = 20
 	h.ask(2, &"req_sit", [true])
 	check(p.sitting, "sat down on the ground")
-	check_eq(c.health.hp, c.max_hp(), "HP filled")
-	check_eq(c.mp, c.max_mp(), "MP filled")
+	check_eq(c.health.hp, c.max_hp(), "every heart back")
+	check_eq(c.mp, 20, "Mana as it was")
 	check_eq([c.rest_map, c.rest_spot], [ROOM, 0], "rested here")
 	check(h.told(2, "You rested. You'll wake here if you faint nearby."), "told the player")
 
@@ -54,7 +54,7 @@ func test_fainting_after_resting_wakes_you_at_the_bench() -> void:
 	h.move_to(p, ServerHarness.FIELD)
 	_faint()
 	check_eq(h.last(2, &"ev_enter_map").slice(0, 2), [ROOM, float(BENCH)], "woke at the bench")
-	check_eq(c.health.hp, ceili(c.max_hp() / 2.0), "with half HP, as in town")
+	check_eq(c.health.hp, c.max_hp(), "with every heart, as in town")
 
 func test_fainting_in_another_region_wakes_you_in_town() -> void:
 	_rest()

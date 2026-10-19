@@ -85,11 +85,25 @@ static func xp_need(level: int) -> int:
 		return int(floor(XP_SCALE * pow(lvl, XP_GROWTH)))
 	return int(floor(XP_SCALE * pow(JOB_LEVEL, XP_GROWTH) * pow(float(lvl) / JOB_LEVEL, XP_JOB_GROWTH)))
 
-static func max_hp(job: JobDef, level: int, total: StatBlock) -> int:
-	return job.base_hp + maxi(1, level) * job.hp_growth + total.max_hp
+## Health is hearts (Cory Oct 19): everyone starts with BASE_HEARTS, and every
+## HEART_SHARDS_PER_HEART Heart Shards found add one more. A monster's hit takes a heart or
+## two (Combat.monster_hit).
+const BASE_HEARTS := 5
+const HEART_SHARDS_PER_HEART := 4
+## Mana fills as you hit monsters (MANA_PER_HIT for each one an attack lands on) and never
+## comes back by itself. HEAL_COST of it heals a heart; it also pays for skills. Every
+## MANA_SHARDS_PER_ORB Mana Shards found make the orb hold MANA_PER_ORB more.
+const BASE_MANA := 99
+const MANA_PER_HIT := 11
+const HEAL_COST := 33
+const MANA_SHARDS_PER_ORB := 3
+const MANA_PER_ORB := 33
 
-static func max_mp(job: JobDef, level: int, total: StatBlock) -> int:
-	return job.base_mp + maxi(1, level) * job.mp_growth + total.max_mp
+static func max_hp(heart_shards: int) -> int:
+	return BASE_HEARTS + maxi(0, heart_shards) / HEART_SHARDS_PER_HEART
+
+static func max_mp(mana_shards: int) -> int:
+	return BASE_MANA + maxi(0, mana_shards) / MANA_SHARDS_PER_ORB * MANA_PER_ORB
 
 ## Dawn Essence for the next skill level, with `bought` skill levels bought already.
 static func skill_price(bought: int) -> int:

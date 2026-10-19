@@ -85,13 +85,13 @@ func test_jump_multiplier_and_caps() -> void:
 	check_near(CharacterStats.jump_multiplier(UnitHelpers.stats({"jump": 100})), 1.23, "capped at 123%")
 	check_near(CharacterStats.jump_multiplier(UnitHelpers.stats({"jump": -100})), 0.5, "floored at 50%")
 
-func test_max_hp_and_mp_grow_with_level_and_gear() -> void:
-	var j := fx.job()  # HP 50 + 10 and MP 20 + 5 a level
-	check_eq(CharacterStats.max_hp(j, 1, StatBlock.new()), 60, "HP at level 1")
-	check_eq(CharacterStats.max_hp(j, 0, StatBlock.new()), 60, "never below level 1")
-	check_eq(CharacterStats.max_hp(j, 10, UnitHelpers.stats({"max_hp": 25})), 175, "HP at level 10, with gear")
-	check_eq(CharacterStats.max_mp(j, 1, StatBlock.new()), 25, "MP at level 1")
-	check_eq(CharacterStats.max_mp(j, 30, UnitHelpers.stats({"max_mp": 5})), 175, "MP at level 30, with gear")
+func test_hearts_and_mana_grow_only_from_shards() -> void:
+	check_eq(CharacterStats.max_hp(0), CharacterStats.BASE_HEARTS, "five hearts to start")
+	check_eq(CharacterStats.max_hp(CharacterStats.HEART_SHARDS_PER_HEART - 1), CharacterStats.BASE_HEARTS, "a heart needs every shard")
+	check_eq(CharacterStats.max_hp(2 * CharacterStats.HEART_SHARDS_PER_HEART), CharacterStats.BASE_HEARTS + 2, "two hearts more")
+	check_eq(CharacterStats.max_mp(0), CharacterStats.BASE_MANA, "a full orb to start")
+	check_eq(CharacterStats.max_mp(CharacterStats.MANA_SHARDS_PER_ORB), CharacterStats.BASE_MANA + CharacterStats.MANA_PER_ORB, "a bigger orb")
+	check_eq(CharacterStats.BASE_MANA / CharacterStats.HEAL_COST, 3, "a full orb heals three hearts")
 
 func test_real_jobs_grow_their_damage_with_level() -> void:
 	var s := UnitHelpers.stats({"attack": 10})

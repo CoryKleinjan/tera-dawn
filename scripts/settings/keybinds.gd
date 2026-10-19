@@ -32,6 +32,7 @@ const ACTIONS := [
 	{"action": "sit", "label": "Sit", "group": "Movement", "keys": [KEY_C]},
 	{"action": "attack", "label": "Attack", "group": "Combat", "keys": [KEY_X, KEY_CTRL], "pad": [JOY_BUTTON_X]},
 	{"action": "loot", "label": "Pick up", "group": "Combat", "keys": [KEY_Z], "pad": [JOY_BUTTON_B]},
+	{"action": "heal", "label": "Heal (hold)", "group": "Combat", "keys": [KEY_H], "pad": [JOY_BUTTON_LEFT_STICK]},
 	{"action": "quick_1", "label": "Quickslot 1", "group": "Quickslots", "keys": [KEY_A, KEY_SHIFT], "pad": [JOY_BUTTON_Y]},
 	{"action": "quick_2", "label": "Quickslot 2", "group": "Quickslots", "keys": [KEY_D], "pad": [JOY_BUTTON_RIGHT_SHOULDER]},
 	{"action": "quick_3", "label": "Quickslot 3", "group": "Quickslots", "keys": [KEY_F], "pad": [JOY_BUTTON_LEFT_SHOULDER]},

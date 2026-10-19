@@ -32,7 +32,8 @@ Shared pieces for what's inside a window (`scripts/ui/windows/`):
 
 ## The HUD and the title screen
 
-`TDHud` (`scripts/ui/hud.gd`) is the screen UI while playing: the status bar, overlay,
+`TDHud` (`scripts/ui/hud.gd`) is the screen UI while playing: hearts and the Mana orb
+(`TDVitals`, top left), the status bar, overlay,
 quickslots, chat, the windows (the window manager above), a quest step's key hint, the game
 menu (Esc) and the settings screen, and Esc and pausing (`escape`, `show_title`, `resume`).
 
@@ -61,7 +62,7 @@ buttons (`ui_accept`).
   ornate panels (`ARCH_PANEL`, `draw_panel`, `use_panel`) and list-row art.
 - **`UiStyle`**: styles Godot controls with that art: `style_button`, `style_tab`, keycaps,
   fields, sliders, check boxes, dropdowns, scroll bars, `menu_button` and the button motion.
-- **`WorldSkin`**: what's drawn over the world every frame: the HP, MP and EXP bars, party, monster
+- **`WorldSkin`**: what's drawn over the world every frame: the EXP bar, party, monster
   and boss bars, name and guild tags, quest markers, speech bubbles, hints and
   the map-name banner.
 - **`UiBuild`**: makes the menus' controls: `label`, `heading`, `small_title`, `button` (a

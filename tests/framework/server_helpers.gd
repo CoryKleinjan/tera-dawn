@@ -344,18 +344,6 @@ func field_with(spawns: Array, id := FIELD) -> MapInstance:
 	server.maps.erase(id)
 	return server.map_instance(id)
 
-## Puts a plain ring (not in Content) on `c` that takes away all their Avoidability, so
-## nothing they're hit by is dodged.
-static func no_dodge(c: Character) -> void:
-	var ring := EquipDef.new()
-	ring.id = &"test_clumsy_ring"
-	ring.display_name = "Clumsy Ring"
-	ring.slot = EquipDef.Slot.RING
-	ring.stats = StatBlock.new()
-	ring.stats.avoid = -999
-	c.equipment.put(&"ring_2", ItemStack.exact(ring))
-	c.recalc()
-
 ## Makes `p`'s Monster Book page for `m` complete, so kills never roll a card (test
 ## monsters have none). The "first page" achievement that would bring is marked as had.
 static func no_cards(p: SimPlayer, m: MonsterDef) -> void:

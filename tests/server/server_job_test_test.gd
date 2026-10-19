@@ -158,4 +158,4 @@ func test_a_fresh_beginner_can_beat_it() -> void:
 	var seconds := boss.max_hp / (float(dealt) / swings) * maxi(skill.cooldown, 1) / 60.0
 	check(seconds > 40.0 and seconds < 150.0, "a long but winnable fight: %.0f s of swinging" % seconds)
 	var taken := Combat.monster_hit(boss, hero, 1.0)
-	check(taken < hero.max_hp() / 4, "a touch takes under a quarter of their HP (%d of %d)" % [taken, hero.max_hp()])
+	check_eq(taken, 1, "a touch takes one heart")

@@ -1,7 +1,7 @@
 class_name Character
 extends RefCounted
 ## One character: name, level, EXP, Dawn Essence, job, stats, quickslots, inventory, storage, quests,
-## Dawnshards, HP, MP, the map they're on and what they've done. Formulas live in
+## Dawnshards, hearts, Mana, the map they're on and what they've done. Formulas live in
 ## CharacterStats; this only holds and changes state. Two parts keep their own state and
 ## rules: `skills` (SkillBook: skills bought and buffs) and `gear` (Gear: wearing gear; what's
 ## worn is `equipment`).
@@ -35,7 +35,11 @@ var xp := 0
 ## Unspent Dawn Essence: monsters and quests give it, skill levels cost it.
 var essence := 0
 var shards := 0
+## Mana: fills as they hit monsters, heals hearts and pays for skills (CharacterStats).
 var mp := 0
+## Heart Shards and Mana Shards found: each few make another heart or a bigger Mana orb.
+var heart_shards := 0
+var mana_shards := 0
 var map_id: StringName = START_MAP
 var health := Health.new()
 var job: JobDef
@@ -125,16 +129,16 @@ func recalc() -> void:
 	mp = mini(mp, max_mp())
 	stats_changed.emit()
 
-## Full HP and MP.
+## Every heart back. Mana is earned by fighting, so it stays as it is.
 func refill() -> void:
 	health.reset(max_hp())
-	mp = max_mp()
 
+## Hearts.
 func max_hp() -> int:
-	return CharacterStats.max_hp(job, level, stats)
+	return CharacterStats.max_hp(heart_shards)
 
 func max_mp() -> int:
-	return CharacterStats.max_mp(job, level, stats)
+	return CharacterStats.max_mp(mana_shards)
 
 ## What damage grows from: the job's power at this level plus the Monster Book's rank.
 func power() -> int:
@@ -160,7 +164,7 @@ func xp_need(lvl := -1) -> int:
 func at_max_level() -> bool:
 	return level >= MAX_LEVEL
 
-## Adds EXP and returns how many levels were gained; each level up refills HP and MP. At
+## Adds EXP and returns how many levels were gained; each level up refills the hearts. At
 ## MAX_LEVEL EXP stops (kept at 0).
 func gain_xp(n: int) -> int:
 	if at_max_level():
@@ -191,6 +195,18 @@ func spend_mp(n: int) -> bool:
 
 func restore_mp(n: int) -> void:
 	mp = clampi(mp + n, 0, max_mp())
+
+## Whether they have the Mana and a missing heart to heal one (CharacterStats.HEAL_COST).
+func can_heal() -> bool:
+	return mp >= CharacterStats.HEAL_COST and health.hp > 0 and health.hp < max_hp()
+
+## Spends HEAL_COST Mana on one heart. False when they can't (can_heal).
+func heal_heart() -> bool:
+	if not can_heal():
+		return false
+	mp -= CharacterStats.HEAL_COST
+	health.heal(1)
+	return true
 
 # ---------- what they've done ----------
 

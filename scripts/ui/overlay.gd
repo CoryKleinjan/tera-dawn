@@ -60,7 +60,7 @@ func _draw() -> void:
 		_draw_minimap(mm)
 	var boss_shown := world.started and _draw_boss_bar(Vector2(v.x / 2, 6))
 	if world.started:
-		_draw_party(Vector2(16, 56))
+		_draw_party(Vector2(16, TDVitals.ORB.end.y + 14))
 		_draw_buffs(Vector2(mm.position.x - 6, 10))
 	_draw_log(v.x - 12 - (world.hud.quickslots.size.x + 6 if world.started else 0.0), log_bottom())
 	# map banner

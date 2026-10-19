@@ -13,8 +13,10 @@ const MONSTER_POOF := &"monster_poof"
 const CRITICAL := &"critical"
 ## The burst around a player who levels up.
 const LEVEL_UP := &"level_up"
+## The glow round a player whose Mana healed a heart.
+const HEAL := &"heal"
 ## Every effect named above.
-const NAMED: Array[StringName] = [CELEBRATE, MONSTER_POOF, CRITICAL, LEVEL_UP]
+const NAMED: Array[StringName] = [CELEBRATE, MONSTER_POOF, CRITICAL, LEVEL_UP, HEAL]
 
 @export var id: StringName
 @export var frames: Array[Texture2D] = []
