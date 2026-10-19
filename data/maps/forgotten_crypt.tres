@@ -451,3 +451,4 @@ region = &"lanternfall"
 world_pos = Vector2(760.0, 520.0)
 zone_pos = Vector2(580.0, 5800.0)
 return_map = &"lanternfall"
+rest_spots = Array[Vector2i]([Vector2i(600, 2)])

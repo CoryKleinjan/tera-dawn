@@ -1106,6 +1106,7 @@ script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 41
 count = 2
+patrol_to = 1740.0
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("12_drop_entry")
@@ -1201,3 +1202,4 @@ region = &"greenbough"
 world_pos = Vector2(273.0, 133.0)
 zone_pos = Vector2(-8200.0, -3600.0)
 return_map = &"greenbough"
+rest_spots = Array[Vector2i]([Vector2i(1850, 41)])

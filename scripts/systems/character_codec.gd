@@ -26,7 +26,7 @@ static func to_dict(c: Character) -> Dictionary:
 		"book": c.book.to_dict(), "pet": String(c.pet), "pet_full": c.pet_full, "visited": c.visited.duplicate(),
 		"achievements": c.achievements.duplicate(), "counters": c.counters.duplicate(),
 		"scenes_seen": c.scenes_seen.duplicate(), "secrets": c.secrets.duplicate(),
-		"relics": c.relics.duplicate(),
+		"relics": c.relics.duplicate(), "rest_map": String(c.rest_map), "rest_spot": c.rest_spot,
 	}
 
 static func _string_keys(d: Dictionary) -> Dictionary:
@@ -112,6 +112,9 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 	var pet_id := StringName(str(data.get("pet", "")))
 	c.pet = pet_id if Content.items.get(pet_id) is PetDef else &""
 	c.pet_full = clampi(int(data.get("pet_full", c.pet_full)), 0, PetDef.FULL)
+	var rest := StringName(str(data.get("rest_map", "")))
+	c.rest_map = rest if Content.maps.has(rest) else &""
+	c.rest_spot = maxi(0, int(data.get("rest_spot", 0)))
 	for key in ["visited", "achievements", "scenes_seen", "secrets", "relics", "jobs_passed"]:
 		if data.get(key) is Array:
 			var list: Array[String] = c.get(key)

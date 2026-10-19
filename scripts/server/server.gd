@@ -139,14 +139,14 @@ func disconnected(peer: int) -> void:
 	lobby.dropped(peer)
 
 ## Takes a player out of the world (saving them). They stay connected. A player who leaves
-## while fainted is revived first, so they come back in town.
+## while fainted is revived first, so they come back where they'd wake (`_wake_spot`).
 func leave(peer: int) -> void:
 	var p := player_of(peer)
 	if p == null:
 		return
 	if p.fainted():
 		_wake(p)
-		p.character.map_id = _town_for(p)
+		p.character.map_id = _wake_spot(p)[0]
 	social.left(p)
 	sessions.erase(peer)
 	_off_map(p)
@@ -176,11 +176,37 @@ func enter_map(p: SimPlayer, id: StringName, x: float, platform := 0, arrive := 
 	save(p)
 	scenes.play(p, m.def.intro_scene)
 
-## Sends a fainted player back to town with half their HP and MP.
+## Sends a fainted player back to their rest spot or town (`_wake_spot`) with half their HP
+## and MP.
 func revive(p: SimPlayer) -> void:
 	_wake(p)
+	var at := _wake_spot(p)
+	enter_map(p, at[0], at[1], at[2])
+
+## Where a fainted player wakes up, as [map, x, platform]: the rest spot they last rested at
+## (`_rest`) when they fainted in its region outside a town, else the town (`_town_for`) at
+## its start.
+func _wake_spot(p: SimPlayer) -> Array:
+	var c := p.character
+	var rest: MapDef = Content.maps.get(c.rest_map)
+	if rest and p.map and not p.map.def.town and rest.region == p.map.def.region and c.rest_spot < rest.rest_spots.size():
+		var r := rest.rest_spots[c.rest_spot]
+		return [rest.id, float(r.x), r.y]
 	var town := _town_for(p)
-	enter_map(p, town, Content.map(town).start_x)
+	return [town, Content.map(town).start_x, 0]
+
+## Rests the player at rest spot `spot` of their map (MapDef.rest_spots): HP and MP fill, and
+## fainting in this region wakes them here from now on.
+func _rest(p: SimPlayer, spot: int) -> void:
+	var c := p.character
+	c.health.set_hp(c.max_hp())
+	c.mp = c.max_mp()
+	p.dirty_vitals = true
+	if c.rest_map != p.map.def.id or c.rest_spot != spot:
+		c.rest_map = p.map.def.id
+		c.rest_spot = spot
+		p.map.tell(p, "You rested. You'll wake here if you faint nearby.", Palette.INFO)
+		save(p)
 
 ## Gets a fainted player up with half their HP and MP and a moment of invincibility.
 func _wake(p: SimPlayer) -> void:
@@ -259,7 +285,8 @@ func on_slam(peer: int, at: Vector2) -> void:
 		p.map.slam(p, at)
 
 ## Sits the player down on the ground (`down`) or gets them up. Sitting regenerates faster
-## (SimPlayer.step); moving or getting hit gets them up.
+## (SimPlayer.step), and sitting by a rest spot's bench rests there (`_rest`); moving or
+## getting hit gets them up.
 func on_sit(peer: int, down: bool) -> void:
 	var p := player_of(peer)
 	if p == null or p.sitting == down:
@@ -273,6 +300,9 @@ func on_sit(peer: int, down: bool) -> void:
 		p.character.count(Counters.SAT)
 		p.dirty_character = true
 	Net.send(peer, &"ev_sit", [down])
+	var spot := p.map.layout.rest_at(p.position) if down else -1
+	if spot >= 0:
+		_rest(p, spot)
 
 ## `aim` is a Hitbox.Aim: up or down for an aiming attack, else ahead.
 func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int, aim := 0) -> void:

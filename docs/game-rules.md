@@ -76,6 +76,10 @@ update this page when one changes. Each zone's own look and music are in
 - Getting hit freezes him a beat, flashes the screen and knocks him away without steering.
 - No chairs: the Sit key sits him on the ground, where he regains HP and MP twice as fast (the
   base part). Moving, the Sit key again or any monster hit gets him up.
+- Rest spots, Hollow Knight style (Cory Oct 19): each rebuilt zone has two field rooms with its
+  town's bench standing in them, one midway and one before the boss, with no monsters walking
+  over it. Sitting beside the bench fills HP and MP, and from then on fainting in that zone (not
+  in a town) wakes him at that bench instead of in town.
 - An aimed attack turns its swing effect up or down.
 - Job skills will be flashy and grand, like MapleStory. Their effects are painted (Gemini),
   8 frames at 14 fps: soft glow with no outline, MapleStory-big, in the job's colours. Attacks

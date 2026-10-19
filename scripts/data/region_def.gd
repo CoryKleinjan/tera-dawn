@@ -22,6 +22,8 @@ extends Resource
 ## the painting: a room of the map's own size at MapDef.zone_pos with its ledges,
 ## shown once you've been there (secret ledges and ways once you've found them).
 @export var shaped_zone := false
+## The bench standing at its maps' rest spots (MapDef.rest_spots): its town's own bench.
+@export var bench: Texture2D
 ## What every monster on its maps can drop on top of its own loot: the zone's runes (RuneDef).
 @export var drops: Array[DropEntry] = []
 

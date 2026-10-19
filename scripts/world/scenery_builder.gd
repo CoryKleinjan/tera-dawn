@@ -53,6 +53,9 @@ func build(map: MapDef, platforms: Array[Platform], rng: RandomNumberGenerator) 
 		_stand(piece)
 	for p in map.props:
 		_prop(p, map)
+	for r in map.rest_spots:
+		if r.y < platforms.size():
+			_bench(r, map, platforms[r.y])
 	for b in map.buildings:
 		_building(b, platforms[b.platform], biome)
 	for p in map.portals:
@@ -189,6 +192,16 @@ func _prop(p: PropPlacement, map: MapDef) -> void:
 		var l := TDStage.light(p.light_color, p.light_energy, 4.0)
 		l.position = s.position + Vector3(0, p.light_height / TDStage.PX, 0.6)
 		root.add_child(l)
+
+## A rest spot's bench (MapDef.rest_spots): its region's own (RegionDef.bench), standing just
+## behind the walking line.
+func _bench(r: Vector2i, map: MapDef, pl: Platform) -> void:
+	var region: RegionDef = Content.regions.get(map.region)
+	if region == null or region.bench == null:
+		return
+	var s := TDStage.sprite(region.bench, TDStage.TEXEL)
+	TDStage.stand_on_land(s, Vector2(r.x, pl.y + 3.0), BREAKABLE_DEPTH)
+	root.add_child(s)
 
 ## A chest or wall that breaks open when hit (BreakableDef), standing just behind the walking
 ## line at its `height`. TDStage.show_breakables shows it whole or broken for you.
