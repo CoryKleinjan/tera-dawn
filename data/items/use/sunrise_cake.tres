@@ -9,7 +9,7 @@
 script = ExtResource("1_use_def")
 id = &"sunrise_cake"
 display_name = "Sunrise Cake"
-description = "Three layers of sponge and sunshine. Heals 5 health."
+description = "Three layers of sponge and sunshine. Restores 800 HP."
 icon = ExtResource("2_sunrise_cake")
 sprite_scale = 0.36
 glow_color = Color(1.0, 0.690196, 0.627451, 1.0)
@@ -17,4 +17,4 @@ pickup_effect = ExtResource("3_shard_pickup")
 sell_price = 110
 max_stack = 100
 use_effect = ExtResource("4_heal")
-heal_hearts = 5
+heal_hp = 800

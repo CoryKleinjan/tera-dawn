@@ -250,13 +250,13 @@ func loot() -> void:
 ## Drinking a potion, and taking gear off and on.
 func potion_and_gear() -> void:
 	# A Red Potion from the Use tab heals.
-	_me().character.health.set_hp(1)
+	_me().character.health.set_hp(10)
 	var red: ItemDef = Content.item(&"red_potion")
 	var potions := Game.me.inventory.count_of(red)
 	world.hud.windows["inventory"].tab = ItemDef.Tab.USE
 	world.hud.windows["inventory"].use_slot(_first_filled(Game.me, ItemDef.Tab.USE))
 	await _ticks(1)
-	_check(Game.me.health.hp > 1 and Game.me.inventory.count_of(red) == potions - 1, "drinking a Red Potion heals and uses it up")
+	_check(Game.me.health.hp > 10 and Game.me.inventory.count_of(red) == potions - 1, "drinking a Red Potion heals and uses it up")
 
 	# Gear changes go through the server too.
 	var attack := Game.me.stats.attack

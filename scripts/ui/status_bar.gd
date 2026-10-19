@@ -106,12 +106,9 @@ func _draw() -> void:
 	DrawUtil.text(self, Game.ui_font, c + Vector2(0, -3), "Lv", 7, Palette.MIST)
 	DrawUtil.text(self, Game.num_font, c + Vector2(0, 9), str(Game.me.level), 11, Palette.SUN, 0, 3, Palette.NIGHT)
 	# HP, MP, EXP
-	# health is hearts and MP is only a bar: neither shows a number
 	var hp := Game.me.health
-	var hp_at := bar_rect("hp_frame").position
-	WorldSkin.draw_bar(self, "hp_frame", "fill_red", hp_at, hp.fraction(), fit("hp_frame"), "", trail("hp"), 0.0, HP_MP_EXTRA)
-	WorldSkin.draw_heart_marks(self, WorldSkin.bar_groove("hp_frame", hp_at, fit("hp_frame"), HP_MP_EXTRA), hp.max_hp)
-	WorldSkin.draw_bar(self, "mp_frame", "fill_blue", bar_rect("mp_frame").position, float(Game.me.mp) / Game.me.max_mp(), fit("mp_frame"), "", trail("mp"), 0.0, HP_MP_EXTRA)
+	WorldSkin.draw_bar(self, "hp_frame", "fill_red", bar_rect("hp_frame").position, hp.fraction(), fit("hp_frame"), "%d / %d" % [hp.hp, hp.max_hp], trail("hp"), 0.0, HP_MP_EXTRA)
+	WorldSkin.draw_bar(self, "mp_frame", "fill_blue", bar_rect("mp_frame").position, float(Game.me.mp) / Game.me.max_mp(), fit("mp_frame"), "%d / %d" % [Game.me.mp, Game.me.max_mp()], trail("mp"), 0.0, HP_MP_EXTRA)
 	var exp_fill := 1.0 if Game.me.at_max_level() else float(Game.me.xp) / Game.me.xp_need()
 	WorldSkin.draw_bar(self, "exp_frame", "fill_gold", exp_bar_rect().position, exp_fill, fit("exp_frame"), exp_text(), 0.0, _flash / EXP_FLASH)
 	# window buttons

@@ -50,7 +50,7 @@ func check() -> void:
 	# only the sentry: another monster's touch would also leave the player blinking
 	var others := _hold_mobs(wood, [sentry])
 	_teleport(Vector2(sentry.position.x + 150, sentry.plat.y))
-	ch.health.reset(ch.max_hearts())
+	ch.health.reset(ch.max_hp())
 	var hp: int = ch.health.hp
 	sentry.moves.cool[0] = 0
 	sentry.moves.gap = 0

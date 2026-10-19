@@ -9,12 +9,12 @@
 script = ExtResource("script")
 id = &"white_potion"
 display_name = "White Potion"
-description = "A pure, bright draught. Heals 3 health."
+description = "A pure, bright draught. Restores a lot of HP."
 icon = ExtResource("icon")
 sprite_scale = 0.36
 glow_color = Color(0.957, 0.941, 1.000, 1.0)
 pickup_effect = ExtResource("pickup")
 sell_price = 40
 max_stack = 100
-heal_hearts = 3
+heal_hp = 300
 use_effect = ExtResource("heal")

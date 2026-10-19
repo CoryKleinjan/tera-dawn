@@ -57,8 +57,9 @@ const GUILD_TAG := ["social/guild_tag", Vector4(46, 28, 46, 18), Vector2(56, 0)]
 ## `trail` (above `fraction`) shows a pale chunk of what was just lost, and `flash` (0-1)
 ## lights the fill up, for bars that animate (TDStatusBar).
 static func draw_bar(ci: CanvasItem, frame: String, fill: String, pos: Vector2, fraction: float, scale := 1.0, text := "", trail := 0.0, flash := 0.0, extra := 0.0) -> void:
+	var g: Rect2 = GROOVES[frame]
 	draw_bar_frame(ci, frame, pos, scale, extra)
-	var groove := bar_groove(frame, pos, scale, extra)
+	var groove := Rect2(pos + g.position * scale, g.size * scale + Vector2(extra, 0))
 	if trail > fraction:
 		var from := groove.size.x * clampf(fraction, 0.0, 1.0)
 		var to := groove.size.x * clampf(trail, 0.0, 1.0)
@@ -73,18 +74,6 @@ static func draw_bar(ci: CanvasItem, frame: String, fill: String, pos: Vector2, 
 		var ts := maxi(int(12 * scale), BAR_TEXT_MIN)
 		DrawUtil.text(ci, Game.ui_font, Vector2(groove.get_center().x, groove.get_center().y + ts * 0.36),
 			text, ts, Palette.MIST, 0, 4, Color(0.1, 0.05, 0.15, 0.9))
-
-## The groove of bar `frame` drawn at `pos`, `scale` and `extra` pixels wider (see draw_bar).
-static func bar_groove(frame: String, pos: Vector2, scale: float, extra := 0.0) -> Rect2:
-	var g: Rect2 = GROOVES[frame]
-	return Rect2(pos + g.position * scale, g.size * scale + Vector2(extra, 0))
-
-## Splits a health bar's `groove` into `hearts` equal cells with thin dark marks: the bar's
-## segments (there are no heart icons).
-static func draw_heart_marks(ci: CanvasItem, groove: Rect2, hearts: int) -> void:
-	for i in range(1, hearts):
-		var x := roundf(groove.position.x + groove.size.x * i / hearts)
-		ci.draw_line(Vector2(x, groove.position.y), Vector2(x, groove.end.y), Palette.NIGHT, 2.0)
 
 ## A bar frame drawn `extra` pixels wider than its art: a plain strip from the middle of its
 ## groove stretches, so the painted end caps keep their shape.
@@ -158,9 +147,9 @@ static func draw_quest_marker(ci: CanvasItem, bottom_center: Vector2, kind: Stri
 	var center := bottom_center - Vector2(0, height / 2.0)
 	ci.draw_texture_rect(t, Rect2(center - s / 2.0, s), false)
 
-## A party member's slim health bar (marked into `hearts`), `width` pixels wide with its top left at `pos`. The art has
+## A party member's slim HP bar, `width` pixels wide with its top left at `pos`. The art has
 ## a fill painted in, so the groove is emptied before the real fill goes on.
-static func draw_party_hp(ci: CanvasItem, pos: Vector2, width: float, fraction: float, hearts := 0) -> void:
+static func draw_party_hp(ci: CanvasItem, pos: Vector2, width: float, fraction: float) -> void:
 	var frame := "social/party_hp_frame"
 	var scale := width / UiSkin.size_of(frame).x
 	var g: Rect2 = GROOVES[frame]
@@ -168,7 +157,6 @@ static func draw_party_hp(ci: CanvasItem, pos: Vector2, width: float, fraction: 
 	var groove := Rect2(pos + g.position * scale, g.size * scale)
 	DrawUtil.round_rect(ci, groove.grow(0.5), groove.size.y / 2.0, Palette.NIGHT)
 	draw_bar_fill(ci, "fill_red", groove, fraction)
-	draw_heart_marks(ci, groove, hearts)
 
 ## A monster HP bar `width` pixels wide centred above it.
 static func draw_monster_hp(ci: CanvasItem, bottom_center: Vector2, width: float, fraction: float) -> void:

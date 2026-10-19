@@ -69,6 +69,6 @@ ambient occlusion or depth of field. The game is made for Vulkan (Forward+); a c
 without it falls back to the compatibility renderer, which has no ambient occlusion or depth
 of field, and the video page says so. Store pages should list Vulkan as recommended.
 
-Text that belongs to a spot in the world (name tags, hints, "Miss")
+Text that belongs to a spot in the world (name tags, hints, damage numbers)
 is never put in the 3D stage: `TDOverlay` projects the spot to the screen and draws it there,
 so depth of field never blurs it and nothing in the world covers it.

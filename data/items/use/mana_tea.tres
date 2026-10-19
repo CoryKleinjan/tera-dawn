@@ -9,7 +9,7 @@
 script = ExtResource("1_use_def")
 id = &"mana_tea"
 display_name = "Mana Tea"
-description = "Lumewood leaf tea. Restores a good share of MP."
+description = "Lumewood leaf tea. Restores 250 MP."
 icon = ExtResource("2_mana_tea")
 sprite_scale = 0.36
 glow_color = Color(0.560784, 0.721569, 1.0, 1.0)

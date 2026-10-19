@@ -77,7 +77,7 @@ func _draw_party() -> void:
 			x = 20.0
 		draw_label(r.position + Vector2(x, 12), m[0], Palette.SUN, 12)
 		draw_label(r.position + Vector2(6, 24), "%s  ·  %s" % [j.display_name if j else "", Content.map(StringName(m[4])).display_name if Content.maps.has(StringName(m[4])) else ""], Palette.MUTED, 10)
-		WorldSkin.draw_party_hp(self, party_hp_rect(r).position, PARTY_HP_W, float(m[3]), int(m[5]) if m.size() > 5 else 0)
+		WorldSkin.draw_party_hp(self, party_hp_rect(r).position, PARTY_HP_W, float(m[3]))
 		var who: String = m[0]
 		if lead and who != Game.me.name:
 			add_button(kick_rect(r), "Kick", func() -> void: Net.ask(&"req_social", [&"kick", who]), true, true)
