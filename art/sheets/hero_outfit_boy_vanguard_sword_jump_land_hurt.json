@@ -30,8 +30,18 @@
     ]
   },
   "inset": 6,
+  "background": [
+    230,
+    59,
+    241
+  ],
+  "key": [
+    0.3,
+    0.62
+  ],
   "label_band": 0,
   "keep": "largest",
+  "dark_key": false,
   "scale": 0.102,
   "save": false
 }
