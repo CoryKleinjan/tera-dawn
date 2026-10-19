@@ -44,7 +44,6 @@ const ACTIONS := [
 	{"action": "inventory", "label": "Inventory", "group": "Windows", "keys": [KEY_I]},
 	{"action": "equipment", "label": "Equipment", "group": "Windows", "keys": [KEY_E]},
 	{"action": "stats", "label": "Character", "group": "Windows", "keys": [KEY_S]},
-	{"action": "skills", "label": "Skills", "group": "Windows", "keys": [KEY_K]},
 	{"action": "quests", "label": "Quests", "group": "Windows", "keys": [KEY_Q]},
 	{"action": "worldmap", "label": "World map", "group": "Windows", "keys": [KEY_W]},
 	{"action": "community", "label": "Community", "group": "Windows", "keys": [KEY_O]},

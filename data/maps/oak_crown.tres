@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=89 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=86 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -25,7 +25,6 @@
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/greenbough_fields_side.png" id="32_ground_side"]
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="33_backdrop_layer_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/greenbough_fields/old_oak_heights.png" id="34_old_oak_heights"]
-[ext_resource type="Resource" path="res://data/items/use/honey_bun.tres" id="34_honey_bun"]
 [ext_resource type="Script" path="res://scripts/data/scene_spot.gd" id="35_scene_spot"]
 [ext_resource type="Resource" path="res://data/tears/greenbough_tear.tres" id="36_greenbough_tear"]
 [sub_resource type="Resource" id="Prop_0"]
@@ -401,12 +400,6 @@ item = ExtResource("15_dawnshard")
 min_amount = 220
 max_amount = 320
 
-[sub_resource type="Resource" id="Loot_0_1"]
-script = ExtResource("14_drop_entry")
-item = ExtResource("34_honey_bun")
-min_amount = 4
-max_amount = 4
-
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("12_breakable_def")
 id = &"oak_crown_lookout_chest"
@@ -416,7 +409,7 @@ hits = 1
 whole = ExtResource("24_chest")
 broken = ExtResource("25_chest_open")
 height = 48.0
-loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_0_0"), SubResource("Loot_0_1")])
+loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_0_0")])
 card = ExtResource("10_barkcap")
 
 [sub_resource type="Resource" id="Loot_1_0"]
@@ -424,12 +417,6 @@ script = ExtResource("14_drop_entry")
 item = ExtResource("15_dawnshard")
 min_amount = 220
 max_amount = 320
-
-[sub_resource type="Resource" id="Loot_1_1"]
-script = ExtResource("14_drop_entry")
-item = ExtResource("34_honey_bun")
-min_amount = 4
-max_amount = 4
 
 [sub_resource type="Resource" id="Breakable_1"]
 script = ExtResource("12_breakable_def")
@@ -440,7 +427,7 @@ hits = 1
 whole = ExtResource("24_chest")
 broken = ExtResource("25_chest_open")
 height = 48.0
-loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_1_0"), SubResource("Loot_1_1")])
+loot = Array[ExtResource("14_drop_entry")]([SubResource("Loot_1_0")])
 card = ExtResource("10_barkcap")
 
 [resource]

@@ -27,7 +27,7 @@
       "quest_complete_banner"
     ],
     [
-      "level_up_banner",
+      "",
       "job_advance_banner",
       "",
       ""
@@ -74,12 +74,6 @@
   },
   "overrides": {
     "quest_complete_banner": {
-      "fix": "glow_backdrop",
-      "keep": "largest",
-      "scale": 1.5,
-      "recolor": null
-    },
-    "level_up_banner": {
       "fix": "glow_backdrop",
       "keep": "largest",
       "scale": 1.5,

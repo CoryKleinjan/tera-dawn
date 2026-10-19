@@ -27,4 +27,3 @@ start_scene = ExtResource("4_ksdnq")
 offer_hint = "Walk to her and press {move_up} to talk"
 hint = "{move_left} {move_right} to move, {jump} to jump"
 objectives = Array[ExtResource("1_50sa0")]([SubResource("Resource_ji6rw")])
-reward_essence = 5

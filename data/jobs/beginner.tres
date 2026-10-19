@@ -1,33 +1,18 @@
-[gd_resource type="Resource" script_class="JobDef" load_steps=8 format=3]
+[gd_resource type="Resource" script_class="JobDef" load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/job_def.gd" id="1_job_def"]
 [ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="3_equip_def"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="7_drop_entry"]
-[ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="8_red_potion"]
 
-[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="q_blue_potion"]
 [ext_resource type="Script" path="res://scripts/data/item_def.gd" id="q_item_def"]
-
-[sub_resource type="Resource" id="Resource_2"]
-script = ExtResource("7_drop_entry")
-item = ExtResource("8_red_potion")
-chance = 1.0
-min_amount = 5
-max_amount = 5
 
 [resource]
 script = ExtResource("1_job_def")
 id = &"beginner"
 display_name = "Beginner"
 family = &"beginner"
-mastery = 0.4
 description = "Everyone starts here. Train on the meadow, then take a Job Test in any job town."
-base_power = 12
-base_hp = 57
-hp_growth = 17
-base_mp = 24
-mp_growth = 5
 starting_gear = Array[ExtResource("3_equip_def")]([])
-starting_items = Array[ExtResource("7_drop_entry")]([SubResource("Resource_2")])
+starting_items = Array[ExtResource("7_drop_entry")]([])
 creator_gear = Array[ExtResource("3_equip_def")]([])
-starting_quickslots = Array[ExtResource("q_item_def")]([ExtResource("8_red_potion"), ExtResource("q_blue_potion")])
+starting_quickslots = Array[ExtResource("q_item_def")]([])

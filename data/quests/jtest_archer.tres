@@ -19,6 +19,5 @@ offer_text = "Still on your feet out there, I see. Before I call you an Archer, 
 progress_text = "The trial ground is through the light by the wall."
 complete_text = "Forty years in this forest and I've never seen anything like that. You held your ground. You're an Archer now. But that light... Go to Lumewood and tell Archmage Celest what you saw."
 hint = "Step into the light by the wall and press {move_up}"
-reward_essence = 1000
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Boss")])
 reward_items = Array[ExtResource("4_drop_entry")]([])

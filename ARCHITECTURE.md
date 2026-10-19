@@ -17,8 +17,8 @@ data/*.tres  ──►  Content (autoload)  ──►  World loads a MapDef  ─
   stats and sprite, a map's platforms and spawns, a skill's reach and damage. Every class is a
   Godot `Resource`, so it can be edited in the Godot inspector.
 - **Systems** (`scripts/systems/`) are the character's rules that aren't tied to the world:
-  `Character` (level, EXP, Dawn Essence, stats, bag, hearts, Mana) with its parts `SkillBook` (`c.skills`:
-  skills bought, buffs) and `Gear` (`c.gear`: wearing gear), `Inventory`, `Equipment`, `ItemStack`
+  `Character` (job, stats, bag, hearts, Mana) with its parts `SkillBook` (`c.skills`:
+  attacks, buffs) and `Gear` (`c.gear`: wearing gear), `Inventory`, `Equipment`, `ItemStack`
   (one slot's worth of an item, with its own rolled stats for gear) and `CharacterStats` (the
   power, health and damage formulas). The server owns each player's `Character`; `Game.me` is your copy.
 - **Components** (`scripts/components/`) are small reusable parts any actor can use: `Health`,
@@ -47,7 +47,7 @@ second. Only the stage turns that into 3D (32 game pixels per 3D unit).
 - [Draw order and the stage](docs/architecture/rendering.md): the 3D layers, depths and pixel size of the diorama, world-anchored text.
 - [Monsters](docs/architecture/monsters.md): how to add a monster.
 - [Maps, buildings and towns](docs/architecture/maps.md): how to add a map or a building, town layout, rooms.
-- [Skills](docs/architecture/skills.md): how to add a skill.
+- [Skills](docs/architecture/skills.md): attacks, and how to add one.
 - [Items, gear and weapons](docs/architecture/items.md): stats, equipment, how to add an item or a weapon.
 - [Jobs](docs/architecture/jobs.md): how to add a job.
 - [Windows and settings](docs/architecture/ui.md): how to add a window, the HUD and the title

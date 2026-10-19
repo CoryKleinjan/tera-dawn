@@ -53,6 +53,5 @@ offer_text = "New to the mainland? Then see it properly. Visit all five job town
 progress_text = "Five towns: Greenbough, Lumewood, Emberforge, Lanternfall and Driftcove."
 complete_text = "All five! You know the mainland better than half my dockhands now. Take this, and a stack of Return Scrolls."
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4"), SubResource("Resource_5")])
-reward_essence = 42400
 reward_shards = 2000
 reward_items = Array[ExtResource("3_drop_entry")]([SubResource("Resource_6")])

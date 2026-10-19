@@ -1,6 +1,6 @@
 extends TestCase
-## MonsterBook: kills, cards up to a full set, completed pages, the book rank and the
-## power bonus it gives the character, and the save format.
+## MonsterBook: kills, cards up to a full set, completed pages, the book rank, and the save
+## format.
 
 var fx: UnitHelpers
 var book: MonsterBook
@@ -60,28 +60,12 @@ func test_book_rank_every_three_pages() -> void:
 		check_eq(book.completed(), n, "%d pages" % n)
 		check_eq(book.rank(), expect[n], "rank with %d pages" % n)
 
-func test_power_bonus_is_one_per_rank_past_first() -> void:
-	check_eq(book.power_bonus(), 0, "rank 1 gives nothing")
-	for n in 6:
-		_complete(fx.monster(StringName("t_m%d" % n)))
-	check_eq(book.power_bonus(), 2, "rank 3")
-
 func test_total_cards_counts_unfinished_pages() -> void:
 	book.add_card(fx.monster(&"t_a"))
 	book.add_card(fx.monster(&"t_a"))
 	_complete(fx.monster(&"t_b"))
 	check_eq(book.total_cards(), 2 + CardDef.SET, "all cards")
 	check_eq(book.completed(), 1, "one page")
-
-func test_book_bonus_reaches_character_power() -> void:
-	var c := fx.character()
-	var before := c.power()
-	for n in 3:
-		var m := fx.monster(StringName("t_m%d" % n))
-		for i in CardDef.SET:
-			c.book.add_card(m)
-	check_eq(c.power(), before + 1, "book rank 2 adds 1 power")
-	check_eq(c.stats.nonzero().size(), 0, "and no stats")
 
 func test_save_round_trip() -> void:
 	var a := fx.monster(&"t_a")

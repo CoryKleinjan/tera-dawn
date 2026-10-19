@@ -113,7 +113,7 @@ func test_quest_items_cant_be_offered() -> void:
 
 func test_the_trade_window_holds_nine_things() -> void:
 	for i in 10:
-		ann.character.inventory.put(ItemDef.Tab.USE, i, ItemStack.create(Content.item(&"red_potion"), 1))
+		ann.character.inventory.put(ItemDef.Tab.USE, i, ItemStack.create(Content.item(&"return_scroll"), 1))
 	for i in 10:
 		h.ask(2, &"req_trade_offer", [ItemDef.Tab.USE, i, 1])
 	check_eq((_state(2)["mine"]["items"] as Array).size(), TDSocial.TRADE_SLOTS, "nine")

@@ -1,10 +1,11 @@
 extends TestCase
-## Using and wearing items through requests: potions and their cooldown, return scrolls,
+## Using and wearing items through requests: the item cooldown, return scrolls,
 ## equipping and taking off gear, and moving items (no stats to buy, no upgrade scrolls).
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
 var h: ServerHarness
+var u := UnitHelpers.new()
 var p: SimPlayer
 var c: Character
 
@@ -15,49 +16,31 @@ func before_each() -> void:
 
 func after_each() -> void:
 	h.close()
+	u.cleanup()
 
-func _red_slot() -> int:
-	return c.inventory.find(Content.item(&"red_potion"))
+## A Use item made for the test (it does nothing but get used up), two of them in slot 3.
+func _thing() -> UseDef:
+	var it := u.use()
+	c.inventory.put(ItemDef.Tab.USE, 3, ItemStack.create(it, 2))
+	return it
 
-func test_a_potion_heals_and_is_used_up() -> void:
-	var red: UseDef = Content.item(&"red_potion")
-	c.health.set_hp(1)
-	var before := c.inventory.count_of(red)
-	h.ask(2, &"req_use_item", [_red_slot()])
-	check_eq(c.health.hp, mini(c.max_hp(), 1 + red.hp_for(c.max_hp())), "healed by the potion's amount")
-	check_eq(c.inventory.count_of(red), before - 1, "one used")
-	check(p.dirty_character, "character marked to be sent")
-
-func test_healing_stops_at_max_hp() -> void:
-	c.health.set_hp(c.max_hp() - 3)
-	h.ask(2, &"req_use_item", [_red_slot()])
-	check_eq(c.health.hp, c.max_hp(), "capped")
-
-func test_a_mana_potion_restores_mp() -> void:
-	var blue: UseDef = Content.item(&"blue_potion")
-	c.inventory.put(ItemDef.Tab.USE, 3, ItemStack.create(blue, 2))
-	c.mp = 0
+func test_items_wait_for_the_item_cooldown() -> void:
+	var it := _thing()
 	h.ask(2, &"req_use_item", [3])
-	check_eq(c.mp, mini(c.max_mp(), blue.mp_for(c.max_mp())), "MP restored")
-	check_eq(c.inventory.at(ItemDef.Tab.USE, 3).count, 1, "one left")
-
-func test_potions_wait_for_the_item_cooldown() -> void:
-	var red: UseDef = Content.item(&"red_potion")
-	var before := c.inventory.count_of(red)
-	h.ask(2, &"req_use_item", [_red_slot()])
-	h.ask(2, &"req_use_item", [_red_slot()])
-	check_eq(c.inventory.count_of(red), before - 1, "second one refused")
+	check_eq(c.inventory.count_of(it), 1, "one used")
+	check(p.dirty_character, "character marked to be sent")
+	h.ask(2, &"req_use_item", [3])
+	check_eq(c.inventory.count_of(it), 1, "second one refused")
 	check(h.told(2, "You can't use another item yet."), "told why")
-	h.step(red.cooldown)
-	h.ask(2, &"req_use_item", [_red_slot()])
-	check_eq(c.inventory.count_of(red), before - 2, "allowed after the cooldown")
+	h.step(it.cooldown)
+	h.ask(2, &"req_use_item", [3])
+	check_eq(c.inventory.count_of(it), 0, "allowed after the cooldown")
 
 func test_fainted_players_cant_use_items() -> void:
-	var red: UseDef = Content.item(&"red_potion")
-	var before := c.inventory.count_of(red)
+	var it := _thing()
 	p.faint_t = 10
-	h.ask(2, &"req_use_item", [_red_slot()])
-	check_eq(c.inventory.count_of(red), before, "not used")
+	h.ask(2, &"req_use_item", [3])
+	check_eq(c.inventory.count_of(it), 2, "not used")
 	check(h.told(2, "You can't do that right now."), "told why")
 
 func test_using_an_empty_slot_does_nothing() -> void:
@@ -127,15 +110,15 @@ func test_taking_gear_off_into_a_full_bag_is_refused() -> void:
 	check(h.told(2, "Your Equip inventory is full."), "told why")
 
 func test_moving_items_in_the_bag() -> void:
-	var slot := _red_slot()
-	h.ask(2, &"req_move_item", [ItemDef.Tab.USE, slot, 10])
-	check(c.inventory.at(ItemDef.Tab.USE, slot) == null, "moved out")
-	check_eq(c.inventory.at(ItemDef.Tab.USE, 10).item.id, &"red_potion", "moved in")
+	var it := _thing()
+	h.ask(2, &"req_move_item", [ItemDef.Tab.USE, 3, 10])
+	check(c.inventory.at(ItemDef.Tab.USE, 3) == null, "moved out")
+	check_eq(c.inventory.at(ItemDef.Tab.USE, 10).item, it, "moved in")
 
 func test_moving_items_to_a_bad_slot_is_ignored() -> void:
-	var slot := _red_slot()
-	h.ask(2, &"req_move_item", [ItemDef.Tab.USE, slot, Inventory.SLOTS])
-	check(c.inventory.at(ItemDef.Tab.USE, slot) != null, "stayed")
+	_thing()
+	h.ask(2, &"req_move_item", [ItemDef.Tab.USE, 3, Inventory.SLOTS])
+	check(c.inventory.at(ItemDef.Tab.USE, 3) != null, "stayed")
 
 func test_there_is_nothing_to_buy_stats_or_use_upgrade_scrolls_with() -> void:
 	for gone in [&"req_buy_stat", &"req_auto_stats", &"req_scroll"]:

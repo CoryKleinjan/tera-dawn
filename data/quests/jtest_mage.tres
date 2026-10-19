@@ -19,6 +19,5 @@ offer_text = "So you wish to begin your studies. Every Magician walks the trial 
 progress_text = "The trial ground is through the light by the wall."
 complete_text = "You stood against something none of us has a name for. You are a Magician now. Come, my scholars must hear this from you."
 hint = "Step into the light by the wall and press {move_up}"
-reward_essence = 1000
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Boss")])
 reward_items = Array[ExtResource("4_drop_entry")]([])

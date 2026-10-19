@@ -19,6 +19,5 @@ offer_text = "Want to join the crew, eh? Every hand on it ran the trial ground f
 progress_text = "The trial ground is through the light by the wall."
 complete_text = "Now that's a tale for the tavern! Welcome aboard, Pirate. But I've sailed every sea and never seen the sky tear open. Sail for Lumewood. Archmage Celest will want to hear it."
 hint = "Step into the light by the wall and press {move_up}"
-reward_essence = 1000
 objectives = Array[ExtResource("2_quest_objective")]([SubResource("Boss")])
 reward_items = Array[ExtResource("4_drop_entry")]([])

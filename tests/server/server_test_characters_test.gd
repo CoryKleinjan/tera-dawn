@@ -1,9 +1,8 @@
 extends TestCase
-## Developer test characters (TestCharacters): one per job at the top level, in the
-## best gear the job can wear up to the gear tier and able to wear all of it, with every skill,
-## the Dawnshards and Dawn Essence to spare; they're
-## kept in their own folder apart from the player's own characters, only the missing ones
-## are made unless asked to rebuild, and each is put back in its job's town at the top level.
+## Developer test characters (TestCharacters): one per job, in the best gear the job can wear
+## up to the gear tier and able to wear all of it, with Dawnshards to spare; they're kept in
+## their own folder apart from the player's own characters, only the missing ones are made
+## unless asked to rebuild, and each is put back in its job's town.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
@@ -19,19 +18,16 @@ func after_each() -> void:
 
 # ---------- the characters ----------
 
-func test_every_job_gets_a_grown_character_in_gear_it_can_wear() -> void:
+func test_every_job_gets_a_character_in_gear_it_can_wear() -> void:
 	for job in TestCharacters.jobs():
 		var c := TestCharacters.build(TestCharacters.name_for(job), job)
 		check_eq(c.job, job, "%s: the job" % job.id)
-		check_eq([c.level, c.xp], [Character.MAX_LEVEL, 0], "%s: the top level" % job.id)
-		check_eq(c.power(), CharacterStats.power(job, Character.MAX_LEVEL), "%s: the top level's power" % job.id)
 		check_eq(c.shards, TestCharacters.SHARDS, "%s: Dawnshards" % job.id)
-		check_eq(c.essence, TestCharacters.ESSENCE, "%s: Dawn Essence to try buying with" % job.id)
 		check(c.gear.weapon() != null, "%s: holds a weapon" % job.id)
 		for place: StringName in c.equipment.worn:
 			var e := c.equipment.at(place).equip_def()
 			check_eq(c.gear.equip_problem(e), "", "%s can wear the %s" % [job.id, e.id])
-		check_eq(c.health.hp, c.max_hp(), "%s: full HP" % job.id)
+		check_eq(c.health.hp, c.max_hp(), "%s: every heart" % job.id)
 
 func test_the_gear_is_the_best_the_job_can_wear() -> void:
 	for job in TestCharacters.jobs():
@@ -59,13 +55,6 @@ func test_a_job_with_two_weapon_kinds_wields_its_first_and_carries_the_other() -
 		check_eq(c.gear.weapon(), weapons[0], "%s wields its main kind" % job.id)
 		for e in weapons.slice(1):
 			check(c.inventory.find(e) >= 0, "%s carries the %s" % [job.id, e.id])
-
-func test_every_skill_is_at_its_highest_level() -> void:
-	for job in TestCharacters.jobs():
-		var c := TestCharacters.build("Skills", job)
-		for s: SkillDef in Content.skills.values():
-			if not s.innate and s.job in c.job_line():
-				check_eq(c.skills.level(s), s.max_level, "%s: %s" % [job.id, s.id])
 
 func test_each_starts_in_its_job_town() -> void:
 	for job in TestCharacters.jobs():
@@ -109,13 +98,11 @@ func test_they_are_kept_until_rebuilt() -> void:
 	for n in store.names():
 		var kept := store.load_character(n)
 		kept.map_id = &"nowhere"
-		kept.level = 5
 		store.save(kept)
 	TestCharacters.prepare(store, false)
 	for n in store.names():
 		var kept := store.load_character(n)
 		check_eq(kept.map_id, TestCharacters.home_town(kept.job), "%s back in its town" % n)
-		check_eq(kept.level, Character.MAX_LEVEL, "%s back at the top level" % n)
 	TestCharacters.prepare(store, true)
 	check_eq(store.load_character(first).shards, TestCharacters.SHARDS, "made fresh")
 	check_eq(store.names().size(), Content.jobs.size(), "still one per job")

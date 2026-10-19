@@ -1,39 +1,9 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=17 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=7 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_entry"]
-[ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="item_red_potion"]
-[ext_resource type="Resource" path="res://data/items/use/orange_potion.tres" id="item_orange_potion"]
-[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="item_white_potion"]
-[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="item_blue_potion"]
-[ext_resource type="Resource" path="res://data/items/use/elixir.tres" id="item_elixir"]
 [ext_resource type="Resource" path="res://data/items/use/return_scroll.tres" id="item_return_scroll"]
 [ext_resource type="Resource" path="res://data/items/use/dawnrise_scroll.tres" id="item_dawnrise_scroll"]
-
-[sub_resource type="Resource" id="entry_0"]
-script = ExtResource("2_entry")
-item = ExtResource("item_red_potion")
-price = 0
-
-[sub_resource type="Resource" id="entry_1"]
-script = ExtResource("2_entry")
-item = ExtResource("item_orange_potion")
-price = 0
-
-[sub_resource type="Resource" id="entry_2"]
-script = ExtResource("2_entry")
-item = ExtResource("item_white_potion")
-price = 0
-
-[sub_resource type="Resource" id="entry_3"]
-script = ExtResource("2_entry")
-item = ExtResource("item_blue_potion")
-price = 0
-
-[sub_resource type="Resource" id="entry_4"]
-script = ExtResource("2_entry")
-item = ExtResource("item_elixir")
-price = 0
 
 [sub_resource type="Resource" id="entry_return_scroll"]
 script = ExtResource("2_entry")
@@ -49,4 +19,4 @@ price = 0
 script = ExtResource("1_shop")
 id = &"meadow_general"
 display_name = "Mira's General Store"
-items = Array[ExtResource("2_entry")]([SubResource("entry_0"), SubResource("entry_1"), SubResource("entry_2"), SubResource("entry_3"), SubResource("entry_4"), SubResource("entry_return_scroll"), SubResource("entry_dawnrise_scroll")])
+items = Array[ExtResource("2_entry")]([SubResource("entry_return_scroll"), SubResource("entry_dawnrise_scroll")])

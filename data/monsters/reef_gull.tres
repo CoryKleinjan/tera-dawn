@@ -1,28 +1,12 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=14 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="SpriteFrames" path="res://assets/animations/reef_gull.tres" id="2_reef_gull"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="4_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/reef_feather.tres" id="5_reef_feather"]
-[ext_resource type="Resource" path="res://data/items/use/white_potion.tres" id="6_white_potion"]
-[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="7_blue_potion"]
 [ext_resource type="Resource" path="res://data/monster_moves/swoop.tres" id="mv_swoop"]
 [ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
-
-[sub_resource type="Resource" id="Resource_4"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("7_blue_potion")
-chance = 0.05
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("6_white_potion")
-chance = 0.08
-min_amount = 1
-max_amount = 2
 
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("3_drop_entry")
@@ -43,9 +27,8 @@ script = ExtResource("1_monster_def")
 id = &"reef_gull"
 display_name = "Reef Gull"
 level = 15
-max_hp = 677
+max_hp = 114
 attack = 53
-essence = 173
 speed = 1.1
 size = Vector2(40.0, 30.0)
 boss = false
@@ -54,4 +37,4 @@ hover_height = 56.0
 moves = Array[ExtResource("mv_script")]([ExtResource("mv_swoop")])
 sprite_frames = ExtResource("2_reef_gull")
 sprite_scale = 1.0
-drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4")])
+drops = Array[ExtResource("3_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2")])

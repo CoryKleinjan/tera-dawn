@@ -19,7 +19,7 @@ func before_each() -> void:
 	h = ServerHarness.new()
 	charm = Content.item(&"tusk_charm") as RelicDef
 	heart = Content.item(&"magma_heart") as RelicDef
-	var boss := ServerHarness.monster(&"test_boss", 1, 1)
+	var boss := ServerHarness.monster(&"test_boss", 1)
 	boss.boss = true
 	boss.relic = charm
 	var field := ServerHarness.field_def()

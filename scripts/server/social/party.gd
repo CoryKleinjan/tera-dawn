@@ -167,7 +167,6 @@ func leave(pt: TDSocial.Party, char_name: String, why: String) -> void:
 	for m in pt.members:
 		tell(social.player_named(m), why)
 
-## The EXP each other party member on `killer`'s map gets for their kill: [[player, exp], ...].
 ## The caster's party members on the same map within `reach` of them (not the caster).
 func near(p: SimPlayer, reach: float) -> Array[SimPlayer]:
 	var out: Array[SimPlayer] = []
@@ -180,13 +179,14 @@ func near(p: SimPlayer, reach: float) -> Array[SimPlayer]:
 			out.append(o)
 	return out
 
-func shares(killer: SimPlayer, amount: int) -> Array:
-	var out := []
+## The other members of `killer`'s party on the same map who are up.
+func here(killer: SimPlayer) -> Array[SimPlayer]:
+	var out: Array[SimPlayer] = []
 	var pt := social.party_of(killer.character.name)
 	if pt == null:
 		return out
 	for m in pt.members:
 		var o := social.player_named(m)
 		if o and o != killer and o.map == killer.map and not o.fainted():
-			out.append([o, maxi(1, roundi(amount * TDSocial.PARTY_SHARE))])
+			out.append(o)
 	return out

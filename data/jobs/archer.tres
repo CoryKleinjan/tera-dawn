@@ -2,31 +2,16 @@
 
 [ext_resource type="Script" path="res://scripts/data/job_def.gd" id="1_job_def"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="3_drop_entry"]
-[ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="5_red_potion"]
-[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="q_blue_potion"]
 [ext_resource type="Script" path="res://scripts/data/item_def.gd" id="q_item_def"]
 [ext_resource type="Resource" path="res://data/quests/jtest_archer.tres" id="20_test"]
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("3_drop_entry")
-item = ExtResource("5_red_potion")
-chance = 1.0
-min_amount = 20
-max_amount = 20
 
 [resource]
 script = ExtResource("1_job_def")
 id = &"archer"
 display_name = "Archer"
 family = &"archer"
-mastery = 0.6
 description = "Sharp-eyed hunters who strike from afar with bows."
-base_power = 5
-base_hp = 62
-hp_growth = 12
-base_mp = 24
-mp_growth = 6
 advances_from = &"beginner"
-advance_gifts = Array[ExtResource("3_drop_entry")]([SubResource("Resource_3")])
-starting_quickslots = Array[ExtResource("q_item_def")]([ExtResource("5_red_potion"), ExtResource("q_blue_potion")])
+advance_gifts = Array[ExtResource("3_drop_entry")]([])
+starting_quickslots = Array[ExtResource("q_item_def")]([])
 advance_quest = ExtResource("20_test")

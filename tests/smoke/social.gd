@@ -30,7 +30,7 @@ func check() -> void:
 	var labels: Array = menu.actions().map(func(a: Array) -> String: return a[0])
 	_check(menu.visible and labels.has("Invite to party") and labels.has("Trade") and labels.has("Add buddy"), "clicking a player opens what you can do with them")
 	menu.visible = false
-	# a party, shared Dawn Essence
+	# a party
 	Net.ask(&"req_social", [&"party", "Ally"])
 	await _ticks(1)
 	var id: int = social.invites.keys().filter(func(k: int) -> bool: return social.invites[k]["to"] == ally.peer)[0]
@@ -38,10 +38,10 @@ func check() -> void:
 	await _ticks(35)
 	var party: Dictionary = Game.social.get("party", {})
 	_check(party.get("leader") == ch.name and party.get("members", []).size() == 2, "a party forms when the invite is accepted")
-	var essence := ally.character.essence
 	var mob: SimMob = _me().map.mobs.filter(func(m: SimMob) -> bool: return not m.dead)[0]
+	var kills := ally.character.book.kills(mob.def)
 	_me().map.kill_mob(mob, _me())
-	_check(ally.character.essence > essence, "party members on the map share the Dawn Essence")
+	_check(ally.character.book.kills(mob.def) == kills + 1, "a kill counts for party members on the map too")
 	Net.ask(&"req_chat", ["/p go team"])
 	await _ticks(2)
 	_check(str(chat.lines[-1]["text"]) == "[Party] %s: go team" % ch.name, "/p talks to the party")

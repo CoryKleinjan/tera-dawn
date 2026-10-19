@@ -5,6 +5,7 @@ extends TestCase
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
 var h: ServerHarness
+var u := UnitHelpers.new()
 var map: MapInstance
 var p: SimPlayer
 var mob: SimMob
@@ -19,6 +20,7 @@ func before_each() -> void:
 
 func after_each() -> void:
 	h.close()
+	u.cleanup()
 
 ## Puts the monster `offset` from Ann's feet.
 func _mob_at(offset: Vector2) -> void:
@@ -47,9 +49,10 @@ func test_up_misses_a_monster_ahead() -> void:
 	check_eq(_attack(Hitbox.Aim.UP)[5], [], "up doesn't")
 
 func test_a_buff_never_aims() -> void:
-	var skill := Content.skill(&"quick_step")
+	var skill := u.skill(&"t_buff", SkillDef.Kind.BUFF)
+	skill.duration = 10.0
+	skill.animation = SkillDef.SPELL
 	p.character.skills.learned[skill.id] = 1
-	p.character.mp = p.character.max_mp()
 	check_eq(_attack(Hitbox.Aim.UP, skill.id)[6], Hitbox.Aim.AHEAD, "shown ahead")
 
 func test_a_nonsense_aim_counts_as_ahead() -> void:
@@ -62,9 +65,11 @@ func test_melee_knocks_harder_than_a_shot() -> void:
 	_mob_at(Vector2(60, 0))
 	_attack(Hitbox.Aim.AHEAD)
 	var melee := absf(mob.kx)
-	p.character.skills.learned[&"ice_spike"] = 1
-	p.character.mp = 999
-	_attack(Hitbox.Aim.AHEAD, &"ice_spike")
+	var shot := u.skill(&"t_shot")
+	shot.reach = 360.0
+	shot.projectile = ProjectileDef.new()
+	p.character.skills.learned[shot.id] = 1
+	_attack(Hitbox.Aim.AHEAD, shot.id)
 	check_near(absf(mob.kx), SimMob.KNOCKBACK, "a shot pushes the usual amount")
 	check_near(melee, SimMob.KNOCKBACK * MapInstance.MELEE_KNOCKBACK, "a blow pushes harder")
 

@@ -44,7 +44,7 @@ update this page when one changes. Each zone's own look and music are in
   moved up or down the stack on any frame; nothing is repainted or cut for it. Prefer shrinking
   to growing: a piece drawn bigger than painted looks softer.
 - Every piece of gear has frames for every pose in the game, whatever its job: every job's
-  attack (swing, bow, pistol, throw, cast) and every skill pose added later. A new body pose
+  attack (swing, bow, pistol, throw, cast) and every pose added later. A new body pose
   means new frames for all gear.
 - His arms, fists and held weapons never cover his face, in any pose; both fists show. Blink
   has no pose of its own: he just vanishes and reappears.
@@ -61,8 +61,8 @@ update this page when one changes. Each zone's own look and music are in
 - He walks, never runs, and walks 15% faster after about 0.4 s of moving. No jump sound.
 - Jobs have no movement skills (Cory Oct 17): bosses unlock moves instead, Hollow Knight
   style. Each zone boss drops a relic the first time a character beats it, for everyone at the
-  fight, and only they can take theirs. The move is theirs for good on every job, with no
-  level, essence or MP: Grotto Tusker Dash (a flat burst of 180 px ahead, farther than a Double Jump carries you
+  fight, and only they can take theirs. The move is theirs for good on every job and costs no
+  Mana: Grotto Tusker Dash (a flat burst of 180 px ahead, farther than a Double Jump carries you
   sideways, once per jump in the air; the roll pose), Arcane Sentinel Double Jump (the leap pose), Molten King Slam (Down + Jump in the
   air drops straight down and breaks cracked floors), Reef Titan Surge (hold Down + Dash on the
   ground, let go to fly straight ahead; the lunge pose). Elder Treant Wall Jump and Lantern
@@ -70,8 +70,7 @@ update this page when one changes. Each zone's own look and music are in
   Double Jump and Surge play the painted effects made for the old job moves (rolling dash
   spray, flash jump burst, charge trail); Slam bursts a molten impact where the hero lands. Each relic
   has its own painted icon.
-- Attacks and most attack skills aim: up hits overhead, down (in the air only) hits below. Buffs
-  don't aim. A downward melee blow that meets a monster bounces him off it (pogo).
+- Attacks aim: up hits overhead, down (in the air only) hits below. A downward melee blow that meets a monster bounces him off it (pogo).
 - He can move while swinging and keeps facing the swing until it ends. Buffs and spells make no
   swing: he carries on with what he was doing.
 - Holding attack keeps swinging, and a press made just before he can swing again goes off
@@ -87,55 +86,35 @@ update this page when one changes. Each zone's own look and music are in
   over it. Sitting beside the bench brings every heart back, and from then on fainting in that zone (not
   in a town) wakes him at that bench instead of in town.
 - An aimed attack turns its swing effect up or down.
-- Job skills will be flashy and grand, like MapleStory. Their effects are painted (Gemini),
-  8 frames at 14 fps: soft glow with no outline, MapleStory-big, in the job's colours. Attacks
-  show a swing and a hit on each monster struck, shots fly as painted frames, buffs burst as
-  cast and keep an aura round the player while they last; passives get none. Art only: no
-  added screen shake, flash or slow-down.
 
-## Jobs, levels and skills
+## Jobs, hearts and damage
 
-- The hero has a level (1 to 100, Cory Oct 17). Monsters give EXP equal to the Dawn Essence they
-  drop, and quests give EXP equal to their essence reward, on the old MapleStory-style EXP curve.
-  Each level raises power by the job's growth and refills the hearts, with a burst, a
-  "LEVEL UP!" ribbon and a jingle. The HUD shows a level badge and an EXP bar. Fainting loses 10% of
-  the EXP toward the next level (never a level); essence is safe.
+- Progression works like Hollow Knight (Cory Oct 19): no levels, EXP, Dawn Essence, job skills
+  or potions. The hero grows by finding things and by his gear.
 - Hearts and Mana, working like Hollow Knight but with the game's own names (Cory Oct 19). The
   hero has 5 hearts; every 4 Heart Shards found add one. A monster's touch or move takes one
   heart, a boss's big move two; nothing is dodged. Hearts and Mana never come back by
   themselves: a rest spot brings every heart back, and waking from a faint brings every heart
   and an empty Mana orb.
 - Mana fills as he hits monsters, a little for each one an attack strikes. Holding the Heal key,
-  standing still, spends a third of a full orb on one heart; Mana also pays for skills. Every 3
+  standing still, spends a third of a full orb on one heart. Every 3
   Mana Shards found make the orb bigger. The Mana orb and a row of hearts sit in the top left
   corner; their look is the painted sheet Cory approved (`art/source/hearts_mana.png`). In co-op each player has their own hearts and Mana and heals only themselves.
 - No damage numbers (Cory Oct 19): hits on monsters and on the hero show no numbers and no "Miss".
-- No base stats (no STR, DEX, INT, LUK or CHA, Cory Oct 17): the job and the level set them.
-  Damage grows from power (the job's own at level 1, plus the same every level, plus the Monster
-  Book's rank); Avoidability grows by the job. Nothing is bought with points and
-  nothing asks for a stat.
-- Monsters also drop Dawn Essence when they die and it flies to the hero (quests pay it too). It
-  buys skill levels only, anywhere, in the skill window; each skill level costs more than the
-  last one bought. Menus call it "Dawn Essence".
-- A first job has six skills: a quick single-target attack, a crowd attack, a self buff, a party
-  buff (reaches party members nearby), a passive and a monster-control skill.
-  Skill levels get dear quickly, so players choose what to leave unmaxed.
-- Monster control, one per job, made to combo: Warrior Skyward Cleave throws monsters in front
-  into the air; Magician Gravity Well pulls airborne monsters down, then hits every grounded one
-  around; Thief Shadow Ambush blinks into the biggest group ahead (ground or air) and stuns it;
-  Archer Pinning Shot pins one monster in place, even in mid-air; Pirate Anchor Haul drags
-  monsters in a line back to the hero. Thrown or stunned monsters can't move, attack or hurt by
-  touch. Every one deals damage. Bosses take the damage but are never thrown, dragged or stunned.
+- No base stats (no STR, DEX, INT, LUK or CHA, Cory Oct 17), and nothing is bought with
+  points or asks for a stat. Damage comes from the weapon: its attack, raised by its tier and
+  enchantments (Cory Oct 19, weapon tiers set damage). Monster health is set so each kind takes
+  about as many hits as it did before levels went, for a hero with the gear tier expected by
+  then (`Balance`).
+- Attacks are the weapon's own (a swing, a bow shot); there are no job skills or skill window
+  (Cory Oct 19).
 - First-job tutors open when the hero reaches their town, with no requirement; each job is taken
   by passing its Job Test once, and switching back to a job already
-  passed is free (its gifts come only the first time). Switching jobs at any tutor
-  that offers one drops the old job's skills and refunds the essence spent on them.
+  passed is free (its gifts come only the first time).
 - Second tier (parked): every first job picks one of two blends of itself and another first job:
   Spellblade (Warrior + Magician), Hexcaster (Magician + Thief), Swashbuckler (Thief + Pirate),
   Sharpshooter (Pirate + Archer), Wildhunter (Archer + Warrior). A blend is the same job from
-  either side. It keeps its own first-job skills and opens all of the other job's first-job
-  skills; it has no skills of its own (its draw is combining the two jobs). It wields every
-  weapon and off-hand of both jobs.
+  either side. It wields every weapon and off-hand of both jobs.
   Second- and third-tier jobs open when the hero beats a set boss, found through the tears,
   while one of the parent jobs. Which tutor teaches them and which boss opens each wait on
   the story.
@@ -147,9 +126,8 @@ update this page when one changes. Each zone's own look and music are in
   two parents: Spellblade into Bladecaller (Warrior) or Runeblade (Magician), Hexcaster into
   Warlock (Magician) or Nightweaver (Thief), Swashbuckler into Cutthroat (Thief) or Dread
   Pirate (Pirate), Sharpshooter into Gunslinger (Pirate) or Hawkeye (Archer), Wildhunter into
-  Stalker (Archer) or Berserker (Warrior). It joins no new job: it keeps both parents' skills
-  and weapons (no two-handed weapons), and it adds four skills of
-  its own that differ by lean: three skills and one ultimate that hits a very large area.
+  Stalker (Archer) or Berserker (Warrior). It joins no new job: it keeps both parents'
+  weapons (no two-handed weapons).
 - There is no Harbinger job: the harbinger is only a story reveal.
 - Off-hand slot (once the Shield slot): Warriors and Beginners wear a shield, a Thief throwing
   stars (with a dagger in hand), a Magician a book, an Archer a quiver worn on the back, a Pirate a pistol (with a scimitar). Stars
@@ -222,7 +200,7 @@ update this page when one changes. Each zone's own look and music are in
   the main way.
 - Every field has two secret ledges only a boss relic's move reaches (a small room has one):
   a high one (Double Jump) and a far one across a gap (Dash or Surge).
-  Each holds a chest a character opens once (shards, potions, a local Monster Book card). Secret ledges and shortcuts stay off the minimap; the zone map shows them once found.
+  Each holds a chest a character opens once (shards, a local Monster Book card). Secret ledges and shortcuts stay off the minimap; the zone map shows them once found.
 - Greenbough's, Dawnharbor Coast's, Lumewood's, Emberreach's and Lanternfall's fields have no raised land: every ledge is a plain platform with nothing under it
   (no terrace walls).
 - Characters and NPCs draw in front of land; characters cast no shadows. Portals draw in front of land and
@@ -305,13 +283,12 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   Cory says otherwise. A monster taken out of a zone stays in the files.
 - Defeated monsters respawn on a timer while the map stays loaded (a few seconds; bosses about
   half a minute). A map nobody is on resets, so coming back finds it full and its ground cleared.
-- Only the hero has a level. No "Lv." on monsters, bosses, maps, regions, the Monster Book,
-  quests, gear or trips, and nothing needs a level. Monsters and gear keep a hidden tuning tier
-  (MonsterDef.level, EquipDef.required_level) only so the balance and content checks can measure
-  them against a hero of that level.
-- Monster strength: each kind's own HP, attack and Dawn Essence are what it is on the map nearest
+- Nothing has a level, the hero included. No "Lv." anywhere, and nothing needs a level.
+  Monsters and gear keep a hidden tuning tier (MonsterDef.level, EquipDef.required_level), how
+  far along a player meets them, only so the balance and content checks can measure them.
+- Monster strength: each kind's own HP and attack are what it is on the map nearest
   a town that it lives on; on each map farther from the nearest town than that it is 15% stronger
-  (HP, attack and essence). Shortcuts and one-way ways home (a boss arena's) don't count
+  (HP and attack). Shortcuts and one-way ways home (a boss arena's) don't count
   toward that distance. Bosses keep their own numbers.
 - The paths players walk between towns stay gentle (tuning tier 10 or below) the whole way, so new
   players can reach every job town. Dead-end training branches climb in smooth steps to a boss
@@ -354,8 +331,9 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
   4-8 (Y, RB, LB, RT, B), Back opens a window menu, and with a window open a pad cursor stands
   in for the mouse (A click and drag, X right-click, Y double-click, B closes). Key hints name
   the pad's buttons while it's in use.
-- Skill icons are painted NPC-style badges: one bold subject (no people for Shoulder Bash) in a thick rounded frame of the job's colour: Beginner warm brown, Warrior
-  crimson, Magician blue, Thief charcoal black with silver trim, Archer green, Pirate gold.
+- Attack icons (the quickslots) are painted NPC-style badges: one bold subject in a thick
+  rounded frame of the job's colour: Beginner warm brown, Warrior crimson, Magician blue, Thief
+  charcoal black with silver trim, Archer green, Pirate gold.
 
 ## Audio and travel
 
@@ -403,8 +381,7 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 - Finishing a tear makes the world decline: the first one turns the whole world (every map but
   the tears' own) and each one after takes it further. The game goes from bright and happy to
   dreary and sullen: darker light and fog (never a recolour of the art), new painted scenery and
-  more dangerous, less cute painted versions of the monsters, +50% stronger a step with more EXP
-  and essence to match. In co-op a map follows the host's character.
+  more dangerous, less cute painted versions of the monsters, +50% stronger a step. In co-op a map follows the host's character.
 - Some maps have areas no one can reach until the world declines: a cracked wall or floor gives
   way and leads into an extended zone with the next part of the story, harder to cross and with
   more dangerous monsters. Two are shared (Greenbough with Lumewood, Lanternfall with

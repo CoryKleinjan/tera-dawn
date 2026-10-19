@@ -1,6 +1,6 @@
 extends TestCase
-## CharacterStats: power, damage and magic ranges from power, accuracy, avoid, crit,
-## Speed and Jump multipliers with their caps, and max HP / MP growth.
+## CharacterStats: the damage range from the weapon's attack, accuracy, crit, Speed and
+## Jump multipliers with their caps, and hearts and Mana from shards.
 
 var fx: UnitHelpers
 
@@ -10,64 +10,26 @@ func before_each() -> void:
 func after_each() -> void:
 	fx.cleanup()
 
-func _job(mastery := 0.5, base_power := 10) -> JobDef:
-	var j := fx.job()
-	j.mastery = mastery
-	j.base_power = base_power
-	return j
-
-func test_power_grows_with_level() -> void:
-	var j := _job(0.5, 12)
-	check_eq(CharacterStats.power(j, 1), 12, "base power at level 1")
-	check_eq(CharacterStats.power(j, 10), 12 + 9 * CharacterStats.POWER_PER_LEVEL, "five a level")
-	check_eq(CharacterStats.power(j, 0), 12, "never below level 1")
-
 func test_damage_range_formula() -> void:
-	# 20 × 3.6 × 10 / 100 × 2 = 14.4 -> 14, lowest 14 × 0.5 = 7
-	var s := UnitHelpers.stats({"attack": 10})
-	check_eq(CharacterStats.damage_range(_job(), 20, s), Vector2i(7, 14), "range")
+	# top = 10 × 2 = 20, lowest 20 × 0.7 = 14
+	check_eq(CharacterStats.damage_range(UnitHelpers.stats({"attack": 10})), Vector2i(14, 20), "range")
 
-func test_damage_range_grows_with_power_and_attack() -> void:
-	var j := _job()
-	var s := UnitHelpers.stats({"attack": 10})
-	check_eq(CharacterStats.damage_range(j, 30, s).y, 22, "30 power")
-	check_eq(CharacterStats.damage_range(j, 100, s).y, 72, "100 power")
-	check_eq(CharacterStats.damage_range(j, 100, UnitHelpers.stats({"attack": 20})).y, 144, "twice the attack")
-	check_eq(CharacterStats.damage_range(j, 100, UnitHelpers.stats({"attack": 10, "defense": 90, "accuracy": 50})).y, 72, "other stats don't add to it")
+func test_damage_range_grows_with_attack() -> void:
+	check_eq(CharacterStats.damage_range(UnitHelpers.stats({"attack": 20})).y, 40, "twice the attack, twice the top")
+	check_eq(CharacterStats.damage_range(UnitHelpers.stats({"attack": 10, "defense": 90, "accuracy": 50, "avoid": 7})).y, 20, "other stats don't add to it")
+
+func test_damage_range_uses_the_bigger_attack() -> void:
+	check_eq(CharacterStats.damage_range(UnitHelpers.stats({"magic_attack": 15})), Vector2i(21, 30), "a wand's Magic Attack")
+	check_eq(CharacterStats.damage_range(UnitHelpers.stats({"attack": 15, "magic_attack": 5})).y, 30, "Weapon Attack when it's bigger")
+	check_eq(CharacterStats.main_attack(UnitHelpers.stats({"attack": 4, "magic_attack": 9})), 9, "the bigger of the two")
 
 func test_damage_range_never_below_one() -> void:
-	var j := _job(0.1)
-	check_eq(CharacterStats.damage_range(j, 0, StatBlock.new()), Vector2i(1, 1), "no power, no attack")
-	check_eq(CharacterStats.damage_range(j, 1, UnitHelpers.stats({"attack": 1})), Vector2i(1, 1), "tiny")
+	check_eq(CharacterStats.damage_range(StatBlock.new()), Vector2i(1, 1), "no attack")
+	check_eq(CharacterStats.damage_range(UnitHelpers.stats({"attack": 1})), Vector2i(1, 2), "tiny")
 
-func test_mastery_sets_the_low_end() -> void:
-	var s := UnitHelpers.stats({"attack": 50})  # top = 50 × 3.6 × 50 / 100 × 2 = 180
-	check_eq(CharacterStats.damage_range(_job(0.6), 50, s), Vector2i(108, 180), "60%")
-	check_eq(CharacterStats.damage_range(_job(0.95), 50, s), Vector2i(171, 180), "95%")
-
-func test_magic_range_formula() -> void:
-	# M = 40 + 20 = 60: 60² / 120 + 60 = 90
-	var s := UnitHelpers.stats({"magic_attack": 20})
-	check_eq(CharacterStats.magic_attack(s, 40), 60, "magic attack includes power")
-	check_eq(CharacterStats.magic_range(_job(0.5), 40, s), Vector2i(45, 90), "range")
-	check_eq(CharacterStats.magic_range(_job(), 0, StatBlock.new()), Vector2i(1, 1), "floor of one")
-
-func test_magic_range_ignores_weapon_attack() -> void:
-	var j := _job()
-	var a := CharacterStats.magic_range(j, 40, StatBlock.new())
-	var b := CharacterStats.magic_range(j, 40, UnitHelpers.stats({"attack": 500}))
-	check_eq(a, b, "only power and Magic Attack")
-
-func test_accuracy_and_avoid() -> void:
-	var s := UnitHelpers.stats({"accuracy": 3, "avoid": 2})
-	check_eq(CharacterStats.accuracy(s), 3, "accuracy is gear's")
+func test_accuracy_is_gears() -> void:
+	check_eq(CharacterStats.accuracy(UnitHelpers.stats({"accuracy": 3})), 3, "accuracy is gear's")
 	check_eq(CharacterStats.accuracy(StatBlock.new()), 0, "zero")
-	var j := _job()
-	check_eq(CharacterStats.avoid(j, 1, s), 2 + CharacterStats.BASE_AVOID, "avoid = gear + base")
-	check_eq(CharacterStats.avoid(j, 50, s), 2 + CharacterStats.BASE_AVOID, "no growth without avoid_growth")
-	j.avoid_growth = 3.75
-	check_eq(CharacterStats.avoid(j, 1, StatBlock.new()), CharacterStats.BASE_AVOID, "nothing at level 1")
-	check_eq(CharacterStats.avoid(j, 11, s), 2 + CharacterStats.BASE_AVOID + 38, "3.75 a level, rounded")
 
 func test_crit_rate() -> void:
 	check_near(CharacterStats.crit_rate(StatBlock.new()), 0.12, "base")
@@ -92,14 +54,6 @@ func test_hearts_and_mana_grow_only_from_shards() -> void:
 	check_eq(CharacterStats.max_mp(0), CharacterStats.BASE_MANA, "a full orb to start")
 	check_eq(CharacterStats.max_mp(CharacterStats.MANA_SHARDS_PER_ORB), CharacterStats.BASE_MANA + CharacterStats.MANA_PER_ORB, "a bigger orb")
 	check_eq(CharacterStats.BASE_MANA / CharacterStats.HEAL_COST, 3, "a full orb heals three hearts")
-
-func test_real_jobs_grow_their_damage_with_level() -> void:
-	var s := UnitHelpers.stats({"attack": 10})
-	for id in Content.jobs:
-		var j: JobDef = Content.jobs[id]
-		check(j.base_power > 0, "%s: has base power" % id)
-		var low := CharacterStats.damage_range(j, CharacterStats.power(j, 10), s).y
-		check(CharacterStats.damage_range(j, CharacterStats.power(j, 30), s).y > low, "%s: levels raise damage" % id)
 
 func test_stat_block_rolled_and_format() -> void:
 	check_eq(StatBlock.format(&"attack", 3), "+3", "plain")

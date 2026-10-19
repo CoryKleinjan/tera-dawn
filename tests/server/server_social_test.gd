@@ -1,6 +1,6 @@
 extends TestCase
 ## Players together through the server: chat channels and whispers, invitations,
-## parties (and their shared Dawn Essence), buddy lists and the ev_social summary.
+## parties (and the kills they share), buddy lists and the ev_social summary.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
@@ -153,34 +153,25 @@ func test_a_party_holds_six() -> void:
 	check(h.told(2, "Your party is full."), "the seventh is refused")
 	check(h.server.social.party_of("Mate3") == null, "Mate3 stays out")
 
-func test_party_members_on_the_map_share_kill_essence() -> void:
+func test_a_kill_counts_for_party_members_on_the_map() -> void:
 	_accept(2, "party", 3)
 	_accept(2, "party", 4)
-	var d := ServerHarness.monster(&"test_mob", 1, 10)
+	var d := ServerHarness.monster(&"test_mob", 1)
 	var map := h.server.map_instance(ServerHarness.FIELD)
 	var m := SimMob.new(map, 0, d, map.layout.platforms[0])
 	map.mobs.append(m)
 	ServerHarness.no_cards(ann, d)
 	map.kill_mob(m, ann)
-	check_eq(ann.character.essence, 10, "the killer gets it all")
-	check_eq(bob.character.essence, 4, "Bob on the map gets 40%")
-	check_eq(cat.character.essence, 0, "Cat in town gets nothing")
-	var fly := h.last(3, &"ev_essence")
-	check(fly.size() == 3 and fly[2] == 4, "Bob's share flies to him from the monster")
-	check_eq(h.count(4, &"ev_essence"), 0, "none to Cat")
+	check_eq(ann.character.book.kills(d), 1, "the killer's book counts it")
 	check_eq(bob.character.book.kills(d), 1, "the kill counts for Bob's book and quests too")
-	check_eq(cat.character.book.kills(d), 0, "but not Cat's")
+	check_eq(cat.character.book.kills(d), 0, "but not Cat's, in town")
 
-func test_a_fainted_party_member_gets_no_share() -> void:
+func test_party_members_here_are_the_others_on_the_map_who_are_up() -> void:
 	_accept(2, "party", 3)
+	_accept(2, "party", 4)
+	check_eq(h.server.social.party_here(ann), [bob] as Array[SimPlayer], "Bob, not Ann herself or Cat in town")
 	bob.faint_t = 10
-	var shares: Array = h.server.social.party_shares(ann, 10)
-	check(shares.is_empty(), "no share")
-
-func test_the_smallest_share_is_one() -> void:
-	_accept(2, "party", 3)
-	var shares: Array = h.server.social.party_shares(ann, 1)
-	check(shares.size() == 1 and shares[0][0] == bob and shares[0][1] == 1, "one Dawn Essence")
+	check(h.server.social.party_here(ann).is_empty(), "not Bob while he's fainted")
 
 func test_leaving_a_party_of_two_breaks_it_up() -> void:
 	_accept(2, "party", 3)

@@ -165,15 +165,6 @@ func test_sitting_down_earns_take_a_seat_once() -> void:
 	h.step(61)
 	check_eq(h.count(2, &"ev_achievement"), 1, "not sent again")
 
-func test_reaching_level_5_earns_an_achievement() -> void:
-	var need := 0
-	for lvl in range(c.level, 5):
-		need += c.xp_need(lvl)
-	h.server.give_xp(p, need - c.xp)
-	check_eq(c.level, 5, "level 5")
-	h.step(1)
-	check_has(h.events(2, &"ev_achievement"), ["level_5"], "Growing Up")
-
 func test_achievements_are_noticed_on_the_minute_too() -> void:
 	c.shards = 100000
 	h.step(59)

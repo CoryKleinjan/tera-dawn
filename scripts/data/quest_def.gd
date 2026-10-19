@@ -48,8 +48,6 @@ extends Resource
 @export var objectives: Array[QuestObjective] = []
 
 @export_group("Rewards")
-## Pays this much Dawn Essence and as much EXP.
-@export var reward_essence := 0
 @export var reward_shards := 0
 ## Each entry gives its item, `min_amount` of it.
 @export var reward_items: Array[DropEntry] = []
@@ -58,12 +56,14 @@ extends Resource
 func turn_in_npc() -> StringName:
 	return turn_in if turn_in != &"" else giver
 
-## "120 EXP · 120 Dawn Essence · 50 Dawnshards · 3 Red Potion"
+## "Reward: 50 Dawnshards · 3 Tide Rune", or "" for a quest that gives nothing (a Job Test).
+func reward_line() -> String:
+	var r := describe_rewards()
+	return "Reward: %s" % r if r != "" else ""
+
+## "50 Dawnshards · 3 Tide Rune"
 func describe_rewards() -> String:
 	var parts := []
-	if reward_essence > 0:
-		parts.append("%d EXP" % reward_essence)
-		parts.append("%d Dawn Essence" % reward_essence)
 	if reward_shards > 0:
 		parts.append("%d Dawnshards" % reward_shards)
 	for r in reward_items:

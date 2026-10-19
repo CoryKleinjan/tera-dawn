@@ -11,14 +11,14 @@ on Windows).
 
 **What's in it:** play solo, or co-op with up to four players (one hosts, friends join
 bringing their own characters), with up to six characters saved on each player's computer; a world of regions, towns, fields and boss hunting grounds joined by portals, ships and
-coaches; a Beginner and five jobs (Warrior, Archer, Magician, Thief, Pirate) with skill books,
-quickslots, melee, ranged and magic combat; levels with Dawn Essence for skill levels, gear slots and gear sets,
-runes and drops; NPCs, shops, storage and quests; chat, parties, buddies, guilds, trades and fame;
+coaches; a Beginner and five jobs (Warrior, Archer, Magician, Thief, Pirate), quickslots,
+melee, ranged and magic combat; hearts and Mana, Hollow Knight style with no levels; gear slots and
+gear sets, runes and drops; NPCs, shops, storage and quests; chat, parties, buddies, guilds, trades and fame;
 sitting, pets, the Monster Book and Steam achievements.
 
 All content is data in `data/`, and all art is painted sheets in `art/source/` cut into
 `assets/` by `tools/art/slice_sheets.py`. [ARCHITECTURE.md](ARCHITECTURE.md) explains how the
-code is laid out and links a page per system, with how to add a monster, map, item, skill and so on.
+code is laid out and links a page per system, with how to add a monster, map, item and so on.
 
 ## Running it
 
@@ -45,11 +45,11 @@ Defaults; every key can be changed under **Settings > Controls**, with two keys 
 | Drop through a platform | Down + Jump | Down + A |
 | Sit on the ground (doubles regen) | C | |
 | Attack (hold Up to hit overhead, Down in the air to hit below and bounce) | X or Ctrl | X |
-| Quickslots (skills, potions) | A (or Shift), D, F, G, V, B, N, M | Y, RB, LB |
+| Quickslots (items) | A (or Shift), D, F, G, V, B, N, M | Y, RB, LB |
 | Pick up items (hold to keep looting) | Z | B |
 | Dash (after the Grotto Tusker) | R | RT |
 | Inventory / Equipment / Character | I / E / S | Back (window menu) |
-| Quests / Skills / World map | Q / K / W | |
+| Quests / World map | Q / W | |
 | Community / Monster Book and achievements | O / L | |
 | Chat | Enter | |
 | Enter a portal, talk to an NPC | Up | Up |

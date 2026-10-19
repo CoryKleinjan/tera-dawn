@@ -1,10 +1,11 @@
 extends TestCase
-## Attacks and skills against monsters on the server: what gets hit, damage, kills, Dawn
-## Essence, cooldowns, MP, buffs and monsters coming back.
+## Attacks and skills against monsters on the server: what gets hit, damage, kills,
+## cooldowns, Mana, buffs and monsters coming back.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
 var h: ServerHarness
+var u := UnitHelpers.new()
 var mob_def: MonsterDef
 var map: MapInstance
 var p: SimPlayer
@@ -14,15 +15,23 @@ func before_each() -> void:
 
 func after_each() -> void:
 	h.close()
+	u.cleanup()
 
 ## A field with `count` test monsters of `hp` HP, all at `x`, and Ann at 300 facing right.
-func _setup(hp := 1, essence := 10, count := 1, x := 340.0) -> void:
-	mob_def = ServerHarness.monster(&"test_mob", hp, essence)
+func _setup(hp := 1, count := 1, x := 340.0) -> void:
+	mob_def = ServerHarness.monster(&"test_mob", hp)
 	map = h.field_with([ServerHarness.spawn(mob_def, count)])
 	for m in map.mobs:
 		m.position.x = x
 	p = h.join(2, "Ann", ServerHarness.FIELD, 300.0)
 	ServerHarness.no_cards(p, mob_def)
+
+## A melee skill made for the test that costs Mana and reaches past a plain swing.
+func _bash() -> SkillDef:
+	var s := u.skill(&"t_bash")
+	s.mp_cost = 5
+	s.reach = 160.0
+	return s
 
 func _attack(peer := 2, skill := &"basic_attack") -> void:
 	var who: SimPlayer = h.server.sessions[peer]
@@ -53,18 +62,18 @@ func test_damage_is_within_the_characters_range() -> void:
 		h.step(p.cooldown)
 
 func test_monster_behind_you_is_not_hit() -> void:
-	_setup(1000, 10, 1, 240.0)
+	_setup(1000, 1, 240.0)
 	_attack()
 	check_eq(h.last(2, &"ev_skill")[5], [], "nothing hit")
 	check_eq(map.mobs[0].health.hp, 1000, "full HP")
 
 func test_monster_out_of_reach_is_not_hit() -> void:
-	_setup(1000, 10, 1, 300.0 + 78.0 + 18.0 + 1.0)
+	_setup(1000, 1, 300.0 + 78.0 + 18.0 + 1.0)
 	_attack()
 	check_eq(h.last(2, &"ev_skill")[5], [], "nothing hit")
 
 func test_plain_attack_hits_only_the_nearest_monster() -> void:
-	_setup(1000, 10, 2)
+	_setup(1000, 2)
 	map.mobs[0].position.x = 360.0
 	map.mobs[1].position.x = 330.0
 	_attack()
@@ -89,23 +98,13 @@ func test_a_hit_monster_turns_on_its_attacker() -> void:
 	check_eq(m.aggro, 600, "angry")
 	check_eq(m.show_hp, SimMob.SHOW_HP_TICKS, "HP bar shown")
 
-func test_killing_a_monster_announces_it_and_gives_essence() -> void:
-	_setup(1, 10)
+func test_killing_a_monster_announces_it() -> void:
+	_setup(1)
 	h.join(3, "Bob", ServerHarness.FIELD, 900.0)
 	_attack()
 	check(map.mobs[0].dead, "dead")
 	check_eq(h.last(2, &"ev_mob_died"), [0], "killer told")
 	check_eq(h.last(3, &"ev_mob_died"), [0], "others on the map told")
-	check_eq(p.character.essence, 10, "Dawn Essence")
-	var fly := h.last(2, &"ev_essence")
-	check_eq(fly.size(), 3, "the essence flies to the player")
-	check_eq(fly[2], 10, "all of it")
-	check_eq(h.count(3, &"ev_essence"), 0, "only to the killer")
-	check_eq(h.count(2, &"ev_gain"), 0, "it flies from the monster instead of rising over the player")
-	check(not h.told(2, "Essence"), "not in the message log")
-	h.step(1)
-	# the first kill also earns an achievement, so the whole character is sent
-	check_eq(h.last(2, &"ev_character")[0]["essence"], 10, "the update carries the new essence")
 
 func test_attacks_wait_for_the_cooldown() -> void:
 	_setup(100000)
@@ -172,54 +171,45 @@ func test_in_co_op_a_map_resets_only_once_everyone_has_left() -> void:
 func test_skills_you_dont_know_are_refused() -> void:
 	_setup(1000)
 	var mp := p.character.mp
-	_attack(2, &"shoulder_bash")
+	_attack(2, _bash().id)
 	check_eq(h.count(2, &"ev_skill"), 0, "not used")
 	check(h.told(2, "You don't know that skill."), "told why")
-	check_eq(p.character.mp, mp, "no MP spent")
+	check_eq(p.character.mp, mp, "no Mana spent")
 
 func test_unknown_skill_ids_are_ignored() -> void:
 	_setup(1000)
 	_attack(2, &"no_such_skill")
 	check_eq(h.api.sent.size(), 0, "nothing happens")
 
-func test_learned_skill_spends_its_mp_and_reaches_further() -> void:
-	_setup(1000, 10, 1, 400.0)
+func test_a_known_skill_spends_its_mp_and_reaches_further() -> void:
+	_setup(1000, 1, 400.0)
 	var c := p.character
-	c.essence = c.skills.price() + 5
-	h.ask(2, &"req_learn_skill", [&"shoulder_bash"])
-	check_eq(c.skills.learned.get(&"shoulder_bash"), 1, "learned")
-	check_eq(c.essence, 5, "its price in Dawn Essence spent")
-	check_eq(c.skills.paid.get(&"shoulder_bash"), CharacterStats.skill_price(0), "and kept as paid")
+	var bash := _bash()
+	c.skills.learned[bash.id] = 1
 	c.mp = c.max_mp()
 	var mp := c.mp
-	_attack(2, &"shoulder_bash")
-	check_eq(c.mp, mp - Content.skill(&"shoulder_bash").mp_at(1), "MP paid")
+	_attack(2, bash.id)
+	check_eq(c.mp, mp - bash.mp_at(1), "Mana paid")
 	check_eq((h.last(2, &"ev_skill")[5] as Array).size(), 1, "hit the monster 100 px away, past a plain swing")
-
-func test_learning_without_enough_essence_is_refused() -> void:
-	_setup()
-	var c := p.character
-	c.essence = c.skills.price() - 1
-	h.ask(2, &"req_learn_skill", [&"shoulder_bash"])
-	check(not c.skills.learned.has(&"shoulder_bash"), "not learned")
-	check_eq(c.essence, c.skills.price() - 1, "nothing spent")
-	check(h.told(2, "You need %d Dawn Essence for that." % c.skills.price()), "told why")
 
 func test_not_enough_mp_refuses_the_skill() -> void:
 	_setup(1000)
-	p.character.skills.learned[&"shoulder_bash"] = 1
+	var bash := _bash()
+	p.character.skills.learned[bash.id] = 1
 	p.character.mp = 2
-	_attack(2, &"shoulder_bash")
+	_attack(2, bash.id)
 	check_eq(h.count(2, &"ev_skill"), 0, "not used")
-	check(h.told(2, "Not enough MP for Shoulder Bash."), "told why")
-	check_eq(p.character.mp, 2, "MP kept")
+	check(h.told(2, "Not enough Mana for T Bash."), "told why")
+	check_eq(p.character.mp, 2, "Mana kept")
 
 func test_a_buff_raises_stats_until_it_wears_off() -> void:
 	_setup()
 	var c := p.character
-	var skill := Content.skill(&"quick_step")
+	var skill := u.skill(&"t_step", SkillDef.Kind.BUFF)
+	skill.animation = SkillDef.SPELL
+	skill.duration = 2.0
+	skill.stats = UnitHelpers.stats({"speed": 10})
 	c.skills.learned[skill.id] = 1
-	c.mp = c.max_mp()
 	var speed := c.stats.speed
 	_attack(2, skill.id)
 	check_eq(c.stats.speed, speed + skill.stats_at(1).speed, "faster")
@@ -229,7 +219,7 @@ func test_a_buff_raises_stats_until_it_wears_off() -> void:
 	h.step(1)
 	check(not c.skills.buffs.has(skill.id), "ended")
 	check_eq(c.stats.speed, speed, "speed back")
-	check(h.told(2, "Quick Step wore off."), "told")
+	check(h.told(2, "T Step wore off."), "told")
 
 func test_a_fainted_player_cannot_attack() -> void:
 	_setup(1000)

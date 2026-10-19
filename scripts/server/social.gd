@@ -19,8 +19,6 @@ const GUILD_COST := 15000
 const FAME_REPEAT_DAYS := 30
 const TRADE_SLOTS := 9
 const CHAT_MAX := 120
-## Share of a kill's Dawn Essence and EXP every other party member on the map gets.
-const PARTY_SHARE := 0.4
 ## Ticks an invitation waits for an answer.
 const INVITE_TICKS := 3600
 const INFO := Color("c9e4ff")
@@ -177,8 +175,10 @@ func invite(p: SimPlayer, kind: String, to: String) -> void:
 func on_answer(peer: int, id: int, accept: bool) -> void:
 	party.on_answer(peer, id, accept)
 
-func party_shares(killer: SimPlayer, amount: int) -> Array:
-	return party.shares(killer, amount)
+## The other members of `killer`'s party on the same map who are up (a kill counts for their
+## quests too).
+func party_here(killer: SimPlayer) -> Array[SimPlayer]:
+	return party.here(killer)
 
 ## Party members on the same map within `reach` of `p` (for party buffs).
 func party_near(p: SimPlayer, reach: float) -> Array[SimPlayer]:

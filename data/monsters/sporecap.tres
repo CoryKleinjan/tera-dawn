@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MonsterDef" load_steps=15 format=3]
+[gd_resource type="Resource" script_class="MonsterDef" load_steps=11 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/monster_def.gd" id="1_monster_def"]
 [ext_resource type="Resource" path="res://data/monsters/spore_puff.tres" id="2_spore_puff"]
@@ -6,24 +6,8 @@
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="4_drop_entry"]
 [ext_resource type="Resource" path="res://data/items/dawnshard.tres" id="5_dawnshard"]
 [ext_resource type="Resource" path="res://data/items/etc/spore_sac.tres" id="6_spore_sac"]
-[ext_resource type="Resource" path="res://data/items/use/red_potion.tres" id="7_red_potion"]
-[ext_resource type="Resource" path="res://data/items/use/blue_potion.tres" id="8_blue_potion"]
 [ext_resource type="Resource" path="res://data/monster_moves/pounce.tres" id="mv_pounce"]
 [ext_resource type="Script" path="res://scripts/data/monster_move.gd" id="mv_script"]
-
-[sub_resource type="Resource" id="Resource_4"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("8_blue_potion")
-chance = 0.05
-min_amount = 1
-max_amount = 1
-
-[sub_resource type="Resource" id="Resource_3"]
-script = ExtResource("4_drop_entry")
-item = ExtResource("7_red_potion")
-chance = 0.08
-min_amount = 1
-max_amount = 2
 
 [sub_resource type="Resource" id="Resource_2"]
 script = ExtResource("4_drop_entry")
@@ -46,7 +30,6 @@ display_name = "Sporecap"
 level = 5
 max_hp = 85
 attack = 15
-essence = 21
 speed = 0.9
 size = Vector2(40.0, 44.0)
 boss = false
@@ -57,4 +40,4 @@ sight = 120.0
 moves = Array[ExtResource("mv_script")]([ExtResource("mv_pounce")])
 sprite_frames = ExtResource("3_sporecap")
 sprite_scale = 1.0
-drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2"), SubResource("Resource_3"), SubResource("Resource_4")])
+drops = Array[ExtResource("4_drop_entry")]([SubResource("Resource_1"), SubResource("Resource_2")])
