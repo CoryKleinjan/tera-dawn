@@ -277,6 +277,12 @@ func req_sit(down: bool) -> void:
 	if server:
 		server.on_sit(_sender(), down)
 
+## The heal key was held long enough: Mana heals a heart.
+@rpc("any_peer", "call_local", "reliable")
+func req_heal() -> void:
+	if server:
+		server.on_heal(_sender())
+
 @rpc("any_peer", "call_local", "reliable")
 func req_skill(skill_id: StringName, at: Vector2, face: int, aim := 0) -> void:
 	if server:
@@ -634,11 +640,6 @@ func ev_gain(kind: StringName, amount: int) -> void:
 func ev_pickup(item_id: StringName, amount: int) -> void:
 	if world and Content.items.has(item_id):
 		world.show_pickup(Content.items[item_id], amount)
-
-@rpc("authority", "call_local", "reliable")
-func ev_number(x: float, y: float, value: int, kind: String) -> void:
-	if world:
-		world.add_number(Vector2(x, y), value, kind)
 
 @rpc("authority", "call_local", "reliable")
 func ev_effect(effect_id: StringName, x: float, y: float, face: int, follow_peer: int) -> void:

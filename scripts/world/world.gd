@@ -439,8 +439,6 @@ func fly_essence(from: Vector2, amount: int) -> void:
 func show_level_up(peer: int, level: int) -> void:
 	fx.show_level_up(peer, level)
 
-func add_number(pos: Vector2, value: int, kind: String) -> void:
-	fx.add_number(pos, value, kind)
 
 ## Plays sound effect `id` coming from `pos` in the world: quieter the further it is from
 ## your hero, and not at all beyond SOUND_FAR.

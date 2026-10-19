@@ -63,8 +63,10 @@ func _rich() -> Character:
 	q.monster = mob
 	c.quests.accept(fx.quest(&"t_quest", [q]))
 	c.quests.record_kill(mob)
+	c.heart_shards = 5
+	c.mana_shards = 2
 	c.recalc()
-	c.health.set_hp(50)
+	c.health.set_hp(3)
 	c.mp = 17
 	return c
 
@@ -84,8 +86,10 @@ func test_round_trip_basics() -> void:
 	check(b.job == c.job, "job")
 	check_eq([b.level, b.xp], [12, 40], "level and EXP")
 	check_eq(b.power(), c.power(), "power")
-	check_eq(b.health.hp, 50, "HP")
-	check_eq(b.mp, 17, "MP")
+	check_eq(b.health.hp, 3, "hearts")
+	check_eq(b.mp, 17, "Mana")
+	check_eq([b.heart_shards, b.mana_shards], [5, 2], "Heart and Mana Shards")
+	check_eq(b.max_hp(), CharacterStats.BASE_HEARTS + 1, "a heart from the shards")
 
 func test_round_trip_gear_keeps_rolled_stats() -> void:
 	var b := _round_trip(_rich())
@@ -159,7 +163,7 @@ func test_bad_values_are_clamped_or_ignored() -> void:
 		"base": {},
 		"skills": {"t_gone": 3}, "skills_paid": {"t_gone": 17},
 		"buffs": {"t_gone": [1, 50], "t_job": "bad"},
-		"pet": "t_etc", "pet_full": 500, "hp": 0, "mp": 99999,
+		"pet": "t_etc", "pet_full": 500, "hp": 0, "mp": 99999, "heart_shards": -3, "mana_shards": -1,
 	})
 	check_eq(c.essence, 17, "essence floor, plus what the unknown skill cost")
 	check_eq([c.level, c.xp], [1, 0], "no level from the days without levels")
@@ -170,8 +174,9 @@ func test_bad_values_are_clamped_or_ignored() -> void:
 	check(c.skills.buffs.is_empty(), "bad buffs dropped")
 	check_eq(c.pet, &"", "not a pet")
 	check_eq(c.pet_full, 100, "fullness capped")
-	check_eq(c.health.hp, 1, "loads with at least 1 HP")
-	check_eq(c.mp, c.max_mp(), "MP capped")
+	check_eq(c.health.hp, 1, "loads with at least 1 heart")
+	check_eq(c.mp, c.max_mp(), "Mana capped")
+	check_eq([c.heart_shards, c.mana_shards], [0, 0], "shards floored")
 
 func test_bad_paid_values_are_floored() -> void:
 	fx.skill()
@@ -202,12 +207,12 @@ func test_unknown_job_keeps_current_job() -> void:
 	c.load_dict({"job": "t_no_such_job", "essence": 0, "base": {}})
 	check_eq(c.job.id, &"t_job", "kept")
 
-func test_missing_hp_and_mp_load_full() -> void:
+func test_a_save_from_before_hearts_loads_with_every_heart() -> void:
 	var c := fx.character()
-	c.load_dict({"job": "t_job", "essence": 0, "level": 2})
-	check_eq(c.health.hp, c.max_hp(), "full HP")
-	check_eq(c.mp, c.max_mp(), "full MP")
-	check_eq(c.max_hp(), 70, "level 2: 50 + 2 × 10")
+	c.load_dict({"job": "t_job", "essence": 0, "level": 2, "hp": 37, "mp": 80})
+	check_eq(c.max_hp(), CharacterStats.BASE_HEARTS, "five hearts")
+	check_eq(c.health.hp, c.max_hp(), "every heart, whatever HP it had")
+	check_eq(c.mp, 0, "an empty orb")
 
 func test_save_with_an_old_appearance_loads_without_it() -> void:
 	var c := fx.character()

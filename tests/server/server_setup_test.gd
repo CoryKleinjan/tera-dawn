@@ -1,5 +1,5 @@
 extends TestCase
-## Sitting on the ground (and its faster regeneration) and the Setup tab through the
+## Sitting on the ground (which heals nothing by itself) and the Setup tab through the
 ## server: pets coming out, picking up loot, getting hungry and being fed. Also achievements
 ## reaching the player as ev_achievement.
 
@@ -20,11 +20,6 @@ func before_each() -> void:
 func after_each() -> void:
 	h.close()
 
-## Steps once so that the map's next tick is a regeneration tick.
-func _regen_tick() -> void:
-	p.map.tick = 119
-	h.step(1)
-
 # ---------- sitting ----------
 
 func test_sitting_down() -> void:
@@ -33,22 +28,13 @@ func test_sitting_down() -> void:
 	check_eq(h.last(2, &"ev_sit"), [true], "client told")
 	check_eq(int(c.counters.get(Counters.SAT, 0)), 1, "counted")
 
-func test_sitting_doubles_regeneration() -> void:
-	c.health.set_hp(10)
-	c.mp = 0
-	_regen_tick()
-	check_eq(c.health.hp, 12, "2 HP standing, before any stats are bought")
-	check_eq(c.mp, 2, "2 MP standing, before any stats are bought")
+func test_nothing_comes_back_by_itself_even_sitting() -> void:
+	c.health.set_hp(2)
+	c.mp = 10
 	h.ask(2, &"req_sit", [true])
-	_regen_tick()
-	check_eq(c.health.hp, 12 + 4, "4 HP sitting")
-	check_eq(c.mp, 2 + 4, "4 MP sitting")
-
-func test_no_regeneration_between_regen_ticks() -> void:
-	c.health.set_hp(10)
-	p.map.tick = 0
-	h.step(119)
-	check_eq(c.health.hp, 10, "nothing until tick 120")
+	h.step(600)
+	check_eq(c.health.hp, 2, "no hearts back")
+	check_eq(c.mp, 10, "no Mana back")
 
 func test_getting_up() -> void:
 	h.ask(2, &"req_sit", [true])

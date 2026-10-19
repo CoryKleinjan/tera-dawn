@@ -1,0 +1,16 @@
+{
+ "source": "art/source/hearts_mana.png",
+ "out_dir": "assets/sprites/ui",
+ "cells": [["heart_full", "heart_empty"], ["mana_full", "mana_empty"]],
+ "grid": {"rows": [0, 1024, 2048], "cols": [0, 1024, 2048]},
+ "inset": 0,
+ "detail": 1,
+ "dark_key": false,
+ "trim": false,
+ "overrides": {
+  "heart_full": {"crop": [64, 108, 962, 916], "scale": 0.0535},
+  "heart_empty": {"crop": [64, 108, 962, 916], "scale": 0.0535},
+  "mana_full": {"crop": [42, 42, 982, 980], "scale": 0.1234},
+  "mana_empty": {"crop": [42, 42, 982, 980], "scale": 0.1234}
+ }
+}

@@ -176,8 +176,8 @@ func enter_map(p: SimPlayer, id: StringName, x: float, platform := 0, arrive := 
 	save(p)
 	scenes.play(p, m.def.intro_scene)
 
-## Sends a fainted player back to their rest spot or town (`_wake_spot`) with half their HP
-## and MP.
+## Sends a fainted player back to their rest spot or town (`_wake_spot`) with every heart
+## back and no Mana.
 func revive(p: SimPlayer) -> void:
 	_wake(p)
 	var at := _wake_spot(p)
@@ -195,12 +195,11 @@ func _wake_spot(p: SimPlayer) -> Array:
 	var town := _town_for(p)
 	return [town, Content.map(town).start_x, 0]
 
-## Rests the player at rest spot `spot` of their map (MapDef.rest_spots): HP and MP fill, and
-## fainting in this region wakes them here from now on.
+## Rests the player at rest spot `spot` of their map (MapDef.rest_spots): every heart comes
+## back (Mana stays as it is), and fainting in this region wakes them here from now on.
 func _rest(p: SimPlayer, spot: int) -> void:
 	var c := p.character
-	c.health.set_hp(c.max_hp())
-	c.mp = c.max_mp()
+	c.refill()
 	p.dirty_vitals = true
 	if c.rest_map != p.map.def.id or c.rest_spot != spot:
 		c.rest_map = p.map.def.id
@@ -208,12 +207,11 @@ func _rest(p: SimPlayer, spot: int) -> void:
 		p.map.tell(p, "You rested. You'll wake here if you faint nearby.", Palette.INFO)
 		save(p)
 
-## Gets a fainted player up with half their HP and MP and a moment of invincibility.
+## Gets a fainted player up with every heart, no Mana and a moment of invincibility.
 func _wake(p: SimPlayer) -> void:
 	var c := p.character
-	c.health.reset(c.max_hp())
-	c.health.set_hp(ceili(c.max_hp() / 2.0))
-	c.mp = ceili(c.max_mp() / 2.0)
+	c.refill()
+	c.mp = 0
 	p.faint_t = 0
 	p.inv = 120
 	p.dirty_vitals = true
@@ -284,9 +282,8 @@ func on_slam(peer: int, at: Vector2) -> void:
 			and at.distance_to(p.position) <= SimPlayer.MAX_STEP * TDPlayer.REPORT_EVERY + 40.0:
 		p.map.slam(p, at)
 
-## Sits the player down on the ground (`down`) or gets them up. Sitting regenerates faster
-## (SimPlayer.step), and sitting by a rest spot's bench rests there (`_rest`); moving or
-## getting hit gets them up.
+## Sits the player down on the ground (`down`) or gets them up. Sitting by a rest spot's
+## bench rests there (`_rest`); moving or getting hit gets them up.
 func on_sit(peer: int, down: bool) -> void:
 	var p := player_of(peer)
 	if p == null or p.sitting == down:
@@ -303,6 +300,16 @@ func on_sit(peer: int, down: bool) -> void:
 	var spot := p.map.layout.rest_at(p.position) if down else -1
 	if spot >= 0:
 		_rest(p, spot)
+
+## The player held the heal key long enough (TDPlayer): CharacterStats.HEAL_COST Mana heals
+## a heart, if they have it and aren't healing faster than SimPlayer.HEAL_TICKS allows.
+func on_heal(peer: int) -> void:
+	var p := player_of(peer)
+	if p == null or p.fainted() or p.in_scene() or p.heal_cd > COOLDOWN_SLACK or not p.character.heal_heart():
+		return
+	p.heal_cd = SimPlayer.HEAL_TICKS
+	p.dirty_vitals = true
+	p.map.broadcast(&"ev_effect", [EffectDef.HEAL, p.position.x, p.position.y, p.face, p.peer])
 
 ## `aim` is a Hitbox.Aim: up or down for an aiming attack, else ahead.
 func on_skill(peer: int, skill_id: StringName, at: Vector2, face: int, aim := 0) -> void:
