@@ -19,13 +19,16 @@ func build(map: MapDef, platforms: Array[Platform]) -> void:
 		var d := map.platforms[i - 1]
 		if d.in_scenery:
 			continue  # the scenery behind it is its painting
+		var z := _ledge_z(platforms[i], platforms[0])
 		if d.look:
-			_platform_look(platforms[i], d)
+			_platform_look(platforms[i], d, z)
 		else:
-			_platform_front(platforms[i], biome, d.solid)
+			_platform_front(platforms[i], biome, d.solid, z)
 		if d.solid:
 			_solid_wall(map, i, biome)
 	_edge_grass(map, platforms, biome)
+	if map.solid_room:
+		_room_shell(map, platforms, biome)
 
 ## Adds a piece of land to the map. Land casts no shadows: platforms and the floor would
 ## otherwise throw the sun's shadow onto the scenery standing behind them.
@@ -138,16 +141,28 @@ func _strip(name_: String, texture: Texture2D, rect: Rect2, tile: Vector2, z: fl
 
 # ---------- painted platform fronts ----------
 
+## How much nearer the camera the lowest platform's skin sits than the highest one's, so a
+## deep ledge's underside tucks behind the ledge below it (Cory 2026-10-19). Kept smaller than
+## the trims' place behind LAND_FRONT (TRIM_Z), so every ledge stays in front of the walls.
+const LEDGE_SPREAD := 0.008
+## Where the walls' painted trims sit (a terrace's corner stones, a room's wall face and
+## ceiling edge): behind every platform skin, in front of the wall rock at LAND_FRONT - 0.01.
+const TRIM_Z := TDStage.LAND_FRONT - 0.009
+
+## The depth of a platform's skin: lower platforms a little nearer, the floor at LAND_FRONT.
+func _ledge_z(pl: Platform, ground: Platform) -> float:
+	return TDStage.LAND_FRONT - LEDGE_SPREAD * (1.0 - clampf(pl.y / ground.y, 0.0, 1.0))
+
 ## A floating platform's painted front: one picture built from the biome's platform pieces
 ## for this platform's width (PlatformSkin), hung so its walking surface is the top edge.
-func _platform_front(pl: Platform, biome: BiomeDef, square := false) -> void:
+func _platform_front(pl: Platform, biome: BiomeDef, square := false, z := TDStage.LAND_FRONT) -> void:
 	if biome.platform_middle == null:
 		return
 	var tex := PlatformSkin.texture(biome, pl.w, square)
 	var s := TDStage.sprite(tex)
 	s.offset = Vector2(0, -tex.get_height() / 2.0)  # origin at the top centre
 	var top := PlatformSkin.span(biome, pl.y).x
-	s.position = TDStage.to3d(Vector2(pl.x + pl.w / 2.0, top), TDStage.LAND_FRONT)
+	s.position = TDStage.to3d(Vector2(pl.x + pl.w / 2.0, top), z)
 	_add(s)
 
 ## A solid platform's wall: the floor's rock texture from just under its painted top edge
@@ -177,7 +192,66 @@ func _solid_wall(map: MapDef, platform: int, biome: BiomeDef) -> void:
 		var tile := TDStage.art_size(corner)
 		var x := x1 - tile.x + out if right else x0 - out
 		var r := Rect2(x, top, tile.x, rect.size.y)
-		_add(_strip("TerraceCorner", corner, r, tile, TDStage.LAND_FRONT - 0.005, false, true))
+		_add(_strip("TerraceCorner", corner, r, tile, TRIM_Z, false, true))
+
+# ---------- a solid room's walls and ceiling ----------
+
+## How thick a solid room's side walls and ceiling stand inside its edges (game pixels).
+const WALL := 64.0
+const CEILING := 64.0
+## How far a top way's opening in the ceiling reaches either side of its spot (game pixels).
+const SHAFT := 110.0
+## How far the ceiling's painted underside reaches up into its rock band (game pixels).
+const CEILING_OVERLAP := 40.0
+
+## A solid room's shell (MapDef.solid_room): its biome's room rock (or the floor's rock) down
+## both sides and along the top, the painted wall face on each wall's inner side and the
+## ceiling's underside hanging below it, left open at each way out (a side way's opening
+## above its ledge, a top way's shaft).
+func _room_shell(map: MapDef, platforms: Array[Platform], biome: BiomeDef) -> void:
+	var rock: Texture2D = biome.room_rock if biome.room_rock else biome.ground_side
+	if rock == null:
+		return
+	var tile := TDStage.art_size(rock)
+	var z := TDStage.LAND_FRONT - 0.01
+	var layout := MapLayout.new(map)
+	var shafts: Array[Vector2] = []
+	for p: PortalDef in layout.ways:
+		if layout.ways[p] == RoomExits.Side.TOP:
+			shafts.append(Vector2(p.x - SHAFT, p.x + SHAFT))
+	shafts.sort()
+	var x := 0.0
+	for s in shafts + [Vector2(map.width, map.width)]:
+		if s.x > x:
+			_add(_strip("Ceiling", rock, Rect2(x, 0.0, s.x - x, CEILING), tile, z))
+			if biome.room_ceiling:
+				var et := TDStage.art_size(biome.room_ceiling)
+				_add(_strip("CeilingEdge", biome.room_ceiling, Rect2(x, CEILING - CEILING_OVERLAP, s.x - x, et.y), et, TRIM_Z))
+		x = maxf(x, s.y)
+	for right in [false, true]:
+		var side := RoomExits.Side.RIGHT if right else RoomExits.Side.LEFT
+		var gaps: Array[Vector2] = []
+		for p: PortalDef in layout.ways:
+			if layout.ways[p] == side:
+				var y := platforms[p.platform].y
+				gaps.append(Vector2(y - RoomExits.OPENING, y + FLOOR_FILL_TOP))
+		gaps.sort()
+		var x0 := map.width - WALL if right else 0.0
+		var top := CEILING
+		for g in gaps + [Vector2(platforms[0].y, platforms[0].y)]:
+			if g.x > top:
+				var r := Rect2(x0, top, WALL, g.x - top)
+				_add(_strip("Wall", rock, r, tile, z, true, true))
+				if biome.room_face:
+					var ft := TDStage.art_size(biome.room_face)
+					var fx := x0 - ft.x * 0.5 if right else x0 + WALL - ft.x * 0.5
+					var face := _strip("WallFace", biome.room_face, Rect2(fx, top, ft.x, r.size.y), ft, TRIM_Z, false, true)
+					if right:  # the same face turned to look into the room
+						var m: ShaderMaterial = (face.mesh as QuadMesh).material
+						var us: Vector2 = m.get_shader_parameter(&"uv_scale")
+						m.set_shader_parameter(&"uv_scale", Vector2(-us.x, us.y))
+					_add(face)
+			top = maxf(top, g.y)
 
 ## The game-y span a platform's painted skin covers: x is the top of its grass, y the bottom.
 static func skin_span(d: PlatformDef, biome: BiomeDef) -> Vector2:
@@ -191,11 +265,11 @@ static func skin_span(d: PlatformDef, biome: BiomeDef) -> Vector2:
 	return PlatformSkin.span(biome, d.y)
 
 ## A platform drawn as one painted piece of land, hung so its grass rises above the top edge.
-func _platform_look(pl: Platform, d: PlatformDef) -> void:
+func _platform_look(pl: Platform, d: PlatformDef, z := TDStage.LAND_FRONT) -> void:
 	var texel := d.look_texel()
 	var s := TDStage.sprite(d.look, texel * TDStage.art_density(d.look))
 	s.offset = Vector2(0, -d.look.get_height() / 2.0)  # origin at the top centre
-	s.position = TDStage.to3d(Vector2(pl.x + pl.w / 2.0, pl.y - d.look_grass()), TDStage.LAND_FRONT)
+	s.position = TDStage.to3d(Vector2(pl.x + pl.w / 2.0, pl.y - d.look_grass()), z)
 	_add(s)
 
 # ---------- grass along the edges ----------

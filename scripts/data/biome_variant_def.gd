@@ -76,6 +76,9 @@ const KEEP_COLOR := Color(0, 0, 0, 0)
 @export var terrace_corner_left: Texture2D
 @export var terrace_corner_right: Texture2D
 @export var ground_side: Texture2D
+@export var room_rock: Texture2D
+@export var room_face: Texture2D
+@export var room_ceiling: Texture2D
 
 const COLORS := ["sky_top", "sky_mid", "sky_low", "sky_horizon", "sun_color", "light_color", "ambient_color",
 	"fog_color", "mote_color", "grade_tint", "grade_lift", "light_shaft_color"]
@@ -83,7 +86,7 @@ const NUMBERS := ["light_energy", "ambient_energy", "fog_begin", "fog_end", "fog
 	"grade_saturation", "frame_scale", "frame_fade"]
 const TOGGLES := ["motes_rise", "light_shafts"]
 const LAND := ["platform_left", "platform_middle", "platform_middle_alt", "platform_right", "terrace_left",
-	"terrace_right", "terrace_corner_left", "terrace_corner_right", "ground_side"]
+	"terrace_right", "terrace_corner_left", "terrace_corner_right", "ground_side", "room_rock", "room_face", "room_ceiling"]
 
 ## `base` with this variant applied: a copy, so the shared biome is never changed.
 func apply(base: BiomeDef) -> BiomeDef:

@@ -5,10 +5,10 @@
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="3_biome_variant_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberreach_fields/overhang_left.png" id="4_overhang_left"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberreach_fields/overhang_right.png" id="5_overhang_right"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/emberreach_fields/cap_left.png" id="6_cap_left"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/emberreach_fields/middle_a.png" id="7_middle_a"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/emberreach_fields/middle_b.png" id="8_middle_b"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/emberreach_fields/cap_right.png" id="9_cap_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/emberreach_ledge/cap_left.png" id="6_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/emberreach_ledge/middle_a.png" id="7_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/emberreach_ledge/middle_b.png" id="8_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/emberreach_ledge/cap_right.png" id="9_cap_right"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/emberreach_fields_side.png" id="10_emberreach_fields_side"]
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="11_backdrop_layer_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/emberreach_fields/smoke_pits.png" id="12_smoke_pits"]
@@ -59,12 +59,6 @@ x = 300.0
 y = 845.0
 width = 400.0
 
-[sub_resource type="Resource" id="Platform_2"]
-script = ExtResource("13_platform_def")
-x = 600.0
-y = 770.0
-width = 400.0
-
 [sub_resource type="Resource" id="Platform_3"]
 script = ExtResource("13_platform_def")
 x = 900.0
@@ -77,12 +71,6 @@ x = 1600.0
 y = 845.0
 width = 400.0
 
-[sub_resource type="Resource" id="Platform_5"]
-script = ExtResource("13_platform_def")
-x = 1900.0
-y = 770.0
-width = 300.0
-
 [sub_resource type="Resource" id="Platform_6"]
 script = ExtResource("13_platform_def")
 x = 600.0
@@ -90,12 +78,30 @@ y = 520.0
 width = 150.0
 secret = true
 
+[sub_resource type="Resource" id="Step_1"]
+script = ExtResource("13_platform_def")
+x = 730.0
+y = 761.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_2"]
+script = ExtResource("13_platform_def")
+x = 130.0
+y = 761.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_3"]
+script = ExtResource("13_platform_def")
+x = 400.0
+y = 677.0
+width = 200.0
+
 [sub_resource type="Resource" id="Portal_0"]
 script = ExtResource("14_portal_def")
 x = 1200.0
 target_map = &"smoke_pits"
 target_x = 1800.0
-target_platform = 38
+target_platform = 12
 
 [sub_resource type="Resource" id="Spawn_0"]
 script = ExtResource("16_spawn_def")
@@ -108,13 +114,13 @@ patrol_to = 2200.0
 [sub_resource type="Resource" id="Spawn_1"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_fire_imp_archer")
-platform = 2
+platform = 1
 count = 2
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_ash_bat")
-platform = 4
+platform = 3
 count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
@@ -127,7 +133,7 @@ max_amount = 240
 script = ExtResource("24_breakable_def")
 id = &"vent_chimney_high_chest"
 x = 675.0
-platform = 6
+platform = 4
 hits = 1
 whole = ExtResource("22_chest")
 broken = ExtResource("23_chest_open")
@@ -145,7 +151,7 @@ width = 2400
 height = 1000
 ground_y = 920
 start_x = 1300.0
-platforms = Array[ExtResource("13_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6")])
+platforms = Array[ExtResource("13_platform_def")]([SubResource("Platform_1"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_6"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3")])
 portals = Array[ExtResource("14_portal_def")]([SubResource("Portal_0")])
 breakables = Array[ExtResource("24_breakable_def")]([SubResource("Breakable_0")])
 spawns = Array[ExtResource("16_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2")])

@@ -5,10 +5,10 @@
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="3_biome_variant_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/lumewood_fields/vines_left.png" id="4_vines_left"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/lumewood_fields/vines_right.png" id="5_vines_right"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_fields/cap_left.png" id="6_cap_left"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_fields/middle_a.png" id="7_middle_a"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_fields/middle_b.png" id="8_middle_b"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_fields/cap_right.png" id="9_cap_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_ledge/cap_left.png" id="6_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_ledge/middle_a.png" id="7_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_ledge/middle_b.png" id="8_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lumewood_ledge/cap_right.png" id="9_cap_right"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/lumewood_fields_side.png" id="10_lumewood_fields_side"]
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="11_backdrop_layer_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/lumewood_fields/glowcap_hollow.png" id="12_glowcap_hollow"]
@@ -55,18 +55,6 @@ x = 300.0
 y = 845.0
 width = 400.0
 
-[sub_resource type="Resource" id="Platform_2"]
-script = ExtResource("13_platform_def")
-x = 600.0
-y = 770.0
-width = 400.0
-
-[sub_resource type="Resource" id="Platform_3"]
-script = ExtResource("13_platform_def")
-x = 900.0
-y = 695.0
-width = 400.0
-
 [sub_resource type="Resource" id="Platform_4"]
 script = ExtResource("13_platform_def")
 x = 1200.0
@@ -79,12 +67,6 @@ x = 1500.0
 y = 845.0
 width = 400.0
 
-[sub_resource type="Resource" id="Platform_6"]
-script = ExtResource("13_platform_def")
-x = 1800.0
-y = 770.0
-width = 300.0
-
 [sub_resource type="Resource" id="Platform_7"]
 script = ExtResource("13_platform_def")
 x = 900.0
@@ -92,12 +74,30 @@ y = 440.0
 width = 150.0
 secret = true
 
+[sub_resource type="Resource" id="Step_1"]
+script = ExtResource("13_platform_def")
+x = 1870.0
+y = 761.0
+width = 440.0
+
+[sub_resource type="Resource" id="Step_2"]
+script = ExtResource("13_platform_def")
+x = 1910.0
+y = 677.0
+width = 210.0
+
+[sub_resource type="Resource" id="Step_3"]
+script = ExtResource("13_platform_def")
+x = 1630.0
+y = 593.0
+width = 210.0
+
 [sub_resource type="Resource" id="Portal_0"]
 script = ExtResource("14_portal_def")
 x = 2300.0
 target_map = &"glowcap_hollow"
 target_x = 400.0
-target_platform = 16
+target_platform = 10
 
 [sub_resource type="Resource" id="Spawn_0"]
 script = ExtResource("16_spawn_def")
@@ -110,19 +110,19 @@ patrol_to = 2000.0
 [sub_resource type="Resource" id="Spawn_1"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_star_bat")
-platform = 2
+platform = 1
 count = 2
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_lume_wisp")
-platform = 4
+platform = 2
 count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_star_bat")
-platform = 6
+platform = 2
 count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
@@ -135,7 +135,7 @@ max_amount = 240
 script = ExtResource("24_breakable_def")
 id = &"mosslight_grotto_high_chest"
 x = 975.0
-platform = 7
+platform = 4
 hits = 1
 whole = ExtResource("22_chest")
 broken = ExtResource("23_chest_open")
@@ -153,7 +153,7 @@ width = 2400
 height = 1000
 ground_y = 920
 start_x = 2100.0
-platforms = Array[ExtResource("13_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7")])
+platforms = Array[ExtResource("13_platform_def")]([SubResource("Platform_1"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_7"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3")])
 portals = Array[ExtResource("14_portal_def")]([SubResource("Portal_0")])
 breakables = Array[ExtResource("24_breakable_def")]([SubResource("Breakable_0")])
 spawns = Array[ExtResource("16_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3")])

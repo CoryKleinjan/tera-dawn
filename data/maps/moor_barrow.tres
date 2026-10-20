@@ -5,10 +5,10 @@
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="3_biome_variant_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/lanternfall_fields/overhang_left.png" id="4_overhang_left"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/lanternfall_fields/overhang_right.png" id="5_overhang_right"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lanternfall_fields/cap_left.png" id="6_cap_left"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lanternfall_fields/middle_a.png" id="7_middle_a"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lanternfall_fields/middle_b.png" id="8_middle_b"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lanternfall_fields/cap_right.png" id="9_cap_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lanternfall_ledge/cap_left.png" id="6_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lanternfall_ledge/middle_a.png" id="7_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lanternfall_ledge/middle_b.png" id="8_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/lanternfall_ledge/cap_right.png" id="9_cap_right"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/lanternfall_fields_side.png" id="10_lanternfall_fields_side"]
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="11_backdrop_layer_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/lanternfall_fields/wraith_moor.png" id="12_wraith_moor"]
@@ -65,23 +65,11 @@ x = 700.0
 y = 770.0
 width = 400.0
 
-[sub_resource type="Resource" id="Platform_3"]
-script = ExtResource("13_platform_def")
-x = 1100.0
-y = 695.0
-width = 400.0
-
 [sub_resource type="Resource" id="Platform_4"]
 script = ExtResource("13_platform_def")
 x = 800.0
 y = 545.0
 width = 400.0
-
-[sub_resource type="Resource" id="Platform_5"]
-script = ExtResource("13_platform_def")
-x = 950.0
-y = 395.0
-width = 350.0
 
 [sub_resource type="Resource" id="Platform_6"]
 script = ExtResource("13_platform_def")
@@ -95,12 +83,6 @@ x = 1600.0
 y = 845.0
 width = 400.0
 
-[sub_resource type="Resource" id="Platform_8"]
-script = ExtResource("13_platform_def")
-x = 1900.0
-y = 770.0
-width = 300.0
-
 [sub_resource type="Resource" id="Platform_9"]
 script = ExtResource("13_platform_def")
 x = 650.0
@@ -108,10 +90,64 @@ y = 80.0
 width = 150.0
 secret = true
 
+[sub_resource type="Resource" id="Step_1"]
+script = ExtResource("13_platform_def")
+x = 430.0
+y = 686.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_2"]
+script = ExtResource("13_platform_def")
+x = 630.0
+y = 602.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_3"]
+script = ExtResource("13_platform_def")
+x = 1270.0
+y = 461.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_4"]
+script = ExtResource("13_platform_def")
+x = 1540.0
+y = 377.0
+width = 440.0
+
+[sub_resource type="Resource" id="Step_5"]
+script = ExtResource("13_platform_def")
+x = 1470.0
+y = 293.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_6"]
+script = ExtResource("13_platform_def")
+x = 940.0
+y = 461.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_7"]
+script = ExtResource("13_platform_def")
+x = 770.0
+y = 377.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_8"]
+script = ExtResource("13_platform_def")
+x = 600.0
+y = 293.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_9"]
+script = ExtResource("13_platform_def")
+x = 380.0
+y = 209.0
+width = 200.0
+
 [sub_resource type="Resource" id="Portal_0"]
 script = ExtResource("15_portal_def")
 x = 1150.0
-platform = 6
+platform = 4
 target_map = &"wraith_moor"
 target_x = 1700.0
 gate = &"moor_barrow_gate"
@@ -140,14 +176,14 @@ count = 2
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_gloomcap")
-platform = 7
+platform = 5
 count = 2
 
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("21_breakable_def")
 id = &"barrow_gate"
 x = 1800.0
-platform = 7
+platform = 5
 hits = 1
 whole = ExtResource("19_lever")
 broken = ExtResource("20_lever_pulled")
@@ -181,7 +217,7 @@ max_amount = 240
 script = ExtResource("21_breakable_def")
 id = &"moor_barrow_high_chest"
 x = 725.0
-platform = 9
+platform = 6
 hits = 1
 whole = ExtResource("26_chest")
 broken = ExtResource("27_chest_open")
@@ -199,7 +235,7 @@ width = 2400
 height = 1000
 ground_y = 920
 start_x = 1150.0
-platforms = Array[ExtResource("13_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9")])
+platforms = Array[ExtResource("13_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_4"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_9"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3"), SubResource("Step_4"), SubResource("Step_5"), SubResource("Step_6"), SubResource("Step_7"), SubResource("Step_8"), SubResource("Step_9")])
 portals = Array[ExtResource("15_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1")])
 breakables = Array[ExtResource("21_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1"), SubResource("Breakable_2")])
 spawns = Array[ExtResource("17_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2")])

@@ -6,10 +6,10 @@
 [ext_resource type="Script" path="res://scripts/data/decor_def.gd" id="4_decor_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/dawnharbor_fields/netting_left.png" id="5_netting_left"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/dawnharbor_fields/netting_right.png" id="6_netting_right"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor_fields/cap_left.png" id="7_cap_left"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor_fields/middle_a.png" id="8_middle_a"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor_fields/middle_b.png" id="9_middle_b"]
-[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor_fields/cap_right.png" id="10_cap_right"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor_ledge/cap_left.png" id="7_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor_ledge/middle_a.png" id="8_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor_ledge/middle_b.png" id="9_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/dawnharbor_ledge/cap_right.png" id="10_cap_right"]
 [ext_resource type="Texture2D" path="res://assets/sprites/ground/dawnharbor_fields_side.png" id="11_dawnharbor_fields_side"]
 [ext_resource type="Script" path="res://scripts/data/backdrop_layer_def.gd" id="12_backdrop_layer_def"]
 [ext_resource type="Texture2D" path="res://assets/sprites/backgrounds/dawnharbor_fields/windmill_downs.png" id="13_windmill_downs"]
@@ -72,22 +72,10 @@ x = 400.0
 y = 845.0
 width = 500.0
 
-[sub_resource type="Resource" id="Platform_2"]
-script = ExtResource("14_platform_def")
-x = 800.0
-y = 770.0
-width = 400.0
-
 [sub_resource type="Resource" id="Platform_3"]
 script = ExtResource("14_platform_def")
 x = 1100.0
 y = 695.0
-width = 400.0
-
-[sub_resource type="Resource" id="Platform_4"]
-script = ExtResource("14_platform_def")
-x = 1400.0
-y = 620.0
 width = 400.0
 
 [sub_resource type="Resource" id="Platform_5"]
@@ -102,12 +90,6 @@ x = 2200.0
 y = 845.0
 width = 400.0
 
-[sub_resource type="Resource" id="Platform_7"]
-script = ExtResource("14_platform_def")
-x = 2400.0
-y = 770.0
-width = 300.0
-
 [sub_resource type="Resource" id="Platform_8"]
 script = ExtResource("14_platform_def")
 x = 1480.0
@@ -115,12 +97,24 @@ y = 415.0
 width = 150.0
 secret = true
 
+[sub_resource type="Resource" id="Step_1"]
+script = ExtResource("14_platform_def")
+x = 930.0
+y = 761.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_2"]
+script = ExtResource("14_platform_def")
+x = 1530.0
+y = 611.0
+width = 200.0
+
 [sub_resource type="Resource" id="Portal_0"]
 script = ExtResource("15_portal_def")
 x = 1200.0
 target_map = &"windmill_downs"
 target_x = 4100.0
-target_platform = 24
+target_platform = 9
 
 [sub_resource type="Resource" id="Spawn_0"]
 script = ExtResource("17_spawn_def")
@@ -133,19 +127,19 @@ patrol_to = 2800.0
 [sub_resource type="Resource" id="Spawn_1"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_reef_gull")
-platform = 2
+platform = 1
 count = 2
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_bramble_boar")
-platform = 3
+platform = 2
 count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_reef_gull")
-platform = 5
+platform = 3
 count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
@@ -158,7 +152,7 @@ max_amount = 240
 script = ExtResource("25_breakable_def")
 id = &"mill_loft_high_chest"
 x = 1555.0
-platform = 8
+platform = 5
 hits = 1
 whole = ExtResource("23_chest")
 broken = ExtResource("24_chest_open")
@@ -176,7 +170,7 @@ width = 3000
 height = 1000
 ground_y = 920
 start_x = 1350.0
-platforms = Array[ExtResource("14_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8")])
+platforms = Array[ExtResource("14_platform_def")]([SubResource("Platform_1"), SubResource("Platform_3"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_8"), SubResource("Step_1"), SubResource("Step_2")])
 portals = Array[ExtResource("15_portal_def")]([SubResource("Portal_0")])
 breakables = Array[ExtResource("25_breakable_def")]([SubResource("Breakable_0")])
 spawns = Array[ExtResource("17_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3")])

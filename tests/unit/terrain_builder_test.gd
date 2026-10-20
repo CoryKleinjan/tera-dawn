@@ -67,7 +67,13 @@ func test_platforms_are_flat_skins_at_land_front() -> void:
 	var skins := _sprites().filter(func(s: Sprite3D) -> bool: return s.texture is ImageTexture)
 	check_eq(skins.size(), map.platforms.size(), "each platform gets one front skin picture")
 	for s: Sprite3D in skins:
-		check_near(s.position.z, TDStage.LAND_FRONT, "the skin stays behind the actors")
+		check(s.position.z <= TDStage.LAND_FRONT and s.position.z >= TDStage.LAND_FRONT - TerrainBuilder.LEDGE_SPREAD,
+			"the skin stays behind the actors, just at the land's front")
+	# a lower platform's skin is nearer, so a deep ledge's underside tucks behind the one below
+	skins.sort_custom(func(a: Sprite3D, b: Sprite3D) -> bool: return a.position.y > b.position.y)
+	for i in range(1, skins.size()):
+		if skins[i].position.y < skins[i - 1].position.y:
+			check(skins[i].position.z > skins[i - 1].position.z, "a lower skin is nearer than the one above it")
 
 func test_skins_are_as_wide_as_their_platform() -> void:
 	var skins := _sprites().filter(func(s: Sprite3D) -> bool: return s.texture is ImageTexture)

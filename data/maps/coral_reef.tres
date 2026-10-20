@@ -10,6 +10,10 @@
 [ext_resource type="Script" path="res://scripts/data/prop_placement.gd" id="11_prop_placement"]
 [ext_resource type="Texture2D" path="res://assets/sprites/tiles/meadow/bush_large.png" id="13_bush_large"]
 [ext_resource type="Script" path="res://scripts/data/biome_variant_def.gd" id="variant_def"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/driftcove_ledge/cap_left.png" id="ledge_cap_left"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/driftcove_ledge/middle_a.png" id="ledge_middle_a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/driftcove_ledge/middle_b.png" id="ledge_middle_b"]
+[ext_resource type="Texture2D" path="res://assets/sprites/platforms/driftcove_ledge/cap_right.png" id="ledge_cap_right"]
 
 [sub_resource type="Resource" id="Resource_36"]
 script = ExtResource("11_prop_placement")
@@ -185,6 +189,12 @@ fog_color = Color(0.3137, 0.7529, 0.7843, 1)
 ambient_color = Color(0.2275, 0.5647, 0.6588, 1)
 ambient_energy = 0.45
 mote_color = Color(1.2, 2.4, 2.6, 1)
+platform_left = ExtResource("ledge_cap_left")
+platform_middle = ExtResource("ledge_middle_a")
+platform_middle_alt = ExtResource("ledge_middle_b")
+platform_right = ExtResource("ledge_cap_right")
+hide_edge_grass = true
+hide_platform_decor = true
 
 [sub_resource type="Resource" id="Step_1"]
 script = ExtResource("3_platform_def")

@@ -44,6 +44,13 @@ extends Resource
 ## edge, then soil below.
 @export var ground_side: Texture2D
 @export var ground_soil: Texture2D
+## A solid room's rock (MapDef.solid_room, TerrainBuilder._room_shell): a seamless texture
+## filling its walls and ceiling, the wall's face (an upright strip, drawn on the left wall's
+## right side and mirrored on the right wall), and the ceiling's underside with its hanging
+## stone points (repeated along it). Without them the shell uses `ground_side`.
+@export var room_rock: Texture2D
+@export var room_face: Texture2D
+@export var room_ceiling: Texture2D
 ## The painted front of a floating platform (art/sheets/platform_pieces_<area>.json): its
 ## left end, the middle and a second middle mixed in, and its right end. PlatformSkin sets
 ## them edge to edge for each platform's width. Floating platforms are only this skin, with

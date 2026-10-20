@@ -368,6 +368,54 @@ func _run() -> void:
 		_me().inv = 0
 		Net.server.enter_map(_me(), &"meadow", 300)
 		await _physics(10)
+	if only == "shell":
+		# A solid room's walls and ceiling (MapDef.solid_room), from a few spots (not in the full run).
+		_me().inv = 100000
+		for m: MapDef in Content.maps.values():
+			if not m.solid_room:
+				continue
+			for at in [Vector2i(300, 0), Vector2i(200, 15), Vector2i(2200, 26), Vector2i(2100, 1), Vector2i(600, 3)]:
+				if at.y > m.platforms.size():
+					continue
+				Net.server.enter_map(_me(), m.id, at.x, at.y)
+				await _physics(40)
+				await _frames(3)
+				await _shot("shell_%s_%d_%d" % [m.id, at.x, at.y])
+		_me().inv = 0
+		Net.server.enter_map(_me(), &"meadow", 300)
+		await _physics(10)
+	if only == "ledges":
+		# Ledges stacked close above one another on the map named after the mode (not in the full run).
+		_me().inv = 100000
+		var m: MapDef = Content.maps[StringName(args[2])]
+		var shots := 0
+		for i in m.platforms.size():
+			var a := m.platforms[i]
+			for b: PlatformDef in m.platforms:
+				var overlap := minf(a.x + a.width, b.x + b.width) - maxf(a.x, b.x)
+				if shots < 4 and b.y > a.y and b.y - a.y <= 80.0 and overlap > 0.0:
+					Net.server.enter_map(_me(), m.id, a.x + a.width / 2.0, i + 1)
+					await _physics(40)
+					await _frames(3)
+					await _shot("ledges_%s_%d" % [m.id, i + 1])
+					shots += 1
+					break
+		_me().inv = 0
+		Net.server.enter_map(_me(), &"meadow", 300)
+		await _physics(10)
+	if only == "room":
+		# The map named after the mode, standing on the floor and every fifth platform (not in the full run).
+		_me().inv = 100000
+		var m: MapDef = Content.maps[StringName(args[2])]
+		for i in range(0, m.platforms.size() + 1, 5):
+			var x := float(m.start_x) if i == 0 else m.platforms[i - 1].x + m.platforms[i - 1].width / 2.0
+			Net.server.enter_map(_me(), m.id, x, i)
+			await _physics(40)
+			await _frames(3)
+			await _shot("room_%s_%d" % [m.id, i])
+		_me().inv = 0
+		Net.server.enter_map(_me(), &"meadow", 300)
+		await _physics(10)
 	if only == "rests":
 		# Every rest spot's bench, the hero standing beside it (not in the full run).
 		_me().inv = 100000
