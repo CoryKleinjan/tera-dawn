@@ -10,7 +10,7 @@
 script = ExtResource("2_quest_objective")
 kind = 3
 map = &"starfall_ridge"
-platform = 6
+platform = 5
 spot_name = "the light over Starfall Ridge"
 count = 1
 
