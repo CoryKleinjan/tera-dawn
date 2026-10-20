@@ -1,7 +1,6 @@
 class_name SocialParties
 extends SocialPart
-## Invitations (to a party, a buddy list, a trade or a guild), buddy lists and parties
-## (with shared EXP).
+## Invitations (to a party, a buddy list, a trade or a guild), buddy lists and parties.
 
 # ---------- invitations ----------
 

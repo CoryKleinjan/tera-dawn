@@ -6,7 +6,7 @@ extends RefCounted
 
 const CRIT_MULTIPLIER := 1.6
 
-## One damage line from a character's skill against a monster. Returns {damage, crit, miss}.
+## One damage line from a character's skill against a monster. Returns {damage, crit}.
 static func player_hit(skill: SkillDef, _target: MonsterDef, ch: Character) -> Dictionary:
 	var multiplier := skill.damage_at(ch.skills.level(skill))
 	var crit := randf() < CharacterStats.crit_rate(ch.stats)
@@ -14,7 +14,7 @@ static func player_hit(skill: SkillDef, _target: MonsterDef, ch: Character) -> D
 	var dmg := maxi(1, roundi(randi_range(spread.x, spread.y) * multiplier
 		* CharacterStats.damage_bonus(ch.stats, skill.is_ranged())
 		* (CRIT_MULTIPLIER if crit else 1.0)))
-	return {"damage": dmg, "crit": crit, "miss": false}
+	return {"damage": dmg, "crit": crit}
 
 ## A monster move at least this strong (MonsterMove.power) from a boss is a big hit.
 const BIG_HIT_POWER := 1.2

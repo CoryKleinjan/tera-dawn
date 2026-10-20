@@ -34,7 +34,7 @@
     ],
     [
       "window_close",
-      "stat_plus",
+      "",
       "tooltip_frame"
     ],
     [
@@ -87,17 +87,6 @@
         ]
       ],
       "scale": 0.874
-    },
-    "stat_plus": {
-      "blank": [
-        [
-          1,
-          0,
-          189,
-          31
-        ]
-      ],
-      "scale": 0.745
     },
     "tooltip_frame": {
       "blank": [

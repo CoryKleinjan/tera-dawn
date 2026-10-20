@@ -1,7 +1,7 @@
 class_name TDSocial
 extends RefCounted
 ## Everything players do with each other, run by the server: chat (map, whisper, party,
-## guild, buddies), invitations, buddy lists, parties (with shared EXP), trading,
+## guild, buddies), invitations, buddy lists, parties, trading,
 ## guilds and fame.
 ##
 ## Each player's client gets a summary of their buddies, party and guild (`ev_social`)

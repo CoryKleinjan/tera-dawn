@@ -2,7 +2,7 @@ class_name MapInstance
 extends RefCounted
 ## One map running on the server: its monsters, the items on the ground and the players
 ## on it. The server keeps one per map that has been visited and steps the ones with
-## players on them. Everything the players see happen here (hits, kills, EXP, drops,
+## players on them. Everything the players see happen here (hits, kills, drops,
 ## pickups) is decided here and sent to the clients on this map as events.
 
 ## Game pixels between the items a monster drops.
@@ -247,9 +247,6 @@ func _strike(p: SimPlayer, skill: SkillDef, lvl: int, m: SimMob) -> Array:
 		if m.health.is_dead():
 			break
 		var hit := Combat.player_hit(skill, m.def, p.character)
-		if hit["miss"]:
-			hits.append([0, "miss"])
-			continue
 		var dmg: int = hit["damage"]
 		m.health.damage(dmg)
 		hits.append([dmg, "crit" if hit["crit"] else "hit"])

@@ -1,7 +1,7 @@
 class_name TDWorldFx
 extends RefCounted
-## How TDWorld shows the server's events: swings, projectiles, damage numbers, monster
-## shots and deaths, level-ups and other effects. Everything it spawns goes on the
+## How TDWorld shows the server's events: swings, projectiles, hits, monster
+## shots and deaths and other effects. Everything it spawns goes on the
 ## world's fx layer.
 
 var world: TDWorld
@@ -88,14 +88,12 @@ static func swing_point(feet: Vector2, face: int, aim: Hitbox.Aim) -> Vector2:
 func _show_hits(skill: SkillDef, m: TDMob, hits: Array, face: int, mine: bool) -> void:
 	var mid := m.body_position() + Vector2(0, -m.def.size.y / 2.0)
 	var crit := false
-	var landed := false
 	for i in hits.size():
 		var kind: String = hits[i][1]
 		crit = crit or kind == "crit"
-		landed = landed or kind != "miss"
 		if kind == "crit":
 			add_effect(Content.effect(EffectDef.CRITICAL), mid, face)
-	if not landed:
+	if hits.is_empty():
 		return
 	var stop := 0
 	if mine:

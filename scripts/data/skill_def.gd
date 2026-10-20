@@ -1,14 +1,11 @@
 class_name SkillDef
 extends Resource
 ## A skill: an attack, a buff the player casts on themselves, or a passive that is always on.
-## The basic attack is a skill too (`innate`, known by everyone without Skill Points).
+## The basic attack is a skill too (`innate`, known by everyone).
 ##
-## Skills belong to a job (`job`) and are learned with Skill Points in the skill window (K),
-## up to `max_level`. Numbers that grow with the skill's level have a `_per_level` partner,
-## added once for every level above 1 (see the `*_at` functions).
-##
-## Add a skill by saving a SkillDef in data/skills/: it shows up in its job's tab of the
-## skill window, and players put it on a quickslot to use it.
+## Add a skill by saving a SkillDef in data/skills/; players put it on a quickslot to use it.
+## The skill-level fields (`max_level`, `_per_level`) stay for the found spells to come (see
+## docs/architecture/skills.md).
 
 enum Kind { ATTACK, BUFF, PASSIVE }
 const KIND_NAMES := ["Attack", "Buff", "Passive"]

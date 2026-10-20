@@ -8,14 +8,12 @@ are the weapons' own attacks: the plain swing (`Character.BASIC_ATTACK`) and a w
 
 ## How to add a skill
 
-1. Create `data/skills/<id>.tres` as a **SkillDef**: its `kind` (attack, buff or passive),
-   the `job` whose skill book it's in, `max_level` and an optional `requires` skill. Costs and
-   numbers that grow with the skill's level have a `_per_level` partner (`mp_cost_per_level`,
-   `damage_per_level`, `stats_per_level`, `duration_per_level`, `regen_hp_per_level`).
+1. Create `data/skills/<id>.tres` as a **SkillDef**: its `kind` (attack, buff or passive)
+   and an optional `requires` skill.
    - Attacks: cooldown, how long the player is busy (`action_ticks`), the hit area (`reach`,
      `height`), `max_targets`, `hits` and the damage multiplier.
    - Buffs: `stats` added while it lasts, and `duration` in seconds. Also: `party` (it reaches
-     party members within `SkillDef.PARTY_REACH`, at the caster's level), `heal` (a share of
+     party members within `SkillDef.PARTY_REACH`), `heal` (a share of
      Max HP; a heal with no duration adds no buff), `mp_guard` (a share of damage taken comes
      out of MP), `steady` (no knockback), `hide` (monsters can't see or touch you; attacking
      ends it), and HP/MP recovery.
@@ -53,7 +51,7 @@ Ranged and magic skills:
 - A `projectile` (a **ProjectileDef** in `data/projectiles/`: texture, or painted `frames` it
   loops in flight, speed, spin, light) makes
   the skill a shot. The server still decides the hit at once; clients fly one projectile per
-  hit (`TDProjectile`) and pop the damage number when it lands, holding the monster's death
+  hit (`TDProjectile`) and show the hit when it lands, holding the monster's death
   until then.
 - A weapon (`EquipDef`) names its `weapon_kind` (sword, dagger, bow, wand, staff, knuckle, star, gun)
   and an optional `basic_attack` skill that replaces the plain swing (a bow's Shoot). Ranged

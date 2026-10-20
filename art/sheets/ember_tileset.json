@@ -37,8 +37,8 @@
     [
       "rock_small",
       "rock_large",
-      "crystals",
-      "steam_vent",
+      "",
+      "",
       "fence",
       "fire_lilies",
       "tall_grass"
@@ -272,33 +272,6 @@
         0,
         48,
         186,
-        176
-      ],
-      "flat_bottom": true
-    },
-    "crystals": {
-      "fix": "glow_backdrop",
-      "blank": [
-        [
-          0,
-          0,
-          180,
-          30
-        ],
-        [
-          0,
-          30,
-          90,
-          50
-        ]
-      ],
-      "flat_bottom": true
-    },
-    "steam_vent": {
-      "crop": [
-        0,
-        27,
-        272,
         176
       ],
       "flat_bottom": true

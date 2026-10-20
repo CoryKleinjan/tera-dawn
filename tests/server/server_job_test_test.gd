@@ -145,8 +145,7 @@ func test_a_fresh_beginner_can_beat_it() -> void:
 	var swings := 400
 	for i in swings:
 		var hit := Combat.player_hit(skill, boss, hero)
-		if not hit["miss"]:
-			dealt += hit["damage"]
+		dealt += hit["damage"]
 	var seconds := boss.max_hp / (float(dealt) / swings) * maxi(skill.cooldown, 1) / 60.0
 	check(seconds > 40.0 and seconds < 150.0, "a long but winnable fight: %.0f s of swinging" % seconds)
 	var taken := Combat.monster_hit(boss, hero, 1.0)

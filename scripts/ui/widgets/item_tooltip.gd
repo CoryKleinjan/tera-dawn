@@ -2,7 +2,7 @@ class_name TDItemTooltip
 extends Control
 ## The card that follows the mouse over an item slot: name, kind, which jobs can use it (red
 ## when yours can't), gear's tier, stats, gear's rune slots (filled and empty), how gear compares with
-## what's worn in its slot, what a potion restores or a rune adds, the description and what
+## what's worn in its slot, what a rune adds, the description and what
 ## double-clicking does. Drawn above every window.
 
 const W := 220.0

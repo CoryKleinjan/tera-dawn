@@ -52,7 +52,7 @@ var npc_layer: Node2D
 var drop_layer: Node2D
 var avatar_layer: Node2D
 var fx_layer: Node2D
-## Shows the server's events: swings, damage numbers, shots and effects.
+## Shows the server's events: swings, hits, shots and effects.
 var fx: TDWorldFx
 ## Plays cutscenes the server sends (see TDCutscenePlayer).
 var scenes: TDCutscenePlayer
@@ -229,7 +229,7 @@ func _log_pickup(item: ItemDef, count: int) -> void:
 	add_log("Picked up %s" % MapInstance.amount_name(item, count), Palette.MIST)
 	log_lines[-1].merge({"item": item.id, "count": count, "at": tick}, true)
 
-## EXP or Dawnshards you just gained, as a small number rising over you.
+## Dawnshards you just gained, as a small number rising over you.
 func show_gain(kind: StringName, amount: int) -> void:
 	fx.show_gain(kind, amount)
 

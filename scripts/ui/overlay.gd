@@ -1,6 +1,6 @@
 class_name TDOverlay
 extends Control
-## Screen-space drawing over the map: name tags, HP bars, damage numbers, speech bubbles,
+## Screen-space drawing over the map: name tags, HP bars, speech bubbles,
 ## the map name, minimap, running buffs, message log, map banner and the faint screen.
 ## Things that follow the 3D stage are projected to the screen here so they stay crisp
 ## (no depth of field or fog on text).

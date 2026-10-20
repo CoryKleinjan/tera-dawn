@@ -8,7 +8,7 @@ extends RefCounted
 ##   body.draw(face, pet, animation, look, armor, weapon)      # every frame
 
 ## What he is doing that shows him standing: these have no frames of their own.
-const STANDING := [&"ready", &"turn", &"level_up"]
+const STANDING := [&"ready", &"turn"]
 ## What every attack and skill motion plays until the job sets paint their own (HeroLookDef).
 const ATTACK := &"attack"
 ## The moves that last a set time (TDPlayer): their frames are spread over that time whatever
