@@ -121,9 +121,11 @@ Godot `SpriteFrames` resource. Frames can come from any manifest, as `"<sheet>:<
 - `nudge`: `{"frame": [dx, dy]}` fine-tunes one frame. `pad_top`: empty rows above every frame
   (room for hair and hats). Both are in art pixels. Animations may give per-frame `durations`.
 
-Actors look for `idle`, `move` (monsters), `attack`, `hurt` and `die`. The hero's layers
-(`hero_*.json`) are one frame per cell, uncut (`trim` false, `anchor` and `baseline` "cell"), so
-every layer comes out the same size and they line up when stacked.
+Actors look for `idle`, `move` (monsters), `attack`, `hurt` and `die`. Each hero look
+(`hero_look_<look>_<move>.json`, one sheet per move) keeps the largest piece of each cell and its
+walk sheet's set lines every move up feet down (`baseline` "bottom") into one `SpriteFrames`
+named for what he does (see HeroLookDef). The older `hero_<gear>.json` layers are cut one frame
+per cell, uncut, only for their items' icons.
 
 ## Sheet families
 

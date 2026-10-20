@@ -23,7 +23,7 @@ data/*.tres  ──►  Content (autoload)  ──►  World loads a MapDef  ─
   power, health and damage formulas). The server owns each player's `Character`; `Game.me` is your copy.
 - **Components** (`scripts/components/`) are small reusable parts any actor can use: `Health`,
   `Hitbox`, `SpriteRig` (sprite, animation, light and aura) and `HeroBody` (how every hero shows: his
-  painted layers and pet; see [characters](docs/architecture/characters.md)).
+  painted look and pet; see [characters](docs/architecture/characters.md)).
 - **Server** (`scripts/server/`) runs the game for everyone (see [multiplayer](docs/architecture/multiplayer.md)).
 - **Actors** (`scripts/actors/`) are what you see in the world: your hero, other players,
   monsters, NPCs and drops.

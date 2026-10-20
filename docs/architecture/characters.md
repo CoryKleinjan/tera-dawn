@@ -4,50 +4,40 @@ Part of the [architecture docs](../../ARCHITECTURE.md).
 
 ## Character creation and how heroes show
 
-**Create** on character select opens the character creator (`TDCreator`): a name and the
-starting outfit (`NewCharacter`). `Net.create_character` makes a new character in the
+**Create** on character select opens the character creator (`TDCreator`): a name, the hero's
+look and the starting outfit (`NewCharacter`). `Net.create_character` makes a new character in the
 starting job (`Character.START_JOB`) and saves it on this computer (`CharacterStore.create`),
 then character select shows the list (name and job) with the new character picked.
 
+- **Looks** are `HeroLookDef`s (`data/hero/looks/`, loaded by `Content` into `Content.looks`):
+  each is one painted hero, every frame painted whole (`art/sheets/hero_look_<id>_<move>.json`,
+  one sheet per move; the walk sheet's manifest writes the look's `SpriteFrames`). The creator
+  shows the picked look standing; `Character.look` keeps its id, and a save from before the
+  looks (or an id the game doesn't know) gets the first (`HeroLookDef.of`).
 - **Outfit** choices come from the starting job's `creator_gear` (one piece per kind). It is
   empty for now (no starting outfits are painted yet), so the creator offers none.
-- **Layered look**: the hero is drawn from painted layers, MapleStory style. `HeroLookDef`
-  (`data/hero/look.tres`) holds his body and fists, the faces and hairstyles he can have (each a
-  `HeroStyleDef` in `data/hero/faces/` or `data/hero/hairs/`, with its own placements; the first
-  of each is his default, `HeroBody.face_style`/`hair_style`) and which frames each animation
-  shows (`"<anim>_<weapon kind>"` overrides it, like `attack_bow`; an animation with no frames
-  shows him standing). Each piece of gear's
-  `EquipDef.worn` is its layer, cut from the same cells (`art/sheets/hero_*.json`, one frame per
-  cell named like `idle1` or `walk2`), so layers line up frame by frame; `hides_hair` (helmets,
-  hats) sets where it stacks. A weapon or off-hand is instead `EquipDef.held` (`HeldDef`,
-  `data/hero/held/`): ONE painting pinned per frame (anchor point, spot, turn and layer), the
-  MapleStory way. Pose him by hand in `scenes/dev/hero_pose_editor.tscn` (play it in Godot:
-  pick the job ("No job" for the plain hero), face, hair, pose and what he wears from the dropdowns, click
-  any piece and drag it, wheel or Q/E to turn, Shift+wheel or [ ] to resize, F or Flip to mirror
-  it on that pose, PgUp/PgDn to move it up or down the stack, Save writes the files). Held pieces save to their pins; worn layers
-  to `EquipDef.nudges`, a face or hairstyle to its `HeroStyleDef.nudges` and his body and fists
-  to `HeroLookDef.nudges` (frame ->
-  Vector4: shift, turn, places up the stack), sizes to each one's `sizes` (frame -> share
-  of its painted size) and flips to each one's `flips` (frame -> true: mirrored around the
-  point it turns around, then turned; a held piece's muzzle mirrors with it), applied whole by
-  `HeroBody.Layer`. The Shown here checkboxes put a piece
-  on a frame or take it off; a worn piece with no painting of its own for that pose can't be
-  ticked (held pieces fit any pose). Held pieces gain or lose that frame's pin; worn
-  layers and his parts record it in `frame_art` (frame -> the frame whose painting shows there,
-  or "" when deleted), and an added piece shows even where the stack
-  would leave it off (hair under a hat, fists with no weapon out). Shots (arrows, bullets,
-  stars, spells) leave from `HeroBody.muzzle`: the muzzle of the held piece showing on the
-  frame the shot leaves on (`data/hero/muzzles.tres`, `MuzzleSetDef`: a point per piece in its
-  painting, the shot frame per move, and a shooting fist per frame for when the weapon isn't
-  placed there). M in the editor sets them; the held files stay as placed. A character has no picked appearance
-  yet; older saves that carry one still load.
 - **One body for every hero**: your hero (`TDPlayer`) and other players' (`TDAvatar`) each
   work out what they are doing (from your keys, or from the snapshot: an animation name such
-  as "walk", "attack" or a skill's `animation`), and `HeroBody`
-  (`scripts/components/hero_body.gd`) shows them the same way for both. It stacks one sprite per
-  layer in a fixed order (`HeroBody.layers`) and brings along the companion (the pet).
-  Other players' gear reaches you as item ids in their info (`SimPlayer.info`). The sizes the game needs for a
-  hero (`TDPlayer.HEIGHT`, `WIDTH`, `CHEST`, `SimPlayer.HURTBOX_SIZE`) are constants.
+  as "walk", "dash" or a skill's `animation`), and `HeroBody`
+  (`scripts/components/hero_body.gd`) shows them the same way for both: one sprite playing the
+  look's animation of that name (`HeroBody.resolve`: a few poses such as "ready" stand, and every
+  skill's motion plays "attack", the Surge's punch, until the job sets paint their own), and the
+  companion (the pet). Shots leave from his punching fist (`HeroLookDef.fist`,
+  `HeroBody.muzzle`). Other players' looks and worn set pieces reach you in their info
+  (`SimPlayer.info`, `Gear.shown`). The sizes the game needs for a hero (`TDPlayer.HEIGHT`, `WIDTH`,
+  `CHEST`, `SimPlayer.HURTBOX_SIZE`) are constants.
+- **Outfits** are `HeroOutfitDef`s (`data/hero/outfits/`, `Content.outfits`): a look painted
+  wearing a set's pieces, one per pair (armor and weapon, armor with an empty fist, plain clothes
+  with the weapon), every frame painted whole like the look itself (`art/sheets/hero_outfit_<look>_<set>_<move>.json`,
+  sources in `art/source/hero/outfits/`). `HeroLookDef.frames_for(armor, weapon)` picks the
+  painting of that pair, else the armor's, else the weapon's, else plain clothes, and
+  `HeroBody.draw` plays it. None are painted for now, so gear doesn't change his look. A frame
+  whose art crosses its cell line gets a manifest of its own over a wider `region` (the
+  wanderer's second dash frame). Adding a set means painting its three outfits for every look,
+  cutting them and adding a `HeroOutfitDef` for each.
+- **Adding a look**: paint its sheets (one per move, the cells the other looks' manifests name),
+  copy a look's manifests with its id, cut them, and add its `HeroLookDef` with its `order` and
+  `fist` (where the punching fist is on the last "attack" frame).
 
 ### Sitting, pets, the Monster Book and achievements
 
@@ -73,9 +63,10 @@ then character select shows the list (name and job) with the new character picke
   Picking one up (`MapInstance._learn_relic`) adds its id to `Character.relics` for good,
   never to the bag; `Character.has_move` says what's unlocked. `TDPlayer` does the moves on
   your own machine like any other step (`_relic_moves`, `_air_jump`, the "dash" key); the
-  server only breaks what a Slam lands on (`req_slam`). A move plays its relic's painted
-  `effect` round him (a code-drawn `trail` while it has none). A relic drop is its owner's
-  alone and never expires (`SimDrop`).
+  server only breaks what a Slam lands on (`req_slam`). A move shows its own painted animation
+  ("dash", "surge_charge", "surge", "slam", "double_jump", then "slam_land" or "surge_end" for a
+  few ticks, `TDPlayer._pose`) and plays its relic's painted `effect` round him (a code-drawn
+  `trail` while it has none). A relic drop is its owner's alone and never expires (`SimDrop`).
 - **Achievements** are **AchievementDef**s in `data/achievements/`, loaded by `Content`; each
   measures something about the Character (its `kind`, see `Achievements.measure`) against a
   `goal`. `Achievements.all()` lists them in `order` for the collection window and the server.

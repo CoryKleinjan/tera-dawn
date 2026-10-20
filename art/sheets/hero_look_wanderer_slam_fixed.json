@@ -1,0 +1,37 @@
+{
+  "source": "art/source/hero/looks/wanderer_slam_fixed.png",
+  "out_dir": "art/build/hero/looks/wanderer",
+  "cells": [
+    [
+      "slam1",
+      "",
+      "",
+      ""
+    ],
+    [
+      "",
+      "",
+      "",
+      ""
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      675,
+      1350
+    ],
+    "cols": [
+      0,
+      600,
+      1200,
+      1800,
+      2400
+    ]
+  },
+  "inset": 6,
+  "label_band": 0,
+  "keep": "largest",
+  "scale": 0.102,
+  "save": false
+}

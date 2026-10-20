@@ -127,7 +127,7 @@ static func best_gear(c: Character) -> Dictionary:
 ## per kind, the highest required level, then the most stats (weapon attack counts most).
 ## A kind with more than one place (rings) fills each with the next best piece. The weapon
 ## is the best of the kind the job is handed first when it advances, when it has one, and
-## the off-hand slot takes the job's own off-hand when it has one.
+## the armor is the job's own set's when it has one.
 static func best_gear_for(job: JobDef, lvl: int) -> Dictionary:
 	var by_slot := {}
 	for e in _wearable(job, lvl):
@@ -137,8 +137,8 @@ static func best_gear_for(job: JobDef, lvl: int) -> Dictionary:
 	var out := {}
 	for slot: EquipDef.Slot in by_slot:
 		var pieces: Array = by_slot[slot]
-		if slot == EquipDef.Slot.SHIELD:
-			pieces.sort_custom(func(a: EquipDef, b: EquipDef) -> bool: return _better_offhand(job, a, b))
+		if slot == EquipDef.Slot.ARMOR:
+			pieces.sort_custom(func(a: EquipDef, b: EquipDef) -> bool: return _better_armor(job, a, b))
 		else:
 			pieces.sort_custom(_better)
 		if slot == EquipDef.Slot.WEAPON:
@@ -173,9 +173,9 @@ static func _main_weapon_kind(job: JobDef) -> StringName:
 			return e.weapon_kind
 	return &""
 
-## Whether `a` beats `b` in the off-hand slot: an off-hand made for `job` (a Thief's stars, a
-## Pirate's pistol) before one anyone can wear (a shield), then the better piece.
-static func _better_offhand(job: JobDef, a: EquipDef, b: EquipDef) -> bool:
+## Whether `a` beats `b` as armor: armor made for `job` (its set's) before armor anyone can
+## wear, then the better piece.
+static func _better_armor(job: JobDef, a: EquipDef, b: EquipDef) -> bool:
 	var own_a := job.family in a.jobs
 	if own_a != (job.family in b.jobs):
 		return own_a

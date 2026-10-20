@@ -20,8 +20,8 @@ SPRITES = os.path.join(ROOT, "assets", "sprites")
 MAX_SHARE = 0.15
 MIN_PIXELS = 30  # a few odd pixels on a small sprite aren't a line
 # Sprites whose edge is nearly all painted dark plum outline, which the check can't tell from a
-# fringe: the hero's face layer is his bald head's outline with a face inside it.
-OUTLINE_ONLY = {"assets/sprites/hero/face.png"}
+# fringe (none now).
+OUTLINE_ONLY = set()
 
 
 def _shifted(m, dy, dx):

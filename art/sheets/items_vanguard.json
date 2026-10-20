@@ -1,0 +1,24 @@
+{
+  "source": "art/source/items_vanguard.png",
+  "out_dir": "assets/sprites/items",
+  "scale": 0.05,
+  "keep": "largest",
+  "cells": [
+    [
+      "vanguard_armor",
+      "vanguard_sword"
+    ]
+  ],
+  "grid": {
+    "rows": [
+      0,
+      1350
+    ],
+    "cols": [
+      0,
+      1200,
+      2400
+    ]
+  },
+  "inset": 6
+}

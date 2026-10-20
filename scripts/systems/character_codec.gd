@@ -6,7 +6,7 @@ extends RefCounted
 ## Everything about the character.
 static func to_dict(c: Character) -> Dictionary:
 	return {
-		"name": c.name, "shards": c.shards, "map_id": c.map_id,
+		"name": c.name, "look": String(c.look), "shards": c.shards, "map_id": c.map_id,
 		"job": c.job.id, "came_from": String(c.came_from), "jobs_passed": c.jobs_passed.duplicate(),
 		"hp": c.health.hp, "mp": c.mp, "heart_shards": c.heart_shards, "mana_shards": c.mana_shards,
 		"inventory": c.inventory.to_dict(), "equipment": c.equipment.to_dict(), "storage": c.storage.to_dict(),
@@ -31,6 +31,8 @@ static func _string_keys(d: Dictionary) -> Dictionary:
 ## Essence, base stats or job skills (Cory Oct 19), is left out).
 static func load_dict(c: Character, data: Dictionary) -> void:
 	c.name = str(data.get("name", c.name))
+	# saves from before the looks get the first one
+	c.look = HeroLookDef.of(StringName(str(data.get("look", "")))).id
 	c.shards = maxi(0, int(data.get("shards", c.shards)))
 	var m := StringName(str(data.get("map_id", c.map_id)))
 	c.map_id = m if Content.maps.has(m) else Character.START_MAP

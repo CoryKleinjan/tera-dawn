@@ -144,6 +144,21 @@ class Keying(unittest.TestCase):
         _, alpha = ss.defringe(rgb, alpha, bg)
         self.assertEqual(alpha[0, 12], 0.0)
 
+    def test_solid_inside_fills_pink_art_but_keeps_the_edge_and_gaps(self):
+        bg = np.array(helpers.MAGENTA)
+        cell = np.zeros((80, 80, 3), float)
+        cell[:] = helpers.MAGENTA
+        cell[10:70, 10:70] = (90, 70, 110)  # the figure
+        cell[30:50, 30:50] = (235, 120, 230)  # pink-lit chainmail deep inside it
+        cell[10:70, 10:12] = (250, 40, 250)  # pinkish glow along the outline
+        rgb, alpha = ss.key_magenta(cell, bg, dark_key=False)
+        self.assertLess(alpha[40, 40], 0.9, msg="the key alone lets the background through the chainmail")
+        out, out_alpha = ss.fix_solid_inside(rgb, alpha, source=cell / 255.0)
+        self.assertEqual(out_alpha[40, 40], 1.0)
+        self.assertTrue(np.allclose(out[40, 40], cell[40, 40] / 255.0), msg="in its painted colours")
+        self.assertTrue(np.allclose(out_alpha[10:70, 10:12], alpha[10:70, 10:12]), msg="the outline is cut as before")
+        self.assertEqual(out_alpha[5, 5], 0.0)
+
 
 class Glow(unittest.TestCase):
     """key_glow: painted light (and smoke) on a flat background."""

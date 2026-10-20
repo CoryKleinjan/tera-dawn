@@ -9,10 +9,40 @@ func weapon() -> EquipDef:
 	var w := character.equipment.at(&"weapon")
 	return w.equip_def() if w else null
 
-## What's worn in the off-hand slot (a shield, stars, a book, a quiver or a pistol), or null.
-func offhand() -> EquipDef:
-	var o := character.equipment.at(&"shield")
-	return o.equip_def() if o else null
+## The armor worn, or null.
+func armor() -> EquipDef:
+	var a := character.equipment.at(&"armor")
+	return a.equip_def() if a else null
+
+## The set whose armor and weapon are both worn, or null.
+func full_set() -> GearSetDef:
+	var s := GearSetDef.of(armor())
+	return s if s and s.weapon == weapon() else null
+
+## A kill while wearing a whole set: its kill buff (Battle Fury) goes up a level and starts
+## its time again. True if it did.
+func on_kill() -> bool:
+	var s := full_set()
+	if s == null or s.kill_buff == null:
+		return false
+	var skills := character.skills
+	var running: Array = skills.buffs.get(s.kill_buff.id, [0, 0])
+	skills.add_buff(s.kill_buff, mini(running[0] + 1, s.kill_buff.max_level))
+	return true
+
+## Ends the kill buffs of sets no longer worn whole (a piece came off).
+func _end_broken_sets() -> void:
+	var whole := full_set()
+	for s: GearSetDef in Content.gear_sets.values():
+		if s != whole and s.kill_buff and character.skills.buffs.erase(s.kill_buff.id):
+			character.recalc()
+
+## What shows on the hero: the ids of the armor and the weapon worn, empty for none
+## (HeroLookDef.frames_for).
+func shown() -> Array[StringName]:
+	var a := armor()
+	var w := weapon()
+	return [a.id if a else &"", w.id if w else &""]
 
 ## Whether this job can use gear meant for `families` (empty means anyone). A blend wears
 ## both its parent jobs' gear (JobDef.wear_families).
@@ -47,6 +77,7 @@ func equip(i: int, place: StringName = &"") -> String:
 	var old := c.equipment.put(place, stack)
 	if old:
 		c.inventory.put(ItemDef.Tab.EQUIP, i, old)
+	_end_broken_sets()
 	return ""
 
 ## Takes off what's worn in `place` and puts it in the bag (at slot `i` if given and free).
@@ -62,6 +93,7 @@ func unequip(place: StringName, i := -1) -> String:
 		return "Your Equip inventory is full."
 	c.equipment.take(place)
 	c.inventory.put(ItemDef.Tab.EQUIP, i, stack)
+	_end_broken_sets()
 	return ""
 
 

@@ -1,46 +1,16 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=15 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=5 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
-[ext_resource type="Resource" path="res://data/items/equips/hunters_hood.tres" id="e_hunters_hood"]
-[ext_resource type="Resource" path="res://data/items/equips/hunters_vest.tres" id="e_hunters_vest"]
-[ext_resource type="Resource" path="res://data/items/equips/hunters_trousers.tres" id="e_hunters_trousers"]
-[ext_resource type="Resource" path="res://data/items/equips/hunters_boots.tres" id="e_hunters_boots"]
-
 [ext_resource type="Resource" path="res://data/items/equips/hunters_bow.tres" id="e_hunters_bow"]
-[ext_resource type="Resource" path="res://data/items/equips/hunters_quiver.tres" id="e_hunters_quiver"]
-[sub_resource type="Resource" id="Entry_hunters_hood"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("e_hunters_hood")
-price = 0
-
-[sub_resource type="Resource" id="Entry_hunters_vest"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("e_hunters_vest")
-price = 0
-
-[sub_resource type="Resource" id="Entry_hunters_trousers"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("e_hunters_trousers")
-price = 0
-
-[sub_resource type="Resource" id="Entry_hunters_boots"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("e_hunters_boots")
-price = 0
 
 [sub_resource type="Resource" id="Entry_hunters_bow"]
 script = ExtResource("2_shop_entry")
 item = ExtResource("e_hunters_bow")
 price = 0
 
-[sub_resource type="Resource" id="Entry_hunters_quiver"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("e_hunters_quiver")
-price = 0
-
 [resource]
 script = ExtResource("1_shop_def")
 id = &"fletcher"
 display_name = "Greenbough Fletcher"
-items = Array[ExtResource("2_shop_entry")]([SubResource("Entry_hunters_hood"), SubResource("Entry_hunters_vest"), SubResource("Entry_hunters_trousers"), SubResource("Entry_hunters_boots"), SubResource("Entry_hunters_bow"), SubResource("Entry_hunters_quiver")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Entry_hunters_bow")])
