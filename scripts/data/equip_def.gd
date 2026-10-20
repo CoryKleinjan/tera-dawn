@@ -18,39 +18,14 @@ const SLOT_NAMES := {Slot.WEAPON: "Weapon", Slot.ARMOR: "Armor", Slot.EARRINGS: 
 ## Replaces the plain attack while wielded (a bow's shot). Null keeps the basic attack.
 @export var basic_attack: SkillDef
 
-@export_group("Worn look")
-## The old layered hero's paintings of it (this group): the hero is now painted whole
-## (HeroLookDef) and no longer shows gear, so they are only where its icon comes from until
-## the job sets replace them.
-## Its painted layer on the old hero (art/sheets/hero_<id>.json).
-@export var worn: SpriteFrames:
-	set(v):
-		worn = v
-		_icon_from_look()
-## Its worn layer moved by hand in the pose editor: frame -> Vector4(x, y, degrees clockwise,
-## places up the stack) (HeroBody.Layer). A held piece uses its pins instead.
-@export var nudges: Dictionary = {}
-## Frame -> how big its look is drawn there (1.0 as painted), set in the pose editor; its worn
-## layer or held painting grows or shrinks around the point it turns around.
-@export var sizes: Dictionary = {}
-## Frames changed in the pose editor's Add/Delete: frame -> the frame whose painting shows there
-## (another frame's, when added to a frame it has no painting for), or &"" when deleted there.
-@export var frame_art: Dictionary = {}
-## Frames where its worn layer is drawn mirrored, set by the pose editor's Flip: frame -> true.
-## It is mirrored around the point it turns around, then turned. A held piece keeps its own
-## (HeldDef.flips).
-@export var flips: Dictionary = {}
-## A hat or helmet that covers his hair, so the hair layer isn't drawn under it.
-@export var hides_hair := false
-## A weapon or off-hand: one painting held in his hand, pinned per frame (HeldDef), drawn instead
-## of `worn`.
+@export_group("Held look")
+## A weapon or off-hand's painting held in the old hero's hand (HeldDef). The hero is now
+## painted whole (HeroLookDef) and no longer shows gear, so it is only where the icon comes
+## from until the job sets replace it.
 @export var held: HeldDef:
 	set(v):
 		held = v
 		_icon_from_look()
-## A top whose long sleeves reach his wrists (a robe), so the fists painted with bare forearms
-## (HeroLookDef.bare_arm_frames) aren't drawn over them.
-@export var long_sleeves := false
 
 @export_group("Requirements")
 ## Job lines that can wear it (JobDef.family); empty for anyone.
@@ -67,12 +42,11 @@ const SLOT_NAMES := {Slot.WEAPON: "Weapon", Slot.ARMOR: "Armor", Slot.EARRINGS: 
 func tab() -> Tab:
 	return Tab.EQUIP
 
-## Gear with no icon of its own shows what he wears: its held painting, or its standing (idle1)
-## frame, with the empty space around it dropped.
+## Gear with no icon of its own shows its held painting, with the empty space around it dropped.
 func _icon_from_look() -> void:
 	if icon:
 		return
-	var tex: Texture2D = held.texture() if held else (worn.get_frame_texture(&"idle1", 0) if worn and worn.has_animation(&"idle1") else null)
+	var tex: Texture2D = held.texture() if held else null
 	if tex == null:
 		return
 	var used := TextureBounds.used_rect(tex)

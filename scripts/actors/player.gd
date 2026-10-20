@@ -5,7 +5,7 @@ extends Node2D
 ## feels instant. It is snappy, Hollow Knight style: he starts and stops at once, steers
 ## freely in the air, hops short when jump is let go early and falls faster than he rises.
 ## Where you are goes to the server a few times a second. Attacks, portals, looting and
-## potions are requests the server answers (see Net). The attack key uses the basic attack;
+## using items are requests the server answers (see Net). The attack key uses the basic attack;
 ## the quickslot keys use whatever skill or item is on that slot. Holding Up or Down (in the
 ## air) aims an attack that way.
 

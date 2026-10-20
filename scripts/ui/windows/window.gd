@@ -26,7 +26,6 @@ const TAB_TEXT_SHARE := 0.58
 ## List rows and panels: one darkness and one corner radius everywhere.
 const ROW_ALPHA := 0.4
 const ROW_RADIUS := 6.0
-const PLUS_SIZE := 20.0
 ## The button art's ends in art pixels (curl and stud, kept unstretched), and the middle of the
 ## face between its stitched lines.
 const BUTTON_END := 16.0
@@ -271,13 +270,6 @@ func add_button(r: Rect2, label: String, action: Callable, enabled := true, smal
 ## A button that's only a picture from the UI art (a whisper bubble), brighter on hover.
 func icon_button(r: Rect2, art: String, action: Callable) -> void:
 	UiSkin.draw_icon(self, art, r, UiSkin.LIT if r.has_point(_hover) else Color.WHITE)
-	_buttons.append([r, action])
-
-## The "+" that buys a skill level, `side` pixels square with its
-## top left at `at`.
-func plus_button(at: Vector2, action: Callable, side := PLUS_SIZE) -> void:
-	var r := Rect2(at, Vector2(side, side))
-	draw_texture_rect(UiSkin.tex("stat_plus"), r, false, Color(1.25, 1.2, 1.1) if r.has_point(_hover) else Color.WHITE)
 	_buttons.append([r, action])
 
 ## Presses the button under `at`, if there is one.

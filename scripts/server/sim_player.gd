@@ -5,7 +5,7 @@ extends RefCounted
 ##
 ## Movement runs on the player's own machine, like MapleStory, so it feels instant. The
 ## client reports where it is a few times a second and the server checks the report is
-## possible. Everything else (hits, EXP, items, hearts and Mana) the server decides.
+## possible. Everything else (hits, items, hearts and Mana) the server decides.
 
 const FAINT_TICKS := 150
 ## Fastest a report may move the player per tick: well above running and falling speed.
@@ -36,7 +36,7 @@ var cooldown := 0     # ticks before the next attack
 var recharge := {}
 var inv := 0          # invincibility ticks after being hit
 var faint_t := 0      # ticks left lying fainted
-var item_cd := 0      # ticks before another potion can be used
+var item_cd := 0      # ticks before another item can be used
 var heal_cd := 0      # ticks before another heal can land (HEAL_TICKS)
 var since_move := 0   # ticks since the last movement report
 var hurt_here := false # took damage since arriving on this map (a boss beaten untouched counts)
@@ -48,7 +48,7 @@ var scene_then: SceneSpot  # the scene spot whose scene is playing: it sends the
 
 ## The client needs a fresh copy of the whole Character (inventory, gear, stats).
 var dirty_character := false
-## HP, MP, EXP or Dawnshards changed.
+## Hearts, Mana or Dawnshards changed.
 var dirty_vitals := false
 
 func _init(p: int, c: Character) -> void:

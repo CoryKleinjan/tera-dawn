@@ -1,7 +1,7 @@
 class_name TDInventoryWindow
 extends TDWindow
 ## The bag (I): Equip, Use, Etc and Setup tabs of item slots. Double-click gear to wear it, a
-## potion to use it, a pet to bring it out, drag to rearrange, drag onto the equipment window to equip, and drag
+## scroll to use it, a pet to bring it out, drag to rearrange, drag onto the equipment window to equip, and drag
 ## out of every window to drop it on the ground.
 
 const COLS := 4
@@ -59,7 +59,7 @@ func _shop() -> TDShopWindow:
 func _tab_clicked(i: int) -> void:
 	tab = i as ItemDef.Tab
 
-## What double-clicking a slot does: wear gear, drink a potion. The server does it and
+## What double-clicking a slot does: wear gear, use an item. The server does it and
 ## sends back the result (or why not).
 func use_slot(i: int) -> void:
 	if Game.me.inventory.at(tab, i) == null:

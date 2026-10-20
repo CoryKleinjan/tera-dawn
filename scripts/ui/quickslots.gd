@@ -2,7 +2,7 @@ class_name TDQuickslots
 extends Control
 ## The eight quickslots above the right end of the status bar, like MapleStory's key
 ## setup: each holds a skill or an item and is used with its key (Game.QUICKSLOT_ACTIONS)
-## or a click. Drag a skill from the skill window or a potion from the inventory onto a
+## or a click. Drag a skill or an item from the inventory onto a
 ## slot, drag slots to swap them, and right-click or drag one off to clear it. The slots
 ## are saved with the character (Character.quickslots). The panel fades to see-through while
 ## the hero or an NPC near them is behind it (TDHud.fade_over_people).

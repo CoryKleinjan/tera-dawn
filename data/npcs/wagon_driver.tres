@@ -18,5 +18,5 @@ display_name = "Hobb"
 title = "Wagon Driver"
 sprite_frames = ExtResource("2_sprite")
 greeting = "Need a lift? My wagon knows every road on the isle. Costs a few Dawnshards, saves a lot of walking."
-lines = PackedStringArray("Fern Hollow's ferns grow taller than you, and the boars hide in them. Bring potions.", "Captain Marlo's Dawnbreaker sails from the dock to the mainland. Dawnharbor, they call the port there.", "If you're ever lost, a Return Scroll will bring you back to town. Mira sells them.")
+lines = PackedStringArray("Fern Hollow's ferns grow taller than you, and the boars hide in them. Watch your step.", "Captain Marlo's Dawnbreaker sails from the dock to the mainland. Dawnharbor, they call the port there.", "If you're ever lost, a Return Scroll will bring you back to town. Mira sells them.")
 travel = Array[ExtResource("3_travel_route")]([SubResource("Resource_1")])

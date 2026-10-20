@@ -580,7 +580,7 @@ func _run() -> void:
 			if m.def.id == &"fern_boar" and m.plat == hollow.layout.platforms[0]:
 				_place_mob(m, p.position.x + 150)
 				break
-		# the boar's Dawn Essence flies to the hero
+		# the boar's Dawnshards fly to the hero
 		hollow.kill_mob(hollow.mobs[0], _me())
 		await _physics(25)
 		await _shot("hollow")

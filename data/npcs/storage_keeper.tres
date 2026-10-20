@@ -10,5 +10,5 @@ display_name = "Brin"
 title = "Storage Keeper"
 sprite_frames = ExtResource("2_sprite")
 greeting = "Brin's vaults, at your service. Whatever you leave with me in one town, you'll find in every town."
-lines = PackedStringArray("Ten Dawnshards a stack. Cheaper than losing it in a cave.", "I've never lost a single potion. Not one.")
+lines = PackedStringArray("Ten Dawnshards a stack. Cheaper than losing it in a cave.", "I've never lost a single bottle. Not one.")
 storage = true

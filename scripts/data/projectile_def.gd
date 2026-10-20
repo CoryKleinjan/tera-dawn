@@ -1,8 +1,8 @@
 class_name ProjectileDef
 extends Resource
 ## What flies from a ranged skill to its target: an arrow, a star, a bolt of magic.
-## Only for show: the server has already worked out the hit, and the damage number pops
-## up when the projectile arrives.
+## Only for show: the server has already worked out the hit, and the hit effect plays
+## when the projectile arrives.
 
 @export var id: StringName
 @export var texture: Texture2D

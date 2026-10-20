@@ -54,8 +54,8 @@ const RAGE_SPEED := 1.2
 var map: MapInstance
 var index := 0
 var def: MonsterDef
-## How much stronger than its MonsterDef it is on this map (MonsterStrength): its HP, the
-## damage it deals and the Dawn Essence it gives are all this many times its own.
+## How much stronger than its MonsterDef it is on this map (MonsterStrength): its HP, and the
+## damage it deals are both this many times its own.
 var strength := 1.0
 var plat: Platform
 ## The stretch of `plat` it walks on: all of it unless its SpawnDef sets a patrol range.
