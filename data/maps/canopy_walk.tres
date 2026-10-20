@@ -141,12 +141,6 @@ x = 2860.0
 y = 640.0
 width = 320.0
 
-[sub_resource type="Resource" id="Platform_9"]
-script = ExtResource("3_platform_def")
-x = 3060.0
-y = 560.0
-width = 220.0
-
 [sub_resource type="Resource" id="Platform_10"]
 script = ExtResource("3_platform_def")
 x = 3300.0
@@ -184,12 +178,6 @@ x = 4600.0
 y = 560.0
 width = 380.0
 
-[sub_resource type="Resource" id="Platform_16"]
-script = ExtResource("3_platform_def")
-x = 5560.0
-y = 520.0
-width = 340.0
-
 [sub_resource type="Resource" id="Platform_17"]
 script = ExtResource("3_platform_def")
 x = 5200.0
@@ -203,46 +191,10 @@ x = 760.0
 y = 400.0
 width = 220.0
 
-[sub_resource type="Resource" id="Step_1"]
-script = ExtResource("3_platform_def")
-x = 800.0
-y = 470.0
-width = 150.0
-
 [sub_resource type="Resource" id="Step_2"]
 script = ExtResource("3_platform_def")
 x = 1760.0
 y = 645.0
-width = 150.0
-
-[sub_resource type="Resource" id="Step_3"]
-script = ExtResource("3_platform_def")
-x = 1650.0
-y = 570.0
-width = 150.0
-
-[sub_resource type="Resource" id="Step_4"]
-script = ExtResource("3_platform_def")
-x = 1760.0
-y = 495.0
-width = 150.0
-
-[sub_resource type="Resource" id="Step_5"]
-script = ExtResource("3_platform_def")
-x = 1920.0
-y = 360.0
-width = 150.0
-
-[sub_resource type="Resource" id="Step_6"]
-script = ExtResource("3_platform_def")
-x = 3350.0
-y = 390.0
-width = 150.0
-
-[sub_resource type="Resource" id="Step_7"]
-script = ExtResource("3_platform_def")
-x = 4550.0
-y = 640.0
 width = 150.0
 
 [sub_resource type="Resource" id="Step_8"]
@@ -251,11 +203,53 @@ x = 5490.0
 y = 653.0
 width = 150.0
 
-[sub_resource type="Resource" id="Step_9"]
+[sub_resource type="Resource" id="Step_10"]
 script = ExtResource("3_platform_def")
-x = 5600.0
-y = 587.0
-width = 150.0
+x = 4340.0
+y = 636.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_11"]
+script = ExtResource("3_platform_def")
+x = 1880.0
+y = 624.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_12"]
+script = ExtResource("3_platform_def")
+x = 1710.0
+y = 540.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_13"]
+script = ExtResource("3_platform_def")
+x = 1440.0
+y = 456.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_14"]
+script = ExtResource("3_platform_def")
+x = 1010.0
+y = 372.0
+width = 440.0
+
+[sub_resource type="Resource" id="Step_15"]
+script = ExtResource("3_platform_def")
+x = 250.0
+y = 456.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_16"]
+script = ExtResource("3_platform_def")
+x = 3250.0
+y = 356.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_17"]
+script = ExtResource("3_platform_def")
+x = 1710.0
+y = 336.0
+width = 200.0
 
 [sub_resource type="Resource" id="Portal_0"]
 script = ExtResource("8_portal_def")
@@ -263,14 +257,14 @@ x = 60.0
 platform = 1
 target_map = &"deep_canopy"
 target_x = 2960.0
-target_platform = 5
+target_platform = 4
 
 [sub_resource type="Resource" id="Portal_1"]
 script = ExtResource("8_portal_def")
 x = 5200.0
 target_map = &"dappled_nook"
 target_x = 930.0
-target_platform = 17
+target_platform = 13
 
 [sub_resource type="Resource" id="Spawn_0"]
 script = ExtResource("9_spawn_def")
@@ -369,67 +363,67 @@ count = 2
 [sub_resource type="Resource" id="Spawn_14"]
 script = ExtResource("9_spawn_def")
 monster = ExtResource("34_seedwing")
-platform = 9
+platform = 1
 count = 1
 
 [sub_resource type="Resource" id="Spawn_15"]
 script = ExtResource("9_spawn_def")
 monster = ExtResource("10_barkcap")
-platform = 10
+platform = 9
 count = 4
 
 [sub_resource type="Resource" id="Spawn_16"]
 script = ExtResource("9_spawn_def")
 monster = ExtResource("34_seedwing")
-platform = 10
+platform = 9
 count = 1
 
 [sub_resource type="Resource" id="Spawn_17"]
 script = ExtResource("9_spawn_def")
 monster = ExtResource("34_seedwing")
-platform = 11
+platform = 10
 count = 1
 
 [sub_resource type="Resource" id="Spawn_18"]
 script = ExtResource("9_spawn_def")
 monster = ExtResource("34_seedwing")
-platform = 12
+platform = 11
 count = 1
 
 [sub_resource type="Resource" id="Spawn_19"]
 script = ExtResource("9_spawn_def")
 monster = ExtResource("34_seedwing")
-platform = 14
+platform = 13
 count = 2
 
 [sub_resource type="Resource" id="Spawn_20"]
 script = ExtResource("9_spawn_def")
 monster = ExtResource("10_barkcap")
-platform = 14
+platform = 13
 count = 1
 
 [sub_resource type="Resource" id="Spawn_21"]
 script = ExtResource("9_spawn_def")
 monster = ExtResource("10_barkcap")
-platform = 15
+platform = 14
 count = 3
 
 [sub_resource type="Resource" id="Spawn_22"]
 script = ExtResource("9_spawn_def")
 monster = ExtResource("10_barkcap")
-platform = 16
+platform = 2
 count = 2
 
 [sub_resource type="Resource" id="Spawn_23"]
 script = ExtResource("9_spawn_def")
 monster = ExtResource("34_seedwing")
-platform = 16
+platform = 3
 count = 1
 
 [sub_resource type="Resource" id="Spawn_24"]
 script = ExtResource("9_spawn_def")
 monster = ExtResource("34_seedwing")
-platform = 18
+platform = 16
 count = 1
 
 [sub_resource type="Resource" id="Loot_0_0"]
@@ -442,7 +436,7 @@ max_amount = 220
 script = ExtResource("12_breakable_def")
 id = &"canopy_walk_crown_chest"
 x = 3840.0
-platform = 13
+platform = 12
 hits = 1
 whole = ExtResource("24_chest")
 broken = ExtResource("25_chest_open")
@@ -460,7 +454,7 @@ max_amount = 220
 script = ExtResource("12_breakable_def")
 id = &"canopy_walk_far_chest"
 x = 5275.0
-platform = 17
+platform = 15
 hits = 1
 whole = ExtResource("24_chest")
 broken = ExtResource("25_chest_open")
@@ -478,7 +472,7 @@ width = 5900
 height = 800
 ground_y = 720
 start_x = 150.0
-platforms = Array[ExtResource("3_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9"), SubResource("Platform_10"), SubResource("Platform_11"), SubResource("Platform_12"), SubResource("Platform_13"), SubResource("Platform_14"), SubResource("Platform_15"), SubResource("Platform_16"), SubResource("Platform_17"), SubResource("Platform_18"), SubResource("Step_1"), SubResource("Step_2"), SubResource("Step_3"), SubResource("Step_4"), SubResource("Step_5"), SubResource("Step_6"), SubResource("Step_7"), SubResource("Step_8"), SubResource("Step_9")])
+platforms = Array[ExtResource("3_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_10"), SubResource("Platform_11"), SubResource("Platform_12"), SubResource("Platform_13"), SubResource("Platform_14"), SubResource("Platform_15"), SubResource("Platform_17"), SubResource("Platform_18"), SubResource("Step_2"), SubResource("Step_8"), SubResource("Step_10"), SubResource("Step_11"), SubResource("Step_12"), SubResource("Step_13"), SubResource("Step_14"), SubResource("Step_15"), SubResource("Step_16"), SubResource("Step_17")])
 portals = Array[ExtResource("8_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1")])
 breakables = Array[ExtResource("12_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1")])
 spawns = Array[ExtResource("9_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13"), SubResource("Spawn_14"), SubResource("Spawn_15"), SubResource("Spawn_16"), SubResource("Spawn_17"), SubResource("Spawn_18"), SubResource("Spawn_19"), SubResource("Spawn_20"), SubResource("Spawn_21"), SubResource("Spawn_22"), SubResource("Spawn_23"), SubResource("Spawn_24")])
