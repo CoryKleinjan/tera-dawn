@@ -75,12 +75,6 @@ x = 300.0
 y = 545.0
 width = 400.0
 
-[sub_resource type="Resource" id="Platform_2"]
-script = ExtResource("14_platform_def")
-x = 600.0
-y = 470.0
-width = 400.0
-
 [sub_resource type="Resource" id="Platform_3"]
 script = ExtResource("14_platform_def")
 x = 900.0
@@ -93,18 +87,18 @@ x = 1500.0
 y = 545.0
 width = 400.0
 
-[sub_resource type="Resource" id="Platform_5"]
-script = ExtResource("14_platform_def")
-x = 1800.0
-y = 470.0
-width = 300.0
-
 [sub_resource type="Resource" id="Platform_6"]
 script = ExtResource("14_platform_def")
 x = 1370.0
 y = 265.0
 width = 150.0
 secret = true
+
+[sub_resource type="Resource" id="Step_1"]
+script = ExtResource("14_platform_def")
+x = 730.0
+y = 461.0
+width = 200.0
 
 [sub_resource type="Resource" id="Portal_0"]
 script = ExtResource("15_portal_def")
@@ -124,7 +118,7 @@ patrol_to = 2000.0
 [sub_resource type="Resource" id="Spawn_1"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_kelp_lurker")
-platform = 2
+platform = 1
 count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
@@ -137,7 +131,7 @@ max_amount = 240
 script = ExtResource("25_breakable_def")
 id = &"smugglers_stash_hoard_chest"
 x = 1100.0
-platform = 3
+platform = 2
 hits = 1
 whole = ExtResource("23_chest")
 broken = ExtResource("24_chest_open")
@@ -173,7 +167,7 @@ max_amount = 240
 script = ExtResource("25_breakable_def")
 id = &"smugglers_stash_high_chest"
 x = 1445.0
-platform = 6
+platform = 4
 hits = 1
 whole = ExtResource("23_chest")
 broken = ExtResource("24_chest_open")
@@ -191,7 +185,7 @@ width = 2400
 height = 700
 ground_y = 620
 start_x = 2100.0
-platforms = Array[ExtResource("14_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6")])
+platforms = Array[ExtResource("14_platform_def")]([SubResource("Platform_1"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_6"), SubResource("Step_1")])
 portals = Array[ExtResource("15_portal_def")]([SubResource("Portal_0")])
 breakables = Array[ExtResource("25_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1"), SubResource("Breakable_2")])
 spawns = Array[ExtResource("17_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1")])

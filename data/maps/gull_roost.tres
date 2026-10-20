@@ -76,22 +76,10 @@ x = 300.0
 y = 845.0
 width = 400.0
 
-[sub_resource type="Resource" id="Platform_2"]
-script = ExtResource("14_platform_def")
-x = 600.0
-y = 770.0
-width = 400.0
-
 [sub_resource type="Resource" id="Platform_3"]
 script = ExtResource("14_platform_def")
 x = 900.0
 y = 695.0
-width = 400.0
-
-[sub_resource type="Resource" id="Platform_4"]
-script = ExtResource("14_platform_def")
-x = 1200.0
-y = 620.0
 width = 400.0
 
 [sub_resource type="Resource" id="Platform_5"]
@@ -106,12 +94,6 @@ x = 1600.0
 y = 845.0
 width = 400.0
 
-[sub_resource type="Resource" id="Platform_7"]
-script = ExtResource("14_platform_def")
-x = 1800.0
-y = 770.0
-width = 300.0
-
 [sub_resource type="Resource" id="Platform_8"]
 script = ExtResource("14_platform_def")
 x = 2120.0
@@ -119,12 +101,24 @@ y = 595.0
 width = 150.0
 secret = true
 
+[sub_resource type="Resource" id="Step_1"]
+script = ExtResource("14_platform_def")
+x = 730.0
+y = 761.0
+width = 200.0
+
+[sub_resource type="Resource" id="Step_2"]
+script = ExtResource("14_platform_def")
+x = 1330.0
+y = 611.0
+width = 200.0
+
 [sub_resource type="Resource" id="Portal_0"]
 script = ExtResource("15_portal_def")
 x = 1000.0
 target_map = &"gull_bluffs"
 target_x = 2900.0
-target_platform = 26
+target_platform = 10
 
 [sub_resource type="Resource" id="Spawn_0"]
 script = ExtResource("17_spawn_def")
@@ -137,19 +131,19 @@ patrol_to = 2200.0
 [sub_resource type="Resource" id="Spawn_1"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_coral_turret")
-platform = 2
+platform = 1
 count = 2
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_reef_gull")
-platform = 4
+platform = 2
 count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_coral_turret")
-platform = 6
+platform = 4
 count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
@@ -162,7 +156,7 @@ max_amount = 1
 script = ExtResource("23_breakable_def")
 id = &"smugglers_key_chest"
 x = 1700.0
-platform = 5
+platform = 3
 hits = 1
 whole = ExtResource("21_chest")
 broken = ExtResource("22_chest_open")
@@ -179,7 +173,7 @@ max_amount = 240
 script = ExtResource("23_breakable_def")
 id = &"gull_roost_far_chest"
 x = 2195.0
-platform = 8
+platform = 5
 hits = 1
 whole = ExtResource("21_chest")
 broken = ExtResource("22_chest_open")
@@ -197,7 +191,7 @@ width = 2400
 height = 1000
 ground_y = 920
 start_x = 1100.0
-platforms = Array[ExtResource("14_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8")])
+platforms = Array[ExtResource("14_platform_def")]([SubResource("Platform_1"), SubResource("Platform_3"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_8"), SubResource("Step_1"), SubResource("Step_2")])
 portals = Array[ExtResource("15_portal_def")]([SubResource("Portal_0")])
 breakables = Array[ExtResource("23_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1")])
 spawns = Array[ExtResource("17_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3")])

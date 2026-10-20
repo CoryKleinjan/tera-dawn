@@ -340,7 +340,7 @@ x = 2320.0
 platform = 1
 target_map = &"gull_bluffs"
 target_x = 150.0
-target_platform = 30
+target_platform = 14
 
 [sub_resource type="Resource" id="Portal_1"]
 script = ExtResource("21_portal_def")

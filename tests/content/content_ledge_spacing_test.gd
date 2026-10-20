@@ -6,7 +6,7 @@ extends TestCase
 ## the few listed below where the room's top ledge has no other way up to it.
 ## Zones join this list as their rooms are laid out again.
 const Scan := preload("res://tests/content/content_scan.gd")
-const LAID_OUT: Array[StringName] = [&"lumewood", &"emberreach", &"lanternfall"]
+const LAID_OUT: Array[StringName] = [&"lumewood", &"emberreach", &"lanternfall", &"dawnharbor"]
 const TUCK := 20.0
 const SLACK := 30.0
 ## map id -> the steps (x, y) allowed under a wider ledge's shelf
