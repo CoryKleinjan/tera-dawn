@@ -23,7 +23,5 @@ extends Resource
 @export var storage := false
 ## Sets runes in gear (TDEnchantWindow; the fee is each RuneDef.fee).
 @export var enchants := false
-## Founds guilds (for TDSocial.GUILD_COST Dawnshards).
-@export var guild := false
 ## Trips they offer (ships, wagons...).
 @export var travel: Array[TravelRoute] = []

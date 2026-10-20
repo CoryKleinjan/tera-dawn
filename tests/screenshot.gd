@@ -435,23 +435,18 @@ func _run() -> void:
 		for i in 2:
 			var f := SimPlayer.new(300 + i, Character.create(["Mossy", "Kestrel"][i]))
 			Net.server.sessions[f.peer] = f
-			social.joined(f)
 			Net.server.enter_map(f, &"dawnharbor", 1000.0 + i * 220.0)
 			f.face = -1
 			friends.append(f)
 		Net.server.enter_map(_me(), &"dawnharbor", 820)
 		social.invite(_me(), "party", "Mossy")
 		social.on_answer(friends[0].peer, social.invites.keys()[-1], true)
-		social.guilds["dawnbreakers"] = {"name": "Dawnbreakers", "master": ch.name, "members": [ch.name, "Mossy"]}
-		ch.guild = "Dawnbreakers"
-		friends[0].character.guild = "Dawnbreakers"
 		_me().dirty_character = true
 		social.on_chat(friends[0].peer, "Anyone want to hunt in the Crystal Caves?")
 		social.on_chat(_me().peer, "/p I'm in! Meet at Lumewood.")
 		social.whisper(friends[1], ch.name, "Want to hunt later?")
 		await _physics(40)
 		world.hud.toggle_window("community")
-		world.hud.windows["community"].tab = 1
 		await _frames(3)
 		await _shot("social")
 		world.hud.toggle_window("community")

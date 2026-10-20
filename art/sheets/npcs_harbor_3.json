@@ -6,7 +6,7 @@
   "out_dir": "art/build/npcs_harbor_3",
   "cells": [
     [
-      "guild_clerk_1",
+      "",
       "",
       "",
       "",
@@ -18,7 +18,7 @@
       ""
     ],
     [
-      "guild_clerk_2",
+      "",
       "",
       "",
       "",
@@ -27,28 +27,6 @@
     ]
   ],
   "overrides": {
-    "guild_clerk_1": {
-      "scale": 0.2253,
-      "blank": [
-        [
-          0,
-          0,
-          236,
-          26
-        ]
-      ]
-    },
-    "guild_clerk_2": {
-      "scale": 0.2253,
-      "blank": [
-        [
-          86,
-          0,
-          240,
-          20
-        ]
-      ]
-    },
     "pet_keeper_1": {
       "scale": 0.204,
       "blank": [
@@ -73,25 +51,6 @@
     }
   },
   "sets": {
-    "guild_clerk": {
-      "frames": {
-        "idle1": "npcs_harbor_3:guild_clerk_1",
-        "idle2": "npcs_harbor_3:guild_clerk_2"
-      },
-      "anchor": "head",
-      "baseline": "bottom",
-      "out": "assets/sprites/npcs/guild_clerk.png",
-      "sprite_frames": "assets/animations/npc_guild_clerk.tres",
-      "animations": {
-        "idle": {
-          "frames": [
-            "idle1",
-            "idle2"
-          ],
-          "fps": 1.5
-        }
-      }
-    },
     "pet_keeper": {
       "frames": {
         "idle1": "npcs_harbor_3:pet_keeper_1",

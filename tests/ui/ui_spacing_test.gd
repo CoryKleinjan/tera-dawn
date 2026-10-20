@@ -39,12 +39,10 @@ func _check_layout(w: TDWindow, what: String) -> void:
 		var width := DrawUtil.text_width(Game.ui_font, label, TDWindow.tab_font_size(r, label))
 		check(width <= TDWindow.tab_text_width(r), "%s: the %s tab's label (%d px) fits its tab (%d px)" % [what, label, width, TDWindow.tab_text_width(r)])
 
-## Makes the player a `job` with a guild and some fame, so every row has a value.
+## Makes the player a `job`.
 func _player(job: StringName) -> void:
 	await ui.edit(func(c: Character) -> void:
-		c.job = Content.job(job)
-		c.guild = "Dawnbreakers"
-		c.fame = 12)
+		c.job = Content.job(job))
 
 func test_character_window_fits_with_no_stat_buttons() -> void:
 	for job: StringName in [&"warrior", &"beginner"]:
@@ -66,9 +64,7 @@ func test_every_window_opens_above_the_status_bar() -> void:
 func test_every_window_keeps_its_buttons_apart() -> void:
 	await _player(&"warrior")
 	Game.social = {
-		"buddies": [["Mossy", true, "Dawnrise Meadow"], ["Kestrel", false, ""]],
 		"party": {"leader": Game.me.name, "members": [[Game.me.name, 1, "warrior", 1.0, "meadow"], ["Kestrelwings", 7, "archer", 0.4, "hollow"]]},
-		"guild": {"name": "Dawnbreakers", "master": Game.me.name, "members": [[Game.me.name, true], ["Mossy", true]]},
 	}
 	for key in ["inventory", "equipment", "stats", "quests", "worldmap", "community", "collection"]:
 		var w := await _open(key)

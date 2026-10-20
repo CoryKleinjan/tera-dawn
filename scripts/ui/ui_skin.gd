@@ -9,7 +9,7 @@ extends RefCounted
 ## ui_windows.png straight into it, and one folder per newer sheet, named like the textures
 ## here ("hud/quests_button"): hud/ (HUD buttons, quest markers, minimap), menu/ (Esc menu
 ## and settings controls), dialogue/ (dialogue, shop, trade, quests, banners), social/
-## (buddies, party, guild, chat, invitations), book/ (Monster Book and achievements).
+## (party, chat, invitations), book/ (Monster Book and achievements).
 ## world_map.png is the painted world map.
 ##
 ## The art is cut at DENSITY texels per art pixel, so it stays sharp on big screens, and is
@@ -154,12 +154,6 @@ static func shard_counter() -> TDUiBox:
 static func amount_chip(on: bool) -> TDUiBox:
 	return box("dialogue/amount_chip_on" if on else "dialogue/amount_chip", 20, 14)
 
-## A buddy or guild member: a round niche on the left (for their online dot), then text.
-static func friend_row() -> TDUiBox:
-	var sb := box("social/friend_row", 18, 16)
-	sb.texture_margin_left = 70
-	return sb
-
 ## An achievement: a round badge niche on the left; the done one glows with a star in it.
 static func achievement_row(done: bool) -> TDUiBox:
 	var sb := box("book/achievement_row_done" if done else "book/achievement_row", 20, 18)
@@ -170,8 +164,7 @@ static func achievement_row(done: bool) -> TDUiBox:
 ## spine between them, see `draw_book`.
 const BOOK := ["book/book_pages", Vector4(40, 44, 40, 48), Vector2(30, 0)]
 
-## Panels with an ornament in the middle of an edge (draw them with draw_panel; WorldSkin
-## has the guild tag):
+## Panels with an ornament in the middle of an edge (draw them with draw_panel):
 ## [texture, margins (left, top, right, bottom), middle kept (across, down)], in art pixels.
 ## The arch panel's bottom border takes in the light trim under its dark middle, so content
 ## padded past it never sits on the trim.

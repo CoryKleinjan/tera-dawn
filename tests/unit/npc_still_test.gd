@@ -12,7 +12,7 @@ func _held_rig(def: NpcDef) -> SpriteRig:
 	return rig
 
 func test_animated_npc_holds_its_first_idle_frame() -> void:
-	var rig := _held_rig(load("res://data/npcs/guild_clerk.tres"))
+	var rig := _held_rig(load("res://data/npcs/captain_marlo.tres"))
 	var body := rig.body as AnimatedSprite3D
 	check(not body.is_playing(), "the idle loop doesn't play")
 	check_eq(body.frame, 0, "on the first idle frame (the one in the dialogue portrait)")

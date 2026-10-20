@@ -63,7 +63,7 @@ buttons (`ui_accept`).
 - **`UiStyle`**: styles Godot controls with that art: `style_button`, `style_tab`, keycaps,
   fields, sliders, check boxes, dropdowns, scroll bars, `menu_button` and the button motion.
 - **`WorldSkin`**: what's drawn over the world every frame: party, monster
-  and boss bars, name and guild tags, quest markers, speech bubbles, hints and
+  and boss bars, name tags, quest markers, speech bubbles, hints and
   the map-name banner.
 - **`UiBuild`**: makes the menus' controls: `label`, `heading`, `small_title`, `button` (a
   menu button that calls a function), `gold_button`, `centered_row`, `column`, `field`,

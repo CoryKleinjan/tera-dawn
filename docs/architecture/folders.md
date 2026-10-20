@@ -21,7 +21,7 @@ scripts/
                       DevSettings
   server/             TDServer, TDLobby, MapInstance, SimPlayer, SimMob (+ MobMoves), SimDrop,
                       TDSocial
-  server/social/      TDSocial's parts: chat, parties, trade, guilds
+  server/social/      TDSocial's parts: chat, parties, trade
   server/services/    TDServer's parts (ServerPart): items, NPC shops, storage, enchanting, travel, quests, jobs,
                       cutscenes
   net/                SnapshotFlags (the bits both sides read in snapshots), SnapshotCodec (packs them)

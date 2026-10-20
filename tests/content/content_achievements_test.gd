@@ -1,6 +1,6 @@
 extends TestCase
 ## Achievements (data/achievements/, through Content): every file loads as a complete
-## AchievementDef, ids and Steam ids are unique, they're the 20 the game shipped with and kept (saves
+## AchievementDef, ids and Steam ids are unique, they're the 19 the game shipped with and kept (saves
 ## and Steamworks know them by id and Steam name), every kind is something
 ## Achievements.measure or a Counters tally actually tracks, goals are reachable numbers, and
 ## find() returns each one.
@@ -11,8 +11,8 @@ const Scan := preload("res://tests/content/content_scan.gd")
 ## these ids and Steamworks these Steam names, so none may change. Three were made solo goals
 ## when the game became single player first (Cory, 2026-10-16): level_50 (now every boss),
 ## well_liked (a boss untouched) and dealmaker (every map of a zone). lucky_scroll went with
-## the upgrade scrolls (Cory, 2026-10-17), and level_5, level_10 and level_30 with player
-## levels (Cory, 2026-10-19).
+## the upgrade scrolls (Cory, 2026-10-17), level_5, level_10 and level_30 with player
+## levels (Cory, 2026-10-19), and guildmate with guilds (Cory, 2026-10-20).
 const SHIPPED := [
 	{"id": "first_hunt", "steam": "ACH_FIRST_HUNT", "title": "First Hunt", "text": "Defeat a monster.", "kind": "kills", "goal": 1},
 	{"id": "hunter", "steam": "ACH_HUNTER", "title": "Hunter", "text": "Defeat 500 monsters.", "kind": "kills", "goal": 500},
@@ -32,7 +32,6 @@ const SHIPPED := [
 	{"id": "take_a_seat", "steam": "ACH_TAKE_A_SEAT", "title": "Take a Seat", "text": "Sit down for a rest.", "kind": "sat", "goal": 1},
 	{"id": "best_friend", "steam": "ACH_BEST_FRIEND", "title": "Best Friend", "text": "Bring out a pet.", "kind": "pets", "goal": 1},
 	{"id": "well_liked", "steam": "ACH_WELL_LIKED", "title": "Untouchable", "text": "Defeat a boss without taking a hit on its map.", "kind": "clean_bosses", "goal": 1},
-	{"id": "guildmate", "steam": "ACH_GUILDMATE", "title": "Guildmate", "text": "Join a guild.", "kind": "guild", "goal": 1},
 	{"id": "dealmaker", "steam": "ACH_DEALMAKER", "title": "Seen It All", "text": "Visit every map of a zone.", "kind": "zones_explored", "goal": 1},
 ]
 

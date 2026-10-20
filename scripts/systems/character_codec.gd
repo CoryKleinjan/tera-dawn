@@ -13,7 +13,6 @@ static func to_dict(c: Character) -> Dictionary:
 		"quests": c.quests.to_dict(),
 		"skills": _string_keys(c.skills.learned), "buffs": _string_keys(c.skills.buffs),
 		"quickslots": c.quickslots.map(func(q: Array) -> Array: return q.map(func(v) -> String: return String(v))),
-		"buddies": c.buddies.duplicate(), "fame": c.fame, "fame_day": c.fame_day, "fame_given": c.fame_given.duplicate(), "guild": c.guild,
 		"book": c.book.to_dict(), "pet": String(c.pet), "pet_full": c.pet_full, "visited": c.visited.duplicate(),
 		"achievements": c.achievements.duplicate(), "counters": c.counters.duplicate(),
 		"scenes_seen": c.scenes_seen.duplicate(), "secrets": c.secrets.duplicate(),
@@ -71,17 +70,6 @@ static func load_dict(c: Character, data: Dictionary) -> void:
 			if not slot.is_empty() and not (Content.skills if slot[0] == &"skill" else Content.items).has(slot[1]):
 				slot = []
 			c.quickslots[i] = slot
-	if data.get("buddies") is Array:
-		c.buddies.clear()
-		for b in data["buddies"]:
-			c.buddies.append(str(b))
-	c.fame = int(data.get("fame", c.fame))
-	c.fame_day = int(data.get("fame_day", c.fame_day))
-	if data.get("fame_given") is Dictionary:
-		c.fame_given = {}
-		for k in data["fame_given"]:
-			c.fame_given[str(k)] = int(data["fame_given"][k])
-	c.guild = str(data.get("guild", c.guild))
 	if data.get("book") is Dictionary:
 		c.book.load_dict(data["book"])
 	var pet_id := StringName(str(data.get("pet", "")))

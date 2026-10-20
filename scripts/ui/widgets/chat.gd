@@ -2,7 +2,7 @@ class_name TDChat
 extends Control
 ## The chat box at the bottom left. Enter opens a line to type in; what you type is said
 ## to everyone on the map (it also shows in a bubble over your head). Start with a command
-## for other channels: /w Name (whisper), /p (party), /g (guild), /b (buddies). /help lists
+## for other channels: /w Name (whisper), /p (party). /help lists
 ## the rest. Lines fade after a while unless the box is open. Playing alone, there's no one
 ## to talk to, so the box stays out of the way: only the last few lines show, briefly.
 
@@ -17,7 +17,7 @@ const FADE_TICKS := 900
 const SOLO_FADE_TICKS := 240
 const SOLO_LINES := 3
 const COLORS := {"all": Color("f4ecff"), "pet": Palette.PET, "whisper": Color("ff9ee6"), "whisper_sent": Color("ff9ee6"),
-	"party": Color("ffb36b"), "guild": Palette.GUILD, "buddy": Color("8fe0ff"), "system": Palette.MUTED}
+	"party": Color("ffb36b"), "system": Palette.MUTED}
 
 var world: TDWorld
 var field: LineEdit
@@ -89,10 +89,6 @@ func add(kind: String, from: String, text: String) -> void:
 			shown = "To %s: %s" % [from, text]
 		"party":
 			shown = "[Party] %s: %s" % [from, text]
-		"guild":
-			shown = "[Guild] %s: %s" % [from, text]
-		"buddy":
-			shown = "[Buddy] %s: %s" % [from, text]
 		"system":
 			shown = text
 		_:

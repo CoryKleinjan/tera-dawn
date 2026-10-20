@@ -41,4 +41,3 @@ const PET := Color("ffd9a8")
 const CARD := Color("a8e6ff")
 ## Runes and what they add (tooltips, the enchanter).
 const RUNE := Color("d9b8ff")
-const GUILD := Color("b8f070")

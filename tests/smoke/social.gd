@@ -1,14 +1,13 @@
 extends SmokeArea
-## Playing with others: chat, parties, buddies, trading, fame and guilds.
+## Playing with others: chat, parties and trading.
 
-## Chat, parties, buddies, trading, guilds and fame, with a second
+## Chat, parties and trading, with a second
 ## character played straight on the server (it has no game of its own).
 func check() -> void:
 	var social := Net.server.social
 	var ch := _me().character
 	var ally := SimPlayer.new(4242, Character.create("Ally"))
 	Net.server.sessions[ally.peer] = ally
-	social.joined(ally)
 	Net.server.enter_map(_me(), &"meadow", 400)
 	Net.server.enter_map(ally, &"meadow", 470)
 	await _ticks(5)
@@ -28,7 +27,7 @@ func check() -> void:
 	world.click_avatar(world.avatars[ally.peer])
 	var menu: TDPlayerMenuWindow = world.hud.windows["player"]
 	var labels: Array = menu.actions().map(func(a: Array) -> String: return a[0])
-	_check(menu.visible and labels.has("Invite to party") and labels.has("Trade") and labels.has("Add buddy"), "clicking a player opens what you can do with them")
+	_check(menu.visible and labels.has("Invite to party") and labels.has("Trade"), "clicking a player opens what you can do with them")
 	menu.visible = false
 	# a party
 	Net.ask(&"req_social", [&"party", "Ally"])
@@ -45,15 +44,6 @@ func check() -> void:
 	Net.ask(&"req_chat", ["/p go team"])
 	await _ticks(2)
 	_check(str(chat.lines[-1]["text"]) == "[Party] %s: go team" % ch.name, "/p talks to the party")
-	# buddies
-	social.invite(ally, "buddy", ch.name)
-	await _ticks(2)
-	_check(world.hud.invites.visible and world.hud.invites.pending[0][1] == "buddy", "an invitation card pops up")
-	world.hud.invites.answer(true)
-	await _ticks(35)
-	_check(ch.buddies.has("Ally") and ally.character.buddies.has(ch.name), "accepting makes you buddies both ways")
-	var buddies: Array = Game.social.get("buddies", [])
-	_check(buddies.size() == 1 and buddies[0][1], "the buddy list shows them online")
 	# trading: an item for Dawnshards
 	ch.inventory.remove(Content.item(&"moss_tuft"), 1000)
 	ch.inventory.add(Content.item(&"moss_tuft"), 5)
@@ -63,6 +53,7 @@ func check() -> void:
 	var shards := ch.shards
 	social.invite(ally, "trade", ch.name)
 	await _ticks(2)
+	_check(world.hud.invites.visible and world.hud.invites.pending[0][1] == "trade", "an invitation card pops up")
 	world.hud.invites.answer(true)
 	await _ticks(2)
 	var trade: TDTradeWindow = world.hud.windows["trade"]
@@ -86,36 +77,6 @@ func check() -> void:
 	trade.cancel()
 	await _ticks(2)
 	_check(ally.character.shards == 700 and not trade.visible, "cancelling gives back what was offered")
-	# fame
-	ch.fame_day = -1
-	Net.ask(&"req_fame", [ally.peer, true])
-	Net.ask(&"req_fame", [ally.peer, true])
-	_check(ally.character.fame == 1, "fame goes up by one, once a day")
-	# a guild
-	Net.server.enter_map(_me(), &"dawnharbor", 300)
-	Net.server.enter_map(ally, &"dawnharbor", 400)
-	await _ticks(3)
-	ch.shards = TDSocial.GUILD_COST + 100
-	# Hollis keeps the guild register in Dawnharbor's Guild Hall
-	Net.server.enter_map(_me(), &"dawnharbor_guild", 240)
-	Net.server.enter_map(ally, &"dawnharbor_guild", 400)
-	await _ticks(3)
-	var clerk: TDNpc = world.npcs().filter(func(n: TDNpc) -> bool: return n.def.id == &"guild_clerk")[0]
-	_teleport(Vector2(clerk.position.x - 30, clerk.position.y))
-	await _ticks(2)
-	Net.ask(&"req_guild_create", [&"guild_clerk", "Dawnbreakers"])
-	await _ticks(2)
-	_check(Game.me.guild == "Dawnbreakers" and ch.shards == 100, "the guild clerk founds a guild for its fee")
-	Net.ask(&"req_social", [&"guild", "Ally"])
-	id = social.invites.keys().filter(func(k: int) -> bool: return social.invites[k]["kind"] == "guild")[0]
-	social.on_answer(ally.peer, id, true)
-	await _ticks(5)
-	_check(ally.character.guild == "Dawnbreakers" and world.avatars[ally.peer].guild == "Dawnbreakers", "guild members show the guild under their name")
-	var reloaded := TDSocial.new(Net.server, save_dir)
-	_check(reloaded.guild_of("Ally").get("name") == "Dawnbreakers", "guilds are saved")
-	Net.ask(&"req_chat", ["/g hi guild"])
-	await _ticks(2)
-	_check(str(chat.lines[-1]["text"]) == "[Guild] %s: hi guild" % ch.name, "/g talks to the guild")
 	# leaving takes them out of the party
 	social.left(ally)
 	Net.server.sessions.erase(ally.peer)

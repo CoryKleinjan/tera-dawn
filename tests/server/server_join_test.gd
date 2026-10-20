@@ -169,7 +169,7 @@ func test_the_look_picked_is_the_characters_and_others_see_it() -> void:
 	made.look = &"wanderer"
 	h.play(2, "Ann", made.to_dict())
 	check_eq(h.server.sessions[2].character.look, &"wanderer", "the look picked")
-	check_eq(h.server.sessions[2].info()[4], &"wanderer", "in what other players get")
+	check_eq(h.server.sessions[2].info()[3], &"wanderer", "in what other players get")
 
 func test_player_info_is_sent_only_when_it_changes() -> void:
 	var a := h.join(2, "Ann")
@@ -178,9 +178,9 @@ func test_player_info_is_sent_only_when_it_changes() -> void:
 	var before := h.events(3, &"ev_player_info").size()
 	h.step(TDServer.SNAPSHOT_EVERY * 4)
 	check_eq(h.events(3, &"ev_player_info").size(), before, "nothing new while nothing changed")
-	a.character.guild = "Dawnguard"
+	a.character.look = &"test_look"
 	h.step(TDServer.SNAPSHOT_EVERY)
-	check_eq(h.player_info(3, 2)[2], "Dawnguard", "her new guild is sent")
+	check_eq(h.player_info(3, 2)[3], &"test_look", "her new look is sent")
 
 func test_a_newcomer_hears_about_everyone_already_there() -> void:
 	h.join(2, "Ann")

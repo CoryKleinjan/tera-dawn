@@ -462,42 +462,24 @@ func test_world_map_cities_keep_off_region_names() -> void:
 
 func _social() -> Dictionary:
 	var me := Game.me.name
-	return {
-		"buddies": [["Mossy", true, "Dawnrise Meadow"], ["Kestrel", false, ""]],
-		"fame": 3,
-		"party": {"leader": me, "members": [[me, 1, "beginner", 1.0, "meadow"], ["Mossy", 7, "warrior", 0.4, "hollow"]]},
-		"guild": {"name": "Dawnbreakers", "master": me, "members": [[me, true], ["Mossy", true], ["Kestrel", false]]},
-	}
+	return {"party": {"leader": me, "members": [[me, 1, "beginner", 1.0, "meadow"], ["Mossy", 7, "warrior", 0.4, "hollow"]]}}
 
-func test_community_tabs_draw_buddies_party_and_guild() -> void:
+func test_party_window_draws_empty_and_full() -> void:
 	var com: TDCommunityWindow = _open("community")
 	for state in [{}, _social()]:
 		Game.social = state
-		for t in TDCommunityWindow.TABS.size():
-			await _click_tab(com, t)
-			check_eq(com.tab, t, "clicking the %s tab" % TDCommunityWindow.TABS[t])
-			await _redrawn(com, "community, %s, %s" % [TDCommunityWindow.TABS[t], "empty" if state.is_empty() else "full"])
-			for b in com._buttons:
-				check(Rect2(Vector2.ZERO, com.size).encloses(b[0]), "%s: button at %s lies inside the window" % [TDCommunityWindow.TABS[t], b[0]])
-	Game.social = _social()
-	com.tab = 0
-	await _redrawn(com, "buddies")
-	check_eq(com._buttons.size(), 4, "buddies: Whisper and Remove for the online one, Remove for the other, Add buddy")
-	com.tab = 1
-	await _redrawn(com, "party")
+		await _redrawn(com, "party, %s" % ("empty" if state.is_empty() else "full"))
+		for b in com._buttons:
+			check(Rect2(Vector2.ZERO, com.size).encloses(b[0]), "button at %s lies inside the window" % b[0])
 	check_eq(com._buttons.size(), 3, "party leader: Kick Mossy, Invite, Leave party")
-	com.tab = 2
-	await _redrawn(com, "guild")
-	check_eq(com._buttons.size(), 2, "guild master: Invite, Leave guild")
 
-func test_community_add_buddy_asks_for_a_name() -> void:
+func test_party_invite_asks_for_a_name() -> void:
 	Game.social = {}
 	var com: TDCommunityWindow = _open("community")
-	com.tab = 0
-	await _redrawn(com, "buddies")
+	await _redrawn(com, "party")
 	var add: Rect2 = com._buttons[-1][0]
 	await ui.click(com, add.get_center())
-	check(ui.hud.prompt.visible, "Add buddy opens the name prompt")
+	check(ui.hud.prompt.visible, "Invite opens the name prompt")
 	ui.hud.prompt.answer(false)
 	check(not ui.hud.prompt.visible, "Cancel closes it")
 
@@ -836,17 +818,10 @@ func test_player_menu_lists_what_you_can_do() -> void:
 	menu.open(a)
 	check(menu.visible and menu.title == "Mossy", "clicking a player opens their menu")
 	var labels: Array = menu.actions().map(func(x: Array) -> String: return x[0])
-	check_eq(labels, ["Whisper", "Invite to party", "Add buddy", "Trade", "Fame +1", "Fame -1"], "actions for a stranger")
+	check_eq(labels, ["Whisper", "Invite to party", "Trade"], "what you can do with another player")
 	await _redrawn(menu, "player menu")
 	for i in labels.size():
 		check(menu.row_rect(i).end.y <= menu.size.y, "action %d lies inside the window" % i)
-	Game.social = _social() # a guild we're master of, with Mossy as a buddy
-	labels = menu.actions().map(func(x: Array) -> String: return x[0])
-	check_eq(labels, ["Whisper", "Invite to party", "Trade", "Invite to guild", "Fame +1", "Fame -1"], "actions for a guildless buddy")
-	a.guild = "Elsewhere"
-	menu.open(a)
-	labels = menu.actions().map(func(x: Array) -> String: return x[0])
-	check(not labels.has("Invite to guild"), "someone in another guild can't be invited")
 	await ui.click(menu, menu.row_rect(0).get_center())
 	check(not menu.visible and ui.hud.chat.field.visible and ui.hud.chat.field.text == "/w Mossy ", "Whisper closes the menu and starts a whisper")
 	ui.hud.chat.close()

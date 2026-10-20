@@ -1,6 +1,6 @@
 extends TestCase
 ## Character.to_dict / load_dict: a full round trip (gear rolled stats, jobs passed, skills,
-## buffs, quickslots, buddies, fame, guild, Monster Book, pet, visited maps, achievements,
+## buffs, quickslots, Monster Book, pet, visited maps, achievements,
 ## tallies, hearts and Mana), bad values, and older saves, whose levels, EXP, Dawn Essence
 ## and stat points load as nothing.
 
@@ -40,11 +40,6 @@ func _rich() -> Character:
 	c.skills.buffs[buff.id] = [2, 500]
 	c.set_quickslot(0, &"skill", buff.id)
 	c.set_quickslot(Character.QUICKSLOTS - 2, &"item", scroll.id)
-	c.buddies.assign(["Ana", "Bo"])
-	c.fame = 7
-	c.fame_day = 20000
-	c.fame_given = {"Ana": 19999}
-	c.guild = "Dawnguard"
 	var mob := fx.monster()
 	c.book.record_kill(mob)
 	c.book.add_card(mob)
@@ -109,11 +104,6 @@ func test_round_trip_skills_buffs_and_quickslots() -> void:
 
 func test_round_trip_social_book_pet_and_tallies() -> void:
 	var b := _round_trip(_rich())
-	check_eq(Array(b.buddies), ["Ana", "Bo"], "buddies")
-	check_eq(b.fame, 7, "fame")
-	check_eq(b.fame_day, 20000, "fame day")
-	check_eq(b.fame_given, {"Ana": 19999}, "fame given")
-	check_eq(b.guild, "Dawnguard", "guild")
 	var mob := Content.monster(&"t_mob")
 	check_eq(b.book.kills(mob), 1, "book kills")
 	check_eq(b.book.cards(mob), 1, "book cards")
@@ -143,9 +133,7 @@ func test_save_is_stable() -> void:
 func test_to_dict_does_not_share_lists() -> void:
 	var c := _rich()
 	var d := c.to_dict()
-	d["buddies"].append("Eve")
 	d["counters"]["deals"] = 100
-	check_eq(c.buddies.size(), 2, "buddies untouched")
 	check_eq(c.counters["deals"], 3, "counters untouched")
 
 func test_bad_values_are_clamped_or_ignored() -> void:

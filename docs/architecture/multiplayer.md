@@ -32,8 +32,8 @@ TDWorld  ───────────────────────�
   `WorldCamera` follows your hero). Snapshots go out 20 times a
   second as packed bytes (`SnapshotCodec`) so even a busy map fits in one network packet:
   they hold only positions, facing, HP, animation and flags, and leave out monsters that
-  haven't changed (every monster goes in once a second). A player's name, job, guild,
-  pet and worn gear go separately (`ev_player_info`), reliably and only when they change.
+  haven't changed (every monster goes in once a second). A player's name, job,
+  pet, look and worn gear go separately (`ev_player_info`), reliably and only when they change.
 - **Net** (`scripts/autoload/net.gd`) is the whole protocol in one file. `req_*` methods go from
   a client to the server (grouped by the server part that answers them), `ev_*` methods from the server to clients. UI and actors call
   `Net.ask(&"req_…", [args])`; the server answers with events, and `Game.me` (your copy of
@@ -103,14 +103,13 @@ monsters it splits into (those sleep, dead, until their parent is defeated).
 
 `TDSocial` (`scripts/server/social.gd`, owned by the server) runs everything players do with
 each other: chat and its slash commands, invitations (`ev_invite` / `req_invite_answer`),
-buddies (kept on the Character), parties (server memory only; a kill counts for the quests of party members on the map,
-`Party.here`), trades (offers are held by the server until both press Trade, then swapped, or handed
-back on cancel), guilds (saved in `guilds.data` next to the character saves) and fame. Each player gets a summary of their buddies, party and
-guild through `ev_social` whenever it changes (`Game.social`); the community window, the
+parties (server memory only; a kill counts for the quests of party members on the map,
+`Party.here`) and trades (offers are held by the server until both press Trade, then swapped, or handed
+back on cancel). Each player gets a summary of their party through `ev_social` whenever it
+changes (`Game.social`); the party window, the
 player menu, the party health list and the trade window (`scripts/ui/windows/`) read it.
 
 `TDSocial` holds the shared state and is what the server and `Net` call; the work is done by
 its parts in `scripts/server/social/`, one per section: `SocialChat` (chat and slash commands),
-`SocialParties` (invitations, buddies, parties), `SocialTrade` and `SocialGuilds` (guilds and
-fame). A new social feature gets its own part (extend `SocialPart`)
+`SocialParties` (invitations, parties) and `SocialTrade`. A new social feature gets its own part (extend `SocialPart`)
 and a forwarding method on `TDSocial`.

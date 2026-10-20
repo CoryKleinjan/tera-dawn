@@ -42,8 +42,8 @@ var port := DEFAULT_PORT
 var server: TDServer
 ## Where events for the player are shown, when this game has a client.
 var world: TDWorld
-## Where this computer keeps its characters (and, when hosting, the game's guilds and its
-## encryption key). Tests point it somewhere else.
+## Where this computer keeps its characters (and, when hosting, the game's encryption
+## key). Tests point it somewhere else.
 var save_dir := "user://characters"
 ## The characters character select is showing (this computer's own, or the test characters
 ## with the Developer setting on); see `open_saves`.
@@ -461,16 +461,6 @@ func req_trade_ready() -> void:
 func req_trade_cancel() -> void:
 	if server:
 		server.social.cancel_trade(_sender())
-
-@rpc("any_peer", "call_local", "reliable")
-func req_guild_create(npc_id: StringName, guild_name: String) -> void:
-	if server:
-		server.social.on_guild_create(_sender(), npc_id, guild_name)
-
-@rpc("any_peer", "call_local", "reliable")
-func req_fame(target_peer: int, up: bool) -> void:
-	if server:
-		server.social.on_fame(_sender(), target_peer, up)
 
 # ---------- events: server -> client ----------
 
