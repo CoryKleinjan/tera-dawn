@@ -22,16 +22,18 @@ update this page when one changes. Each zone's own look and music are in
 
 ## Hero
 
-- The hero is the chibi boy only (Cory, Oct 19), turned three-quarters and facing right; the
-  creator has no look to pick. He is painted whole on every frame (no layers), one sheet per
-  move. Saves made with a dropped look load as the boy.
+- The hero is the chibi boy only (Cory, Oct 19), turned three-quarters and facing right, as the
+  wanderer: sword and armor painted on, as in the approved picture
+  (`art-sheets/new-hero/refs/wanderer_boy_final_stand.png` in project files). The creator has
+  no look to pick. He is painted whole on every frame (no layers), one sheet per move. Saves
+  made with a dropped look load as the wanderer.
 - Every move has its full animation, matching the 8-frame skill effects: the relic moves (Dash,
   Double Jump, Surge, Slam) are 8 painted frames each.
 - Armor is one set item and a weapon is one set item. Each set is painted onto the whole
   character, for every frame; each job only gets the sets and weapons it can use. The
   armor shows whenever it's worn: armor and weapon together, armor with an empty fist, plain
-  clothes with the weapon, or plain clothes. Until a job's sets are painted, its gear doesn't
-  show on him, every attack and skill plays the Surge's punch, and shots leave from that fist.
+  clothes with the weapon, or plain clothes. For now (Cory, Oct 19) no set is painted, so gear
+  doesn't change his look; until a job's sets are painted, its gear doesn't show on him, every attack and skill plays the Surge's punch, and shots leave from that fist.
 - Gear is painted whole on every frame: no holes, gaps, notches or bites where an arm, hand or
   leg crosses it, nothing cut off flat, and both shoes or boots on every pose (sitting and lying
   down too). Every result is checked frame by frame on a flat colour before it goes in.

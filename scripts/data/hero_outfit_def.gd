@@ -6,7 +6,7 @@ extends Resource
 ## Either piece may be missing: the armor with an empty hand, or plain clothes with the weapon.
 ## HeroLookDef.frames_for picks the one a hero is wearing.
 
-## Its file name: the look and the set, "boy_vanguard" or "boy_vanguard_armor".
+## Its file name: the look and the set, "wanderer_vanguard" or "wanderer_vanguard_armor".
 @export var id: StringName
 ## The HeroLookDef it is a painting of.
 @export var look: StringName

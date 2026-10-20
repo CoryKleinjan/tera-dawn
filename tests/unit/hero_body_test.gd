@@ -14,7 +14,6 @@ func test_every_look_has_every_move() -> void:
 			check(look.frames.has_animation(m), "%s has %s" % [look.id, m])
 
 func test_every_outfit_has_every_move_and_a_real_look() -> void:
-	check(not Content.outfits.is_empty(), "there are outfits")
 	for o: HeroOutfitDef in Content.outfits.values():
 		check(Content.looks.has(o.look), "%s paints a look there is" % o.id)
 		check(o.armor != &"" or o.weapon != &"", "%s wears something" % o.id)
@@ -23,24 +22,13 @@ func test_every_outfit_has_every_move_and_a_real_look() -> void:
 		for m in MOVES:
 			check(o.frames.has_animation(m), "%s has %s" % [o.id, m])
 
-func test_every_set_is_painted_for_every_look_worn_whole_or_one_piece_at_a_time() -> void:
+func test_gear_with_no_painting_leaves_his_look_as_painted() -> void:
+	var look := HeroLookDef.all()[0]
 	for s: GearSetDef in Content.gear_sets.values():
-		for look in HeroLookDef.all():
-			for pair in [[s.armor.id, s.weapon.id], [s.armor.id, &""], [&"", s.weapon.id]]:
-				check(HeroOutfitDef.find(look.id, pair[0], pair[1]) != null,
-					"%s painted in %s / %s" % [look.id, pair[0], pair[1]])
-
-func test_the_look_follows_what_is_worn() -> void:
-	var look := HeroLookDef.of(&"boy")
-	var whole: SpriteFrames = HeroOutfitDef.find(&"boy", &"vanguard_armor", &"vanguard_sword").frames
-	var armor_only: SpriteFrames = HeroOutfitDef.find(&"boy", &"vanguard_armor", &"").frames
-	var sword_only: SpriteFrames = HeroOutfitDef.find(&"boy", &"", &"vanguard_sword").frames
-	check(look.frames_for(&"vanguard_armor", &"vanguard_sword") == whole, "armor and sword: the whole set")
-	check(look.frames_for(&"vanguard_armor", &"") == armor_only, "armor only: an empty fist")
-	check(look.frames_for(&"", &"vanguard_sword") == sword_only, "sword only: plain clothes and the sword")
-	check(look.frames_for(&"", &"") == look.frames, "nothing: plain clothes")
-	check(look.frames_for(&"vanguard_armor", &"training_sword") == armor_only, "armor shows with a weapon it has no painting for")
-	check(look.frames_for(&"", &"training_sword") == look.frames, "a weapon with no painting: plain clothes")
+		for pair in [[s.armor.id, s.weapon.id], [s.armor.id, &""], [&"", s.weapon.id]]:
+			if HeroOutfitDef.find(look.id, pair[0], pair[1]) == null:
+				check(look.frames_for(pair[0], pair[1]) == look.frames, "%s / %s: as painted" % pair)
+	check(look.frames_for(&"", &"") == look.frames, "nothing worn: as painted")
 
 func test_looks_come_in_order_and_an_unknown_one_is_the_first() -> void:
 	var looks := HeroLookDef.all()

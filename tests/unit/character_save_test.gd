@@ -16,7 +16,7 @@ func after_each() -> void:
 func _rich() -> Character:
 	var c := fx.character()
 	c.name = "Saver"
-	c.look = &"boy"
+	c.look = &"wanderer"
 	c.shards = 9876
 	c.jobs_passed.assign(["t_next", "t_other"])
 	c.map_id = Content.maps.keys()[0]
@@ -76,7 +76,7 @@ func test_round_trip_basics() -> void:
 	var c := _rich()
 	var b := _round_trip(c)
 	check_eq(b.name, "Saver", "name")
-	check_eq(b.look, &"boy", "look")
+	check_eq(b.look, &"wanderer", "look")
 	check_eq(b.shards, 9876, "shards")
 	check_eq(Array(b.jobs_passed), ["t_next", "t_other"], "jobs passed")
 	check_eq(b.map_id, c.map_id, "map")

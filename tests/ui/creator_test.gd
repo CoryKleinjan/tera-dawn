@@ -109,7 +109,9 @@ func test_a_new_hero_starts_as_the_wanderer_shown_standing() -> void:
 	await _play("Fresh")
 	var c := ui.hud.title.creator
 	var looks := HeroLookDef.all()
-	check_eq(looks[0].id, &"wanderer", "the wanderer comes first")
+	check_eq(looks.size(), 1, "one look")
+	check_eq(looks[0].id, &"wanderer", "the wanderer")
+	check(not c.values.has("look"), "no look to pick")
 	check_eq(c.made.look, &"wanderer", "picked to start with")
 	check(c.preview.texture == looks[0].frames.get_frame_texture(&"idle", 0), "shown standing")
 	await _create_and_play()

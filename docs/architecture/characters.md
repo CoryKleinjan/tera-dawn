@@ -31,9 +31,10 @@ then character select shows the list (name and job) with the new character picke
   with the weapon), every frame painted whole like the look itself (`art/sheets/hero_outfit_<look>_<set>_<move>.json`,
   sources in `art/source/hero/outfits/`). `HeroLookDef.frames_for(armor, weapon)` picks the
   painting of that pair, else the armor's, else the weapon's, else plain clothes, and
-  `HeroBody.draw` plays it. A frame whose art crosses its cell line gets a manifest of its own
-  over a wider `region` (the sword-only dash's second frame). Adding a set means painting its
-  three outfits for every look, cutting them and adding a `HeroOutfitDef` for each.
+  `HeroBody.draw` plays it. None are painted for now, so gear doesn't change his look. A frame
+  whose art crosses its cell line gets a manifest of its own over a wider `region` (the
+  wanderer's second dash frame). Adding a set means painting its three outfits for every look,
+  cutting them and adding a `HeroOutfitDef` for each.
 - **Adding a look**: paint its sheets (one per move, the cells the other looks' manifests name),
   copy a look's manifests with its id, cut them, and add its `HeroLookDef` with its `order` and
   `fist` (where the punching fist is on the last "attack" frame).
