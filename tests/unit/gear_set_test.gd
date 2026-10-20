@@ -24,12 +24,14 @@ func _wear(e: EquipDef) -> void:
 			check_eq(c.gear.equip(i), "", "wears the %s" % e.display_name)
 			return
 
-func test_the_vanguard_is_one_armor_and_one_sword_for_warriors() -> void:
+func test_the_vanguard_is_one_armor_and_one_sword() -> void:
 	check_eq(set_def.armor.slot, EquipDef.Slot.ARMOR, "the armor")
 	check_eq(set_def.weapon.slot, EquipDef.Slot.WEAPON, "the weapon")
 	check_eq(set_def.weapon.weapon_kind, &"sword", "a sword")
+	check_eq(set_def.armor.jobs, [&"warrior"] as Array[StringName], "the armor: Warriors only")
+	# every new character starts with the sword (play test 2026-10-20), until a tutor hands one out
+	check(set_def.weapon.jobs.is_empty(), "the sword: anyone")
 	for e in [set_def.armor, set_def.weapon]:
-		check_eq(e.jobs, [&"warrior"] as Array[StringName], "%s: Warriors only" % e.id)
 		check(e.icon != null, "%s has its painted icon" % e.id)
 		check(GearSetDef.of(e) == set_def, "%s belongs to the set" % e.id)
 

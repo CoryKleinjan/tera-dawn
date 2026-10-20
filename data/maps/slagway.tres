@@ -342,7 +342,7 @@ gate_picture = ExtResource("15_gate")
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_slag_slime")
 platform = 0
-count = 3
+count = 2
 patrol_from = 200.0
 patrol_to = 1000.0
 
@@ -350,43 +350,36 @@ patrol_to = 1000.0
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_slag_slime")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_slag_slime")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_slag_slime")
 platform = 5
-count = 2
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_slag_slime")
 platform = 7
-count = 2
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_slag_slime")
 platform = 9
-count = 2
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_slag_slime")
 platform = 11
-count = 2
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_slag_slime")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("20_breakable_def")

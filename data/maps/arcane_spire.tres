@@ -485,7 +485,7 @@ key = ExtResource("16_spire_key")
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_spell_imp")
 platform = 0
-count = 3
+count = 2
 patrol_from = 300.0
 patrol_to = 1700.0
 
@@ -493,7 +493,7 @@ patrol_to = 1700.0
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_starfall_golem")
 platform = 0
-count = 3
+count = 2
 patrol_from = 300.0
 patrol_to = 1700.0
 
@@ -501,97 +501,84 @@ patrol_to = 1700.0
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_starfall_golem")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_starfall_golem")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_starfall_golem")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_starfall_golem")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_spell_imp")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_spell_imp")
 platform = 8
-count = 2
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_spell_imp")
 platform = 5
-count = 2
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_spell_imp")
 platform = 6
-count = 2
 
 [sub_resource type="Resource" id="Spawn_10"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_starfall_golem")
 platform = 7
-count = 2
 
 [sub_resource type="Resource" id="Spawn_11"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_starfall_golem")
 platform = 8
-count = 2
 
 [sub_resource type="Resource" id="Spawn_12"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_starfall_golem")
 platform = 9
-count = 2
 
 [sub_resource type="Resource" id="Spawn_13"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_spell_imp")
 platform = 10
-count = 2
 
 [sub_resource type="Resource" id="Spawn_14"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_spell_imp")
 platform = 11
-count = 2
 
 [sub_resource type="Resource" id="Spawn_15"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_starfall_golem")
 platform = 12
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Spawn_16"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_starfall_golem")
 platform = 13
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Spawn_17"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_starfall_golem")
 platform = 14
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("21_drop_entry")

@@ -161,7 +161,7 @@ shortcut = &"smoke_pits_crack"
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_magma_shell")
 platform = 0
-count = 4
+count = 2
 patrol_from = 300.0
 patrol_to = 2200.0
 
@@ -169,13 +169,11 @@ patrol_to = 2200.0
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_fire_imp_archer")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_magma_shell")
 platform = 5
-count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("19_drop_entry")

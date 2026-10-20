@@ -102,7 +102,7 @@ target_platform = 9
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_forge_golem")
 platform = 0
-count = 3
+count = 2
 patrol_from = 300.0
 patrol_to = 2000.0
 
@@ -110,7 +110,6 @@ patrol_to = 2000.0
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_cinder_hog")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("19_drop_entry")

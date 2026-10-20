@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="ShopDef" load_steps=19 format=3]
+[gd_resource type="Resource" script_class="ShopDef" load_steps=17 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/shop_def.gd" id="1_shop_def"]
 [ext_resource type="Script" path="res://scripts/data/shop_entry.gd" id="2_shop_entry"]
@@ -9,7 +9,6 @@
 [ext_resource type="Resource" path="res://data/items/use/emberforge_scroll.tres" id="15_emberforge_scroll"]
 [ext_resource type="Resource" path="res://data/items/use/lanternfall_scroll.tres" id="16_lanternfall_scroll"]
 [ext_resource type="Resource" path="res://data/items/use/driftcove_scroll.tres" id="17_driftcove_scroll"]
-[ext_resource type="Resource" path="res://data/items/use/pet_snack.tres" id="p11_pet_snack"]
 
 [sub_resource type="Resource" id="Resource_15"]
 script = ExtResource("2_shop_entry")
@@ -46,13 +45,8 @@ script = ExtResource("2_shop_entry")
 item = ExtResource("11_return_scroll")
 price = 0
 
-[sub_resource type="Resource" id="P11_pet_snack"]
-script = ExtResource("2_shop_entry")
-item = ExtResource("p11_pet_snack")
-price = 0
-
 [resource]
 script = ExtResource("1_shop_def")
 id = &"town_general"
 display_name = "General Store"
-items = Array[ExtResource("2_shop_entry")]([SubResource("P11_pet_snack"), SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15")])
+items = Array[ExtResource("2_shop_entry")]([SubResource("Resource_9"), SubResource("Resource_10"), SubResource("Resource_11"), SubResource("Resource_12"), SubResource("Resource_13"), SubResource("Resource_14"), SubResource("Resource_15")])

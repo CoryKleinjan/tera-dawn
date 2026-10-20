@@ -126,7 +126,7 @@ target_x = 200.0
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_kelp_lurker")
 platform = 0
-count = 4
+count = 2
 patrol_from = 300.0
 patrol_to = 2700.0
 
@@ -134,25 +134,21 @@ patrol_to = 2700.0
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_barnacle_boar")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_kelp_lurker")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_barnacle_boar")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_kelp_lurker")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("21_drop_entry")

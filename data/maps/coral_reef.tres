@@ -28,67 +28,60 @@ flip = false
 script = ExtResource("7_spawn_def")
 monster = ExtResource("10_coral_turret")
 platform = 9
-count = 1
 
 [sub_resource type="Resource" id="Resource_30"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("10_coral_turret")
 platform = 8
-count = 1
 
 [sub_resource type="Resource" id="Resource_29"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("10_coral_turret")
 platform = 7
-count = 1
 
 [sub_resource type="Resource" id="Resource_28"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("9_reef_gull")
 platform = 6
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_27"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("10_coral_turret")
 platform = 5
-count = 1
 
 [sub_resource type="Resource" id="Resource_26"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("10_coral_turret")
 platform = 4
-count = 1
 
 [sub_resource type="Resource" id="Resource_25"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("9_reef_gull")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Resource_24"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("10_coral_turret")
 platform = 2
-count = 1
 
 [sub_resource type="Resource" id="Resource_23"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("9_reef_gull")
 platform = 1
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_22"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("9_reef_gull")
 platform = 0
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_21"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("10_coral_turret")
 platform = 0
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_20"]
 script = ExtResource("6_portal_def")

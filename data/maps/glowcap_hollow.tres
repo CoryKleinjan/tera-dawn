@@ -335,7 +335,7 @@ shortcut = &"glowcap_hollow_fake_wall"
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_lume_wisp")
 platform = 0
-count = 3
+count = 2
 patrol_from = 250.0
 patrol_to = 1050.0
 
@@ -343,7 +343,7 @@ patrol_to = 1050.0
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_star_bat")
 platform = 0
-count = 3
+count = 2
 patrol_from = 1100.0
 patrol_to = 2600.0
 
@@ -351,31 +351,26 @@ patrol_to = 2600.0
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_star_bat")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_lume_wisp")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_lume_wisp")
 platform = 10
-count = 2
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_star_bat")
 platform = 16
-count = 2
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_lume_wisp")
 platform = 19
-count = 2
 
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("20_breakable_def")

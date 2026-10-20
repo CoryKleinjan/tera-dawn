@@ -75,37 +75,35 @@ flip = true
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_barnacle_boar")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Resource_14"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_barnacle_boar")
 platform = 3
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_13"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_barnacle_boar")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Resource_12"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("m_cliff_harpy")
 platform = 1
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_11"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_barnacle_boar")
 platform = 0
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_10"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("m_cliff_harpy")
 platform = 0
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_9"]
 script = ExtResource("7_portal_def")

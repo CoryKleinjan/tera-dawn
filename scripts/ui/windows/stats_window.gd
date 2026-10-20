@@ -1,6 +1,6 @@
 class_name TDStatsWindow
 extends TDWindow
-## Character info (S): guild, fame, hearts, Mana, and what the gear works out to in combat.
+## Character info (S): hearts, Mana, and what the gear works out to in combat.
 
 const ROW_H := 17.0
 ## How far above a row's baseline the middle of its text sits (12 px text).
@@ -12,7 +12,7 @@ const COL_RIGHT_VALUE := 98.0
 ## The room kept between a left-hand value and the right-hand column's label.
 const COL_GAP := 8.0
 ## The window's height.
-const BASE_H := 200.0
+const BASE_H := 164.0
 
 ## Where the last row ended when the window was last drawn (for checking it fits).
 var content_end := 0.0
@@ -24,8 +24,6 @@ func _draw_body() -> void:
 	var me := Game.me
 	var s := me.stats
 	var y := 52.0
-	y = _pair(y, ["Guild", me.guild if me.guild != "" else "-"],
-		["Fame", str(me.fame), Palette.GOOD if me.fame > 0 else (Palette.WARN if me.fame < 0 else Palette.MIST)])
 	# the long numbers get a row each, so they line up with the values above
 	y = _row(y, "Hearts", "%d / %d" % [me.health.hp, me.max_hp()])
 	y = _row(y, "Mana", "%d / %d" % [me.mp, me.max_mp()])
@@ -34,8 +32,7 @@ func _draw_body() -> void:
 	var dmg := me.damage_range()
 	y = _pair(y, ["Damage", "%d ~ %d" % [dmg.x, dmg.y], Palette.SUN], ["Critical Rate", "%d%%" % roundi(CharacterStats.crit_rate(s) * 100)])
 	y = _pair(y, ["Weapon Attack", str(s.attack)], ["Magic Attack", str(s.magic_attack)])
-	y = _pair(y, ["Accuracy", str(CharacterStats.accuracy(s))], ["Attack Speed", "%d%%" % roundi(100 + s.attack_speed)])
-	y = _pair(y, ["Speed", "%d%%" % roundi(CharacterStats.speed_multiplier(s) * 100)], ["Jump", "%d%%" % roundi(CharacterStats.jump_multiplier(s) * 100)])
+	y = _row(y, "Speed", "%d%%" % roundi(CharacterStats.speed_multiplier(s) * 100))
 	content_end = y
 
 ## A label and its value, the value `value_x` from the label (so values line up in columns),

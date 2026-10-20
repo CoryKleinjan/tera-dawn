@@ -436,7 +436,7 @@ shortcut = &"gull_bluffs_fake_wall"
 script = ExtResource("23_spawn_def")
 monster = ExtResource("22_reef_gull")
 platform = 0
-count = 4
+count = 2
 patrol_from = 300.0
 patrol_to = 2400.0
 
@@ -444,13 +444,12 @@ patrol_to = 2400.0
 script = ExtResource("23_spawn_def")
 monster = ExtResource("24_coral_turret")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("23_spawn_def")
 monster = ExtResource("22_reef_gull")
 platform = 0
-count = 3
+count = 2
 patrol_from = 3200.0
 patrol_to = 5500.0
 
@@ -458,91 +457,77 @@ patrol_to = 5500.0
 script = ExtResource("23_spawn_def")
 monster = ExtResource("24_coral_turret")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("23_spawn_def")
 monster = ExtResource("25_kelp_lurker")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("23_spawn_def")
 monster = ExtResource("22_reef_gull")
 platform = 10
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("23_spawn_def")
 monster = ExtResource("25_kelp_lurker")
 platform = 12
-count = 2
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("23_spawn_def")
 monster = ExtResource("24_coral_turret")
 platform = 13
-count = 2
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("23_spawn_def")
 monster = ExtResource("22_reef_gull")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("23_spawn_def")
 monster = ExtResource("22_reef_gull")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Spawn_10"]
 script = ExtResource("23_spawn_def")
 monster = ExtResource("22_reef_gull")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Spawn_11"]
 script = ExtResource("23_spawn_def")
 monster = ExtResource("22_reef_gull")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Spawn_12"]
 script = ExtResource("23_spawn_def")
 monster = ExtResource("22_reef_gull")
 platform = 5
-count = 2
 
 [sub_resource type="Resource" id="Spawn_13"]
 script = ExtResource("23_spawn_def")
 monster = ExtResource("25_kelp_lurker")
 platform = 15
-count = 2
 
 [sub_resource type="Resource" id="Spawn_14"]
 script = ExtResource("23_spawn_def")
 monster = ExtResource("24_coral_turret")
 platform = 16
-count = 2
 
 [sub_resource type="Resource" id="Spawn_15"]
 script = ExtResource("23_spawn_def")
 monster = ExtResource("25_kelp_lurker")
 platform = 17
-count = 2
 
 [sub_resource type="Resource" id="Spawn_16"]
 script = ExtResource("23_spawn_def")
 monster = ExtResource("24_coral_turret")
 platform = 18
-count = 2
 
 [sub_resource type="Resource" id="Spawn_17"]
 script = ExtResource("23_spawn_def")
 monster = ExtResource("25_kelp_lurker")
 platform = 19
-count = 2
 
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("27_breakable_def")

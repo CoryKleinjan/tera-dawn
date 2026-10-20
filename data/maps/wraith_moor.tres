@@ -238,7 +238,7 @@ gate_picture = ExtResource("15_gate")
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_night_boar")
 platform = 0
-count = 4
+count = 2
 patrol_from = 300.0
 patrol_to = 2000.0
 
@@ -246,7 +246,7 @@ patrol_to = 2000.0
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_gloomcap")
 platform = 0
-count = 4
+count = 2
 patrol_from = 2300.0
 patrol_to = 4100.0
 
@@ -254,49 +254,41 @@ patrol_to = 4100.0
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_gloomcap")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_night_boar")
 platform = 6
-count = 2
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_gloomcap")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_night_boar")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_gloomcap")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_night_boar")
 platform = 7
-count = 2
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_gloomcap")
 platform = 5
-count = 2
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_night_boar")
 platform = 6
-count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("20_drop_entry")

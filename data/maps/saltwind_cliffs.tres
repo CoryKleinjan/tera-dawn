@@ -84,73 +84,66 @@ flip = true
 script = ExtResource("8_spawn_def")
 monster = ExtResource("m_sand_crab")
 platform = 10
-count = 2
 
 [sub_resource type="Resource" id="Resource_33"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("m_tide_slime")
 platform = 9
-count = 2
 
 [sub_resource type="Resource" id="Resource_32"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("m_sand_crab")
 platform = 8
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_31"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("m_sand_crab")
 platform = 7
-count = 2
 
 [sub_resource type="Resource" id="Resource_30"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("m_tide_slime")
 platform = 6
-count = 2
 
 [sub_resource type="Resource" id="Resource_29"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("m_tide_slime")
 platform = 5
-count = 2
 
 [sub_resource type="Resource" id="Resource_28"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("m_tide_slime")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Resource_27"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("m_sand_crab")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Resource_26"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("m_tide_slime")
 platform = 2
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_25"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("m_sand_crab")
 platform = 1
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_24"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("m_sand_crab")
 platform = 0
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_23"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("m_tide_slime")
 platform = 0
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_22"]
 script = ExtResource("7_portal_def")

@@ -500,7 +500,7 @@ shortcut = &"graveyard_chapel_wall"
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_gloomcap")
 platform = 0
-count = 4
+count = 2
 patrol_from = 300.0
 patrol_to = 1500.0
 
@@ -508,7 +508,7 @@ patrol_to = 1500.0
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_marsh_horror")
 platform = 0
-count = 3
+count = 2
 patrol_from = 1700.0
 patrol_to = 2900.0
 
@@ -516,109 +516,91 @@ patrol_to = 2900.0
 script = ExtResource("17_spawn_def")
 monster = ExtResource("19_crypt_shell")
 platform = 18
-count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("19_crypt_shell")
 platform = 19
-count = 2
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("19_crypt_shell")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_gloomcap")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_marsh_horror")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("19_crypt_shell")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_gloomcap")
 platform = 5
-count = 2
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_marsh_horror")
 platform = 6
-count = 2
 
 [sub_resource type="Resource" id="Spawn_10"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("19_crypt_shell")
 platform = 7
-count = 2
 
 [sub_resource type="Resource" id="Spawn_11"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_gloomcap")
 platform = 8
-count = 2
 
 [sub_resource type="Resource" id="Spawn_12"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_marsh_horror")
 platform = 9
-count = 2
 
 [sub_resource type="Resource" id="Spawn_13"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("19_crypt_shell")
 platform = 10
-count = 2
 
 [sub_resource type="Resource" id="Spawn_14"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_marsh_horror")
 platform = 11
-count = 2
 
 [sub_resource type="Resource" id="Spawn_15"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("19_crypt_shell")
 platform = 12
-count = 2
 
 [sub_resource type="Resource" id="Spawn_16"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_marsh_horror")
 platform = 13
-count = 2
 
 [sub_resource type="Resource" id="Spawn_17"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("19_crypt_shell")
 platform = 14
-count = 2
 
 [sub_resource type="Resource" id="Spawn_18"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_marsh_horror")
 platform = 15
-count = 2
 
 [sub_resource type="Resource" id="Spawn_19"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("19_crypt_shell")
 platform = 16
-count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("21_drop_entry")

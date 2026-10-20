@@ -152,7 +152,7 @@ target_x = 1750.0
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_shade_imp")
 platform = 0
-count = 4
+count = 2
 patrol_from = 200.0
 patrol_to = 2200.0
 
@@ -160,13 +160,11 @@ patrol_to = 2200.0
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_lantern_wisp")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_shade_imp")
 platform = 5
-count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("19_drop_entry")

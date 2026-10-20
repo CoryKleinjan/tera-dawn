@@ -3,15 +3,16 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://vwvug2enl7jj"
-path="res://.godot/imported/overhang_right.png-7a0adef26d9b9c99ad496e2d82272c98.ctex"
+path.bptc="res://.godot/imported/overhang_right.png-7a0adef26d9b9c99ad496e2d82272c98.bptc.ctex"
 metadata={
-"vram_texture": false
+"imported_formats": ["s3tc_bptc"],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://assets/sprites/backgrounds/lanternfall_fields/overhang_right.png"
-dest_files=["res://.godot/imported/overhang_right.png-7a0adef26d9b9c99ad496e2d82272c98.ctex"]
+dest_files=["res://.godot/imported/overhang_right.png-7a0adef26d9b9c99ad496e2d82272c98.bptc.ctex"]
 
 [params]
 

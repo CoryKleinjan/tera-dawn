@@ -300,7 +300,7 @@ target_platform = 1
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_magma_shell")
 platform = 0
-count = 4
+count = 2
 patrol_from = 300.0
 patrol_to = 1800.0
 
@@ -308,7 +308,7 @@ patrol_to = 1800.0
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_forge_golem")
 platform = 0
-count = 3
+count = 2
 patrol_from = 2000.0
 patrol_to = 3700.0
 
@@ -316,67 +316,56 @@ patrol_to = 3700.0
 script = ExtResource("18_spawn_def")
 monster = ExtResource("20_cinder_hog")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_magma_shell")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("20_cinder_hog")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_magma_shell")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_forge_golem")
 platform = 8
-count = 2
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("20_cinder_hog")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_forge_golem")
 platform = 5
-count = 2
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("20_cinder_hog")
 platform = 6
-count = 2
 
 [sub_resource type="Resource" id="Spawn_10"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("20_cinder_hog")
 platform = 12
-count = 2
 
 [sub_resource type="Resource" id="Spawn_11"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_forge_golem")
 platform = 7
-count = 2
 
 [sub_resource type="Resource" id="Spawn_12"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("20_cinder_hog")
 platform = 13
-count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("22_drop_entry")

@@ -248,15 +248,15 @@ target_x = 3700.0
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_prism_slime")
 platform = 0
-count = 4
-patrol_from = 300.0
+count = 2
+patrol_from = 650.0
 patrol_to = 2200.0
 
 [sub_resource type="Resource" id="Spawn_1"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_crystal_golem")
 platform = 0
-count = 4
+count = 2
 patrol_from = 2200.0
 patrol_to = 4100.0
 
@@ -264,73 +264,61 @@ patrol_to = 4100.0
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_prism_slime")
 platform = 1
-count = 1
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_prism_slime")
 platform = 3
-count = 1
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_prism_slime")
 platform = 5
-count = 1
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_prism_slime")
 platform = 7
-count = 1
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_prism_slime")
 platform = 9
-count = 1
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_crystal_golem")
 platform = 14
-count = 2
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_crystal_golem")
 platform = 11
-count = 2
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_crystal_golem")
 platform = 12
-count = 2
 
 [sub_resource type="Resource" id="Spawn_10"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_prism_slime")
 platform = 13
-count = 2
 
 [sub_resource type="Resource" id="Spawn_11"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_prism_slime")
 platform = 14
-count = 2
 
 [sub_resource type="Resource" id="Spawn_12"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_prism_slime")
 platform = 15
-count = 2
 
 [sub_resource type="Resource" id="Spawn_13"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_prism_slime")
 platform = 22
-count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("19_drop_entry")

@@ -163,7 +163,7 @@ target_x = 2950.0
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_gloomcap")
 platform = 0
-count = 4
+count = 2
 patrol_from = 300.0
 patrol_to = 2200.0
 
@@ -171,13 +171,11 @@ patrol_to = 2200.0
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_night_boar")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_gloomcap")
 platform = 5
-count = 2
 
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("21_breakable_def")

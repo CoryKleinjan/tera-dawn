@@ -109,7 +109,7 @@ target_x = 700.0
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_prism_slime")
 platform = 0
-count = 4
+count = 2
 patrol_from = 600.0
 patrol_to = 3500.0
 
@@ -117,19 +117,16 @@ patrol_to = 3500.0
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_crystal_golem")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_prism_slime")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_crystal_golem")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("21_breakable_def")

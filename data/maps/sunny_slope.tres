@@ -48,73 +48,67 @@ flip = false
 script = ExtResource("8_spawn_def")
 monster = ExtResource("11_petal_bat")
 platform = 10
-count = 2
 
 [sub_resource type="Resource" id="Resource_33"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_tide_dewling")
 platform = 9
-count = 2
 
 [sub_resource type="Resource" id="Resource_32"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_mossling")
 platform = 8
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_31"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_mossling")
 platform = 7
-count = 2
 
 [sub_resource type="Resource" id="Resource_30"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_mossling")
 platform = 6
-count = 2
 
 [sub_resource type="Resource" id="Resource_29"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_tide_dewling")
 platform = 5
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_28"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("11_petal_bat")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Resource_27"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("11_petal_bat")
 platform = 3
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_26"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_tide_dewling")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Resource_25"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_mossling")
 platform = 1
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_24"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_mossling")
 platform = 0
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_23"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_tide_dewling")
 platform = 0
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_22"]
 script = ExtResource("7_portal_def")

@@ -38,25 +38,25 @@ flip = false
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_shell_crab")
 platform = 2
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_8"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_shell_crab")
 platform = 1
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_7"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_sea_gull")
 platform = 0
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_6"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_shell_crab")
 platform = 0
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Resource_5"]
 script = ExtResource("7_portal_def")

@@ -373,7 +373,7 @@ shortcut = &"smoke_pits_crack"
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_cinder_pup")
 platform = 0
-count = 4
+count = 2
 patrol_from = 300.0
 patrol_to = 1500.0
 
@@ -381,7 +381,7 @@ patrol_to = 1500.0
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_fire_imp_archer")
 platform = 0
-count = 3
+count = 2
 patrol_from = 1600.0
 patrol_to = 2900.0
 
@@ -389,79 +389,66 @@ patrol_to = 2900.0
 script = ExtResource("16_spawn_def")
 monster = ExtResource("18_ash_bat")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("18_ash_bat")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_cinder_pup")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_fire_imp_archer")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("18_ash_bat")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_cinder_pup")
 platform = 5
-count = 2
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_fire_imp_archer")
 platform = 6
-count = 2
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("18_ash_bat")
 platform = 9
-count = 2
 
 [sub_resource type="Resource" id="Spawn_10"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_fire_imp_archer")
 platform = 7
-count = 2
 
 [sub_resource type="Resource" id="Spawn_11"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("18_ash_bat")
 platform = 8
-count = 2
 
 [sub_resource type="Resource" id="Spawn_12"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_fire_imp_archer")
 platform = 9
-count = 2
 
 [sub_resource type="Resource" id="Spawn_13"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("18_ash_bat")
 platform = 13
-count = 2
 
 [sub_resource type="Resource" id="Spawn_14"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_cinder_pup")
 platform = 15
-count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("20_drop_entry")
