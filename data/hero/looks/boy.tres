@@ -7,6 +7,6 @@
 script = ExtResource("1_look")
 id = &"boy"
 display_name = "Boy"
-order = 0
+order = 1
 frames = ExtResource("2_frames")
 fist = Vector2(120.2, 73.4)
