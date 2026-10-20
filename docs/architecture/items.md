@@ -58,23 +58,35 @@ Zone runes drop from every monster on a region's maps (`RegionDef.drops`, rolled
 `drops`. To add a rune, save a RuneDef in `data/items/runes/` and add a DropEntry for it to its
 region or boss.
 
-Equipment slots: Weapon, Hat, Top, Bottom, Shoes, Gloves, Cape, Earrings, Pendant, two Rings
-and Shield (`EquipDef.Slot` and `Equipment.PLACES_FOR`). Adding a slot means adding it to both.
-The Shield slot is called Off-hand in the game (its place key stays `shield`): it holds a shield or a job's off-hand: `EquipDef.offhand_kind` says what a piece is
-(shield, star, book, quiver, pistol; `Gear.offhand`), and skills can ask for one
-(`SkillDef.offhand`).
+Equipment slots: Weapon, Armor, Earrings, Pendant and two Rings (`EquipDef.Slot` and
+`Equipment.PLACES_FOR`; the enum keeps the numbers the data files hold). Adding a slot means
+adding it to both and to `TDEquipmentWindow.LAYOUT`. The Armor piece is a whole outfit (hat to
+shoes, cape and off-hand); there is no off-hand slot. A save from before keeps its weapon and
+accessories and drops what was in the old Hat, Top, Bottom, Shoes, Gloves, Cape and Off-hand
+places (`Equipment.load_dict`).
+
+**Job sets** (`GearSetDef`, `data/gear_sets/`): one Armor piece and one weapon, painted onto the
+hero together (see [characters](characters.md)), and the set's effect while both are worn
+(`Gear.full_set`). The Vanguard's Battle Fury is its `kill_buff`: a buff `SkillDef` in no job
+(`data/skills/sets/`) that `Gear.on_kill` (called from `MapInstance.kill_mob`) starts or raises
+a level per kill up to its `max_level`, restarting its time; `Gear.equip`/`unequip` end it when a
+piece comes off. Its stacks are the buff's level, so its stats (`attack_speed`) scale with
+`stats_per_level`, and the client knows it like any buff. The item tooltip names the set and
+lights its effect while it is worn.
 
 ## How to add an item or piece of gear
 
 1. Give it an icon in `assets/sprites/items/<id>.png`: a painted cell on an item sheet (a Gemini
-   edit in `tools/art/gemini_pass.json`, cut by its `art/sheets/items_*.json` manifest). Gear
-   has no icon yet; an item slot shows the item's name instead, and a drop shows only its glow.
-   Gear the hero wears also sets `worn` (its layer, see [characters](characters.md)).
+   edit in `tools/art/gemini_pass.json`, cut by its `art/sheets/items_*.json` manifest). A set
+   piece's icon is painted fresh, showing what the hero wears (`items_vanguard.json`); older
+   gear with no icon shows its name instead. A set piece also needs its outfits painted (see
+   [characters](characters.md)).
 2. Create the `.tres` in `data/items/equips/`, `use/`, `etc/` or `setup/` as an
    **EquipDef**, **UseDef** or **ItemDef**. Fill in `id`, name, description, icon and
    `sell_price`; for gear, the slot, its job lines and a **StatBlock** in `stats`.
-3. Make something drop it: a **DropEntry** on a monster's `drops` (item, chance from 0 to 1,
-   amount range). Rare gear is usually 1 to 4%.
+3. Make it reachable: an item is a **DropEntry** on a monster's `drops` (item, chance from 0
+   to 1, amount range); gear never drops, so a shop line sells it (`ShopEntry`, with its
+   unlock).
 
 A **new kind of consumable** (something no `UseDef` field does yet) is a new field on
 `UseDef` plus one small step in `ServerItems.on_use_item` (`scripts/server/services/items.gd`),
@@ -87,5 +99,5 @@ for the loot key, and stays there if its tab is full.
 
 A weapon is an **EquipDef** in the Weapon slot with a `weapon_kind` (sword, dagger, bow, wand,
 staff, knuckle...), which skills can ask for (`SkillDef.weapons`), and optionally a
-`basic_attack` that replaces the plain attack while it is wielded. How it looks and is held is
-its hero painting (`data/hero/held/`, see characters.md); it has no icon yet.
+`basic_attack` that replaces the plain attack while it is wielded. It shows in his hand only
+where an outfit paints it (see characters.md).

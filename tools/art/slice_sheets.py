@@ -634,6 +634,15 @@ def fix_magenta_rim(rgb, alpha, source=None, band=6, radius=6):
     return rgb, alpha
 
 
+def fix_solid_inside(rgb, alpha, source=None, depth=16):
+    """Art painted close to the magenta (a pink-lit chainmail sleeve) keys part see-through in the
+    middle of the figure: pixels at least `depth` sheet pixels inside the figure stay solid, in
+    their painted colours. The outline and the glow along it are cut as usual."""
+    inside = ~dilate(alpha < 0.02, depth, outside=True)
+    rgb = np.where((inside & (alpha < 1))[..., None], source, rgb)
+    return rgb, np.where(inside, 1.0, alpha)
+
+
 def fix_guide_green(rgb, alpha, source=None, band=12):
     """Hero layers painted over a flat green silhouette: the green guide Gemini left along the
     piece's edge (a yellow-green rim where skin met the guide, specks in a fold) is background.
@@ -664,6 +673,8 @@ def fix_guide_blue(rgb, alpha, source=None):
 
 
 FIXES["guide_green"] = fix_guide_green
+fix_solid_inside.local = True  # it only fills in, so the outline keeps its painted fade
+FIXES["solid_inside"] = fix_solid_inside
 FIXES["guide_blue"] = fix_guide_blue
 fix_guide_green.local = fix_guide_blue.local = True  # they cut a few spots: feather only there
 FIXES["magenta_rim"] = fix_magenta_rim

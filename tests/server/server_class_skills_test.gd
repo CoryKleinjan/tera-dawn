@@ -162,16 +162,8 @@ func test_attack_speed_makes_attacks_come_sooner() -> void:
 	_use(ann, &"basic_attack")
 	check(ann.cooldown < plain, "shorter cooldown (%d < %d)" % [ann.cooldown, plain])
 
-func test_an_off_hand_skill_needs_its_off_hand() -> void:
+func test_throwing_stars_need_nothing_but_the_skill() -> void:
 	_setup()
 	var scatter := _shot(&"t_scatter")
-	scatter.offhand = [&"star"]
 	_use(ann, scatter.id)
-	check(h.told(2, "T Scatter needs throwing stars in your off-hand slot."), "told what's missing")
-	var star := u.equip(&"t_star", EquipDef.Slot.SHIELD)
-	star.offhand_kind = &"star"
-	ann.character.equipment.put(&"shield", ItemStack.exact(star))
-	ann.character.recalc()
-	ann.recharge.clear()
-	_use(ann, scatter.id)
-	check_eq(h.last(2, &"ev_skill")[1], scatter.id, "thrown with stars in the off-hand slot")
+	check_eq(h.last(2, &"ev_skill")[1], scatter.id, "thrown with no off-hand (there is none) and no ammo")

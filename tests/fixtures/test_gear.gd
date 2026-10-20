@@ -5,16 +5,15 @@ class_name TestGear
 
 const FOLDER := "res://tests/fixtures/gear"
 ## What a new Beginner wears, and the outfit the character creator offers.
-const STARTING_GEAR := [&"training_sword", &"linen_tunic", &"trail_pants"]
-const CREATOR_GEAR := [&"linen_tunic", &"meadow_shirt", &"berry_smock", &"trail_pants", &"rolled_shorts",
-	&"field_trousers", &"canvas_shoes", &"clay_clogs", &"reed_sandals"]
+const STARTING_GEAR := [&"training_sword", &"linen_tunic"]
+const CREATOR_GEAR := [&"linen_tunic", &"meadow_shirt", &"berry_smock"]
 ## Gear the village shop sells, as it used to.
 const SHOP := &"meadow_general"
-const SHOP_GEAR := [&"training_sword", &"leaf_cap", &"linen_tunic", &"trail_pants", &"leather_boots"]
+const SHOP_GEAR := [&"training_sword", &"leaf_cap", &"linen_tunic"]
 ## Each job's basic weapons, handed over when advancing (the first is worn at once).
 const ADVANCE_WEAPONS := {
 	&"warrior": [&"bronze_sword"], &"mage": [&"apprentice_wand"], &"archer": [&"willow_bow"],
-	&"thief": [&"rusty_dagger", &"iron_star"], &"pirate": [&"deckhand_scimitar", &"driftwood_pistol"],
+	&"thief": [&"rusty_dagger"], &"pirate": [&"deckhand_scimitar"],
 }
 
 static func install() -> void:

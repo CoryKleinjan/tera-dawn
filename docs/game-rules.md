@@ -22,36 +22,31 @@ update this page when one changes. Each zone's own look and music are in
 
 ## Hero
 
-- The hero is a chibi boy (`art/reference/hero.png`) painted in layers, MapleStory style: one
-  body sheet (bald, blank face, mitten fists), and his face, hair and each piece of gear painted
-  over a flat green silhouette of it so they land in place on every frame.
+- The hero is the chibi boy only (Cory, Oct 19), turned three-quarters and facing right, as the
+  wanderer: sword and armor painted on, as in the approved picture
+  (`art-sheets/new-hero/refs/wanderer_boy_final_stand.png` in project files). The creator has
+  no look to pick. He is painted whole on every frame (no layers), one sheet per move. Saves
+  made with a dropped look load as the wanderer.
+- Every move has its full animation, matching the 8-frame skill effects: the relic moves (Dash,
+  Double Jump, Surge, Slam) are 8 painted frames each.
+- Armor is one set item and a weapon is one set item. Each set is painted onto the whole
+  character, for every frame; each job only gets the sets and weapons it can use. The
+  armor shows whenever it's worn: armor and weapon together, armor with an empty fist, plain
+  clothes with the weapon, or plain clothes. For now (Cory, Oct 19) no set is painted, so gear
+  doesn't change his look; until a job's sets are painted, its gear doesn't show on him, every attack and skill plays the Surge's punch, and shots leave from that fist.
 - Gear is painted whole on every frame: no holes, gaps, notches or bites where an arm, hand or
   leg crosses it, nothing cut off flat, and both shoes or boots on every pose (sitting and lying
-  down too). On back frames he faces away, so gear shows its BACK: no buttons,
-  buckles, clasps, collar stars, flies, knee patches or toe caps. Every gear prompt says both
-  rules in plain words, names the cells seen from behind, and every result is checked frame by
-  frame on a flat colour before it goes in; a hole is fixed by repainting that piece alone on
-  plain magenta. A helmet, hat, shield or tome
-  is one painting pinned to his head or hand on every frame (separate paints only where his head
-  turns). The weapon is one painting held in his near fist; the shield or tome is in his far
-  hand and only shows while the weapon does. Where each sits, its turn and its layer on every
-  frame are set by hand in the pose editor.
+  down too). Every result is checked frame by frame on a flat colour before it goes in.
 - Head gear (helmet, hat, hood, bandana) covers only his head: nothing attached to it reaches his
   shoulders, so no cape, collar or shoulder flap.
-- Draw order, back to front: off-hand (shield), cape, body, trousers, shoes, tome, top, gloves,
-  face, hair (hidden under helmets), hat, weapon, then his fists over its grip. In the pose editor
-  any piece (his body, face, hair, fists, each piece of gear) can be moved, turned, resized and
-  moved up or down the stack on any frame; nothing is repainted or cut for it. Prefer shrinking
-  to growing: a piece drawn bigger than painted looks softer.
-- Every piece of gear has frames for every pose in the game, whatever its job: every job's
-  attack (swing, bow, pistol, throw, cast) and every pose added later. A new body pose
-  means new frames for all gear.
+- Head gear doesn't hide all hair: hair lies under it as it would in real life (long hair hangs
+  below a helmet, a ponytail hangs from under the back rim), never poking out through it.
+- In armor his face is ready for battle: focused and determined, not over the top, never
+  smiling and happy. In plain clothes he keeps the friendly face he was painted with.
 - His arms, fists and held weapons never cover his face, in any pose; both fists show. Blink
   has no pose of its own: he just vanishes and reappears.
 - Animations are shared across similar actions (one swing for all melee, one cast for all
-  spells); his walk is 4 steps, slow. Melee attacks play one 2-frame swing (swing2, swing3) with the weapon
-  only turning in the picture, never edge-on.
-- Male only for now.
+  spells); his walk is 6 steps. A weapon only turns in the picture, never edge-on.
 
 ## Movement and combat feel
 
@@ -65,8 +60,8 @@ update this page when one changes. Each zone's own look and music are in
   Mana: Grotto Tusker Dash (a flat burst of 180 px ahead, farther than a Double Jump carries you
   sideways, once per jump in the air; the roll pose), Arcane Sentinel Double Jump (the leap pose), Molten King Slam (Down + Jump in the
   air drops straight down and breaks cracked floors), Reef Titan Surge (hold Down + Dash on the
-  ground, let go to fly straight ahead; the lunge pose). Elder Treant Wall Jump and Lantern
-  Wraith Glide wait for their poses. The main way never needs a move; secret rooms can. Dash,
+  ground, let go to fly straight ahead, fist first). Elder Treant Wall Jump and Lantern
+  Wraith Glide wait for their moves (their poses are painted). The main way never needs a move; secret rooms can. Dash,
   Double Jump and Surge play the painted effects made for the old job moves (rolling dash
   spray, flash jump burst, charge trail); Slam bursts a molten impact where the hero lands. Each relic
   has its own painted icon.
@@ -129,19 +124,23 @@ update this page when one changes. Each zone's own look and music are in
   Stalker (Archer) or Berserker (Warrior). It joins no new job: it keeps both parents'
   weapons (no two-handed weapons).
 - There is no Harbinger job: the harbinger is only a story reveal.
-- Off-hand slot (once the Shield slot): Warriors and Beginners wear a shield, a Thief throwing
-  stars (with a dagger in hand), a Magician a book, an Archer a quiver worn on the back, a Pirate a pistol (with a scimitar). Stars
-  and pistols never run out. A Thief's dagger hits one monster and the stars hit a crowd; a
-  Pirate's scimitar hits one and the pistol a crowd.
+- No off-hand slot (Cory Oct 18): a shield, stars, book, quiver or pistol is part of the job
+  set's armor, painted on with it. Nothing thrown or fired ever runs out. A Thief's dagger hits one monster and the stars hit a crowd; a Pirate's scimitar hits
+  one and the pistol a crowd.
 
 ## Gear
 
-- Gear is drawn on the hero (see Hero) but has no icons yet: a slot shows an item's name in
-  place of its icon. Each first job has a
-  starter armor set (hat, top, trousers, shoes; that job and its blends only), sold in its
-  town's shop: Warrior Squire set (Emberforge), Magician Novice set (Lumewood), Thief Footpad set
-  (Lanternfall), Archer Hunter's set (Greenbough), Pirate Deckhand set (Driftcove). Tests still
-  bring their own plain gear (`tests/fixtures/gear`) for what the game doesn't have yet.
+- Slots (Cory Oct 18): Weapon, Armor, Earrings, Pendant and two Rings. The Armor piece is hat,
+  top, bottom, shoes, gloves, cape and off-hand in one; earrings, pendants and rings only give
+  stats. A job set is one Armor piece and one weapon (that job and its blends only), each with
+  its own painted icon matching what the hero wears, and its own effect while both are worn.
+  Each job gets two sets. The Warrior's Vanguard set is sold at the Emberforge Armory from the
+  start. Its look, the same on every frame: a steel helm with a raised ridge over
+  the middle of the dome, a riveted brow band, a pointed nose strip and cheek guards; a deep navy
+  tabard with one narrow white stripe; a plain blue heater shield; a steel longsword. Its Battle
+  Fury makes each kill swing 6% faster, up to 5 stacks, until 8 seconds pass with no kill, and
+  ends when a piece comes off. Other jobs keep only their starter weapons and wear plain clothes
+  until their sets are painted. Tests bring their own plain gear (`tests/fixtures/gear`).
 - No upgrade scrolls (Cory Oct 17): gear gets better through enchantments. Every piece has 3
   rune slots. An enchanter sets a rune from the bag in a slot of a piece in the bag for the
   rune's Dawnshard fee; it always works, and a rune set over another loses the old one. A worn
@@ -318,8 +317,8 @@ Every new town is made the same way, so it reaches Dawnharbor's level the first 
 - Painted travel leather and parchment. No fake stitching; the close X fits the style; the minimap
   frame matches the bottom bar.
 - Monster HP bars have no dragon emblem. Quest marks are a painted "!", "?" and three dots.
-- The equipment window lays its slots out like a person (hat on top, shoes at the bottom), with
-  what the gear adds beside them.
+- The equipment window lays its slots out like a person (earrings on top, the armor in the
+  middle with the weapon beside it, rings at the bottom), with what the gear adds beside them.
 - No clouds on the title screen.
 - The world map shows towns always and a field only once visited (as "???" before). A zone drawn
   to shape (Greenbough, Dawnharbor Coast, Lumewood, Emberreach, Lanternfall) shows a room only once visited, like Hollow Knight: its ledges and

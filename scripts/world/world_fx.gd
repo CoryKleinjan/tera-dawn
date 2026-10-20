@@ -29,7 +29,7 @@ func show_skill(peer: int, skill: SkillDef, at: Vector2, face: int, lines: Array
 	var mine := who == world.player
 	var way := Hitbox.aim_direction(face, aim)
 	var from := at + Vector2(0, -TDPlayer.CHEST) + way * 20 + Vector2(0, -2)
-	# a shot leaves from the bow, barrel, star or wand tip he's holding (HeroBody.muzzle)
+	# a shot leaves from his punching fist (HeroBody.muzzle)
 	var body: HeroBody = who.get("body") if who else null
 	var muzzle: Variant = body.muzzle(skill.animation, face) if body and skill.projectile else null
 	if muzzle != null:

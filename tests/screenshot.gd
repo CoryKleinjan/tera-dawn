@@ -84,11 +84,11 @@ func _run() -> void:
 	world.hud.title._on_solo()
 	await _physics(2)
 	if only == "" or only == "creator":
-		# The character creator, with a name and a few choices made.
+		# The character creator, with a name typed and the second look picked.
 		world.hud.title.character_select.create_button.pressed.emit()
 		var creator := world.hud.title.creator
 		creator.name_field.text = "Dawnling"
-		creator.step("outfit:%d" % EquipDef.Slot.TOP, 1)
+		creator.step("look", 1)
 		await _frames(10)
 		await _shot("creator")
 		creator.cancelled.emit()
@@ -259,24 +259,22 @@ func _run() -> void:
 		await _shot("ranged")
 	if only == "muzzles":
 		# The bow's shot held still where it leaves, on the frame it leaves on (not in the full
-		# run): `_old` from the chest as it used to, `_new` from the bow (HeroBody.muzzle).
+		# run): `_old` from the chest as it used to, `_new` from his punching fist (HeroBody.muzzle).
 		await _go(&"greenbough", 900)  # a town: nothing to hit
-		for job: Array in [[&"archer", &"hunters_bow", &"", &"bow_shot"]]:
+		for job: Array in [[&"archer", &"hunters_bow", &"bow_shot"]]:
 			for c: Character in [ch, Game.me]:
 				c.job = Content.job(job[0])
 				c.equipment.take(&"weapon")
-				c.equipment.take(&"shield")
 				c.equipment.put(&"weapon", ItemStack.exact(Content.item(job[1])))
-				if job[2] != &"":
-					c.equipment.put(&"shield", ItemStack.exact(Content.item(job[2])))
 			_me().dirty_character = true
 			await _physics(150)  # the job's ribbon and light fade
-			var skill: SkillDef = Content.skill(job[3])
-			var weapon: EquipDef = Game.me.equipment.defs().get(&"weapon")
-			var move := HeroBody.LOOK.resolve(skill.animation, weapon.weapon_kind)
-			var frame: StringName = HeroBody.MUZZLES.frames.get(move, HeroBody.LOOK.frame_at(move, &"", 0.0))
-			var spec: Dictionary = HeroBody.LOOK.animations[move]
-			var ticks := int(((spec["frames"] as Array).find(frame) + 0.4) / float(spec["fps"]) * 60.0)
+			var skill: SkillDef = Content.skill(job[2])
+			# the shot leaves on the attack's last frame (the punch)
+			var frames := HeroLookDef.of(Game.me.look).frames
+			var into := 0.4
+			for i in frames.get_frame_count(HeroBody.ATTACK) - 1:
+				into += frames.get_frame_duration(HeroBody.ATTACK, i)
+			var ticks := int(into / frames.get_animation_speed(HeroBody.ATTACK) * 60.0)
 			for way in ["old", "new"]:
 				p = world.player
 				_teleport(world, Vector2(900, world.map.ground_y))
@@ -500,6 +498,27 @@ func _run() -> void:
 		meadow.remove_player(friend)
 		Net.ask(&"req_sit", [false])
 		await _physics(3)
+	if only == "looks":
+		# Every hero look side by side, in each of his moves (not in the full run).
+		_teleport(world, Vector2(1180, 620))
+		p.face = 1
+		var field: MapInstance = Net.server.maps[&"meadow"]
+		var lookers := []
+		var looks := HeroLookDef.all()
+		for i in looks.size():
+			var c := Character.create("Look %d" % i)
+			c.look = looks[i].id
+			var other := SimPlayer.new(200 + i, c)
+			field.add_player(other, 1260.0 + i * 70.0)
+			other.face = 1
+			lookers.append(other)
+		for anim: StringName in [&"idle", &"walk", &"jump", &"fall", &"hurt", &"faint", &"sit", &"dash", &"surge_charge", &"surge", &"slam", &"slam_land", &"double_jump", &"attack"]:
+			for other: SimPlayer in lookers:
+				other.animation = anim
+			await _physics(50)
+			await _shot("looks_%s" % anim)
+		for other in lookers:
+			field.remove_player(other)
 	if only == "" or only == "players":
 		# Two other players nearby. They're on the server but have no game connected.
 		_teleport(world, Vector2(1300, 620))
@@ -519,7 +538,7 @@ func _run() -> void:
 	if only == "" or only == "windows":
 		# Inventory, equipment and character windows with some loot, one tooltip showing.
 		world.scenes.skip()  # (the intro cutscene would hide the windows)
-		for id in [&"leather_boots", &"petal_cape", &"moss_ring", &"oak_shield", &"dawn_blade"]:
+		for id in [&"bronze_mail", &"ember_helm", &"moss_ring", &"dawn_blade"]:
 			ch.inventory.add(Content.item(id))
 		for id in [&"boar_tusk", &"petal_wing", &"dewling_droplet"]:
 			ch.inventory.add(Content.item(id), randi_range(3, 40))

@@ -1,16 +1,18 @@
 class_name NewCharacter
 extends RefCounted
-## The choices made in the character creator: the starting outfit. The client sends it with
-## its first join (`to_dict`), and the server checks every choice against what the creator
-## offers before making the character (`Character.create`).
+## The choices made in the character creator: the hero's look and the starting outfit. The
+## client sends them with its first join (`to_dict`), and the server checks every choice
+## against what the creator offers before making the character (`Character.create`).
 ##
 ## Outfit choices come from the starting job's `creator_gear`: one piece per kind of gear
 ## (top, bottom, shoes...). Kinds not chosen keep the job's `starting_gear`.
 
+## The look picked (HeroLookDef.id).
+var look: StringName = HeroLookDef.all()[0].id
 ## Gear kind (EquipDef.Slot) -> the EquipDef picked for it.
 var outfit := {}
 
-## Starts with the job's own starting gear picked where the creator offers it.
+## Starts with the first look and the job's own starting gear picked where the creator offers it.
 func _init(job_id := Character.START_JOB) -> void:
 	var job := Content.job(job_id)
 	for kind in outfit_kinds(job):
@@ -43,8 +45,15 @@ func cycle_outfit(job: JobDef, kind: EquipDef.Slot, step: int) -> void:
 	if not options.is_empty():
 		outfit[kind] = options[posmod(options.find(outfit.get(kind)) + step, options.size())]
 
+## Picks the next or previous look.
+func cycle_look(step: int) -> void:
+	var looks := HeroLookDef.all()
+	look = looks[posmod(looks.find(HeroLookDef.of(look)) + step, looks.size())].id
+
 ## Every choice made at random.
 func roll(job: JobDef, rng: RandomNumberGenerator = null) -> void:
+	var looks := HeroLookDef.all()
+	look = looks[rng.randi_range(0, looks.size() - 1) if rng else randi() % looks.size()].id
 	for kind in outfit_kinds(job):
 		var options := outfit_options(job, kind)
 		outfit[kind] = options[rng.randi_range(0, options.size() - 1) if rng else randi() % options.size()]
@@ -64,14 +73,16 @@ func to_dict() -> Dictionary:
 	var gear := []
 	for kind in outfit:
 		gear.append(String(outfit[kind].id))
-	return {"outfit": gear}
+	return {"look": String(look), "outfit": gear}
 
 ## The choices a client sent, keeping only what the creator offers a new `job` character.
-## Anything missing or not on offer stays as the default (an older client's "look" is left
-## out).
+## Anything missing or not on offer stays as the default.
 static func from_dict(data: Dictionary, job_id := Character.START_JOB) -> NewCharacter:
 	var n := NewCharacter.new(job_id)
 	var job := Content.job(job_id)
+	var look := StringName(str(data.get("look", "")))
+	if Content.looks.has(look):
+		n.look = look
 	var gear: Variant = data.get("outfit")
 	if gear is Array:
 		for id in gear:

@@ -33,9 +33,6 @@ func use_problem(skill: SkillDef) -> String:
 	var w := c.gear.weapon()
 	if not skill.weapons.is_empty() and (w == null or not w.weapon_kind in skill.weapons):
 		return "%s needs a %s." % [skill.display_name, " or ".join(skill.weapons)]
-	var o := c.gear.offhand()
-	if not skill.offhand.is_empty() and (o == null or not o.offhand_kind in skill.offhand):
-		return "%s needs %s in your off-hand slot." % [skill.display_name, " or ".join(skill.offhand.map(EquipDef.offhand_name))]
 	if c.mp < skill.mp_at(level(skill)):
 		return "Not enough Mana for %s." % skill.display_name
 	return ""

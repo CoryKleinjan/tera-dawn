@@ -22,6 +22,8 @@ func check() -> void:
 	var attack := c.stats.attack
 	_check(c.gear.unequip(&"weapon") == "" and c.stats.attack == attack - sword.stats.attack, "taking off the sword lowers Weapon Attack")
 	_check(c.gear.equip(_first_filled(c, ItemDef.Tab.EQUIP)) == "" and c.stats.attack == attack, "putting it back on restores Weapon Attack")
+	c.gear.unequip(&"armor")
+	c.inventory.clear()
 	c.inventory.add(Content.item(&"leaf_cap"))
 	var defense := c.stats.defense
 	c.gear.equip(_first_filled(c, ItemDef.Tab.EQUIP))

@@ -67,6 +67,7 @@ func _lines() -> Array:
 				col = Palette.WARN
 			out.append(["%s: %s" % [StatBlock.LABELS[f], StatBlock.format(f, v)], col, 12])
 		out.append_array(rune_lines(stack))
+		out.append_array(set_lines(e))
 		if compare:
 			out.append_array(_comparison(e))
 	elif item is UseDef:
@@ -94,6 +95,17 @@ func _lines() -> Array:
 		out.append([item.description, Color(Palette.MIST, 0.8), 11])
 	if hint != "":
 		out.append([hint, Color(Palette.SUN, 0.75), 11])
+	return out
+
+## The set the gear belongs to and what wearing both its pieces gives, lit while both are worn.
+static func set_lines(e: EquipDef) -> Array:
+	var s := GearSetDef.of(e)
+	if s == null:
+		return []
+	var col := Palette.GOOD if Game.me.gear.full_set() == s else Palette.MUTED
+	var out := [["%s set: %s and %s" % [s.display_name, s.armor.display_name, s.weapon.display_name], col, 11]]
+	if s.kill_buff:
+		out.append(["Both worn: %s. %s" % [s.kill_buff.display_name, s.kill_buff.description], col, 11])
 	return out
 
 ## A line for each of the gear's rune slots: the rune and what it adds, or that it's empty.

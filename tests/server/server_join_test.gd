@@ -150,18 +150,26 @@ func test_events_to_a_peer_that_left_are_not_sent() -> void:
 
 func test_the_creators_choices_make_a_beginner_with_that_outfit() -> void:
 	var made := NewCharacter.new()
-	made.outfit[EquipDef.Slot.TOP] = Content.item(&"meadow_shirt")
+	made.outfit[EquipDef.Slot.ARMOR] = Content.item(&"meadow_shirt")
 	h.play(2, "Ann", made.to_dict())
 	var c: Character = h.server.sessions[2].character
 	check_eq(c.job.id, Character.START_JOB, "a Beginner")
-	check_eq(c.equipment.at(&"top").item.id, &"meadow_shirt", "the top picked")
+	check_eq(c.equipment.at(&"armor").item.id, &"meadow_shirt", "the top picked")
 	check_eq(h.last(2, &"ev_joined")[0]["name"], "Ann", "the client hears it")
 
 func test_an_older_clients_look_choices_are_left_out() -> void:
 	h.play(2, "Ann", {"look": {"hair": "hair_ponytail"}, "outfit": ["meadow_shirt"]})
 	var c: Character = h.server.sessions[2].character
-	check_eq(c.equipment.at(&"top").item.id, &"meadow_shirt", "the top picked")
-	check(not c.to_dict().has("appearance"), "no look kept")
+	check_eq(c.equipment.at(&"armor").item.id, &"meadow_shirt", "the top picked")
+	check(not c.to_dict().has("appearance"), "no old appearance kept")
+	check_eq(c.look, HeroLookDef.all()[0].id, "the first look")
+
+func test_the_look_picked_is_the_characters_and_others_see_it() -> void:
+	var made := NewCharacter.new()
+	made.look = &"wanderer"
+	h.play(2, "Ann", made.to_dict())
+	check_eq(h.server.sessions[2].character.look, &"wanderer", "the look picked")
+	check_eq(h.server.sessions[2].info()[4], &"wanderer", "in what other players get")
 
 func test_player_info_is_sent_only_when_it_changes() -> void:
 	var a := h.join(2, "Ann")

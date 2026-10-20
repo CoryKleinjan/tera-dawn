@@ -22,7 +22,8 @@ func _aura(lasts: int) -> TDEffect:
 
 func test_every_timed_buff_has_an_aura() -> void:
 	for s: SkillDef in Content.skills.values():
-		if s.kind == SkillDef.Kind.BUFF and s.duration_ticks(1) > 0:
+		# a set's kill buff (Battle Fury) waits for its own painted glow
+		if s.kind == SkillDef.Kind.BUFF and s.duration_ticks(1) > 0 and not GearSetDef.with_buff(s):
 			check(s.aura != null, "%s lasts a while but shows no aura" % s.id)
 
 func test_an_aura_loops_its_frames_until_the_buff_ends() -> void:

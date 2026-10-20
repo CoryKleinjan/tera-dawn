@@ -29,7 +29,7 @@ func test_spend_and_restore_mp() -> void:
 
 func test_gear_adds_no_hearts_or_mana() -> void:
 	var c := fx.character()
-	c.equipment.put(&"hat", ItemStack.exact(fx.equip(&"t_hat", EquipDef.Slot.HAT, {"max_hp": 100, "max_mp": 50})))
+	c.equipment.put(&"armor", ItemStack.exact(fx.equip(&"t_hat", EquipDef.Slot.ARMOR, {"max_hp": 100, "max_mp": 50})))
 	check_eq(c.max_hp(), CharacterStats.BASE_HEARTS, "hearts")
 	check_eq(c.max_mp(), CharacterStats.BASE_MANA, "Mana")
 
