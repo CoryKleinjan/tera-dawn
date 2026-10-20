@@ -1,22 +1,16 @@
 class_name TDSocial
 extends RefCounted
-## Everything players do with each other, run by the server: chat (map, whisper, party,
-## guild, buddies), invitations, buddy lists, parties, trading,
-## guilds and fame.
+## Everything players do with each other, run by the server: chat (map, whisper, party),
+## invitations, parties and trading.
 ##
-## Each player's client gets a summary of their buddies, party and guild (`ev_social`)
-## whenever it changes, and the state of their trade (`ev_trade`).
+## Each player's client gets a summary of their party (`ev_social`) whenever it changes,
+## and the state of their trade (`ev_trade`).
 ##
 ## This holds the shared state and the lookups; the work is split into parts under
-## scripts/server/social/ (chat, parties, trades, guilds). The methods the
+## scripts/server/social/ (chat, parties, trades). The methods the
 ## server and Net call are all here and hand off to the right part.
 
 const PARTY_MAX := 6
-const BUDDY_MAX := 20
-const GUILD_MAX := 30
-const GUILD_COST := 15000
-## Fame can be given once a day, and to the same player once a month.
-const FAME_REPEAT_DAYS := 30
 const TRADE_SLOTS := 9
 const CHAT_MAX := 120
 ## Ticks an invitation waits for an answer.
@@ -43,9 +37,6 @@ class Trade:
 var server: TDServer
 var parties := {}
 var party_ids := 0
-## lowercased guild name -> {"name": String, "master": String, "members": Array of names}
-var guilds := {}
-var guild_path := ""
 ## invitation id -> {"kind", "from" (name), "to" (peer), "data", "t"}
 var invites := {}
 var invite_ids := 0
@@ -57,16 +48,12 @@ var _sent := {}
 var chat: SocialChat
 var party: SocialParties
 var trade: SocialTrade
-var guild: SocialGuilds
 
-func _init(s: TDServer, save_folder: String) -> void:
+func _init(s: TDServer) -> void:
 	server = s
 	chat = SocialChat.new(self)
 	party = SocialParties.new(self)
 	trade = SocialTrade.new(self)
-	guild = SocialGuilds.new(self)
-	guild_path = save_folder.path_join("guilds.data")
-	guild.load_guilds()
 
 # ---------- lookups ----------
 
@@ -84,25 +71,12 @@ func party_of(char_name: String) -> Party:
 			return pt
 	return null
 
-func guild_of(char_name: String) -> Dictionary:
-	for g: Dictionary in guilds.values():
-		if (g["members"] as Array).has(char_name):
-			return g
-	return {}
-
 ## A system message to one player (nothing if they're gone).
 func tell(p: SimPlayer, text: String, col := INFO) -> void:
 	if p and p.map:
 		p.map.tell(p, text, col)
 
 # ---------- coming and going ----------
-
-func joined(p: SimPlayer) -> void:
-	var g := guild_of(p.character.name)
-	p.character.guild = g.get("name", "")
-	for other: SimPlayer in server.sessions.values():
-		if other != p and other.character.buddies.has(p.character.name):
-			tell(other, "%s is online." % p.character.name)
 
 func left(p: SimPlayer) -> void:
 	var peer := p.peer
@@ -133,15 +107,10 @@ func step(tick: int) -> void:
 			_sent[p.peer] = s
 			Net.send(p.peer, &"ev_social", [s])
 
-## What a player's community window shows: buddies (online and where), their party
-## (with each member's HP and map) and their guild.
+## What a player's community window shows: their party, with each member's HP and map.
 func summary(p: SimPlayer) -> Dictionary:
 	var c := p.character
-	var buddies := []
-	for b in c.buddies:
-		var o := player_named(b)
-		buddies.append([b, o != null, o.map.def.display_name if o and o.map else ""])
-	var out := {"buddies": buddies, "fame": c.fame}
+	var out := {}
 	var pt := party_of(c.name)
 	if pt:
 		var members := []
@@ -150,12 +119,6 @@ func summary(p: SimPlayer) -> Dictionary:
 			if o:
 				members.append([m, o.peer, String(o.character.job.id), o.character.health.fraction(), String(o.map.def.id) if o.map else ""])
 		out["party"] = {"leader": pt.leader, "members": members}
-	var g := guild_of(c.name)
-	if not g.is_empty():
-		var members := []
-		for m in g["members"]:
-			members.append([m, player_named(m) != null])
-		out["guild"] = {"name": g["name"], "master": g["master"], "members": members}
 	return out
 
 # ---------- requests (see Net) and calls from the server ----------
@@ -195,12 +158,3 @@ func on_trade_ready(peer: int) -> void:
 
 func cancel_trade(peer: int, why := "The trade was cancelled.") -> void:
 	trade.cancel(peer, why)
-
-func on_guild_create(peer: int, npc_id: StringName, guild_name: String) -> void:
-	guild.on_create(peer, npc_id, guild_name)
-
-func save_guilds() -> void:
-	guild.save_guilds()
-
-func on_fame(peer: int, target_peer: int, up: bool) -> void:
-	guild.on_fame(peer, target_peer, up)

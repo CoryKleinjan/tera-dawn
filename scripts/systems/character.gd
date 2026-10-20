@@ -57,15 +57,6 @@ var skills := SkillBook.new(self)
 var quickslots: Array = []
 ## Everything worn plus skill bonuses. Kept up to date by recalc().
 var stats := StatBlock.new()
-## Names of this character's buddies (the server keeps them both ways).
-var buddies: Array[String] = []
-## Fame other players gave (or took). `fame_day` is the day (days since 1970) this
-## character last gave fame, and `fame_given` the day they last gave each name fame.
-var fame := 0
-var fame_day := -1
-var fame_given := {}
-## The guild's name, or "". The server's guild list is the real record.
-var guild := ""
 ## Kills and cards of every monster met.
 var book := MonsterBook.new()
 ## The pet that's out (a PetDef id, or empty) and how full it is (0 to 100).

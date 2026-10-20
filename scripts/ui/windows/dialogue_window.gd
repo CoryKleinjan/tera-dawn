@@ -95,8 +95,6 @@ func _options() -> Array:
 		out.append(["Open storage", func() -> void:
 			visible = false
 			hud.windows["storage"].open(npc)])
-	if def.guild:
-		out.append(["Found a guild", _guild_page])
 	if not def.travel.is_empty():
 		out.append(["Travel", _travel_list])
 	if not _jobs_offered().is_empty():
@@ -140,19 +138,6 @@ func _quest_options() -> Array:
 				_page("%s%s\n\n%s" % [q.progress_text, _job_paths(q), _objective_list(q)], [
 					["Back", func() -> void: _main_page(greeting)]]), ICON_QUEST_ACTIVE])
 	return out
-
-## Founding a guild: the price, then a name.
-func _guild_page() -> void:
-	var greeting := npc.def.greeting
-	var who := npc.def.id
-	if Game.me.guild != "":
-		_page("You're already in %s. Leave it first if you want to found your own." % Game.me.guild, [["Back", func() -> void: _main_page(greeting)]])
-		return
-	_page("A guild of your own costs %d Dawnshards. Its name shows under every member's name, and members can talk with /g." % TDSocial.GUILD_COST, [
-		["Name the guild", func() -> void:
-			visible = false
-			hud.prompt.ask("Name your guild", "", func(n: String) -> void: Net.ask(&"req_guild_create", [who, n]))],
-		["Back", func() -> void: _main_page(greeting)]])
 
 ## Where this NPC can take you, and the fare.
 func _travel_list() -> void:

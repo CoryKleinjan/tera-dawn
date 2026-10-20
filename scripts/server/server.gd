@@ -26,7 +26,7 @@ var sessions := {}
 var maps := {}
 var tick := 0
 var _drop_ids := 0
-## Chat, buddies, parties, trades, guilds and fame.
+## Chat, parties and trades.
 var social: TDSocial
 ## The requests about the player's things, NPC shops, storage, enchanting, getting around,
 ## quests and jobs, one part each (scripts/server/services/).
@@ -39,10 +39,10 @@ var quests: ServerQuests
 var jobs: ServerJobs
 var scenes: ServerScenes
 
-## `save_dir` is where this game keeps what the server owns (its guilds).
+## `save_dir` is where this game keeps what the server owns.
 func _init(save_dir := "user://characters") -> void:
 	DirAccess.make_dir_recursive_absolute(save_dir)
-	social = TDSocial.new(self, save_dir)
+	social = TDSocial.new(self)
 	lobby = TDLobby.new(self)
 	items = ServerItems.new(self)
 	npc_shop = ServerNpcShop.new(self)
@@ -128,7 +128,6 @@ func enter_game(peer: int, c: Character) -> void:
 		return
 	var p := SimPlayer.new(peer, c)
 	sessions[peer] = p
-	social.joined(p)
 	Net.send(peer, &"ev_joined", [c.to_dict()])
 	enter_map(p, c.map_id, Content.map(c.map_id).start_x)
 	print("%s joined (peer %d)" % [c.name, peer])

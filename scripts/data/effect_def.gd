@@ -5,7 +5,7 @@ extends Resource
 
 # Effects the game fires by id rather than through a skill or item (data/effects/<id>.tres).
 ## A sparkle around a player who did something worth cheering: an achievement, a job
-## advance, a new guild, a Monster Book rank.
+## advance, a Monster Book rank.
 const CELEBRATE := &"celebrate"
 ## A monster vanishing as it's defeated.
 const MONSTER_POOF := &"monster_poof"

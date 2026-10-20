@@ -1,6 +1,6 @@
 extends TestCase
 ## Players together through the server: chat channels and whispers, invitations,
-## parties (and the kills they share), buddy lists and the ev_social summary.
+## parties (and the kills they share) and the ev_social summary.
 
 const ServerHarness := preload("res://tests/framework/server_helpers.gd")
 
@@ -71,13 +71,6 @@ func test_party_chat_reaches_the_party_across_maps() -> void:
 	check_eq(h.last(4, &"ev_chat"), ["party", "Ann", "on my way", 2], "Cat in town gets it")
 	check_eq(h.count(2, &"ev_chat"), 1, "Ann too")
 	check_eq(h.count(3, &"ev_chat"), 0, "Bob isn't in the party")
-
-func test_buddy_chat_reaches_buddies() -> void:
-	_accept(2, "buddy", 4)
-	h.clear()
-	_chat(2, "/b hi friends")
-	check_eq(h.last(4, &"ev_chat"), ["buddy", "Ann", "hi friends", 2], "buddy gets it")
-	check_eq(h.count(3, &"ev_chat"), 0, "others don't")
 
 func test_unknown_commands_show_help() -> void:
 	_chat(2, "/dance")
@@ -215,59 +208,3 @@ func test_the_social_summary_lists_the_party() -> void:
 	var count := h.count(3, &"ev_social")
 	h.step(30)
 	check_eq(h.count(3, &"ev_social"), count, "not sent again when nothing changed")
-
-# ---------- buddies ----------
-
-func test_accepting_a_buddy_adds_both_ways() -> void:
-	_accept(2, "buddy", 3)
-	check_has(ann.character.buddies, "Bob", "Ann's list")
-	check_has(bob.character.buddies, "Ann", "Bob's list")
-
-func test_a_buddy_cant_be_added_twice() -> void:
-	_accept(2, "buddy", 3)
-	h.clear()
-	_invite(3, "buddy", 2)
-	check_eq(h.count(2, &"ev_invite"), 0, "not asked")
-	check(h.told(3, "Ann is already your buddy."), "told")
-
-func test_removing_a_buddy_removes_both_ways() -> void:
-	_accept(2, "buddy", 3)
-	_chat(2, "/unbuddy BOB")
-	check(not ann.character.buddies.has("Bob"), "off Ann's list")
-	check(not bob.character.buddies.has("Ann"), "off Bob's list")
-
-func test_buddies_are_told_when_you_come_online() -> void:
-	_accept(2, "buddy", 4)
-	h.leave(4)
-	h.clear()
-	h.play(4, "Cat")
-	check(h.told(2, "Cat is online."), "Ann told")
-	check(not h.told(3, "Cat is online."), "Bob isn't her buddy")
-
-func test_buddies_are_saved_with_the_character() -> void:
-	_accept(2, "buddy", 3)
-	h.leave(2)
-	check_has(h.saved("Ann").buddies, "Bob", "saved")
-
-func test_the_social_summary_shows_buddies_online() -> void:
-	_accept(2, "buddy", 4)
-	h.step(30)
-	var s: Dictionary = h.last(2, &"ev_social")[0]
-	check_eq(s["buddies"], [["Cat", true, "Test Town"]], "Cat, online, in town")
-
-func test_accepting_a_buddy_with_a_full_list_is_refused() -> void:
-	var id := _invite(2, "buddy", 3)
-	check_ne(id, 0, "invited while Bob had room")
-	for i in TDSocial.BUDDY_MAX:
-		bob.character.buddies.append("Friend%d" % i)
-	h.ask(3, &"req_invite_answer", [id, true])
-	check_eq(bob.character.buddies.size(), TDSocial.BUDDY_MAX, "Bob's list stays at the limit")
-	check(not ann.character.buddies.has("Bob"), "Ann isn't half-buddied")
-	check(h.told(3, "Your buddy list is full."), "Bob is told why")
-	check(h.told(2, "Bob's buddy list is full."), "Ann is told why")
-
-func test_inviting_someone_with_a_full_buddy_list_is_refused() -> void:
-	for i in TDSocial.BUDDY_MAX:
-		bob.character.buddies.append("Friend%d" % i)
-	check_eq(_invite(2, "buddy", 3), 0, "no invite sent")
-	check(h.told(2, "Bob's buddy list is full."), "Ann is told why")

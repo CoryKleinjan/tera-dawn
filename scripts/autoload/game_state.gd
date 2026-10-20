@@ -12,7 +12,7 @@ signal character_changed
 
 ## The player's character as the server last described it. Read it; don't change it.
 var me: Character
-## Buddies, party and guild as the server last described them (TDSocial.summary).
+## The party as the server last described it (TDSocial.summary).
 var social := {}
 ## The friend's game last joined (address, with :port when it isn't the usual one).
 var last_address := ""

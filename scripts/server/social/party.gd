@@ -1,10 +1,10 @@
 class_name SocialParties
 extends SocialPart
-## Invitations (to a party, a buddy list, a trade or a guild), buddy lists and parties.
+## Invitations (to a party or a trade) and parties.
 
 # ---------- invitations ----------
 
-## Asks `to` (a name) to join `p` in a party, a buddy list, a trade or a guild.
+## Asks `to` (a name) to join `p` in a party or a trade.
 func invite(p: SimPlayer, kind: String, to: String) -> void:
 	var o := social.player_named(to)
 	if o == null:
@@ -23,9 +23,8 @@ func invite(p: SimPlayer, kind: String, to: String) -> void:
 			return
 	social.invite_ids += 1
 	social.invites[social.invite_ids] = {"kind": kind, "from": p.character.name, "to": o.peer, "t": server.tick}
-	var what: String = {"party": "%s invites you to a party.", "buddy": "%s wants to be your buddy.",
-		"trade": "%s wants to trade.", "guild": "%s invites you to the guild %s."}[kind]
-	var text: String = what % [p.character.name, p.character.guild] if kind == "guild" else what % p.character.name
+	var what: String = {"party": "%s invites you to a party.", "trade": "%s wants to trade."}[kind]
+	var text := what % p.character.name
 	Net.send(o.peer, &"ev_invite", [social.invite_ids, kind, p.character.name, text])
 	tell(p, "You asked %s." % o.character.name)
 
@@ -41,26 +40,11 @@ func _invite_problem(p: SimPlayer, kind: String, o: SimPlayer) -> String:
 				return "Your party is full."
 			if social.party_of(them):
 				return "%s is already in a party." % them
-		"buddy":
-			if p.character.buddies.has(them):
-				return "%s is already your buddy." % them
-			if p.character.buddies.size() >= TDSocial.BUDDY_MAX:
-				return "Your buddy list is full."
-			if o.character.buddies.size() >= TDSocial.BUDDY_MAX and not o.character.buddies.has(me):
-				return "%s's buddy list is full." % them
 		"trade":
 			if o.map != p.map:
 				return "%s needs to be on this map to trade." % them
 			if social.trades.has(p.peer) or social.trades.has(o.peer):
 				return "One of you is already trading."
-		"guild":
-			var g := social.guild_of(me)
-			if g.is_empty() or g["master"] != me:
-				return "Only a guild master can invite."
-			if (g["members"] as Array).size() >= TDSocial.GUILD_MAX:
-				return "Your guild is full."
-			if not social.guild_of(them).is_empty():
-				return "%s is already in a guild." % them
 	return ""
 
 func on_answer(peer: int, id: int, accept: bool) -> void:
@@ -78,10 +62,6 @@ func on_answer(peer: int, id: int, accept: bool) -> void:
 	if not accept:
 		tell(from, "%s said no." % p.character.name)
 		return
-	if inv["kind"] == "buddy" and p.character.buddies.size() >= TDSocial.BUDDY_MAX and not p.character.buddies.has(from.character.name):
-		tell(p, "Your buddy list is full.", MapInstance.BAD)
-		tell(from, "%s's buddy list is full." % p.character.name, MapInstance.BAD)
-		return
 	var problem := _invite_problem(from, inv["kind"], p)
 	if problem != "":
 		tell(p, problem, MapInstance.BAD)
@@ -89,34 +69,8 @@ func on_answer(peer: int, id: int, accept: bool) -> void:
 	match inv["kind"]:
 		"party":
 			_join_party(from, p)
-		"buddy":
-			for pair in [[from, p], [p, from]]:
-				var a: SimPlayer = pair[0]
-				if not a.character.buddies.has(pair[1].character.name):
-					a.character.buddies.append(pair[1].character.name)
-			tell(from, "%s is now your buddy." % p.character.name, Palette.GOOD)
-			tell(p, "%s is now your buddy." % from.character.name, Palette.GOOD)
 		"trade":
 			social.trade.open(from, p)
-		"guild":
-			social.guild.join_guild(social.guild_of(from.character.name), p)
-
-# ---------- buddies ----------
-
-func remove_buddy(p: SimPlayer, char_name: String) -> void:
-	var i := -1
-	for k in p.character.buddies.size():
-		if p.character.buddies[k].to_lower() == char_name.to_lower():
-			i = k
-	if i < 0:
-		tell(p, "%s isn't on your buddy list." % char_name, MapInstance.BAD)
-		return
-	var them := p.character.buddies[i]
-	p.character.buddies.remove_at(i)
-	var o := social.player_named(them)
-	if o:
-		o.character.buddies.erase(p.character.name)
-	tell(p, "%s was taken off your buddy list." % them)
 
 # ---------- parties ----------
 

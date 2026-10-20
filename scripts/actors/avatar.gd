@@ -15,7 +15,6 @@ var animation := &"idle"
 var flags := 0
 var known := false
 var job := &""
-var guild := ""
 var speech := ""
 var speech_t := 0
 ## How they're drawn: their look and pet (see HeroBody).
@@ -48,15 +47,14 @@ func apply(state: Array) -> void:
 		position = target # first sight or a portal hop: no gliding across the map
 	known = true
 
-## Takes their [name, job, guild, pet, look, armor, weapon], sent when it changes.
+## Takes their [name, job, pet, look, armor, weapon], sent when it changes.
 func apply_info(info: Array) -> void:
 	char_name = info[0]
 	job = StringName(str(info[1]))
-	guild = str(info[2])
-	pet = StringName(str(info[3]))
-	look = StringName(str(info[4])) if info.size() > 4 else &""
-	armor = StringName(str(info[5])) if info.size() > 5 else &""
-	weapon = StringName(str(info[6])) if info.size() > 6 else &""
+	pet = StringName(str(info[2]))
+	look = StringName(str(info[3])) if info.size() > 3 else &""
+	armor = StringName(str(info[4])) if info.size() > 4 else &""
+	weapon = StringName(str(info[5])) if info.size() > 5 else &""
 
 ## They used a skill: they make its motion (a buff or spell makes none).
 func play_skill(skill: SkillDef) -> void:
@@ -82,7 +80,7 @@ func _process(_delta: float) -> void:
 	body.visible = known
 	body.draw(face, pet, animation, HeroLookDef.of(look), armor, weapon)
 
-## Their name tag (and guild) under their feet, put in `tags` for the overlay to draw.
+## Their name tag under their feet, put in `tags` for the overlay to draw.
 func draw_tag(tags: TDNameTags, at: Vector2) -> void:
 	if known and not fainted():
-		tags.add_name(at + Vector2(0, 4), char_name, Palette.MIST, guild)
+		tags.add_name(at + Vector2(0, 4), char_name, Palette.MIST)

@@ -41,8 +41,6 @@ func _raise(c: Character, kind: String, n: int) -> void:
 			for i in n:
 				c.visit(StringName("t_map%d" % i))
 		"shards": c.shards = n
-		"fame": c.fame = n
-		"guild": c.guild = "Dawn" if n > 0 else ""
 		"boss_kinds":
 			c.book.pages.clear()
 			var bosses := Content.monsters.values().filter(func(m: MonsterDef) -> bool: return m.boss)

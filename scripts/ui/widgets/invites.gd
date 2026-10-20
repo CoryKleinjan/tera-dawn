@@ -1,6 +1,6 @@
 class_name TDInvites
 extends PanelContainer
-## Invitations from other players (a party, a buddy, a trade, a guild), one card at a
+## Invitations from other players (a party or a trade), one card at a
 ## time at the top of the screen with Accept and Decline.
 
 ## [id, kind, from, text], oldest first

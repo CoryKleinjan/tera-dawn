@@ -28,8 +28,6 @@ static func measure(c: Character, kind: String) -> int:
 		"quests": return c.quests.done.size()
 		"maps": return c.visited.size()
 		"shards": return c.shards
-		"fame": return c.fame
-		"guild": return 0 if c.guild == "" else 1
 		"boss_kinds": return boss_kinds(c)
 		"zones_explored": return zones_explored(c)
 	return int(c.counters.get(kind, 0))

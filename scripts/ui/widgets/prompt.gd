@@ -1,6 +1,6 @@
 class_name TDPrompt
 extends TDModal
-## A question with a text box (a guild's name, a price, a buddy to add). Enter or OK
+## A question with a text box (a price, a player to invite). Enter or OK
 ## answers, Esc or Cancel doesn't. Only one is open at a time.
 
 ## Lighter than the other questions' dim (play goes on behind it), and closer together.

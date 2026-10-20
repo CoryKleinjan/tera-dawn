@@ -273,7 +273,7 @@ func _draw_world_text() -> void:
 	var p := world.player
 	if world.started and not p.fainted():
 		var feet := st.screen(world.drawn(p), TDPlayer.Z)
-		tags.add_name(feet + Vector2(0, 4), Game.me.name, Palette.SUN, Game.me.guild, true)
+		tags.add_name(feet + Vector2(0, 4), Game.me.name, Palette.SUN, true)
 		if p.speech_t > 0:
 			WorldSkin.draw_speech(self, feet + Vector2(0, -TDPlayer.HEIGHT - 1), p.speech)
 	_draw_pet(world.player.companion, TDPlayer.Z, world.started and not p.fainted(), tags)

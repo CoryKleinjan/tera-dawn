@@ -87,20 +87,20 @@ func test_chat_shows_every_channel() -> void:
 func test_invitation_cards_queue_up() -> void:
 	var inv := ui.hud.invites
 	inv.add(1, "party", "Mossy", "Mossy invites you to a party.")
-	inv.add(2, "buddy", "Kestrel", "Kestrel wants to be buddies.")
+	inv.add(2, "trade", "Kestrel", "Kestrel wants to trade.")
 	await ui.frames(1)
 	check(inv.visible and inv.label.text == "Mossy invites you to a party.", "the oldest invitation shows first")
 	check(Rect2(Vector2.ZERO, TDWorld.VIEW).encloses(Rect2(inv.position, inv.size)), "the card is on screen at %s" % inv.position)
 	inv.pending.pop_front()
 	inv._show()
-	check_eq(inv.label.text, "Kestrel wants to be buddies.", "then the next")
+	check_eq(inv.label.text, "Kestrel wants to trade.", "then the next")
 	inv.clear()
 	check(not inv.visible, "clearing hides the card")
 
 func test_prompt_answers_with_what_was_typed() -> void:
 	var prompt := ui.hud.prompt
 	var got := []
-	prompt.ask("Name your guild", "Dawn", func(t: String) -> void: got.append(t))
+	prompt.ask("Who do you want to invite?", "Dawn", func(t: String) -> void: got.append(t))
 	await ui.frames(1)
 	check(prompt.visible and prompt.field.text == "Dawn" and prompt.field.max_length == 24, "the prompt opens with its starting text")
 	check(ui.hud.typing(), "typing in the prompt blocks movement")
@@ -126,8 +126,7 @@ func test_overlay_draws_everything_it_can_show() -> void:
 		for q: QuestDef in Content.quests.values().slice(0, 5):
 			c.quests.accept(q)
 		c.skills.learned[buff.id] = 1
-		c.skills.buffs[buff.id] = [1, 600]
-		c.guild = "Dawnbreakers")
+		c.skills.buffs[buff.id] = [1, 600])
 	Game.social = {"party": {"leader": "Mossy", "members": [["Mossy", 7, "warrior", 0.5, "meadow"], [Game.me.name, 1, "warrior", 1.0, "meadow"], ["Kestrel", 8, "archer", 0.1, "hollow"]]}}
 	for i in 8:
 		ui.world.add_log("Log line %d" % i, Palette.MIST)
@@ -236,8 +235,8 @@ func test_title_screen_draws_and_hides() -> void:
 func test_name_tags_nudge_apart_and_yours_stays_put() -> void:
 	var tags := TDNameTags.new()
 	tags.add_name(Vector2(100, 200), "Mossy", Palette.MIST)
-	tags.add_name(Vector2(104, 202), "Kestrel", Palette.MIST, "Dawnbreakers")
-	tags.add_name(Vector2(102, 201), Game.me.name, Palette.SUN, "", true)
+	tags.add_name(Vector2(104, 202), "Kestrel", Palette.MIST)
+	tags.add_name(Vector2(102, 201), Game.me.name, Palette.SUN, true)
 	tags.add_name(Vector2(400, 200), "Far away", Palette.MIST)
 	tags.arrange()
 	var r := tags.rects()
