@@ -29,8 +29,15 @@ func test_status_bar_draws_any_state() -> void:
 
 func test_quickslots_hold_skills_and_items() -> void:
 	var slots := ui.hud.quickslots
-	await ui.frames(1)
-	check(slots.visible, "quickslots show while playing")
+	for i in Character.QUICKSLOTS:
+		slots.clear_slot(i)
+	await ui.ticks(2)
+	await ui.frames(2)
+	check(not slots.visible, "empty quickslots stay hidden")
+	slots.assign(1, &"item", &"return_scroll")
+	await ui.ticks(2)
+	await ui.frames(2)
+	check(slots.visible, "quickslots show once one holds something")
 	for i in Character.QUICKSLOTS:
 		check_eq(slots.slot_at(slots.slot_rect(i).get_center()), i, "slot_at the middle of quickslot %d" % i)
 	check_eq(slots.slot_at(Vector2(-5, -5)), -1, "slot_at outside")
@@ -57,6 +64,7 @@ func test_quickslot_item_hover_shows_the_item() -> void:
 	var slots := ui.hud.quickslots
 	slots.assign(1, &"item", &"return_scroll")
 	await ui.ticks(2)
+	await ui.frames(2)
 	await ui.hover(slots, slots.slot_rect(1).get_center())
 	check(ui.hud.tooltip.stack != null and ui.hud.tooltip.stack.item.id == &"return_scroll", "hovering a scroll shows it")
 
@@ -166,8 +174,10 @@ func test_quickslots_and_tracker_fade_over_the_hero() -> void:
 	await ui.edit(func(c: Character) -> void:
 		for q: QuestDef in Content.quests.values().slice(0, 2):
 			c.quests.accept(q))
+	hud.quickslots.assign(1, &"item", &"return_scroll")
 	ui.teleport(Vector2(400, ui.world.map.ground_y))
 	ui.world.snap_camera()
+	await ui.ticks(2)
 	await ui.frames(5)
 	var hero := hud.screen_rect(ui.world.drawn(ui.world.player), Vector2(TDPlayer.WIDTH, TDPlayer.HEIGHT), TDPlayer.Z)
 	check(hero.size.x > 20 and hero.size.y > 50, "the hero's screen rect is about his size: %s" % hero)

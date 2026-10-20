@@ -360,7 +360,7 @@ gate_picture = ExtResource("15_gate")
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_slag_slime")
 platform = 0
-count = 4
+count = 2
 patrol_from = 300.0
 patrol_to = 1800.0
 
@@ -368,7 +368,7 @@ patrol_to = 1800.0
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_cinder_pup")
 platform = 0
-count = 4
+count = 2
 patrol_from = 2000.0
 patrol_to = 3500.0
 
@@ -376,67 +376,56 @@ patrol_to = 3500.0
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_cinder_pup")
 platform = 6
-count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_slag_slime")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_cinder_pup")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_slag_slime")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_cinder_pup")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_cinder_pup")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_slag_slime")
 platform = 8
-count = 2
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_cinder_pup")
 platform = 5
-count = 2
 
 [sub_resource type="Resource" id="Spawn_10"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_slag_slime")
 platform = 6
-count = 2
 
 [sub_resource type="Resource" id="Spawn_11"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_cinder_pup")
 platform = 11
-count = 2
 
 [sub_resource type="Resource" id="Spawn_12"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_slag_slime")
 platform = 7
-count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("20_drop_entry")

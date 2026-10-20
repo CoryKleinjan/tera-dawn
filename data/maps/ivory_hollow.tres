@@ -157,7 +157,7 @@ target_platform = 0
 script = ExtResource("5_spawn_def")
 monster = ExtResource("8_hollow_stag")
 platform = 0
-count = 3
+count = 2
 patrol_from = 400.0
 patrol_to = 2000.0
 
@@ -165,7 +165,6 @@ patrol_to = 2000.0
 script = ExtResource("5_spawn_def")
 monster = ExtResource("8_hollow_stag")
 platform = 0
-count = 2
 patrol_from = 2200.0
 patrol_to = 3900.0
 
@@ -173,49 +172,41 @@ patrol_to = 3900.0
 script = ExtResource("5_spawn_def")
 monster = ExtResource("8_hollow_stag")
 platform = 2
-count = 1
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("5_spawn_def")
 monster = ExtResource("8_hollow_stag")
 platform = 9
-count = 1
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("5_spawn_def")
 monster = ExtResource("8_hollow_stag")
 platform = 16
-count = 1
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("5_spawn_def")
 monster = ExtResource("9_shardling")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("5_spawn_def")
 monster = ExtResource("9_shardling")
 platform = 6
-count = 2
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("5_spawn_def")
 monster = ExtResource("9_shardling")
 platform = 10
-count = 2
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("5_spawn_def")
 monster = ExtResource("9_shardling")
 platform = 14
-count = 2
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("5_spawn_def")
 monster = ExtResource("9_shardling")
 platform = 18
-count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("13_drop_entry")

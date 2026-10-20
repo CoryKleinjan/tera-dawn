@@ -163,7 +163,7 @@ target_platform = 22
 script = ExtResource("8_spawn_def")
 monster = ExtResource("26_bramble_boar")
 platform = 0
-count = 4
+count = 2
 patrol_from = 200.0
 patrol_to = 1560.0
 
@@ -171,7 +171,7 @@ patrol_to = 1560.0
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 0
-count = 4
+count = 2
 patrol_from = 300.0
 patrol_to = 1560.0
 
@@ -179,7 +179,6 @@ patrol_to = 1560.0
 script = ExtResource("8_spawn_def")
 monster = ExtResource("26_bramble_boar")
 platform = 0
-count = 1
 patrol_from = 2080.0
 patrol_to = 2380.0
 
@@ -187,49 +186,41 @@ patrol_to = 2380.0
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 3
-count = 1
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("26_bramble_boar")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 5
-count = 1
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 6
-count = 1
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 8
-count = 2
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("26_bramble_boar")
 platform = 9
-count = 2
 
 [sub_resource type="Resource" id="Spawn_10"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 10
-count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("19_drop_entry")

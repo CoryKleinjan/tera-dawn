@@ -99,7 +99,7 @@ target_platform = 18
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_starfall_golem")
 platform = 0
-count = 3
+count = 2
 patrol_from = 300.0
 patrol_to = 2000.0
 
@@ -107,7 +107,6 @@ patrol_to = 2000.0
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_spell_imp")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("19_drop_entry")

@@ -57,7 +57,6 @@ after_boss = ExtResource("8_petrified_warden")
 script = ExtResource("5_spawn_def")
 monster = ExtResource("8_petrified_warden")
 platform = 0
-count = 1
 patrol_from = 420.0
 patrol_to = 1100.0
 

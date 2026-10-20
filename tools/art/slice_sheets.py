@@ -1145,10 +1145,11 @@ def build_set(name, spec, sprites, out_root):
     half = max(max(ax, im.width - ax) for _, im, ax, _ in frames)
     fw = int(np.ceil(half)) * 2 + 2
     fh = max(im.height + b for _, im, _, b in frames) + 1 + round(spec.get("pad_top", 0) * detail)
-    strip = Image.new("RGBA", (fw * len(frames), fh), (0, 0, 0, 0))
+    cols = strip_columns(fw, len(frames))
+    strip = Image.new("RGBA", (fw * cols, fh * -(-len(frames) // cols)), (0, 0, 0, 0))
     index = {}
     for i, (key, im, ax, b) in enumerate(frames):
-        strip.alpha_composite(im, (i * fw + round(fw / 2 - ax), fh - 1 - b - im.height))
+        strip.alpha_composite(im, ((i % cols) * fw + round(fw / 2 - ax), (i // cols) * fh + fh - 1 - b - im.height))
         index[key] = i
     png = os.path.join(out_root, spec["out"])
     os.makedirs(os.path.dirname(png), exist_ok=True)
@@ -1159,16 +1160,26 @@ def build_set(name, spec, sprites, out_root):
     print(f"  set {name}: {len(frames)} frames of {fw}x{fh} -> {spec['out']}, {spec['sprite_frames']}")
 
 
+# Godot can't load a texture wider than this; a longer strip wraps onto more rows.
+MAX_TEXTURE = 16384
+
+
+def strip_columns(fw, n):
+    """How many frames sit side by side on a strip: all of them, unless that is too wide."""
+    return max(1, min(n, MAX_TEXTURE // fw))
+
+
 def write_sprite_frames(path, texture, fw, fh, index, anims, detail=DEFAULTS["detail"]):
     """A Godot SpriteFrames resource whose frames are regions of one strip texture. A strip cut
     at other than the default detail tells the game so on each frame ("art_density" metadata,
     read by TDStage.art_density), so a big monster can be cut sharper and still show its size."""
     used = sorted({index[f] for a in anims.values() for f in a["frames"]})
+    cols = strip_columns(fw, len(index))
     lines = [f'[gd_resource type="SpriteFrames" load_steps={len(used) + 2} format=3]', "",
              f'[ext_resource type="Texture2D" path="{texture}" id="1_strip"]', ""]
     for i in used:
         lines += [f'[sub_resource type="AtlasTexture" id="f{i}"]', 'atlas = ExtResource("1_strip")',
-                  f"region = Rect2({i * fw}, 0, {fw}, {fh})"]
+                  f"region = Rect2({(i % cols) * fw}, {(i // cols) * fh}, {fw}, {fh})"]
         if detail != DEFAULTS["detail"]:
             lines.append(f"metadata/art_density = {float(detail)}")
         lines.append("")

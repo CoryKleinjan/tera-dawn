@@ -371,85 +371,72 @@ target_x = 140.0
 script = ExtResource("26_spawn_def")
 monster = ExtResource("25_kelp_lurker")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Spawn_1"]
 script = ExtResource("26_spawn_def")
 monster = ExtResource("27_barnacle_boar")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("26_spawn_def")
 monster = ExtResource("25_kelp_lurker")
 platform = 6
-count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("26_spawn_def")
 monster = ExtResource("27_barnacle_boar")
 platform = 8
-count = 2
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("26_spawn_def")
 monster = ExtResource("25_kelp_lurker")
 platform = 10
-count = 2
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("26_spawn_def")
 monster = ExtResource("27_barnacle_boar")
 platform = 12
-count = 2
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("26_spawn_def")
 monster = ExtResource("25_kelp_lurker")
 platform = 14
-count = 2
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("26_spawn_def")
 monster = ExtResource("27_barnacle_boar")
 platform = 16
-count = 2
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("26_spawn_def")
 monster = ExtResource("25_kelp_lurker")
 platform = 18
-count = 2
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("26_spawn_def")
 monster = ExtResource("27_barnacle_boar")
 platform = 20
-count = 2
 
 [sub_resource type="Resource" id="Spawn_10"]
 script = ExtResource("26_spawn_def")
 monster = ExtResource("25_kelp_lurker")
 platform = 22
-count = 2
 
 [sub_resource type="Resource" id="Spawn_11"]
 script = ExtResource("26_spawn_def")
 monster = ExtResource("25_kelp_lurker")
 platform = 26
-count = 2
 
 [sub_resource type="Resource" id="Spawn_12"]
 script = ExtResource("26_spawn_def")
 monster = ExtResource("27_barnacle_boar")
 platform = 28
-count = 2
 
 [sub_resource type="Resource" id="Spawn_13"]
 script = ExtResource("26_spawn_def")
 monster = ExtResource("27_barnacle_boar")
 platform = 0
-count = 3
+count = 2
 patrol_from = 300.0
 patrol_to = 2000.0
 

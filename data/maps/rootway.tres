@@ -352,7 +352,7 @@ target_x = 1650.0
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 0
-count = 4
+count = 2
 patrol_from = 200.0
 patrol_to = 1700.0
 
@@ -360,7 +360,7 @@ patrol_to = 1700.0
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 0
-count = 4
+count = 2
 patrol_from = 1700.0
 patrol_to = 2900.0
 
@@ -368,7 +368,7 @@ patrol_to = 2900.0
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 0
-count = 5
+count = 3
 patrol_from = 2900.0
 patrol_to = 4300.0
 
@@ -376,7 +376,7 @@ patrol_to = 4300.0
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 0
-count = 4
+count = 2
 patrol_from = 4300.0
 patrol_to = 5900.0
 
@@ -384,7 +384,7 @@ patrol_to = 5900.0
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 0
-count = 4
+count = 2
 patrol_from = 5900.0
 patrol_to = 6900.0
 
@@ -392,169 +392,143 @@ patrol_to = 6900.0
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("35_acorn_sentry")
 platform = 2
-count = 1
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("35_acorn_sentry")
 platform = 5
-count = 1
 
 [sub_resource type="Resource" id="Spawn_10"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 7
-count = 1
 
 [sub_resource type="Resource" id="Spawn_11"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("35_acorn_sentry")
 platform = 7
-count = 1
 
 [sub_resource type="Resource" id="Spawn_12"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 8
-count = 4
+count = 2
 
 [sub_resource type="Resource" id="Spawn_13"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("35_acorn_sentry")
 platform = 9
-count = 1
 
 [sub_resource type="Resource" id="Spawn_14"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 10
-count = 1
 
 [sub_resource type="Resource" id="Spawn_15"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("35_acorn_sentry")
 platform = 10
-count = 1
 
 [sub_resource type="Resource" id="Spawn_16"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 11
-count = 2
 
 [sub_resource type="Resource" id="Spawn_17"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 12
-count = 2
 
 [sub_resource type="Resource" id="Spawn_18"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("35_acorn_sentry")
 platform = 12
-count = 1
 
 [sub_resource type="Resource" id="Spawn_19"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 13
-count = 2
 
 [sub_resource type="Resource" id="Spawn_20"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("35_acorn_sentry")
 platform = 14
-count = 1
 
 [sub_resource type="Resource" id="Spawn_21"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 16
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Spawn_22"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("35_acorn_sentry")
 platform = 16
-count = 1
 
 [sub_resource type="Resource" id="Spawn_23"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("35_acorn_sentry")
 platform = 17
-count = 1
 
 [sub_resource type="Resource" id="Spawn_24"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 18
-count = 1
 
 [sub_resource type="Resource" id="Spawn_25"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 19
-count = 1
 
 [sub_resource type="Resource" id="Spawn_26"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("35_acorn_sentry")
 platform = 19
-count = 1
 
 [sub_resource type="Resource" id="Spawn_27"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("35_acorn_sentry")
 platform = 20
-count = 1
 
 [sub_resource type="Resource" id="Spawn_28"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 21
-count = 2
 
 [sub_resource type="Resource" id="Spawn_29"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 23
-count = 1
 
 [sub_resource type="Resource" id="Spawn_30"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("35_acorn_sentry")
 platform = 23
-count = 1
 
 [sub_resource type="Resource" id="Spawn_31"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("35_acorn_sentry")
 platform = 25
-count = 1
 
 [sub_resource type="Resource" id="Spawn_32"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("34_barkcap")
 platform = 26
-count = 1
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("12_drop_entry")

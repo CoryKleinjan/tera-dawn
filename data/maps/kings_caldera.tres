@@ -46,7 +46,6 @@ after_boss = ExtResource("6_boss")
 script = ExtResource("5_spawn_def")
 monster = ExtResource("6_boss")
 platform = 0
-count = 1
 patrol_from = 420.0
 patrol_to = 1100.0
 

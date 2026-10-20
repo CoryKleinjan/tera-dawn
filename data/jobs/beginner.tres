@@ -1,10 +1,11 @@
-[gd_resource type="Resource" script_class="JobDef" load_steps=5 format=3]
+[gd_resource type="Resource" script_class="JobDef" load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/job_def.gd" id="1_job_def"]
 [ext_resource type="Script" path="res://scripts/data/equip_def.gd" id="3_equip_def"]
 [ext_resource type="Script" path="res://scripts/data/drop_entry.gd" id="7_drop_entry"]
 
 [ext_resource type="Script" path="res://scripts/data/item_def.gd" id="q_item_def"]
+[ext_resource type="Resource" path="res://data/items/equips/vanguard_sword.tres" id="4_sword"]
 
 [resource]
 script = ExtResource("1_job_def")
@@ -12,7 +13,7 @@ id = &"beginner"
 display_name = "Beginner"
 family = &"beginner"
 description = "Everyone starts here. Train on the meadow, then take a Job Test in any job town."
-starting_gear = Array[ExtResource("3_equip_def")]([])
+starting_gear = Array[ExtResource("3_equip_def")]([ExtResource("4_sword")])
 starting_items = Array[ExtResource("7_drop_entry")]([])
 creator_gear = Array[ExtResource("3_equip_def")]([])
 starting_quickslots = Array[ExtResource("q_item_def")]([])

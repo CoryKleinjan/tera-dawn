@@ -124,7 +124,7 @@ target_platform = 10
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_reef_gull")
 platform = 0
-count = 4
+count = 2
 patrol_from = 200.0
 patrol_to = 2200.0
 
@@ -132,19 +132,16 @@ patrol_to = 2200.0
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_coral_turret")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("16_reef_gull")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("17_spawn_def")
 monster = ExtResource("18_coral_turret")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("20_drop_entry")

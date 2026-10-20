@@ -5,7 +5,8 @@ extends Control
 ## or a click. Drag a skill or an item from the inventory onto a
 ## slot, drag slots to swap them, and right-click or drag one off to clear it. The slots
 ## are saved with the character (Character.quickslots). The panel fades to see-through while
-## the hero or an NPC near them is behind it (TDHud.fade_over_people).
+## the hero or an NPC near them is behind it (TDHud.fade_over_people), and hides while
+## every slot is empty.
 
 const COLS := 4
 const SLOT := 36.0
@@ -43,7 +44,9 @@ func fit_view() -> void:
 	position = TDWorld.VIEW - size - Vector2(MARGIN.x, TDStatusBar.HEIGHT + MARGIN.y)
 
 func _process(delta: float) -> void:
-	visible = world != null and world.started
+	# hidden while every slot is empty, so the field stays clear; shown while something is
+	# being dragged, so it can be dropped on a slot
+	visible = world != null and world.started and (_holds_any() or get_viewport().gui_is_dragging())
 	if visible:
 		hud.fade_over_people(self, delta)
 	# drawn again only when something it shows changed
@@ -51,6 +54,10 @@ func _process(delta: float) -> void:
 	if state != _drawn:
 		_drawn = state
 		queue_redraw()
+
+## Whether any slot holds a skill or an item.
+func _holds_any() -> bool:
+	return Game.me != null and Game.me.quickslots.any(func(q: Array) -> bool: return not q.is_empty())
 
 ## Everything _draw shows, to tell when it needs drawing again.
 func _drawn_state() -> Array:

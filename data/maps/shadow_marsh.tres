@@ -177,7 +177,7 @@ target_platform = 10
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_lantern_wisp")
 platform = 0
-count = 4
+count = 2
 patrol_from = 300.0
 patrol_to = 1400.0
 
@@ -185,7 +185,7 @@ patrol_to = 1400.0
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_shade_imp")
 platform = 0
-count = 4
+count = 2
 patrol_from = 1900.0
 patrol_to = 4100.0
 
@@ -193,31 +193,26 @@ patrol_to = 4100.0
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_shade_imp")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_lantern_wisp")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_lantern_wisp")
 platform = 6
-count = 2
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_shade_imp")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_lantern_wisp")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("19_drop_entry")

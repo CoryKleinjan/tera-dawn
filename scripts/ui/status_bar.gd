@@ -1,7 +1,7 @@
 class_name TDStatusBar
 extends Control
-## The bar along the bottom of the screen: buttons for the game windows and the Dawnshard
-## purse (hearts and Mana are top left, TDVitals). The quickslots sit just above it (TDQuickslots). Drawn from
+## The bar in the bottom right of the screen, only as wide as what it holds: buttons for the
+## game windows and the Dawnshard purse (hearts and Mana are top left, TDVitals). The quickslots sit just above it (TDQuickslots). Drawn from
 ## the UI sheet's art.
 
 const HEIGHT := 50.0
@@ -12,6 +12,8 @@ const ITEM_H := 26.0
 const BAND_TOP := 10.0
 const BAND_BOTTOM := 43.0
 const WINDOW_BUTTON_GAP := 2.0
+## Room between the bar's left cap and the first window button.
+const LEFT_PAD := 30.0
 ## The bar art (art/source/ui_hud_bar.png): each end's brass sun cap and its dark rim, in
 ## art pixels. The art is drawn at one scale to fit HEIGHT, and the dawn-lit band between the caps
 ## repeats along the bar instead of stretching, so its gold trim stays sharp at any width.
@@ -52,7 +54,7 @@ func _drawn_state() -> Array:
 
 func _draw() -> void:
 	var w := size.x
-	UiSkin.draw_box(self, _bar_box(), Rect2(0, 0, w, HEIGHT), HEIGHT / UiSkin.size_of("hud_bar").y)
+	UiSkin.draw_box(self, _bar_box(), bar_rect(), HEIGHT / UiSkin.size_of("hud_bar").y)
 	# window buttons
 	for i in TDHud.WINDOW_ACTIONS.size():
 		_window_button(TDHud.WINDOW_ACTIONS[i], _window_button_rect(i))
@@ -60,6 +62,15 @@ func _draw() -> void:
 	var icon := Rect2(w - 140, item_top(), 28, ITEM_H)
 	UiSkin.draw_icon(self, "icon_dawnshard", icon)
 	DrawUtil.text(self, Game.num_font, Vector2(icon.end.x + 4, band_center() + 5), str(Game.me.shards), 14, Palette.SUN, 1, 3, Palette.NIGHT)
+
+## The part of the bar drawn: from just left of the window buttons to the right edge.
+func bar_rect() -> Rect2:
+	var left := _window_button_rect(0).position.x - LEFT_PAD
+	return Rect2(left, 0, size.x - left, HEIGHT)
+
+## Clicks left of the bar go to the field.
+func _has_point(point: Vector2) -> bool:
+	return bar_rect().has_point(point)
 
 ## The middle of the band between the bar art's gold trim lines, in pixels from the top.
 static func band_center() -> float:

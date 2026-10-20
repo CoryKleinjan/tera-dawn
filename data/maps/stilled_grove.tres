@@ -110,7 +110,7 @@ shortcut = &"silent_stair_wall"
 script = ExtResource("5_spawn_def")
 monster = ExtResource("8_shardling")
 platform = 0
-count = 3
+count = 2
 patrol_from = 400.0
 patrol_to = 1900.0
 
@@ -118,37 +118,31 @@ patrol_to = 1900.0
 script = ExtResource("5_spawn_def")
 monster = ExtResource("8_shardling")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("5_spawn_def")
 monster = ExtResource("8_shardling")
 platform = 5
-count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("5_spawn_def")
 monster = ExtResource("9_pale_moth")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("5_spawn_def")
 monster = ExtResource("9_pale_moth")
 platform = 7
-count = 2
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("5_spawn_def")
 monster = ExtResource("9_pale_moth")
 platform = 9
-count = 1
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("5_spawn_def")
 monster = ExtResource("9_pale_moth")
 platform = 10
-count = 1
 
 [sub_resource type="Resource" id="Prop_0"]
 script = ExtResource("10_prop_placement")

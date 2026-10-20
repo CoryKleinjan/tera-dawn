@@ -301,77 +301,69 @@ target_x = 140.0
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_forge_golem")
 platform = 0
-count = 3
-patrol_from = 300.0
+count = 2
+patrol_from = 900.0
 patrol_to = 2100.0
 
 [sub_resource type="Resource" id="Spawn_1"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_ash_wraith")
 platform = 0
-count = 3
-patrol_from = 300.0
+count = 2
+patrol_from = 900.0
 patrol_to = 2100.0
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_forge_golem")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_ash_wraith")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_forge_golem")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_ash_wraith")
 platform = 5
-count = 2
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_forge_golem")
 platform = 6
-count = 2
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_ash_wraith")
 platform = 7
-count = 2
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_forge_golem")
 platform = 8
-count = 2
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_ash_wraith")
 platform = 9
-count = 2
 
 [sub_resource type="Resource" id="Spawn_10"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_forge_golem")
 platform = 5
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Spawn_11"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_forge_golem")
 platform = 10
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("19_drop_entry")

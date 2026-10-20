@@ -303,7 +303,7 @@ shortcut = &"bough_trail_fake_wall"
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 0
-count = 4
+count = 2
 patrol_from = 320.0
 patrol_to = 1150.0
 
@@ -311,7 +311,7 @@ patrol_to = 1150.0
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_seedwing")
 platform = 0
-count = 3
+count = 2
 patrol_from = 900.0
 patrol_to = 1900.0
 
@@ -319,7 +319,7 @@ patrol_to = 1900.0
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 0
-count = 3
+count = 2
 patrol_from = 1900.0
 patrol_to = 3000.0
 
@@ -327,7 +327,6 @@ patrol_to = 3000.0
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_seedwing")
 platform = 0
-count = 2
 patrol_from = 2600.0
 patrol_to = 3600.0
 
@@ -335,7 +334,6 @@ patrol_to = 3600.0
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 0
-count = 2
 patrol_from = 3000.0
 patrol_to = 3660.0
 
@@ -343,31 +341,26 @@ patrol_to = 3660.0
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 1
-count = 1
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_seedwing")
 platform = 3
-count = 1
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_seedwing")
 platform = 4
-count = 1
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 5
-count = 2
 patrol_from = 1480.0
 patrol_to = 1700.0
 
@@ -375,97 +368,83 @@ patrol_to = 1700.0
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 6
-count = 1
 
 [sub_resource type="Resource" id="Spawn_11"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 7
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Spawn_12"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_seedwing")
 platform = 8
-count = 1
 
 [sub_resource type="Resource" id="Spawn_13"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 9
-count = 2
 
 [sub_resource type="Resource" id="Spawn_14"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_seedwing")
 platform = 10
-count = 2
 
 [sub_resource type="Resource" id="Spawn_15"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 11
-count = 2
 
 [sub_resource type="Resource" id="Spawn_16"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_seedwing")
 platform = 12
-count = 1
 
 [sub_resource type="Resource" id="Spawn_17"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 13
-count = 1
 
 [sub_resource type="Resource" id="Spawn_18"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_seedwing")
 platform = 13
-count = 1
 
 [sub_resource type="Resource" id="Spawn_19"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_seedwing")
 platform = 14
-count = 1
 
 [sub_resource type="Resource" id="Spawn_20"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 16
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Spawn_21"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 17
-count = 1
 
 [sub_resource type="Resource" id="Spawn_22"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_seedwing")
 platform = 18
-count = 1
 
 [sub_resource type="Resource" id="Spawn_23"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("9_thornling")
 platform = 20
-count = 1
 
 [sub_resource type="Resource" id="Spawn_24"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_seedwing")
 platform = 21
-count = 1
 
 [sub_resource type="Resource" id="Spawn_25"]
 script = ExtResource("8_spawn_def")
 monster = ExtResource("10_seedwing")
 platform = 22
-count = 1
 
 [sub_resource type="Resource" id="Breakable_0"]
 script = ExtResource("15_breakable_def")

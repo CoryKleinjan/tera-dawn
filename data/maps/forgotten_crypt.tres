@@ -317,77 +317,69 @@ key = ExtResource("16_chapel_key")
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_marsh_horror")
 platform = 0
-count = 3
-patrol_from = 300.0
+count = 2
+patrol_from = 900.0
 patrol_to = 2100.0
 
 [sub_resource type="Resource" id="Spawn_1"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_dusk_stalker")
 platform = 0
-count = 3
-patrol_from = 300.0
+count = 2
+patrol_from = 900.0
 patrol_to = 2100.0
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_marsh_horror")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_dusk_stalker")
 platform = 3
-count = 2
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_marsh_horror")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_dusk_stalker")
 platform = 5
-count = 2
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_marsh_horror")
 platform = 6
-count = 2
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_dusk_stalker")
 platform = 7
-count = 2
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_marsh_horror")
 platform = 8
-count = 2
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("19_dusk_stalker")
 platform = 9
-count = 2
 
 [sub_resource type="Resource" id="Spawn_10"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_marsh_horror")
 platform = 10
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Spawn_11"]
 script = ExtResource("18_spawn_def")
 monster = ExtResource("17_marsh_horror")
 platform = 8
-count = 3
+count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("21_drop_entry")

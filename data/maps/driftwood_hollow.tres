@@ -105,7 +105,7 @@ target_x = 2740.0
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_sand_crab")
 platform = 0
-count = 4
+count = 2
 patrol_from = 300.0
 patrol_to = 2200.0
 
@@ -113,19 +113,16 @@ patrol_to = 2200.0
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_tide_dewling")
 platform = 2
-count = 2
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("17_tide_dewling")
 platform = 4
-count = 2
 
 [sub_resource type="Resource" id="Spawn_3"]
 script = ExtResource("16_spawn_def")
 monster = ExtResource("15_sand_crab")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("19_drop_entry")

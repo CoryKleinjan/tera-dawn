@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="MapDef" load_steps=208 format=3]
+[gd_resource type="Resource" script_class="MapDef" load_steps=207 format=3]
 
 [ext_resource type="Script" path="res://scripts/data/map_def.gd" id="1_map_def"]
 [ext_resource type="Resource" path="res://data/biomes/greenwood.tres" id="2_greenwood"]
@@ -897,7 +897,7 @@ gate_picture = ExtResource("34_gate")
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 0
-count = 3
+count = 2
 patrol_from = 60.0
 patrol_to = 950.0
 
@@ -905,15 +905,13 @@ patrol_to = 950.0
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 0
-count = 2
-patrol_from = 1450.0
-patrol_to = 2070.0
+patrol_from = 2150.0
+patrol_to = 2400.0
 
 [sub_resource type="Resource" id="Spawn_2"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 1
-count = 2
 patrol_from = 1600.0
 patrol_to = 2070.0
 
@@ -921,115 +919,96 @@ patrol_to = 2070.0
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 2
-count = 1
 
 [sub_resource type="Resource" id="Spawn_4"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 3
-count = 1
 
 [sub_resource type="Resource" id="Spawn_5"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 4
-count = 1
 
 [sub_resource type="Resource" id="Spawn_6"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 5
-count = 1
 
 [sub_resource type="Resource" id="Spawn_7"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 6
-count = 1
 
 [sub_resource type="Resource" id="Spawn_8"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 7
-count = 1
 
 [sub_resource type="Resource" id="Spawn_9"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 9
-count = 2
 
 [sub_resource type="Resource" id="Spawn_10"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 10
-count = 2
 
 [sub_resource type="Resource" id="Spawn_11"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 11
-count = 2
 
 [sub_resource type="Resource" id="Spawn_12"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 12
-count = 1
 
 [sub_resource type="Resource" id="Spawn_13"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 13
-count = 1
 
 [sub_resource type="Resource" id="Spawn_14"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 14
-count = 1
 
 [sub_resource type="Resource" id="Spawn_15"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 15
-count = 2
 
 [sub_resource type="Resource" id="Spawn_16"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 16
-count = 2
 
 [sub_resource type="Resource" id="Spawn_17"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 17
-count = 2
 
 [sub_resource type="Resource" id="Spawn_18"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 18
-count = 2
 
 [sub_resource type="Resource" id="Spawn_19"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 19
-count = 2
 
 [sub_resource type="Resource" id="Spawn_20"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 20
-count = 2
 
 [sub_resource type="Resource" id="Spawn_21"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 21
-count = 1
 patrol_from = 1760.0
 patrol_to = 2070.0
 
@@ -1037,122 +1016,96 @@ patrol_to = 2070.0
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 22
-count = 2
 
 [sub_resource type="Resource" id="Spawn_23"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 23
-count = 2
 
 [sub_resource type="Resource" id="Spawn_24"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 1
-count = 2
 
 [sub_resource type="Resource" id="Spawn_25"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 24
-count = 2
 
 [sub_resource type="Resource" id="Spawn_26"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 25
-count = 2
 
 [sub_resource type="Resource" id="Spawn_27"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 26
-count = 2
 
 [sub_resource type="Resource" id="Spawn_28"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 27
-count = 2
 
 [sub_resource type="Resource" id="Spawn_29"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 28
-count = 2
 
 [sub_resource type="Resource" id="Spawn_30"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 29
-count = 2
 
 [sub_resource type="Resource" id="Spawn_31"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 30
-count = 2
 
 [sub_resource type="Resource" id="Spawn_32"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 31
-count = 2
 
 [sub_resource type="Resource" id="Spawn_33"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 32
-count = 2
 
 [sub_resource type="Resource" id="Spawn_34"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 33
-count = 1
 
 [sub_resource type="Resource" id="Spawn_35"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 34
-count = 2
 
 [sub_resource type="Resource" id="Spawn_36"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 35
-count = 2
 
 [sub_resource type="Resource" id="Spawn_37"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 36
-count = 2
 
 [sub_resource type="Resource" id="Spawn_38"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 37
-count = 2
 
 [sub_resource type="Resource" id="Spawn_39"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 38
-count = 2
 
 [sub_resource type="Resource" id="Spawn_40"]
 script = ExtResource("7_spawn_def")
 monster = ExtResource("8_grove_wisp")
 platform = 2
-count = 2
-
-[sub_resource type="Resource" id="Spawn_41"]
-script = ExtResource("7_spawn_def")
-monster = ExtResource("8_grove_wisp")
-platform = 39
-count = 2
-patrol_to = 1740.0
 
 [sub_resource type="Resource" id="Loot_0_0"]
 script = ExtResource("12_drop_entry")
@@ -1230,7 +1183,7 @@ start_x = 2150.0
 platforms = Array[ExtResource("3_platform_def")]([SubResource("Platform_1"), SubResource("Platform_2"), SubResource("Platform_3"), SubResource("Platform_4"), SubResource("Platform_5"), SubResource("Platform_6"), SubResource("Platform_7"), SubResource("Platform_8"), SubResource("Platform_9"), SubResource("Platform_10"), SubResource("Platform_11"), SubResource("Platform_12"), SubResource("Platform_13"), SubResource("Platform_14"), SubResource("Platform_15"), SubResource("Platform_16"), SubResource("Platform_17"), SubResource("Platform_18"), SubResource("Platform_19"), SubResource("Platform_20"), SubResource("Platform_21"), SubResource("Platform_22"), SubResource("Platform_23"), SubResource("Platform_25"), SubResource("Platform_26"), SubResource("Platform_27"), SubResource("Platform_28"), SubResource("Platform_29"), SubResource("Platform_30"), SubResource("Platform_31"), SubResource("Platform_32"), SubResource("Platform_33"), SubResource("Platform_34"), SubResource("Platform_35"), SubResource("Platform_36"), SubResource("Platform_37"), SubResource("Platform_38"), SubResource("Platform_39"), SubResource("Platform_41"), SubResource("Platform_42"), SubResource("Step_1"), SubResource("Step_3"), SubResource("Step_5"), SubResource("Step_7"), SubResource("Step_9"), SubResource("Step_11"), SubResource("Step_14"), SubResource("Step_17"), SubResource("Step_20"), SubResource("Step_23"), SubResource("Step_25"), SubResource("Step_27"), SubResource("Step_30"), SubResource("Step_33"), SubResource("Step_35"), SubResource("Step_37"), SubResource("Step_39"), SubResource("Step_41"), SubResource("Step_43"), SubResource("Step_44"), SubResource("Step_46"), SubResource("Step_48"), SubResource("Step_49"), SubResource("Step_51"), SubResource("Step_53"), SubResource("Step_55"), SubResource("Step_57"), SubResource("Step_59"), SubResource("Step_62"), SubResource("Step_64"), SubResource("Step_66"), SubResource("Step_68"), SubResource("Step_70"), SubResource("Step_72"), SubResource("Step_75"), SubResource("Step_77"), SubResource("Step_79"), SubResource("Step_80"), SubResource("Step_81"), SubResource("Step_82"), SubResource("Step_83"), SubResource("Step_84"), SubResource("Step_85"), SubResource("Step_86"), SubResource("Step_87"), SubResource("Step_88"), SubResource("Step_89"), SubResource("Step_90"), SubResource("Step_91"), SubResource("Step_92"), SubResource("Step_93"), SubResource("Step_94"), SubResource("Step_95"), SubResource("Step_96"), SubResource("Step_97"), SubResource("Step_98"), SubResource("Step_99"), SubResource("Step_100"), SubResource("Step_101"), SubResource("Step_102"), SubResource("Step_103"), SubResource("Step_104"), SubResource("Step_105"), SubResource("Step_106"), SubResource("Step_107"), SubResource("Step_108"), SubResource("Step_109"), SubResource("Step_110"), SubResource("Step_111"), SubResource("Step_112"), SubResource("Step_113"), SubResource("Step_114"), SubResource("Step_115"), SubResource("Step_116"), SubResource("Step_117"), SubResource("Step_118"), SubResource("Step_119"), SubResource("Step_120"), SubResource("Step_121"), SubResource("Step_122"), SubResource("Step_123"), SubResource("Step_124"), SubResource("Step_125"), SubResource("Step_126"), SubResource("Step_127"), SubResource("Step_128"), SubResource("Step_129"), SubResource("Step_130")])
 portals = Array[ExtResource("6_portal_def")]([SubResource("Portal_0"), SubResource("Portal_1"), SubResource("Portal_2"), SubResource("Portal_3")])
 breakables = Array[ExtResource("9_breakable_def")]([SubResource("Breakable_0"), SubResource("Breakable_1"), SubResource("Lever_elder_root_rootway"), SubResource("Breakable_key")])
-spawns = Array[ExtResource("7_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13"), SubResource("Spawn_14"), SubResource("Spawn_15"), SubResource("Spawn_16"), SubResource("Spawn_17"), SubResource("Spawn_18"), SubResource("Spawn_19"), SubResource("Spawn_20"), SubResource("Spawn_21"), SubResource("Spawn_22"), SubResource("Spawn_23"), SubResource("Spawn_24"), SubResource("Spawn_25"), SubResource("Spawn_26"), SubResource("Spawn_27"), SubResource("Spawn_28"), SubResource("Spawn_29"), SubResource("Spawn_30"), SubResource("Spawn_31"), SubResource("Spawn_32"), SubResource("Spawn_33"), SubResource("Spawn_34"), SubResource("Spawn_35"), SubResource("Spawn_36"), SubResource("Spawn_37"), SubResource("Spawn_38"), SubResource("Spawn_39"), SubResource("Spawn_40"), SubResource("Spawn_41")])
+spawns = Array[ExtResource("7_spawn_def")]([SubResource("Spawn_0"), SubResource("Spawn_1"), SubResource("Spawn_2"), SubResource("Spawn_3"), SubResource("Spawn_4"), SubResource("Spawn_5"), SubResource("Spawn_6"), SubResource("Spawn_7"), SubResource("Spawn_8"), SubResource("Spawn_9"), SubResource("Spawn_10"), SubResource("Spawn_11"), SubResource("Spawn_12"), SubResource("Spawn_13"), SubResource("Spawn_14"), SubResource("Spawn_15"), SubResource("Spawn_16"), SubResource("Spawn_17"), SubResource("Spawn_18"), SubResource("Spawn_19"), SubResource("Spawn_20"), SubResource("Spawn_21"), SubResource("Spawn_22"), SubResource("Spawn_23"), SubResource("Spawn_24"), SubResource("Spawn_25"), SubResource("Spawn_26"), SubResource("Spawn_27"), SubResource("Spawn_28"), SubResource("Spawn_29"), SubResource("Spawn_30"), SubResource("Spawn_31"), SubResource("Spawn_32"), SubResource("Spawn_33"), SubResource("Spawn_34"), SubResource("Spawn_35"), SubResource("Spawn_36"), SubResource("Spawn_37"), SubResource("Spawn_38"), SubResource("Spawn_39"), SubResource("Spawn_40")])
 props = Array[ExtResource("18_prop_placement")]([SubResource("Prop_0"), SubResource("Prop_1"), SubResource("Prop_2"), SubResource("Prop_3")])
 region = &"greenbough"
 world_pos = Vector2(273.0, 133.0)
